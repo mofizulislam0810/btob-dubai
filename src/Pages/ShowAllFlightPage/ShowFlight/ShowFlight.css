@@ -1,0 +1,72 @@
+.box-shadow{
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  }
+
+  .box-shadow:hover{
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4); 
+  }
+
+
+.show-hide{
+    min-width: 100px;
+    position: relative;
+    margin-bottom: 71px;
+    background: white;
+    padding: 2px 18px;
+    border-right: 1px solid rgb(226, 226, 226);
+    border-bottom: 1px solid rgb(226, 226, 226);
+    border-left: 1px solid rgb(226, 226, 226);
+    border-image: initial;
+    transition: width 0.2s ease-in-out 0s;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    font-size: 12px;
+    font-weight: 600;
+    color: blue;
+    display: block;
+    cursor: pointer;
+    outline: none;
+    border-top: none;
+  }
+
+  .thead{
+    background-color: #02046a;
+  }
+
+
+  .box {
+    display: none;
+    position: absolute;
+    /* top: 30px;*/
+    left: 25%;
+    color: #02046a;
+    padding: 5px;
+    /* border: 1px solid black; */
+  }
+  
+  .briefcase:hover+.box {
+    display: block;
+  }
+
+  .flighttime{
+    font-size: 13px;
+  }
+
+  .show-flight-checkbox {
+    background-color: #fff;
+    margin: 10px 0px 0px 10px;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+  }
+
+  .selected-bg-color{
+    background-color: rgba(235, 235, 235, 0.886);
+  }
+
+  .font-size{
+    font-size: 13px;
+  }

@@ -1,0 +1,516 @@
+import React, { useEffect, useState } from "react";
+import $ from "jquery";
+import SearchFrom from "../../SearchPage/SearchFrom/SearchFrom";
+import gif from "../../../images/icon/Spinner-1s-200px.gif";
+import ShowFlight from "../ShowFlight/ShowFlight";
+import "./ShowAllFlight.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import NoDataFoundPage from "../../NoDataFoundPage/NoDataFoundPage/NoDataFoundPage";
+import useAuth from "../../../hooks/useAuth";
+import Loading from "../../Loading/Loading";
+
+const ShowAllFlight = ({
+  fetchFlighData,
+  originCode,
+  destinationCode,
+  fecthMulti,
+  loading,
+  airlineFilters,
+  tripType
+}) => {
+  const { count } = useAuth();
+  // console.log(count);
+  const [amountChange,setAmountChange] = useState('Invoice Amount');
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  const { tripTypeModify } = state;
+  const footerProposalList = null;
+  // console.log(JSON.parse(sessionStorage.getItem("checkList")));
+  // let [footerProposalList,setFooterProposalList] = useState([]);
+  var flightsData = [];
+  let mainJson;
+  let jsonData;
+  if (String(tripType) === String("One Way")) {
+    if (fetchFlighData !== null) {
+      mainJson = fetchFlighData;
+      jsonData = fetchFlighData.airSearchResponses;
+    } else {
+    }
+  } else if (String(tripType) === String("Round Trip")) {
+    if (fetchFlighData !== null) {
+      mainJson = fetchFlighData;
+      jsonData = fetchFlighData.airSearchResponses;
+    } else {
+    }
+  } else if (String(tripType) === String("Multi City")) {
+    if (fetchFlighData !== null) {
+      mainJson = fetchFlighData;
+      jsonData = fetchFlighData?.airSearchResponses;
+    } else {
+    }
+  }
+
+  const [price, setPrice] = useState(
+    mainJson?.minMaxPrice?.maxPrice === undefined
+      ? 1000000
+      : mainJson?.minMaxPrice?.maxPrice
+  );
+  // console.log(price);
+  // setPrice(mainJson.minMaxPrice?.maxPrice);
+  //price=mainJson.minMaxPrice?.maxPrice;
+  const [name, setName] = useState([]);
+  const [radioname, setRadioName] = useState(0);
+  const [check, setCheck] = useState(true);
+  const handleInput = (e) => {
+    setPrice(e.target.value);
+  };
+
+  let dataPrice = [];
+
+  if (parseInt(radioname) === 0 && name.length === 0) {
+    dataPrice = jsonData?.filter(
+      (item) => parseInt(item.totalPrice) <= parseInt(price, 10)
+    );
+  } else if (parseInt(radioname) === 1 && name.length === 0) {
+    dataPrice = jsonData?.filter(
+      (item) =>
+        parseInt(item.totalPrice) <= parseInt(price, 10) &&
+        item.directions[0][0].stops === 0
+    );
+  } else if (parseInt(radioname) === 2 && name.length === 0) {
+    dataPrice = jsonData?.filter(
+      (item) =>
+        parseInt(item.totalPrice) <= parseInt(price, 10) &&
+        item.directions[0][0].stops === 1
+    );
+  } else if (parseInt(radioname) === 3 && name.length === 0) {
+    dataPrice = jsonData?.filter(
+      (item) =>
+        parseInt(item.totalPrice) <= parseInt(price, 10) &&
+        item.directions[0][0].stops > 1
+    );
+  } else if (parseInt(radioname) === 0 && name.length > 0) {
+    dataPrice = jsonData?.filter(
+      (item) =>
+        parseInt(item.totalPrice) <= parseInt(price, 10) &&
+        name.some((category) => [item.platingCarrier].flat().includes(category))
+    );
+  } else if (parseInt(radioname) === 1 && name.length > 0) {
+    dataPrice = jsonData?.filter(
+      (item) =>
+        parseInt(item.totalPrice) <= parseInt(price, 10) &&
+        name.some((category) =>
+          [item.platingCarrier].flat().includes(category)
+        ) &&
+        item.directions[0][0].stops === 0
+    );
+  } else if (parseInt(radioname) === 2 && name.length > 0) {
+    dataPrice = jsonData?.filter(
+      (item) =>
+        parseInt(item.totalPrice) <= parseInt(price, 10) &&
+        name.some((category) =>
+          [item.platingCarrier].flat().includes(category)
+        ) &&
+        item.directions[0][0].stops === 1
+    );
+  } else {
+    dataPrice = jsonData?.filter(
+      (item) =>
+        parseInt(item.totalPrice) <= parseInt(price, 10) &&
+        name.some((category) =>
+          [item.platingCarrier].flat().includes(category)
+        ) &&
+        item.directions[0][0].stops > 1
+    );
+  }
+
+  let flightName = [];
+
+  mainJson?.airlineFilters?.map((item) => {
+    const obj = {
+      name: item.airlineName,
+      code: item.airlineCode,
+      totalFlights: item.totalFlights,
+      minPrice: item.minPrice,
+    };
+    flightName.push(obj);
+  });
+
+  const handleChange = (e) => {
+    //  alert(name.length+", "+flightName.length);
+    if (e.target.checked) {
+      if (flightName.length - name.length === 1) {
+        setCheck(true);
+      } else {
+        setCheck(false);
+      }
+      setName([...name, e.target.value]);
+    } else {
+      if (name.length <= flightName.length && name.length > 1) {
+        setCheck(false);
+      } else {
+        setCheck(true);
+      }
+      setName(name.filter((id) => id !== e.target.value));
+    }
+  };
+
+  // for radio button filter
+  const radioflightName = [
+    { name: "All Flights" },
+    // { name: "Direct flight only" },
+    // { name: "1 stop" },
+    // { name: "2 stops or more" },
+  ];
+
+  let i = 0;
+  mainJson?.stops?.map((item) => {
+    if (item === 0) {
+      const obj = {
+        name: "Direct",
+      };
+      radioflightName.push(obj);
+    }
+    if (item === 1) {
+      const obj = {
+        name: "1 Stop",
+      };
+      radioflightName.push(obj);
+    }
+    if (item > 1) {
+      if (i === 0) {
+        const obj = {
+          name: "2 or More Stops",
+        };
+        radioflightName.push(obj);
+      }
+      i++;
+    }
+  });
+
+  const radiohandleChange = (e) => {
+    setRadioName(e.target.value);
+  };
+
+  if (String(tripType) === String("One Way")) {
+    flightsData = dataPrice;
+  } else if (String(tripType) === String("Round Trip")) {
+    flightsData = dataPrice;
+  } else if (String(tripType) === String("Multi City")) {
+    flightsData = dataPrice;
+  }
+
+  useEffect(() => {
+    // $(".slide-toggle").hide();
+    // $(".search-again").click(function () {
+    //   $(".slide-toggle").slideToggle("slow");
+    // });
+
+    $(".rotate").click(function () {
+      $(this).toggleClass("down");
+    });
+    // stop section toggle option
+    $(document).ready(function () {
+      $("#stopclicksection").click(function () {
+        $("#stopsection").toggle();
+      });
+    });
+
+    // airlines section toggle option
+    $(document).ready(function () {
+      $("#airclicksection").click(function () {
+        $("#airlinessection").toggle();
+      });
+    });
+
+    // airlines section toggle option
+    $(document).ready(function () {
+      $("#baggclicksection").click(function () {
+        $("#baggagesection").toggle();
+      });
+      $("#priceclicksection").click(function () {
+        $("#pricesection").toggle();
+      });
+    });
+  }, []);
+
+  const handleProposal = () => {
+    navigate("/proposal");
+  };
+
+  return (
+    <div>
+         <div className="container box-shadow bg-white content-width">
+            <div className="row border mt-3 px-5 py-2">
+              <div className="col-lg-6 my-auto">
+                  <h5 className="pt-1">We found {fetchFlighData?.totalFlights} flights, {fetchFlighData?.airlineFilters?.length} Unique Airlines </h5>
+              </div>
+              <div className="col-lg-6">
+              <div class="dropdown float-end">
+                  <button class="btn btn-primary fw-bold text-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span className="me-1"><i class="fas fa-money-bill-wave"></i></span>{amountChange}
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li class="dropdown-item" onClick={() => setAmountChange("Invoice Amount")}>Invoice Amount</li>
+                    <li class="dropdown-item" onClick={() => setAmountChange("Gross Amount")}>Gross Amount</li>
+                  </ul>
+               </div>
+              </div>
+            </div>
+          </div>
+      <Loading loading={loading}></Loading>
+      <div className="container my-3 bg-white content-width">
+        <div className="row py-4 ps-3">
+          <div
+            className="col-lg-3 rounded box-shadow"
+            style={{ height: "100%", position: "sticky", top: "9%"}}
+          >
+            <div className="container">
+              <div className="row px-2">
+                <div className="col-lg-6 mt-3">
+                  <h6 className="float-start text-color fw-bold">Price</h6>
+                </div>
+                <div className="col-lg-6 mt-3">
+                  <div className="text-end">
+                    <span id="priceclicksection">
+                      <i
+                        className="fa fa-chevron-up rotate"
+                        aria-hidden="true"
+                      ></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="row pb-3">
+                <div className="col-lg-12 mt-2" id="pricesection">
+                  <div className="mt-2">
+                    <input
+                      className="w-100"
+                      type="range"
+                      name="flexRadioDefault2"
+                      value={price}
+                      id="flexRadioDefault1"
+                      onInput={handleInput}
+                      min={mainJson?.minMaxPrice?.minPrice}
+                      max={mainJson?.minMaxPrice?.maxPrice}
+                    />
+                  </div>
+                  <div>
+                    <span className="float-start fw-bold">
+                      MIN BDT {mainJson?.minMaxPrice?.minPrice}
+                    </span>
+                    <span className="float-end fw-bold">
+                      MAX BDT {mainJson?.minMaxPrice?.maxPrice}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr></hr>
+            {/* Stop section  */}
+            <div className="container">
+              <div className="row px-2">
+                <div className="col-lg-6 mt-3">
+                  <h6 className="float-start text-color fw-bold">Stops</h6>
+                </div>
+                <div className="col-lg-6 mt-3">
+                  <div className="text-end">
+                    <span id="stopclicksection">
+                      <i
+                        className="fa fa-chevron-up rotate"
+                        aria-hidden="true"
+                      ></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="row pb-3 px-2">
+                <div className="col-lg-12 mt-2" id="stopsection">
+                  <div className="form-check mt-2">
+                    {radioflightName.map((item, index) => (
+                      <div key={index}>
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="name"
+                          value={index}
+                          id="flexCheckDefault"
+                          onChange={radiohandleChange}
+                          defaultChecked={index === 0}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="flexCheckDefault"
+                        >
+                          {item.name}
+                        </label>
+                        <br></br>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr></hr>
+            {/* End of stop section  */}
+
+            {/* Airlines Section  */}
+            <div className="container">
+              <div className="row px-2">
+                <div className="col-lg-6 mt-3">
+                  <h6 className="float-start text-color fw-bold">Airlines</h6>
+                </div>
+                <div className="col-lg-6 mt-3">
+                  <div className="text-end">
+                    <span id="airclicksection">
+                      <i
+                        className="fa fa-chevron-up rotate"
+                        aria-hidden="true"
+                      ></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="row pb-3 px-2">
+                <div className="col-lg-12 mt-2" id="airlinessection">
+                  <div className="form-check mt-2 ">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      id="flexCheckDefault"
+                      checked={check}
+                    />
+                    <label
+                      className="form-check-label float-start fw-bold"
+                      htmlFor="flexCheckDefault"
+                    >
+                      All Airline
+                    </label>
+                  </div>
+                  <div className="form-check mt-2">
+                    {flightName.map((item, index) => (
+                      <div key={index}>
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          value={item.code}
+                          id="flexCheckDefault"
+                          onChange={handleChange}
+                        />
+                        <img src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.code}.png`} alt="airlineCode" width="35px" height="30px"/>
+                        <label
+                          className="form-check-label fw-bold px-2"
+                          htmlFor="flexCheckDefault"
+                          title={item.name}
+                        >
+                          {item.code} ({item.totalFlights})
+                        </label>{" "}
+                        <span className="fw-bold float-end">BDT {item.minPrice}</span>
+                        <br></br>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr></hr>
+            {/* End of Airlines Section  */}
+
+            {/* Baggage section  */}
+            <div className="container">
+              <div className="row px-2">
+                <div className="col-lg-6 mt-3">
+                  <h6 className="float-start text-color fw-bold">Baggage</h6>
+                </div>
+                <div className="col-lg-6 mt-3">
+                  <div className="text-end">
+                    <span id="baggclicksection">
+                      <i
+                        className="fa fa-chevron-up rotate"
+                        aria-hidden="true"
+                      ></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="row pb-3 px-2">
+                <div className="col-lg-12 mt-2" id="baggagesection">
+                  <div className="form-check mt-2">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault2"
+                      id="flexRadioDefault1"
+                      defaultChecked
+                    />
+                    <label
+                      className="form-check-label float-start"
+                      htmlFor="flexRadioDefault2"
+                    >
+                      All baggage options
+                    </label>
+                  </div>
+                  <div className="form-check mt-2">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault2"
+                      id="flexRadioDefault1"
+                    />
+                    <label
+                      className="form-check-label float-start"
+                      htmlFor="flexRadioDefault2"
+                    >
+                      Checked baggage included
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-9">
+            {flightsData?.length === 0 && flightsData !==null && flightsData !== undefined ? (
+              <>
+                <NoDataFoundPage />
+              </>
+            ) : (
+              flightsData?.map((data, index) => (
+                <ShowFlight
+                  key={index}
+                  flightType={tripType}
+                  index={index}
+                  data={data}
+                  amountChange={amountChange}
+                ></ShowFlight>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+      {count > 0 ? (
+        <footer className="main-footer fixed-bottom">
+          <div className="text-center">
+            {/* <b>Version</b> 3.1.0 */}
+            <strong className="fs-4">{count} flight Selected</strong>
+            <button
+              className="btn button-color fw-bold text-white ms-5"
+              onClick={handleProposal}
+            >
+              MAKE PROPOSAL
+            </button>
+          </div>
+          {/* <div className="float-end me-5 pe-5">
+         
+           
+          </div> */}
+
+          {/* <strong>Copyright &copy; 2020-2022</strong> All rights reserved. */}
+        </footer>
+      ) : (
+        <></>
+      )}
+    </div>
+  );
+};
+
+export default ShowAllFlight;

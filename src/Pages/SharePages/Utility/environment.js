@@ -1,0 +1,87 @@
+// const baseURL='http://localhost:7236/';
+const baseURL='http://52.221.202.198:83/';
+const baseApiURL =baseURL+ 'api/';
+const tokenData = JSON.parse(sessionStorage.getItem('token'));
+let headerToken = { headers: { Authorization: '' } };
+if(tokenData!=null && new Date(tokenData.expireIn)>=new Date())
+{
+  headerToken = { headers: { Authorization: 'Bearer ' + tokenData?.token } };
+}
+export const environment = {
+  baseApiURL:baseApiURL,
+  register: baseApiURL + 'user/b2bregister',
+  login: baseApiURL + 'user/b2blogin',
+  headerToken:headerToken,
+  weatherList: baseURL + 'weatherforecast',
+  userList: baseApiURL + 'user',
+  searchFlight: baseApiURL + 'Search',
+  bookFlight: baseApiURL + 'Book',
+  ticketingFlight: baseApiURL + 'Ticket',
+  priceCheck: baseApiURL + 'RePrice',
+  depositRequest : baseApiURL + 'AgentBalance/DepositRequest',
+  agentDeposits :baseApiURL + 'AgentBalance/AgentDeposits',
+  agentFileUpload : baseApiURL + 'AgentBalance/Upload',
+  cityList : baseApiURL+'Dropdown/Cities',
+  bankAccounts : baseApiURL+'Dropdown/bank-account',
+  bankAccountsByAgent : baseApiURL+'AgentBankAccount/AgentBankAccountsByAgent',
+  accountsByAgentDropdown : baseApiURL+'Dropdown/AgentBankAccountsByAgent',
+  bankAccount: baseApiURL + 'AgentBankAccount',
+  markupsByAgent: baseApiURL + 'AgentDynamicMarkup/MarkupsByAgent',
+  getairlineList : baseApiURL+'Dropdown/Airlines',
+  getcountryList : baseApiURL+'Dropdown/Countries',
+  getairportList : baseApiURL+'Dropdown/Airports',
+  markup: baseApiURL + 'AgentDynamicMarkup',
+  getsupporttypeList : baseApiURL+'Dropdown/SupportTypes',
+  getsubjectList : baseApiURL+'Dropdown/SupportSubjects',
+  getSupportInfoesByStatustList : baseApiURL+'SupportInfo/SupportInfoesByStatus',
+  supportInfo:baseApiURL+'SupportInfo',
+  supportFileUpload : baseApiURL + 'SupportInfo/Upload',
+  getSupportHistoriesByAgentList : baseApiURL+'SupportHistory/SupportHistoriesByAgent',
+  historyFileUpload : baseApiURL + 'SupportHistory/Upload',
+  supportHistory:baseApiURL+'SupportHistory',
+  getSupportNoticeCountByAgent : baseApiURL+'SupportHistory/SupportNoticeCountByAgent',
+  agentInfo : baseApiURL+'AgentInfo/GetByUserId',
+  currentUserInfo : baseApiURL+'user/GetCurrentUser',
+  accountManagerInfo : baseApiURL+'AccountManager/GetByAgentId',
+  agentStaff : baseApiURL+'AgentStaff',
+  getAgentStaffByAgent:baseApiURL+'AgentStaff/GetAgentStaffs',
+  getAgentSettingById:baseApiURL+'AgentStaff/GetAgentSettings',
+  getSupportNoticeByAgent : baseApiURL+'SupportHistory/SupportNoticeByAgent',
+  sendEmailProposal : baseApiURL + 'Email/SendProposal',
+  sendEmailInvoice : baseApiURL + 'Email/SendInvoice',
+  sendEmailBooking : baseApiURL + 'Email/SendBooking',
+  getAgentPassengers:baseApiURL+'AgentInfo/AgentPassengers',
+  saveAgentPassenger:baseApiURL+'AgentInfo/SaveAgentPassenger',
+  deleteAgentPassenger:baseApiURL+'AgentInfo/DeletePassenger',
+  paymentGateway:baseApiURL+'PaymentGateway',
+  paymentCheckout:baseApiURL+'AgentBalance/Checkout',
+  passengerupload : baseApiURL + 'AgentInfo/passengerupload',
+  accountLedger: baseApiURL + 'AccountLadger/AgentAccountLadger',
+  marqueeList : baseApiURL + 'Marquee',
+  changeTicketStatus:baseApiURL + 'TicketInfo/ChangeStatus',
+
+  highestTicktedAirlines: baseApiURL + 'Dashboard/HighestTicktedAirlines',
+  logoFileUpload: baseApiURL + 'user/uploadB2B',
+  branchList : baseApiURL + 'AgentBalance/GetBranches',
+  creditList : baseApiURL + 'CreditList/CreditList',
+  ticketRefundRequest : baseApiURL + 'TicketInfo/RefundRequest',
+
+  totalBooking: baseApiURL + 'Dashboard/TotalBooking',
+  totalTicket: baseApiURL + 'Dashboard/TotalTicket',
+  totalSales: baseApiURL + 'Dashboard/TotalSales',
+
+  getTicketingList : baseApiURL+'ReportB2B/AirTicketing',
+  passengerListByIds: baseApiURL + 'ReportB2B/PassengerListByIds',
+  udatePriceByReference: baseApiURL + 'ReportB2B/UpdatePriceByReference',
+  updateBookingFareBreakdown:baseApiURL + 'ReportB2B/UpdateBookingFareBreakdown',
+  salesReport:baseApiURL + 'ReportB2B/GetSalesReport',
+  segmentList: baseApiURL + 'ReportB2B/SegmentsByTransactionId',
+  creditNoteList : baseApiURL+'ReportB2B/GetCreditNoteByAgentId',
+  getTicketingDetails:baseApiURL + 'ReportB2B/AirTicketingDetails',
+  getFareRules:baseApiURL + 'FareRules',
+  getzoneListbycountryName:baseApiURL+'dropdown/ZonesByCountryName',
+  getcityListbycountryName:baseApiURL+'dropdown/CitiesByCountryName',
+  airTicketingSearch:baseApiURL+'ReportB2B/AirTicketingSearch',
+  searchLogs : baseApiURL+"ReportB2B/SearchLogsByUser"
+ 
+}

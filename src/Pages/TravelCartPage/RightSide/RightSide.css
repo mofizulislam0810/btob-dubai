@@ -1,0 +1,21 @@
+.flight-details{
+    min-width: 100px;
+    position: relative;
+    margin-bottom: -7px;
+    background: white;
+    padding: 2px 18px;
+    border-right: 1px solid rgb(226, 226, 226);
+    border-bottom: 1px solid rgb(226, 226, 226);
+    border-left: 1px solid rgb(226, 226, 226);
+    border-image: initial;
+    transition: width 0.2s ease-in-out 0s;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    font-size: 12px;
+    font-weight: 600;
+    color: blue;
+    display: block;
+    cursor: pointer;
+    outline: none;
+    border-top: none;
+  }

@@ -1,0 +1,37 @@
+.table>:not(:last-child)>:last-child>* {
+    border-bottom-color: #dee2e6;
+}
+
+#menu-standard { 
+    float: right;
+}
+
+#menu-standard li { 
+    float: left;
+    padding-left: 5px;
+}
+
+ul{
+    list-style-type:none;
+}
+
+th,td{
+ white-space:nowrap;
+}
+
+.btn-primary{
+    background-color: blue;
+    border: 0;
+}
+
+.btn-primary:hover{
+    background-color: black;
+}
+
+.table {
+    table-layout: auto;
+  }
+  
+  th {
+   width: 10%;
+  }

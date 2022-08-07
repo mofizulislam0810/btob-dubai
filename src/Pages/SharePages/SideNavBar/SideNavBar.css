@@ -1,0 +1,20 @@
+.brand-link{
+    color: white !important;
+    border-bottom: 1px solid #ffffff !important;
+}
+
+.form-control-sidebar{
+    background-color: #ffffff !important;
+    border: 1px solid #1741c1 !important;
+    color: #fff !important
+}
+
+.btn-sidebar{
+    background-color: #ffffff !important;
+    border: 1px solid #1741c1 !important;
+    color: #1741c1 !important;
+}
+
+.nav-sidebar .nav-item .nav-link{
+    color: white !important;
+}

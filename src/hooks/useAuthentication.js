@@ -1,0 +1,71 @@
+import { useState } from "react";
+import axios from "axios";
+import { environment } from "../Pages/SharePages/Utility/environment";
+
+const useAuthentication = () => {
+  const [bookData, setBookData] = useState([]);
+  const [ticketData, setTicketData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const token = sessionStorage.getItem("token");
+  const [login, setLogin] = useState(token && token.length > 0);
+  const [count,setCount] = useState(0);
+  const [id,setId] = useState();
+
+  const onClickLoginButton = (loginData, navigate, location, toast) => {
+    axios
+      .post(environment.login, loginData)
+      .then((response) => {
+        console.log(response.data.data);
+        if (response.data.isSuccess==true) {
+          sessionStorage.setItem("token", JSON.stringify(response.data.data));
+          sessionStorage.setItem("LoginData", JSON.stringify(loginData));
+          // setLogin(true);
+          const destination = location.state?.from || "/search";
+          navigate(destination);
+          window.location.reload();
+        } else {
+          toast.error("Email or password is wrong!");
+        }
+      })
+      .catch((err) => {
+        toast.error("Email or password is wrong!");
+      });
+    // const onClickLoginButton = (loginData, navigate, location, toast) => {
+    //   let data = {
+    //     token:
+    //       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImthbXJ1bC5jc2VwdUBnbWFpbC5jb20iLCJuYmYiOjE2NDY5MDk2NjgsImV4cCI6MTY0NjkxMTQ2OCwiaWF0IjoxNjQ2OTA5NjY4fQ.rqz8GCO5oi8eeDw3ao5f0pLSQH0BsI8n9UI95SddFMw",
+    //     refreshToken: null,
+    //     expireIn: "2022-03-10T11:24:28.2451394Z",
+    //     error: null,
+    //   };
+    //   sessionStorage.setItem("token", JSON.stringify(data));
+    //   const useremail = "abcd@gmail.com";
+    //   const password = "123456";
+    //   if (useremail === loginData.email && password === loginData.password) {
+    //     sessionStorage.setItem("LoginData", JSON.stringify(loginData));
+    //     setLogin(true);
+    //     const destination = location.state?.from || "/search";
+    //     navigate(destination);
+    //   } else {
+    //     toast.error("Email or password is wrong!");
+    //     navigate("/");
+    //   }
+  };
+
+  return {
+    onClickLoginButton,
+    login,
+    setBookData,
+    bookData,
+    setTicketData,
+    ticketData,
+    setLoading,
+    loading,
+    setCount,
+    count,
+    setId,
+    id
+  };
+};
+
+export default useAuthentication;

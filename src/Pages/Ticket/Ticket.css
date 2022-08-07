@@ -1,0 +1,16 @@
+.table th {
+    padding: 3px;
+}
+
+#menu-standard { 
+    float: right;
+}
+
+#menu-standard li { 
+    float: left;
+    padding-left: 5px;
+}
+
+ul{
+    list-style-type:none;
+}

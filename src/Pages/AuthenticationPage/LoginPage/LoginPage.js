@@ -67,12 +67,19 @@ const LoginPage = () => {
           <div className="login-box">
             <ToastContainer />
             <div className="card">
-              <Center className="card-header text-center">
-                <Image src={logo} alt="Triplover" w="225px" h="84px" />
+              <Center className="text-center">
+                <Image
+                  src={logo}
+                  alt="Triplover"
+                  w="225px"
+                  h="84px"
+                  mt={8}
+                  mb={6}
+                />
               </Center>
               <div className="card-body login-card-body">
                 {/* <p className="login-box-msg">Sign in to start your session</p> */}
-                <VStack spacing="0px" mb={6}>
+                <VStack spacing="0px" mb={4}>
                   <Divider h="1px" color="#dddddd" mb="-12px" />
                   <Text
                     zIndex={1}
@@ -124,13 +131,23 @@ const LoginPage = () => {
                   <div className="row">
                     <div className="col-12">
                       <div className="icheck-primary">
-                        <Flex justifyContent="space-between">
+                        <Flex
+                          justifyContent="space-between"
+                          alignItems="center"
+                        >
                           <HStack>
-                            <input
-                              className="me-1"
+                            <Switch
+                              pt={2}
+                              colorScheme="messenger"
+                              size="sm"
                               type="checkbox"
                               id="remember"
                             />
+                            {/* <input
+                              className="me-1"
+                              type="checkbox"
+                              id="remember"
+                            /> */}
                             <Text fontWeight={400} fontSize="12px">
                               Remember me
                             </Text>
@@ -169,16 +186,21 @@ const LoginPage = () => {
                   </div>
                 </form>
 
-                <Link to="/registration">
-                  <HStack spacing={1}>
-                    <Text fontSize="13px" fontWeight={400}>
-                      New user?
-                    </Text>
-                    <Text fontSize="13px" fontWeight={500} color="primary">
+                <HStack spacing={1} alignItems="baseline">
+                  <Text fontSize="12px" fontWeight={400}>
+                    New user?
+                  </Text>
+                  <Link to="/registration">
+                    <Text
+                      fontSize="13px"
+                      fontWeight={500}
+                      color="primary"
+                      _hover={{ fontWeight: 600 }}
+                    >
                       Sign Up
                     </Text>
-                  </HStack>
-                </Link>
+                  </Link>
+                </HStack>
               </div>
             </div>
           </div>
@@ -190,7 +212,7 @@ const LoginPage = () => {
                 objectFit="cover"
                 src={cardImage}
                 alt="Cities"
-                h="425px"
+                h="461px"
               />
             </Box>
           </Hide>

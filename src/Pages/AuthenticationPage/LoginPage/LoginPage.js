@@ -29,6 +29,10 @@ import flightsImg from "../../../images/landing/flights.png";
 import hotlelsImg from "../../../images/landing/hotels.png";
 import holidaysImg from "../../../images/landing/holidays.png";
 import visaProcessingImg from "../../../images/landing/visa-processing.png";
+import airlines1 from "../../../images/landing/airlines-1.png";
+import airlines2 from "../../../images/landing/airlines-2.png";
+import airlines3 from "../../../images/landing/airlines-3.png";
+import airlines4 from "../../../images/landing/airlines-4.png";
 import cardBg from "../../../images/landing/landing-bg.png";
 
 import { MdOutlineEmail } from "react-icons/md";
@@ -70,6 +74,13 @@ const LoginPage = () => {
     { text: "Hotels", img: hotlelsImg },
     { text: "Holiday", img: holidaysImg },
     { text: "Visa Processing", img: visaProcessingImg },
+  ];
+
+  const topAirlinesData = [
+    { img: airlines1 },
+    { img: airlines2 },
+    { img: airlines3 },
+    { img: airlines4 },
   ];
 
   // backgroundImage={`url(${cardBg})`}
@@ -257,6 +268,24 @@ const LoginPage = () => {
               {item.text}
             </Text>
           </VStack>
+        ))}
+      </Flex>
+
+      <Text fontSize="21px" fontWeight={500} pt="100px">
+        Top Airlines Are With Us
+      </Text>
+      <Flex gap="60px" py="50px">
+        {topAirlinesData.map((item) => (
+          <Center
+            key={nanoid()}
+            bg="rgba(255, 255, 255, 0.3)"
+            border="1px solid #E8E8E8"
+            borderRadius="5px"
+            px="45px"
+            py="57px"
+          >
+            <Image src={item.img} alt="airlines1" w="150px" />
+          </Center>
         ))}
       </Flex>
     </VStack>

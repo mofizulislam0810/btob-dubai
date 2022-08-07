@@ -6,6 +6,25 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FooterLR from "../../Optional/FooterLR/FooterLR";
 import "./LoginPage.css";
+import {
+  Box,
+  Center,
+  Flex,
+  Image,
+  Hide,
+  Text,
+  Divider,
+  VStack,
+  Switch,
+  Button,
+  HStack,
+  InputGroup,
+  InputRightElement,
+  Input,
+} from "@chakra-ui/react";
+import cardImage from "../../../images/landing/card.png";
+import { MdOutlineEmail } from "react-icons/md";
+import { BsEyeSlash } from "react-icons/bs";
 
 const LoginPage = () => {
   const { onClickLoginButton } = useAuth();
@@ -38,97 +57,150 @@ const LoginPage = () => {
   };
 
   return (
-    <>
+    <Center>
       <div className="hold-transition login-page search-panel-bg">
-        <div className="login-box">
-          <ToastContainer />
-          <div className="card">
-            <div className="card-header text-center">
-              <img src={logo} alt="Triplover" />
-            </div>
-            <div className="card-body login-card-body">
-              <p className="login-box-msg">Sign in to start your session</p>
+        <Flex
+          borderRadius="5px"
+          overflow="hidden"
+          boxShadow="0px 4px 67px rgba(156, 156, 156, 0.25)"
+        >
+          <div className="login-box">
+            <ToastContainer />
+            <div className="card">
+              <Center className="card-header text-center">
+                <Image src={logo} alt="Triplover" w="225px" h="84px" />
+              </Center>
+              <div className="card-body login-card-body">
+                {/* <p className="login-box-msg">Sign in to start your session</p> */}
+                <VStack spacing="0px" mb={6}>
+                  <Divider h="1px" color="#dddddd" mb="-12px" />
+                  <Text
+                    zIndex={1}
+                    bg="white"
+                    display="inline-block"
+                    px="16px"
+                    fontSize="16px"
+                    fontWeight={400}
+                  >
+                    Sign in to start your session
+                  </Text>
+                </VStack>
 
-              <form onSubmit={handleLoginUser}>
-                <div className="input-group mb-3">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    className="form-control rounded"
-                    placeholder="Email"
-                    required
-                  />
-                  <div className="input-group-append">
-                    <div className="input-group-text">
-                      <span className="fas fa-envelope"></span>
+                <form onSubmit={handleLoginUser}>
+                  <InputGroup my={2}>
+                    <InputRightElement
+                      pointerEvents="none"
+                      children={<MdOutlineEmail color="#B8B8B8" />}
+                    />
+                    <Input
+                      border="1px solid #dddddd"
+                      focusBorderColor="primary"
+                      id="email"
+                      name="email"
+                      type="email"
+                      className="form-control rounded"
+                      placeholder="Email"
+                      required
+                    />
+                  </InputGroup>
+
+                  <InputGroup my={2} mb={6}>
+                    <InputRightElement
+                      pointerEvents="none"
+                      children={<BsEyeSlash color="#B8B8B8" />}
+                    />
+                    <Input
+                      border="1px solid #dddddd"
+                      focusBorderColor="primary"
+                      id="password"
+                      name="password"
+                      type={passwordShown ? "text" : "password"}
+                      className="form-control rounded"
+                      placeholder="Password"
+                      required
+                    />
+                  </InputGroup>
+
+                  <div className="row">
+                    <div className="col-12">
+                      <div className="icheck-primary">
+                        <Flex justifyContent="space-between">
+                          <HStack>
+                            <input
+                              className="me-1"
+                              type="checkbox"
+                              id="remember"
+                            />
+                            <Text fontWeight={400} fontSize="12px">
+                              Remember me
+                            </Text>
+                          </HStack>
+
+                          <Link to="/forgotpassword">
+                            <Text
+                              fontWeight={300}
+                              fontSize="13px"
+                              color="secondary"
+                            >
+                              Recover Password
+                            </Text>
+                          </Link>
+                        </Flex>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="input-group mb-3">
-                  <input
-                    id="password"
-                    name="password"
-                    type={passwordShown ? "text" : "password"}
-                    className="form-control rounded"
-                    placeholder="Password"
-                    required
-                  />
-                  <div className="input-group-append" onClick={togglePassword}>
-                    <div className="input-group-text">
-                      {passwordShown ? (
-                        <i class="fas fa-eye"></i>
-                      ) : (
-                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                      )}
+                  <div className="row">
+                    <div className="col-12 my-3">
+                      <Box
+                        w="100%"
+                        h="55px"
+                        type="submit"
+                        //className="btn button-color text-white fw-bold btn-block rounded btn-sm"
+                        bg="gradient"
+                        color="black"
+                        fontSize="16px"
+                        fontWeight={400}
+                        borderRadius="6px"
+                        _hover={{ color: "white" }}
+                      >
+                        <Center h="100%">Login</Center>
+                      </Box>
                     </div>
                   </div>
-                </div>
-                <div className="row">
-                  <div className="col-12">
-                    <div className="icheck-primary">
-                      <input className="me-1" type="checkbox" id="remember" />
-                      <label htmlFor="remember" className="font-size">
-                        Remember Me
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-12 my-2">
-                    <button
-                      type="submit"
-                      className="btn button-color text-white fw-bold btn-block rounded btn-sm"
-                    >
-                      Sign In
-                    </button>
-                  </div>
-                </div>
-              </form>
-              <p className="lh-2">
-                <Link to="/forgotpassword">
-                  <span className="font-size" style={{ color: "#66667f" }}>
-                    Forgot password?
-                  </span>
-                </Link>
-                <br></br>
+                </form>
+
                 <Link to="/registration">
-                  <span className="font-size mt-1" style={{ color: "#66667f" }}>
-                    <span className="fw-bold" style={{ color: "#1d94e4" }}>
+                  <HStack spacing={1}>
+                    <Text fontSize="13px" fontWeight={400}>
+                      New user?
+                    </Text>
+                    <Text fontSize="13px" fontWeight={500} color="primary">
                       Sign Up
-                    </span>{" "}
-                    for new user
-                  </span>
+                    </Text>
+                  </HStack>
                 </Link>
-              </p>
+              </div>
             </div>
           </div>
-        </div>
+          <Hide below="md">
+            <Box bg="background">
+              <Image
+                w="460px"
+                layout="fill"
+                objectFit="cover"
+                src={cardImage}
+                alt="Cities"
+                h="425px"
+              />
+            </Box>
+          </Hide>
+        </Flex>
+
         {/* <div className="login-form">
           <FooterLR></FooterLR>
         </div> */}
       </div>
-    </>
+    </Center>
   );
 };
 

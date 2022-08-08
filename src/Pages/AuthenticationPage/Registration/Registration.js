@@ -9,6 +9,7 @@ import FooterLR from "../../Optional/FooterLR/FooterLR";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReCAPTCHA from "react-google-recaptcha";
+import { Box, Center } from "@chakra-ui/react";
 
 const Registration = () => {
   let [countryName, setCountryName] = useState("Bangladesh");
@@ -176,12 +177,9 @@ const Registration = () => {
                 <div className="row">
                   <div className="col-lg-6">
                     <div class="card">
-                      <div
-                        class="card-header text-dark"
-                        style={{ background: "skyblue" }}
-                      >
+                      <Box className="card-header text-dark" bg="pink">
                         Company Information
-                      </div>
+                      </Box>
                       <div class="card-body">
                         <div className="row">
                           <div className="col-lg-12 pb-3">
@@ -356,12 +354,9 @@ const Registration = () => {
                   {/* <div className="col-lg-1"></div> */}
                   <div className="col-lg-6">
                     <div class="card">
-                      <div
-                        class="card-header text-dark"
-                        style={{ background: "skyblue" }}
-                      >
+                      <Box className="card-header text-dark" bg="pink">
                         User Information
-                      </div>
+                      </Box>
                       <div class="card-body">
                         <div className="row">
                           <div className="col-lg-12">
@@ -494,7 +489,8 @@ const Registration = () => {
                   </div>
                 </div>
               </div>
-              <div className="row">
+
+              {/* <div className="row">
                 <div className="col-lg-12 mt-4">
                   <button
                     type="button"
@@ -504,7 +500,25 @@ const Registration = () => {
                     Sign Up
                   </button>
                 </div>
-              </div>
+              </div> */}
+
+              <Box
+                my={4}
+                w="400px"
+                h="55px"
+                bg="gradient"
+                color="white"
+                fontSize="16px"
+                fontWeight={400}
+                borderRadius="6px"
+                _hover={{ opacity: 0.9 }}
+                type="button"
+                className="btn button-color text-white fw-bold btn-block w-25 mx-auto rounded btn-sm"
+                onClick={() => handleSubmit()}
+              >
+                <Center h="100%"> Sign Up</Center>
+              </Box>
+
               <p className="my-2 font-size text-center">
                 Already have account
                 <Link to="/">

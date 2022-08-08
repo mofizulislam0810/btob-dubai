@@ -19,12 +19,13 @@ import {
   FaFacebookF,
   FaLinkedinIn,
   FaPhoneAlt,
-  FaBuilding,
 } from "react-icons/fa";
 import { GrMail } from "react-icons/gr";
 import { BsFillHouseFill } from "react-icons/bs";
 import Contact from "../../Optional/Contact/Contact";
 import { map } from "jquery";
+import { Link } from "react-router-dom";
+import { nanoid } from "nanoid";
 
 const socialData = [
   { icon: FaTwitter },
@@ -34,11 +35,11 @@ const socialData = [
 ];
 
 const quickLinksData = [
-  { text: "Contact" },
-  { text: "Bank Details" },
-  { text: "Privacy Policy" },
-  { text: "Terms And Conditions" },
-  { text: "Refund & Cancellation" },
+  { text: "Contact", to: "contact" },
+  { text: "Bank Details", to: "bankdetail" },
+  { text: "Privacy Policy", to: "privacypolicy" },
+  { text: "Terms And Conditions", to: "termandcondition" },
+  { text: "Refund & Cancellation", to: "refundandcancellation" },
 ];
 
 const addressData = [
@@ -73,7 +74,7 @@ const Footer = () => {
           <Image src={logo} alt="Triplover" w="160px" mb="24px" />
           <HStack gap="10px">
             {socialData.map((item) => (
-              <Circle bg="#E0ECFB" size="45px">
+              <Circle bg="#E0ECFB" size="45px" key={nanoid()}>
                 <Icon as={item.icon} h="22px" w="22px" color="inactiveText" />
               </Circle>
             ))}
@@ -87,9 +88,11 @@ const Footer = () => {
             Quick Links
           </Text>
           {quickLinksData.map((item) => (
-            <Text fontSize="14px" fontWeight={400} mb="17px">
-              {item.text}
-            </Text>
+            <Link to={`/${item.to}`}>
+              <Text fontSize="14px" fontWeight={400} mb="17px">
+                {item.text}
+              </Text>
+            </Link>
           ))}
         </Box>
 
@@ -115,9 +118,9 @@ const Footer = () => {
         </Box>
       </Flex>
 
-      <Center className="text-center">
+      {/* <Center className="text-center">
         <Image src={paymentOptions} alt="payment options" w="650px" my="30px" />
-      </Center>
+      </Center> */}
 
       <Box borderTop="1px solid #E2E2E2" mx={4} />
 

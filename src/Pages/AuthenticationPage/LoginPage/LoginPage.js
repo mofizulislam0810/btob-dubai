@@ -38,6 +38,7 @@ import cardBg from "../../../images/landing/landing-bg.png";
 import { MdOutlineEmail } from "react-icons/md";
 import { BsEyeSlash } from "react-icons/bs";
 import { nanoid } from "nanoid";
+import Footer from "../../SharePages/Footer/Footer";
 
 const LoginPage = () => {
   const { onClickLoginButton } = useAuth();
@@ -288,6 +289,8 @@ const LoginPage = () => {
           </Center>
         ))}
       </Flex>
+
+      <Footer />
     </VStack>
   );
 };

@@ -141,6 +141,16 @@ hr{
     background-image: linear-gradient(#FF9900, #FF6B00);
 }
 
+/* .search-panel-bg{
+    background-image: url('../../../src/images/bgImage/home-banner-bg.png');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #E8F3FE;
+} */
 
 .text-color{
     color: #02046a;

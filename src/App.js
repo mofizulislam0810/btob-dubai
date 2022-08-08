@@ -47,6 +47,7 @@ import CreditNotes from "./Pages/CreditNotes/CreditNotes";
 import CheckoutSuccess from "./Pages/CheckoutConfirmation/CheckoutSuccess";
 import CheckoutFailed from "./Pages/CheckoutConfirmation/CheckoutFailed";
 import { Box } from "@chakra-ui/react";
+import cardBg from "../src/images/landing/landing-bg.png";
 function App() {
   // const [token,setToken] = useState(sessionStorage.getItem("token"));
   // if(!token){
@@ -56,7 +57,14 @@ function App() {
   // }
 
   return (
-    <Box bg="background">
+    <Box>
+      <Box
+        w="100%"
+        h="100vh"
+        backgroundImage={`url(${cardBg})`}
+        zIndex={0}
+        position="absolute"
+      />
       <AuthProvider>
         <BrowserRouter>
           <Routes>

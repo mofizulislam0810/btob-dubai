@@ -33,7 +33,6 @@ import airlines1 from "../../../images/landing/airlines-1.png";
 import airlines2 from "../../../images/landing/airlines-2.png";
 import airlines3 from "../../../images/landing/airlines-3.png";
 import airlines4 from "../../../images/landing/airlines-4.png";
-import cardBg from "../../../images/landing/landing-bg.png";
 
 import { MdOutlineEmail } from "react-icons/md";
 import { BsEyeSlash } from "react-icons/bs";
@@ -84,10 +83,9 @@ const LoginPage = () => {
     { img: airlines4 },
   ];
 
-  // backgroundImage={`url(${cardBg})`}
   return (
     <VStack>
-      <Center w="100%" h="100vh" backgroundImage={`url(${cardBg})`}>
+      <Center w="100%" h="100vh">
         <Flex
           borderRadius="5px"
           overflow="hidden"

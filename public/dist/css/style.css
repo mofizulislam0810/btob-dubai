@@ -150,7 +150,8 @@ hr{
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-color: #E8F3FE;
+    /* background-color: #E8F3FE; */
+    background-color: #F7FBFF;
 }
 
 .text-color{

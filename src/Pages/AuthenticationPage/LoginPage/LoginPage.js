@@ -196,21 +196,20 @@ const LoginPage = () => {
                     </div>
                   </div>
                   <div className="row">
-                    <div className="col-12 my-3">
-                      <Box
-                        w="100%"
-                        h="55px"
+                    <div className="col-12 my-2">
+                      <button
                         type="submit"
-                        //className="btn button-color text-white fw-bold btn-block rounded btn-sm"
-                        bg="gradient"
-                        color="white"
-                        fontSize="16px"
-                        fontWeight={400}
-                        borderRadius="6px"
-                        _hover={{ opacity: 0.9 }}
+                        className="btn text-white fw-bold btn-block rounded btn-sm"
                       >
-                        <Center h="100%">Login</Center>
-                      </Box>
+                        <Center
+                          bg="gradient"
+                          borderRadius="6px"
+                          h="55px"
+                          _hover={{ opacity: 0.9 }}
+                        >
+                          <Text color="white">Login</Text>
+                        </Center>
+                      </button>
                     </div>
                   </div>
                 </form>

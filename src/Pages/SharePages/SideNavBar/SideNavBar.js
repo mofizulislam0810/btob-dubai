@@ -7,7 +7,7 @@ const SideNavBar = () => {
   return (
     <aside
       className="main-sidebar sidebar-dark-primary elevation-4"
-      style={{ position: "fixed", height: "100%", backgroundColor: "#02046a" }}
+      style={{ position: "fixed", height: "100%", backgroundColor: "#FFFFFF" }}
     >
       {/* Brand Logo  */}
       <Link to="/dashboard" className="brand-link">
@@ -17,7 +17,7 @@ const SideNavBar = () => {
           className="brand-image img-circle elevation-3"
           // style={{ opacity: ".8" }}
         />
-        <span className="brand-text font-weight-light">Dashboard</span>
+        <span className="brand-text font-weight-light" style={{color:"#8796A1"}}>Dashboard</span>
       </Link>
 
       {/* Sidebar  */}

@@ -1330,7 +1330,7 @@ const SearchFrom = () => {
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="d-flex justify-content-center">
-                      <button className="btn button-color text-white mt-3 text-center fw-bold">
+                      <button className="btn button-color text-white mt-3 text-center fw-bold rounded">
                         Search Flight
                       </button>
                     </div>
@@ -1357,8 +1357,8 @@ const SearchFrom = () => {
                       {index === 0 ? (
                         <>
                           <p
-                            className="text-white py-2 pe-2 mb-0"
-                            style={{ fontSize: "12px" }}
+                            className="py-2 pe-2 mb-0"
+                            style={{ fontSize: "12px",color:"#8796A1" }}
                           >
                             Recent searches
                           </p>
@@ -1367,8 +1367,8 @@ const SearchFrom = () => {
                         <> </>
                       )}
                       <div
-                        className="bg-white text-dark  text-center p-2 me-2"
-                        style={{ fontSize: "12px", cursor: "pointer" }}
+                        className="text-center  text-dark p-2 me-2"
+                        style={{ fontSize: "12px", cursor: "pointer" ,backgroundColor:"#FAF9FF"}}
                         onClick={() => searchValue(index)}
                       >
                         <span>{item.routes[0].origin}</span>

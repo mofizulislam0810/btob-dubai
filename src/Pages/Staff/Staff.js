@@ -165,7 +165,7 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
                       <li id="menu-item">
                         <a
                           href="javascript:void(0)"
-                          className="btn btn-sm btn-secondary float-right mr-1 d-print-none"
+                          className="btn btn-sm button-color float-right mr-1 d-print-none rounded text-white"
                           data-bs-toggle="modal"
                           data-bs-target="#accountModal"
                           onClick={() => handleCreateItem()}
@@ -335,14 +335,14 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
                   <div className="modal-footer">
                     <button
                       type="button"
-                      className="btn btn-secondary"
+                      className="btn btn-secondary rounded"
                       data-bs-dismiss="modal"
                     >
                       Close
                     </button>
                     <button
                       type="button"
-                      className="btn button-color fw-bold text-white"
+                      className="btn button-color fw-bold text-white rounded"
                       onClick={() => handleSubmit()}
                     >
                       Submit
@@ -353,13 +353,8 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
             </div>
           </div>
         </section>
-        <div className="text-center text-white pb-2">
-          {/* <b>Version</b> 3.1.0 */}
-          <strong>Copyright &copy; 2020-2022 All rights reserved.</strong>
-        </div>
       </div>
-
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 };

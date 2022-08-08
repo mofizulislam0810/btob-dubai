@@ -98,14 +98,14 @@ const Queues = () => {
   };
 
   const handleDateChange = (status, utid, pnr, ticketno) => {
-    if (status === "Issued") {
+        if (status === "Issued") {
       window.open(
         "/support?typeid=2&subjectid=2&utid=" +
           utid +
           "&pnr=" +
           pnr +
           "&ticketno=" +
-          ticketno == undefined ? "" : ticketno,
+          (ticketno == undefined ? "" : ticketno),
         "_blank"
       );
     } else {
@@ -115,7 +115,7 @@ const Queues = () => {
           "&pnr=" +
           pnr +
           "&ticketno=" +
-          ticketno == undefined ? "" : ticketno,
+          (ticketno == undefined ? "" : ticketno),
         "_blank"
       );
     }
@@ -751,12 +751,8 @@ const Queues = () => {
             </div>
           </form>
         </section>
-        <div className="text-center text-white pt-5 pb-2 mt-5">
-          {/* <b>Version</b> 3.1.0 */}
-          <strong>Copyright &copy; 2020-2022 All rights reserved.</strong>
-        </div>
       </div>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 };

@@ -288,7 +288,7 @@ const Support = () => {
 									</ul>
 									<div className="tab-content">
 										<div className="tab-pane  show active" id="opened">
-											<button type="button" id="btnOpenModal" className="btn button-color fw-bold text-white my-2" data-bs-toggle="modal" data-bs-target="#supportModal">
+											<button type="button" id="btnOpenModal" className="btn button-color fw-bold text-white my-2 rounded" data-bs-toggle="modal" data-bs-target="#supportModal">
 												Add
 											</button>
 
@@ -371,8 +371,8 @@ const Support = () => {
 															</div>
 														</div>
 														<div className="modal-footer">
-															<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-															<button type="button" className="btn button-color fw-bold text-white" onClick={() => handleSupportSubmit()}>Submit</button>
+															<button type="button" className="btn btn-secondary rounded" data-bs-dismiss="modal">Close</button>
+															<button type="button" className="btn button-color fw-bold text-white rounded" onClick={() => handleSupportSubmit()}>Submit</button>
 
 
 														</div>

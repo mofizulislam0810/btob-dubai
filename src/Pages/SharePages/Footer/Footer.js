@@ -61,13 +61,6 @@ const addressData = [
 
 const Footer = () => {
   return (
-    // <footer className="main-footer fixed-bottom">
-    //   <div className="float-right d-none d-sm-block">
-    //     {/* <b>Version</b> 3.1.0 */}
-    //     <strong>Copyright &copy; 2020-2022</strong> All rights reserved.
-    //   </div>
-    //   {/* <strong>Copyright &copy; 2020-2022</strong> All rights reserved. */}
-    // </footer>
     <Box className="container">
       <Flex w="100%" mt="80px" mb="30px" justifyContent="space-between">
         <Box>
@@ -135,13 +128,6 @@ const Footer = () => {
         © Copyright Triplover Limited. All rights reserved.
       </Text>
     </Box>
-
-    // <footer className="fixed-bottom">
-    //   <div className="text-center text-white">
-    //     {/* <b>Version</b> 3.1.0 */}
-    //     <strong>Copyright &copy; 2020-2022 All rights reserved.</strong>
-    //   </div>
-    // </footer>
   );
 };
 

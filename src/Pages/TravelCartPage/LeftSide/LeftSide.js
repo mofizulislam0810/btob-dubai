@@ -3043,7 +3043,7 @@ const LeftSide = () => {
                   <div className="col-lg-12 text-center">
                     <button
                       type="submit"
-                      className="btn button-color text-white fw-bold w-25 mt-2"
+                      className="btn button-color text-white fw-bold w-25 mt-2 rounded"
                     >
                       Book Now
                     </button>

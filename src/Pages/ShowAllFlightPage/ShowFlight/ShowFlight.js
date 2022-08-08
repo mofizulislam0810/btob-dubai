@@ -257,7 +257,7 @@ const ShowFlight = (props) => {
       {amountChange === "Invoice Amount" ? (
         <>
           <div
-            className="row mb-5 mx-3 py-2 rounded box-shadow"
+            className="row mb-5 mx-3 py-2 rounded box-shadow bg-white"
             id={"first-option" + props.index}
           >
             <div className="col-lg-10 my-auto border-end">

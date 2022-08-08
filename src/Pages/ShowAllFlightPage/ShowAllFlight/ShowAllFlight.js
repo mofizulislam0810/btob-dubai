@@ -243,8 +243,8 @@ const ShowAllFlight = ({
 
   return (
     <div>
-         <div className="container bg-white box-shadow content-width">
-            <div className="row border mt-3 px-5 py-2">
+         <div className="container box-shadow content-width">
+            <div className="row border mt-3 px-5 py-2 bg-white">
               <div className="col-lg-6 my-auto">
                   <h5 className="pt-1">We found {fetchFlighData?.totalFlights} flights, {fetchFlighData?.airlineFilters?.length} Unique Airlines </h5>
               </div>
@@ -262,10 +262,10 @@ const ShowAllFlight = ({
             </div>
           </div>
       <Loading loading={loading}></Loading>
-      <div className="container my-3 bg-white content-width">
+      <div className="container my-3 content-width">
         <div className="row py-4 ps-3">
           <div
-            className="col-lg-3 rounded box-shadow"
+            className="col-lg-3 rounded box-shadow bg-white"
             style={{ height: "100%", position: "sticky", top: "9%"}}
           >
             <div className="container">
@@ -392,7 +392,7 @@ const ShowAllFlight = ({
                   </div>
                   <div className="form-check mt-2">
                     {flightName.map((item, index) => (
-                      <div key={index}>
+                      <div key={index} className="d-flex align-item-center">
                         <input
                           className="form-check-input"
                           type="checkbox"

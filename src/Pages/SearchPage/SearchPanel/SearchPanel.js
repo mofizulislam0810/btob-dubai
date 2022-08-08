@@ -12,7 +12,7 @@ import { environment } from "../../SharePages/Utility/environment";
 import Footer from "../../SharePages/Footer/Footer";
 
 const SearchPanel = () => {
-  const {setId} = useAuth();
+  const { setId } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
     // filght panel click color chenge
@@ -36,37 +36,37 @@ const SearchPanel = () => {
       $("#hotel-panal").removeClass("bottom-border");
     });
   }, []);
-// const marqueeText = [
-//   {
-//     "title":"text one",
-//     "description":"Received amount from customer one - Refund Charge (As per Airline Policy)"
-//   },
-//   {
-//     "title":"text two",
-//     "description":"Received amount from customer two - Refund Charge (As per Airline Policy)"
-//   },
-//   {
-//     "title":"text three",
-//     "description":"Received amount from customer three - Refund Charge (As per Airline Policy)"
-//   },
-// ]
+  // const marqueeText = [
+  //   {
+  //     "title":"text one",
+  //     "description":"Received amount from customer one - Refund Charge (As per Airline Policy)"
+  //   },
+  //   {
+  //     "title":"text two",
+  //     "description":"Received amount from customer two - Refund Charge (As per Airline Policy)"
+  //   },
+  //   {
+  //     "title":"text three",
+  //     "description":"Received amount from customer three - Refund Charge (As per Airline Policy)"
+  //   },
+  // ]
 
-const [text,setText] = useState();
-const getMarqueeText = async () => {
-  const response = await axios.get(
-    environment.marqueeList,
-    environment.headerToken
-  );
-  setText(response.data.data);
-};
-console.log(text);
-const handleClick = (idx) =>{
-  setId(idx);
-  navigate("/details");
-}
-useEffect(()=>{
-  getMarqueeText();
-},[])
+  const [text, setText] = useState();
+  const getMarqueeText = async () => {
+    const response = await axios.get(
+      environment.marqueeList,
+      environment.headerToken
+    );
+    setText(response.data.data);
+  };
+  console.log(text);
+  const handleClick = (idx) => {
+    setId(idx);
+    navigate("/details");
+  };
+  useEffect(() => {
+    getMarqueeText();
+  }, []);
   return (
     <div>
       <div className="content-wrapper search-panel-bg">
@@ -77,21 +77,17 @@ useEffect(()=>{
           gradient={false}
           style={{ backgroundColor: "#02046a" }}
         >
-
-          {
-            text?.map((item,index)=>{
-              return(
-                <p
+          {text?.map((item, index) => {
+            return (
+              <p
                 style={{ fontSize: "15pt", cursor: "pointer" }}
                 className="text-white pt-2 me-5"
-                onClick={()=>handleClick(index+1)}
+                onClick={() => handleClick(index + 1)}
               >
                 {item.title}
               </p>
-              
-              )
-            })
-          }
+            );
+          })}
           {/* <p
             style={{ fontSize: "15pt", cursor: "pointer" }}
             className="text-white pt-2"

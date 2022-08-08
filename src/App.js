@@ -46,8 +46,9 @@ import TicketOrderSuccess from "./Pages/TicketingResultPage/TicketOrderSuccess/T
 import CreditNotes from "./Pages/CreditNotes/CreditNotes";
 import CheckoutSuccess from "./Pages/CheckoutConfirmation/CheckoutSuccess";
 import CheckoutFailed from "./Pages/CheckoutConfirmation/CheckoutFailed";
+import { Box } from "@chakra-ui/react";
+import cardBg from "../src/images/landing/landing-bg.png";
 function App() {
-
   // const [token,setToken] = useState(sessionStorage.getItem("token"));
   // if(!token){
   //   return(
@@ -55,21 +56,30 @@ function App() {
   //   );
   // }
 
-
   return (
-    <div>
+    <Box>
+      <Box
+        w="100%"
+        h="100vh"
+        backgroundImage={`url(${cardBg})`}
+        zIndex={0}
+        position="absolute"
+      />
       <AuthProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/registration" element={<Registration />} />
-            <Route path="/loading"  element={<Loading />} />
+            <Route path="/loading" element={<Loading />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/bankdetail" element={<BankDetails/>} />
+            <Route path="/bankdetail" element={<BankDetails />} />
             <Route path="/privacypolicy" element={<PrivacyPolicy />} />
             <Route path="/termandcondition" element={<TermCondition />} />
-            <Route path="/refundandcancellation" element={<RefundAndCancellation/>} />
-            <Route path="/faq" element={<FAQ/>} />
+            <Route
+              path="/refundandcancellation"
+              element={<RefundAndCancellation />}
+            />
+            <Route path="/faq" element={<FAQ />} />
             <Route
               path="/search"
               element={
@@ -150,7 +160,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-             <Route
+            <Route
               path="/view"
               element={
                 <PrivateRoute>
@@ -166,7 +176,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-             <Route
+            <Route
               path="/dashboard"
               element={
                 <PrivateRoute>
@@ -174,7 +184,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-             <Route
+            <Route
               path="/balance"
               element={
                 <PrivateRoute>
@@ -182,7 +192,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-              <Route
+            <Route
               path="/markup"
               element={
                 <PrivateRoute>
@@ -190,7 +200,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-             <Route
+            <Route
               path="/support"
               element={
                 <PrivateRoute>
@@ -210,15 +220,15 @@ function App() {
               path="/Staff"
               element={
                 <PrivateRoute>
-                 <Staff></Staff>
+                  <Staff></Staff>
                 </PrivateRoute>
               }
             />
-             <Route
+            <Route
               path="/proposal"
               element={
                 <PrivateRoute>
-                <Proposal></Proposal>
+                  <Proposal></Proposal>
                 </PrivateRoute>
               }
             />
@@ -226,7 +236,7 @@ function App() {
               path="/forgotpassword"
               element={<ForgotPassword></ForgotPassword>}
             />
-             <Route
+            <Route
               path="/quickpassenger"
               element={
                 <PrivateRoute>
@@ -234,7 +244,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-             <Route
+            <Route
               path="/ticket"
               element={
                 <PrivateRoute>
@@ -250,7 +260,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-             <Route
+            <Route
               path="/voucher"
               element={
                 <PrivateRoute>
@@ -258,11 +268,11 @@ function App() {
                 </PrivateRoute>
               }
             />
-             <Route
+            <Route
               path="/bookedview"
               element={
                 <PrivateRoute>
-                  <BookedView/>
+                  <BookedView />
                 </PrivateRoute>
               }
             />
@@ -278,7 +288,7 @@ function App() {
               path="/cbankaccount"
               element={
                 <PrivateRoute>
-                  <CompanyBankAccount/>
+                  <CompanyBankAccount />
                 </PrivateRoute>
               }
             />
@@ -286,7 +296,7 @@ function App() {
               path="/details"
               element={
                 <PrivateRoute>
-                  <Description/>
+                  <Description />
                 </PrivateRoute>
               }
             />
@@ -294,11 +304,11 @@ function App() {
               path="/ledger"
               element={
                 <PrivateRoute>
-                  <Ledger/>
+                  <Ledger />
                 </PrivateRoute>
               }
             />
-              <Route
+            <Route
               path="/salesreport"
               element={
                 <PrivateRoute>
@@ -319,11 +329,11 @@ function App() {
               path="/creditnote"
               element={
                 <PrivateRoute>
-                  <CreditNotes/>
+                  <CreditNotes />
                 </PrivateRoute>
               }
             />
-                    <Route
+            <Route
               path="/checkoutsuccess"
               element={
                 <PrivateRoute>
@@ -342,7 +352,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </AuthProvider>
-    </div>
+    </Box>
   );
 }
 

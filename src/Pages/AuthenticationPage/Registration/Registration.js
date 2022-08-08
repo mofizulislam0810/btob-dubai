@@ -9,6 +9,7 @@ import FooterLR from "../../Optional/FooterLR/FooterLR";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReCAPTCHA from "react-google-recaptcha";
+import { Box, Center, Text } from "@chakra-ui/react";
 
 const Registration = () => {
   let [countryName, setCountryName] = useState("Bangladesh");
@@ -176,12 +177,9 @@ const Registration = () => {
                 <div className="row">
                   <div className="col-lg-6">
                     <div class="card">
-                      <div
-                        class="card-header text-dark"
-                        style={{ background: "skyblue" }}
-                      >
+                      <Box className="card-header text-dark" bg="pink">
                         Company Information
-                      </div>
+                      </Box>
                       <div class="card-body">
                         <div className="row">
                           <div className="col-lg-12 pb-3">
@@ -356,12 +354,9 @@ const Registration = () => {
                   {/* <div className="col-lg-1"></div> */}
                   <div className="col-lg-6">
                     <div class="card">
-                      <div
-                        class="card-header text-dark"
-                        style={{ background: "skyblue" }}
-                      >
+                      <Box className="card-header text-dark" bg="pink">
                         User Information
-                      </div>
+                      </Box>
                       <div class="card-body">
                         <div className="row">
                           <div className="col-lg-12">
@@ -494,17 +489,26 @@ const Registration = () => {
                   </div>
                 </div>
               </div>
+
               <div className="row">
                 <div className="col-lg-12 mt-4">
                   <button
                     type="button"
-                    className="btn button-color text-white fw-bold btn-block w-25 mx-auto rounded btn-sm"
+                    className="btn text-white fw-bold btn-block w-25 mx-auto rounded btn-sm"
                     onClick={() => handleSubmit()}
                   >
-                    Sign Up
+                    <Center
+                      bg="gradient"
+                      borderRadius="6px"
+                      h="55px"
+                      _hover={{ opacity: 0.9 }}
+                    >
+                      <Text color="white">Sing Up</Text>
+                    </Center>
                   </button>
                 </div>
               </div>
+
               <p className="my-2 font-size text-center">
                 Already have account
                 <Link to="/">

@@ -6,6 +6,7 @@ import currentYear from "../SharePages/Utility/currentYear";
 import { environment } from "../SharePages/Utility/environment";
 import moment from "moment";
 import ReactPaginate from 'react-paginate';
+import Footer from "../SharePages/Footer/Footer";
 const CreditNotes = () => {
     const [creditNoteList, setCreditNoteList] = useState([]);
     let [pageCount, setPageCount] = useState(0);
@@ -118,11 +119,9 @@ const CreditNotes = () => {
             </div>
           </div>
         </section>
-        <div className="text-center text-white pt-5 pb-2 mt-5">
-          {/* <b>Version</b> 3.1.0 */}
-          <strong>Copyright &copy; {currentYear()} All rights reserved.</strong>
-        </div>
+
       </div>
+      <Footer/>
     </div>
   );
 };

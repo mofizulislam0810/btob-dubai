@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../../images/logo/logo-combined.png";
+import logo from "../../../images/logo/image_2022_07_28T11_49_00_957Z_2-removebg-preview.png";
 import axios from "axios";
 import { environment } from "../../../../src/Pages/SharePages/Utility/environment";
 import { useState } from "react";
@@ -128,7 +128,7 @@ const handleViewTicket=()=>{
         </li>
         <li className="nav-item d-none d-sm-inline-block">
           <Link to="/search">
-            <img src={logo} alt="" width="160" height="60"/>
+            <img src={logo} alt="" width="100%" height="60"/>
           </Link>
         </li>
       </ul>
@@ -139,14 +139,14 @@ const handleViewTicket=()=>{
         <li className="nav-item">
           <form class="form-inline">
             <input
-              class="form-control search-input"
+              class="form-control search-input rounded-start"
               type="search"
               aria-label="Search"
               placeholder="Name/PNR/Ticket no/Booking Ref"
               onChange={(e)=>setSearchText(e.target.value)}
             />
             <button
-              class="btn button-color text-white fw-bold my-2 my-sm-0"
+              class="btn button-color text-white fw-bold my-2 my-sm-0 rounded-end"
               onClick={handleViewTicket}
               type="button"
             >
@@ -225,13 +225,13 @@ const handleViewTicket=()=>{
 
         <li className="nav-item dropdown me-1">
           <a
-            className="nav-link btn button-color"
+            className="nav-link btn button-color rounded"
             // style={{ backgroundColor: "#02046a" }}
             data-toggle="dropdown"
             href="#"
           >
             <span className="text-white fw-bold">
-              BDT {agentInfo?.currentBalance}
+            AED {agentInfo?.currentBalance}
             </span>
           </a>
           <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -239,10 +239,10 @@ const handleViewTicket=()=>{
             <div className="p-3 text-center">
               <h6>Your Account Balance</h6>
               <button
-                className="btn text-white fw-bold button-color"
+                className="btn text-white fw-bold button-color rounded"
                 // style={{ backgroundColor: "#02046a" }}
               >
-                BDT {agentInfo?.currentBalance}
+                AED {agentInfo?.currentBalance}
               </button>
             </div>
             <div className="dropdown-divider"></div>

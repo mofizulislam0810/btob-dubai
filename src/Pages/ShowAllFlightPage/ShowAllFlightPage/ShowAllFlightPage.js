@@ -1073,7 +1073,7 @@ const ShowAllFlightPage = () => {
       <div className="content-wrapper search-panel-bg">
         <section className="content-header"></section>
         <section className="content">
-          <div className="container box-shadow bg-white content-width">
+          <div className="container bg-white box-shadow content-width">
             <div className="row border mt-3 px-5 py-2">
               <div className="col-lg-7 py-3 my-auto border-right">
                 <span className="p-2 border">
@@ -1276,7 +1276,7 @@ const ShowAllFlightPage = () => {
                 </span>
               </div>
               <div className="col-lg-2 my-auto d-flex justify-content-center">
-                <button className="btn button-color btn-sm text-white float-start fw-bold search-again">
+                <button className="btn button-color btn-sm text-white float-start fw-bold search-again rounded">
                   Modify search
                 </button>
               </div>
@@ -2146,7 +2146,7 @@ const ShowAllFlightPage = () => {
                                   <div className="col-lg-12">
                                     <div className="d-flex justify-content-center">
                                       <button
-                                        className="btn button-color text-white mt-3 text-center fw-bold"
+                                        className="btn button-color text-white mt-3 text-center fw-bold rounded"
                                         id="search-flight"
                                       >
                                         Search Flight
@@ -2194,12 +2194,8 @@ const ShowAllFlightPage = () => {
             )}
           </div>
         </section>
-        <div className="text-center text-white pt-5 pb-2 mt-1">
-          {/* <b>Version</b> 3.1.0 */}
-          <strong>Copyright &copy; {currentYear()} All rights reserved.</strong>
-        </div>
       </div>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 };

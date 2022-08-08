@@ -32,6 +32,7 @@ const ShowFlight = (props) => {
   // console.log(directions);
   const flightType = props.flightType;
   const amountChange = props.amountChange;
+  let currency = props.currency;
   const [idxD, setIdxD] = useState(0);
   const [idxA, setIdxA] = useState(0);
   const [idxD1, setIdxD1] = useState(0);
@@ -154,7 +155,7 @@ const ShowFlight = (props) => {
       localStorage.setItem("refundable", JSON.stringify(refundable));
     });
 
-    $("#select-flight-t-click" + props.index).click(function () {});
+    $("#select-flight-t-click" + props.index).click(function () { });
 
     $(document).ready(function () {
       $("#show-option" + props.index).show();
@@ -250,6 +251,7 @@ const ShowFlight = (props) => {
       setCount(checkList.length);
     }
   };
+  console.log(currency);
   return (
     <>
       {amountChange === "Invoice Amount" ? (
@@ -430,7 +432,7 @@ const ShowFlight = (props) => {
                           ) : (
                             <>
                               {directions[0][0].segments.length === 1 &&
-                              directions[0][0].segments[0].details.length ===
+                                directions[0][0].segments[0].details.length ===
                                 1 ? (
                                 "Direct"
                               ) : (
@@ -438,7 +440,7 @@ const ShowFlight = (props) => {
                                   {directions[0][0].segments.length > 1 ? (
                                     <>
                                       {directions[0][0].segments.length ===
-                                      2 ? (
+                                        2 ? (
                                         <span
                                           data-tip={
                                             directions[0][0].segments[0]
@@ -683,7 +685,7 @@ const ShowFlight = (props) => {
                           ) : (
                             <>
                               {directions[0][0].segments.length === 1 &&
-                              directions[0][0].segments[0].details.length ===
+                                directions[0][0].segments[0].details.length ===
                                 1 ? (
                                 "Direct"
                               ) : (
@@ -691,7 +693,7 @@ const ShowFlight = (props) => {
                                   {directions[1][0].segments.length > 1 ? (
                                     <>
                                       {directions[1][0].segments.length ===
-                                      2 ? (
+                                        2 ? (
                                         <span
                                           data-tip={
                                             directions[1][0].segments[0]
@@ -910,7 +912,7 @@ const ShowFlight = (props) => {
                 ) : (
                   <></>
                 )}
-                    
+
                 <span className="pe-3 text-color font-size">
                   <span className="text-color briefcase">
                     {" "}
@@ -971,7 +973,7 @@ const ShowFlight = (props) => {
                     </table>
                   </div>
                 </span>
-                
+
                 <span className="text-color float-end">
 
                   {refundable === true ? (
@@ -995,16 +997,16 @@ const ShowFlight = (props) => {
                   )}
                 </span>
                 <span className="pe-3 text-color float-end">
-                <i class="fas fa-pen-nib me-1"></i>{" "}
-                        <Link
-                          to=""
-                          style={{ textDecoration: "none" }}
-                          className="fw-bold text-color font-size"
-                          data-bs-toggle="modal"
-                          data-bs-target={"#farerulesModal"+props.index}
-                        >
-                          Fare Rules
-                      </Link>
+                  <i class="fas fa-pen-nib me-1"></i>{" "}
+                  <Link
+                    to=""
+                    style={{ textDecoration: "none" }}
+                    className="fw-bold text-color font-size"
+                    data-bs-toggle="modal"
+                    data-bs-target={"#farerulesModal" + props.index}
+                  >
+                    Fare Rules
+                  </Link>
                 </span>
               </div>
             </div>
@@ -1012,15 +1014,15 @@ const ShowFlight = (props) => {
             <div className="col-lg-2 my-auto text-center">
               <h5 className="text-end text-color text-center fw-bold">
                 <del className="fs-6 text-danger">
-                  
-                  BDT {totalPrice - bookingComponents[0].discountPrice +(bookingComponents[0].agentAdditionalPrice<0?0:bookingComponents[0].agentAdditionalPrice)}
+
+                  {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
                 </del>
                 <br></br>
-                BDT {totalPrice+ bookingComponents[0].agentAdditionalPrice} 
+                {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice}
               </h5>
               <Link
                 to="/travellcart"
-                className="btn button-color text-white fw-bold w-100 my-2"
+                className="btn button-color text-white fw-bold w-100 my-2 rounded"
                 // id={"select-flight-click" + props.index}
                 onClick={handleSelectFlight}
               >
@@ -1069,7 +1071,7 @@ const ShowFlight = (props) => {
                       </div>
                       <div className="col-lg-6">
                         <h6 className="text-color fw-bold text-end">
-                          BDT 9,000
+                          {currency !== undefined ? currency : "BDT"}  9,000
                         </h6>
                       </div>
                     </div>
@@ -1122,7 +1124,7 @@ const ShowFlight = (props) => {
                       </div>
                       <div className="col-lg-6">
                         <h6 className="text-color fw-bold text-end">
-                          BDT 10,000
+                          {currency !== undefined ? currency : "BDT"}  10,000
                         </h6>
                       </div>
                     </div>
@@ -1175,7 +1177,7 @@ const ShowFlight = (props) => {
                       </div>
                       <div className="col-lg-6">
                         <h6 className="text-color fw-bold text-end">
-                          BDT 12,000
+                          {currency !== undefined ? currency : "BDT"}  12,000
                         </h6>
                       </div>
                     </div>
@@ -1250,7 +1252,7 @@ const ShowFlight = (props) => {
                     <>
                       <tr>
                         <td className="left">ADT</td>
-                        <td className="left">{passengerFares.adt.basePrice+ bookingComponents[0].agentAdditionalPrice/(passengerCounts.adt+(passengerCounts.cnn !==null?passengerCounts.cnn : 0)+(passengerCounts.inf !==null?passengerCounts.inf : 0))}</td>
+                        <td className="left">{passengerFares.adt.basePrice + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}</td>
                         <td className="center">{passengerFares.adt.taxes}</td>
                         <td className="right">
                           {passengerFares.adt.discountPrice}
@@ -1258,8 +1260,8 @@ const ShowFlight = (props) => {
                         <td className="right">{passengerFares.adt.ait}</td>
                         <td className="right">{passengerCounts.adt}</td>
                         <td className="right fw-bold">
-                          BDT{" "}
-                          {(passengerFares.adt.totalPrice * passengerCounts.adt)+ bookingComponents[0].agentAdditionalPrice/(passengerCounts.adt+(passengerCounts.cnn !==null?passengerCounts.cnn : 0)+(passengerCounts.inf !==null?passengerCounts.inf : 0))}
+                          {currency !== undefined ? currency : "BDT"}  {" "}
+                          {(passengerFares.adt.totalPrice * passengerCounts.adt) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
                         </td>
                       </tr>
                     </>
@@ -1271,7 +1273,7 @@ const ShowFlight = (props) => {
                     <>
                       <tr>
                         <td className="left">CNN</td>
-                        <td className="left">{passengerFares.cnn.basePrice+ bookingComponents[0].agentAdditionalPrice/(passengerCounts.adt+(passengerCounts.cnn !==null?passengerCounts.cnn : 0)+(passengerCounts.inf !==null?passengerCounts.inf : 0))}</td>
+                        <td className="left">{passengerFares.cnn.basePrice + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}</td>
                         <td className="center">{passengerFares.cnn.taxes}</td>
                         <td className="right">
                           {passengerFares.cnn.discountPrice}
@@ -1279,8 +1281,8 @@ const ShowFlight = (props) => {
                         <td className="right">{passengerFares.cnn.ait}</td>
                         <td className="right">{passengerCounts.cnn}</td>
                         <td className="right fw-bold">
-                          BDT{" "}
-                          {(passengerFares.cnn.totalPrice * passengerCounts.cnn)+ bookingComponents[0].agentAdditionalPrice/(passengerCounts.adt+(passengerCounts.cnn !==null?passengerCounts.cnn : 0)+(passengerCounts.inf !==null?passengerCounts.inf : 0))}
+                          {currency !== undefined ? currency : "BDT"}  {" "}
+                          {(passengerFares.cnn.totalPrice * passengerCounts.cnn) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
                         </td>
                       </tr>
                     </>
@@ -1292,7 +1294,7 @@ const ShowFlight = (props) => {
                     <>
                       <tr>
                         <td className="left">INF</td>
-                        <td className="left">{passengerFares.inf.basePrice+ bookingComponents[0].agentAdditionalPrice/(passengerCounts.adt+(passengerCounts.cnn !==null?passengerCounts.cnn : 0)+(passengerCounts.inf !==null?passengerCounts.inf : 0))}</td>
+                        <td className="left">{passengerFares.inf.basePrice + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}</td>
                         <td className="center">{passengerFares.inf.taxes}</td>
                         <td className="right">
                           {passengerFares.inf.discountPrice}
@@ -1300,8 +1302,8 @@ const ShowFlight = (props) => {
                         <td className="right">{passengerFares.inf.ait}</td>
                         <td className="right">{passengerCounts.inf}</td>
                         <td className="right fw-bold">
-                          BDT{" "}
-                          {(passengerFares.inf.totalPrice * passengerCounts.inf)+ bookingComponents[0].agentAdditionalPrice/(passengerCounts.adt+(passengerCounts.cnn !==null?passengerCounts.cnn : 0)+(passengerCounts.inf !==null?passengerCounts.inf : 0))}
+                          {currency !== undefined ? currency : "BDT"}  {" "}
+                          {(passengerFares.inf.totalPrice * passengerCounts.inf) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
                         </td>
                       </tr>
                     </>
@@ -1332,16 +1334,17 @@ const ShowFlight = (props) => {
             itemCodeRef={itemCodeRef}
             passengerCounts={passengerCounts}
             passengerFares={passengerFares}
+            currency={currency}
           ></ShowModal>
 
           {/* show more section  */}
 
           {(directions[0] !== undefined && directions[0].length > 1) ||
-          (directions[1] !== undefined && directions[1].length > 1) ||
-          (directions[2] !== undefined && directions[2].length > 1) ||
-          (directions[3] !== undefined && directions[3].length > 1) ||
-          (directions[4] !== undefined && directions[4].length > 1) ||
-          (directions[5] !== undefined && directions[5].length > 1) ? (
+            (directions[1] !== undefined && directions[1].length > 1) ||
+            (directions[2] !== undefined && directions[2].length > 1) ||
+            (directions[3] !== undefined && directions[3].length > 1) ||
+            (directions[4] !== undefined && directions[4].length > 1) ||
+            (directions[5] !== undefined && directions[5].length > 1) ? (
             <>
               <div
                 className="position-relative"
@@ -1457,8 +1460,8 @@ const ShowFlight = (props) => {
                                   {directions[0][0].segments.length === 1
                                     ? "Direct"
                                     : directions[0][0].segments.length -
-                                      1 +
-                                      " Stop"}
+                                    1 +
+                                    " Stop"}
                                 </span>
                               </div>
                               <div className="col-lg-12 text-center">
@@ -1534,7 +1537,7 @@ const ShowFlight = (props) => {
                                 name={"chooseoption0" + props.index}
                                 onChange={() => selectDirectionOption0(index)}
                                 defaultChecked={index === 0 ? true : false}
-                                // onChange={handleChange}
+                              // onChange={handleChange}
                               />
                               <label
                                 className="form-check-label"
@@ -1613,8 +1616,8 @@ const ShowFlight = (props) => {
                                       {directions[0][0].segments.length === 1
                                         ? "Direct"
                                         : directions[0][0].segments.length -
-                                          1 +
-                                          " Stop"}
+                                        1 +
+                                        " Stop"}
                                     </span>
                                   </div>
                                   <div className="col-lg-12 text-center">
@@ -1694,7 +1697,7 @@ const ShowFlight = (props) => {
                                       selectDirectionOption1(index)
                                     }
                                     defaultChecked={index === 0 ? true : false}
-                                    // onChange={handleChange}
+                                  // onChange={handleChange}
                                   />
                                   <label
                                     className="form-check-label"
@@ -1777,8 +1780,8 @@ const ShowFlight = (props) => {
                                       {directions[0][0].segments.length === 1
                                         ? "Direct"
                                         : directions[0][0].segments.length -
-                                          1 +
-                                          " Stop"}
+                                        1 +
+                                        " Stop"}
                                     </span>
                                   </div>
                                   <div className="col-lg-12 text-center">
@@ -1858,7 +1861,7 @@ const ShowFlight = (props) => {
                                       selectDirectionOption2(index)
                                     }
                                     defaultChecked={index === 0 ? true : false}
-                                    // onChange={handleChange}
+                                  // onChange={handleChange}
                                   />
                                   <label
                                     className="form-check-label"
@@ -1942,8 +1945,8 @@ const ShowFlight = (props) => {
                                       {directions[0][0].segments.length === 1
                                         ? "Direct"
                                         : directions[0][0].segments.length -
-                                          1 +
-                                          " Stop"}
+                                        1 +
+                                        " Stop"}
                                     </span>
                                   </div>
                                   <div className="col-lg-12 text-center">
@@ -2023,7 +2026,7 @@ const ShowFlight = (props) => {
                                       selectDirectionOption3(index)
                                     }
                                     defaultChecked={index === 0 ? true : false}
-                                    // onChange={handleChange}
+                                  // onChange={handleChange}
                                   />
                                   <label
                                     className="form-check-label"
@@ -2106,8 +2109,8 @@ const ShowFlight = (props) => {
                                       {directions[0][0].segments.length === 1
                                         ? "Direct"
                                         : directions[0][0].segments.length -
-                                          1 +
-                                          " Stop"}
+                                        1 +
+                                        " Stop"}
                                     </span>
                                   </div>
                                   <div className="col-lg-12 text-center">
@@ -2187,7 +2190,7 @@ const ShowFlight = (props) => {
                                       selectDirectionOption4(index)
                                     }
                                     defaultChecked={index === 0 ? true : false}
-                                    // onChange={handleChange}
+                                  // onChange={handleChange}
                                   />
                                   <label
                                     className="form-check-label"
@@ -2271,8 +2274,8 @@ const ShowFlight = (props) => {
                                       {directions[0][0].segments.length === 1
                                         ? "Direct"
                                         : directions[0][0].segments.length -
-                                          1 +
-                                          " Stop"}
+                                        1 +
+                                        " Stop"}
                                     </span>
                                   </div>
                                   <div className="col-lg-12 text-center">
@@ -2352,7 +2355,7 @@ const ShowFlight = (props) => {
                                       selectDirectionOption5(index)
                                     }
                                     defaultChecked={index === 0 ? true : false}
-                                    // onChange={handleChange}
+                                  // onChange={handleChange}
                                   />
                                   <label
                                     className="form-check-label"
@@ -2432,8 +2435,8 @@ const ShowFlight = (props) => {
                                 {directions[0][0].segments.length === 1
                                   ? "Direct"
                                   : directions[0][0].segments.length -
-                                    1 +
-                                    " Stop"}
+                                  1 +
+                                  " Stop"}
                               </span>
                             </div>
                             <div className="col-lg-12 text-center">
@@ -2508,7 +2511,7 @@ const ShowFlight = (props) => {
                               name={"chooseDeparture" + props.index}
                               onChange={() => selectDirectionOption0(index)}
                               defaultChecked={index === 0 ? true : false}
-                              // onChange={handleChange}
+                            // onChange={handleChange}
                             />
                             <label
                               className="form-check-label"
@@ -2595,8 +2598,8 @@ const ShowFlight = (props) => {
                                     {directions[1][0].segments.length === 1
                                       ? "Direct"
                                       : directions[1][0].segments.length -
-                                        1 +
-                                        " Stop"}
+                                      1 +
+                                      " Stop"}
                                   </span>
                                 </div>
                                 <div className="col-lg-12 text-center">
@@ -2699,17 +2702,17 @@ const ShowFlight = (props) => {
                   {/* {
                     alert(bookingComponents[0].agentAdditionalPrice)
                   } */}
-                  BDT {totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice<0?0:bookingComponents[0].agentAdditionalPrice)}
+                  {currency !== undefined ? currency : "BDT"}  {totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)}
                 </del>
                 <br></br>
-                BDT {totalPrice+ bookingComponents[0].agentAdditionalPrice}
+                {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice}
               </h5>
               <h6 className="text-end text-color fw-bold text-center">
                 {refundable === true ? "Refundable" : "Non-Refundable"}
               </h6>
               <button
                 type="submit"
-                className="btn button-color text-white fw-bold w-100 mb-1"
+                className="btn button-color text-white fw-bold w-100 mb-1 rounded"
                 onClick={handleSelectFlight}
               >
                 {" "}
@@ -2747,7 +2750,7 @@ const ShowFlight = (props) => {
                       </div>
                       <div className="col-lg-6">
                         <h6 className="text-color fw-bold text-end">
-                          BDT 9,000
+                          {currency !== undefined ? currency : "BDT"}  9,000
                         </h6>
                       </div>
                     </div>
@@ -2800,7 +2803,7 @@ const ShowFlight = (props) => {
                       </div>
                       <div className="col-lg-6">
                         <h6 className="text-color fw-bold text-end">
-                          BDT 10,000
+                          {currency !== undefined ? currency : "BDT"}  10,000
                         </h6>
                       </div>
                     </div>
@@ -2853,7 +2856,7 @@ const ShowFlight = (props) => {
                       </div>
                       <div className="col-lg-6">
                         <h6 className="text-color fw-bold text-end">
-                          BDT 12,000
+                          {currency !== undefined ? currency : "BDT"}  12,000
                         </h6>
                       </div>
                     </div>
@@ -3090,7 +3093,7 @@ const ShowFlight = (props) => {
                           ) : (
                             <>
                               {directions[0][0].segments.length === 1 &&
-                              directions[0][0].segments[0].details.length ===
+                                directions[0][0].segments[0].details.length ===
                                 1 ? (
                                 "Direct"
                               ) : (
@@ -3098,7 +3101,7 @@ const ShowFlight = (props) => {
                                   {directions[0][0].segments.length > 1 ? (
                                     <>
                                       {directions[0][0].segments.length ===
-                                      2 ? (
+                                        2 ? (
                                         <span
                                           data-tip={
                                             directions[0][0].segments[0]
@@ -3337,7 +3340,7 @@ const ShowFlight = (props) => {
                           ) : (
                             <>
                               {directions[0][0].segments.length === 1 &&
-                              directions[0][0].segments[0].details.length ===
+                                directions[0][0].segments[0].details.length ===
                                 1 ? (
                                 "Direct"
                               ) : (
@@ -3345,7 +3348,7 @@ const ShowFlight = (props) => {
                                   {directions[1][0].segments.length > 1 ? (
                                     <>
                                       {directions[1][0].segments.length ===
-                                      2 ? (
+                                        2 ? (
                                         <span
                                           data-tip={
                                             directions[1][0].segments[0]
@@ -3645,11 +3648,11 @@ const ShowFlight = (props) => {
 
             <div className="col-lg-2 my-auto text-center">
               <h5 className="text-end text-color text-center fw-bold">
-                BDT {totalPrice+ bookingComponents[0].agentAdditionalPrice}
+                {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice}
               </h5>
               <Link
                 to="/travellcart"
-                className="btn button-color text-white fw-bold w-100 my-2"
+                className="btn button-color text-white fw-bold w-100 my-2 rounded"
                 // id={"select-flight-click" + props.index}
                 onClick={handleSelectFlight}
               >
@@ -3698,7 +3701,7 @@ const ShowFlight = (props) => {
                       </div>
                       <div className="col-lg-6">
                         <h6 className="text-color fw-bold text-end">
-                          BDT 9,000
+                          {currency !== undefined ? currency : "BDT"}  9,000
                         </h6>
                       </div>
                     </div>
@@ -3751,7 +3754,7 @@ const ShowFlight = (props) => {
                       </div>
                       <div className="col-lg-6">
                         <h6 className="text-color fw-bold text-end">
-                          BDT 10,000
+                          {currency !== undefined ? currency : "BDT"}  10,000
                         </h6>
                       </div>
                     </div>
@@ -3804,7 +3807,7 @@ const ShowFlight = (props) => {
                       </div>
                       <div className="col-lg-6">
                         <h6 className="text-color fw-bold text-end">
-                          BDT 12,000
+                          {currency !== undefined ? currency : "BDT"}  12,000
                         </h6>
                       </div>
                     </div>
@@ -3880,7 +3883,7 @@ const ShowFlight = (props) => {
                     <>
                       <tr>
                         <td className="left">ADT</td>
-                        <td className="left">{passengerFares.adt.basePrice+ bookingComponents[0].agentAdditionalPrice/(passengerCounts.adt+(passengerCounts.cnn !==null?passengerCounts.cnn : 0)+(passengerCounts.inf !==null?passengerCounts.inf : 0))}</td>
+                        <td className="left">{passengerFares.adt.basePrice + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}</td>
                         <td className="center">{passengerFares.adt.taxes}</td>
                         <td className="right">
                           {passengerFares.adt.discountPrice}
@@ -3888,8 +3891,8 @@ const ShowFlight = (props) => {
                         <td className="right">{passengerFares.adt.ait}</td>
                         <td className="right">{passengerCounts.adt}</td>
                         <td className="right fw-bold">
-                          BDT{" "}
-                          {(passengerFares.adt.totalPrice * passengerCounts.adt)+ bookingComponents[0].agentAdditionalPrice/(passengerCounts.adt+(passengerCounts.cnn !==null?passengerCounts.cnn : 0)+(passengerCounts.inf !==null?passengerCounts.inf : 0))}
+                          {currency !== undefined ? currency : "BDT"}  {" "}
+                          {(passengerFares.adt.totalPrice * passengerCounts.adt) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
                         </td>
                       </tr>
                     </>
@@ -3901,7 +3904,7 @@ const ShowFlight = (props) => {
                     <>
                       <tr>
                         <td className="left">CNN</td>
-                        <td className="left">{passengerFares.cnn.basePrice+ bookingComponents[0].agentAdditionalPrice/(passengerCounts.adt+(passengerCounts.cnn !==null?passengerCounts.cnn : 0)+(passengerCounts.inf !==null?passengerCounts.inf : 0))}</td>
+                        <td className="left">{passengerFares.cnn.basePrice + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}</td>
                         <td className="center">{passengerFares.cnn.taxes}</td>
                         <td className="right">
                           {passengerFares.cnn.discountPrice}
@@ -3909,8 +3912,8 @@ const ShowFlight = (props) => {
                         <td className="right">{passengerFares.cnn.ait}</td>
                         <td className="right">{passengerCounts.cnn}</td>
                         <td className="right fw-bold">
-                          BDT{" "}
-                          {(passengerFares.cnn.totalPrice * passengerCounts.cnn)+ bookingComponents[0].agentAdditionalPrice/(passengerCounts.adt+(passengerCounts.cnn !==null?passengerCounts.cnn : 0)+(passengerCounts.inf !==null?passengerCounts.inf : 0))}
+                          {currency !== undefined ? currency : "BDT"}  {" "}
+                          {(passengerFares.cnn.totalPrice * passengerCounts.cnn) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
                         </td>
                       </tr>
                     </>
@@ -3922,7 +3925,7 @@ const ShowFlight = (props) => {
                     <>
                       <tr>
                         <td className="left">INF</td>
-                        <td className="left">{passengerFares.inf.basePrice+ bookingComponents[0].agentAdditionalPrice/(passengerCounts.adt+(passengerCounts.cnn !==null?passengerCounts.cnn : 0)+(passengerCounts.inf !==null?passengerCounts.inf : 0))}</td>
+                        <td className="left">{passengerFares.inf.basePrice + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}</td>
                         <td className="center">{passengerFares.inf.taxes}</td>
                         <td className="right">
                           {passengerFares.inf.discountPrice}
@@ -3930,8 +3933,8 @@ const ShowFlight = (props) => {
                         <td className="right">{passengerFares.inf.ait}</td>
                         <td className="right">{passengerCounts.inf}</td>
                         <td className="right fw-bold">
-                          BDT{" "}
-                          {(passengerFares.inf.totalPrice * passengerCounts.inf)+ bookingComponents[0].agentAdditionalPrice/(passengerCounts.adt+(passengerCounts.cnn !==null?passengerCounts.cnn : 0)+(passengerCounts.inf !==null?passengerCounts.inf : 0))}
+                          {currency !== undefined ? currency : "BDT"}  {" "}
+                          {(passengerFares.inf.totalPrice * passengerCounts.inf) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
                         </td>
                       </tr>
                     </>
@@ -3962,16 +3965,17 @@ const ShowFlight = (props) => {
             itemCodeRef={itemCodeRef}
             passengerCounts={passengerCounts}
             passengerFares={passengerFares}
+            currency={currency}
           ></ShowModal>
 
           {/* show more section  */}
 
           {(directions[0] !== undefined && directions[0].length > 1) ||
-          (directions[1] !== undefined && directions[1].length > 1) ||
-          (directions[2] !== undefined && directions[2].length > 1) ||
-          (directions[3] !== undefined && directions[3].length > 1) ||
-          (directions[4] !== undefined && directions[4].length > 1) ||
-          (directions[5] !== undefined && directions[5].length > 1) ? (
+            (directions[1] !== undefined && directions[1].length > 1) ||
+            (directions[2] !== undefined && directions[2].length > 1) ||
+            (directions[3] !== undefined && directions[3].length > 1) ||
+            (directions[4] !== undefined && directions[4].length > 1) ||
+            (directions[5] !== undefined && directions[5].length > 1) ? (
             <>
               <div
                 className="position-relative"
@@ -4087,8 +4091,8 @@ const ShowFlight = (props) => {
                                   {directions[0][0].segments.length === 1
                                     ? "Direct"
                                     : directions[0][0].segments.length -
-                                      1 +
-                                      " Stop"}
+                                    1 +
+                                    " Stop"}
                                 </span>
                               </div>
                               <div className="col-lg-12 text-center">
@@ -4164,7 +4168,7 @@ const ShowFlight = (props) => {
                                 name={"chooseoption0" + props.index}
                                 onChange={() => selectDirectionOption0(index)}
                                 defaultChecked={index === 0 ? true : false}
-                                // onChange={handleChange}
+                              // onChange={handleChange}
                               />
                               <label
                                 className="form-check-label"
@@ -4243,8 +4247,8 @@ const ShowFlight = (props) => {
                                       {directions[0][0].segments.length === 1
                                         ? "Direct"
                                         : directions[0][0].segments.length -
-                                          1 +
-                                          " Stop"}
+                                        1 +
+                                        " Stop"}
                                     </span>
                                   </div>
                                   <div className="col-lg-12 text-center">
@@ -4324,7 +4328,7 @@ const ShowFlight = (props) => {
                                       selectDirectionOption1(index)
                                     }
                                     defaultChecked={index === 0 ? true : false}
-                                    // onChange={handleChange}
+                                  // onChange={handleChange}
                                   />
                                   <label
                                     className="form-check-label"
@@ -4407,8 +4411,8 @@ const ShowFlight = (props) => {
                                       {directions[0][0].segments.length === 1
                                         ? "Direct"
                                         : directions[0][0].segments.length -
-                                          1 +
-                                          " Stop"}
+                                        1 +
+                                        " Stop"}
                                     </span>
                                   </div>
                                   <div className="col-lg-12 text-center">
@@ -4488,7 +4492,7 @@ const ShowFlight = (props) => {
                                       selectDirectionOption2(index)
                                     }
                                     defaultChecked={index === 0 ? true : false}
-                                    // onChange={handleChange}
+                                  // onChange={handleChange}
                                   />
                                   <label
                                     className="form-check-label"
@@ -4572,8 +4576,8 @@ const ShowFlight = (props) => {
                                       {directions[0][0].segments.length === 1
                                         ? "Direct"
                                         : directions[0][0].segments.length -
-                                          1 +
-                                          " Stop"}
+                                        1 +
+                                        " Stop"}
                                     </span>
                                   </div>
                                   <div className="col-lg-12 text-center">
@@ -4653,7 +4657,7 @@ const ShowFlight = (props) => {
                                       selectDirectionOption3(index)
                                     }
                                     defaultChecked={index === 0 ? true : false}
-                                    // onChange={handleChange}
+                                  // onChange={handleChange}
                                   />
                                   <label
                                     className="form-check-label"
@@ -4736,8 +4740,8 @@ const ShowFlight = (props) => {
                                       {directions[0][0].segments.length === 1
                                         ? "Direct"
                                         : directions[0][0].segments.length -
-                                          1 +
-                                          " Stop"}
+                                        1 +
+                                        " Stop"}
                                     </span>
                                   </div>
                                   <div className="col-lg-12 text-center">
@@ -4817,7 +4821,7 @@ const ShowFlight = (props) => {
                                       selectDirectionOption4(index)
                                     }
                                     defaultChecked={index === 0 ? true : false}
-                                    // onChange={handleChange}
+                                  // onChange={handleChange}
                                   />
                                   <label
                                     className="form-check-label"
@@ -4901,8 +4905,8 @@ const ShowFlight = (props) => {
                                       {directions[0][0].segments.length === 1
                                         ? "Direct"
                                         : directions[0][0].segments.length -
-                                          1 +
-                                          " Stop"}
+                                        1 +
+                                        " Stop"}
                                     </span>
                                   </div>
                                   <div className="col-lg-12 text-center">
@@ -4982,7 +4986,7 @@ const ShowFlight = (props) => {
                                       selectDirectionOption5(index)
                                     }
                                     defaultChecked={index === 0 ? true : false}
-                                    // onChange={handleChange}
+                                  // onChange={handleChange}
                                   />
                                   <label
                                     className="form-check-label"
@@ -5062,8 +5066,8 @@ const ShowFlight = (props) => {
                                 {directions[0][0].segments.length === 1
                                   ? "Direct"
                                   : directions[0][0].segments.length -
-                                    1 +
-                                    " Stop"}
+                                  1 +
+                                  " Stop"}
                               </span>
                             </div>
                             <div className="col-lg-12 text-center">
@@ -5138,7 +5142,7 @@ const ShowFlight = (props) => {
                               name={"chooseDeparture" + props.index}
                               onChange={() => selectDirectionOption0(index)}
                               defaultChecked={index === 0 ? true : false}
-                              // onChange={handleChange}
+                            // onChange={handleChange}
                             />
                             <label
                               className="form-check-label"
@@ -5225,8 +5229,8 @@ const ShowFlight = (props) => {
                                     {directions[1][0].segments.length === 1
                                       ? "Direct"
                                       : directions[1][0].segments.length -
-                                        1 +
-                                        " Stop"}
+                                      1 +
+                                      " Stop"}
                                   </span>
                                 </div>
                                 <div className="col-lg-12 text-center">
@@ -5323,14 +5327,14 @@ const ShowFlight = (props) => {
             </div>
             <div className="col-lg-2 my-auto text-center">
               <h5 className="text-end text-color text-center fw-bold">
-                BDT {totalPrice+ bookingComponents[0].agentAdditionalPrice} 
+                {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice}
               </h5>
               <h6 className="text-end text-color fw-bold text-center">
                 {refundable === true ? "Refundable" : "Non-Refundable"}
               </h6>
               <button
                 type="submit"
-                className="btn button-color text-white fw-bold w-100 mb-1"
+                className="btn button-color text-white fw-bold w-100 mb-1 rounded"
                 onClick={handleSelectFlight}
               >
                 {" "}
@@ -5368,7 +5372,7 @@ const ShowFlight = (props) => {
                       </div>
                       <div className="col-lg-6">
                         <h6 className="text-color fw-bold text-end">
-                          BDT 9,000
+                          {currency !== undefined ? currency : "BDT"}  9,000
                         </h6>
                       </div>
                     </div>
@@ -5421,7 +5425,7 @@ const ShowFlight = (props) => {
                       </div>
                       <div className="col-lg-6">
                         <h6 className="text-color fw-bold text-end">
-                          BDT 10,000
+                          {currency !== undefined ? currency : "BDT"}  10,000
                         </h6>
                       </div>
                     </div>
@@ -5474,7 +5478,7 @@ const ShowFlight = (props) => {
                       </div>
                       <div className="col-lg-6">
                         <h6 className="text-color fw-bold text-end">
-                          BDT 12,000
+                          {currency !== undefined ? currency : "BDT"}  12,000
                         </h6>
                       </div>
                     </div>
@@ -5532,7 +5536,7 @@ const ShowFlight = (props) => {
               <p className="show-hide">Hide more options</p>
             </div>
           </div>
-         
+
         </>
       )}
     </>

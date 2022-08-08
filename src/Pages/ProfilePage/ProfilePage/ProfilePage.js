@@ -10,7 +10,7 @@ const ProfilePage = () => {
             <Navbar></Navbar>
             <SideNavBar></SideNavBar>
             <ProfilePagePanel></ProfilePagePanel>
-            {/* <Footer></Footer> */}
+            <Footer></Footer>
         </div>
     );
 };

@@ -9,6 +9,7 @@ import useAuth from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
+import Footer from "../../SharePages/Footer/Footer";
 
 const SearchPanel = () => {
   const { setId } = useAuth();
@@ -167,11 +168,7 @@ const SearchPanel = () => {
           <SearchFrom></SearchFrom>
           <AddPanel></AddPanel>
         </section>
-        {/* /.content  */}
-        <div className="text-center text-white py-2">
-          {/* <b>Version</b> 3.1.0 */}
-          <strong>Copyright &copy; {currentYear()} All rights reserved.</strong>
-        </div>
+        <Footer></Footer>
       </div>
     </div>
   );

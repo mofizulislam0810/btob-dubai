@@ -8,6 +8,7 @@ const RightSide = () => {
   const navigation = useNavigate();
   // const data = localStorage.getItem('Database');
   const filterParam = JSON.parse(localStorage.getItem("Database"));
+  const currency = JSON.parse(localStorage.getItem("currency"));
   const flightType = filterParam.tripTypeModify;
   const direction0 = JSON.parse(localStorage.getItem("direction0"));
   const direction1 = JSON.parse(localStorage.getItem("direction1"));
@@ -579,7 +580,7 @@ const RightSide = () => {
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end fw-bold">
-                      BDT {passengerFares.adt.totalPrice * passengerCounts.adt}
+                      {currency!==undefined ? currency : "BDT"}   {passengerFares.adt.totalPrice * passengerCounts.adt}
                     </h6>
                   </div>
                 </div>
@@ -652,7 +653,7 @@ const RightSide = () => {
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end fw-bold">
-                      BDT {passengerFares.cnn.totalPrice * passengerCounts.cnn}
+                      {currency!==undefined ? currency : "BDT"}   {passengerFares.cnn.totalPrice * passengerCounts.cnn}
                     </h6>
                   </div>
                 </div>
@@ -724,7 +725,7 @@ const RightSide = () => {
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end fw-bold">
-                      BDT {passengerFares.inf.totalPrice * passengerCounts.inf}
+                      {currency!==undefined ? currency : "BDT"}   {passengerFares.inf.totalPrice * passengerCounts.inf}
                     </h6>
                   </div>
                 </div>
@@ -751,6 +752,7 @@ const RightSide = () => {
         totalPrice={totalPrice}
         passengerFares={passengerFares}
         passengerCounts={passengerCounts}
+        currency={currency}
       ></ShowModal>
     </div>
   );

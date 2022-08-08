@@ -25,7 +25,7 @@ const TravelCartPage = () => {
         </>
       )}
 
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 };

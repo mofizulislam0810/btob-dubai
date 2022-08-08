@@ -4,6 +4,7 @@ import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
 import currentYear from "../../SharePages/Utility/currentYear";
 import Chart from "../Chart";
+import Footer from "../../SharePages/Footer/Footer";
 const DashboardPanel = () => {
   const [highestTicktedAirlines, setHighestTicktedAirlines] = useState([]);
   const [labelList, setLabelList] = useState([]);
@@ -174,12 +175,11 @@ const DashboardPanel = () => {
   return (
     <>
       <div className="content-wrapper search-panel-bg" style={{ height: '800px' }}>
-
         <section className="content-header">
           <div className="container-fluid">
             <div className="row mb-2">
               <div className="col-sm-6">
-                <h1 className="m-0 fw-bold text-white">Dashboard</h1>
+                <h1 className="m-0 fw-bold">Dashboard</h1>
               </div>
             </div>
           </div>
@@ -283,11 +283,7 @@ const DashboardPanel = () => {
 
 
       </div>
-
-      <div className="text-center text-white" style={{ background: '#1587e2' }}>
-        <strong>Copyright &copy; {currentYear()} All rights reserved.</strong>
-       
-      </div>
+      <Footer/>
     </>
   );
 };

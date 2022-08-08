@@ -136,7 +136,7 @@ useEffect(()=>{
                   <p className="text-muted text-center">
                     Member Of {sessionStorage.getItem('agentName')}
                   </p>
-                  <button  type="button" className="btn button-color text-white fw-bold btn-block" data-bs-toggle="modal" data-bs-target="#profileModal">
+                  <button  type="button" className="btn button-color text-white fw-bold btn-block rounded" data-bs-toggle="modal" data-bs-target="#profileModal">
                                           Edit
                                       </button>
                   {/* <Link to="#" className="btn btn-primary btn-block">
@@ -229,14 +229,14 @@ useEffect(()=>{
                           <div className="modal-footer">
                             <button
                               type="button"
-                              className="btn btn-secondary"
+                              className="btn btn-secondary rounded"
                               data-bs-dismiss="modal"
                             >
                               Close
                             </button>
                             <button
                               type="button"
-                              className="btn button-color text-white fw-bold"
+                              className="btn button-color text-white fw-bold rounded"
                               onClick={() => handleSubmit()}
                             >
                               Submit
@@ -316,10 +316,6 @@ useEffect(()=>{
             </div>
           </div>
         </section>
-        <div className="text-center text-white pt-5 pb-2 mt-5">
-          {/* <b>Version</b> 3.1.0 */}
-          <strong>Copyright &copy; 2020-2022 All rights reserved.</strong>
-        </div>
       </div>
     </div>
   );

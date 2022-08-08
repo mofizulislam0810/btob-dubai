@@ -27,10 +27,6 @@ const TravelCartPanel = () => {
         </div>
     </div>
     </section>
-    <div className="text-center text-white pt-5 pb-2 mt-1">
-            {/* <b>Version</b> 3.1.0 */}
-            <strong>Copyright &copy; {currentYear()} All rights reserved.</strong>
-          </div>
     </div>
   );
 };

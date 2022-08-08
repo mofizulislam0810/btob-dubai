@@ -342,6 +342,7 @@ const Voucher = () => {
           </div>
         </section>
       </div>
+      <Footer/>
     </div>
   );
 };

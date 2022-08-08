@@ -466,6 +466,7 @@ const Invoice = () => {
       </div>
       </section>
       </div>
+      <Footer/>
     </div>
   );
 };

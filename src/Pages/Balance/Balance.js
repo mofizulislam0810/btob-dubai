@@ -13,7 +13,7 @@ import ReactPaginate from 'react-paginate';
 const Balance = () => {
   let [pageCount, setPageCount] = useState(0);
   let [pageSize, setPageSize] = useState(10);
-  let [currentPageNumber,setCurrentPageNumber]=useState(1);
+  let [currentPageNumber, setCurrentPageNumber] = useState(1);
   let [depositTypeId, setDepositType] = useState(1);
   let [paymentTypeId, setPaymentType] = useState(1);
   let [checkNo, setCheckNo] = useState("");
@@ -55,29 +55,29 @@ const Balance = () => {
     branchId: branchId,
     transactionId: transactionId,
   };
-const clearDepositEntry=()=>{
-  setDepositType(1);
-   setPaymentType(1);
-   setCheckNo("");
-   setCheckBank("");
-   setCheckIssueDate("");
-   setReference("");
-   setDepositInAccount(0);
-   setAmount(0);
-   setAttachment("");
-   setDepositFromAccount(0);
-   setDepositDate("");
-   setTransferDate("");
-   setBranch(0);
-   setTransaction("");
-}
-  let onlineSendObj={
+  const clearDepositEntry = () => {
+    setDepositType(1);
+    setPaymentType(1);
+    setCheckNo("");
+    setCheckBank("");
+    setCheckIssueDate("");
+    setReference("");
+    setDepositInAccount(0);
+    setAmount(0);
+    setAttachment("");
+    setDepositFromAccount(0);
+    setDepositDate("");
+    setTransferDate("");
+    setBranch(0);
+    setTransaction("");
+  }
+  let onlineSendObj = {
     agentId: sessionStorage.getItem("agentId") ?? 0,
-    uniqueTransID:"",
-    amount:onlineAmount,
-    charge:onlineCharge,
-    totalAmount:onlineAmount+(onlineAmount*onlineCharge/100),
-    remarks:"Online Deposit Checkout"
+    uniqueTransID: "",
+    amount: onlineAmount,
+    charge: onlineCharge,
+    totalAmount: onlineAmount + (onlineAmount * onlineCharge / 100),
+    remarks: "Online Deposit Checkout"
   }
   const deposittypeList = [
     { id: 1, name: "Check" },
@@ -95,105 +95,104 @@ const clearDepositEntry=()=>{
 
   const handleSubmit = () => {
 
-    
-    if(depositTypeId==1){
-      if(checkNo==""){
+
+    if (depositTypeId == 1) {
+      if (checkNo == "") {
         toast.error("Sorry! Check no is empty..");
         return;
       }
-      if(checkBank==""){
+      if (checkBank == "") {
         toast.error("Sorry! Check bank is empty..");
         return;
       }
-      if(checkIssueDate==""){
+      if (checkIssueDate == "") {
         toast.error("Sorry! Check issue date is empty..");
         return;
       }
-      if(reference==""){
+      if (reference == "") {
         toast.error("Sorry! Refference is empty..");
         return;
       }
-      if(depositInAccountId==0){
+      if (depositInAccountId == 0) {
         toast.error("Sorry! Deposited in account is empty..");
         return;
       }
     }
-    if(depositTypeId==2){
-      if(checkNo==""){
+    if (depositTypeId == 2) {
+      if (checkNo == "") {
         toast.error("Sorry! Check no is empty..");
         return;
       }
-      if(depositInAccountId==0){
+      if (depositInAccountId == 0) {
         toast.error("Sorry! Deposit bank is empty..");
         return;
       }
-      if(depositDate==""){
+      if (depositDate == "") {
         toast.error("Sorry! Deposit date is empty..");
         return;
       }
-      if(reference==""){
+      if (reference == "") {
         toast.error("Sorry! Refference is empty..");
         return;
       }
     }
-    if(depositTypeId==3){
-      if(checkNo==""){
+    if (depositTypeId == 3) {
+      if (checkNo == "") {
         toast.error("Sorry! Check no is empty..");
         return;
       }
-      if(depositInAccountId==0){
+      if (depositInAccountId == 0) {
         toast.error("Sorry! Deposited in bank is empty..");
         return;
       }
-      if(depositFromAccountId==0){
+      if (depositFromAccountId == 0) {
         toast.error("Sorry! Deposit from bank is empty..");
         return;
       }
-      if(transferDate==""){
+      if (transferDate == "") {
         toast.error("Sorry! Transfer date is empty..");
         return;
       }
-      if(reference==""){
+      if (reference == "") {
         toast.error("Sorry! Refference is empty..");
         return;
       }
     }
-    if(depositTypeId==4){
-      if(branchId==0){
+    if (depositTypeId == 4) {
+      if (branchId == 0) {
         toast.error("Sorry! Branch is empty..");
         return;
       }
-      if(reference==""){
+      if (reference == "") {
         toast.error("Sorry! Refference is empty..");
         return;
       }
     }
-    if(depositTypeId==5){
-      if(paymentTypeId==0){
+    if (depositTypeId == 5) {
+      if (paymentTypeId == 0) {
         toast.error("Sorry! Payment type is empty..");
         return;
       }
-      if(paymentTypeId==1)
-      {
-        if(transactionId==""){
+      if (paymentTypeId == 1) {
+        if (transactionId == "") {
           toast.error("Sorry! Transaction Id is empty..");
           return;
         }
       }
-      setAmount(vendorAmount+vendorAmount*(paymentTypeId === 1 ? 1.50 : 1.00)/100)
+      setAmount(vendorAmount + vendorAmount * (paymentTypeId === 1 ? 1.50 : 1.00) / 100)
     }
-    if(depositTypeId==6){
-      if(amount==0){
+    if (depositTypeId == 6) {
+      if (amount == 0) {
         toast.error("Sorry! Payment type is empty..");
         return;
       }
-      if(transactionId==""){
+      if (transactionId == "") {
         toast.error("Sorry! Transaction Id is empty..");
         return;
       }
-      setAmount(vendorAmount+vendorAmount* 1.00/100)
+      setAmount(vendorAmount + vendorAmount * 1.00 / 100)
     }
-    if(amount<=0){
+    if (amount <= 0) {
       toast.error("Sorry! Amount is empty..");
       return;
     }
@@ -209,33 +208,33 @@ const clearDepositEntry=()=>{
       } else {
         toast.error("Sorry! Data not created..");
       }
-            
+
     };
     postData();
   };
- const handleOnlineDepositSubmit=()=>{
-   console.log(onlineSendObj)
-  const postData = async () => {
-    const response = await axios.post(
-      environment.paymentCheckout,
-      onlineSendObj,
-      environment.headerToken
-    );
-    console.log(response)
-    if (response.data.isSuccess===true) {
-      window.location=response.data.sslUrl;
-    } else {
-      toast.error("Sorry! Data not created..");
-    }
-  };
-  postData();
+  const handleOnlineDepositSubmit = () => {
+    console.log(onlineSendObj)
+    const postData = async () => {
+      const response = await axios.post(
+        environment.paymentCheckout,
+        onlineSendObj,
+        environment.headerToken
+      );
+      console.log(response)
+      if (response.data.isSuccess === true) {
+        window.location = response.data.sslUrl;
+      } else {
+        toast.error("Sorry! Data not created..");
+      }
+    };
+    postData();
   }
   const handleGetTransaction = (currentPageNumber) => {
     const getData = async () => {
       const response = await axios.get(
         environment.agentDeposits +
-          "/" +
-          (sessionStorage.getItem("agentId") ?? 0)+`?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
+        "/" +
+        (sessionStorage.getItem("agentId") ?? 0) + `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
         environment.headerToken
       );
       console.log(response.data.data)
@@ -261,7 +260,7 @@ const clearDepositEntry=()=>{
     getBankAccounts();
     const getGatewayCharge = async () => {
       const response = await axios.get(
-        environment.paymentGateway+"/2",
+        environment.paymentGateway + "/2",
         environment.headerToken
       );
       console.log(response)
@@ -317,7 +316,7 @@ const clearDepositEntry=()=>{
     let agentId = sessionStorage.getItem("agentId") ?? 0;
     const getAgentBankAccounts = async () => {
       const response = await axios.get(
-        environment.bankAccountsByAgent + "/" + agentId+`?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
+        environment.bankAccountsByAgent + "/" + agentId + `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
         environment.headerToken
       );
       console.log(response.data)
@@ -342,7 +341,7 @@ const clearDepositEntry=()=>{
     setSwiftCode(item.swiftCode);
     setIsActive(item.isActive);
   };
-  const clearBankForm=()=>{
+  const clearBankForm = () => {
     setCurrentItem(null);
     setHolderName("");
     setAccountNumber("");
@@ -381,47 +380,39 @@ const clearDepositEntry=()=>{
     isActive: isActive,
   };
   const handleBankSubmit = () => {
-    if(holderName==="")
-    {
+    if (holderName === "") {
       toast.error("Sorry! Holder name is empty");
       return;
     }
-    if(accountNumber==="")
-    {
+    if (accountNumber === "") {
       toast.error("Sorry! Account number is empty");
       return;
     }
-    if(routingNumber==="")
-    {
+    if (routingNumber === "") {
       toast.error("Sorry! Routing number is empty");
       return;
     }
-    if(bankName==="")
-    {
+    if (bankName === "") {
       toast.error("Sorry! Bank name is empty");
       return;
     }
-    if(branchName==="")
-    {
+    if (branchName === "") {
       toast.error("Sorry! Branch name is empty");
       return;
     }
-    if(branchCode==="")
-    {
+    if (branchCode === "") {
       toast.error("Sorry! Branch code is empty");
       return;
     }
-    if(!cityId>0){
+    if (!cityId > 0) {
       toast.error("Sorry! City is not selected");
       return;
     }
-    if(address==="")
-    {
+    if (address === "") {
       toast.error("Sorry! Address is empty");
       return;
     }
-    if(swiftCode==="")
-    {
+    if (swiftCode === "") {
       toast.error("Sorry! Swift code is empty");
       return;
     }
@@ -462,7 +453,7 @@ const clearDepositEntry=()=>{
   };
   useEffect(() => {
     handleGetEntry(currentPageNumber);
-     handleGetAgentBankAccounts(currentPageNumber);
+    handleGetAgentBankAccounts(currentPageNumber);
   }, [currentPageNumber]);
   return (
     <div>
@@ -472,7 +463,7 @@ const clearDepositEntry=()=>{
         <div className="content-wrapper search-panel-bg">
           <section className="content-header"></section>
           <section className="content">
-          <ToastContainer />
+            <ToastContainer />
             <form
               className="mx-5 mt-3"
               encType="multipart/form-data"
@@ -503,7 +494,7 @@ const clearDepositEntry=()=>{
                           href="#transaction"
                           className="nav-link"
                           data-bs-toggle="tab"
-                          onClick={()=>handleGetTransaction(1)}
+                          onClick={() => handleGetTransaction(1)}
                         >
                           Transaction
                         </a>
@@ -513,13 +504,13 @@ const clearDepositEntry=()=>{
                           href="#bankaccounts"
                           className="nav-link"
                           data-bs-toggle="tab"
-                          onClick={()=>handleGetAgentBankAccounts(1)}
+                          onClick={() => handleGetAgentBankAccounts(1)}
                         >
                           Bank Accounts
                         </a>
                       </li>
-                      <li className='nav-item' style={{marginLeft:"52%"}}>
-                      <a
+                      <li className='nav-item' style={{ marginLeft: "52%" }}>
+                        <a
                           href="javascript:void(0)"
                           className="nav-link"
                           data-bs-toggle="modal"
@@ -631,7 +622,7 @@ const clearDepositEntry=()=>{
                                   onChange={(e) =>
                                     setDepositInAccount(Number(e.target.value))
                                   }
-                                  
+
                                 >
                                   <option key={0} value="0">
                                     Select One
@@ -683,7 +674,7 @@ const clearDepositEntry=()=>{
                             <div className="row mt-3">
                               <div className="col-sm-12 text-center">
                                 <button
-                                  className="btn button-color col-sm-1 fw-bold text-white"
+                                  className="btn button-color col-sm-1 fw-bold text-white rounded"
                                   type="button"
                                   onClick={() => handleSubmit()}
                                 >
@@ -801,7 +792,7 @@ const clearDepositEntry=()=>{
                                 onChange={(e) =>
                                   setDepositInAccount(Number(e.target.value))
                                 }
-                                
+
                               >
                                 <option key={0} value="0">
                                   Select One
@@ -1074,14 +1065,14 @@ const clearDepositEntry=()=>{
                             {paymentTypeId === 2 ? (
                               <div className="col-sm-3">
                                 <label>
-                                Payable  Amount
+                                  Payable  Amount
                                 </label>
                                 <input
                                   type={"number"}
                                   className="form-control"
                                   placeholder="Amount"
                                   disabled
-                                  value={vendorAmount+vendorAmount*(paymentTypeId === 1 ? 1.50 : 1.00)/100}
+                                  value={vendorAmount + vendorAmount * (paymentTypeId === 1 ? 1.50 : 1.00) / 100}
                                 ></input>
                               </div>
                             ) : (
@@ -1129,14 +1120,14 @@ const clearDepositEntry=()=>{
                             </div>
                             <div className="col-sm-3">
                               <label>
-                               Payable Amount
+                                Payable Amount
                               </label>
                               <input
                                 type={"number"}
                                 className="form-control"
                                 placeholder="Payable Amount"
                                 disabled
-                                value={vendorAmount+vendorAmount*1.00/100}
+                                value={vendorAmount + vendorAmount * 1.00 / 100}
                               ></input>
                             </div>
                             <div className="col-sm-12 text-right">
@@ -1173,45 +1164,45 @@ const clearDepositEntry=()=>{
                           </thead>
                           <tbody>
                             {
-                            balanceList.length>0?
-                            balanceList.map((item, index) => {
-                              return (
-                                <tr key={index}>
-                                  <td>{((currentPageNumber-1)*pageSize)+ index + 1}</td>
-                                  <td>
-                                    {item.depositTypeId === 1
-                                      ? "Check"
-                                      : item.depositTypeId === 2
-                                      ? "Bank Deposit"
-                                      : item.depositTypeId === 3
-                                      ? "Bank Transfer"
-                                      : item.depositTypeId === 4
-                                      ? "Cash"
-                                      : item.depositTypeId === 5
-                                      ? "BKash"
-                                      : item.depositTypeId === 6
-                                      ? "Nagad"
-                                      : item.depositTypeId === 7
-                                      ? "Online"
-                                      : ""}
-                                  </td>
-                                  <td>{item.reference}</td>
-                                  <td>{moment(item.createdDate).format('DD-MM-yyyy hh:mm A')}</td>
-                                  <td>
-                                    {item.status === 1
-                                      ? "Processing"
-                                      : item.status === 2
-                                      ? "Cancelled"
-                                      : item.status === 3
-                                      ? "Rejected"
-                                      : item.status === 4
-                                      ? "Approved"
-                                      : ""}
-                                  </td>
-                                  <td>{item.amount}</td>
-                                </tr>
-                              );
-                            }):<></>}
+                              balanceList.length > 0 ?
+                                balanceList.map((item, index) => {
+                                  return (
+                                    <tr key={index}>
+                                      <td>{((currentPageNumber - 1) * pageSize) + index + 1}</td>
+                                      <td>
+                                        {item.depositTypeId === 1
+                                          ? "Check"
+                                          : item.depositTypeId === 2
+                                            ? "Bank Deposit"
+                                            : item.depositTypeId === 3
+                                              ? "Bank Transfer"
+                                              : item.depositTypeId === 4
+                                                ? "Cash"
+                                                : item.depositTypeId === 5
+                                                  ? "BKash"
+                                                  : item.depositTypeId === 6
+                                                    ? "Nagad"
+                                                    : item.depositTypeId === 7
+                                                      ? "Online"
+                                                      : ""}
+                                      </td>
+                                      <td>{item.reference}</td>
+                                      <td>{moment(item.createdDate).format('DD-MM-yyyy hh:mm A')}</td>
+                                      <td>
+                                        {item.status === 1
+                                          ? "Processing"
+                                          : item.status === 2
+                                            ? "Cancelled"
+                                            : item.status === 3
+                                              ? "Rejected"
+                                              : item.status === 4
+                                                ? "Approved"
+                                                : ""}
+                                      </td>
+                                      <td>{item.amount}</td>
+                                    </tr>
+                                  );
+                                }) : <></>}
                           </tbody>
                         </table>
                         <ReactPaginate
@@ -1240,7 +1231,7 @@ const clearDepositEntry=()=>{
                         <button
                           onClick={() => handleCreateItem()}
                           type="button"
-                          className="btn button-color fw-bold text-white my-2"
+                          className="btn button-color fw-bold text-white my-2 rounded"
                           data-bs-toggle="modal"
                           data-bs-target="#accountModal"
                         >
@@ -1452,14 +1443,14 @@ const clearDepositEntry=()=>{
                               <div className="modal-footer">
                                 <button
                                   type="button"
-                                  className="btn btn-secondary"
+                                  className="btn btn-secondary rounded"
                                   data-bs-dismiss="modal"
                                 >
                                   Close
                                 </button>
                                 <button
                                   type="button"
-                                  className="btn button-color fw-bold text-white"
+                                  className="btn button-color fw-bold text-white rounded"
                                   onClick={() => handleBankSubmit()}
                                 >
                                   Submit
@@ -1490,7 +1481,7 @@ const clearDepositEntry=()=>{
                             {agentBankAccountList.map((item, index) => {
                               return (
                                 <tr key={index}>
-                                  <td>{index+1}</td>
+                                  <td>{index + 1}</td>
                                   <td>
                                     <a
                                       onClick={() => handleEditItem(item)}
@@ -1544,58 +1535,54 @@ const clearDepositEntry=()=>{
               </div>
             </form>
           </section>
-          <div className="text-center text-white pt-5 pb-2 mt-5">
-            {/* <b>Version</b> 3.1.0 */}
-            <strong>Copyright &copy; 2020-2022 All rights reserved.</strong>
-          </div>
         </div>
       </div>
       <div
-                          className="modal fade"
-                          id="onlineModal"
-                          tabIndex={-1}
-                          aria-hidden="true"
-                        >
-                          <div className="modal-dialog">
-                            <div className="modal-content">
-                              <div className="modal-header">
-                                <h5
-                                  className="modal-title"
-                                >
-                                  Online Deposit
-                                </h5>
-                                <button
-                                  type="button"
-                                  className="btn-close"
-                                  data-bs-dismiss="modal"
-                                  aria-label="Close"
-                                ></button>
-                              </div>
-                              <div className="modal-body">
-                              <strong>Amount</strong>    <input onChange={(e)=>setOnlineAmount(Number(e.target.value))} type={'number'} className='form-control'></input>
-                              <strong>Charge:</strong>     {onlineCharge}% <br/>
-                              <strong>Total Amount:</strong>  {onlineAmount+(onlineAmount*onlineCharge/100)} <br/>
-                              </div> 
-                              <div className="modal-footer">
-                                <button
-                                  type="button"
-                                  className="btn btn-secondary"
-                                  data-bs-dismiss="modal"
-                                >
-                                  Close
-                                </button>
-                                <button
-                                  type="button"
-                                  className="btn button-color fw-bold text-white"
-                                  onClick={() => handleOnlineDepositSubmit()}
-                                >
-                                  Submit
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-      {/* <Footer></Footer> */}
+        className="modal fade"
+        id="onlineModal"
+        tabIndex={-1}
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5
+                className="modal-title"
+              >
+                Online Deposit
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <strong>Amount</strong>    <input onChange={(e) => setOnlineAmount(Number(e.target.value))} type={'number'} className='form-control'></input>
+              <strong>Charge:</strong>     {onlineCharge}% <br />
+              <strong>Total Amount:</strong>  {onlineAmount + (onlineAmount * onlineCharge / 100)} <br />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary rounded"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                className="btn button-color fw-bold text-white rounded"
+                onClick={() => handleOnlineDepositSubmit()}
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Footer></Footer>
     </div>
   );
 };

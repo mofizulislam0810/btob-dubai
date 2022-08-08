@@ -847,6 +847,7 @@ const Ticket = () => {
           </div>
         </section>
       </div>
+      <Footer/>
     </div>
   );
 };

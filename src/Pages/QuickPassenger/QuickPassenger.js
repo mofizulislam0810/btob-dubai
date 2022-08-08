@@ -8,6 +8,7 @@ import courtries from "../../JSON/countries.json";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactPaginate from 'react-paginate';
+import Footer from "../SharePages/Footer/Footer";
 const QuickPassenger = () => {
   let [pageCount, setPageCount] = useState(0);
   let [pageSize, setPageSize] = useState(10);
@@ -335,7 +336,7 @@ const QuickPassenger = () => {
                       <li id="menu-item">
                         <a
                           href="javascript:void(0)"
-                          className="btn btn-sm btn-secondary float-right mr-1 d-print-none"
+                          className="btn btn-sm button-color float-right mr-1 d-print-none rounded text-white"
                           data-bs-toggle="modal"
                           data-bs-target="#accountModal"
                           onClick={() => handleCreateItem()}
@@ -987,14 +988,14 @@ const QuickPassenger = () => {
                   <div className="modal-footer">
                     <button
                       type="button"
-                      className="btn btn-secondary"
+                      className="btn btn-secondary rounded"
                       data-bs-dismiss="modal"
                     >
                       Close
                     </button>
                     <button
                       type="button"
-                      className="btn button-color fw-bold text-white"
+                      className="btn button-color fw-bold text-white rounded"
                       onClick={() => handleSubmit()}
                     >
                       Submit
@@ -1005,11 +1006,8 @@ const QuickPassenger = () => {
             </div>
           </div>
         </section>
-        <div className="text-center text-white pt-5 pb-2 mt-5">
-          {/* <b>Version</b> 3.1.0 */}
-          <strong>Copyright &copy; 2020-2022 All rights reserved.</strong>
-        </div>
       </div>
+      <Footer/>
     </div>
   );
 };

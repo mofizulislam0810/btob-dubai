@@ -7,7 +7,7 @@ import moment from "moment";
 import layOver from "../../SharePages/Utility/layOver";
 import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
-import { Parser } from 'html-to-react'
+import { Parser } from 'html-to-react';
 const ShowModal = ({
   flag,
   index,
@@ -25,6 +25,7 @@ const ShowModal = ({
   uniqueTransID,
   passengerCounts,
   passengerFares,
+  currency
 }) => {
   const ImageUrlD = `https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction0.platingCarrierCode}.png`;
   const ImageUrlR =
@@ -88,7 +89,9 @@ const ShowModal = ({
       );
     });
 
-  });
+      fetchOptions();
+ 
+  },[]);
   const fareRulesObj = {
     itemCodeRef: itemCodeRef,
     uniqueTransID: uniqueTransID,
@@ -110,7 +113,8 @@ const ShowModal = ({
       console.log(fareRules)
   }
 
-  fetchOptions();
+
+  // fetchOptions();
 //   let fareRules={
 //     "item1": {
 //         "fareRuleDetails": [
@@ -825,7 +829,7 @@ const ShowModal = ({
                 </div>
                 <div className="col-lg-3 my-auto">
                   <h5 className="text-end text-color fw-bold">
-                    BDT {totalPrice+ bookingComponents[0].agentAdditionalPrice}
+                    {currency!==undefined ? currency : "BDT"}   {totalPrice+ bookingComponents[0].agentAdditionalPrice}
                   </h5>
                   <h6 className="text-end text-color fw-bold">
                     {refundable === true ? "Refundable" : "Non-Refundable"}
@@ -833,7 +837,7 @@ const ShowModal = ({
                   {flag === 0 ? (
                     <Link
                       to="/travellcart"
-                      className="btn button-color fw-bold text-white float-end"
+                      className="btn button-color fw-bold text-white float-end rounded"
                       id={"select-click" + index}
                     >
                       Select Flight
@@ -3256,7 +3260,7 @@ const ShowModal = ({
                           <td className="right">{passengerFares.adt.ait}</td>
                           <td className="right">{passengerCounts.adt}</td>
                           <td className="right fw-bold">
-                            BDT{" "}
+                            {currency!==undefined ? currency : "BDT"}  {" "}
                             {(passengerFares.adt.totalPrice * passengerCounts.adt)+ bookingComponents[0].agentAdditionalPrice/(passengerCounts.adt+(passengerCounts.cnn !==null?passengerCounts.cnn : 0)+(passengerCounts.inf !==null?passengerCounts.inf : 0))}
                           </td>
                         </tr>
@@ -3279,7 +3283,7 @@ const ShowModal = ({
                           <td className="right">{passengerFares.cnn.ait}</td>
                           <td className="right">{passengerCounts.cnn}</td>
                           <td className="right fw-bold">
-                            BDT{" "}
+                            {currency!==undefined ? currency : "BDT"}  {" "}
                             {(passengerFares.cnn.totalPrice * passengerCounts.cnn)+ bookingComponents[0].agentAdditionalPrice/(passengerCounts.adt+(passengerCounts.cnn !==null?passengerCounts.cnn : 0)+(passengerCounts.inf !==null?passengerCounts.inf : 0))}
                           </td>
                         </tr>
@@ -3302,7 +3306,7 @@ const ShowModal = ({
                           <td className="right">{passengerFares.inf.ait}</td>
                           <td className="right">{passengerCounts.inf}</td>
                           <td className="right fw-bold">
-                            BDT{" "}
+                            {currency!==undefined ? currency : "BDT"}  {" "}
                             {(passengerFares.inf.totalPrice * passengerCounts.inf)+ bookingComponents[0].agentAdditionalPrice/(passengerCounts.adt+(passengerCounts.cnn !==null?passengerCounts.cnn : 0)+(passengerCounts.inf !==null?passengerCounts.inf : 0))}
                           </td>
                         </tr>

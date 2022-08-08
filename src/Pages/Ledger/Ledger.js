@@ -6,6 +6,7 @@ import currentYear from "../SharePages/Utility/currentYear";
 import { environment } from "../SharePages/Utility/environment";
 import moment from "moment";
 import ReactPaginate from 'react-paginate';
+import Footer from "../SharePages/Footer/Footer";
 const Ledger = () => {
   const [ledgerData, setLedgerData] = useState();
   let [fromDate, setFromDate] = useState(new Date().toJSON().slice(0, 10));
@@ -227,11 +228,8 @@ const Ledger = () => {
             </div>
           </form>
         </section>
-        <div className="text-center text-white pt-5 pb-2 mt-5">
-          {/* <b>Version</b> 3.1.0 */}
-          <strong>Copyright &copy; 2020-2022 All rights reserved.</strong>
-        </div>
       </div>
+      <Footer/>
     </div>
   );
 };

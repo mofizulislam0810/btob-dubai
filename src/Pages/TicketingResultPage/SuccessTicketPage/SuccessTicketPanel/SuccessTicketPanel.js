@@ -38,6 +38,7 @@ useEffect(()=>{
   // const direction3 = JSON.parse(localStorage.getItem("direction3"));
   // const direction4 = JSON.parse(localStorage.getItem("direction4"));
   // const direction5 = JSON.parse(localStorage.getItem("direction5"));
+  const currency = JSON.parse(localStorage.getItem("currency"));
   const ImageUrlD = `https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketData.item1?.flightInfo?.directions[0][0].platingCarrierCode}.png`;
   const ImageUrlR =
     ticketData.item1?.flightInfo?.directions.length === 2
@@ -823,7 +824,7 @@ useEffect(()=>{
                                       }
                                     </td>
                                     <td className="fw-bold">
-                                      BDT{" "}
+                                      {currency!==undefined ? currency : "BDT"}  {" "}
                                       {ticketData.item1?.flightInfo
                                         .passengerFares.adt.totalPrice *
                                         ticketData.item1?.flightInfo
@@ -871,7 +872,7 @@ useEffect(()=>{
                                       }
                                     </td>
                                     <td className="fw-bold">
-                                      BDT{" "}
+                                      {currency!==undefined ? currency : "BDT"}  {" "}
                                       {ticketData.item1?.flightInfo
                                         .passengerFares.cnn.totalPrice *
                                         ticketData.item1?.flightInfo
@@ -920,7 +921,7 @@ useEffect(()=>{
                                       }
                                     </td>
                                     <td className="fw-bold">
-                                      BDT{" "}
+                                      {currency!==undefined ? currency : "BDT"}  {" "}
                                       {ticketData.item1?.flightInfo
                                         .passengerFares.inf.totalPrice *
                                         ticketData.item1?.flightInfo

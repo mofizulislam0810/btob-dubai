@@ -456,7 +456,7 @@ const SuccessBookingPanel = () => {
                   <div className="row mb-5 mt-2">
                     <div className="col-lg-12 text-center">
                       <button
-                        className="btn button-color text-white fw-bold w-25 mt-2"
+                        className="btn button-color text-white fw-bold w-25 mt-2 rounded"
                         onClick={handleGenarateTicket}
                       >
                         Issue Ticket

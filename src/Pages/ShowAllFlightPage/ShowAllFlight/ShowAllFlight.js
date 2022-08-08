@@ -200,6 +200,9 @@ const ShowAllFlight = ({
     flightsData = dataPrice;
   }
 
+  let currency = mainJson?.currency;
+  console.log(currency);
+  localStorage.setItem("currency",JSON.stringify(currency));
   useEffect(() => {
     // $(".slide-toggle").hide();
     // $(".search-again").click(function () {
@@ -240,14 +243,14 @@ const ShowAllFlight = ({
 
   return (
     <div>
-         <div className="container box-shadow bg-white content-width">
+         <div className="container bg-white box-shadow content-width">
             <div className="row border mt-3 px-5 py-2">
               <div className="col-lg-6 my-auto">
                   <h5 className="pt-1">We found {fetchFlighData?.totalFlights} flights, {fetchFlighData?.airlineFilters?.length} Unique Airlines </h5>
               </div>
               <div className="col-lg-6">
               <div class="dropdown float-end">
-                  <button class="btn btn-primary fw-bold text-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn btn-primary fw-bold text-white dropdown-toggle button-color rounded" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <span className="me-1"><i class="fas fa-money-bill-wave"></i></span>{amountChange}
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -297,10 +300,10 @@ const ShowAllFlight = ({
                   </div>
                   <div>
                     <span className="float-start fw-bold">
-                      MIN BDT {mainJson?.minMaxPrice?.minPrice}
+                      MIN {currency!==undefined ? currency : "BDT"}   {mainJson?.minMaxPrice?.minPrice}
                     </span>
                     <span className="float-end fw-bold">
-                      MAX BDT {mainJson?.minMaxPrice?.maxPrice}
+                      MAX {currency!==undefined ? currency : "BDT"}   {mainJson?.minMaxPrice?.maxPrice}
                     </span>
                   </div>
                 </div>
@@ -405,7 +408,7 @@ const ShowAllFlight = ({
                         >
                           {item.code} ({item.totalFlights})
                         </label>{" "}
-                        <span className="fw-bold float-end">BDT {item.minPrice}</span>
+                        <span className="fw-bold float-end">{currency!==undefined ? currency : "BDT"}   {item.minPrice}</span>
                         <br></br>
                       </div>
                     ))}
@@ -481,6 +484,7 @@ const ShowAllFlight = ({
                   index={index}
                   data={data}
                   amountChange={amountChange}
+                  currency={currency}
                 ></ShowFlight>
               ))
             )}
@@ -500,10 +504,7 @@ const ShowAllFlight = ({
             </button>
           </div>
           {/* <div className="float-end me-5 pe-5">
-         
-           
           </div> */}
-
           {/* <strong>Copyright &copy; 2020-2022</strong> All rights reserved. */}
         </footer>
       ) : (

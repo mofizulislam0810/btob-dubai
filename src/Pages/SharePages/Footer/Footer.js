@@ -9,8 +9,8 @@ const Footer = () => {
     //   </div>
     //   {/* <strong>Copyright &copy; 2020-2022</strong> All rights reserved. */}
     // </footer>
-    <footer className="fixed-bottom">
-        <div className="text-center text-white">
+    <footer>
+        <div className="text-center" style={{color:"#8796A1"}}>
           {/* <b>Version</b> 3.1.0 */}
           <strong>Copyright &copy; 2020-2022 All rights reserved.</strong>
         </div>

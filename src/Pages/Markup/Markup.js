@@ -285,7 +285,7 @@ const Markup = () => {
         <section className="content">
         <ToastContainer />
           <form
-            className="mx-5 mt-3"
+            className="mx-5 my-3"
             encType="multipart/form-data"
             style={{ minHeight: "500px" }}
           >
@@ -692,7 +692,7 @@ const Markup = () => {
                       >
                         <button
                           type="button"
-                          className="btn button-color fw-bold text-white col-sm-1"
+                          className="btn button-color fw-bold text-white col-sm-1 rounded"
                           onClick={() => handleMarkupSubmit()}
                         >
                           Submit
@@ -1173,7 +1173,7 @@ const Markup = () => {
                               </button>
                               <button
                                 type="button"
-                                className="btn button-color text-white fw-bold"
+                                className="btn button-color text-white fw-bold rounded"
                                 onClick={() => handleMarkupSubmit()}
                               >
                                 Submit
@@ -1267,12 +1267,8 @@ const Markup = () => {
             </div>
           </form>
         </section>
-        <div className="text-center text-white pt-5 pb-2 mt-5">
-          {/* <b>Version</b> 3.1.0 */}
-          <strong>Copyright &copy; 2020-2022 All rights reserved.</strong>
-        </div>
       </div>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 };

@@ -128,7 +128,7 @@ const handleViewTicket=()=>{
         </li>
         <li className="nav-item d-none d-sm-inline-block">
           <Link to="/search">
-            <img src={logo} alt="" width="100%" height="60"/>
+            <img src={logo} alt="" width="60%" height="40"/>
           </Link>
         </li>
       </ul>

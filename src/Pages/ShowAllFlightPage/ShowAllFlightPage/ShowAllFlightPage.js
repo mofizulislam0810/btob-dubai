@@ -1070,12 +1070,12 @@ const ShowAllFlightPage = () => {
     <div>
       <Navbar></Navbar>
       <SideNavBar></SideNavBar>
-      <div className="content-wrapper search-panel-bg">
+      <div className="content-wrapper">
         <section className="content-header"></section>
         <section className="content">
-          <div className="container bg-white box-shadow content-width">
-            <div className="row border mt-3 px-5 py-2">
-              <div className="col-lg-7 py-3 my-auto border-right">
+          <div className="container box-shadow content-width">
+            <div className="row border" >
+              <div className="col-lg-7 py-3 ps-5 my-auto border-right bg-white">
                 <span className="p-2 border">
                   <span className="fw-bold" style={{ fontSize: "14px" }}>
                     <span className="me-2">
@@ -1250,7 +1250,7 @@ const ShowAllFlightPage = () => {
 
 
               </div>
-              <div className="col-lg-3 py-3 my-auto border-right">
+              <div className="col-lg-3 py-3 my-auto border-right bg-white">
                 <span className="fw-bold mx-1 border p-2" style={{ fontSize: "14px" }}>
                   {travelClass}
                 </span>
@@ -1275,7 +1275,7 @@ const ShowAllFlightPage = () => {
                     : " "}
                 </span>
               </div>
-              <div className="col-lg-2 my-auto d-flex justify-content-center">
+              <div className="col-lg-2 my-auto d-flex justify-content-center bg-white">
                 <button className="btn button-color btn-sm text-white float-start fw-bold search-again rounded">
                   Modify search
                 </button>

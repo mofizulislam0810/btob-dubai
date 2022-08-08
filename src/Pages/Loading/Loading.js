@@ -51,7 +51,7 @@ const Loading = ({ flag, loading,originCode,destinationCode,tripType }) => {
                     </p>
                     <img
                       src={img}
-                      className="img-fluid my-2"
+                      className="img-fluid my-2 mx-auto"
                       alt="fly plan"
                       width={"60%"}
                     />

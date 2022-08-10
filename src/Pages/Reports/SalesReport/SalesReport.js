@@ -27,6 +27,13 @@ const SalesReport = () => {
   let [pageCount, setPageCount] = useState(0);
   let [pageSize, setPageSize] = useState(10);
   let [currentPageNumber, setCurrentPageNumber] = useState(1);
+
+  const [isTimeOut, setIsTimeOut] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsTimeOut(true), 10000);
+  }, []);
+
   const getReportData = async (currentPageNumber) => {
     const obj = {
       agentId: sessionStorage.getItem("agentId") ?? 0,
@@ -293,7 +300,7 @@ const SalesReport = () => {
                             </tfoot>
                           </table>
 
-                          {Object.keys(reportData).length === 0 && (
+                          {Object.keys(reportData).length === 0 && !isTimeOut && (
                             <Center w="100%" py="50px">
                               <Spinner
                                 thickness="4px"

@@ -36,6 +36,12 @@ const Queues = () => {
   let [gdsPnr, setGDSPNR] = useState("");
   const [idxD, setIdxD] = useState(0);
 
+  const [isTimeOut, setIsTimeOut] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsTimeOut(true), 10000);
+  }, []);
+
   let onStatusChange = (statusId) => {
     setIdxD(statusId);
     setStatusId(statusId);
@@ -858,7 +864,7 @@ const Queues = () => {
                           </tbody>
                         </table>
 
-                        {Object.keys(ticketingList).length === 0 && (
+                        {Object.keys(ticketingList).length === 0 && !isTimeOut && (
                           <Center w="100%" py="50px">
                             <Spinner
                               thickness="4px"
@@ -870,6 +876,7 @@ const Queues = () => {
                           </Center>
                         )}
                       </div>
+
                       <ReactPaginate
                         previousLabel={"previous"}
                         nextLabel={"next"}

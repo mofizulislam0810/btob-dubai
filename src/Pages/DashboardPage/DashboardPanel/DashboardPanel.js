@@ -276,16 +276,17 @@ const DashboardPanel = () => {
             <div className="col-md-6">
               {/* <div id="calendar2"></div> */}
 
-              <Box mx="10px">
+              <Box
+                mx="10px"
+                borderRadius="4px"
+                boxShadow="md"
+                overflow="hidden"
+              >
                 <RevoCalendar
                   events={eventList}
-                  style={{
-                    borderRadius: "5px",
-                    border: "5px solid #4F6995",
-                  }}
                   highlightToday={true}
                   lang="en"
-                  primaryColor="#0083fc"
+                  primaryColor="#1e88e5"
                   secondaryColor="#f7fbff"
                   todayColor="#0083fc"
                   textColor="#1e1e1e"
@@ -296,14 +297,15 @@ const DashboardPanel = () => {
                   showDetailToggler={true}
                   showSidebarToggler={true}
                   onePanelAtATime={false}
-                  allowDeleteEvent={true}
+                  allowDeleteEvent={false}
                   allowAddEvent={false}
                   openDetailsOnDateSelection={true}
                   timeFormat24={true}
                   showAllDayLabel={true}
                   detailDateFormat="DD/MM/YYYY"
-                  // deleteEvent={deleteEvent}
-                  // addEvent={addEvent}
+                  eventSelected={(index) =>
+                    console.log("index of response json : " + index)
+                  }
                 />
               </Box>
             </div>

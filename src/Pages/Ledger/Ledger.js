@@ -5,18 +5,19 @@ import SideNavBar from "../SharePages/SideNavBar/SideNavBar";
 import currentYear from "../SharePages/Utility/currentYear";
 import { environment } from "../SharePages/Utility/environment";
 import moment from "moment";
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 import Footer from "../SharePages/Footer/Footer";
+import { Center, Spinner } from "@chakra-ui/react";
 const Ledger = () => {
   const [ledgerData, setLedgerData] = useState();
   let [fromDate, setFromDate] = useState(new Date().toJSON().slice(0, 10));
   let [toDate, setToDate] = useState(new Date().toJSON().slice(0, 10));
   let [balanceType, setBalanceType] = useState(null);
-  let [currencyName,setCurrencyName] = useState("");
+  let [currencyName, setCurrencyName] = useState("");
 
   let [pageCount, setPageCount] = useState(0);
   let [pageSize, setPageSize] = useState(10);
-  let [currentPageNumber,setCurrentPageNumber]=useState(1);
+  let [currentPageNumber, setCurrentPageNumber] = useState(1);
   const getLedgerData = async (currentPageNumber) => {
     const obj = {
       agentId: sessionStorage.getItem("agentId") ?? 0,
@@ -25,7 +26,8 @@ const Ledger = () => {
       balanceType: balanceType,
     };
     const response = await axios.post(
-      environment.accountLedger+`?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
+      environment.accountLedger +
+        `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
       obj,
       environment.headerToken
     );
@@ -45,15 +47,11 @@ const Ledger = () => {
     setToDate(e.target.value);
   };
   const handlePageClick = async (data) => {
-
-
     let currentPage = data.selected + 1;
     setCurrentPageNumber(currentPage);
     getLedgerData(currentPage);
   };
   const handleSubmit = () => {
-    
-
     getLedgerData(currentPageNumber);
   };
   useEffect(() => {
@@ -77,7 +75,7 @@ const Ledger = () => {
                   <div className="tab-content">
                     <div className="tab-pane fade show active" id="tp1">
                       <h4> Account ledger</h4>
-                      <hr className="my-3"/>
+                      <hr className="my-3" />
                       <div
                         className="row"
                         style={{ width: "100%", paddingBottom: "5px" }}
@@ -161,9 +159,18 @@ const Ledger = () => {
                               <th>Description</th>
                               <th>Created By</th>
                               <th>Balance Type</th>
-                              <th>Debit {currencyName ? "(" + currencyName + ")" : ""}</th>
-                              <th>Credit {currencyName ? "(" + currencyName + ")" : ""}</th>
-                              <th>Balance {currencyName ? "(" + currencyName + ")" : ""}</th>
+                              <th>
+                                Debit{" "}
+                                {currencyName ? "(" + currencyName + ")" : ""}
+                              </th>
+                              <th>
+                                Credit{" "}
+                                {currencyName ? "(" + currencyName + ")" : ""}
+                              </th>
+                              <th>
+                                Balance{" "}
+                                {currencyName ? "(" + currencyName + ")" : ""}
+                              </th>
                             </tr>
                           </thead>
                           <tbody>
@@ -203,6 +210,19 @@ const Ledger = () => {
                             )}
                           </tbody>
                         </table>
+
+                        {Object.keys(ledgerData).length === 0 && (
+                          <Center w="100%" py="50px">
+                            <Spinner
+                              thickness="4px"
+                              speed="0.65s"
+                              emptyColor="gray.200"
+                              color="red.500"
+                              size="xl"
+                            />
+                          </Center>
+                        )}
+
                         <ReactPaginate
                           previousLabel={"previous"}
                           nextLabel={"next"}
@@ -211,7 +231,9 @@ const Ledger = () => {
                           marginPagesDisplayed={2}
                           pageRangeDisplayed={3}
                           onPageChange={handlePageClick}
-                          containerClassName={"pagination justify-content-center"}
+                          containerClassName={
+                            "pagination justify-content-center"
+                          }
                           pageClassName={"page-item"}
                           pageLinkClassName={"page-link"}
                           previousClassName={"page-item"}
@@ -231,7 +253,7 @@ const Ledger = () => {
           </form>
         </section>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

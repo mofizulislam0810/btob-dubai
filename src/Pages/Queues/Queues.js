@@ -12,7 +12,7 @@ import ReactPaginate from "react-paginate";
 import Loading from "../Loading/Loading";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Spinner, Text } from "@chakra-ui/react";
 
 const Queues = () => {
   const [loading, setLoading] = useState(false);
@@ -254,7 +254,7 @@ const Queues = () => {
       <div className="content-wrapper search-panel-bg">
         <section className="content-header"></section>
         <section className="content">
-          <Loading loading={loading}></Loading>
+          {/* <Loading loading={loading}></Loading> */}
           <form
             className="mx-5 mt-3"
             encType="multipart/form-data"
@@ -266,7 +266,7 @@ const Queues = () => {
                   <div className="tab-content">
                     <div className="tab-pane fade show active" id="tp1">
                       <h4>Flight History</h4>
-                      <hr className="my-3"/>
+                      <hr className="my-3" />
                       <div
                         className="row"
                         style={{ width: "100%", paddingBottom: "5px" }}
@@ -444,6 +444,7 @@ const Queues = () => {
                           </div>
                         </div>
                       </div>
+
                       <div
                         style={{ overflowX: "scroll", marginBottom: "16px" }}
                       >
@@ -856,6 +857,18 @@ const Queues = () => {
                             )}
                           </tbody>
                         </table>
+
+                        {Object.keys(ticketingList).length === 0 && (
+                          <Center w="100%" py="50px">
+                            <Spinner
+                              thickness="4px"
+                              speed="0.65s"
+                              emptyColor="gray.200"
+                              color="red.500"
+                              size="xl"
+                            />
+                          </Center>
+                        )}
                       </div>
                       <ReactPaginate
                         previousLabel={"previous"}

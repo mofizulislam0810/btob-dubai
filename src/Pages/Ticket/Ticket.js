@@ -424,7 +424,7 @@ const Ticket = () => {
                                         <td>{item.passengerCount}</td>
                                         <td>{item.agentAdditionalPrice}</td>
                                         <td className="fw-bold">
-                                          BDT{" "}
+                                          {item.currencyName}{" "}
                                           {item.totalPrice *
                                             item.passengerCount}
                                         </td>
@@ -442,7 +442,7 @@ const Ticket = () => {
                                         <td>{item.passengerCount}</td>
                                         <td>{item.agentAdditionalPrice}</td>
                                         <td className="fw-bold">
-                                          BDT{" "}
+                                        {item.currencyName}{" "}
                                           {item.totalPrice *
                                             item.passengerCount}
                                         </td>
@@ -460,7 +460,7 @@ const Ticket = () => {
                                         <td>{item.passengerCount}</td>
                                         <td>{item.agentAdditionalPrice}</td>
                                         <td className="fw-bold">
-                                          BDT{" "}
+                                        {item.currencyName}{" "}
                                           {item.totalPrice *
                                             item.passengerCount}
                                         </td>

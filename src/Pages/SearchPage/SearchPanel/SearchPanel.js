@@ -75,13 +75,13 @@ const SearchPanel = () => {
           className="my-auto"
           pauseOnHover
           gradient={false}
-          style={{ backgroundColor: "#02046a" }}
+          style={{ backgroundColor: "#390404" }}
         >
           {text?.map((item, index) => {
             return (
               <p
                 style={{ fontSize: "15pt", cursor: "pointer" }}
-                className="text-white pt-2 me-5"
+                className="text-white py-2 me-5"
                 onClick={() => handleClick(index + 1)}
               >
                 {item.title}

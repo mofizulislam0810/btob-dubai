@@ -649,9 +649,9 @@ const SearchFrom = () => {
                               data-bs-toggle="dropdown"
                               aria-expanded="false"
                               data-bs-auto-close="outside"
-                              style={{ height: "38px" }}
+                              style={{ height: "38px"}}
                             >
-                              <span id="adultval">
+                              <span className="d-flex">
                                 <svg
                                   width="20"
                                   height="20"
@@ -886,7 +886,7 @@ const SearchFrom = () => {
                       htmlFor="formGroupExampleInput"
                       className="form-label text-white"
                     >
-                      Depart From <span className="text-danger fw-bold">*</span>
+                      Depart From <span className="text-white fw-bold">*</span>
                     </label>
                     <span className="address">
                       <input
@@ -912,7 +912,7 @@ const SearchFrom = () => {
                       htmlFor="formGroupExampleInput"
                       className="form-label text-white"
                     >
-                      Going To <span className="text-danger fw-bold">*</span>
+                      Going To <span className="text-white fw-bold">*</span>
                     </label>
                     <span className="address">
                       <input
@@ -934,7 +934,7 @@ const SearchFrom = () => {
                           className="form-label text-white"
                         >
                           Departing{" "}
-                          <span className="text-danger fw-bold">*</span>
+                          <span className="text-white fw-bold">*</span>
                         </label>
                       </div>
                       <div className="col-lg-6" id="returnLavel">
@@ -943,7 +943,7 @@ const SearchFrom = () => {
                           className="form-label text-white"
                         >
                           Returning{" "}
-                          <span className="text-danger fw-bold">*</span>
+                          <span className="text-white fw-bold">*</span>
                         </label>
                       </div>
                     </div>
@@ -1330,7 +1330,7 @@ const SearchFrom = () => {
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="d-flex justify-content-center">
-                      <button className="btn button-color text-white mt-3 text-center fw-bold rounded">
+                      <button className="btn text-white mt-4 text-center fw-bold rounded" style={{backgroundColor:"#390404"}}>
                         Search Flight
                       </button>
                     </div>
@@ -1346,7 +1346,7 @@ const SearchFrom = () => {
         </div>
       </form>
 
-      <div className="container my-3">
+      {/* <div className="container my-3">
         <div className="row">
           <div className="col-lg-12">
             <div className="d-flex justify-content-center">
@@ -1405,7 +1405,7 @@ const SearchFrom = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -244,11 +244,11 @@ const ShowAllFlight = ({
   return (
     <div>
          <div className="container box-shadow content-width">
-            <div className="row border mt-3 px-5 py-2 bg-white">
-              <div className="col-lg-6 my-auto">
+            <div className="row border mt-3">
+              <div className="col-lg-6 py-3 px-5 bg-white">
                   <h5 className="pt-1">We found {fetchFlighData?.totalFlights} flights, {fetchFlighData?.airlineFilters?.length} Unique Airlines </h5>
               </div>
-              <div className="col-lg-6">
+              <div className="col-lg-6 bg-white py-3 px-5 ">
               <div class="dropdown float-end">
                   <button class="btn btn-primary fw-bold text-white dropdown-toggle button-color rounded" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <span className="me-1"><i class="fas fa-money-bill-wave"></i></span>{amountChange}
@@ -266,7 +266,8 @@ const ShowAllFlight = ({
         <div className="row py-4 ps-3">
           <div
             className="col-lg-3 rounded box-shadow bg-white"
-            style={{ height: "100%", position: "sticky", top: "9%"}}
+            style={{ height: "100%", position: "sticky", top: "9%", maxHeight:"100vh",
+            overflowY:"auto"}}
           >
             <div className="container">
               <div className="row px-2">
@@ -299,10 +300,10 @@ const ShowAllFlight = ({
                     />
                   </div>
                   <div>
-                    <span className="float-start fw-bold">
+                    <span className="float-start fw-bold" style={{fontSize:"13px"}}>
                       MIN {currency!==undefined ? currency : "BDT"}   {mainJson?.minMaxPrice?.minPrice}
                     </span>
-                    <span className="float-end fw-bold">
+                    <span className="float-end fw-bold" style={{fontSize:"13px"}}>
                       MAX {currency!==undefined ? currency : "BDT"}   {mainJson?.minMaxPrice?.maxPrice}
                     </span>
                   </div>
@@ -392,7 +393,7 @@ const ShowAllFlight = ({
                   </div>
                   <div className="form-check mt-2">
                     {flightName.map((item, index) => (
-                      <div key={index} className="d-flex align-item-center">
+                      <div key={index} className="d-flex align-items-center justify-content-between">
                         <input
                           className="form-check-input"
                           type="checkbox"
@@ -404,11 +405,11 @@ const ShowAllFlight = ({
                         <label
                           className="form-check-label fw-bold px-2"
                           htmlFor="flexCheckDefault"
-                          title={item.name}
+                          title={item.name} style={{fontSize:"13px"}}
                         >
                           {item.code} ({item.totalFlights})
                         </label>{" "}
-                        <span className="fw-bold float-end">{currency!==undefined ? currency : "BDT"}   {item.minPrice}</span>
+                        <span className="fw-bold float-end" style={{fontSize:"13px"}}>{currency!==undefined ? currency : "BDT"}   {item.minPrice}</span>
                         <br></br>
                       </div>
                     ))}
@@ -420,7 +421,7 @@ const ShowAllFlight = ({
             {/* End of Airlines Section  */}
 
             {/* Baggage section  */}
-            <div className="container">
+            <div className="container pb-5 mb-5">
               <div className="row px-2">
                 <div className="col-lg-6 mt-3">
                   <h6 className="float-start text-color fw-bold">Baggage</h6>

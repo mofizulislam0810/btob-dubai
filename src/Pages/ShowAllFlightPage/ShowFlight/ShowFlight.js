@@ -357,7 +357,7 @@ const ShowFlight = (props) => {
                               .arrival,
                             item[0].segments[0]?.departure
                           ) !== 0 ? (
-                            <span className="text-danger">
+                            <span className="text-danger" style={{fontSize:"8px"}}>
                               +
                               {dayCount(
                                 item[0].segments[item[0].segments.length - 1]
@@ -598,7 +598,7 @@ const ShowFlight = (props) => {
                           ].arrival,
                           directions[0][0].segments[0]?.departure
                         ) !== 0 ? (
-                          <span className="text-danger">
+                          <span className="text-danger" style={{fontSize:"8px"}}>
                             +
                             {dayCount(
                               directions[0][0].segments[
@@ -850,7 +850,7 @@ const ShowFlight = (props) => {
                           ].arrival,
                           directions[1][0].segments[0]?.departure
                         ) !== 0 ? (
-                          <span className="text-danger">
+                          <span className="text-danger" style={{fontSize:"8px"}}>
                             +
                             {dayCount(
                               directions[1][0].segments[
@@ -886,13 +886,7 @@ const ShowFlight = (props) => {
                 {directions[0][0].segments[0].bookingCount ? (
                   <>
                     <span className="px-3 text-color font-size">
-                      <img
-                        src={seatIcon}
-                        className="me-1"
-                        alt="plane-seat"
-                        width={"25px"}
-                        height={"25px"}
-                      />
+                      <i class="fas fa-couch me-1"></i>
                       <span className="me-1">Seats</span>
                       {directions[0][0].segments[0].bookingCount}{" "}
                     </span>
@@ -1371,7 +1365,7 @@ const ShowFlight = (props) => {
 
           {/* toggle option for hide */}
           <div
-            className="row mb-5 mx-3 py-2 rounded box-shadow"
+            className="row mb-5 mx-3 py-2 rounded box-shadow bg-white"
             id={"toggle-option" + props.index}
           >
             <div className="col-lg-10">
@@ -1504,7 +1498,7 @@ const ShowFlight = (props) => {
                                     .arrival,
                                   item.segments[0]?.departure
                                 ) !== 0 ? (
-                                  <span className="text-danger">
+                                  <span className="text-danger" style={{fontSize:"8px"}}>
                                     +
                                     {dayCount(
                                       item.segments[item.segments.length - 1]
@@ -1660,7 +1654,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger">
+                                      <span className="text-danger" style={{fontSize:"8px"}}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -1824,7 +1818,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger">
+                                      <span className="text-danger" style={{fontSize:"8px"}}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -1989,7 +1983,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger">
+                                      <span className="text-danger" style={{fontSize:"8px"}}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -2153,7 +2147,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger">
+                                      <span className="text-danger" style={{fontSize:"8px"}}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -2318,7 +2312,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger">
+                                      <span className="text-danger" style={{fontSize:"8px"}}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -2478,7 +2472,7 @@ const ShowFlight = (props) => {
                                 item.segments[item.segments.length - 1].arrival,
                                 item.segments[0]?.departure
                               ) !== 0 ? (
-                                <span className="text-danger">
+                                <span className="text-danger" style={{fontSize:"8px"}}>
                                   +
                                   {dayCount(
                                     item.segments[item.segments.length - 1]
@@ -2642,7 +2636,7 @@ const ShowFlight = (props) => {
                                       .arrival,
                                     item.segments[0]?.departure
                                   ) !== 0 ? (
-                                    <span className="text-danger">
+                                    <span className="text-danger" style={{fontSize:"8px"}}>
                                       +
                                       {dayCount(
                                         item.segments[item.segments.length - 1]
@@ -3018,7 +3012,7 @@ const ShowFlight = (props) => {
                               .arrival,
                             item[0].segments[0]?.departure
                           ) !== 0 ? (
-                            <span className="text-danger">
+                            <span className="text-danger" style={{fontSize:"8px"}}>
                               +
                               {dayCount(
                                 item[0].segments[item[0].segments.length - 1]
@@ -3259,7 +3253,7 @@ const ShowFlight = (props) => {
                           ].arrival,
                           directions[0][0].segments[0]?.departure
                         ) !== 0 ? (
-                          <span className="text-danger">
+                          <span className="text-danger" style={{fontSize:"8px"}}>
                             +
                             {dayCount(
                               directions[0][0].segments[
@@ -3505,7 +3499,7 @@ const ShowFlight = (props) => {
                           ].arrival,
                           directions[1][0].segments[0]?.departure
                         ) !== 0 ? (
-                          <span className="text-danger">
+                          <span className="text-danger" style={{fontSize:"8px"}}>
                             +
                             {dayCount(
                               directions[1][0].segments[
@@ -4135,7 +4129,7 @@ const ShowFlight = (props) => {
                                     .arrival,
                                   item.segments[0]?.departure
                                 ) !== 0 ? (
-                                  <span className="text-danger">
+                                  <span className="text-danger" style={{fontSize:"8px"}}>
                                     +
                                     {dayCount(
                                       item.segments[item.segments.length - 1]
@@ -4291,7 +4285,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger">
+                                      <span className="text-danger" style={{fontSize:"8px"}}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -4455,7 +4449,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger">
+                                      <span className="text-danger" style={{fontSize:"8px"}}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -4620,7 +4614,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger">
+                                      <span className="text-danger" style={{fontSize:"8px"}}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -4784,7 +4778,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger">
+                                      <span className="text-danger" style={{fontSize:"8px"}}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -4949,7 +4943,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger">
+                                      <span className="text-danger" style={{fontSize:"8px"}}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -5109,7 +5103,7 @@ const ShowFlight = (props) => {
                                 item.segments[item.segments.length - 1].arrival,
                                 item.segments[0]?.departure
                               ) !== 0 ? (
-                                <span className="text-danger">
+                                <span className="text-danger" style={{fontSize:"8px"}}>
                                   +
                                   {dayCount(
                                     item.segments[item.segments.length - 1]
@@ -5273,7 +5267,7 @@ const ShowFlight = (props) => {
                                       .arrival,
                                     item.segments[0]?.departure
                                   ) !== 0 ? (
-                                    <span className="text-danger">
+                                    <span className="text-danger" style={{fontSize:"8px"}}>
                                       +
                                       {dayCount(
                                         item.segments[item.segments.length - 1]

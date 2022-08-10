@@ -2,3 +2,7 @@
     max-width: 900px;
     margin: 1.75rem auto;
   }
+
+.fade .active {
+    background-color: #390404c8;
+}

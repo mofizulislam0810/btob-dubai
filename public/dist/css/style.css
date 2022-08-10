@@ -21,11 +21,10 @@ body{
 
 
 #form-bg{
-    background-color: #02046a;
+    background-image: linear-gradient(100.94deg, #390404c8 -9.51%, #EC1C1E 115.79%);
     padding: 30px 30px 70px 30px;
     padding-bottom: 28px;
   }
-
 
 /* search panel position */
 .banner-text{
@@ -57,7 +56,7 @@ body{
 #travel-type-panel{
     z-index: 1;
     margin-top: 16px;
-    background-color: #02046a;
+    background-image: linear-gradient(100.94deg, #390404 -9.51%, #EC1C1E 115.79%);
 }
 
 .content-wrapper{

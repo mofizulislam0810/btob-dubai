@@ -287,7 +287,7 @@ const DashboardPanel = () => {
                   highlightToday={true}
                   lang="en"
                   primaryColor="#1e88e5"
-                  secondaryColor="#f7fbff"
+                  secondaryColor="#f9f9f9"
                   todayColor="#0083fc"
                   textColor="#1e1e1e"
                   indicatorColor="#ff0000"

@@ -259,7 +259,7 @@ const Support = () => {
 								Support
 							</div>
 							<div className='card-body'>
-								<div className="m-4">
+								<div className="mx-4">
 									<div className='row'>
 									<div className='col-sm-3'>
 										<label>Support Type<span style={{ color: 'red' }}>*</span></label>

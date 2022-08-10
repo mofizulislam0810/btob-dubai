@@ -969,7 +969,7 @@ const SearchFrom = () => {
                           className="form-label text-white"
                         >
                           Depart From{" "}
-                          <span className="text-danger fw-bold">*</span>
+                          <span className="text-white fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -996,7 +996,7 @@ const SearchFrom = () => {
                           className="form-label text-white"
                         >
                           Going To{" "}
-                          <span className="text-danger fw-bold">*</span>
+                          <span className="text-white fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1018,7 +1018,7 @@ const SearchFrom = () => {
                               className="form-label text-white"
                             >
                               Departing{" "}
-                              <span className="text-danger fw-bold">*</span>
+                              <span className="text-white fw-bold">*</span>
                             </label>
                           </div>
                         </div>
@@ -1045,7 +1045,7 @@ const SearchFrom = () => {
                           className="form-label text-white"
                         >
                           Depart From{" "}
-                          <span className="text-danger fw-bold">*</span>
+                          <span className="text-white fw-bold">*</span>
                         </label>
 
                         <input
@@ -1063,7 +1063,7 @@ const SearchFrom = () => {
                           className="form-label text-white"
                         >
                           Going To{" "}
-                          <span className="text-danger fw-bold">*</span>
+                          <span className="text-white fw-bold">*</span>
                         </label>
                         <input
                           type="text"
@@ -1082,7 +1082,7 @@ const SearchFrom = () => {
                               className="form-label text-white"
                             >
                               Departing{" "}
-                              <span className="text-danger fw-bold">*</span>
+                              <span className="text-white fw-bold">*</span>
                             </label>
                           </div>
                         </div>
@@ -1109,7 +1109,7 @@ const SearchFrom = () => {
                           className="form-label text-white"
                         >
                           Depart From{" "}
-                          <span className="text-danger fw-bold">*</span>
+                          <span className="text-white fw-bold">*</span>
                         </label>
 
                         <input
@@ -1127,7 +1127,7 @@ const SearchFrom = () => {
                           className="form-label text-white"
                         >
                           Going To{" "}
-                          <span className="text-danger fw-bold">*</span>
+                          <span className="text-white fw-bold">*</span>
                         </label>
                         <input
                           type="text"
@@ -1146,7 +1146,7 @@ const SearchFrom = () => {
                               className="form-label text-white"
                             >
                               Departing{" "}
-                              <span className="text-danger fw-bold">*</span>
+                              <span className="text-white fw-bold">*</span>
                             </label>
                           </div>
                         </div>
@@ -1173,7 +1173,7 @@ const SearchFrom = () => {
                           className="form-label text-white"
                         >
                           Depart From{" "}
-                          <span className="text-danger fw-bold">*</span>
+                          <span className="text-white fw-bold">*</span>
                         </label>
 
                         <input
@@ -1191,7 +1191,7 @@ const SearchFrom = () => {
                           className="form-label text-white"
                         >
                           Going To{" "}
-                          <span className="text-danger fw-bold">*</span>
+                          <span className="text-white fw-bold">*</span>
                         </label>
                         <input
                           type="text"
@@ -1210,7 +1210,7 @@ const SearchFrom = () => {
                               className="form-label text-white"
                             >
                               Departing{" "}
-                              <span className="text-danger fw-bold">*</span>
+                              <span className="text-white fw-bold">*</span>
                             </label>
                           </div>
                         </div>
@@ -1237,7 +1237,7 @@ const SearchFrom = () => {
                           className="form-label text-white"
                         >
                           Depart From{" "}
-                          <span className="text-danger fw-bold">*</span>
+                          <span className="text-white fw-bold">*</span>
                         </label>
 
                         <input
@@ -1255,7 +1255,7 @@ const SearchFrom = () => {
                           className="form-label text-white"
                         >
                           Going To{" "}
-                          <span className="text-danger fw-bold">*</span>
+                          <span className="text-white fw-bold">*</span>
                         </label>
                         <input
                           type="text"
@@ -1274,7 +1274,7 @@ const SearchFrom = () => {
                               className="form-label text-white"
                             >
                               Departing{" "}
-                              <span className="text-danger fw-bold">*</span>
+                              <span className="text-white fw-bold">*</span>
                             </label>
                           </div>
                         </div>
@@ -1292,7 +1292,7 @@ const SearchFrom = () => {
                     </div>
                     <div className="my-2 d-flex justify-content-center">
                       <div
-                        className="btn btn-primary rounded-pill"
+                        className="btn button-color rounded-pill text-white"
                         id="btnp-1"
                         onClick={() => handleFlightOptionP(1)}
                       >
@@ -1300,7 +1300,7 @@ const SearchFrom = () => {
                       </div>
                       &nbsp;
                       <div
-                        className="btn btn-primary rounded-pill"
+                        className="btn button-color rounded-pill text-white"
                         id="btnm-1"
                         style={{ display: "none" }}
                         onClick={() => handleFlightOptionM(1)}

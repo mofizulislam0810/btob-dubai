@@ -12,13 +12,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactPaginate from 'react-paginate';
 const Markup = () => {
-  useEffect(()=>{
+  useEffect(() => {
     $("#js-licensing").remove();
-      $(document).ready(function(){
-        $("#js-licensing").remove();
-      })
-  },[])
-  
+    $(document).ready(function () {
+      $("#js-licensing").remove();
+    })
+  }, [])
+
   let [airlineList, setAirlineList] = useState([]);
   let [countryList, setCountryList] = useState([]);
   let [agentMarkupList, setAgentMarkupList] = useState([]);
@@ -87,13 +87,13 @@ const Markup = () => {
   let [tripTypeId, setTripTypeId] = useState(0);
   let [pageCount, setPageCount] = useState(0);
   let [pageSize, setPageSize] = useState(10);
-  let [currentPageNumber,setCurrentPageNumber]=useState(1);
+  let [currentPageNumber, setCurrentPageNumber] = useState(1);
   const fieldIds = { text: "code", value: "id" };
   const fieldCodes = { text: "code", value: "code" };
   const handleGetAgentMarkups = (currentPageNumber) => {
     const getData = async () => {
       const response = await axios.get(
-        environment.markupsByAgent + "/" + (sessionStorage.getItem("agentId") ?? 0)+`?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
+        environment.markupsByAgent + "/" + (sessionStorage.getItem("agentId") ?? 0) + `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
         environment.headerToken
       );
       setAgentMarkupList(response.data.data);
@@ -104,9 +104,9 @@ const Markup = () => {
   const handleCreateItem = () => {
     const getAirlines = async () => {
       const response = await axios.get(environment.getairlineList);
-      
-      airlineList=response.data;
-      airlineList.push({code:"ALL"});
+
+      airlineList = response.data;
+      airlineList.push({ code: "ALL" });
       setAirlineList(airlineList);
     };
 
@@ -118,14 +118,14 @@ const Markup = () => {
     getCountries();
     const getAirlports = async () => {
       const response = await axios.get(environment.getairportList);
-      
+
       setAirportList(response.data);
     };
     getAirlports();
     clearForm();
-    
+
   };
-  const clearForm=()=>{
+  const clearForm = () => {
     setCurrentItem(null);
     setAirlineId(0);
     setOriginCountryId(0);
@@ -196,50 +196,50 @@ const Markup = () => {
     setCurrentPageNumber(currentPage);
     handleGetAgentMarkups(currentPage);
   };
-  
+
   const handleMarkupSubmit = () => {
 
-    let originAirportAll=false;
-  if(originAirportCode!==undefined && originAirportCode!==null && originAirportCode!=="")
-  { originAirportCode?.map((item,index)=>{
-    if(item==="ALL Airports"){
-      originAirportAll=true;
+    let originAirportAll = false;
+    if (originAirportCode !== undefined && originAirportCode !== null && originAirportCode !== "") {
+      originAirportCode?.map((item, index) => {
+        if (item === "ALL Airports") {
+          originAirportAll = true;
+        }
+      });
     }
-    });
-  }
-  let destinationAirportAll=false;
-  if(destinationAirportCode!==undefined && destinationAirportCode!==null && destinationAirportCode!=="")
-  { destinationAirportCode?.map((item,index)=>{
-    if(item==="ALL Airports"){
-      destinationAirportAll=true;
+    let destinationAirportAll = false;
+    if (destinationAirportCode !== undefined && destinationAirportCode !== null && destinationAirportCode !== "") {
+      destinationAirportCode?.map((item, index) => {
+        if (item === "ALL Airports") {
+          destinationAirportAll = true;
+        }
+      });
     }
-    });
-  }
 
-  let markupObj = {
-    id: currentItem == null ? 0 : currentItem.id,
-    agentId: sessionStorage.getItem("agentId") ?? 0,
-    airlineIds: airlineId.toString(),
-    originCountryIds: originCountryId.toString(),
-    destinationCountryIds: destinationCountryId.toString(),
-    validFrom: validFrom,
-    validTo: validTo,
-    rbDs: rbDs,
-    cabinClass: cabinClassId,
-    currencyId: currencyId,
-    markupTypeId: markupTypeId,
-    markupValue: markupValue,
-    commissionTypeId: commissionTypeId,
-    commissionValue: commissionValue,
-    markupApplyOn: markupApplyOn,
-    commissionApplyOn: commissionApplyOn,
-    applyFor: applyForId,
-    originAirportCodes:originAirportAll===false? originAirportCode?.toString():"ALL Airports",
-    destinationAirportCodes:destinationAirportAll===false? destinationAirportCode?.toString():"ALL Airports",
-    fareType: fareTypeId,
-    tripType: tripTypeId,
-    isActive: isActive,
-  };
+    let markupObj = {
+      id: currentItem == null ? 0 : currentItem.id,
+      agentId: sessionStorage.getItem("agentId") ?? 0,
+      airlineIds: airlineId.toString(),
+      originCountryIds: originCountryId.toString(),
+      destinationCountryIds: destinationCountryId.toString(),
+      validFrom: validFrom,
+      validTo: validTo,
+      rbDs: rbDs,
+      cabinClass: cabinClassId,
+      currencyId: currencyId,
+      markupTypeId: markupTypeId,
+      markupValue: markupValue,
+      commissionTypeId: commissionTypeId,
+      commissionValue: commissionValue,
+      markupApplyOn: markupApplyOn,
+      commissionApplyOn: commissionApplyOn,
+      applyFor: applyForId,
+      originAirportCodes: originAirportAll === false ? originAirportCode?.toString() : "ALL Airports",
+      destinationAirportCodes: destinationAirportAll === false ? destinationAirportCode?.toString() : "ALL Airports",
+      fareType: fareTypeId,
+      tripType: tripTypeId,
+      isActive: isActive,
+    };
 
     console.log(markupObj);
     if ((currentItem == null ? 0 : currentItem.id) > 0) {
@@ -283,7 +283,7 @@ const Markup = () => {
       <div className="content-wrapper search-panel-bg">
         <section className="content-header"></section>
         <section className="content">
-        <ToastContainer />
+          <ToastContainer />
           <form
             className="mx-5 my-3"
             encType="multipart/form-data"
@@ -311,7 +311,7 @@ const Markup = () => {
                         href="#existing"
                         className="nav-link"
                         data-bs-toggle="tab"
-                        onClick={()=>handleGetAgentMarkups(1)}
+                        onClick={() => handleGetAgentMarkups(1)}
                       >
                         Existing
                       </a>
@@ -319,8 +319,8 @@ const Markup = () => {
                   </ul>
                   <div className="tab-content">
                     <div className="tab-pane fade show active" id="newmarkup">
-                      <h4 className="mt-2">New Markup</h4>
-                      <hr />
+                      <h4 className="mt-4">New Markup</h4>
+                      <hr className="mb-3" />
                       <h3>Required Fields</h3>
                       <hr />
                       <div className="row my-3">
@@ -335,13 +335,13 @@ const Markup = () => {
                             fields={fieldIds}
                             placeholder="Select Airline"
                             onChange={(e) => setAirlineId(e.target.value)}
-                            
+
                           />
                         </div>
                         <div className="col-sm-3">
                           <label>
                             Origin Country
-                            
+
                           </label>
                           <MultiSelectComponent
                             id="mtselement"
@@ -354,7 +354,7 @@ const Markup = () => {
                         <div className="col-sm-3">
                           <label>
                             Destination Country
-                            
+
                           </label>
                           <MultiSelectComponent
                             id="mtselement"
@@ -488,7 +488,7 @@ const Markup = () => {
                         </div>
                         <div className="col-sm-3">
                           <label>
-                          Markup  Apply On<span style={{ color: "red" }}>*</span>
+                            Markup  Apply On<span style={{ color: "red" }}>*</span>
                           </label>
                           <select
                             className="form-select"
@@ -506,45 +506,45 @@ const Markup = () => {
                           </select>
                         </div>
                         <div className="col-sm-3">
-                                  <label>
-                                    Commission Type
-                                    
-                                  </label>
-                                  <select
-                                    className="form-select"
-                                    value={commissionTypeId}
-                                    placeholder="Commission Type"
-                                    onChange={(e) =>
-                                      setCommissionTypeId(e.target.value)
-                                    }
-                                  >
-                                    {commissiontypeList.map((item, index) => {
-                                      return (
-                                        <option key={index} value={item.id}>
-                                          {item.name}
-                                        </option>
-                                      );
-                                    })}
-                                  </select>
-                                </div>
-                                <div className="col-sm-3">
-                                  <label>
-                                  Commission Value
-                                    
-                                  </label>
-                                  <input
-                                    type={"number"}
-                                    value={commissionValue}
-                                    className="form-control"
-                                    onChange={(e) =>
-                                      setCommissionValue(e.target.value)
-                                    }
-                                    placeholder="Commission Value"
-                                  ></input>
-                                </div>
-                                <div className="col-sm-3">
                           <label>
-                          Commission  Apply On<span style={{ color: "red" }}>*</span>
+                            Commission Type
+
+                          </label>
+                          <select
+                            className="form-select"
+                            value={commissionTypeId}
+                            placeholder="Commission Type"
+                            onChange={(e) =>
+                              setCommissionTypeId(e.target.value)
+                            }
+                          >
+                            {commissiontypeList.map((item, index) => {
+                              return (
+                                <option key={index} value={item.id}>
+                                  {item.name}
+                                </option>
+                              );
+                            })}
+                          </select>
+                        </div>
+                        <div className="col-sm-3">
+                          <label>
+                            Commission Value
+
+                          </label>
+                          <input
+                            type={"number"}
+                            value={commissionValue}
+                            className="form-control"
+                            onChange={(e) =>
+                              setCommissionValue(e.target.value)
+                            }
+                            placeholder="Commission Value"
+                          ></input>
+                        </div>
+                        <div className="col-sm-3">
+                          <label>
+                            Commission  Apply On<span style={{ color: "red" }}>*</span>
                           </label>
                           <select
                             className="form-select"
@@ -580,13 +580,13 @@ const Markup = () => {
                             })}
                           </select>
                         </div>
-                       
+
                       </div>
                       <div className="row mb-3">
                         <div className="col-sm-3">
                           <label>
                             Origin Airport
-                            
+
                           </label>
                           <MultiSelectComponent
                             id="mtselement"
@@ -595,7 +595,7 @@ const Markup = () => {
                             fields={fieldCodes}
                             placeholder="Select Origin Airport"
                             onChange={(e) => setOriginAirportCode(e.target.value)}
-                            
+
                           />
                           {/* <select
                             className="form-select"
@@ -616,7 +616,7 @@ const Markup = () => {
                         <div className="col-sm-3">
                           <label>
                             Destination Airport
-                            
+
                           </label>
                           <MultiSelectComponent
                             id="mtselement"
@@ -625,7 +625,7 @@ const Markup = () => {
                             fields={fieldCodes}
                             placeholder="Select Destination Airport"
                             onChange={(e) => setDestinationAirportCode(e.target.value)}
-                            
+
                           />
                           {/* <select
                             className="form-select"
@@ -701,8 +701,8 @@ const Markup = () => {
                     </div>
 
                     <div className="tab-pane fade" id="existing">
-                      <h4 className="mt-2">Existing</h4>
-                      <hr />
+                      <h4 className="mt-4">Existing</h4>
+                      <hr className="mb-3"/>
                       {/* <button onClick={() => handleCreateItem()} type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#accountModal">
                                             Add
                                         </button> */}
@@ -767,7 +767,7 @@ const Markup = () => {
                                 <div className="col-sm-3">
                                   <label>
                                     Airline
-                                    
+
                                   </label>
                                   <MultiSelectComponent
                                     id="mtselement"
@@ -783,7 +783,7 @@ const Markup = () => {
                                 <div className="col-sm-3">
                                   <label>
                                     Origin Country
-                                    
+
                                   </label>
                                   <MultiSelectComponent
                                     id="mtselement"
@@ -799,7 +799,7 @@ const Markup = () => {
                                 <div className="col-sm-3">
                                   <label>
                                     Destination Country
-                                    
+
                                   </label>
                                   <MultiSelectComponent
                                     id="mtselement"
@@ -815,7 +815,7 @@ const Markup = () => {
                                 <div className="col-sm-3">
                                   <label>
                                     Valid From
-                                    
+
                                   </label>
                                   <input
                                     type={"date"}
@@ -831,7 +831,7 @@ const Markup = () => {
                                 <div className="col-sm-3">
                                   <label>
                                     Valid To
-                                    
+
                                   </label>
                                   <input
                                     type={"date"}
@@ -917,7 +917,7 @@ const Markup = () => {
                                 <div className="col-sm-3">
                                   <label>
                                     Markup Type
-                                    
+
                                   </label>
                                   <select
                                     className="form-select"
@@ -939,7 +939,7 @@ const Markup = () => {
                                 <div className="col-sm-3">
                                   <label>
                                     Markup Value
-                                    
+
                                   </label>
                                   <input
                                     type={"number"}
@@ -953,7 +953,7 @@ const Markup = () => {
                                 </div>
                                 <div className="col-sm-3">
                                   <label>
-                                  Markup  Apply On
+                                    Markup  Apply On
                                     <span style={{ color: "red" }}>*</span>
                                   </label>
                                   <select
@@ -976,7 +976,7 @@ const Markup = () => {
                                 <div className="col-sm-3">
                                   <label>
                                     Commission Type
-                                    
+
                                   </label>
                                   <select
                                     className="form-select"
@@ -997,8 +997,8 @@ const Markup = () => {
                                 </div>
                                 <div className="col-sm-3">
                                   <label>
-                                  Commission Value
-                                    
+                                    Commission Value
+
                                   </label>
                                   <input
                                     type={"number"}
@@ -1012,7 +1012,7 @@ const Markup = () => {
                                 </div>
                                 <div className="col-sm-3">
                                   <label>
-                                  Commission  Apply On
+                                    Commission  Apply On
                                     <span style={{ color: "red" }}>*</span>
                                   </label>
                                   <select
@@ -1033,42 +1033,42 @@ const Markup = () => {
                                   </select>
                                 </div>
                                 <div className="col-sm-3">
-                          <label>
-                            Apply For<span style={{ color: "red" }}>*</span>
-                          </label>
-                          <select
-                            className="form-select"
-                            value={null}
-                            placeholder="Apply On"
-                            onChange={(e) => setApplyForId(e.target.value)}
-                          >
-                            <option key={0}>Select Apply For</option>
-                            {applyforList.map((item, index) => {
-                              return (
-                                <option key={index} value={item.id}>
-                                  {item.name}
-                                </option>
-                              );
-                            })}
-                          </select>
-                        </div>
+                                  <label>
+                                    Apply For<span style={{ color: "red" }}>*</span>
+                                  </label>
+                                  <select
+                                    className="form-select"
+                                    value={null}
+                                    placeholder="Apply On"
+                                    onChange={(e) => setApplyForId(e.target.value)}
+                                  >
+                                    <option key={0}>Select Apply For</option>
+                                    {applyforList.map((item, index) => {
+                                      return (
+                                        <option key={index} value={item.id}>
+                                          {item.name}
+                                        </option>
+                                      );
+                                    })}
+                                  </select>
+                                </div>
                               </div>
-                              
+
                               <div className="row mb-3">
                                 <div className="col-sm-3">
                                   <label>
                                     Origin Airport
-                                    
+
                                   </label>
                                   <MultiSelectComponent
-                            id="mtselement"
-                            value={originAirportCode}
-                            dataSource={airportList}
-                            fields={fieldCodes}
-                            placeholder="Select Origin Airport"
-                            onChange={(e) => setOriginAirportCode(e.target.value)}
-                            
-                          />
+                                    id="mtselement"
+                                    value={originAirportCode}
+                                    dataSource={airportList}
+                                    fields={fieldCodes}
+                                    placeholder="Select Origin Airport"
+                                    onChange={(e) => setOriginAirportCode(e.target.value)}
+
+                                  />
                                   {/* <select
                                     className="form-select"
                                     value={originAirportCode}
@@ -1089,17 +1089,17 @@ const Markup = () => {
                                 <div className="col-sm-3">
                                   <label>
                                     Destination Airport
-                                    
+
                                   </label>
                                   <MultiSelectComponent
-                            id="mtselement"
-                            value={destinationAirportCode}
-                            dataSource={airportList}
-                            fields={fieldCodes}
-                            placeholder="Select Destination Airport"
-                            onChange={(e) => setDestinationAirportCode(e.target.value)}
-                            
-                          />
+                                    id="mtselement"
+                                    value={destinationAirportCode}
+                                    dataSource={airportList}
+                                    fields={fieldCodes}
+                                    placeholder="Select Destination Airport"
+                                    onChange={(e) => setDestinationAirportCode(e.target.value)}
+
+                                  />
                                   {/* <select
                                     className="form-select"
                                     value={destinationAirportCode}
@@ -1120,7 +1120,7 @@ const Markup = () => {
                                 <div className="col-sm-3">
                                   <label>
                                     Fare Type
-                                    
+
                                   </label>
                                   <select
                                     className="form-select"
@@ -1142,7 +1142,7 @@ const Markup = () => {
                                 <div className="col-sm-3">
                                   <label>
                                     Trip Type
-                                    
+
                                   </label>
                                   <select
                                     className="form-select"
@@ -1203,7 +1203,7 @@ const Markup = () => {
                           {agentMarkupList.map((item, index) => {
                             return (
                               <tr key={index}>
-                                <td>{((currentPageNumber-1)*pageSize)+ index+1}</td>
+                                <td>{((currentPageNumber - 1) * pageSize) + index + 1}</td>
                                 <td>
                                   <a
                                     href="#"
@@ -1226,10 +1226,10 @@ const Markup = () => {
                                   {
                                     console.log(item.validFrom)
                                   }
-                                  {item.validFrom!==null?moment(item.validFrom).format("yyyy-MM-DD"):""}
+                                  {item.validFrom !== null ? moment(item.validFrom).format("yyyy-MM-DD") : ""}
                                 </td>
                                 <td>
-                                  {item.validFrom!==null?moment(item.validTo).format("yyyy-MM-DD"):""}
+                                  {item.validFrom !== null ? moment(item.validTo).format("yyyy-MM-DD") : ""}
                                 </td>
                                 <td>
                                   {moment(item.createdDate).format(
@@ -1242,24 +1242,24 @@ const Markup = () => {
                         </tbody>
                       </table>
                       <ReactPaginate
-                          previousLabel={"previous"}
-                          nextLabel={"next"}
-                          breakLabel={"..."}
-                          pageCount={pageCount}
-                          marginPagesDisplayed={2}
-                          pageRangeDisplayed={3}
-                          onPageChange={handlePageClick}
-                          containerClassName={"pagination justify-content-center"}
-                          pageClassName={"page-item"}
-                          pageLinkClassName={"page-link"}
-                          previousClassName={"page-item"}
-                          previousLinkClassName={"page-link"}
-                          nextClassName={"page-item"}
-                          nextLinkClassName={"page-link"}
-                          breakClassName={"page-item"}
-                          breakLinkClassName={"page-link"}
-                          activeClassName={"active"}
-                        />
+                        previousLabel={"previous"}
+                        nextLabel={"next"}
+                        breakLabel={"..."}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={3}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination justify-content-center"}
+                        pageClassName={"page-item"}
+                        pageLinkClassName={"page-link"}
+                        previousClassName={"page-item"}
+                        previousLinkClassName={"page-link"}
+                        nextClassName={"page-item"}
+                        nextLinkClassName={"page-link"}
+                        breakClassName={"page-item"}
+                        breakLinkClassName={"page-link"}
+                        activeClassName={"active"}
+                      />
                     </div>
                   </div>
                 </div>

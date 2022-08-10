@@ -52,7 +52,7 @@ const CreditNotes = () => {
                     <table className="table table-bordered align-middle table-striped text-center">
                       <thead>
                         <tr>
-                            <th>SL</th>
+                          <th>SL</th>
                           <th>Reference</th>
                           <th>PNR</th>
                           <th>Amount</th>
@@ -85,7 +85,7 @@ const CreditNotes = () => {
                                           </a>
                               </td>
                               <td>{item.pnr}</td>
-                              <td>{item.refundAmount}</td>
+                              <td>{item.currencyName} {item.refundAmount}</td>
                               <td>{moment(item.adjustmentDate).format('DD-MM-yyyy')}</td>
                               <td>{moment(item.createdDate).format('DD-MM-yyyy')}</td>
                               <td>{item.status}</td>

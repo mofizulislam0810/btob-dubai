@@ -1688,7 +1688,7 @@ const ShowAllFlightPage = () => {
                                       className="form-label text-white"
                                     >
                                       Depart From{" "}
-                                      <span className="text-danger fw-bold">
+                                      <span className="text-white fw-bold">
                                         *
                                       </span>
                                     </label>
@@ -1709,7 +1709,7 @@ const ShowAllFlightPage = () => {
                                       className="form-label text-white"
                                     >
                                       Going To{" "}
-                                      <span className="text-danger fw-bold">
+                                      <span className="text-white fw-bold">
                                         *
                                       </span>
                                     </label>
@@ -1731,7 +1731,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Departing{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
@@ -1745,7 +1745,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Returning{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
@@ -1776,7 +1776,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Depart From{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
@@ -1797,7 +1797,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Going To{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
@@ -1819,7 +1819,7 @@ const ShowAllFlightPage = () => {
                                               className="form-label text-white"
                                             >
                                               Departing{" "}
-                                              <span className="text-danger fw-bold">
+                                              <span className="text-white fw-bold">
                                                 *
                                               </span>
                                             </label>
@@ -1848,7 +1848,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Depart From{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
@@ -1868,7 +1868,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Going To{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
@@ -1889,7 +1889,7 @@ const ShowAllFlightPage = () => {
                                               className="form-label text-white"
                                             >
                                               Departing{" "}
-                                              <span className="text-danger fw-bold">
+                                              <span className="text-white fw-bold">
                                                 *
                                               </span>
                                             </label>
@@ -1918,7 +1918,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Depart From{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
@@ -1938,7 +1938,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Going To{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
@@ -1959,7 +1959,7 @@ const ShowAllFlightPage = () => {
                                               className="form-label text-white"
                                             >
                                               Departing{" "}
-                                              <span className="text-danger fw-bold">
+                                              <span className="text-white fw-bold">
                                                 *
                                               </span>
                                             </label>
@@ -1988,7 +1988,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Depart From{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
@@ -2008,7 +2008,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Going To{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
@@ -2029,7 +2029,7 @@ const ShowAllFlightPage = () => {
                                               className="form-label text-white"
                                             >
                                               Departing{" "}
-                                              <span className="text-danger fw-bold">
+                                              <span className="text-white fw-bold">
                                                 *
                                               </span>
                                             </label>
@@ -2058,7 +2058,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Depart From{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
@@ -2078,7 +2078,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Going To{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
@@ -2099,7 +2099,7 @@ const ShowAllFlightPage = () => {
                                               className="form-label text-white"
                                             >
                                               Departing{" "}
-                                              <span className="text-danger fw-bold">
+                                              <span className="text-white fw-bold">
                                                 *
                                               </span>
                                             </label>
@@ -2120,7 +2120,7 @@ const ShowAllFlightPage = () => {
                                     <div className="my-2 d-flex justify-content-center">
                                       <button
                                       type="button"
-                                        className="btn btn-primary rounded-pill"
+                                        className="btn button-color rounded-pill"
                                         id="btnp-1"
                                         onClick={() => handleFlightOptionP()}
                                       >
@@ -2129,7 +2129,7 @@ const ShowAllFlightPage = () => {
                                       &nbsp;
                                       <button
                                       type="button"
-                                        className="btn btn-primary rounded-pill"
+                                        className="btn button-color rounded-pill"
                                         id="btnm-1"
                                         style={{ display: "none" }}
                                         onClick={() => handleFlightOptionM()}

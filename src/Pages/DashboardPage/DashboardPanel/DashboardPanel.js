@@ -248,7 +248,7 @@ const DashboardPanel = () => {
           <div className="row hero">
             <div className="col-md-6">
 
-              <div id="calendar2"></div>
+              {/* <div id="calendar2"></div> */}
             </div>
 
             <div className="col-md-6">

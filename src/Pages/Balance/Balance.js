@@ -478,7 +478,7 @@ const Balance = () => {
                 </div>
                 <div className="card-body">
                   <div className="m-4">
-                    <ul className="nav nav-tabs" id="balanceTab">
+                    <ul className="nav nav-tabs mb-3" id="balanceTab">
                       <li className="nav-item">
                         <a
                           href="#entry"
@@ -509,7 +509,7 @@ const Balance = () => {
                           Bank Accounts
                         </a>
                       </li>
-                      <li className='nav-item' style={{ marginLeft: "52%" }}>
+                      <li className='nav-item text-end' style={{ marginLeft: "62.3%" }}>
                         <a
                           href="javascript:void(0)"
                           className="nav-link"
@@ -522,8 +522,8 @@ const Balance = () => {
                     </ul>
                     <div className="tab-content">
                       <div className="tab-pane fade show active" id="entry">
-                        <h4 className="mt-2">Entry</h4>
-                        <hr />
+                        <h4>Entry</h4>
+                        <hr className="my-3"/>
                         <div className="row">
                           <div className="col-sm-3">
                             <label>
@@ -1146,8 +1146,8 @@ const Balance = () => {
                       </div>
 
                       <div className="tab-pane fade" id="transaction">
-                        <h4 className="mt-2">Transaction</h4>
-                        <hr />
+                        <h4>Transaction</h4>
+                        <hr  className="my-3"/>
                         <table
                           className="table table-striped"
                           style={{ width: "100%" }}
@@ -1199,7 +1199,7 @@ const Balance = () => {
                                                 ? "Approved"
                                                 : ""}
                                       </td>
-                                      <td>{item.amount}</td>
+                                      <td>{item.currencyName} {item.amount}</td>
                                     </tr>
                                   );
                                 }) : <></>}
@@ -1226,8 +1226,8 @@ const Balance = () => {
                         />
                       </div>
                       <div className="tab-pane fade" id="bankaccounts">
-                        <h4 className="mt-2">Bank Accounts</h4>
-                        <hr />
+                        <h4>Bank Accounts</h4>
+                        <hr  className="my-3"/>
                         <button
                           onClick={() => handleCreateItem()}
                           type="button"

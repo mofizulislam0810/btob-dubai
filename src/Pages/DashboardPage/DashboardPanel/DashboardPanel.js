@@ -15,7 +15,7 @@ const DashboardPanel = () => {
     var date = new Date(obj.date);
     var timestamp = +date;
     return {
-      name: obj.name,
+      name: obj.id,
       date: timestamp,
     };
   });

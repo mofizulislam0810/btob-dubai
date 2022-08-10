@@ -42,8 +42,8 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
               <div className="card-body">
                 <div className="tab-content">
                   <div className="tab-pane fade show active" id="tp1">
-                    <h4 className="mt-2">Company Bank Account</h4>
-                    <hr />
+                    <h4 >Company Bank Account</h4>
+                    <hr className="my-3"/>
                     <table className="table table-bordered align-middle table-striped text-center">
                       <thead>
                         <tr>

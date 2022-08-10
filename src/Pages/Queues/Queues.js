@@ -265,21 +265,21 @@ const Queues = () => {
                 <div className="m-4">
                   <div className="tab-content">
                     <div className="tab-pane fade show active" id="tp1">
-                      <h4 className="mt-2">Flight History</h4>
-                      <hr />
+                      <h4>Flight History</h4>
+                      <hr className="my-3"/>
                       <div
                         className="row"
                         style={{ width: "100%", paddingBottom: "5px" }}
                       >
-                        <div className="col-sm-12 text-left mt-3 mb-3">
+                        <div className="col-sm-12 text-left pb-2">
                           <ul id="menu-standard">
                             <li id="menu-item">
                               <a
                                 href="javascript:void(0)"
                                 className={
                                   idxD === 0
-                                    ? "btn btn-danger"
-                                    : "btn btn-default"
+                                    ? "btn button-color text-white rounded"
+                                    : "btn btn-default rounded"
                                 }
                                 onClick={() => onStatusChange(0)}
                               >
@@ -291,8 +291,8 @@ const Queues = () => {
                                 href="javascript:void(0)"
                                 className={
                                   idxD === 6
-                                    ? "btn btn-danger"
-                                    : "btn btn-default"
+                                    ? "btn button-color text-white rounded"
+                                    : "btn btn-default rounded"
                                 }
                                 onClick={() => onStatusChange(6)}
                               >
@@ -304,8 +304,8 @@ const Queues = () => {
                                 href="javascript:void(0)"
                                 className={
                                   idxD === 3
-                                    ? "btn btn-danger"
-                                    : "btn btn-default"
+                                    ? "btn button-color text-white rounded"
+                                    : "btn btn-default rounded"
                                 }
                                 onClick={() => onStatusChange(3)}
                               >
@@ -317,8 +317,8 @@ const Queues = () => {
                                 href="javascript:void(0)"
                                 className={
                                   idxD === 5
-                                    ? "btn btn-danger"
-                                    : "btn btn-default"
+                                    ? "btn button-color text-white rounded"
+                                    : "btn btn-default rounded"
                                 }
                                 onClick={() => onStatusChange(5)}
                               >
@@ -330,8 +330,8 @@ const Queues = () => {
                                 href="javascript:void(0)"
                                 className={
                                   idxD === 2
-                                    ? "btn btn-danger"
-                                    : "btn btn-default"
+                                    ? "btn button-color text-white rounded"
+                                    : "btn btn-default rounded"
                                 }
                                 onClick={() => onStatusChange(2)}
                               >
@@ -343,8 +343,8 @@ const Queues = () => {
                                 href="javascript:void(0)"
                                 className={
                                   idxD === 8
-                                    ? "btn btn-danger"
-                                    : "btn btn-default"
+                                    ? "btn button-color text-white rounded"
+                                    : "btn btn-default rounded"
                                 }
                                 onClick={() => onStatusChange(7)}
                               >
@@ -357,8 +357,8 @@ const Queues = () => {
                                 href="javascript:void(0)"
                                 className={
                                   idxD === 9
-                                    ? "btn btn-danger"
-                                    : "btn btn-default"
+                                    ? "btn button-color text-white rounded"
+                                    : "btn btn-default rounded"
                                 }
                                 data-bs-toggle="collapse"
                                 data-bs-target="#f1Collapse"
@@ -427,14 +427,14 @@ const Queues = () => {
                               >
                                 <button
                                   type="button"
-                                  class="btn button-color fw-bold text-white ms-4"
+                                  class="btn button-color fw-bold text-white ms-4 rounded"
                                   onClick={() => handleGetList(statusId)}
                                 >
                                   Search
                                 </button>
                                 <button
                                   type="button"
-                                  class="btn button-color fw-bold text-white ms-4"
+                                  class="btn button-color fw-bold text-white ms-4 rounded"
                                   onClick={() => handleClearTicketing(statusId)}
                                 >
                                   Clear

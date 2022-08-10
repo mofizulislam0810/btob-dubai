@@ -1,6 +1,6 @@
-const baseURL='http://localhost:7236/';
+// const baseURL='http://localhost:7236/';
 // const baseURL='http://52.221.202.198:83/';
-// const baseURL='http://52.221.202.198:86/';
+const baseURL='http://52.221.202.198:86/';
 const baseApiURL =baseURL+ 'api/';
 const tokenData = JSON.parse(sessionStorage.getItem('token'));
 let headerToken = { headers: { Authorization: '' } };

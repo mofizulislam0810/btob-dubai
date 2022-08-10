@@ -8,10 +8,11 @@ import $ from "jquery";
 import axios from "axios";
 import { environment } from "../SharePages/Utility/environment";
 import moment from "moment";
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 import Loading from "../Loading/Loading";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Box, Button, Text } from "@chakra-ui/react";
 
 const Queues = () => {
   const [loading, setLoading] = useState(false);
@@ -45,21 +46,21 @@ const Queues = () => {
       statusId === 1
         ? "Hold"
         : statusId === 2
-          ? "Pending"
-          : statusId === 3
-            ? "Booked"
-            : statusId === 4
-              ? "Failed"
-              : statusId === 5
-                ? "Cancelled"
-                : statusId === 6
-                  ? "Issued"
-                  : statusId === 7
-                    ? "Ordered"
-                    : "";
+        ? "Pending"
+        : statusId === 3
+        ? "Booked"
+        : statusId === 4
+        ? "Failed"
+        : statusId === 5
+        ? "Cancelled"
+        : statusId === 6
+        ? "Issued"
+        : statusId === 7
+        ? "Ordered"
+        : "";
     const getTicketingList = async () => {
       let sendObj = {
-        agentId: sessionStorage.getItem('agentId') ?? 0,
+        agentId: sessionStorage.getItem("agentId") ?? 0,
         uniqueTransID: uniqueTransID,
         fromDate: fromDate,
         toDate: toDate,
@@ -67,7 +68,8 @@ const Queues = () => {
         status: status,
       };
       const response = await axios.post(
-        environment.getTicketingList + `?pageNumber=${currentPage}&pageSize=${pageSize}`,
+        environment.getTicketingList +
+          `?pageNumber=${currentPage}&pageSize=${pageSize}`,
         sendObj,
         environment.headerToken
       );
@@ -98,7 +100,7 @@ const Queues = () => {
   };
 
   const handleDateChange = (status, utid, pnr, ticketno) => {
-        if (status === "Issued") {
+    if (status === "Issued") {
       window.open(
         "/support?typeid=2&subjectid=2&utid=" +
           utid +
@@ -125,21 +127,21 @@ const Queues = () => {
     if (status === "Issued") {
       window.open(
         "/support?typeid=2&subjectid=0&utid=" +
-        utid +
-        "&pnr=" +
-        pnr +
-        "&ticketno=" +
-        (ticketno == undefined ? "" : ticketno),
+          utid +
+          "&pnr=" +
+          pnr +
+          "&ticketno=" +
+          (ticketno == undefined ? "" : ticketno),
         "_blank"
       );
     } else {
       window.open(
         "/support?typeid=1&subjectid=0&utid=" +
-        utid +
-        "&pnr=" +
-        pnr +
-        "&ticketno=" +
-        (ticketno == undefined ? "" : ticketno),
+          utid +
+          "&pnr=" +
+          pnr +
+          "&ticketno=" +
+          (ticketno == undefined ? "" : ticketno),
         "_blank"
       );
     }
@@ -149,21 +151,21 @@ const Queues = () => {
     if (status === "Issued") {
       window.open(
         "/support?typeid=2&subjectid=1&utid=" +
-        utid +
-        "&pnr=" +
-        pnr +
-        "&ticketno=" +
-        ticketno,
+          utid +
+          "&pnr=" +
+          pnr +
+          "&ticketno=" +
+          ticketno,
         "_blank"
       );
     } else {
       window.open(
         "/support?typeid=1&subjectid=1&utid=" +
-        utid +
-        "&pnr=" +
-        pnr +
-        "&ticketno=" +
-        ticketno,
+          utid +
+          "&pnr=" +
+          pnr +
+          "&ticketno=" +
+          ticketno,
         "_blank"
       );
     }
@@ -173,11 +175,11 @@ const Queues = () => {
     if (status === "Issued") {
       window.open(
         "/support?typeid=2&subjectid=5&utid=" +
-        utid +
-        "&pnr=" +
-        pnr +
-        "&ticketno=" +
-        ticketno,
+          utid +
+          "&pnr=" +
+          pnr +
+          "&ticketno=" +
+          ticketno,
         "_blank"
       );
     }
@@ -201,23 +203,25 @@ const Queues = () => {
     // navigate("/voucher?utid="+utid,'_blank');
   };
   const handleRefundReq = (utid) => {
-    var result = window.confirm('Are you sure to request refund');
+    var result = window.confirm("Are you sure to request refund");
     if (result) {
-      console.log(environment.headerToken)
+      console.log(environment.headerToken);
       const refundReq = async () => {
-        await axios.put(
-          environment.ticketRefundRequest + "/" + utid, null,
-          environment.headerToken
-        ).then((res) => {
-          if (res.data > 0) {
-            toast.success("Thanks! Refund successfully requested..");
-          }
-        });
-      }
+        await axios
+          .put(
+            environment.ticketRefundRequest + "/" + utid,
+            null,
+            environment.headerToken
+          )
+          .then((res) => {
+            if (res.data > 0) {
+              toast.success("Thanks! Refund successfully requested..");
+            }
+          });
+      };
       refundReq();
     }
-
-  }
+  };
   useEffect(() => {
     handleGetList(statusId, currentPageNumber);
     // $(document).ready(function () {
@@ -267,7 +271,7 @@ const Queues = () => {
                         className="row"
                         style={{ width: "100%", paddingBottom: "5px" }}
                       >
-                        <div className="col-sm-12 text-left">
+                        <div className="col-sm-12 text-left mt-3 mb-3">
                           <ul id="menu-standard">
                             <li id="menu-item">
                               <a
@@ -338,7 +342,8 @@ const Queues = () => {
                               <a
                                 href="javascript:void(0)"
                                 className={
-                                  idxD === 8 ? "btn btn-danger"
+                                  idxD === 8
+                                    ? "btn btn-danger"
                                     : "btn btn-default"
                                 }
                                 onClick={() => onStatusChange(7)}
@@ -386,7 +391,9 @@ const Queues = () => {
                                 <input
                                   type={"text"}
                                   value={uniqueTransID}
-                                  onChange={(e) => setUniqueTransID(e.target.value)}
+                                  onChange={(e) =>
+                                    setUniqueTransID(e.target.value)
+                                  }
                                   className="form-control"
                                   placeholder="Booking ID"
                                 ></input>
@@ -396,9 +403,7 @@ const Queues = () => {
                                 <input
                                   type={"date"}
                                   value={fromDate}
-                                  onChange={(e) =>
-                                    setFromDate(e.target.value)
-                                  }
+                                  onChange={(e) => setFromDate(e.target.value)}
                                   className="form-control"
                                   placeholder="From Date"
                                 ></input>
@@ -408,9 +413,7 @@ const Queues = () => {
                                 <input
                                   type={"date"}
                                   value={toDate}
-                                  onChange={(e) =>
-                                    setToDate(e.target.value)
-                                  }
+                                  onChange={(e) => setToDate(e.target.value)}
                                   className="form-control"
                                   placeholder="To Date"
                                 ></input>
@@ -441,7 +444,9 @@ const Queues = () => {
                           </div>
                         </div>
                       </div>
-                      <div style={{ overflowX: "scroll" }}>
+                      <div
+                        style={{ overflowX: "scroll", marginBottom: "16px" }}
+                      >
                         <table
                           className="table table-bordered"
                           style={{ width: "100%", fontSize: "13px" }}
@@ -458,7 +463,7 @@ const Queues = () => {
                               <th>PNR</th>
                               <th>Total Price</th>
                               <th>Status</th>
-                              <th >Action</th>
+                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -466,7 +471,11 @@ const Queues = () => {
                               ticketingList.map((item, index) => {
                                 return (
                                   <tr key={index}>
-                                    <td>{(currentPageNumber - 1) * pageSize + index + 1}</td>
+                                    <td>
+                                      {(currentPageNumber - 1) * pageSize +
+                                        index +
+                                        1}
+                                    </td>
                                     <td>{item.leadPaxName}</td>
                                     <td>
                                       {moment(item.bookingDate).format(
@@ -474,66 +483,288 @@ const Queues = () => {
                                       )}
                                     </td>
                                     <td>
-                                      {
-                                        item.issueDate != null ?
-                                          moment(item.issueDate).format(
-                                            "DD-MM-YYYY hh:mm:ss A"
-                                          ) : <></>}
+                                      {item.issueDate != null ? (
+                                        moment(item.issueDate).format(
+                                          "DD-MM-YYYY hh:mm:ss A"
+                                        )
+                                      ) : (
+                                        <></>
+                                      )}
                                     </td>
                                     <td>
-                                      {
-                                        item.departure != null ?
-                                          moment(item.departure).format(
-                                            "DD-MM-YYYY hh:mm:ss A"
-                                          ) : <></>}
+                                      {item.departure != null ? (
+                                        moment(item.departure).format(
+                                          "DD-MM-YYYY hh:mm:ss A"
+                                        )
+                                      ) : (
+                                        <></>
+                                      )}
                                     </td>
                                     <td>
                                       {item.origin === "null"
                                         ? ""
                                         : item.origin +
-                                        (item.destination === ""
-                                          ? ""
-                                          : "/" + item.destination)}
+                                          (item.destination === ""
+                                            ? ""
+                                            : "/" + item.destination)}
                                     </td>
-                                    <td><a href="javascript:void(0)" onClick={() =>
-                                                handleViewTicket(
-                                                  item.uniqueTransID
-                                                )
-                                              }>{item.uniqueTransID}</a></td>
                                     <td>
-                                    <a href="javascript:void(0)" onClick={() =>
-                                                handleViewTicket(
-                                                  item.uniqueTransID
-                                                )
-                                              }>{item.pnr}</a></td>
+                                      <a
+                                        href="javascript:void(0)"
+                                        onClick={() =>
+                                          handleViewTicket(item.uniqueTransID)
+                                        }
+                                      >
+                                        {item.uniqueTransID}
+                                      </a>
+                                    </td>
+                                    <td>
+                                      <a
+                                        href="javascript:void(0)"
+                                        onClick={() =>
+                                          handleViewTicket(item.uniqueTransID)
+                                        }
+                                      >
+                                        {item.pnr}
+                                      </a>
+                                    </td>
                                     <td>{item.ticketingPrice}</td>
-                                    <td>{item.status} <br /> {item.refundStatus != null ? "Refund " + item.refundStatus : ""}</td>
+                                    <td>
+                                      {item.status} <br />{" "}
+                                      {item.refundStatus != null
+                                        ? "Refund " + item.refundStatus
+                                        : ""}
+                                    </td>
                                     <td className="text-left">
-                                      {
-                                        item.status === "Booked" ? (
-                                          <>
-                                            <a
-                                              style={{
-                                                borderRadius: "50%",
-                                                fontSize: "12px"
-                                              }}
-                                              href="javascript:void(0)"
-                                              className="btn btn-primary fw-bold"
-                                              title="View Booking"
-                                              onClick={() =>
-                                                handleBookedView(
-                                                  item.uniqueTransID
-                                                )
-                                              }
+                                      {item.status === "Booked" ? (
+                                        <>
+                                          <a
+                                            // style={{
+                                            //   borderRadius: "50%",
+                                            //   fontSize: "12px",
+                                            // }}
+                                            href="javascript:void(0)"
+                                            // className="btn btn-primary fw-bold"
+                                            title="View Booking"
+                                            onClick={() =>
+                                              handleBookedView(
+                                                item.uniqueTransID
+                                              )
+                                            }
+                                          >
+                                            <Button
+                                              border="2px solid"
+                                              colorScheme="messenger"
+                                              variant="outline"
+                                              size="sm"
+                                              borderRadius="16px"
                                             >
                                               VB
-                                            </a>
-                                            &nbsp;{" "}
+                                            </Button>
+                                          </a>
+                                          &nbsp;{" "}
+                                          <a
+                                            // style={{
+                                            //   borderRadius: "50%",
+                                            //   fontSize: "12px",
+                                            // }}
+                                            href="javascript:void(0)"
+                                            // className="btn btn-primary fw-bold"
+                                            title="Booking Cancel"
+                                            onClick={() =>
+                                              handleCancel(
+                                                item.status,
+                                                item.uniqueTransID,
+                                                item.pnr,
+                                                item.ticketNumbers
+                                              )
+                                            }
+                                          >
+                                            <Button
+                                              border="2px solid"
+                                              colorScheme="messenger"
+                                              variant="outline"
+                                              size="sm"
+                                              borderRadius="16px"
+                                            >
+                                              BS
+                                            </Button>
+                                          </a>
+                                          &nbsp;{" "}
+                                          <a
+                                            // style={{
+                                            //   borderRadius: "50%",
+                                            //   fontSize: "12px",
+                                            // }}
+                                            href="javascript:void(0)"
+                                            // className="btn btn-primary fw-bold"
+                                            title="Raise Support"
+                                            onClick={() =>
+                                              handleRaiseSupport(
+                                                item.status,
+                                                item.uniqueTransID,
+                                                item.pnr,
+                                                item.ticketNumbers
+                                              )
+                                            }
+                                          >
+                                            <Button
+                                              border="2px solid"
+                                              colorScheme="messenger"
+                                              variant="outline"
+                                              size="sm"
+                                              borderRadius="16px"
+                                            >
+                                              RS
+                                            </Button>
+                                          </a>
+                                        </>
+                                      ) : item.status === "Issued" ? (
+                                        <>
+                                          <a
+                                            // style={{
+                                            //   borderRadius: "50%",
+                                            //   fontSize: "12px",
+                                            // }}
+                                            href="javascript:void(0)"
+                                            // className="btn btn-primary fw-bold"
+                                            title="View Ticket"
+                                            onClick={() =>
+                                              handleViewTicket(
+                                                item.uniqueTransID
+                                              )
+                                            }
+                                          >
+                                            <Button
+                                              border="2px solid"
+                                              colorScheme="messenger"
+                                              variant="outline"
+                                              size="sm"
+                                              borderRadius="16px"
+                                            >
+                                              VT
+                                            </Button>
+                                          </a>
+                                          &nbsp;{" "}
+                                          <a
+                                            // style={{
+                                            //   borderRadius: "50%",
+                                            //   fontSize: "12px",
+                                            // }}
+                                            href="javascript:void(0)"
+                                            // className="btn btn-primary fw-bold"
+                                            title="Invoice"
+                                            onClick={() =>
+                                              handleViewInvoice(
+                                                item.uniqueTransID
+                                              )
+                                            }
+                                          >
+                                            <Button
+                                              border="2px solid"
+                                              colorScheme="messenger"
+                                              variant="outline"
+                                              size="sm"
+                                              borderRadius="16px"
+                                            >
+                                              IN
+                                            </Button>
+                                          </a>
+                                          &nbsp;{" "}
+                                          <a
+                                            // style={{
+                                            //   borderRadius: "50%",
+                                            //   fontSize: "12px",
+                                            // }}
+                                            href="javascript:void(0)"
+                                            // className="btn btn-primary fw-bold"
+                                            title="Voucher"
+                                            onClick={() =>
+                                              handleViewVoucher(
+                                                item.uniqueTransID
+                                              )
+                                            }
+                                          >
+                                            <Button
+                                              border="2px solid"
+                                              colorScheme="messenger"
+                                              variant="outline"
+                                              size="sm"
+                                              borderRadius="16px"
+                                            >
+                                              VO
+                                            </Button>
+                                          </a>
+                                          &nbsp;{" "}
+                                          <a
+                                            // style={{
+                                            //   borderRadius: "50%",
+                                            //   fontSize: "12px",
+                                            // }}
+                                            href="javascript:void(0)"
+                                            // className="btn btn-primary fw-bold"
+                                            title="Date Change"
+                                            onClick={() =>
+                                              handleDateChange(
+                                                item.status,
+                                                item.uniqueTransID,
+                                                item.pnr,
+                                                item.ticketNumbers
+                                              )
+                                            }
+                                          >
+                                            <Button
+                                              border="2px solid"
+                                              colorScheme="messenger"
+                                              variant="outline"
+                                              size="sm"
+                                              borderRadius="16px"
+                                            >
+                                              DC
+                                            </Button>
+                                          </a>
+                                          &nbsp;{" "}
+                                          <a
+                                            // style={{
+                                            //   borderRadius: "50%",
+                                            //   fontSize: "12px",
+                                            // }}
+                                            href="javascript:void(0)"
+                                            // className="btn btn-primary fw-bold"
+                                            title="Raise Support"
+                                            onClick={() =>
+                                              handleRaiseSupport(
+                                                item.status,
+                                                item.uniqueTransID,
+                                                item.pnr,
+                                                item.ticketNumbers
+                                              )
+                                            }
+                                          >
+                                            <Button
+                                              border="2px solid"
+                                              colorScheme="messenger"
+                                              variant="outline"
+                                              size="sm"
+                                              borderRadius="16px"
+                                            >
+                                              RS
+                                            </Button>
+                                          </a>
+                                          &nbsp;
+                                          {moment(
+                                            moment(item.issueDate).format(
+                                              "YYYY-MM-DD"
+                                            ) + " 12:00:00 PM"
+                                          ) > moment() ? (
                                             <a
-                                              style={{ borderRadius: "50%", fontSize: "12px" }}
+                                              // style={{
+                                              //   borderRadius: "50%",
+                                              //   fontSize: "12px",
+                                              // }}
                                               href="javascript:void(0)"
-                                              className="btn btn-primary fw-bold"
-                                              title="Booking Cancel"
+                                              // className="btn btn-primary fw-bold"
+                                              title="Ticketing Cancel"
                                               onClick={() =>
                                                 handleCancel(
                                                   item.status,
@@ -543,177 +774,79 @@ const Queues = () => {
                                                 )
                                               }
                                             >
-                                              BC
+                                              <Button
+                                                border="2px solid"
+                                                colorScheme="messenger"
+                                                variant="outline"
+                                                size="sm"
+                                                borderRadius="16px"
+                                              >
+                                                TC
+                                              </Button>
                                             </a>
-
-                                            &nbsp;{" "}
-                                            <a
-                                              style={{ borderRadius: "50%", fontSize: "12px" }}
-                                              href="javascript:void(0)"
-                                              className="btn btn-primary fw-bold"
-                                              title="Raise Support"
-                                              onClick={() =>
-                                                handleRaiseSupport(
-                                                  item.status,
-                                                  item.uniqueTransID,
-                                                  item.pnr,
-                                                  item.ticketNumbers
-                                                )
-                                              }
-                                            >
-                                              RS
-                                            </a>
-
-                                          </>
-                                        ) : item.status === "Issued" ? (
-                                          <>
-                                            <a
-                                              style={{
-                                                borderRadius: "50%",
-                                                fontSize: "12px"
-                                              }}
-                                              href="javascript:void(0)"
-                                              className="btn btn-primary fw-bold"
-                                              title="View Ticket"
-                                              onClick={() =>
-                                                handleViewTicket(
-                                                  item.uniqueTransID
-                                                )
-                                              }
-                                            >
-                                              VT
-                                            </a>
-                                            &nbsp;{" "}
-                                            <a
-                                              style={{
-                                                borderRadius: "50%",
-                                                fontSize: "12px"
-                                              }}
-                                              href="javascript:void(0)"
-                                              className="btn btn-primary fw-bold"
-                                              title="Invoice"
-                                              onClick={() =>
-                                                handleViewInvoice(
-                                                  item.uniqueTransID
-                                                )
-                                              }
-                                            >
-                                              IN
-                                            </a>
-                                            &nbsp;{" "}
-                                            <a
-                                              style={{
-                                                borderRadius: "50%",
-                                                fontSize: "12px"
-                                              }}
-                                              href="javascript:void(0)"
-                                              className="btn btn-primary fw-bold"
-                                              title="Voucher"
-                                              onClick={() =>
-                                                handleViewVoucher(
-                                                  item.uniqueTransID
-                                                )
-                                              }
-                                            >
-                                              VO
-                                            </a>
-                                            &nbsp;{" "}
-                                            <a
-                                              style={{ borderRadius: "50%", fontSize: "12px" }}
-                                              href="javascript:void(0)"
-                                              className="btn btn-primary fw-bold"
-                                              title="Date Change"
-                                              onClick={() =>
-                                                handleDateChange(
-                                                  item.status,
-                                                  item.uniqueTransID,
-                                                  item.pnr,
-                                                  item.ticketNumbers
-                                                )
-                                              }
-                                            >
-                                              DC
-                                            </a>
-                                            &nbsp;{" "}
-                                            <a
-                                              style={{ borderRadius: "50%", fontSize: "12px" }}
-                                              href="javascript:void(0)"
-                                              className="btn btn-primary fw-bold"
-                                              title="Raise Support"
-                                              onClick={() =>
-                                                handleRaiseSupport(
-                                                  item.status,
-                                                  item.uniqueTransID,
-                                                  item.pnr,
-                                                  item.ticketNumbers
-                                                )
-                                              }
-                                            >
-                                              RS
-                                            </a>
-                                            &nbsp;{
-                                              moment(moment(item.issueDate).format("YYYY-MM-DD") + " 12:00:00 PM") > moment() ?
-                                                <a
-                                                  style={{ borderRadius: "50%", fontSize: "12px" }}
-                                                  href="javascript:void(0)"
-                                                  className="btn btn-primary fw-bold"
-                                                  title="Ticketing Cancel"
-                                                  onClick={() =>
-                                                    handleCancel(
-                                                      item.status,
-                                                      item.uniqueTransID,
-                                                      item.pnr,
-                                                      item.ticketNumbers
-                                                    )
-                                                  }
-                                                >
-                                                  TC
-                                                </a> : <></>
-
+                                          ) : (
+                                            <></>
+                                          )}
+                                          &nbsp;{" "}
+                                          <a
+                                            // style={{
+                                            //   borderRadius: "50%",
+                                            //   fontSize: "12px",
+                                            // }}
+                                            href="javascript:void(0)"
+                                            // className="btn btn-primary fw-bold"
+                                            title="Ticketing Void"
+                                            onClick={() =>
+                                              handleTicketingVoid(
+                                                item.status,
+                                                item.uniqueTransID,
+                                                item.pnr,
+                                                item.ticketNumbers
+                                              )
                                             }
-
-                                            &nbsp;{" "}
-                                            <a
-                                              style={{ borderRadius: "50%", fontSize: "12px" }}
-                                              href="javascript:void(0)"
-                                              className="btn btn-primary fw-bold"
-                                              title="Ticketing Void"
-                                              onClick={() =>
-                                                handleTicketingVoid(
-                                                  item.status,
-                                                  item.uniqueTransID,
-                                                  item.pnr,
-                                                  item.ticketNumbers
-                                                )
-                                              }
+                                          >
+                                            <Button
+                                              border="2px solid"
+                                              colorScheme="messenger"
+                                              variant="outline"
+                                              size="sm"
+                                              borderRadius="16px"
                                             >
                                               TV
-                                            </a>
-                                          </>
-                                        ) : item.status === "Ticket Cancelled" && item.refundStatus == null ? (
-                                          <>
-
-                                            <a
-                                              style={{
-                                                borderRadius: "50%",
-                                                fontSize: "12px"
-                                              }}
-                                              href="javascript:void(0)"
-                                              className="btn btn-primary fw-bold"
-                                              title="Refund Request"
-                                              onClick={() =>
-                                                handleRefundReq(
-                                                  item.uniqueTransID
-                                                )
-                                              }
+                                            </Button>
+                                          </a>
+                                        </>
+                                      ) : item.status === "Ticket Cancelled" &&
+                                        item.refundStatus == null ? (
+                                        <>
+                                          <a
+                                            // style={{
+                                            //   borderRadius: "50%",
+                                            //   fontSize: "12px",
+                                            // }}
+                                            href="javascript:void(0)"
+                                            // className="btn btn-primary fw-bold"
+                                            title="Refund Request"
+                                            onClick={() =>
+                                              handleRefundReq(
+                                                item.uniqueTransID
+                                              )
+                                            }
+                                          >
+                                            <Button
+                                              border="2px solid"
+                                              colorScheme="messenger"
+                                              variant="outline"
+                                              size="sm"
+                                              borderRadius="16px"
                                             >
                                               RR
-                                            </a>
-                                          </>
-                                        ) : (
-                                          <></>
-                                        )
-                                      }
+                                            </Button>
+                                          </a>
+                                        </>
+                                      ) : (
+                                        <></>
+                                      )}
                                     </td>
                                   </tr>
                                 );
@@ -722,28 +855,27 @@ const Queues = () => {
                               <></>
                             )}
                           </tbody>
-
                         </table>
-                        <ReactPaginate
-                          previousLabel={"previous"}
-                          nextLabel={"next"}
-                          breakLabel={"..."}
-                          pageCount={pageCount}
-                          marginPagesDisplayed={2}
-                          pageRangeDisplayed={3}
-                          onPageChange={handlePageClick}
-                          containerClassName={"pagination justify-content-center"}
-                          pageClassName={"page-item"}
-                          pageLinkClassName={"page-link"}
-                          previousClassName={"page-item"}
-                          previousLinkClassName={"page-link"}
-                          nextClassName={"page-item"}
-                          nextLinkClassName={"page-link"}
-                          breakClassName={"page-item"}
-                          breakLinkClassName={"page-link"}
-                          activeClassName={"active"}
-                        />
                       </div>
+                      <ReactPaginate
+                        previousLabel={"previous"}
+                        nextLabel={"next"}
+                        breakLabel={"..."}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={3}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination justify-content-center"}
+                        pageClassName={"page-item"}
+                        pageLinkClassName={"page-link"}
+                        previousClassName={"page-item"}
+                        previousLinkClassName={"page-link"}
+                        nextClassName={"page-item"}
+                        nextLinkClassName={"page-link"}
+                        breakClassName={"page-item"}
+                        breakLinkClassName={"page-link"}
+                        activeClassName={"active"}
+                      />
                     </div>
                   </div>
                 </div>

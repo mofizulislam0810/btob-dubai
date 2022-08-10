@@ -12,7 +12,7 @@ const Ledger = () => {
   let [fromDate, setFromDate] = useState(new Date().toJSON().slice(0, 10));
   let [toDate, setToDate] = useState(new Date().toJSON().slice(0, 10));
   let [balanceType, setBalanceType] = useState(null);
-  console.log(balanceType);
+  let [currencyName,setCurrencyName] = useState("");
 
   let [pageCount, setPageCount] = useState(0);
   let [pageSize, setPageSize] = useState(10);
@@ -29,7 +29,9 @@ const Ledger = () => {
       obj,
       environment.headerToken
     );
+    setCurrencyName(response.data.data[0].currencyName);
     setLedgerData(response.data.data);
+
     setPageCount(response.data.totalPages);
   };
   console.log(ledgerData);
@@ -74,17 +76,17 @@ const Ledger = () => {
                 <div className="m-4">
                   <div className="tab-content">
                     <div className="tab-pane fade show active" id="tp1">
-                      <h4 className="mt-2"> Account ledger</h4>
-                      <hr />
+                      <h4> Account ledger</h4>
+                      <hr className="my-3"/>
                       <div
                         className="row"
                         style={{ width: "100%", paddingBottom: "5px" }}
                       >
-                        <div className="col-sm-12 text-left">
-                          <div className="d-flex float-end">
+                        <div className="col-sm-12 text-left ">
+                          <div className="d-flex float-end pb-2">
                             <div class="dropdown">
                               <button
-                                class="btn bg-danger dropdown-toggle fw-bold"
+                                class="btn button-color dropdown-toggle fw-bold rounded-start text-white"
                                 type="button"
                                 id="dropdownMenuButton1"
                                 data-bs-toggle="dropdown"
@@ -140,7 +142,7 @@ const Ledger = () => {
                             />
                             <button
                               type="button"
-                              className="btn btn-danger fw-bold"
+                              className="btn button-color fw-bold rounded-end text-white"
                               onClick={handleSubmit}
                             >
                               Search
@@ -159,9 +161,9 @@ const Ledger = () => {
                               <th>Description</th>
                               <th>Created By</th>
                               <th>Balance Type</th>
-                              <th>Debit</th>
-                              <th>Credit</th>
-                              <th>Balance</th>
+                              <th>Debit {currencyName ? "(" + currencyName + ")" : ""}</th>
+                              <th>Credit {currencyName ? "(" + currencyName + ")" : ""}</th>
+                              <th>Balance {currencyName ? "(" + currencyName + ")" : ""}</th>
                             </tr>
                           </thead>
                           <tbody>

@@ -238,7 +238,7 @@ const LoginPage = () => {
                 objectFit="cover"
                 src={cardImage}
                 alt="Cities"
-                h="461px"
+                h="455px"
               />
             </Box>
           </Hide>

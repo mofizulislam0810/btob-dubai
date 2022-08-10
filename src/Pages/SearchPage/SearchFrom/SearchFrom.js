@@ -1346,7 +1346,7 @@ const SearchFrom = () => {
         </div>
       </form>
 
-      <div className="container my-3">
+      {/* <div className="container my-3">
         <div className="row">
           <div className="col-lg-12">
             <div className="d-flex justify-content-center">
@@ -1405,7 +1405,7 @@ const SearchFrom = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -953,7 +953,7 @@ const SearchFrom = () => {
                         </label>
                       </div>
                     </div>
-                    <div className="t-datepicker class_0 bg-light rounded-3 overflow-hidden">
+                    <div className="t-datepicker class_0 bg-light rounded-3 ">
                       <div
                         className="t-check-in"
                         id="departureDate"
@@ -1028,7 +1028,7 @@ const SearchFrom = () => {
                             </label>
                           </div>
                         </div>
-                        <div className="t-datepicker class_1 bg-light rounded-3 overflow-hidden">
+                        <div className="t-datepicker class_1 bg-light rounded-3">
                           <div
                             className="t-check-in t-picker-only"
                             id="departureDate1"

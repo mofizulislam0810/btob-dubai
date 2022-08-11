@@ -19,7 +19,7 @@ const Support = () => {
 	let [status, setStatus] = useState(0);
 	let [historyFileName, setHistoryFileName] = useState('');
 	let [historyMessage, setHistoryMessage] = useState('');
-	let typeid = 0;
+	let typeid = 2;
 	let subjectid = 0;
 	let utid = "";
 	let pnrs = "";

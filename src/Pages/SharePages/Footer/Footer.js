@@ -44,6 +44,7 @@ const quickLinksData = [
 
 const addressData = [
   {
+
     text: `Al Muhairi 113-127, Al Dhagaya, Deira, Dubai, United Arab Emirates`,
     icon: BsFillHouseFill,
   },

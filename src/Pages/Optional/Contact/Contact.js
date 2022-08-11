@@ -1,7 +1,7 @@
 import React from "react";
-import FooterLR from "../FooterLR/FooterLR";
 import './Contact.css';
 import Navbar from "../Navbar/Navbar"
+import Footer from "../../SharePages/Footer/Footer";
 
 const Contact = () => {
   window.scrollTo(0,0);
@@ -9,7 +9,7 @@ const Contact = () => {
     <>
     <Navbar></Navbar>
     <div className="hold-transition login-page search-panel-bg">
-      <div className="container contact border-1 border-secondary p-4">
+      <div className="container border-2 border-secondary contact p-3">
         <div className="row">
           <div className="col-lg-12">
             <h1 className="py-2">Keep in touch</h1>
@@ -63,8 +63,9 @@ const Contact = () => {
           </div> */}
         </div>
       </div>
-      <FooterLR></FooterLR>
+     
     </div>
+   <Footer></Footer>
     </>
   );
 };

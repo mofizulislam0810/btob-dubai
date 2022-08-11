@@ -250,7 +250,7 @@ const ShowAllFlight = ({
               </div>
               <div className="col-lg-6 bg-white py-3 px-5 ">
               <div class="dropdown float-end">
-                  <button class="btn btn-primary fw-bold text-white dropdown-toggle button-color rounded" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn fw-bold text-white dropdown-toggle button-color rounded" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <span className="me-1"><i class="fas fa-money-bill-wave"></i></span>{amountChange}
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -289,7 +289,7 @@ const ShowAllFlight = ({
                 <div className="col-lg-12 mt-2" id="pricesection">
                   <div className="mt-2">
                     <input
-                      className="w-100"
+                      className="w-100 myinput"
                       type="range"
                       name="flexRadioDefault2"
                       value={price}

@@ -5,13 +5,13 @@ import { environment } from "../../SharePages/Utility/environment";
 import currentYear from "../../SharePages/Utility/currentYear";
 import Chart from "../Chart";
 import Footer from "../../SharePages/Footer/Footer";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
 import calanderOneMonthRes from "../../../JSON/calanderOneMonthRes";
 import RevoCalendar from "revo-calendar";
 
 const DashboardPanel = () => {
-  const [eventList,setEventList] = useState([]);
+ const [eventList,setEventList] = useState([]);
   const getEventBooking = async() => {
     const response = await axios.get(environment.getCalendarEventBooking+`?year=2022&month=1`,environment.headerToken);
     console.log(response);
@@ -301,12 +301,23 @@ const DashboardPanel = () => {
                 boxShadow="md"
                 overflow="hidden"
               >
+                <Box w="100%" bg="#1e88e5">
+                  <Text
+                    fontSize="lg"
+                    color="white"
+                    fontWeight={400}
+                    py="12px"
+                    px="20px"
+                  >
+                    Event Calender
+                  </Text>
+                </Box>
                 <RevoCalendar
                   events={eventList}
                   highlightToday={true}
                   lang="en"
-                  primaryColor="#1e88e5"
-                  secondaryColor="#f7fbff"
+                  primaryColor="#4F6995"
+                  secondaryColor="#fff"
                   todayColor="#0083fc"
                   textColor="#1e1e1e"
                   indicatorColor="#ff0000"
@@ -315,7 +326,7 @@ const DashboardPanel = () => {
                   detailWidth={280}
                   showDetailToggler={true}
                   showSidebarToggler={true}
-                  onePanelAtATime={false}
+                  onePanelAtATime={true}
                   allowDeleteEvent={false}
                   allowAddEvent={false}
                   openDetailsOnDateSelection={true}

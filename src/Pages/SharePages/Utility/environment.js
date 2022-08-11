@@ -1,6 +1,6 @@
-const baseURL='http://localhost:7236/';
+// const baseURL='http://localhost:7236/';
 // const baseURL='http://52.221.202.198:83/';
-// const baseURL='http://52.221.202.198:86/';
+const baseURL='http://13.212.45.180:81/';
 const baseApiURL =baseURL+ 'api/';
 const tokenData = JSON.parse(sessionStorage.getItem('token'));
 let headerToken = { headers: { Authorization: '' } };
@@ -28,7 +28,7 @@ export const environment = {
   getCalendarEventBooking : baseApiURL + 'B2BDashboard/GetCalendarEventBooking',
 
   cityList : baseApiURL+'Dropdown/Cities',
-  bankAccounts : baseApiURL+'Dropdown/bank-account',
+  bankAccounts : baseApiURL+'Dropdown/bankaccounts',
   getairlineList : baseApiURL+'Dropdown/Airlines',
   getcountryList : baseApiURL+'Dropdown/Countries',
   getairportList : baseApiURL+'Dropdown/Airports',

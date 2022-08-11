@@ -71,11 +71,11 @@ const SearchPanel = () => {
     <div>
       <div className="content-wrapper search-panel-bg">
         {/* Content Header (Page header)  */}
-        <Marquee
+        {/* <Marquee
           className="my-auto"
           pauseOnHover
           gradient={false}
-          style={{ backgroundColor: "#390404" }}
+          style={{ backgroundColor: "#041339" }}
         >
           {text?.map((item, index) => {
             return (
@@ -88,14 +88,7 @@ const SearchPanel = () => {
               </p>
             );
           })}
-          {/* <p
-            style={{ fontSize: "15pt", cursor: "pointer" }}
-            className="text-white pt-2"
-          >
-            Received amount from customer - Refund Charge (As per Airline Policy
-            + Triplover Convenience Fee)
-          </p> */}
-        </Marquee>
+        </Marquee> */}
         {/* <marquee className="bg-danger my-auto">
           <p
             style={{ fontFamily: "Impact", fontSize: "15pt" }}
@@ -111,7 +104,7 @@ const SearchPanel = () => {
         {/* Main content  */}
         <section className="content">
           {/* main section start  */}
-          <div className="container mt-5">
+          <div className="container mt-1">
             <div className="position-relative">
               <div
                 className="row position-absolute top-0 start-50 translate-middle"

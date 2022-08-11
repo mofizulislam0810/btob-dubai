@@ -10,6 +10,7 @@ import "./SearchFrom.css";
 import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
 import moment from "moment";
+import { Box } from "@chakra-ui/react";
 
 const SearchFrom = () => {
   const formCount = 0;
@@ -556,16 +557,21 @@ const SearchFrom = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-12 col-sm-12 col-md-12 banner-text shadow-for-search">
-              <div id="form-bg">
-                <div className="row">
+              <Box
+                id="form-bg"
+                boxShadow="lg"
+                borderRadius="8px"
+                border="1px solid lightgray"
+              >
+                <div className="row ">
                   <div
                     className="col-lg-4 pb-4 text-center"
                     style={{ paddingTop: "3%" }}
                   >
                     <div className="flex-container">
-                      <div className="left-border">
+                      <div className="left-border ">
                         <button
-                          className="form-select inputgroup"
+                          className="form-select inputgroup rounded-left"
                           type="button"
                           id="dropdownMenuButton1"
                           data-bs-toggle="dropdown"
@@ -643,13 +649,13 @@ const SearchFrom = () => {
                         <div className="d-flex ageselectpadnotx align-items-center inputgroup">
                           <div style={{ position: "relative" }}>
                             <button
-                              className="form-select inputgroup"
+                              className="form-select inputgroup rounded-right"
                               type="button"
                               id="dropdownMenuButtonpassenger"
                               data-bs-toggle="dropdown"
                               aria-expanded="false"
                               data-bs-auto-close="outside"
-                              style={{ height: "38px"}}
+                              style={{ height: "38px" }}
                             >
                               <span className="d-flex">
                                 <svg
@@ -873,7 +879,7 @@ const SearchFrom = () => {
                     </label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control rounded-3"
                       placeholder="e.g. BS, BG, TK"
                       onChange={handleChange}
                       autoComplete="off"
@@ -891,7 +897,7 @@ const SearchFrom = () => {
                     <span className="address">
                       <input
                         type="text"
-                        className="form-control input-field autocomplete"
+                        className="form-control input-field autocomplete rounded-3"
                         ref={originRef}
                         placeholder="From"
                         required
@@ -917,7 +923,7 @@ const SearchFrom = () => {
                     <span className="address">
                       <input
                         type="text"
-                        className="form-control input-field autocomplete"
+                        className="form-control input-field autocomplete rounded-3"
                         ref={destinationRef}
                         placeholder="To"
                         required
@@ -947,7 +953,7 @@ const SearchFrom = () => {
                         </label>
                       </div>
                     </div>
-                    <div className="t-datepicker class_0 bg-light">
+                    <div className="t-datepicker class_0 bg-light rounded-3 ">
                       <div
                         className="t-check-in"
                         id="departureDate"
@@ -974,7 +980,7 @@ const SearchFrom = () => {
                         <span className="address">
                           <input
                             type="text"
-                            className="form-control input-field autocomplete"
+                            className="form-control input-field autocomplete rounded-3"
                             ref={originRef1}
                             placeholder="From"
                             autoComplete="off"
@@ -1001,7 +1007,7 @@ const SearchFrom = () => {
                         <span className="address">
                           <input
                             type="text"
-                            className="form-control input-field autocomplete"
+                            className="form-control input-field autocomplete rounded-3"
                             ref={destinationRef1}
                             placeholder="To"
                             id="txtTo1"
@@ -1010,9 +1016,9 @@ const SearchFrom = () => {
                           />
                         </span>
                       </div>
-                      <div className="col-lg-4">
+                      <div className="col-lg-4 ">
                         <div className="row">
-                          <div className="col-lg-12">
+                          <div className="col-lg-12 ">
                             <label
                               htmlFor="formGroupExampleInput"
                               className="form-label text-white"
@@ -1022,7 +1028,7 @@ const SearchFrom = () => {
                             </label>
                           </div>
                         </div>
-                        <div className="t-datepicker class_1 bg-light">
+                        <div className="t-datepicker class_1 bg-light rounded-3">
                           <div
                             className="t-check-in t-picker-only"
                             id="departureDate1"
@@ -1050,7 +1056,7 @@ const SearchFrom = () => {
 
                         <input
                           type="text"
-                          className="form-control input-field autocomplete"
+                          className="form-control input-field autocomplete rounded-3"
                           ref={originRef2}
                           placeholder="From"
                           autoComplete="off"
@@ -1067,7 +1073,7 @@ const SearchFrom = () => {
                         </label>
                         <input
                           type="text"
-                          className="form-control input-field autocomplete"
+                          className="form-control input-field autocomplete rounded-3"
                           ref={destinationRef2}
                           placeholder="To"
                           id="txtTo2"
@@ -1114,7 +1120,7 @@ const SearchFrom = () => {
 
                         <input
                           type="text"
-                          className="form-control input-field autocomplete"
+                          className="form-control input-field autocomplete rounded-3"
                           ref={originRef3}
                           placeholder="From"
                           autoComplete="off"
@@ -1131,7 +1137,7 @@ const SearchFrom = () => {
                         </label>
                         <input
                           type="text"
-                          className="form-control input-field autocomplete"
+                          className="form-control input-field autocomplete rounded-3"
                           ref={destinationRef3}
                           placeholder="To"
                           id="txtTo3"
@@ -1178,7 +1184,7 @@ const SearchFrom = () => {
 
                         <input
                           type="text"
-                          className="form-control input-field autocomplete"
+                          className="form-control input-field autocomplete rounded-3"
                           ref={originRef4}
                           placeholder="From"
                           autoComplete="off"
@@ -1195,7 +1201,7 @@ const SearchFrom = () => {
                         </label>
                         <input
                           type="text"
-                          className="form-control input-field autocomplete"
+                          className="form-control input-field autocomplete rounded-3"
                           ref={destinationRef4}
                           placeholder="To"
                           id="txtTo4"
@@ -1242,7 +1248,7 @@ const SearchFrom = () => {
 
                         <input
                           type="text"
-                          className="form-control input-field autocomplete"
+                          className="form-control input-field autocomplete rounded-3"
                           ref={originRef5}
                           placeholder="From"
                           autoComplete="off"
@@ -1259,7 +1265,7 @@ const SearchFrom = () => {
                         </label>
                         <input
                           type="text"
-                          className="form-control input-field autocomplete"
+                          className="form-control input-field autocomplete rounded-3"
                           ref={destinationRef5}
                           placeholder="To"
                           id="txtTo5"
@@ -1267,7 +1273,7 @@ const SearchFrom = () => {
                         />
                       </div>
                       <div className="col-lg-4">
-                        <div className="row">
+                        <div className="row rounded-3">
                           <div className="col-lg-12">
                             <label
                               htmlFor="formGroupExampleInput"
@@ -1330,7 +1336,10 @@ const SearchFrom = () => {
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="d-flex justify-content-center">
-                      <button className="btn text-white mt-4 text-center fw-bold rounded" style={{backgroundColor:"#390404"}}>
+                      <button
+                        className="btn text-white mt-4 text-center fw-bold rounded"
+                        style={{ backgroundColor: "#EC1C1E" }}
+                      >
                         Search Flight
                       </button>
                     </div>
@@ -1340,7 +1349,7 @@ const SearchFrom = () => {
                 {/* <div className="row mt-3">
                   <div className="col-lg-12"></div>
                 </div> */}
-              </div>
+              </Box>
             </div>
           </div>
         </div>

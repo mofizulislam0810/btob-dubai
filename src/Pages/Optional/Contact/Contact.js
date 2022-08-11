@@ -1,7 +1,7 @@
 import React from "react";
-import FooterLR from "../FooterLR/FooterLR";
 import './Contact.css';
 import Navbar from "../Navbar/Navbar"
+import Footer from "../../SharePages/Footer/Footer";
 
 const Contact = () => {
   window.scrollTo(0,0);
@@ -9,7 +9,7 @@ const Contact = () => {
     <>
     <Navbar></Navbar>
     <div className="hold-transition login-page search-panel-bg">
-      <div className="container text-white contact">
+      <div className="container border-2 border-secondary contact p-3">
         <div className="row">
           <div className="col-lg-12">
             <h3>Keep in touch</h3>
@@ -22,23 +22,22 @@ const Contact = () => {
               <span className="">
                 <i className="la la-home la-lg"></i>
               </span>{" "}
-              House # 95, Sohrawardi Avenue, Baridhara Diplomatic Zone,
-              Dhaka-1212, Bangladesh.
+              Al Muhairi 113-127, Al Dhagaya, Deira, Dubai, United Arab Emirates.
             </p>
             <p>
               <span className="">
                 <i className="la la-phone la-lg"></i>
               </span>{" "}
-              +880 9613 345345, +880 1730 785685
+              +97143375728
             </p>
             <p>
               <span className="">
                 <i className="la la-envelope la-lg"></i>
               </span>{" "}
-              <a href="mailto:info@triplover.com" className="text-dark fw-bold">info@triplover.com</a>
+              <a href="mailto:info@triplover.com" className="text-dark fw-bold">info@triplover.ae</a>
             </p>
           </div>
-          <div className="col-lg-12">
+          {/* <div className="col-lg-12">
             <p>
               <span className="">Banasree Sales:</span>
             </p>
@@ -61,11 +60,12 @@ const Contact = () => {
               </span>{" "}
               <a href="mailto:info@triplover.com" className="text-dark fw-bold">info@triplover.com</a>
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
-      <FooterLR></FooterLR>
+     
     </div>
+   <Footer></Footer>
     </>
   );
 };

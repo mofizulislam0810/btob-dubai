@@ -24,7 +24,8 @@ export const environment = {
   priceCheck: baseApiURL + 'RePrice',
   getFareRules:baseApiURL + 'FareRules',
 
-
+  
+  getCalendarEventBooking : baseApiURL + 'B2BDashboard/GetCalendarEventBooking',
 
   cityList : baseApiURL+'Dropdown/Cities',
   bankAccounts : baseApiURL+'Dropdown/bank-account',

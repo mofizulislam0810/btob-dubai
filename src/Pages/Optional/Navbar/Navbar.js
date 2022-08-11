@@ -7,10 +7,10 @@ const Navbar = () => {
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid ms-5">
-          <Link class="navbar-brand" to="/">
-            <img src={logo} alt="" width="100" height="24" />
+          <Link class="navbar-brand" to="/search">
+            <img src={logo} alt="" width="60%" height="40" />
           </Link>
-          <button
+          {/* <button
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
@@ -29,7 +29,7 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </nav>
     </div>

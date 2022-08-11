@@ -5,25 +5,30 @@ import SideNavbar from "../SharePages/SideNavBar/SideNavBar";
 import currentYear from "../SharePages/Utility/currentYear";
 import { environment } from "../SharePages/Utility/environment";
 import moment from "moment";
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 import Footer from "../SharePages/Footer/Footer";
+import { Center, Spinner } from "@chakra-ui/react";
 const CreditNotes = () => {
-    const [creditNoteList, setCreditNoteList] = useState([]);
-    let [pageCount, setPageCount] = useState(0);
-    let [pageSize, setPageSize] = useState(10);
-    let [currentPageNumber,setCurrentPageNumber]=useState(1);
+  const [creditNoteList, setCreditNoteList] = useState([]);
+  let [pageCount, setPageCount] = useState(0);
+  let [pageSize, setPageSize] = useState(10);
+  let [currentPageNumber, setCurrentPageNumber] = useState(1);
+
+  const [isTimeOut, setIsTimeOut] = useState(false);
+  useEffect(() => {
+    setTimeout(() => setIsTimeOut(true), 10000);
+  }, []);
+
   const getCreditNotes = async (currentPageNumber) => {
     const response = await axios.get(
-      environment.creditNoteList+"/"+sessionStorage.getItem('agentId')??0+`?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
+      environment.creditNoteList + "/" + sessionStorage.getItem("agentId") ??
+        0 + `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
       environment.headerToken
     );
     setCreditNoteList(response.data.data);
-    setPageCount(response.data.totalPages)
-
+    setPageCount(response.data.totalPages);
   };
   const handlePageClick = async (data) => {
-
-
     let currentPage = data.selected + 1;
     setCurrentPageNumber(currentPage);
     getCreditNotes(currentPage);
@@ -48,7 +53,7 @@ const CreditNotes = () => {
                 <div className="tab-content">
                   <div className="tab-pane fade show active" id="tp1">
                     <h4>Credit Note List</h4>
-                    <hr className="my-3"/>
+                    <hr className="my-3" />
                     <table className="table table-bordered align-middle table-striped text-center">
                       <thead>
                         <tr>
@@ -65,63 +70,78 @@ const CreditNotes = () => {
                         {creditNoteList.map((item, index) => {
                           return (
                             <tr>
-                                <td>{index+1}</td>
+                              <td>{index + 1}</td>
                               <td>
-                              <a
-                                            style={{
-                                              borderRadius: "50%",
-                                              fontSize: "12px"
-                                            }}
-                                            href="javascript:void(0)"
-                                            
-                                            title="Ticket View"
-                                            onClick={() =>
-                                              handleViewTicket(
-                                                item.uniqueTransID
-                                              )
-                                            }
-                                          >
-                                            {item.uniqueTransID}
-                                          </a>
+                                <a
+                                  style={{
+                                    borderRadius: "50%",
+                                    fontSize: "12px",
+                                  }}
+                                  href="javascript:void(0)"
+                                  title="Ticket View"
+                                  onClick={() =>
+                                    handleViewTicket(item.uniqueTransID)
+                                  }
+                                >
+                                  {item.uniqueTransID}
+                                </a>
                               </td>
                               <td>{item.pnr}</td>
                               <td>{item.currencyName} {item.refundAmount}</td>
-                              <td>{moment(item.adjustmentDate).format('DD-MM-yyyy')}</td>
-                              <td>{moment(item.createdDate).format('DD-MM-yyyy')}</td>
+                              <td>
+                                {moment(item.adjustmentDate).format(
+                                  "DD-MM-yyyy"
+                                )}
+                              </td>
+                              <td>
+                                {moment(item.createdDate).format("DD-MM-yyyy")}
+                              </td>
                               <td>{item.status}</td>
                             </tr>
                           );
                         })}
                       </tbody>
                     </table>
-                    <ReactPaginate
-                          previousLabel={"previous"}
-                          nextLabel={"next"}
-                          breakLabel={"..."}
-                          pageCount={pageCount}
-                          marginPagesDisplayed={2}
-                          pageRangeDisplayed={3}
-                          onPageChange={handlePageClick}
-                          containerClassName={"pagination justify-content-center"}
-                          pageClassName={"page-item"}
-                          pageLinkClassName={"page-link"}
-                          previousClassName={"page-item"}
-                          previousLinkClassName={"page-link"}
-                          nextClassName={"page-item"}
-                          nextLinkClassName={"page-link"}
-                          breakClassName={"page-item"}
-                          breakLinkClassName={"page-link"}
-                          activeClassName={"active"}
+
+                    {Object.keys(creditNoteList).length === 0 && !isTimeOut && (
+                      <Center w="100%" py="50px">
+                        <Spinner
+                          thickness="4px"
+                          speed="0.65s"
+                          emptyColor="gray.200"
+                          color="red.500"
+                          size="xl"
                         />
+                      </Center>
+                    )}
+
+                    <ReactPaginate
+                      previousLabel={"previous"}
+                      nextLabel={"next"}
+                      breakLabel={"..."}
+                      pageCount={pageCount}
+                      marginPagesDisplayed={2}
+                      pageRangeDisplayed={3}
+                      onPageChange={handlePageClick}
+                      containerClassName={"pagination justify-content-center"}
+                      pageClassName={"page-item"}
+                      pageLinkClassName={"page-link"}
+                      previousClassName={"page-item"}
+                      previousLinkClassName={"page-link"}
+                      nextClassName={"page-item"}
+                      nextLinkClassName={"page-link"}
+                      breakClassName={"page-item"}
+                      breakLinkClassName={"page-link"}
+                      activeClassName={"active"}
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
-
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

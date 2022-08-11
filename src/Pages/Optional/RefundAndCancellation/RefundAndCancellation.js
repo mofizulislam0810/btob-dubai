@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../../SharePages/Footer/Footer";
 import FooterLR from "../FooterLR/FooterLR";
 import Navbar from "../Navbar/Navbar";
 
@@ -10,11 +11,11 @@ const RefundAndCancellation = () => {
     <div  className="hold-transition login-page search-panel-bg" style={{height:"100%"}}>
       <div className="container mt-3">
         <div className="row">
-          <div className="col-md-12 text-white">
+          <div className="col-md-12">
             <h3>Refund &amp; Cancellation</h3>
           </div>
 
-          <div className="col-md-12 text-white">
+          <div className="col-md-12">
             <p>
               Most of our airline tickets, hotels, pre-paid car rentals,
               vacation packages and service fees are non-refundable after the
@@ -22,7 +23,7 @@ const RefundAndCancellation = () => {
               time of booking and over the phone only.We can accept refund
               requests only if the following conditions have been met:
             </p>
-            <ul className="text-white"
+            <ul className=""
               style={{
                 listStyleType: "disc",
                 listStylePosition: "inside",
@@ -160,8 +161,8 @@ const RefundAndCancellation = () => {
           </div>
         </div>
       </div>
-      <FooterLR></FooterLR>
     </div>
+    <Footer></Footer>
     </>
   );
 };

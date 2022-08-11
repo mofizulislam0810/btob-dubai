@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../../SharePages/Footer/Footer";
 import FooterLR from "../FooterLR/FooterLR";
 import Navbar from "../Navbar/Navbar";
 
@@ -8,7 +9,7 @@ const TermCondition = () => {
     <>
     <Navbar></Navbar>
     <div className="hold-transition login-page search-panel-bg" style={{height:"100%"}}>
-      <div className="container mt-3 text-white">
+      <div className="container mt-3">
         <div className="row">
           <div className="col-md-12">
             <h3>Terms And Condition</h3>
@@ -698,8 +699,8 @@ const TermCondition = () => {
           </div>
         </div>
       </div>
-      <FooterLR></FooterLR>
     </div>
+    <Footer></Footer>
     </>
   );
 };

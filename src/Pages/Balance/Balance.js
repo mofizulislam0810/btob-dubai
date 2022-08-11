@@ -509,7 +509,7 @@ const Balance = () => {
                           Bank Accounts
                         </a>
                       </li>
-                      <li className='nav-item text-end' style={{ marginLeft: "62.3%" }}>
+                      {/* <li className='nav-item text-end' style={{ marginLeft: "62.3%" }}>
                         <a
                           href="javascript:void(0)"
                           className="nav-link"
@@ -518,7 +518,7 @@ const Balance = () => {
                         >
                           Online Deposit
                         </a>
-                      </li>
+                      </li> */}
                     </ul>
                     <div className="tab-content">
                       <div className="tab-pane fade show active" id="entry">

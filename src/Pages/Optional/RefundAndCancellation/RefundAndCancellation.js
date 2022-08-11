@@ -50,31 +50,31 @@ const RefundAndCancellation = () => {
               as described below. All Triplover fees are charged on a per-person
               or per-ticket basis and are non-refundable.
             </p>
-            <h5 className="text-center py-2">Cancellation &amp; Refunds</h5>
-            <h5 className="text-center">Agent Assisted Cancellation/ Refund</h5>
-            <h5 className="py-2">Airline Economy Class </h5>
+            {/* <h5 className="text-center py-2">Cancellation &amp; Refunds</h5> */}
+            <h5 className="text-start my-2">Agent Assisted Cancellation/ Refund</h5>
+            {/* <h5 className="py-2">Airline Economy Class </h5> */}
             <table className="table table-bordered text-dark">
               <tbody>
                 <tr>
-                  <td style={{width:'50%'}}>Domestic</td>
-                  <td>BDT 300</td>
+                  <td style={{width:'50%'}}>Economy Class</td>
+                  <td>AED 20</td>
                 </tr>
                 <tr>
-                  <td>International</td>
-                  <td>BDT 500</td>
+                  <td>Business/First Class</td>
+                  <td>AED 20</td>
                 </tr>
               </tbody>
             </table>
-            <h5 className="py-2">Airline Business/First Class</h5>
+            {/* <h5 className="py-2">Airline Business/First Class</h5>
             <table className="table table-bordered text-dark">
               <tbody>
                 <tr>
                   <td style={{width:'50%'}}>Domestic</td>
-                  <td>BDT 500</td>
+                  <td>AED 18</td>
                 </tr>
                 <tr>
                   <td>International</td>
-                  <td>BDT 2000</td>
+                  <td>AED 80</td>
                 </tr>
               </tbody>
             </table>
@@ -87,11 +87,11 @@ const RefundAndCancellation = () => {
               <tbody>
                 <tr>
                   <td style={{width:'50%'}}>Domestic</td>
-                  <td>BDT 300</td>
+                  <td>AED 12</td>
                 </tr>
                 <tr>
                   <td>International</td>
-                  <td>BDT 500</td>
+                  <td>AED 18</td>
                 </tr>
               </tbody>
             </table>
@@ -100,14 +100,14 @@ const RefundAndCancellation = () => {
               <tbody>
                 <tr>
                   <td style={{width:'50%'}}>Domestic</td>
-                  <td>BDT 500</td>
+                  <td>AED 18</td>
                 </tr>
                 <tr>
                   <td>International</td>
-                  <td>BDT 2000</td>
+                  <td>AED 80</td>
                 </tr>
               </tbody>
-            </table>
+            </table> */}
             <h5 className="py-2">Airlines schedule changes/flight cancellations</h5>
             <p>
               All Airlines have differing rules and policies regarding schedule

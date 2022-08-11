@@ -10,7 +10,12 @@ const AddPanel = () => {
       <div className="container  py-3 pb-5">
         <div className="row">
           <div className="col-lg-6 shadow-for-add py-2">
-            <Box borderRadius="8px" overflow="hidden" boxShadow="lg">
+            <Box
+              borderRadius="8px"
+              overflow="hidden"
+              boxShadow="lg"
+              border="1px solid lightgray"
+            >
               <img
                 src={imgOne}
                 className="img-fluid add-banner"
@@ -22,7 +27,12 @@ const AddPanel = () => {
             </div> */}
           </div>
           <div className="col-lg-6 shadow-for-add py-2">
-            <Box borderRadius="8px" overflow="hidden" boxShadow="lg">
+            <Box
+              borderRadius="8px"
+              overflow="hidden"
+              boxShadow="lg"
+              border="1px solid lightgray"
+            >
               <img
                 src={imgTwo}
                 className="img-fluid add-banner"

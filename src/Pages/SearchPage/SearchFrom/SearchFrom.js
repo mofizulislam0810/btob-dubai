@@ -1339,7 +1339,7 @@ const SearchFrom = () => {
                     <div className="d-flex justify-content-center">
                       <button
                         className="btn text-white mt-4 text-center fw-bold rounded"
-                        style={{ backgroundColor: "#041339" }}
+                        style={{ backgroundColor: "#EC1C1E" }}
                       >
                         Search Flight
                       </button>

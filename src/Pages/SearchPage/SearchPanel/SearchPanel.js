@@ -111,7 +111,7 @@ const SearchPanel = () => {
         {/* Main content  */}
         <section className="content">
           {/* main section start  */}
-          <div className="container mt-5">
+          <div className="container mt-1">
             <div className="position-relative">
               <div
                 className="row position-absolute top-0 start-50 translate-middle"

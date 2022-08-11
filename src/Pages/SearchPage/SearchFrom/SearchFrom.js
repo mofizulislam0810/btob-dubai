@@ -561,7 +561,6 @@ const SearchFrom = () => {
                 id="form-bg"
                 boxShadow="lg"
                 borderRadius="8px"
-                overflow="hidden"
                 border="1px solid lightgray"
               >
                 <div className="row ">

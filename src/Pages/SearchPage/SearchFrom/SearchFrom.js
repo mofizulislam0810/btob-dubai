@@ -10,6 +10,7 @@ import "./SearchFrom.css";
 import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
 import moment from "moment";
+import { Box } from "@chakra-ui/react";
 
 const SearchFrom = () => {
   const formCount = 0;
@@ -556,7 +557,12 @@ const SearchFrom = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-12 col-sm-12 col-md-12 banner-text shadow-for-search">
-              <div id="form-bg">
+              <Box
+                id="form-bg"
+                boxShadow="lg"
+                borderRadius="8px"
+                overflow="hidden"
+              >
                 <div className="row ">
                   <div
                     className="col-lg-4 pb-4 text-center"
@@ -1343,7 +1349,7 @@ const SearchFrom = () => {
                 {/* <div className="row mt-3">
                   <div className="col-lg-12"></div>
                 </div> */}
-              </div>
+              </Box>
             </div>
           </div>
         </div>

@@ -21,7 +21,8 @@ body{
 
 
 #form-bg{
-    background-image: linear-gradient(100.94deg, #390404c8 -9.51%, #EC1C1E 115.79%);
+    /* background-image: linear-gradient(100.94deg, #390404c8 -9.51%, #EC1C1E 115.79%); */
+    background-image: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
     padding: 30px 30px 70px 30px;
     padding-bottom: 28px;
   }

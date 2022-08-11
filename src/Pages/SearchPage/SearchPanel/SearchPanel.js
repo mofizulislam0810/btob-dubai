@@ -75,7 +75,7 @@ const SearchPanel = () => {
           className="my-auto"
           pauseOnHover
           gradient={false}
-          style={{ backgroundColor: "#390404" }}
+          style={{ backgroundColor: "#041339" }}
         >
           {text?.map((item, index) => {
             return (

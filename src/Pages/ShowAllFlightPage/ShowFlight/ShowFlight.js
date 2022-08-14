@@ -251,7 +251,7 @@ const ShowFlight = (props) => {
       setCount(checkList.length);
     }
   };
-  console.log(currency);
+  // console.log(currency);
   return (
     <>
       {amountChange === "Invoice Amount" ? (

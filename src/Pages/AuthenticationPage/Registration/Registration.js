@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Registration.css";
 import logo from "../../../images/logo/logo-combined.png";
 import courtries from "../../../JSON/countries.json";
@@ -10,17 +10,44 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Box, Center, Text } from "@chakra-ui/react";
+import Footer from "../../SharePages/Footer/Footer";
+import {
+  Flex,
+  Image,
+  Hide,
+  Divider,
+  VStack,
+  Switch,
+  Button,
+  HStack,
+  InputGroup,
+  InputRightElement,
+  Input,
+  Heading,
+  Circle,
+} from "@chakra-ui/react";
+import cardImage from "../../../images/landing/card.png";
+import flightsImg from "../../../images/landing/flights.png";
+import hotlelsImg from "../../../images/landing/hotels.png";
+import holidaysImg from "../../../images/landing/holidays.png";
+import visaProcessingImg from "../../../images/landing/visa-processing.png";
+import airlines1 from "../../../images/landing/airlines-1.png";
+import airlines2 from "../../../images/landing/airlines-2.png";
+import airlines3 from "../../../images/landing/airlines-3.png";
+import airlines4 from "../../../images/landing/airlines-4.png";
+import { nanoid } from "nanoid";
 
 const Registration = () => {
-  let [countryName, setCountryName] = useState("Bangladesh");
+  const navigate = useNavigate();
+  let [countryName, setCountryName] = useState("United Arab Emirates");
   let [zoneList, setZoneList] = useState([]);
-  let [agentDialCode, setAgentDialCode] = useState("+880");
+  let [agentDialCode, setAgentDialCode] = useState("+971");
   let [agentName, setAgentName] = useState("");
   let [agentPhoneNo, setAgentPhoneNo] = useState("");
   let [agentEmail, setAgentEmail] = useState("");
   let [agentAddress, setAgentAddress] = useState("");
   let [agentContactPerson, setAgentContactPerson] = useState("");
-  let [userDialCode, setUserDialCode] = useState("+880");
+  let [userDialCode, setUserDialCode] = useState("+971");
   let [userFullName, setUserFullName] = useState("");
   let [userPhoneNo, setUserPhoneNo] = useState("");
   let [userEmail, setUserEmail] = useState("");
@@ -52,7 +79,7 @@ const Registration = () => {
   };
   useEffect(() => {
     getZoneData("Bangladesh");
-    getCityData("Bangladesh");
+    getCityData("United Arab Emirates");
   }, []);
   const handleCountryChange = (e) => {
     setCountryName(e.target.value);
@@ -133,6 +160,7 @@ const Registration = () => {
       const response = await axios.post(environment.register, registerObj);
       if (response.data.isSuccess == true) {
         toast.success("Thanks! Registration successfully submited..");
+        navigate('/regsuccess');
       } else {
         toast.error(response.data.message);
       }
@@ -144,8 +172,24 @@ const Registration = () => {
     console.log("Captcha value:", value);
   }
 
+  const ourServiceData = [
+    { text: "Flights", img: flightsImg },
+    { text: "Hotels", img: hotlelsImg },
+    { text: "Holiday", img: holidaysImg },
+    { text: "Visa Processing", img: visaProcessingImg },
+  ];
+
+  const topAirlinesData = [
+    { img: airlines1 },
+    { img: airlines2 },
+    { img: airlines3 },
+    { img: airlines4 },
+  ];
+
   return (
-    <div className="hold-transition py-5">
+    <>
+    <VStack>
+    <div className="hold-transition py-5 w-100 mb-5">
       <div className="login-box" style={{ minWidth: "70%", marginLeft: "15%" }}>
         <ToastContainer />
 
@@ -525,6 +569,46 @@ const Registration = () => {
         <FooterLR></FooterLR>
       </div> */}
     </div>
+    <Text fontSize="21px" fontWeight={500}>
+        Our Services
+      </Text>
+
+      <Flex gap="60px" py="50px">
+        {ourServiceData.map((item) => (
+          <VStack gap={"22px"} key={nanoid()}>
+            <Circle
+              bg="white"
+              boxShadow=" 0px 11px 20px rgba(224, 239, 255, 0.32)"
+            >
+              <Image src={item.img} alt="flights" w="60px" h="60px" m="45px" />
+            </Circle>
+            <Text fontWeight={400} fontSize="16px" color="text">
+              {item.text}
+            </Text>
+          </VStack>
+        ))}
+      </Flex>
+
+      <Text fontSize="21px" fontWeight={500} pt="100px">
+        Top Airlines Are With Us
+      </Text>
+      <Flex gap="60px" py="50px">
+        {topAirlinesData.map((item) => (
+          <Center
+            key={nanoid()}
+            bg="rgba(255, 255, 255, 0.3)"
+            border="1px solid #E8E8E8"
+            borderRadius="5px"
+            px="45px"
+            py="57px"
+          >
+            <Image src={item.img} alt="airlines1" w="150px" />
+          </Center>
+        ))}
+      </Flex>
+    <Footer></Footer>
+    </VStack>
+    </>
   );
 };
 

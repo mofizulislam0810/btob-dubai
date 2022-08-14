@@ -48,6 +48,7 @@ import CheckoutSuccess from "./Pages/CheckoutConfirmation/CheckoutSuccess";
 import CheckoutFailed from "./Pages/CheckoutConfirmation/CheckoutFailed";
 import { Box } from "@chakra-ui/react";
 import cardBg from "../src/images/landing/landing-bg.png";
+import RegComplete from "./Pages/AuthenticationPage/RegComplete/RegComplete";
 function App() {
   // const [token,setToken] = useState(sessionStorage.getItem("token"));
   // if(!token){
@@ -75,6 +76,7 @@ function App() {
             <Route path="/bankdetail" element={<BankDetails />} />
             <Route path="/privacypolicy" element={<PrivacyPolicy />} />
             <Route path="/termandcondition" element={<TermCondition />} />
+            <Route path="/regsuccess" element={<RegComplete />} />
             <Route
               path="/refundandcancellation"
               element={<RefundAndCancellation />}

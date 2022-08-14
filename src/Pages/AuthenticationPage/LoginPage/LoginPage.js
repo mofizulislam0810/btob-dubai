@@ -205,7 +205,7 @@ const LoginPage = () => {
                           h="55px"
                           _hover={{ opacity: 0.9 }}
                         >
-                          <Text color="white">Login</Text>
+                          <Text color="white">Sign In</Text>
                         </Center>
                       </button>
                     </div>

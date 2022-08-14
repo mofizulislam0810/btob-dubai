@@ -160,7 +160,7 @@ const Registration = () => {
       const response = await axios.post(environment.register, registerObj);
       if (response.data.isSuccess == true) {
         toast.success("Thanks! Registration successfully submited..");
-        navigate("/regsuccess")
+        navigate('/regsuccess');
       } else {
         toast.error(response.data.message);
       }

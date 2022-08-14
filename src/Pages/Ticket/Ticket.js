@@ -33,7 +33,6 @@ const Ticket = () => {
     console.log(response);
     setAgentInfo(response.data);
   };
-
   const location = useLocation();
   const handleGetList = () => {
     const getTicketingList = async () => {
@@ -136,7 +135,7 @@ const Ticket = () => {
                         setIsFareHide(e.target.checked);
                       }}
                     />{" "}
-                    Hide Fare Information
+                    Hide Fare
                     <ul id="menu-standard">
                       <li id="menu-item">
                         <ReactToPrint
@@ -198,7 +197,7 @@ const Ticket = () => {
                                       environment.baseApiURL +
                                       `agentinfo/GetLogo/${ticketingList[0].agentLogo}`
                                     }
-                                    style={{ width: "300px", height: "50px" }}
+                                    style={{ width: "200px", height: "80px" }}
                                   ></img>
                                 ) : (
                                   <>
@@ -206,7 +205,7 @@ const Ticket = () => {
                                       alt="img01"
                                       className="p-2"
                                       src={tllLogo}
-                                      style={{ width: "150px", height: "50px" }}
+                                      style={{ width: "200px", height: "80px" }}
                                     ></img>
                                   </>
                                 )}
@@ -266,11 +265,11 @@ const Ticket = () => {
                           <tbody>
                             <tr>
                               <td className="fw-bold">TLL REFERENCE</td>
-                              <td>TLL-220101987654</td>
+                              <td>{ticketingList[0]?.uniqueTransID}</td>
                             </tr>
                             <tr>
                               <td className="fw-bold">FLIGHT TYPE</td>
-                              <td>Internation</td>
+                              <td>{ticketingList[0]?.journeyType}</td>
                             </tr>
                             <tr>
                               <td className="fw-bold">JOURNEY TYPE</td>
@@ -278,7 +277,7 @@ const Ticket = () => {
                             </tr>
                             <tr>
                               <td className="fw-bold">STATUS</td>
-                              <td>Confirm</td>
+                              <td>{ticketingList[0]?.status}</td>
                             </tr>
                           </tbody>
                         </table>

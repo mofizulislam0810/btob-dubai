@@ -73,9 +73,17 @@ const ShowAllFlight = ({
 
   let dataPrice = [];
 
+  const [filterPrice, setFilterPrice] = useState([
+    Math.floor(mainJson?.minMaxPrice?.minPrice),
+    Math.ceil(mainJson?.minMaxPrice?.maxPrice),
+  ]);
+
   if (parseInt(radioname) === 0 && name.length === 0) {
     dataPrice = jsonData?.filter(
-      (item) => parseInt(item.totalPrice) <= parseInt(price, 10)
+      // (item) => parseInt(item.totalPrice) <= parseInt(price, 10)
+      (item) =>
+        parseInt(item.totalPrice) >= filterPrice[0] &&
+        parseInt(item.totalPrice) <= filterPrice[1]
     );
   } else if (parseInt(radioname) === 1 && name.length === 0) {
     dataPrice = jsonData?.filter(
@@ -320,9 +328,9 @@ const ShowAllFlight = ({
                   </div>
                 </div>
               </div>
-              <div className="row pb-3">
+              <div className="row pb-3 px-2">
                 <div className="col-lg-12 mt-2" id="pricesection">
-                  <div className="mt-2">
+                  {/* <div className="mt-2">
                     <input
                       className="w-100 myinput"
                       type="range"
@@ -334,7 +342,25 @@ const ShowAllFlight = ({
                       min={mainJson?.minMaxPrice?.minPrice}
                       max={mainJson?.minMaxPrice?.maxPrice}
                     />
-                  </div>
+                  </div> */}
+
+                  <RangeSlider
+                    defaultValue={[
+                      Math.floor(mainJson?.minMaxPrice?.minPrice),
+                      Math.ceil(mainJson?.minMaxPrice?.maxPrice),
+                    ]}
+                    min={Math.floor(mainJson?.minMaxPrice?.minPrice)}
+                    max={Math.ceil(mainJson?.minMaxPrice?.maxPrice)}
+                    step={1000}
+                    minStepsBetweenThumbs={1}
+                    onChangeEnd={(val) => setFilterPrice(val)}
+                  >
+                    <RangeSliderTrack bg="#e5d4b1">
+                      <RangeSliderFilledTrack bg="#BF953F" />
+                    </RangeSliderTrack>
+                    <RangeSliderThumb bg="black" boxSize={4} index={0} />
+                    <RangeSliderThumb bg="black" boxSize={4} index={1} />
+                  </RangeSlider>
                   <div>
                     <span
                       className="float-start fw-bold"
@@ -351,21 +377,6 @@ const ShowAllFlight = ({
                       {mainJson?.minMaxPrice?.maxPrice}
                     </span>
                   </div>
-                  {/* <RangeSlider defaultValue={[mainJson?.minMaxPrice?.minPrice, mainJson?.minMaxPrice?.maxPrice]} min={mainJson?.minMaxPrice?.minPrice} max={mainJson?.minMaxPrice?.maxPrice} step={0.01}>
-  <RangeSliderTrack bg='red.100'>
-    <RangeSliderFilledTrack bg='tomato' />
-  </RangeSliderTrack>
-  <RangeSliderThumb boxSize={6} index={0} />
-  <RangeSliderThumb boxSize={6} index={1} />
-</RangeSlider> */}
-
-                  {/* <RangeSlider aria-label={['min', 'max']} defaultValue={[mainJson?.minMaxPrice?.minPrice, mainJson?.minMaxPrice?.maxPrice]}>
-                    <RangeSliderTrack>
-                      <RangeSliderFilledTrack />
-                    </RangeSliderTrack>
-                    <RangeSliderThumb index={0} />
-                    <RangeSliderThumb index={1} />
-                  </RangeSlider> */}
                 </div>
               </div>
             </div>

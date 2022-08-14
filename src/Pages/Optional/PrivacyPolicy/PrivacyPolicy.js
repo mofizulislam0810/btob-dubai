@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "../../SharePages/Footer/Footer";
 import FooterLR from "../FooterLR/FooterLR";
 import Navbar from "../Navbar/Navbar";
 
@@ -9,7 +8,7 @@ const PrivacyPolicy = () => {
     <>
     <Navbar></Navbar>
     <div className="hold-transition login-page search-panel-bg" style={{height:"100%"}}>
-      <div className="container mt-3">
+      <div className="container mt-3 text-white">
         <div className="row">
           <div className="col-lg-12">
             <h3>Privacy Policy</h3>
@@ -220,8 +219,8 @@ const PrivacyPolicy = () => {
           </div>
         </div>
       </div>
+      <FooterLR></FooterLR>
     </div>
-    <Footer></Footer>
     </>
   );
 };

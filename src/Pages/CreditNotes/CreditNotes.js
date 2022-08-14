@@ -87,7 +87,7 @@ const CreditNotes = () => {
                                 </a>
                               </td>
                               <td>{item.pnr}</td>
-                              <td>{item.currencyName} {item.refundAmount}</td>
+                              <td>{item.refundAmount}</td>
                               <td>
                                 {moment(item.adjustmentDate).format(
                                   "DD-MM-yyyy"

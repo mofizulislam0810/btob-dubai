@@ -213,7 +213,7 @@ const ShowModal = ({
                               <>
                                 <div
                                   className="row mt-2 p-2 border-bottom"
-                                  style={{ backgroundColor: "	white" }}
+                                  style={{ backgroundColor: "	#c5c5c5" }}
                                 >
                                   <div className="col-lg-4">
                                     <i className="fas fa-plane"></i>
@@ -326,7 +326,7 @@ const ShowModal = ({
                               <>
                                 <div
                                   className="row mt-2 p-2 border-bottom"
-                                  style={{ backgroundColor: "	white" }}
+                                  style={{ backgroundColor: "	#c5c5c5" }}
                                 >
                                   <div className="col-lg-4">
                                     <i className="fas fa-plane"></i>
@@ -441,7 +441,7 @@ const ShowModal = ({
                                   <>
                                     <div
                                       className="row mt-2 p-2 border-bottom"
-                                      style={{ backgroundColor: "	white" }}
+                                      style={{ backgroundColor: "	#c5c5c5" }}
                                     >
                                       <div className="col-lg-4">
                                         <i className="fas fa-plane"></i>
@@ -562,7 +562,7 @@ const ShowModal = ({
                                   <>
                                     <div
                                       className="row mt-2 p-2 border-bottom"
-                                      style={{ backgroundColor: "	white" }}
+                                      style={{ backgroundColor: "	#c5c5c5" }}
                                     >
                                       <div className="col-lg-4">
                                         <i className="fas fa-plane"></i>
@@ -684,7 +684,7 @@ const ShowModal = ({
                                   <>
                                     <div
                                       className="row mt-2 p-2 border-bottom"
-                                      style={{ backgroundColor: "	white" }}
+                                      style={{ backgroundColor: "	#c5c5c5" }}
                                     >
                                       <div className="col-lg-4">
                                         <i className="fas fa-plane"></i>
@@ -813,7 +813,7 @@ const ShowModal = ({
                                   <>
                                     <div
                                       className="row mt-2 p-2 border-bottom"
-                                      style={{ backgroundColor: "	white" }}
+                                      style={{ backgroundColor: "	#c5c5c5" }}
                                     >
                                       <div className="col-lg-4">
                                         <i className="fas fa-plane"></i>
@@ -934,7 +934,7 @@ const ShowModal = ({
                             {index === 0 ? (
                               <div
                                 className="row pt-2 p-2 border-bottom"
-                                style={{ backgroundColor: "	white" }}
+                                style={{ backgroundColor: "	#c5c5c5" }}
                               >
                                 <div className="col-lg-3 text-start">
                                   <span className="d-inline fs-6 fw-bold ms-1">
@@ -1144,7 +1144,7 @@ const ShowModal = ({
                           <>
                             <div
                               className="row border-bottom p-2"
-                              style={{ backgroundColor: "	white" }}
+                              style={{ backgroundColor: "	#c5c5c5" }}
                             >
                               <div className="col-lg-3 text-start">
                                 <span className="d-inline fs-6 fw-bold ms-1">
@@ -1482,7 +1482,7 @@ const ShowModal = ({
                           <div className="row px-2 pb-2">
                             <div
                               className="col-lg-8 p-2 border-bottom"
-                              style={{ backgroundColor: "	white" }}
+                              style={{ backgroundColor: "	#c5c5c5" }}
                             >
                               <div className="row">
                                 <div className="col-lg-5">
@@ -1558,7 +1558,7 @@ const ShowModal = ({
                           <div className="row pt-4 pb-2">
                             <div
                               className="col-lg-8 p-2 border-bottom"
-                              style={{ backgroundColor: "	white" }}
+                              style={{ backgroundColor: "	#c5c5c5" }}
                             >
                               <div className="row">
                                 <div className="col-lg-5">
@@ -1635,7 +1635,7 @@ const ShowModal = ({
                             <div className="row pt-4 pb-2">
                               <div
                                 className="col-lg-8 p-2 border-bottom"
-                                style={{ backgroundColor: "	white" }}
+                                style={{ backgroundColor: "	#c5c5c5" }}
                               >
                                 <div className="row">
                                   <div className="col-lg-5">
@@ -1717,7 +1717,7 @@ const ShowModal = ({
                             <div className="row pt-4 pb-2">
                               <div
                                 className="col-lg-8 p-2 border-bottom"
-                                style={{ backgroundColor: "	white" }}
+                                style={{ backgroundColor: "	#c5c5c5" }}
                               >
                                 <div className="row">
                                   <div className="col-lg-5">
@@ -1958,7 +1958,7 @@ const ShowModal = ({
                       <>
                         <div className="row px-2 pb-2">
                           <div className="col-lg-8 border-bottom">
-                            <div className="row p-1" style={{ backgroundColor: "	white" }}>
+                            <div className="row p-1" style={{ backgroundColor: "	#c5c5c5" }}>
                               <div className="col-lg-5 text-start">
                                 <span className="d-inline fs-6 fw-bold ms-1">
                                   Departure,{" "}
@@ -2039,7 +2039,7 @@ const ShowModal = ({
                           <div className="container">
                             <div className="row px-2 pb-2">
                               <div className="col-lg-8 border-bottom">
-                                <div className="row p-1" style={{ backgroundColor: "	white" }}>
+                                <div className="row p-1" style={{ backgroundColor: "	#c5c5c5" }}>
                                   <div className="col-lg-5 text-start">
                                     <span className="d-inline fs-6 fw-bold ms-1">
                                       Departure,{" "}

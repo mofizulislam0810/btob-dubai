@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "../../SharePages/Footer/Footer";
 import FooterLR from "../FooterLR/FooterLR";
 import Navbar from "../Navbar/Navbar";
 
@@ -9,7 +8,7 @@ const TermCondition = () => {
     <>
     <Navbar></Navbar>
     <div className="hold-transition login-page search-panel-bg" style={{height:"100%"}}>
-      <div className="container mt-3">
+      <div className="container mt-3 text-white">
         <div className="row">
           <div className="col-md-12">
             <h3>Terms And Condition</h3>
@@ -370,33 +369,33 @@ const TermCondition = () => {
               described below. All Triploverfees are charged on a per-person or
               per-ticket basis and are non-refundable.{" "}
             </p>
-            {/* <h5 className="text-center text-primary py-2">
+            <h5 className="text-center text-primary py-2">
               Cancellation &amp; Refunds
-            </h5> */}
-            <h5 className="text-start my-2">Agent Assisted Cancellation/ Refund</h5>
-            {/* <h5 className="text-primary py-2">Airline Economy Class </h5> */}
-            <table className="table table-bordered text-dark">
-              <tbody>
-                <tr>
-                  <td style={{ width: "50%" }}>Economy Class</td>
-                  <td>AED 20</td>
-                </tr>
-                <tr>
-                  <td>Business/First Class</td>
-                  <td>AED 30</td>
-                </tr>
-              </tbody>
-            </table>
-            {/* <h5 className="text-primary py-2">Airline Business/First Class</h5>
+            </h5>
+            <h5 className="text-center">Agent Assisted Cancellation/ Refund</h5>
+            <h5 className="text-primary py-2">Airline Economy Class </h5>
             <table className="table table-bordered text-dark">
               <tbody>
                 <tr>
                   <td style={{ width: "50%" }}>Domestic</td>
-                  <td>AED 18</td>
+                  <td>BDT 300</td>
                 </tr>
                 <tr>
                   <td>International</td>
-                  <td>AED 80</td>
+                  <td>BDT 500</td>
+                </tr>
+              </tbody>
+            </table>
+            <h5 className="text-primary py-2">Airline Business/First Class</h5>
+            <table className="table table-bordered text-dark">
+              <tbody>
+                <tr>
+                  <td style={{ width: "50%" }}>Domestic</td>
+                  <td>BDT 500</td>
+                </tr>
+                <tr>
+                  <td>International</td>
+                  <td>BDT 2000</td>
                 </tr>
               </tbody>
             </table>
@@ -409,11 +408,11 @@ const TermCondition = () => {
               <tbody>
                 <tr>
                   <td style={{ width: "50%" }}>Domestic</td>
-                  <td>AED 12</td>
+                  <td>BDT 300</td>
                 </tr>
                 <tr>
                   <td>International</td>
-                  <td>AED 18</td>
+                  <td>BDT 500</td>
                 </tr>
               </tbody>
             </table>
@@ -422,14 +421,14 @@ const TermCondition = () => {
               <tbody>
                 <tr>
                   <td style={{ width: "50%" }}>Domestic</td>
-                  <td>AED 18</td>
+                  <td>BDT 500</td>
                 </tr>
                 <tr>
                   <td>International</td>
-                  <td>AED 80</td>
+                  <td>BDT 2000</td>
                 </tr>
               </tbody>
-            </table> */}
+            </table>
             <h5 className="text-primary py-2">
               Airlines schedule changes/flight cancellations
             </h5>
@@ -699,8 +698,8 @@ const TermCondition = () => {
           </div>
         </div>
       </div>
+      <FooterLR></FooterLR>
     </div>
-    <Footer></Footer>
     </>
   );
 };

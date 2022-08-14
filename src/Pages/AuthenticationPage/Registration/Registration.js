@@ -151,7 +151,7 @@ const Registration = () => {
 
         <div className="card">
           <div className="card-header text-center">
-            <Link to="/"><img src={logo} alt="Triplover" /></Link>
+            <img src={logo} alt="Triplover" />
           </div>
           <div className="card-body login-card-body">
             <form>

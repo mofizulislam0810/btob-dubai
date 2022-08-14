@@ -9,6 +9,7 @@ import NoDataFoundPage from "../../NoDataFoundPage/NoDataFoundPage/NoDataFoundPa
 import useAuth from "../../../hooks/useAuth";
 import Loading from "../../Loading/Loading";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {
   RangeSlider,
   RangeSliderFilledTrack,
@@ -18,6 +19,8 @@ import {
 =======
 import { RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack } from "@chakra-ui/react";
 >>>>>>> bfc1f3436b27bcf6de2e6891122a5c011857d96f
+=======
+>>>>>>> parent of bfc1f34 (Merge pull request #10 from mofizulislam0810/main)
 
 const ShowAllFlight = ({
   fetchFlighData,
@@ -78,6 +81,7 @@ const ShowAllFlight = ({
   let dataPrice = [];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   const [filterPrice, setFilterPrice] = useState([
     Math.floor(mainJson?.minMaxPrice?.minPrice),
     Math.ceil(mainJson?.minMaxPrice?.maxPrice),
@@ -87,6 +91,8 @@ const ShowAllFlight = ({
 
 >>>>>>> bfc1f3436b27bcf6de2e6891122a5c011857d96f
 
+=======
+>>>>>>> parent of bfc1f34 (Merge pull request #10 from mofizulislam0810/main)
   if (parseInt(radioname) === 0 && name.length === 0) {
     dataPrice = jsonData?.filter(
       //(item) => parseInt(item.totalPrice) <= parseInt(price, 10)
@@ -311,7 +317,7 @@ const ShowAllFlight = ({
               </div>
               <div className="col-lg-6 bg-white py-3 px-5 ">
               <div class="dropdown float-end">
-                  <button class="btn fw-bold text-white dropdown-toggle button-color rounded" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn btn-primary fw-bold text-white dropdown-toggle button-color rounded" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <span className="me-1"><i class="fas fa-money-bill-wave"></i></span>{amountChange}
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -341,7 +347,7 @@ const ShowAllFlight = ({
             <div className="container">
               <div className="row px-2">
                 <div className="col-lg-6 mt-3">
-                  <h6 className="float-start text-color fw-bold">Price {price}</h6>
+                  <h6 className="float-start text-color fw-bold">Price</h6>
                 </div>
                 <div className="col-lg-6 mt-3">
                   <div className="text-end">
@@ -358,12 +364,11 @@ const ShowAllFlight = ({
                 <div className="col-lg-12 mt-2" id="pricesection">
                   {/* <div className="mt-2">
                     <input
-                      className="w-100 myinput"
+                      className="w-100"
                       type="range"
                       name="flexRadioDefault2"
                       value={price}
                       id="flexRadioDefault1"
-                      step="0.01"
                       onInput={handleInput}
                       min={mainJson?.minMaxPrice?.minPrice}
                       max={mainJson?.minMaxPrice?.maxPrice}
@@ -403,22 +408,6 @@ const ShowAllFlight = ({
                       {mainJson?.minMaxPrice?.maxPrice}
                     </span>
                   </div>
-{/* <RangeSlider defaultValue={[mainJson?.minMaxPrice?.minPrice, mainJson?.minMaxPrice?.maxPrice]} min={mainJson?.minMaxPrice?.minPrice} max={mainJson?.minMaxPrice?.maxPrice} step={0.01}>
-  <RangeSliderTrack bg='red.100'>
-    <RangeSliderFilledTrack bg='tomato' />
-  </RangeSliderTrack>
-  <RangeSliderThumb boxSize={6} index={0} />
-  <RangeSliderThumb boxSize={6} index={1} />
-</RangeSlider> */}
-
-
-                  {/* <RangeSlider aria-label={['min', 'max']} defaultValue={[mainJson?.minMaxPrice?.minPrice, mainJson?.minMaxPrice?.maxPrice]}>
-                    <RangeSliderTrack>
-                      <RangeSliderFilledTrack />
-                    </RangeSliderTrack>
-                    <RangeSliderThumb index={0} />
-                    <RangeSliderThumb index={1} />
-                  </RangeSlider> */}
                 </div>
               </div>
             </div>

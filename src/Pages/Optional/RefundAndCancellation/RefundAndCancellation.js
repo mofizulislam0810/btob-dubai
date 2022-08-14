@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "../../SharePages/Footer/Footer";
 import FooterLR from "../FooterLR/FooterLR";
 import Navbar from "../Navbar/Navbar";
 
@@ -11,11 +10,11 @@ const RefundAndCancellation = () => {
     <div  className="hold-transition login-page search-panel-bg" style={{height:"100%"}}>
       <div className="container mt-3">
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-12 text-white">
             <h3>Refund &amp; Cancellation</h3>
           </div>
 
-          <div className="col-md-12">
+          <div className="col-md-12 text-white">
             <p>
               Most of our airline tickets, hotels, pre-paid car rentals,
               vacation packages and service fees are non-refundable after the
@@ -23,7 +22,7 @@ const RefundAndCancellation = () => {
               time of booking and over the phone only.We can accept refund
               requests only if the following conditions have been met:
             </p>
-            <ul className=""
+            <ul className="text-white"
               style={{
                 listStyleType: "disc",
                 listStylePosition: "inside",
@@ -50,31 +49,31 @@ const RefundAndCancellation = () => {
               as described below. All Triplover fees are charged on a per-person
               or per-ticket basis and are non-refundable.
             </p>
-            {/* <h5 className="text-center py-2">Cancellation &amp; Refunds</h5> */}
-            <h5 className="text-start my-2">Agent Assisted Cancellation/ Refund</h5>
-            {/* <h5 className="py-2">Airline Economy Class </h5> */}
-            <table className="table table-bordered text-dark">
-              <tbody>
-                <tr>
-                  <td style={{width:'50%'}}>Economy Class</td>
-                  <td>AED 20</td>
-                </tr>
-                <tr>
-                  <td>Business/First Class</td>
-                  <td>AED 20</td>
-                </tr>
-              </tbody>
-            </table>
-            {/* <h5 className="py-2">Airline Business/First Class</h5>
+            <h5 className="text-center py-2">Cancellation &amp; Refunds</h5>
+            <h5 className="text-center">Agent Assisted Cancellation/ Refund</h5>
+            <h5 className="py-2">Airline Economy Class </h5>
             <table className="table table-bordered text-dark">
               <tbody>
                 <tr>
                   <td style={{width:'50%'}}>Domestic</td>
-                  <td>AED 18</td>
+                  <td>BDT 300</td>
                 </tr>
                 <tr>
                   <td>International</td>
-                  <td>AED 80</td>
+                  <td>BDT 500</td>
+                </tr>
+              </tbody>
+            </table>
+            <h5 className="py-2">Airline Business/First Class</h5>
+            <table className="table table-bordered text-dark">
+              <tbody>
+                <tr>
+                  <td style={{width:'50%'}}>Domestic</td>
+                  <td>BDT 500</td>
+                </tr>
+                <tr>
+                  <td>International</td>
+                  <td>BDT 2000</td>
                 </tr>
               </tbody>
             </table>
@@ -87,11 +86,11 @@ const RefundAndCancellation = () => {
               <tbody>
                 <tr>
                   <td style={{width:'50%'}}>Domestic</td>
-                  <td>AED 12</td>
+                  <td>BDT 300</td>
                 </tr>
                 <tr>
                   <td>International</td>
-                  <td>AED 18</td>
+                  <td>BDT 500</td>
                 </tr>
               </tbody>
             </table>
@@ -100,14 +99,14 @@ const RefundAndCancellation = () => {
               <tbody>
                 <tr>
                   <td style={{width:'50%'}}>Domestic</td>
-                  <td>AED 18</td>
+                  <td>BDT 500</td>
                 </tr>
                 <tr>
                   <td>International</td>
-                  <td>AED 80</td>
+                  <td>BDT 2000</td>
                 </tr>
               </tbody>
-            </table> */}
+            </table>
             <h5 className="py-2">Airlines schedule changes/flight cancellations</h5>
             <p>
               All Airlines have differing rules and policies regarding schedule
@@ -161,8 +160,8 @@ const RefundAndCancellation = () => {
           </div>
         </div>
       </div>
+      <FooterLR></FooterLR>
     </div>
-    <Footer></Footer>
     </>
   );
 };

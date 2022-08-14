@@ -348,7 +348,7 @@ const QuickPassenger = () => {
                         </a>
                       </li>
                     </ul>
-                    <table className="table table-bordered align-middle table-striped text-center mt-3">
+                    <table className="table table-bordered align-middle table-striped text-center">
                       <thead>
                         <tr>
                           <th>SL</th>

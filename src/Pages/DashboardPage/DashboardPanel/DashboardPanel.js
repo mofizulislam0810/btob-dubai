@@ -11,34 +11,16 @@ import calanderOneMonthRes from "../../../JSON/calanderOneMonthRes";
 import RevoCalendar from "revo-calendar";
 
 const DashboardPanel = () => {
- const [eventList,setEventList] = useState([]);
-  const getEventBooking = async() => {
-    const response = await axios.get(environment.getCalendarEventBooking+`?year=2022&month=1`,environment.headerToken);
-    console.log(response);
-    setEventList(await response.data.map((obj) => {
-      var date = new Date(obj.date);
-      var timestamp = +date;
-      return {
-        name: obj.id,
-        date: timestamp,
-      };
-    }))
-  }
+  const eventList = calanderOneMonthRes.map((obj) => {
+    var date = new Date(obj.date);
+    var timestamp = +date;
+    return {
+      name: obj.id,
+      date: timestamp,
+    };
+  });
 
-  const handleViewTicket = (index) => {
-    let obj = [];
-    obj = eventList.filter((item,idx)=>{
-      if(idx===index){
-        return item;
-      }
-    })
-    // console.log(obj[0].name);
-    window.open("/ticket?utid=" + obj[0].name, "_blank");
-    //navigate("/ticket?utid="+utid,'_blank');
-  };
-
-
-  console.log(eventList);
+  //console.log(eventList);
 
   const [highestTicktedAirlines, setHighestTicktedAirlines] = useState([]);
   const [labelList, setLabelList] = useState([]);
@@ -212,7 +194,6 @@ const DashboardPanel = () => {
 
   useEffect(() => {
     handleCount();
-    getEventBooking();
   }, []);
 
   return (
@@ -333,10 +314,8 @@ const DashboardPanel = () => {
                   timeFormat24={true}
                   showAllDayLabel={true}
                   detailDateFormat="DD/MM/YYYY"
-                  eventSelected={(index) =>{
-                    handleViewTicket(index);
+                  eventSelected={(index) =>
                     console.log("index of response json : " + index)
-                  }
                   }
                 />
               </Box>

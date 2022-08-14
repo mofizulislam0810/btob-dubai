@@ -231,7 +231,7 @@ const handleViewTicket=()=>{
             href="#"
           >
             <span className="text-white fw-bold">
-            {agentInfo?.currencyName !== undefined ? agentInfo?.currencyName : "BDT"} {agentInfo?.currentBalance ?? 0}
+            {agentInfo?.currencyName !== undefined ? agentInfo?.currencyName : "BDT"} {agentInfo?.currentBalance}
             </span>
           </a>
           <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -242,7 +242,7 @@ const handleViewTicket=()=>{
                 className="btn text-white fw-bold button-color rounded"
                 // style={{ backgroundColor: "#02046a" }}
               >
-                {agentInfo?.currencyName !== undefined ? agentInfo?.currencyName : "BDT"} {agentInfo?.currentBalance ?? 0}
+                {agentInfo?.currencyName !== undefined ? agentInfo?.currencyName : "BDT"} {agentInfo?.currentBalance}
               </button>
             </div>
             <div className="dropdown-divider"></div>

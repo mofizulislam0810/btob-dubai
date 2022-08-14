@@ -1,6 +1,6 @@
- const baseURL='http://localhost:7236/';
+// const baseURL='http://localhost:7236/';
 // const baseURL='http://52.221.202.198:83/';
-// const baseURL='http://13.212.45.180:81/';
+const baseURL='http://52.221.202.198:86/';
 const baseApiURL =baseURL+ 'api/';
 const tokenData = JSON.parse(sessionStorage.getItem('token'));
 let headerToken = { headers: { Authorization: '' } };
@@ -24,11 +24,10 @@ export const environment = {
   priceCheck: baseApiURL + 'RePrice',
   getFareRules:baseApiURL + 'FareRules',
 
-  
-  getCalendarEventBooking : baseApiURL + 'B2BDashboard/GetCalendarEventBooking',
+
 
   cityList : baseApiURL+'Dropdown/Cities',
-  bankAccounts : baseApiURL+'Dropdown/bankaccounts',
+  bankAccounts : baseApiURL+'Dropdown/bank-account',
   getairlineList : baseApiURL+'Dropdown/Airlines',
   getcountryList : baseApiURL+'Dropdown/Countries',
   getairportList : baseApiURL+'Dropdown/Airports',
@@ -38,11 +37,11 @@ export const environment = {
   getsubjectList : baseApiURL+'Dropdown/SupportSubjects',
   accountsByAgentDropdown : baseApiURL+'Dropdown/AgentBankAccountsByAgent',
 
-  depositRequest : baseApiURL + 'B2BBalance/DepositRequest',
-  agentDeposits :baseApiURL + 'B2BBalance/AgentDeposits',
-  agentFileUpload : baseApiURL + 'B2BBalance/Upload',
-  paymentCheckout:baseApiURL+'B2BBalance/Checkout',
-  branchList : baseApiURL + 'B2BBalance/GetBranches',
+  depositRequest : baseApiURL + 'B2BAgentBalance/DepositRequest',
+  agentDeposits :baseApiURL + 'B2BAgentBalance/AgentDeposits',
+  agentFileUpload : baseApiURL + 'B2BAgentBalance/Upload',
+  paymentCheckout:baseApiURL+'B2BAgentBalance/Checkout',
+  branchList : baseApiURL + 'B2BAgentBalance/GetBranches',
 
   bankAccountsByAgent : baseApiURL+'B2BBankAccount/AgentBankAccountsByAgent',
   bankAccount: baseApiURL + 'B2BBankAccount',

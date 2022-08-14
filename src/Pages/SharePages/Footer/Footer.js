@@ -36,7 +36,7 @@ const socialData = [
 
 const quickLinksData = [
   { text: "Contact", to: "contact" },
-  // { text: "Bank Details", to: "bankdetail" },
+  { text: "Bank Details", to: "bankdetail" },
   { text: "Privacy Policy", to: "privacypolicy" },
   { text: "Terms And Conditions", to: "termandcondition" },
   { text: "Refund & Cancellation", to: "refundandcancellation" },
@@ -44,16 +44,17 @@ const quickLinksData = [
 
 const addressData = [
   {
-
-    text: `Al Muhairi 113-127, Al Dhagaya, Deira, Dubai, United Arab Emirates`,
+    text: `House # 08, Road # 02, Block # C,
+  Banasree,Rampura, Dhaka- 1219,
+  Bangladesh.`,
     icon: BsFillHouseFill,
   },
   {
-    text: "+97143375728",
+    text: "(880) 9613345345",
     icon: FaPhoneAlt,
   },
   {
-    text: "support@triplover.ae",
+    text: "support@triplover.com",
     icon: GrMail,
   },
 ];

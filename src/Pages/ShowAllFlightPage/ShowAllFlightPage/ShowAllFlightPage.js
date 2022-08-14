@@ -1276,7 +1276,7 @@ const ShowAllFlightPage = () => {
                 </span>
               </div>
               <div className="col-lg-2 my-auto d-flex justify-content-center bg-white">
-                <button className="btn button-color btn-sm text-white float-start fw-bold search-again rounded">
+                <button className="btn button-color btn-sm text-white float-start fw-bold search-again rounded-3">
                   Modify search
                 </button>
               </div>
@@ -1299,7 +1299,7 @@ const ShowAllFlightPage = () => {
                                     <div className="flex-container">
                                       <div className="left-border">
                                         <button
-                                          className="form-select border-0 inputgroup"
+                                          className="form-select border-0 inputgroup rounded-start"
                                           type="button"
                                           id="dropdownMenuButton1"
                                           data-bs-toggle="dropdown"
@@ -1377,7 +1377,7 @@ const ShowAllFlightPage = () => {
                                         <div className="d-flex ageselectpadnotx align-items-center inputgroup">
                                           <div style={{ position: "relative" }}>
                                             <button
-                                              className="form-select border-0 inputgroup"
+                                              className="form-select border-0 inputgroup rounded-end" 
                                               type="button"
                                               id="dropdownMenuButtonpassenger"
                                               data-bs-toggle="dropdown"
@@ -1385,7 +1385,7 @@ const ShowAllFlightPage = () => {
                                               data-bs-auto-close="outside"
                                               style={{ height: "36px" }}
                                             >
-                                              <span id="adultval">
+                                              <span className="d-flex">
                                                 <svg
                                                   width="20"
                                                   height="20"
@@ -1673,7 +1673,7 @@ const ShowAllFlightPage = () => {
                                     </label>
                                     <input
                                       type="text"
-                                      className="form-control"
+                                      className="form-control rounded-3"
                                       placeholder="e.g. BS, BG, TK"
                                       // required
                                       autoComplete="off"
@@ -1688,14 +1688,14 @@ const ShowAllFlightPage = () => {
                                       className="form-label text-white"
                                     >
                                       Depart From{" "}
-                                      <span className="text-danger fw-bold">
+                                      <span className="text-white fw-bold">
                                         *
                                       </span>
                                     </label>
 
                                     <input
                                       type="text"
-                                      className="form-control input-field autocomplete"
+                                      className="form-control input-field autocomplete rounded-3"
                                       ref={originRef}
                                       placeholder="From"
                                       required
@@ -1709,13 +1709,13 @@ const ShowAllFlightPage = () => {
                                       className="form-label text-white"
                                     >
                                       Going To{" "}
-                                      <span className="text-danger fw-bold">
+                                      <span className="text-white fw-bold">
                                         *
                                       </span>
                                     </label>
                                     <input
                                       type="text"
-                                      className="form-control input-field autocomplete"
+                                      className="form-control input-field autocomplete rounded-3"
                                       ref={destinationRef}
                                       placeholder="To"
                                       required
@@ -1731,7 +1731,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Departing{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
@@ -1745,13 +1745,13 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Returning{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
                                       </div>
                                     </div>
-                                    <div className="t-datepicker class_0 bg-light">
+                                    <div className="t-datepicker class_0 bg-light rounded-3">
                                       <div
                                         className="t-check-in"
                                         id="departureDate"
@@ -1776,14 +1776,14 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Depart From{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
 
                                         <input
                                           type="text"
-                                          className="form-control input-field autocomplete"
+                                          className="form-control input-field autocomplete rounded-3"
                                           ref={originRef1}
                                           placeholder="From"
                                           autoComplete="off"
@@ -1797,13 +1797,13 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Going To{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
                                         <input
                                           type="text"
-                                          className="form-control input-field autocomplete"
+                                          className="form-control input-field autocomplete rounded-3"
                                           ref={destinationRef1}
                                           placeholder="To"
                                           id="txtTo1"
@@ -1819,13 +1819,13 @@ const ShowAllFlightPage = () => {
                                               className="form-label text-white"
                                             >
                                               Departing{" "}
-                                              <span className="text-danger fw-bold">
+                                              <span className="text-white fw-bold">
                                                 *
                                               </span>
                                             </label>
                                           </div>
                                         </div>
-                                        <div className="t-datepicker class_1 bg-light">
+                                        <div className="t-datepicker class_1 bg-light rounded-3">
                                           <div
                                             className="t-check-in t-picker-only"
                                             id="departureDate1"
@@ -1848,14 +1848,14 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Depart From{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
 
                                         <input
                                           type="text"
-                                          className="form-control input-field autocomplete"
+                                          className="form-control input-field autocomplete rounded-3"
                                           ref={originRef2}
                                           placeholder="From"
                                           autoComplete="off"
@@ -1868,13 +1868,13 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Going To{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
                                         <input
                                           type="text"
-                                          className="form-control input-field autocomplete"
+                                          className="form-control input-field autocomplete rounded-3"
                                           ref={destinationRef2}
                                           placeholder="To"
                                           id="txtTo2"
@@ -1889,13 +1889,13 @@ const ShowAllFlightPage = () => {
                                               className="form-label text-white"
                                             >
                                               Departing{" "}
-                                              <span className="text-danger fw-bold">
+                                              <span className="text-white fw-bold">
                                                 *
                                               </span>
                                             </label>
                                           </div>
                                         </div>
-                                        <div className="t-datepicker class_2 bg-light">
+                                        <div className="t-datepicker class_2 bg-light rounded-3">
                                           <div
                                             className="t-check-in t-picker-only"
                                             id="departureDate2"
@@ -1918,14 +1918,14 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Depart From{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
 
                                         <input
                                           type="text"
-                                          className="form-control input-field autocomplete"
+                                          className="form-control input-field autocomplete rounded-3"
                                           ref={originRef3}
                                           placeholder="From"
                                           autoComplete="off"
@@ -1938,13 +1938,13 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Going To{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
                                         <input
                                           type="text"
-                                          className="form-control input-field autocomplete"
+                                          className="form-control input-field autocomplete rounded-3"
                                           ref={destinationRef3}
                                           placeholder="To"
                                           id="txtTo3"
@@ -1959,13 +1959,13 @@ const ShowAllFlightPage = () => {
                                               className="form-label text-white"
                                             >
                                               Departing{" "}
-                                              <span className="text-danger fw-bold">
+                                              <span className="text-white fw-bold">
                                                 *
                                               </span>
                                             </label>
                                           </div>
                                         </div>
-                                        <div className="t-datepicker class_3 bg-light">
+                                        <div className="t-datepicker class_3 bg-light rounded-3">
                                           <div
                                             className="t-check-in t-picker-only"
                                             id="departureDate3"
@@ -1988,14 +1988,14 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Depart From{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
 
                                         <input
                                           type="text"
-                                          className="form-control input-field autocomplete"
+                                          className="form-control input-field autocomplete rounded-3"
                                           ref={originRef4}
                                           placeholder="From"
                                           autoComplete="off"
@@ -2008,13 +2008,13 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Going To{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
                                         <input
                                           type="text"
-                                          className="form-control input-field autocomplete"
+                                          className="form-control input-field autocomplete rounded-3"
                                           ref={destinationRef4}
                                           placeholder="To"
                                           id="txtTo4"
@@ -2029,13 +2029,13 @@ const ShowAllFlightPage = () => {
                                               className="form-label text-white"
                                             >
                                               Departing{" "}
-                                              <span className="text-danger fw-bold">
+                                              <span className="text-white fw-bold">
                                                 *
                                               </span>
                                             </label>
                                           </div>
                                         </div>
-                                        <div className="t-datepicker class_4 bg-light">
+                                        <div className="t-datepicker class_4 bg-light rounded-3">
                                           <div
                                             className="t-check-in t-picker-only"
                                             id="departureDate4"
@@ -2058,14 +2058,14 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Depart From{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
 
                                         <input
                                           type="text"
-                                          className="form-control input-field autocomplete"
+                                          className="form-control input-field autocomplete rounded-3"
                                           ref={originRef5}
                                           placeholder="From"
                                           autoComplete="off"
@@ -2078,13 +2078,13 @@ const ShowAllFlightPage = () => {
                                           className="form-label text-white"
                                         >
                                           Going To{" "}
-                                          <span className="text-danger fw-bold">
+                                          <span className="text-white fw-bold">
                                             *
                                           </span>
                                         </label>
                                         <input
                                           type="text"
-                                          className="form-control input-field autocomplete"
+                                          className="form-control input-field autocomplete rounded-3"
                                           ref={destinationRef5}
                                           placeholder="To"
                                           id="txtTo5"
@@ -2099,13 +2099,13 @@ const ShowAllFlightPage = () => {
                                               className="form-label text-white"
                                             >
                                               Departing{" "}
-                                              <span className="text-danger fw-bold">
+                                              <span className="text-white fw-bold">
                                                 *
                                               </span>
                                             </label>
                                           </div>
                                         </div>
-                                        <div className="t-datepicker class_5 bg-light">
+                                        <div className="t-datepicker class_5 bg-light rounded-3">
                                           <div
                                             className="t-check-in t-picker-only"
                                             id="departureDate5"
@@ -2120,7 +2120,7 @@ const ShowAllFlightPage = () => {
                                     <div className="my-2 d-flex justify-content-center">
                                       <button
                                       type="button"
-                                        className="btn btn-primary rounded-pill"
+                                        className="btn button-color rounded-pill text-white"
                                         id="btnp-1"
                                         onClick={() => handleFlightOptionP()}
                                       >
@@ -2129,7 +2129,7 @@ const ShowAllFlightPage = () => {
                                       &nbsp;
                                       <button
                                       type="button"
-                                        className="btn btn-primary rounded-pill"
+                                        className="btn button-color rounded-pill text-white"
                                         id="btnm-1"
                                         style={{ display: "none" }}
                                         onClick={() => handleFlightOptionM()}
@@ -2146,7 +2146,7 @@ const ShowAllFlightPage = () => {
                                   <div className="col-lg-12">
                                     <div className="d-flex justify-content-center">
                                       <button
-                                        className="btn text-white mt-3 text-center fw-bold rounded"
+                                        className="btn text-white mt-3 text-center fw-bold rounded-3"
                                         id="search-flight" style={{backgroundColor:"#390404"}}
                                       >
                                         Search Flight

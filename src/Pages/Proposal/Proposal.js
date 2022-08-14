@@ -18,6 +18,7 @@ import { environment } from "../SharePages/Utility/environment";
 const Proposal = () => {
   let defaultPriceList=[];
   let flightList = JSON.parse(sessionStorage.getItem("checkList"));
+  const currency = JSON.parse(localStorage.getItem("currency"));
   console.log(flightList);
   flightList.map((item, index) => {
     console.log(item.bookingComponents[0].totalPrice)
@@ -790,7 +791,7 @@ const Proposal = () => {
                                     <div className="col-lg-3 my-auto text-center">
                                       {/* <h6 className="text-end text-color"><del>BDT 9,000</del></h6> */}
                                       <h5 className="text-color">
-                                        BDT {item.passengerFares.adt.totalPrice}
+                                      {currency!==undefined ? currency : "BDT"} {item.passengerFares.adt.totalPrice}
                                       </h5>
                                       <p className="text-color fw-bold">
                                         {item.refundable === true
@@ -1117,7 +1118,7 @@ const Proposal = () => {
                                         </div>
                                         <div className="col-lg-8"></div>
                                         <div className="col-lg-2 float-end">
-                                          <h6 className="text-end">BDT 0</h6>
+                                          <h6 className="text-end">{currency!==undefined ? currency : "BDT"} 0</h6>
                                         </div>
                                       </div>
                                       <div className="row border-top">
@@ -1129,7 +1130,7 @@ const Proposal = () => {
                                         <div className="col-lg-8"></div>
                                         <div className="col-lg-2 float-end">
                                           <h6 className="text-end">
-                                            BDT {item.totalPrice}
+                                          {currency!==undefined ? currency : "BDT"} {item.totalPrice}
                                           </h6>
                                         </div>
                                       </div>
@@ -1172,7 +1173,7 @@ const Proposal = () => {
                             <input type="number" name={"value"+index} className="form-control" onChange={(e)=>handleSingleValue(e.target.value,index)} style={{height:"25px",width:"135px"}}/>
                           </div> */}
                           <h5 className="text-color d-flex justify-content-center">
-                            BDT&nbsp;<span id={"balance"+index}> {parseInt(singleValue[index]??0) + addBalance - decBalance }</span>
+                          {currency!==undefined ? currency : "BDT"}&nbsp;<span id={"balance"+index}> {parseInt(singleValue[index]??0) + addBalance - decBalance }</span>
                             <input width={70} type="number" id={"balanceInput"+index} name={"value"+index} value={singleValue[index]??0}  onChange={(e)=>handleSingleValue(e.target.value,index)} style={{height:"25px",width:"70px"}}/>
                             <span className="ms-1" id={"edit"+index}><i class="fas fa-edit"></i></span>
                             <span className="ms-1" id={"right"+index}><i class="fas fa-check"></i></span>
@@ -1232,7 +1233,7 @@ const Proposal = () => {
                                   {parseInt(singleValue[index]) + addBalance  +
                                     parseInt((parseInt(singleValue[index])-item.passengerFares.adt.taxes)*.003) -
                                     190 - decBalance}{" "}
-                                  BDT
+                                  {currency!==undefined ? currency : "BDT"}
                                 </td>
                               </tr>
                             </tbody>
@@ -1377,7 +1378,7 @@ const Proposal = () => {
                               </td>
                               <td className="right">{item.directions[0][0].segments[0].duration[0]}</td>
                               <td>ADT 1</td>
-                              <td className="right">BDT {singleValue[index]}</td>
+                              <td className="right">{currency!==undefined ? currency : "BDT"} {singleValue[index]}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -1408,31 +1409,31 @@ const Proposal = () => {
                                 <td className="left">
                                   <strong>Base Fare</strong>
                                 </td>
-                                <td className="text-end">BDT {singleValue[index]-item.passengerFares.adt.taxes + addBalance - decBalance}</td>
+                                <td className="text-end">{currency!==undefined ? currency : "BDT"} {singleValue[index]-item.passengerFares.adt.taxes + addBalance - decBalance}</td>
                               </tr>
                               <tr>
                                 <td className="left">
                                   <strong>Tax</strong>
                                 </td>
-                                <td className="text-end"> BDT {item.passengerFares.adt.taxes}</td>
+                                <td className="text-end"> {currency!==undefined ? currency : "BDT"} {item.passengerFares.adt.taxes}</td>
                               </tr>
                               <tr>
                                 <td className="left">
                                   <strong>AIT</strong>
                                 </td>
-                                <td className="text-end"> BDT {parseInt(parseInt(singleValue[index])*.003)}</td>
+                                <td className="text-end"> {currency!==undefined ? currency : "BDT"} {parseInt(parseInt(singleValue[index])*.003)}</td>
                               </tr>
                               <tr>
                                 <td className="left">
                                   <strong>Gross Fare</strong>
                                 </td>
-                                <td className="text-end"> BDT {parseInt(parseInt(singleValue[index])*.003)+parseInt(singleValue[index]) + parseInt(addBalance) - parseInt(decBalance)}</td>
+                                <td className="text-end"> {currency!==undefined ? currency : "BDT"} {parseInt(parseInt(singleValue[index])*.003)+parseInt(singleValue[index]) + parseInt(addBalance) - parseInt(decBalance)}</td>
                               </tr>
                               <tr>
                                 <td className="left">
                                   <strong>Discount </strong>
                                 </td>
-                                <td className="text-end">BDT 190</td>
+                                <td className="text-end">{currency!==undefined ? currency : "BDT"} 190</td>
                               </tr>
                              
                               <tr>
@@ -1440,7 +1441,7 @@ const Proposal = () => {
                                   <strong>Total</strong>
                                 </td>
                                 <td className="text-end">
-                                  <strong>BDT {parseInt(parseInt(singleValue[index])*.003)+parseInt(singleValue[index]) + parseInt(addBalance) - parseInt(decBalance) -190}</strong>
+                                  <strong>{currency!==undefined ? currency : "BDT"} {parseInt(parseInt(singleValue[index])*.003)+parseInt(singleValue[index]) + parseInt(addBalance) - parseInt(decBalance) -190}</strong>
                                 </td>
                               </tr>
                             </tbody>

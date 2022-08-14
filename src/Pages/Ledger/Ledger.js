@@ -38,9 +38,8 @@ const Ledger = () => {
       obj,
       environment.headerToken
     );
-    setCurrencyName(response.data.data[0].currencyName);
+    setCurrencyName(response.data.data[0]?.currencyName);
     setLedgerData(response.data.data);
-
     setPageCount(response.data.totalPages);
   };
   console.log(ledgerData);
@@ -218,7 +217,7 @@ const Ledger = () => {
                           </tbody>
                         </table>
 
-                        {Object.keys(ledgerData).length === 0 && !isTimeOut && (
+                        {ledgerData?.length === 0 && !isTimeOut && (
                           <Center w="100%" py="50px">
                             <Spinner
                               thickness="4px"

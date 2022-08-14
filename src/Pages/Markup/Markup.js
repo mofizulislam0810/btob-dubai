@@ -88,8 +88,8 @@ const Markup = () => {
   let [pageCount, setPageCount] = useState(0);
   let [pageSize, setPageSize] = useState(10);
   let [currentPageNumber, setCurrentPageNumber] = useState(1);
-  const fieldIds = { text: "code", value: "id" };
-  const fieldCodes = { text: "code", value: "code" };
+  const fieldIds = { text: "name", value: "id" };
+  const fieldCodes = { text: "name", value: "code" };
   const handleGetAgentMarkups = (currentPageNumber) => {
     const getData = async () => {
       const response = await axios.get(

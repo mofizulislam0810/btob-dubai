@@ -80,7 +80,7 @@ const Balance = () => {
     remarks: "Online Deposit Checkout"
   }
   const deposittypeList = [
-    { id: 1, name: "Cheque" },
+    { id: 1, name: "Check" },
     { id: 2, name: "Bank Deposit" },
     { id: 3, name: "Bank Transfer" },
     { id: 4, name: "Cash" },
@@ -94,6 +94,8 @@ const Balance = () => {
   ];
 
   const handleSubmit = () => {
+
+
     if (depositTypeId == 1) {
       if (checkNo == "") {
         toast.error("Sorry! Check no is empty..");
@@ -625,11 +627,19 @@ const Balance = () => {
                                   <option key={0} value="0">
                                     Select One
                                   </option>
-                                  {
-                                  accountList.map((item, index) => {
+                                  {accountList.map((item, index) => {
                                     return (
                                       <option key={index + 1} value={item.id}>
-                                        {item.name}
+                                        {item.holderName +
+                                          ", " +
+                                          item.bankName +
+                                          ", " +
+                                          item.branchName +
+                                          ", " +
+                                          item.address +
+                                          "(" +
+                                          item.accountNumber +
+                                          ")"}
                                       </option>
                                     );
                                   })}
@@ -694,7 +704,16 @@ const Balance = () => {
                                 {accountList.map((item, index) => {
                                   return (
                                     <option key={index + 1} value={item.id}>
-                                      {item.name}
+                                      {item.holderName +
+                                        ", " +
+                                        item.bankName +
+                                        ", " +
+                                        item.branchName +
+                                        ", " +
+                                        item.address +
+                                        "(" +
+                                        item.accountNumber +
+                                        ")"}
                                     </option>
                                   );
                                 })}
@@ -781,7 +800,16 @@ const Balance = () => {
                                 {accountList.map((item, index) => {
                                   return (
                                     <option key={index + 1} value={item.id}>
-                                      {item.name}
+                                      {item.holderName +
+                                        ", " +
+                                        item.bankName +
+                                        ", " +
+                                        item.branchName +
+                                        ", " +
+                                        item.address +
+                                        "(" +
+                                        item.accountNumber +
+                                        ")"}
                                     </option>
                                   );
                                 })}
@@ -807,7 +835,16 @@ const Balance = () => {
                                 {agentBankAccountList.map((item, index) => {
                                   return (
                                     <option key={index + 1} value={item.id}>
-                                      {item.name}
+                                      {item.holderName +
+                                        ", " +
+                                        item.bankName +
+                                        ", " +
+                                        item.branchName +
+                                        ", " +
+                                        item.address +
+                                        "(" +
+                                        item.accountNumber +
+                                        ")"}
                                     </option>
                                   );
                                 })}
@@ -1134,7 +1171,7 @@ const Balance = () => {
                                       <td>{((currentPageNumber - 1) * pageSize) + index + 1}</td>
                                       <td>
                                         {item.depositTypeId === 1
-                                          ? "Cheque"
+                                          ? "Check"
                                           : item.depositTypeId === 2
                                             ? "Bank Deposit"
                                             : item.depositTypeId === 3
@@ -1347,7 +1384,9 @@ const Balance = () => {
                                             key={index + 1}
                                             value={item.id}
                                           >
-                                            {item.name}
+                                            {item.countryName +
+                                              ", " +
+                                              item.name}
                                           </option>
                                         );
                                       })}

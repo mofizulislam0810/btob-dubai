@@ -1,3 +1,19 @@
 tbody{
     background-color: white;
 }
+
+
+.box-proposal {
+    display: none;
+    position: absolute;
+    top: 190px;
+    left: 14%;
+    color: #02046a;
+    padding: 5px;
+    z-index: 100;
+    /* border: 1px solid black; */
+  }
+  
+  .briefcase:hover+.box-proposal {
+    display: block;
+  }

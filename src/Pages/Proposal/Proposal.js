@@ -16,7 +16,7 @@ import axios from "axios";
 import { environment } from "../SharePages/Utility/environment";
 
 const Proposal = () => {
-  let defaultPriceList=[];
+  let defaultPriceList = [];
   let flightList = JSON.parse(sessionStorage.getItem("checkList"));
   const currency = JSON.parse(localStorage.getItem("currency"));
   console.log(flightList);
@@ -31,17 +31,7 @@ const Proposal = () => {
       ? `https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${flightList[0].directions[1][0].platingCarrierCode}.png`
       : ``;
   useEffect(() => {
-    // $(function () {
-    //   //Add text editor
-    //   $("#compose-textarea").summernote({
-    //     airMode: true,
-    //   });
-    // });
-
     flightList.map((item, index) => {
-      // console.log(item.bookingComponents[0].totalPrice)
-      // defaultPriceList.push(item.bookingComponents[0].totalPrice);
-      // console.log(defaultPriceList)
       $(document).ready(function () {
         $("#flightId" + index).attr("style", "background:#ed5c2b");
         $("#baggageId" + index).attr("style", "background:#02046a");
@@ -112,44 +102,20 @@ const Proposal = () => {
         $("#passengerBrackdown" + index).toggle("slow");
       });
 
-      $("#balanceInput"+index).hide();
-      $("#right"+index).hide();
-      $("#edit"+index).click(function(){
-        $("#balanceInput"+index).show();
-        $("#right"+index).show();
-        $("#balance"+index).hide();
-        $("#edit"+index).hide();
+      $("#balanceInput" + index).hide();
+      $("#right" + index).hide();
+      $("#edit" + index).click(function () {
+        $("#balanceInput" + index).show();
+        $("#right" + index).show();
+        $("#balance" + index).hide();
+        $("#edit" + index).hide();
       })
-      $("#right"+index).click(function(){
-        $("#balanceInput"+index).hide();
-        $("#right"+index).hide();
-        $("#balance"+index).show();
-        $("#edit"+index).show();
+      $("#right" + index).click(function () {
+        $("#balanceInput" + index).hide();
+        $("#right" + index).hide();
+        $("#balance" + index).show();
+        $("#edit" + index).show();
       })
-      
-      // $("#singleInput"+index).hide();
-      // $("#edit"+index).click(function(){
-      //   $("#singleInput"+index).toggle("slow");
-      // })
-
-      // $("#submit"+index).click(function(){
-      //   $("#singleInput"+index).hide("slow");
-      // })
-
-      
-      // $('#downloadPdf'+index).click(function(){
-      //   const doc = new jsPDF();
-
-      //   //get table html
-      //   const pdfTable = document.getElementById("proposalPrint");
-      //   //html to pdf format
-      //   var html = htmlToPdfmake(pdfTable.innerHTML);
-
-      //   const documentDefinition = { content: html };
-      //   pdfMake.vfs = pdfFonts.pdfMake.vfs;
-      //   pdfMake.createPdf(documentDefinition).open();
-      //   pdfMake.createPdf(documentDefinition).download();
-      // })
     });
 
     $("#emailSection").hide();
@@ -164,8 +130,6 @@ const Proposal = () => {
   console.log(defaultPriceList);
 
   const printDocument = () => {
-    // var doc = new jsPDF("p", "pt", "a4");
-    // doc.html(document.querySelector("#proposalPrint")).save("mypdf.pdf");
     const doc = new jsPDF();
 
     //get table html
@@ -178,13 +142,14 @@ const Proposal = () => {
     pdfMake.createPdf(documentDefinition).open();
     pdfMake.createPdf(documentDefinition).download();
   };
-  
-  const [singleValue,setSingleValue] = useState(defaultPriceList);
-  const [inputIncreaseValue,setInputIncreaseValue] = useState();
-  const [inputDecreaseValue,setInputDecreaseValue] = useState();
-  const [addBalance,setAddBalance] = useState(0);
-  const [decBalance,setDecBalance] = useState(0);
+
+  const [singleValue, setSingleValue] = useState(defaultPriceList);
+  const [inputIncreaseValue, setInputIncreaseValue] = useState();
+  const [inputDecreaseValue, setInputDecreaseValue] = useState();
+  const [addBalance, setAddBalance] = useState(0);
+  const [decBalance, setDecBalance] = useState(0);
   const [messageData, setMessageData] = useState({});
+  const [selectedType, setSelectedType] = useState("Increase");
 
 
   const handleOnBlur = (e) => {
@@ -192,49 +157,45 @@ const Proposal = () => {
     const attachment = '';
     const field = e.target.name;
     const value = e.target.value;
-    const newMessageData = { ...messageData,attachment,html };
+    const newMessageData = { ...messageData, attachment, html };
     newMessageData[field] = value;
     setMessageData(newMessageData);
-    // console.log(messageData);
   };
 
- const handleMessageUser = (e) =>{
-  //  console.log(pdfTable);
-  axios.post(environment.sendEmailProposal,messageData)
-  .then(response => (response.status===200? alert("Success") : alert("Failed")));
-   console.log(messageData)
-   e.preventDefault();
- }
+  const handleMessageUser = (e) => {
+    //  console.log(pdfTable);
+    axios.post(environment.sendEmailProposal, messageData)
+      .then(response => (response.status === 200 ? alert("Success") : alert("Failed")));
+    console.log(messageData)
+    e.preventDefault();
+  }
 
-  const handleIncreaseChange = (e) =>{
+  const handleIncreaseChange = (e) => {
     setInputIncreaseValue(e.target.value)
   }
-  
-  const handleDecreaseChange = (e) =>{
+
+  const handleDecreaseChange = (e) => {
     setInputDecreaseValue(e.target.value)
   }
 
-  const handleIncreaseClick = () =>{
-    setAddBalance(parseInt(addBalance)+parseInt(inputIncreaseValue));
-    setInputIncreaseValue('');
+  const handleIncreaseClick = () => {
+    if (selectedType === "Increase") {
+      setAddBalance(parseInt(addBalance) + parseInt(inputIncreaseValue));
+      setInputIncreaseValue('');
+    } else {
+      setAddBalance(parseInt(addBalance) - parseInt(inputIncreaseValue));
+      setInputDecreaseValue('');
+    }
   }
 
-  const handleDecreaseClick = () =>{
-    setDecBalance(parseInt(decBalance)+parseInt(inputDecreaseValue));
-    setInputDecreaseValue('');
-  }
 
-  const handleSingleValue = (value,index) =>{
-    // const value = e.target.value;
-    // console.log(value);
+
+  const handleSingleValue = (value, index) => {
     const singleValueList = [...singleValue];
-    singleValueList[index]=value;
+    singleValueList[index] = value;
     setSingleValue(singleValueList);
   }
   console.log(singleValue);
-// console.log(addBalance);
-// console.log(inputIncreaseValue);
-// console.log(singleValue);
 
   return (
     <div>
@@ -256,48 +217,48 @@ const Proposal = () => {
                   </div>
                   {/* <!-- /.card-header --> */}
                   <form onSubmit={handleMessageUser}>
-                  <div className="card-body">
-                    <div className="form-group">
-                      <input className="form-control" name="to" onBlur={handleOnBlur} placeholder="To:" />
-                    </div>
-                    <div className="form-group">
-                      <input className="form-control" name="subject" onBlur={handleOnBlur} placeholder="Subject:" />
-                    </div>
-                    <div className="form-group">
-                      <textarea
-                        name="body"
-                        onBlur={handleOnBlur}
-                        className="form-control"
-                        placeholder="Message: "
-                        style={{ height: "300px" }}
-                      ></textarea>
-                    </div>
-                    <div className="form-group">
-                      <div className="btn btn-default btn-file">
-                        <i className="fas fa-paperclip"></i> Attachment
-                        <input type="file" name="attachment" onBlur={handleOnBlur} disabled/>
+                    <div className="card-body">
+                      <div className="form-group">
+                        <input className="form-control" name="to" onBlur={handleOnBlur} placeholder="To:" />
                       </div>
-                      <p className="help-block">Max. 32MB</p>
+                      <div className="form-group">
+                        <input className="form-control" name="subject" onBlur={handleOnBlur} placeholder="Subject:" />
+                      </div>
+                      <div className="form-group">
+                        <textarea
+                          name="body"
+                          onBlur={handleOnBlur}
+                          className="form-control"
+                          placeholder="Message: "
+                          style={{ height: "300px" }}
+                        ></textarea>
+                      </div>
+                      <div className="form-group">
+                        <div className="btn btn-default btn-file">
+                          <i className="fas fa-paperclip"></i> Attachment
+                          <input type="file" name="attachment" onBlur={handleOnBlur} disabled />
+                        </div>
+                        <p className="help-block">Max. 32MB</p>
+                      </div>
                     </div>
-                  </div>
-                  {/* <!-- /.card-body --> */}
-                  <div className="card-footer">
-                    <div className="float-right">
-                      {/* <button type="button" className="btn btn-default">
+                    {/* <!-- /.card-body --> */}
+                    <div className="card-footer">
+                      <div className="float-right">
+                        {/* <button type="button" className="btn btn-default">
                         <i className="fas fa-pencil-alt"></i> Draft
                       </button> */}
-                      <button type="submit" className="btn btn-primary">
-                        <i className="far fa-envelope"></i> Send
-                      </button>
-                    </div>
-                    {/* <button
+                        <button type="submit" className="btn btn-primary">
+                          <i className="far fa-envelope"></i> Send
+                        </button>
+                      </div>
+                      {/* <button
                       type="reset"
                       className="btn btn-default"
                       id="discard"
                     >
                       <i className="fas fa-times"></i> Discard
                     </button> */}
-                  </div>
+                    </div>
                   </form>
                   {/* <!-- /.card-footer --> */}
                 </div>
@@ -307,50 +268,60 @@ const Proposal = () => {
           </div>
           <div className="container my-3" style={{ maxWidth: "1265px" }}>
             <div className="row">
-              {/* <!-- left column section --> */}
               <div className="col-lg-3 my-3">
-                {/* <!-- Stop section --> */}
+                <div className="rounded box-shadow bg-white p-3 py-4">
+                  <div className="d-flex align-items-centen justify-content-center py-1">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Increase" defaultChecked={selectedType === "Increase" ? true : false} onChange={() => setSelectedType("Increase")} />
+                      <label class="form-check-label" for="flexRadioDefault1">
+                        Increase
+                      </label>
+                    </div>
+                    <div class="form-check ms-4">
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="Decrease" onChange={() => setSelectedType("Decrease")} />
+                      <label class="form-check-label" for="flexRadioDefault2">
+                        Decrease
+                      </label>
+                    </div>
+                  </div>
 
-                <div className="rounded box-shadow bg-white p-3">
-                  <input className="form-control mt-2" name="increase" type="number" value={inputIncreaseValue} onChange={handleIncreaseChange} placeholder="Enter price"/>
+                  <input className="form-control mt-2" name="increase" type="number" value={inputIncreaseValue} onChange={handleIncreaseChange} placeholder="Enter Amount" />
                   <button
-                    className="btn button-color fw-bold text-white w-100 mt-2" onClick={handleIncreaseClick}
+                    className="btn button-color fw-bold text-white w-100 mt-2 rounded" onClick={handleIncreaseClick} disabled={inputIncreaseValue ? false : true}
                   >
-                    Increase
+                    Submit
                   </button>
-                  <input className="form-control mt-2" name="decrease" type="number" value={inputDecreaseValue} onChange={handleDecreaseChange} placeholder="Enter price"/>
+                  {/* <input className="form-control mt-2" name="decrease" type="number" value={inputDecreaseValue} onChange={handleDecreaseChange} placeholder="Enter Amount" />
                   <button
                     className="btn button-color fw-bold text-white w-100 mt-2" onClick={handleDecreaseClick}
                   >
                     Decrease
-                  </button>
-                  <button
-                    className="btn button-color fw-bold text-white w-100 mt-2"
-                    id="preparemail"
-                  >
-                    PREPARE MAIL
-                  </button>
-                  <button
-                    className="btn button-color fw-bold text-white w-100 mt-2"
-                    id="downloadPdf"
-                    onClick={printDocument}
-                  >
-                    Download
-                  </button>
-                  {/* <div className="col-lg-12 m-3">
-                    <button className="btn button-color fw-bold text-white w-100">PREPARE MAIL</button>
-                    </div> */}
+                  </button> */}
+                  <div className="d-flex pb-1">
+                    <button
+                      className="btn button-color fw-bold text-white w-50 mt-2 me-1 rounded"
+                      id="preparemail" style={{ fontSize: "12px" }}
+                    >
+                      Send Mail
+                    </button>
+                    <button
+                      className="btn button-color fw-bold text-white w-50 mt-2 rounded"
+                      id="downloadPdf"
+                      style={{ fontSize: "12px" }}
+                      onClick={printDocument}
+                    >
+                      Download
+                    </button>
+                  </div>
                 </div>
               </div>
-              {/* <!-- end left column section --> */}
 
-              {/* <!-- right column section --> */}
               <div className="col-lg-9">
                 {flightList.length > 0 ? (
                   flightList.map((item, index) => (
                     <>
                       <div className="row my-3 py-2 rounded box-shadow bg-white">
-                        <div className="col-lg-8">
+                        <div className="col-lg-10">
                           {/* <!-- up flight section --> */}
                           <div className="row p-2">
                             <div className="col-lg-1 my-auto">
@@ -361,7 +332,7 @@ const Proposal = () => {
                                 height="40px"
                               />
                             </div>
-                            <div className="col-lg-3 my-auto">
+                            <div className="col-lg-3 my-auto" style={{ fontSize: "12px" }}>
                               <p className="my-auto fw-bold">
                                 {item.platingCarrierName}
                               </p>
@@ -372,7 +343,7 @@ const Proposal = () => {
                                 }
                               </p>
                             </div>
-                            <div className="col-lg-1 my-auto">
+                            <div className="col-lg-2 my-auto">
                               <span className="fw-bold">
                                 {item.directions[0][0].segments[0].departure.substr(
                                   11,
@@ -383,7 +354,7 @@ const Proposal = () => {
                                 {item.directions[0][0].from}
                               </p>
                             </div>
-                            <div className="col-lg-6 my-auto">
+                            <div className="col-lg-4 my-auto">
                               <div className="row">
                                 <div className="col-lg-12 text-center">
                                   <span className="text-color fw-bold font-size">
@@ -394,6 +365,7 @@ const Proposal = () => {
                                 </div>
                                 <div className="col-lg-12 text-center">
                                   <span className="text-color">
+                                    <i class="fas fa-circle fa-xs"></i>
                                     ------------------------------
                                     <i className="fas fa-plane fa-sm"></i>
                                   </span>
@@ -411,7 +383,7 @@ const Proposal = () => {
                                 </div>
                               </div>
                             </div>
-                            <div className="col-lg-1 my-auto">
+                            <div className="col-lg-2 my-auto">
                               <span className="fw-bold">
                                 {item.directions[0][0].segments[
                                   item.directions[0][0].segments.length - 1
@@ -422,77 +394,12 @@ const Proposal = () => {
                               </p>
                             </div>
                           </div>
-                          <span className="px-3 text-color">
-                            <i class="fas fa-chair me-1"></i>{" "}
-                            {item.directions[0][0].segments[0].bookingCount}(
-                            {item.directions[0][0].segments[0].bookingClass}){" "}
-                          </span>
-                          <span className="text-color">
-                            <span className="text-color briefcase">
-                              {" "}
-                              <i className="fas fa-briefcase fa-sm"></i>
-                            </span>
 
-                            <div className="box">
-                              {" "}
-                              <table
-                                className="table table-bordered table-sm"
-                                style={{ fontSize: "12px" }}
-                              >
-                                <thead className="text-center thead text-white fw-bold">
-                                  <tr>
-                                    <th>Route</th>
-                                    <th>Baggage</th>
-                                    {/* <th>Taxes</th>
-                                        <th>AIT</th>
-                                        <th>Gross Fare</th>
-                                        <th>Discount</th>
-                                        <th>Pax</th>
-                                        <th>Total Pax Fare</th> */}
-                                  </tr>
-                                </thead>
-                                <tbody className="text-center">
-                                  <tr>
-                                    <td className="left">
-                                      {item.directions[0][0].from}-
-                                      {item.directions[0][0].to}
-                                    </td>
-                                    <td className="left">
-                                      ADT :{" "}
-                                      <span className="ms-1 font-size">
-                                        {item.directions[0][0].segments[0]
-                                          .baggage[0].amount +
-                                          " " +
-                                          item.directions[0][0].segments[0]
-                                            .baggage[0].units}
-                                      </span>
-                                    </td>
-                                    {/* <td className="center">{passengerFares.adt.taxes}</td>
-                    <td className="right">10</td>
-                    <td className="right">
-                      {passengerFares.adt.basePrice +
-                        passengerFares.adt.taxes +
-                        10}
-                    </td>
-                    <td className="right">190</td>
-                    <td className="right">1</td>
-                    <td className="right">
-                      {passengerFares.adt.basePrice +
-                        passengerFares.adt.taxes +
-                        10 -
-                        190}{" "}
-                      BDT
-                    </td> */}
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </span>
                           {/* <!-- end of up flight section --> */}
                           {/* <!-- return fight section --> */}
                           {item.directions[1] !== undefined ? (
                             <>
-                              <div className="row p-2">
+                              <div className="row p-2 border-top">
                                 <div className="col-lg-1 my-auto">
                                   <img
                                     src={ImageUrlR}
@@ -501,7 +408,7 @@ const Proposal = () => {
                                     height="40px"
                                   />
                                 </div>
-                                <div className="col-lg-3 my-auto">
+                                <div className="col-lg-3 my-auto" style={{ fontSize: "12px" }}>
                                   <p className="my-auto fw-bold">
                                     {item.platingCarrierName}
                                   </p>
@@ -512,27 +419,28 @@ const Proposal = () => {
                                     }
                                   </p>
                                 </div>
-                                <div className="col-lg-1 my-auto">
+                                <div className="col-lg-2 my-auto">
                                   <span className="fw-bold">
                                     {item.directions[1][0].segments[0].departure.substr(
                                       11,
                                       5
                                     )}
                                   </span>
-                                  <p className="my-auto">{item.from}</p>
+                                  <p className="my-auto">{item.directions[1][0].from}</p>
                                 </div>
-                                <div className="col-lg-6 my-auto">
+                                <div className="col-lg-4 my-auto">
                                   <div className="row">
                                     <div className="col-lg-12 text-center">
                                       <span className="text-color fw-bold font-size">
                                         {item.directions[1][0].stops === 0
                                           ? "Direct"
                                           : item.directions[1][0].stops +
-                                            " Stop"}
+                                          " Stop"}
                                       </span>
                                     </div>
                                     <div className="col-lg-12 text-center">
                                       <span className="text-color">
+                                        <i class="fas fa-circle fa-xs"></i>
                                         ------------------------------
                                         <i className="fas fa-plane fa-sm"></i>
                                       </span>
@@ -561,27 +469,70 @@ const Proposal = () => {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="col-lg-1 my-auto">
+                                <div className="col-lg-2 my-auto">
                                   <span className="fw-bold">
                                     {item.directions[1][0].segments[
                                       item.directions[1][0].segments.length - 1
                                     ].arrival.substr(11, 5)}
                                   </span>
-                                  <p className="my-auto">{item.to}</p>
+                                  <p className="my-auto">{item.directions[1][0].to}</p>
                                 </div>
                               </div>
                             </>
                           ) : (
                             <></>
                           )}
+                          <span className="px-3 text-color">
+                            <i class="fas fa-chair me-1"></i>{" "}
+                            {item.directions[0][0].segments[0].bookingCount}(
+                            {item.directions[0][0].segments[0].bookingClass}){" "}
+                          </span>
+                          <span className="text-color">
+                            <span className="text-color briefcase">
+                              {" "}
+                              <i className="fas fa-briefcase fa-sm"></i>
+                            </span>
 
+                            <div className="box-proposal">
+                              {" "}
+                              <table
+                                className="table table-bordered table-sm"
+                                style={{ fontSize: "12px" }}
+                              >
+                                <thead className="text-center thead text-white fw-bold">
+                                  <tr>
+                                    <th>Route</th>
+                                    <th>Baggage</th>
+                                  </tr>
+                                </thead>
+                                <tbody className="text-center">
+                                  <tr>
+                                    <td className="left">
+                                      {item.directions[0][0].from}-
+                                      {item.directions[0][0].to}
+                                    </td>
+                                    <td className="left">
+                                      ADT :{" "}
+                                      <span className="ms-1 font-size">
+                                        {item.directions[0][0].segments[0]
+                                          .baggage[0].amount +
+                                          " " +
+                                          item.directions[0][0].segments[0]
+                                            .baggage[0].units}
+                                      </span>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </span>
                           {/* <!-- end of return flight section --> */}
                         </div>
 
                         {/* <!-- modal option --> */}
                         <div
                           className="modal fade"
-                          id={"exampleModal"+index}
+                          id={"exampleModal" + index}
                           tabIndex="-1"
                           aria-labelledby="exampleModalLabel"
                           aria-hidden="true"
@@ -640,10 +591,10 @@ const Proposal = () => {
                                             <div className="col-lg-12 text-center">
                                               <span className="text-color fw-bold font-size">
                                                 {item.directions[0][0].stops ===
-                                                0
+                                                  0
                                                   ? "Direct"
                                                   : item.directions[0][0]
-                                                      .stops + " Stop"}
+                                                    .stops + " Stop"}
                                               </span>
                                             </div>
                                             <div className="col-lg-12">
@@ -732,7 +683,7 @@ const Proposal = () => {
                                                       .stops === 0
                                                       ? "Direct"
                                                       : item.directions[1][0]
-                                                          .stops + " Stop"}
+                                                        .stops + " Stop"}
                                                   </span>
                                                 </div>
                                                 <div className="col-lg-12">
@@ -791,7 +742,7 @@ const Proposal = () => {
                                     <div className="col-lg-3 my-auto text-center">
                                       {/* <h6 className="text-end text-color"><del>BDT 9,000</del></h6> */}
                                       <h5 className="text-color">
-                                      {currency!==undefined ? currency : "BDT"} {item.passengerFares.adt.totalPrice}
+                                        {currency !== undefined ? currency : "BDT"} {item.passengerFares.adt.totalPrice}
                                       </h5>
                                       <p className="text-color fw-bold">
                                         {item.refundable === true
@@ -1118,7 +1069,7 @@ const Proposal = () => {
                                         </div>
                                         <div className="col-lg-8"></div>
                                         <div className="col-lg-2 float-end">
-                                          <h6 className="text-end">{currency!==undefined ? currency : "BDT"} 0</h6>
+                                          <h6 className="text-end">{currency !== undefined ? currency : "BDT"} 0</h6>
                                         </div>
                                       </div>
                                       <div className="row border-top">
@@ -1130,7 +1081,7 @@ const Proposal = () => {
                                         <div className="col-lg-8"></div>
                                         <div className="col-lg-2 float-end">
                                           <h6 className="text-end">
-                                          {currency!==undefined ? currency : "BDT"} {item.totalPrice}
+                                            {currency !== undefined ? currency : "BDT"} {item.totalPrice}
                                           </h6>
                                         </div>
                                       </div>
@@ -1152,45 +1103,34 @@ const Proposal = () => {
                             </div>
                           </div>
                         </div>
-                        {/* <!-- end of modal option --> */}
-
-                        {/* <!-- click for flight details modal open option --> */}
-                        <div className="col-lg-2 d-flex justify-content-center align-items-center border-end">
-                          <a
-                            href="#"
-                            className="fw-bold text-color fs-6"
-                            data-bs-toggle="modal"
-                            data-bs-target={"#exampleModal"+index}
-                          >
-                            Flight Details
-                          </a>
-                        </div>
-                        {/* <!-- end click for flight details modal open option --> */}
-                        <div className="col-lg-2 my-auto text-center">
-                          {/* <h6 className="text-end text-color"><del>BDT 9,000</del></h6> */}
-                          {/* <h5 className="text-color">BDT <input type="number" className="w-50" value={8500} /></h5> */}
-                          {/* <div id={"singleInput"+index}> 
-                            <input type="number" name={"value"+index} className="form-control" onChange={(e)=>handleSingleValue(e.target.value,index)} style={{height:"25px",width:"135px"}}/>
-                          </div> */}
+                        <div className="col-lg-2 my-auto text-center border-start">
                           <h5 className="text-color d-flex justify-content-center">
-                          {currency!==undefined ? currency : "BDT"}&nbsp;<span id={"balance"+index}> {parseInt(singleValue[index]??0) + addBalance - decBalance }</span>
-                            <input width={70} type="number" id={"balanceInput"+index} name={"value"+index} value={singleValue[index]??0}  onChange={(e)=>handleSingleValue(e.target.value,index)} style={{height:"25px",width:"70px"}}/>
-                            <span className="ms-1" id={"edit"+index}><i class="fas fa-edit"></i></span>
-                            <span className="ms-1" id={"right"+index}><i class="fas fa-check"></i></span>
+                            {currency !== undefined ? currency : "BDT"}&nbsp;<span id={"balance" + index}> {parseInt(singleValue[index] ?? 0) + addBalance - decBalance}</span>
+                            <input width={70} type="number" id={"balanceInput" + index} name={"value" + index} value={singleValue[index] ?? 0} onChange={(e) => handleSingleValue(e.target.value, index)} style={{ height: "25px", width: "70px" }} />
+                            <span className="ms-1" id={"edit" + index}><i class="fas fa-edit"></i></span>
+                            <span className="ms-1" id={"right" + index}><i class="fas fa-check"></i></span>
                           </h5>
-                          <p className="text-color fw-bold">
+                          <p className="text-color fw-bold" style={{ fontSize: "12px" }}>
                             {item.refundable === true
                               ? "Refundable"
                               : "Non-Refundable"}
                           </p>
+                          <a
+                            href="#"
+                            className="fw-bold text-color"
+                            data-bs-toggle="modal"
+                            data-bs-target={"#exampleModal" + index}
+                            style={{ fontSize: "12px" }}
+                          >
+                            Flight Details
+                          </a>
                           <h6
                             className="text-end fw-bold text-color text-center mt-1"
                             id={"priceDown" + index}
-                            style={{ cursor: "pointer" }}
+                            style={{ cursor: "pointer", fontSize: "12px" }}
                           >
                             Price Breakdown
                           </h6>
-                          {/* <button className="btn button-color  w-100 check-price-click">Check Price</button> */}
                         </div>
                         <div
                           className="table-responsive-sm mt-1"
@@ -1206,7 +1146,7 @@ const Proposal = () => {
                                 <th>Type</th>
                                 <th>Base</th>
                                 <th>Taxes</th>
-                                <th>AIT</th>
+                                <th>Other Fee</th>
                                 <th>Gross Fare</th>
                                 <th>Discount</th>
                                 <th>Pax</th>
@@ -1217,23 +1157,20 @@ const Proposal = () => {
                               <tr>
                                 <td className="left">ADT</td>
                                 <td className="left">
-                                  {parseInt(singleValue[index])-item.passengerFares.adt.taxes +parseInt(addBalance) - decBalance}
+                                  {parseInt(singleValue[index]) - item.passengerFares.adt.taxes + parseInt(addBalance) - decBalance}
                                 </td>
                                 <td className="center">
                                   {item.passengerFares.adt.taxes}
                                 </td>
-                                <td className="right">{parseInt((parseInt(singleValue[index])-item.passengerFares.adt.taxes)*.003)}</td>
+                                <td className="right">0</td>
                                 <td className="right">
-                                  {parseInt(singleValue[index]) +
-                                    parseInt((parseInt(singleValue[index])-item.passengerFares.adt.taxes)*.003) + addBalance - decBalance} 
+                                  {parseInt(singleValue[index]) + addBalance - decBalance}
                                 </td>
                                 <td className="right">190</td>
                                 <td className="right">1</td>
                                 <td className="right">
-                                  {parseInt(singleValue[index]) + addBalance  +
-                                    parseInt((parseInt(singleValue[index])-item.passengerFares.adt.taxes)*.003) -
-                                    190 - decBalance}{" "}
-                                  {currency!==undefined ? currency : "BDT"}
+                                  {parseInt(singleValue[index]) + addBalance - 190 - decBalance}{" "}
+                                  {currency !== undefined ? currency : "BDT"}
                                 </td>
                               </tr>
                             </tbody>
@@ -1246,7 +1183,6 @@ const Proposal = () => {
                   <></>
                 )}
               </div>
-              {/* <!-- end of right column section --> */}
             </div>
           </div>
 
@@ -1260,23 +1196,10 @@ const Proposal = () => {
                 <div className="row" >
                   <div className="card box-shadow">
                     <div className="card-header">
-                      {/* <img
-                    src={logo}
-                    alt="Triplover logo"
-                    style={{ width: "100px" }}
-                  /> */}
-                      <span className="ms-3">
+                      <span>
                         Flight Proposal (Please find the flight options as per
                         your request)
                       </span>
-                      {/* <Link
-                      className="btn btn-sm btn-secondary float-right mr-1 d-print-none"
-                      to="#"
-                      onClick={print}
-                      data-abc="true"
-                    >
-                      <i className="fa fa-print"></i> Print
-                    </Link> */}
                     </div>
                     <div className="card-body">
                       <div className="row">
@@ -1286,7 +1209,7 @@ const Proposal = () => {
                           </h5>
                         </div>
                       </div>
-                      <div className="row mb-2">
+                      <div className="row mb-2" style={{fontSize:"12px"}}>
                         <div className="col-sm-3">
                           <h5 className="mb-1">From</h5>
                           <div>
@@ -1305,8 +1228,8 @@ const Proposal = () => {
                           <h5 className="mb-1">Departure Date</h5>
                           <div>
                             <strong>{moment(item.directions[0][0].segments[0].departure)
-                                    .utc()
-                                    .format("DD-MMMM-yyyy, dddd")}</strong>
+                              .utc()
+                              .format("DD-MMMM-yyyy, dddd")}</strong>
                           </div>
                         </div>
                         <div className="col-sm-3">
@@ -1317,7 +1240,7 @@ const Proposal = () => {
                         </div>
                       </div>
 
-                      <div className="row mb-4">
+                      <div className="row mb-4" style={{fontSize:"12px"}}>
                         <div className="col-sm-3">
                           <h5 className="mb-1">Class</h5>
                           <div>
@@ -1328,8 +1251,8 @@ const Proposal = () => {
                           <h5 className="mb-1">Baggage Allowance</h5>
                           <div>
                             <strong>{item.directions[0][0].segments[0].baggage[0].amount +
-                                  " " +
-                                  item.directions[0][0].segments[0].baggage[0].units}</strong>
+                              " " +
+                              item.directions[0][0].segments[0].baggage[0].units}</strong>
                           </div>
                         </div>
                         <div className="col-sm-3">
@@ -1342,7 +1265,7 @@ const Proposal = () => {
 
                       <div className="table-responsive-sm">
                         <p className="bg-dark p-2 fw-bold">FLIGHT DETAILS</p>
-                        <table className="table table-striped">
+                        <table className="table table-striped" style={{fontSize:"12px"}}>
                           <thead className="text-center">
                             <tr>
                               <th>#</th>
@@ -1358,96 +1281,72 @@ const Proposal = () => {
                             <tr>
                               <td className="center">1</td>
                               <td className="left">
-                              {item.platingCarrierName}<br></br>
-                              {
+                                {item.platingCarrierName}<br></br>
+                                {
                                   item.directions[0][0].segments[0].details[0]
                                     .equipment
                                 }
                               </td>
                               <td className="left">
-                              {item.directions[0][0].segments[0].departure.substr(11, 5)}<br></br>
-                              {moment(item.directions[0][0].segments[0].departure)
-                                    .utc()
-                                    .format("DD-MMMM-yyyy, dddd")}
+                                {item.directions[0][0].segments[0].departure.substr(11, 5)}<br></br>
+                                {moment(item.directions[0][0].segments[0].departure)
+                                  .utc()
+                                  .format("DD-MMMM-yyyy, dddd")}
                               </td>
                               <td className="center">
-                              {item.directions[0][0].segments[0].arrival.substr(11, 5)}<br></br>
-                              {moment(item.directions[0][0].segments[0].arrival)
-                                    .utc()
-                                    .format("DD-MMMM-yyyy, dddd")}
+                                {item.directions[0][0].segments[0].arrival.substr(11, 5)}<br></br>
+                                {moment(item.directions[0][0].segments[0].arrival)
+                                  .utc()
+                                  .format("DD-MMMM-yyyy, dddd")}
                               </td>
                               <td className="right">{item.directions[0][0].segments[0].duration[0]}</td>
                               <td>ADT 1</td>
-                              <td className="right">{currency!==undefined ? currency : "BDT"} {singleValue[index]}</td>
+                              <td className="right">{currency !== undefined ? currency : "BDT"} {singleValue[index]}</td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
-                      <div className="row">
-                        {/* <div className="col-lg-6 col-sm-5">
-                          <div className="table-responsive-sm">
-                            <table className="table table-striped">
-                              <thead className="text-center">
-                                <tr>
-                                  <th colSpan={3}>Passenger Information</th>
-                                </tr>
-                              </thead>
-                              <tbody className="text-center">
-                                <tr>
-                                  <td>Ratul Islam</td>
-                                  <td>ratul@gmail.com</td>
-                                  <td>01625001500</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div> */}
-                        <div className="col-lg-6 col-sm-5">
-                          <table className="table table-clear">
-                            <tbody>
+                      <div className="table-responsive-sm">
+                      <p className="bg-dark p-2 fw-bold">FARE DETAILS</p>
+                        <table
+                            className="table table-bordered px-3 table-sm"
+                            style={{ fontSize: "12px" }}
+                          >
+                            <thead className="text-center thead text-white fw-bold">
                               <tr>
-                                <td className="left">
-                                  <strong>Base Fare</strong>
-                                </td>
-                                <td className="text-end">{currency!==undefined ? currency : "BDT"} {singleValue[index]-item.passengerFares.adt.taxes + addBalance - decBalance}</td>
+                                <th>Type</th>
+                                <th>Base</th>
+                                <th>Taxes</th>
+                                <th>Other Fee</th>
+                                <th>Gross Fare</th>
+                                <th>Discount</th>
+                                <th>Pax</th>
+                                <th>Total Pax Fare</th>
                               </tr>
+                            </thead>
+                            <tbody className="text-center">
                               <tr>
+                                <td className="left">ADT</td>
                                 <td className="left">
-                                  <strong>Tax</strong>
+                                  {parseInt(singleValue[index]) - item.passengerFares.adt.taxes + parseInt(addBalance) - decBalance}
                                 </td>
-                                <td className="text-end"> {currency!==undefined ? currency : "BDT"} {item.passengerFares.adt.taxes}</td>
-                              </tr>
-                              <tr>
-                                <td className="left">
-                                  <strong>AIT</strong>
+                                <td className="center">
+                                  {item.passengerFares.adt.taxes}
                                 </td>
-                                <td className="text-end"> {currency!==undefined ? currency : "BDT"} {parseInt(parseInt(singleValue[index])*.003)}</td>
-                              </tr>
-                              <tr>
-                                <td className="left">
-                                  <strong>Gross Fare</strong>
+                                <td className="right">0</td>
+                                <td className="right">
+                                  {parseInt(singleValue[index]) + addBalance - decBalance}
                                 </td>
-                                <td className="text-end"> {currency!==undefined ? currency : "BDT"} {parseInt(parseInt(singleValue[index])*.003)+parseInt(singleValue[index]) + parseInt(addBalance) - parseInt(decBalance)}</td>
-                              </tr>
-                              <tr>
-                                <td className="left">
-                                  <strong>Discount </strong>
-                                </td>
-                                <td className="text-end">{currency!==undefined ? currency : "BDT"} 190</td>
-                              </tr>
-                             
-                              <tr>
-                                <td className="left">
-                                  <strong>Total</strong>
-                                </td>
-                                <td className="text-end">
-                                  <strong>{currency!==undefined ? currency : "BDT"} {parseInt(parseInt(singleValue[index])*.003)+parseInt(singleValue[index]) + parseInt(addBalance) - parseInt(decBalance) -190}</strong>
+                                <td className="right">190</td>
+                                <td className="right">1</td>
+                                <td className="right">
+                                  {parseInt(singleValue[index]) + addBalance - 190 - decBalance}{" "}
+                                  {currency !== undefined ? currency : "BDT"}
                                 </td>
                               </tr>
                             </tbody>
                           </table>
                         </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -1457,7 +1356,6 @@ const Proposal = () => {
           </div>
         </section>
         <div className="text-center text-white pt-5 pb-2 mt-1">
-          {/* <b>Version</b> 3.1.0 */}
           <strong>Copyright &copy; 2020-2022 All rights reserved.</strong>
         </div>
       </div>

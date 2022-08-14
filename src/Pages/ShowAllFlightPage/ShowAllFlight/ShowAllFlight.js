@@ -21,7 +21,7 @@ const ShowAllFlight = ({
 }) => {
   const { count } = useAuth();
   // console.log(count);
-  const [amountChange,setAmountChange] = useState('Invoice Amount');
+  const [amountChange, setAmountChange] = useState('Invoice Amount');
   const { state } = useLocation();
   const navigate = useNavigate();
   const { tripTypeModify } = state;
@@ -69,40 +69,52 @@ const ShowAllFlight = ({
   let dataPrice = [];
 
 
+  const [filterPrice, setFilterPrice] = useState([
+    Math.floor(mainJson?.minMaxPrice?.minPrice),
+    Math.ceil(mainJson?.minMaxPrice?.maxPrice),
+  ]);
 
 
   if (parseInt(radioname) === 0 && name.length === 0) {
     dataPrice = jsonData?.filter(
-      (item) => parseInt(item.totalPrice) <= parseInt(price, 10)
+      // (item) => parseInt(item.totalPrice) <= parseInt(price, 10)
+      (item) =>
+        parseInt(item.totalPrice) >= filterPrice[0] &&
+        parseInt(item.totalPrice) <= filterPrice[1]
     );
   } else if (parseInt(radioname) === 1 && name.length === 0) {
     dataPrice = jsonData?.filter(
       (item) =>
-        parseInt(item.totalPrice) <= parseInt(price, 10) &&
+        parseInt(item.totalPrice) >= filterPrice[0] &&
+        parseInt(item.totalPrice) <= filterPrice[1] &&
         item.directions[0][0].stops === 0
     );
   } else if (parseInt(radioname) === 2 && name.length === 0) {
     dataPrice = jsonData?.filter(
       (item) =>
-        parseInt(item.totalPrice) <= parseInt(price, 10) &&
+        parseInt(item.totalPrice) >= filterPrice[0] &&
+        parseInt(item.totalPrice) <= filterPrice[1] &&
         item.directions[0][0].stops === 1
     );
   } else if (parseInt(radioname) === 3 && name.length === 0) {
     dataPrice = jsonData?.filter(
       (item) =>
-        parseInt(item.totalPrice) <= parseInt(price, 10) &&
+        parseInt(item.totalPrice) >= filterPrice[0] &&
+        parseInt(item.totalPrice) <= filterPrice[1] &&
         item.directions[0][0].stops > 1
     );
   } else if (parseInt(radioname) === 0 && name.length > 0) {
     dataPrice = jsonData?.filter(
       (item) =>
-        parseInt(item.totalPrice) <= parseInt(price, 10) &&
+        parseInt(item.totalPrice) >= filterPrice[0] &&
+        parseInt(item.totalPrice) <= filterPrice[1] &&
         name.some((category) => [item.platingCarrier].flat().includes(category))
     );
   } else if (parseInt(radioname) === 1 && name.length > 0) {
     dataPrice = jsonData?.filter(
       (item) =>
-        parseInt(item.totalPrice) <= parseInt(price, 10) &&
+        parseInt(item.totalPrice) >= filterPrice[0] &&
+        parseInt(item.totalPrice) <= filterPrice[1] &&
         name.some((category) =>
           [item.platingCarrier].flat().includes(category)
         ) &&
@@ -111,7 +123,8 @@ const ShowAllFlight = ({
   } else if (parseInt(radioname) === 2 && name.length > 0) {
     dataPrice = jsonData?.filter(
       (item) =>
-        parseInt(item.totalPrice) <= parseInt(price, 10) &&
+        parseInt(item.totalPrice) >= filterPrice[0] &&
+        parseInt(item.totalPrice) <= filterPrice[1] &&
         name.some((category) =>
           [item.platingCarrier].flat().includes(category)
         ) &&
@@ -120,7 +133,8 @@ const ShowAllFlight = ({
   } else {
     dataPrice = jsonData?.filter(
       (item) =>
-        parseInt(item.totalPrice) <= parseInt(price, 10) &&
+        parseInt(item.totalPrice) >= filterPrice[0] &&
+        parseInt(item.totalPrice) <= filterPrice[1] &&
         name.some((category) =>
           [item.platingCarrier].flat().includes(category)
         ) &&
@@ -206,7 +220,7 @@ const ShowAllFlight = ({
 
   let currency = mainJson?.currency;
   console.log(currency);
-  localStorage.setItem("currency",JSON.stringify(currency));
+  localStorage.setItem("currency", JSON.stringify(currency));
   useEffect(() => {
     // $(".slide-toggle").hide();
     // $(".search-again").click(function () {
@@ -247,36 +261,38 @@ const ShowAllFlight = ({
 
   return (
     <div>
-         <div className="container box-shadow content-width">
-            <div className="row border mt-3">
-              <div className="col-lg-6 py-3 px-5 bg-white">
-                  <h5 className="pt-1">We found {fetchFlighData?.totalFlights} flights, {fetchFlighData?.airlineFilters?.length} Unique Airlines </h5>
-              </div>
-              <div className="col-lg-6 bg-white py-3 px-5 ">
-              <div class="dropdown float-end">
-                  <button class="btn fw-bold text-white dropdown-toggle button-color rounded" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span className="me-1"><i class="fas fa-money-bill-wave"></i></span>{amountChange}
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li class="dropdown-item" onClick={() => setAmountChange("Invoice Amount")}>Invoice Amount</li>
-                    <li class="dropdown-item" onClick={() => setAmountChange("Gross Amount")}>Gross Amount</li>
-                  </ul>
-               </div>
-              </div>
+      <div className="container box-shadow content-width">
+        <div className="row border mt-3">
+          <div className="col-lg-6 py-3 px-5 bg-white">
+            <h5 className="pt-1">We found {fetchFlighData?.totalFlights} flights, {fetchFlighData?.airlineFilters?.length} Unique Airlines </h5>
+          </div>
+          <div className="col-lg-6 bg-white py-3 px-5 ">
+            <div class="dropdown float-end">
+              <button class="btn fw-bold text-white dropdown-toggle button-color rounded" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <span className="me-1"><i class="fas fa-money-bill-wave"></i></span>{amountChange}
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li class="dropdown-item" onClick={() => setAmountChange("Invoice Amount")}>Invoice Amount</li>
+                <li class="dropdown-item" onClick={() => setAmountChange("Gross Amount")}>Gross Amount</li>
+              </ul>
             </div>
           </div>
+        </div>
+      </div>
       <Loading loading={loading}></Loading>
       <div className="container my-3 content-width">
         <div className="row py-4 ps-3">
           <div
             className="col-lg-3 rounded box-shadow bg-white"
-            style={{ height: "100%", position: "sticky", top: "9%", maxHeight:"100vh",
-            overflowY:"auto"}}
+            style={{
+              height: "100%", position: "sticky", top: "9%", maxHeight: "100vh",
+              overflowY: "auto"
+            }}
           >
             <div className="container">
               <div className="row px-2">
                 <div className="col-lg-6 mt-3">
-                  <h6 className="float-start text-color fw-bold">Price {price}</h6>
+                  <h6 className="float-start text-color fw-bold">Price</h6>
                 </div>
                 <div className="col-lg-6 mt-3">
                   <div className="text-end">
@@ -292,7 +308,7 @@ const ShowAllFlight = ({
               <div className="row pb-3">
                 <div className="col-lg-12 mt-2" id="pricesection">
                   <div className="mt-2">
-                    <input
+                    {/* <input
                       className="w-100 myinput"
                       type="range"
                       name="flexRadioDefault2"
@@ -302,17 +318,34 @@ const ShowAllFlight = ({
                       onInput={handleInput}
                       min={mainJson?.minMaxPrice?.minPrice}
                       max={mainJson?.minMaxPrice?.maxPrice}
-                    />
+                    /> */}
+                    <RangeSlider
+                      defaultValue={[
+                        Math.floor(mainJson?.minMaxPrice?.minPrice),
+                        Math.ceil(mainJson?.minMaxPrice?.maxPrice),
+                      ]}
+                      min={Math.floor(mainJson?.minMaxPrice?.minPrice)}
+                      max={Math.ceil(mainJson?.minMaxPrice?.maxPrice)}
+                      step={1000}
+                      minStepsBetweenThumbs={1}
+                      onChangeEnd={(val) => setFilterPrice(val)}
+                    >
+                      <RangeSliderTrack bg="#e5d4b1">
+                        <RangeSliderFilledTrack bg="#BF953F" />
+                      </RangeSliderTrack>
+                      <RangeSliderThumb bg="black" boxSize={4} index={0} />
+                      <RangeSliderThumb bg="black" boxSize={4} index={1} />
+                    </RangeSlider>
                   </div>
                   <div>
-                    <span className="float-start fw-bold" style={{fontSize:"13px"}}>
-                      MIN {currency!==undefined ? currency : "BDT"}   {mainJson?.minMaxPrice?.minPrice}
+                    <span className="float-start fw-bold" style={{ fontSize: "13px" }}>
+                      MIN {currency !== undefined ? currency : "BDT"}   {mainJson?.minMaxPrice?.minPrice}
                     </span>
-                    <span className="float-end fw-bold" style={{fontSize:"13px"}}>
-                      MAX {currency!==undefined ? currency : "BDT"}   {mainJson?.minMaxPrice?.maxPrice}
+                    <span className="float-end fw-bold" style={{ fontSize: "13px" }}>
+                      MAX {currency !== undefined ? currency : "BDT"}   {mainJson?.minMaxPrice?.maxPrice}
                     </span>
                   </div>
-{/* <RangeSlider defaultValue={[mainJson?.minMaxPrice?.minPrice, mainJson?.minMaxPrice?.maxPrice]} min={mainJson?.minMaxPrice?.minPrice} max={mainJson?.minMaxPrice?.maxPrice} step={0.01}>
+                  {/* <RangeSlider defaultValue={[mainJson?.minMaxPrice?.minPrice, mainJson?.minMaxPrice?.maxPrice]} min={mainJson?.minMaxPrice?.minPrice} max={mainJson?.minMaxPrice?.maxPrice} step={0.01}>
   <RangeSliderTrack bg='red.100'>
     <RangeSliderFilledTrack bg='tomato' />
   </RangeSliderTrack>
@@ -422,15 +455,15 @@ const ShowAllFlight = ({
                           id="flexCheckDefault"
                           onChange={handleChange}
                         />
-                        <img src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.code}.png`} alt="airlineCode" width="35px" height="30px"/>
+                        <img src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.code}.png`} alt="airlineCode" width="35px" height="30px" />
                         <label
                           className="form-check-label fw-bold px-2"
                           htmlFor="flexCheckDefault"
-                          title={item.name} style={{fontSize:"13px"}}
+                          title={item.name} style={{ fontSize: "13px" }}
                         >
                           {item.code} ({item.totalFlights})
                         </label>{" "}
-                        <span className="fw-bold float-end" style={{fontSize:"13px"}}>{currency!==undefined ? currency : "BDT"}   {item.minPrice}</span>
+                        <span className="fw-bold float-end" style={{ fontSize: "13px" }}>{currency !== undefined ? currency : "BDT"}   {item.minPrice}</span>
                         <br></br>
                       </div>
                     ))}
@@ -494,7 +527,7 @@ const ShowAllFlight = ({
             </div>
           </div>
           <div className="col-lg-9">
-            {flightsData?.length === 0 && flightsData !==null && flightsData !== undefined ? (
+            {flightsData?.length === 0 && flightsData !== null && flightsData !== undefined ? (
               <>
                 <NoDataFoundPage />
               </>
@@ -517,12 +550,12 @@ const ShowAllFlight = ({
         <footer className="main-footer fixed-bottom">
           <div className="text-center">
             {/* <b>Version</b> 3.1.0 */}
-            <strong className="fs-4">{count} flight Selected</strong>
+            <strong className="fs-6">{count} Option Selected</strong>
             <button
-              className="btn button-color fw-bold text-white ms-5"
+              className="btn button-color fw-bold text-white ms-3 btn-sm rounded"
               onClick={handleProposal}
             >
-              MAKE PROPOSAL
+              Create Proposal
             </button>
           </div>
           {/* <div className="float-end me-5 pe-5">

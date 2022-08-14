@@ -19,7 +19,7 @@ const Support = () => {
 	let [status, setStatus] = useState(0);
 	let [historyFileName, setHistoryFileName] = useState('');
 	let [historyMessage, setHistoryMessage] = useState('');
-	let typeid = 0;
+	let typeid = 2;
 	let subjectid = 0;
 	let utid = "";
 	let pnrs = "";
@@ -259,7 +259,7 @@ const Support = () => {
 								Support
 							</div>
 							<div className='card-body'>
-								<div className="m-4">
+								<div className="mx-4">
 									<div className='row'>
 									<div className='col-sm-3'>
 										<label>Support Type<span style={{ color: 'red' }}>*</span></label>

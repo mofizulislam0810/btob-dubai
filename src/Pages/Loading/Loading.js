@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./Loading.css";
-import img from "../../images/icon/Loader.gif";
+import img from "../../images/icon/loading.gif";
 // import airports from "../../JSON/airports.json";
 import $ from "jquery";
 
@@ -46,7 +46,7 @@ const Loading = ({ flag, loading,originCode,destinationCode,tripType }) => {
               <div class="text-center my-4">
                 {flag === 0 ? (
                   <>
-                    <p className="fw-bold text-center pt-2">
+                    <p className="fw-bold text-center pt-2" style={{fontSize:"12px"}}>
                       Getting the best deals from airlines...
                     </p>
                     <img

@@ -17,7 +17,7 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
       environment.bankAccounts+`?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
       environment.headerToken
     );
-    setAccountList(response.data.data);
+    setAccountList(response.data);
     setPageCount(await response.data.totalPages);
   };
   const handlePageClick = async (data) => {

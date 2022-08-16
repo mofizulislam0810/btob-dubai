@@ -40,19 +40,19 @@ const Balance = () => {
   let [branchList, setBranchList] = useState([]);
   let sendObj = {
     agentId: sessionStorage.getItem("agentId") ?? 0,
-    depositTypeId: depositTypeId,
-    paymentTypeId: paymentTypeId,
+    fromOfPaymentType: depositTypeId,
+    paymentType: paymentTypeId,
     checkNo: checkNo,
     checkBank: checkBank,
     checkIssueDate: checkIssueDate,
     reference: reference,
-    depositInAccountId: depositInAccountId,
+    depositedInAccountId: depositInAccountId,
     amount: amount,
     attachment: attachment,
-    depositFromAccountId: depositFromAccountId,
+    depositedFromAccountId: depositFromAccountId,
     depositDate: depositDate,
     transferDate: transferDate,
-    branchId: branchId,
+    branchName: "",
     transactionId: transactionId,
   };
   const clearDepositEntry = () => {
@@ -195,6 +195,7 @@ const Balance = () => {
       return;
     }
     const postData = async () => {
+      console.log(sendObj)
       const response = await axios.post(
         environment.depositRequest,
         sendObj,
@@ -435,6 +436,7 @@ const Balance = () => {
         );
         if (response.data > 0) {
           handleGetAgentBankAccounts(1);
+          $('.modal').modal('hide');
           clearBankForm();
           toast.success("Thanks! Bank Account updated successfully..");
         } else {

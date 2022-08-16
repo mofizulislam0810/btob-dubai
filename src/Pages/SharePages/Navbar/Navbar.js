@@ -30,10 +30,11 @@ const handleViewTicket=()=>{
   .post(environment.airTicketingSearch,searchObj, environment.headerToken)
   .then((res) => {
     console.log(res);
-    if(res.data.length > 0){
+    alert(res.data[0].uniqueTransID)
+    if(res.data[0].uniqueTransID !== undefined && res.data[0].uniqueTransID !=='' && res.data[0].uniqueTransID !== null){
       window.open("/ticket?utid=" + res.data[0].uniqueTransID, "_blank");
     }else{
-      toast.error("Wrong Name/PNR/Ticket/Booking Ref Number")
+      toast.error("Data not found!")
     } 
   })
   .catch((err) => {

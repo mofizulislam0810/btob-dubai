@@ -239,17 +239,51 @@ const Balance = () => {
         (sessionStorage.getItem("agentId") ?? 0) + `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
         environment.headerToken
       );
-      console.log(response.data.data)
+      console.log(response.data.totalPages)
       setBalanceList(response.data.data);
       setPageCount(await response.data.totalPages);
     };
     getData();
   };
+
+  const handleGetAgentBankAccounts = (currentPageNumber) => {
+    // const getData = async () => {
+    //   const response = await axios.get(environment.cityList);
+    //   setCityList(response.data);
+    // };
+    // getData();
+    let agentId = sessionStorage.getItem("agentId") ?? 0;
+    const getAgentBankAccounts = async () => {
+      const response = await axios.get(
+        environment.bankAccountsByAgent + "/" + agentId+ `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
+        environment.headerToken
+      );
+      console.log(response.data.data)
+      setAgentBankAccountList(response.data.data);
+      setPageCount(await response.data.totalPages);
+      console.log()
+    };
+    getAgentBankAccounts();
+
+    // const getAgentBankDropdown = async () => {
+    //   const response = await axios.get(
+    //     environment.accountsByAgentDropdown + "?agentId=" + agentId,
+    //     environment.headerToken
+    //   );
+    //   console.log(response.data)
+    //   setAgentAccountDropdownList(response.data);
+    //   console.log()
+    // };
+    // getAgentBankDropdown();
+  };
+
+
+  console.log(pageCount);
   const handlePageClick = async (data) => {
     let currentPage = data.selected + 1;
     setCurrentPageNumber(currentPage);
-    handleGetTransaction(currentPage);
-    handleGetAgentBankAccounts(currentPage);
+    // handleGetTransaction(currentPage);
+    // handleGetAgentBankAccounts(currentPage);
   };
   const handleGetEntry = () => {
     const getBankAccounts = async () => {
@@ -309,36 +343,8 @@ const Balance = () => {
     };
     postData();
   };
-  const handleGetAgentBankAccounts = (currentPageNumber) => {
-    const getData = async () => {
-      const response = await axios.get(environment.cityList);
-      setCityList(response.data);
-    };
-    getData();
-    let agentId = sessionStorage.getItem("agentId") ?? 0;
-    const getAgentBankAccounts = async () => {
-      const response = await axios.get(
-        environment.bankAccountsByAgent + "/" + agentId+ `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
-        environment.headerToken
-      );
-      console.log(response.data.data)
-      setAgentBankAccountList(response.data.data);
-      setPageCount(response.data.totalPages);
-      console.log()
-    };
-    getAgentBankAccounts(currentPageNumber);
 
-    const getAgentBankDropdown = async () => {
-      const response = await axios.get(
-        environment.accountsByAgentDropdown + "?agentId=" + agentId,
-        environment.headerToken
-      );
-      console.log(response.data)
-      setAgentAccountDropdownList(response.data);
-      console.log()
-    };
-    getAgentBankDropdown();
-  };
+
   const handleCreateItem = () => {
     clearBankForm();
   };
@@ -474,7 +480,8 @@ const Balance = () => {
     }
   };
   useEffect(() => {
-    handleGetEntry(currentPageNumber);
+    // handleGetEntry(currentPageNumber);
+    handleGetTransaction(currentPageNumber);
     handleGetAgentBankAccounts(currentPageNumber);
   }, [currentPageNumber]);
   return (

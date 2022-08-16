@@ -8,6 +8,7 @@ import "./Navbar.css";
 import moment from "moment";
 import sessionTime from "../Utility/sessionTime";
 import $ from "jquery";
+import { ToastContainer, toast } from "react-toastify";
 
 const Navbar = () => {
   let [noticeCount, setNoticeCount] = useState(0);
@@ -28,20 +29,37 @@ const handleViewTicket=()=>{
   axios
   .post(environment.airTicketingSearch,searchObj, environment.headerToken)
   .then((res) => {
-    console.log(res.data[0].uniqueTransID);
+    console.log(res);
+    if(res.data.length > 0){
       window.open("/ticket?utid=" + res.data[0].uniqueTransID, "_blank");
+    }else{
+      toast.error("Wrong Name/PNR/Ticket/Booking Ref Number")
+    } 
   })
   .catch((err) => {
     //alert('Invalid login')
   });
-
-  
 }
+
+const accountManagerInfo = async(agentId)=>{
+   await axios
+   .get(
+     environment.accountManagerInfo + "/" + agentId, environment.headerToken
+   )
+   .then((amRes) => {
+     setAccountManager(amRes.data);
+   })
+   .catch((err) => {
+     //alert('Invalid login')
+   });
+}
+
 
   const handleInit = () => {
     axios.get(environment.agentInfo, environment.headerToken)
       .then((agentRes) => {
         console.log(agentRes.data);
+        accountManagerInfo(agentRes.data.id);
         sessionStorage.setItem("agentId", agentRes.data.id);
         sessionStorage.setItem("agentName", agentRes.data.name);
         sessionStorage.setItem("logoName", agentRes.data.logoName);
@@ -52,19 +70,7 @@ const handleViewTicket=()=>{
         //alert('Invalid login')
       });
 
-    axios
-      .get(
-        environment.accountManagerInfo +
-          "/" +
-          (sessionStorage.getItem("agentId") ?? 0),
-        environment.headerToken
-      )
-      .then((amRes) => {
-        setAccountManager(amRes.data);
-      })
-      .catch((err) => {
-        //alert('Invalid login')
-      });
+
 
     axios
       .get(
@@ -109,11 +115,11 @@ const handleViewTicket=()=>{
 
   useEffect(() => {
     handleInit();
-
   }, []);
 
   return (
     <nav className="main-header navbar navbar-expand navbar-white navbar-light" style={{position: "sticky", top: "0"}}>
+      <ToastContainer />
       {/* Left navbar links  */}
       <ul className="navbar-nav">
         <li className="nav-item">

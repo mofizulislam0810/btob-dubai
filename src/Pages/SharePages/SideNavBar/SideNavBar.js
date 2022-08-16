@@ -110,12 +110,12 @@ const SideNavBar = () => {
                     <p>Balance Deposit</p>
                   </Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link to="/cbankaccount" className="nav-link">
                     <i className="far fa-circle nav-icon"></i>
                     <p>Company Bank Account</p>
                   </Link>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <Link to="/ledger" className="nav-link">
                     <i className="far fa-circle nav-icon"></i>

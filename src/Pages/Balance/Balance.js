@@ -80,7 +80,7 @@ const Balance = () => {
     remarks: "Online Deposit Checkout"
   }
   const deposittypeList = [
-    { id: 1, name: "Check" },
+    { id: 1, name: "Cheque" },
     { id: 2, name: "Bank Deposit" },
     { id: 3, name: "Bank Transfer" },
     { id: 4, name: "Cash" },
@@ -94,8 +94,6 @@ const Balance = () => {
   ];
 
   const handleSubmit = () => {
-
-
     if (depositTypeId == 1) {
       if (checkNo == "") {
         toast.error("Sorry! Check no is empty..");
@@ -114,7 +112,7 @@ const Balance = () => {
         return;
       }
       if (depositInAccountId == 0) {
-        toast.error("Sorry! Deposited in account is empty..");
+        toast.error("Sorry! Triplover account is empty..");
         return;
       }
     }
@@ -142,7 +140,7 @@ const Balance = () => {
         return;
       }
       if (depositInAccountId == 0) {
-        toast.error("Sorry! Deposited in bank is empty..");
+        toast.error("Sorry! Triplover bank is empty..");
         return;
       }
       if (depositFromAccountId == 0) {
@@ -316,14 +314,26 @@ const Balance = () => {
     let agentId = sessionStorage.getItem("agentId") ?? 0;
     const getAgentBankAccounts = async () => {
       const response = await axios.get(
-        environment.bankAccountsByAgent + "/" + agentId + `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
+        environment.bankAccountsByAgent + "/" + agentId+ `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
+        environment.headerToken
+      );
+      console.log(response.data.data)
+      setAgentBankAccountList(response.data.data);
+      setPageCount(response.data.totalPages);
+      console.log()
+    };
+    getAgentBankAccounts(currentPageNumber);
+
+    const getAgentBankDropdown = async () => {
+      const response = await axios.get(
+        environment.accountsByAgentDropdown + "?agentId=" + agentId,
         environment.headerToken
       );
       console.log(response.data)
-      setAgentBankAccountList(response.data.data);
-      setPageCount(response.data.totalPages);
+      setAgentAccountDropdownList(response.data);
+      console.log()
     };
-    getAgentBankAccounts(currentPageNumber);
+    getAgentBankDropdown();
   };
   const handleCreateItem = () => {
     clearBankForm();
@@ -612,13 +622,13 @@ const Balance = () => {
                             <div className="row">
                               <div className="col-sm-6">
                                 <label>
-                                  Deposited in Bank A/C
+                                  Triplover Bank A/C
                                   <span style={{ color: "red" }}>*</span>
                                 </label>
                                 <select
                                   className="form-select"
                                   value={depositInAccountId}
-                                  placeholder="Deposited in Bank A/C"
+                                  placeholder="Triplover Bank A/C"
                                   onChange={(e) =>
                                     setDepositInAccount(Number(e.target.value))
                                   }
@@ -627,19 +637,11 @@ const Balance = () => {
                                   <option key={0} value="0">
                                     Select One
                                   </option>
-                                  {accountList.map((item, index) => {
+                                  {
+                                  accountList.map((item, index) => {
                                     return (
                                       <option key={index + 1} value={item.id}>
-                                        {item.holderName +
-                                          ", " +
-                                          item.bankName +
-                                          ", " +
-                                          item.branchName +
-                                          ", " +
-                                          item.address +
-                                          "(" +
-                                          item.accountNumber +
-                                          ")"}
+                                        {item.name}
                                       </option>
                                     );
                                   })}
@@ -687,13 +689,13 @@ const Balance = () => {
                           <div className="row">
                             <div className="col-sm-6">
                               <label>
-                                Deposited Bank A/C
+                                Triplover Bank A/C
                                 <span style={{ color: "red" }}>*</span>
                               </label>
                               <select
                                 className="form-select"
                                 value={depositInAccountId}
-                                placeholder="Deposited in Bank A/C"
+                                placeholder="Triplover Bank A/C"
                                 onChange={(e) =>
                                   setDepositInAccount(Number(e.target.value))
                                 }
@@ -704,16 +706,7 @@ const Balance = () => {
                                 {accountList.map((item, index) => {
                                   return (
                                     <option key={index + 1} value={item.id}>
-                                      {item.holderName +
-                                        ", " +
-                                        item.bankName +
-                                        ", " +
-                                        item.branchName +
-                                        ", " +
-                                        item.address +
-                                        "(" +
-                                        item.accountNumber +
-                                        ")"}
+                                      {item.name}
                                     </option>
                                   );
                                 })}
@@ -768,7 +761,7 @@ const Balance = () => {
                                 }
                               ></input>
                             </div>
-                            <div className="col-sm-12 text-right">
+                            <div className="col-sm-12 text-right mt-3">
                               <button
                                 className="btn btn-success col-sm-1"
                                 type="button"
@@ -782,13 +775,13 @@ const Balance = () => {
                           <div className="row">
                             <div className="col-sm-6">
                               <label>
-                                Deposited in Bank A/C
+                                Triplover Bank A/C
                                 <span style={{ color: "red" }}>*</span>
                               </label>
                               <select
                                 className="form-select"
                                 value={depositInAccountId}
-                                placeholder="Deposited in Bank A/C"
+                                placeholder="Triplover Bank A/C"
                                 onChange={(e) =>
                                   setDepositInAccount(Number(e.target.value))
                                 }
@@ -800,16 +793,7 @@ const Balance = () => {
                                 {accountList.map((item, index) => {
                                   return (
                                     <option key={index + 1} value={item.id}>
-                                      {item.holderName +
-                                        ", " +
-                                        item.bankName +
-                                        ", " +
-                                        item.branchName +
-                                        ", " +
-                                        item.address +
-                                        "(" +
-                                        item.accountNumber +
-                                        ")"}
+                                      {item.name}
                                     </option>
                                   );
                                 })}
@@ -817,13 +801,14 @@ const Balance = () => {
                             </div>
                             <div className="col-sm-6">
                               <label>
-                                Deposited from Bank A/C
+                                My Bank A/C
                                 <span style={{ color: "red" }}>*</span>
                               </label>
+                              <div className="d-flex">
                               <select
                                 className="form-select"
                                 value={depositFromAccountId}
-                                placeholder="Deposited from Bank A/C"
+                                placeholder="My Bank A/C"
                                 onChange={(e) =>
                                   setDepositFromAccount(Number(e.target.value))
                                 }
@@ -832,23 +817,20 @@ const Balance = () => {
                                 <option key={0} value="0">
                                   Select One
                                 </option>
-                                {agentBankAccountList.map((item, index) => {
+                                {agentAccountDropdownList.map((item, index) => {
                                   return (
                                     <option key={index + 1} value={item.id}>
-                                      {item.holderName +
-                                        ", " +
-                                        item.bankName +
-                                        ", " +
-                                        item.branchName +
-                                        ", " +
-                                        item.address +
-                                        "(" +
-                                        item.accountNumber +
-                                        ")"}
+                                      {item.name}
                                     </option>
                                   );
                                 })}
                               </select>
+                              <div className="btn button-color text-white fw-bold px-3" 
+                              onClick={() => handleCreateItem()}
+                              data-bs-toggle="modal"
+                              data-bs-target="#accountModal">New</div>
+                              </div>
+                             
                             </div>
                             <div className="col-sm-3">
                               <label>
@@ -903,7 +885,7 @@ const Balance = () => {
                             </div>
                             <div className="col-sm-12 text-right">
                               <button
-                                className="btn btn-success col-sm-1"
+                                className="btn btn-success col-sm-1 mt-3"
                                 type="button"
                                 onClick={() => handleSubmit()}
                               >
@@ -977,7 +959,7 @@ const Balance = () => {
                             </div>
                             <div className="col-sm-12 text-right">
                               <button
-                                className="btn btn-success col-sm-1"
+                                className="btn btn-success col-sm-1 mt-3"
                                 type="button"
                                 onClick={() => handleSubmit()}
                               >
@@ -1080,7 +1062,7 @@ const Balance = () => {
                             )}
                             <div className="col-sm-12 text-right">
                               <button
-                                className="btn btn-success col-sm-1"
+                                className="btn btn-success col-sm-1 mt-3"
                                 type="button"
                                 onClick={() => handleSubmit()}
                               >
@@ -1132,7 +1114,7 @@ const Balance = () => {
                             </div>
                             <div className="col-sm-12 text-right">
                               <button
-                                className="btn btn-success col-sm-1"
+                                className="btn btn-success col-sm-1 mt-3"
                                 type="button"
                                 onClick={() => handleSubmit()}
                               >
@@ -1171,7 +1153,7 @@ const Balance = () => {
                                       <td>{((currentPageNumber - 1) * pageSize) + index + 1}</td>
                                       <td>
                                         {item.depositTypeId === 1
-                                          ? "Check"
+                                          ? "Cheque"
                                           : item.depositTypeId === 2
                                             ? "Bank Deposit"
                                             : item.depositTypeId === 3
@@ -1238,7 +1220,87 @@ const Balance = () => {
                           Add
                         </button>
 
-                        <div
+                        
+                        <table
+                          className="table table-striped"
+                          style={{ width: "100%" }}
+                        >
+                          <thead>
+                            <tr>
+                              <th>SL</th>
+                              <th>Holder Name</th>
+                              <th>Status</th>
+                              <th>Account Number</th>
+                              <th>Bank Name</th>
+                              <th>Branch Name</th>
+                              <th>Branch Code</th>
+                              <th>Address</th>
+                              <th>Swift Code</th>
+                              <th>Routing number</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {agentBankAccountList.map((item, index) => {
+                              return (
+                                <tr key={index}>
+                                  <td>{index + 1}</td>
+                                  <td>
+                                    <a
+                                      onClick={() => handleEditItem(item)}
+                                      href="#"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#accountModal"
+                                    >
+                                      {item.holderName}
+                                    </a>
+                                  </td>
+                                  <td>
+                                    {item.isActive === true
+                                      ? "Active"
+                                      : "Inactive"}
+                                  </td>
+                                  <td>{item.accountNumber}</td>
+                                  <td>{item.bankName}</td>
+                                  <td>{item.branchName}</td>
+                                  <td>{item.branchCode}</td>
+                                  <td>{item.address}</td>
+                                  <td>{item.swiftCode}</td>
+                                  <td>{item.routingNumber}</td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                        <ReactPaginate
+                          previousLabel={"previous"}
+                          nextLabel={"next"}
+                          breakLabel={"..."}
+                          pageCount={pageCount}
+                          marginPagesDisplayed={2}
+                          pageRangeDisplayed={3}
+                          onPageChange={handlePageClick}
+                          containerClassName={"pagination justify-content-center"}
+                          pageClassName={"page-item"}
+                          pageLinkClassName={"page-link"}
+                          previousClassName={"page-item"}
+                          previousLinkClassName={"page-link"}
+                          nextClassName={"page-item"}
+                          nextLinkClassName={"page-link"}
+                          breakClassName={"page-item"}
+                          breakLinkClassName={"page-link"}
+                          activeClassName={"active"}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+
+      <div
                           className="modal fade"
                           id="accountModal"
                           tabIndex={-1}
@@ -1384,9 +1446,7 @@ const Balance = () => {
                                             key={index + 1}
                                             value={item.id}
                                           >
-                                            {item.countryName +
-                                              ", " +
-                                              item.name}
+                                            {item.name}
                                           </option>
                                         );
                                       })}
@@ -1459,84 +1519,6 @@ const Balance = () => {
                             </div>
                           </div>
                         </div>
-                        <table
-                          className="table table-striped"
-                          style={{ width: "100%" }}
-                        >
-                          <thead>
-                            <tr>
-                              <th>SL</th>
-                              <th>Holder Name</th>
-                              <th>Status</th>
-                              <th>Account Number</th>
-                              <th>Bank Name</th>
-                              <th>Branch Name</th>
-                              <th>Branch Code</th>
-                              <th>Address</th>
-                              <th>Swift Code</th>
-                              <th>Routing number</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {agentBankAccountList.map((item, index) => {
-                              return (
-                                <tr key={index}>
-                                  <td>{index + 1}</td>
-                                  <td>
-                                    <a
-                                      onClick={() => handleEditItem(item)}
-                                      href="#"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#accountModal"
-                                    >
-                                      {item.holderName}
-                                    </a>
-                                  </td>
-                                  <td>
-                                    {item.isActive === true
-                                      ? "Active"
-                                      : "Inactive"}
-                                  </td>
-                                  <td>{item.accountNumber}</td>
-                                  <td>{item.bankName}</td>
-                                  <td>{item.branchName}</td>
-                                  <td>{item.branchCode}</td>
-                                  <td>{item.address}</td>
-                                  <td>{item.swiftCode}</td>
-                                  <td>{item.routingNumber}</td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </table>
-                        <ReactPaginate
-                          previousLabel={"previous"}
-                          nextLabel={"next"}
-                          breakLabel={"..."}
-                          pageCount={pageCount}
-                          marginPagesDisplayed={2}
-                          pageRangeDisplayed={3}
-                          onPageChange={handlePageClick}
-                          containerClassName={"pagination justify-content-center"}
-                          pageClassName={"page-item"}
-                          pageLinkClassName={"page-link"}
-                          previousClassName={"page-item"}
-                          previousLinkClassName={"page-link"}
-                          nextClassName={"page-item"}
-                          nextLinkClassName={"page-link"}
-                          breakClassName={"page-item"}
-                          breakLinkClassName={"page-link"}
-                          activeClassName={"active"}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </section>
-        </div>
-      </div>
       <div
         className="modal fade"
         id="onlineModal"

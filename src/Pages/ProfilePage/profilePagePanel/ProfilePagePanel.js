@@ -7,93 +7,97 @@ import { environment } from '../../../../src/Pages/SharePages/Utility/environmen
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import logo from "../../../images/logo/image_2022_07_28T11_49_00_957Z_2-removebg-preview.png"
+
+
+
 const ProfilePagePanel = () => {
   let [currentUser, setCurrentUser] = useState({});
   let [fullName, setFullName] = useState();
   let [email, setEmail] = useState();
   let [mobile, setMobile] = useState();
   let [userId, setUserId] = useState();
-  let [logoName, setLogoName] = useState(sessionStorage.getItem("logoName"));
+  let [logoName, setLogoName] = useState();
   const handleGetUser = () => {
     const getData = async () => {
-        const response = await axios.get(environment.currentUserInfo,environment.headerToken);
-        setCurrentUser(response.data);
-        setUserId(response.data.id);
-        setFullName(response.data.fullName);
-        setEmail(response.data.email);
-        setMobile(response.data.mobile);
+      const response = await axios.get(environment.currentUserInfo, environment.headerToken);
+      setCurrentUser(response.data);
+      setUserId(response.data.id);
+      setFullName(response.data.fullName);
+      setEmail(response.data.email);
+      setMobile(response.data.mobile);
     };
     getData();
   };
 
+  console.log(logoName);
+  const handleSubmit = () => {
+    currentUser.fullName = fullName;
+    currentUser.email = email;
+    currentUser.mobile = mobile;
+    console.log(currentUser);
 
-    const handleSubmit = () => {
-      currentUser.fullName=fullName;
-      currentUser.email=email;
-      currentUser.mobile=mobile;
-      console.log(currentUser);
+    const putData = async () => {
+      const response = await axios.put(environment.userList, currentUser, environment.headerToken).catch((err) => {
+        toast.error("Sorry! Profile not updated..");
+      });
+      if (response.data.isSuccess == true) {
 
-            const putData = async () => {
-                const response = await axios.put(environment.userList, currentUser,environment.headerToken).catch((err)=>{
-                  toast.error("Sorry! Profile not updated..");
-                });
-                if(response.data.isSuccess==true){
-                 
-                  sessionStorage.setItem('agentName',fullName);
-                  
-                  window.location.reload();
-                  toast.success("Thanks! Profile updated successfully");
-                }
-                else{
-                  toast.error("Sorry! Profile not updated..");
-                }
-            };
-            putData();
+        sessionStorage.setItem('agentName', fullName);
+
+        window.location.reload();
+        toast.success("Thanks! Profile updated successfully");
+      }
+      else {
+        toast.error("Sorry! Profile not updated..");
+      }
+    };
+    putData();
 
 
+  }
+
+  const logoFileUpload = (file) => {
+    let fileExt = file.name.split(".").pop().toLowerCase();
+    if (
+      !(
+        fileExt === "jpg" ||
+        fileExt === "jpeg" ||
+        fileExt === "png"
+      )
+    ) {
+      toast.error("Sorry! Invalid file type..");
+    }
+    else {
+      var formData = new FormData();
+      formData.append(`file`, file);
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      };
+      const postData = async () => {
+        const response = await axios.post(
+          environment.logoFileUpload + "/" + userId,
+          formData,
+          config
+        ).then((res => {
+          setLogoName(file.name);
+          sessionStorage.setItem("logoName", file.name);
+        }));
+      }
+      postData();
     }
 
-    const logoFileUpload=(file)=>{
-      let fileExt = file.name.split(".").pop().toLowerCase();
-      if (
-        !(
-          fileExt === "jpg" ||
-          fileExt === "jpeg" ||
-          fileExt === "png"
-        )
-      ) {
-        toast.error("Sorry! Invalid file type..");
-      }
-      else{
-        var formData = new FormData();
-        formData.append(`file`, file);
-        const config = {
-          headers: {
-            "content-type": "multipart/form-data",
-          },
-        };
-        const postData = async () => {
-          const response = await axios.post(
-            environment.logoFileUpload + "/"+userId ,
-            formData,
-            config
-          ).then((res=>{
-            setLogoName(file.name);
-            sessionStorage.setItem("logoName",file.name);
-          }));
-        }
-        postData();
-      }
 
-
-    }
-useEffect(()=>{
-  handleGetUser();
-},[])
+  }
+  useEffect(() => {
+    handleGetUser();
+  }, [])
   return (
     <div>
       <div className="content-wrapper search-panel-bg">
-      <ToastContainer />
+        <ToastContainer />
         <section className="content-header">
           <div className="container-fluid">
             <div className="row mb-2">
@@ -113,33 +117,55 @@ useEffect(()=>{
                 <div className="card card-primary card-outline">
                   <div className="card-body box-profile">
                     <div className="text-center">
-                    <img
-                                                      alt="img01"
-                                                      src={
-                                                        environment.baseApiURL +
-                                                        `agentinfo/GetLogo/${logoName}`
-                                                      }
-                                                      style={{ width: "200px", height: "200px" }}
-                                                    ></img>
-                                                    <input type={'file'} className='form-control' accept=".jpg, .jpeg, .png, .pdf"
-                                  onChange={(e) =>
-                                    logoFileUpload(
-                                      e.target.files[0]
-                                    )
-                                  }></input>
+                      {
+                        logoName === undefined ? 
+                        <>
+                        <img
+                        alt="img01"
+                        className="mx-auto mb-3"
+                        src={logo}
+                        style={{ width: "150px", height: "80px" }}
+                      ></img>
+                        </> : 
+                        <>
+                         <img
+                        alt="img01"
+                        className="mx-auto mb-3"
+                        src={
+                          environment.baseApiURL +
+                          `agentinfo/GetLogo/${logoName}`
+                        }
+                        style={{ width: "150px", height: "80px" }}
+                      ></img>
+                        </>
+                      }
+                      {/* <img
+                        alt="img01"
+                        src={
+                          environment.baseApiURL +
+                          `agentinfo/GetLogo/${logoName}`
+                        }
+                        style={{ width: "200px", height: "200px" }}
+                      ></img> */}
+                      <input type={'file'} className='form-control' accept=".jpg, .jpeg, .png, .pdf"
+                        onChange={(e) =>
+                          logoFileUpload(
+                            e.target.files[0]
+                          )
+                        }></input>
                     </div>
 
                     <h5 className="profile-username text-center fw-bold">
                       {currentUser.fullName}
                     </h5>
 
-                  <p className="text-muted text-center">
-                    Member Of {sessionStorage.getItem('agentName')}
-                  </p>
-                  <button  type="button" className="btn button-color text-white fw-bold btn-block rounded" data-bs-toggle="modal" data-bs-target="#profileModal">
-                                          Edit
-                                      </button>
-                  {/* <Link to="#" className="btn btn-primary btn-block">
+                    <p className="text-muted text-center">
+                      Member Of {sessionStorage.getItem('agentName')}
+                    </p>
+                    <button type="button" className="btn button-color text-white fw-bold btn-block rounded" data-bs-toggle="modal" data-bs-target="#profileModal">
+                      Edit
+                    </button>
+                    {/* <Link to="#" className="btn btn-primary btn-block">
                     <p className="text-muted text-center">
                       Member Of {sessionStorage.getItem("agentName")}
                     </p>
@@ -178,8 +204,8 @@ useEffect(()=>{
                           <div className="modal-body">
                             <div className="row text-center">
                               <div className="col-sm-4">
-                             
-                                                    {/* <input type={'file'} className='form-control' accept=".jpg, .jpeg, .png, .pdf"
+
+                                {/* <input type={'file'} className='form-control' accept=".jpg, .jpeg, .png, .pdf"
                                   onChange={(e) =>
                                     logoFileUpload(
                                       e.target.files[0]
@@ -306,7 +332,7 @@ useEffect(()=>{
                               </tr>
                             </tbody>
                           </table>
-                       
+
                         </form>
                       </div>
                     </div>

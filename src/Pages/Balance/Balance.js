@@ -38,6 +38,7 @@ const Balance = () => {
   let [onlineAmount, setOnlineAmount] = useState(0);
   let [onlineCharge, setOnlineCharge] = useState(5);
   let [branchList, setBranchList] = useState([]);
+  let [branchNameCash,setBranchNameCash] = useState("");
   let sendObj = {
     agentId: sessionStorage.getItem("agentId") ?? 0,
     fromOfPaymentType: depositTypeId,
@@ -52,9 +53,11 @@ const Balance = () => {
     depositedFromAccountId: depositFromAccountId,
     depositDate: depositDate,
     transferDate: transferDate,
-    branchName: "",
+    branchName: branchNameCash,
     transactionId: transactionId,
   };
+
+  console.log(branchNameCash);
   const clearDepositEntry = () => {
     setDepositType(1);
     setPaymentType(1);
@@ -157,7 +160,7 @@ const Balance = () => {
       }
     }
     if (depositTypeId == 4) {
-      if (branchId == 0) {
+      if (branchNameCash === "") {
         toast.error("Sorry! Branch is empty..");
         return;
       }
@@ -390,6 +393,16 @@ const Balance = () => {
     swiftCode: swiftCode,
     isActive: isActive,
   };
+
+
+  function handleCloseModal(){
+    document.getElementById("accountModal").classList.remove("show");
+    $(".modal-backdrop").remove();
+    $("body").removeClass("modal-open");
+    $("body").removeAttr("style");
+}
+
+
   const handleBankSubmit = () => {
     if (holderName === "") {
       toast.error("Sorry! Holder name is empty");
@@ -401,10 +414,6 @@ const Balance = () => {
     }
     if (routingNumber === "") {
       toast.error("Sorry! Routing number is empty");
-      return;
-    }
-    if (bankName === "") {
-      toast.error("Sorry! Bank name is empty");
       return;
     }
     if (branchName === "") {
@@ -436,9 +445,9 @@ const Balance = () => {
         );
         if (response.data > 0) {
           handleGetAgentBankAccounts(1);
-          $('.modal').modal('hide');
           clearBankForm();
           toast.success("Thanks! Bank Account updated successfully..");
+          handleCloseModal();
         } else {
           toast.error("Sorry! Bank Account not updated..");
         }
@@ -456,6 +465,7 @@ const Balance = () => {
           handleGetAgentBankAccounts(1);
           clearBankForm();
           toast.success("Thanks! Bank Account created successfully..");
+          handleCloseModal();
         } else {
           toast.error("Sorry! Bank Account not created..");
         }
@@ -765,7 +775,7 @@ const Balance = () => {
                             </div>
                             <div className="col-sm-12 text-right mt-3">
                               <button
-                                className="btn btn-success col-sm-1"
+                                className="btn button-color col-sm-1 text-white rounded"
                                 type="button"
                                 onClick={() => handleSubmit()}
                               >
@@ -887,7 +897,7 @@ const Balance = () => {
                             </div>
                             <div className="col-sm-12 text-right">
                               <button
-                                className="btn btn-success col-sm-1 mt-3"
+                                className="btn button-color col-sm-1 mt-3 text-white rounded"
                                 type="button"
                                 onClick={() => handleSubmit()}
                               >
@@ -901,7 +911,7 @@ const Balance = () => {
                               <label>
                                 Branch<span style={{ color: "red" }}>*</span>
                               </label>
-                              <select
+                              {/* <select
                                 className="form-select"
                                 value={branchId}
                                 placeholder="Branch"
@@ -919,7 +929,8 @@ const Balance = () => {
                                     </option>
                                   );
                                 })}
-                              </select>
+                              </select> */}
+                              <input type="text" className="form-control" placeholder="Branch Name" onChange={(e)=>setBranchNameCash(e.target.value)} required/>
                             </div>
 
                             <div className="col-sm-3">
@@ -961,7 +972,7 @@ const Balance = () => {
                             </div>
                             <div className="col-sm-12 text-right">
                               <button
-                                className="btn btn-success col-sm-1 mt-3"
+                                className="btn button-color col-sm-1 mt-3 text-white rounded"
                                 type="button"
                                 onClick={() => handleSubmit()}
                               >
@@ -1064,7 +1075,7 @@ const Balance = () => {
                             )}
                             <div className="col-sm-12 text-right">
                               <button
-                                className="btn btn-success col-sm-1 mt-3"
+                                className="btn button-color col-sm-1 mt-3 text-white rounded"
                                 type="button"
                                 onClick={() => handleSubmit()}
                               >
@@ -1116,7 +1127,7 @@ const Balance = () => {
                             </div>
                             <div className="col-sm-12 text-right">
                               <button
-                                className="btn btn-success col-sm-1 mt-3"
+                                className="btn button-color col-sm-1 mt-3 text-white rounded"
                                 type="button"
                                 onClick={() => handleSubmit()}
                               >

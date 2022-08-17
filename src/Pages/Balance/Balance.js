@@ -12,8 +12,10 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactPaginate from 'react-paginate';
 const Balance = () => {
   let [pageCount, setPageCount] = useState(0);
+  let [pageCountBank, setPageCountBank] = useState(0);
   let [pageSize, setPageSize] = useState(10);
   let [currentPageNumber, setCurrentPageNumber] = useState(1);
+  let [currentPageNumberBank, setCurrentPageNumberBank] = useState(1);
   let [depositTypeId, setDepositType] = useState(1);
   let [paymentTypeId, setPaymentType] = useState(1);
   let [checkNo, setCheckNo] = useState("");
@@ -246,7 +248,7 @@ const Balance = () => {
     getData();
   };
 
-  const handleGetAgentBankAccounts = (currentPageNumber) => {
+  const handleGetAgentBankAccounts = (currentPageNumberBank) => {
     // const getData = async () => {
     //   const response = await axios.get(environment.cityList);
     //   setCityList(response.data);
@@ -255,13 +257,13 @@ const Balance = () => {
     let agentId = sessionStorage.getItem("agentId") ?? 0;
     const getAgentBankAccounts = async () => {
       const response = await axios.get(
-        environment.bankAccountsByAgent + "/" + agentId+ `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
+        environment.bankAccountsByAgent + "/" + agentId+ `?pageNumber=${currentPageNumberBank}&pageSize=${pageSize}`,
         environment.headerToken
       );
       console.log(response.data.data)
       setAgentBankAccountList(response.data.data);
-      setPageCount(await response.data.totalPages);
-      console.log()
+      setPageCountBank(await response.data.totalPages);
+      console.log(response.data.totalPages)
     };
     getAgentBankAccounts();
 
@@ -285,6 +287,14 @@ const Balance = () => {
     // handleGetTransaction(currentPage);
     // handleGetAgentBankAccounts(currentPage);
   };
+
+  const handlePageClickBank = async (data) => {
+    let currentPage = data.selected + 1;
+    setCurrentPageNumberBank(currentPage);
+    // handleGetTransaction(currentPage);
+    // handleGetAgentBankAccounts(currentPage);
+  };
+
   const handleGetEntry = () => {
     const getBankAccounts = async () => {
       const response = await axios.get(
@@ -450,7 +460,7 @@ const Balance = () => {
           environment.headerToken
         );
         if (response.data > 0) {
-          handleGetAgentBankAccounts(1);
+          handleGetAgentBankAccounts(currentPageNumberBank);
           clearBankForm();
           toast.success("Thanks! Bank Account updated successfully..");
           handleCloseModal();
@@ -468,7 +478,7 @@ const Balance = () => {
         );
 
         if (response.data > 0) {
-          handleGetAgentBankAccounts(1);
+          handleGetAgentBankAccounts(currentPageNumberBank);
           clearBankForm();
           toast.success("Thanks! Bank Account created successfully..");
           handleCloseModal();
@@ -482,8 +492,8 @@ const Balance = () => {
   useEffect(() => {
     // handleGetEntry(currentPageNumber);
     handleGetTransaction(currentPageNumber);
-    handleGetAgentBankAccounts(currentPageNumber);
-  }, [currentPageNumber]);
+    handleGetAgentBankAccounts(currentPageNumberBank);
+  }, [currentPageNumber,currentPageNumberBank]);
   return (
     <div>
       <Navbar></Navbar>
@@ -523,7 +533,7 @@ const Balance = () => {
                           href="#transaction"
                           className="nav-link"
                           data-bs-toggle="tab"
-                          onClick={() => handleGetTransaction(1)}
+                          onClick={() => handleGetTransaction(currentPageNumber)}
                         >
                           Transaction
                         </a>
@@ -533,7 +543,7 @@ const Balance = () => {
                           href="#bankaccounts"
                           className="nav-link"
                           data-bs-toggle="tab"
-                          onClick={() => handleGetAgentBankAccounts(1)}
+                          onClick={() => handleGetAgentBankAccounts(currentPageNumberBank)}
                         >
                           Bank Accounts
                         </a>
@@ -1295,10 +1305,10 @@ const Balance = () => {
                           previousLabel={"previous"}
                           nextLabel={"next"}
                           breakLabel={"..."}
-                          pageCount={pageCount}
+                          pageCount={pageCountBank}
                           marginPagesDisplayed={2}
                           pageRangeDisplayed={3}
-                          onPageChange={handlePageClick}
+                          onPageChange={handlePageClickBank}
                           containerClassName={"pagination justify-content-center"}
                           pageClassName={"page-item"}
                           pageLinkClassName={"page-link"}

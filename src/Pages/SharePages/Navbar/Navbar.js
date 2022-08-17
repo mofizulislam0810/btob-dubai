@@ -30,7 +30,6 @@ const handleViewTicket=()=>{
   .post(environment.airTicketingSearch,searchObj, environment.headerToken)
   .then((res) => {
     console.log(res);
-    alert(res.data[0].uniqueTransID)
     if(res.data[0].uniqueTransID !== undefined && res.data[0].uniqueTransID !=='' && res.data[0].uniqueTransID !== null){
       window.open("/ticket?utid=" + res.data[0].uniqueTransID, "_blank");
     }else{
@@ -156,6 +155,7 @@ const accountManagerInfo = async(agentId)=>{
               class="btn button-color text-white fw-bold my-2 my-sm-0 rounded-end"
               onClick={handleViewTicket}
               type="button"
+              disabled={serchText === '' ? true : false}
             >
               <i class="fas fa-search"></i>
             </button>

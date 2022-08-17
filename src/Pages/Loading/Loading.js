@@ -71,34 +71,34 @@ const Loading = ({ flag, loading,originCode,destinationCode,tripType }) => {
                   </>
                 ) : flag === 1 ? (
                   <>
-                    <p className="fw-bold text-center pt-5">
+                    <p className="fw-bold text-center pt-2">
                       Please wait for booking
                     </p>
                     <img
                       src={img}
-                      className="img-fluid my-2"
+                      className="img-fluid my-2 mx-auto"
                       alt="fly plan"
                       width={"60%"}
                     />
                   </>
                 ) : flag === 2 ? (
                   <>
-                    <p className="fw-bold text-center pt-5">
+                    <p className="fw-bold text-center pt-2">
                       Please wait for ticketing
                     </p>
                     <img
                       src={img}
-                      className="img-fluid my-2"
+                      className="img-fluid my-2 mx-auto"
                       alt="fly plan"
                       width={"60%"}
                     />
                   </>
                 ) : flag === 3 ? (
                   <>
-                    <p className="fw-bold text-center pt-5"></p>
+                    <p className="fw-bold text-center pt-2"></p>
                     <img
                       src={img}
-                      className="img-fluid my-2"
+                      className="img-fluid my-2 mx-auto"
                       alt="fly plan"
                       width={"60%"}
                     />

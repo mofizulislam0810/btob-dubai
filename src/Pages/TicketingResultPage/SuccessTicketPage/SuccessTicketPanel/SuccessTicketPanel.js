@@ -117,7 +117,7 @@ useEffect(()=>{
                                       environment.baseApiURL +
                                       `agentinfo/GetLogo/${agentInfo.logoName}`
                                     }
-                                    style={{ width: "250px",height:"100px"}}
+                                    style={{ width: "100px",height:"30px"}}
                                   ></img>
                                 ) : (
                                   <>
@@ -125,7 +125,7 @@ useEffect(()=>{
                                       alt="img02"
                                       className="p-2"
                                       src={logo}
-                                      style={{ width: "250px" }}
+                                      style={{ width: "100px",height:"30px"}}
                                     ></img>
                                   </>
                                 )}
@@ -156,7 +156,7 @@ useEffect(()=>{
                               <br />
                               {/* Baridhara Diplomatic Zone, Dhaka-1212, Bangladesh.
                               <br /> */}
-                              +88{agentInfo.mobileNo}
+                              {agentInfo.mobileNo}
                             </address>
                           </td>
                         </tr>
@@ -209,7 +209,7 @@ useEffect(()=>{
                           <tbody>
                             <tr>
                               <td className="fw-bold">TLL REFERENCE</td>
-                              <td>TLL-220101987654</td>
+                              <td>{ticketData.item1?.uniqueTransID}</td>
                             </tr>
                             <tr>
                               <td className="fw-bold">FLIGHT TYPE</td>
@@ -221,7 +221,7 @@ useEffect(()=>{
                             </tr>
                             <tr>
                               <td className="fw-bold">STATUS</td>
-                              <td>Confirm</td>
+                              <td>Confirmed</td>
                             </tr>
                           </tbody>
                         </table>

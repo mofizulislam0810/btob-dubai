@@ -34,25 +34,27 @@ const BookedView = () => {
   console.log(ticketingList);
   const handleGetList = () => {
     const getTicketingList = async () => {
-      let sendObj = { transactionId: location.search.split("=")[1] };
+      let sendObj = { uniqueTransID: location.search.split("=")[1] };
       const response = await axios.post(
         environment.getTicketingList,
         sendObj,
         environment.headerToken
       );
-      setTicketingList(response.data);
-      console.log(response.data);
+      setTicketingList(response.data.data);
+      console.log(response.data.data);
+      // alert(ticketingList[0].uniqueTransID)
       handleGetPassengerList(
-        response.data[0].passengerIds,
-        response.data[0].uniqueTransID
+        response.data.data[0].passengerIds,
+        response.data.data[0].uniqueTransID
       );
-      handleGetSegmentList(response.data[0].uniqueTransID);
-      setBasePrice(response.data[0].basePrice);
-      setTax(response.data[0].tax);
-      setAIT(Number(response.data[0].basePrice) * 0.003);
-      setTotalPrice(response.data[0].ticketingPrice);
-      setDiscount(response.data[0].discount);
-      setAdditionalPrice(response.data[0].agentAdditionalPrice);
+      handleGetSegmentList(response.data.data[0].uniqueTransID);
+      localStorage.setItem("uniqueTransID", JSON.stringify(response.data.data[0].uniqueTransID));
+      setBasePrice(response.data.data[0].basePrice);
+      setTax(response.data.data[0].tax);
+      setAIT(Number(response.data.data[0].basePrice) * 0.003);
+      setTotalPrice(response.data.data[0].ticketingPrice);
+      setDiscount(response.data.data[0].discount);
+      setAdditionalPrice(response.data.data[0].agentAdditionalPrice);
     };
     getTicketingList();
   };
@@ -119,7 +121,7 @@ const BookedView = () => {
       ? ticketingList[0].referenceLog
       : "{}";
   const Obj = JSON.parse(refLog);
-  console.log(Obj.BookingRefNumber);
+  // console.log(Obj.BookingRefNumber);
   const handleGenerateTicket = () => {
     setLoading(true);
     const sendObjTicket = {
@@ -161,10 +163,9 @@ const BookedView = () => {
     <div>
       <Navbar></Navbar>
       <SideNavBar></SideNavBar>
-
-      {loading ? (
-        <>
-          <Loading flag={2} loading={loading}></Loading>
+      {
+        loading ? <>
+         <Loading flag={2} loading={loading}></Loading>
           <div className="content-wrapper search-panel-bg">
             <section className="content-header"></section>
             <section className="content">
@@ -290,21 +291,21 @@ const BookedView = () => {
                             <tr>
                               <th>Booking Date:</th>
                               <td className="bg-light">
-                                {ticketingList[0]?.bookingDate}
+                                {moment(ticketingList[0]?.bookingDate).format("DD-MMMM-yyyy")}
                               </td>
                               <td>Triplover Ref:</td>
                               <td className="bg-light">
                                 <strong>
                                   {" "}
                                   {/* TLL-{ticketingList[0].data?.item1.bookingRefNumber} */}{" "}
-                                  TLL-{Obj.BookingRefNumber}
+                                  {ticketingList[0]?.uniqueTransID}
                                 </strong>
                               </td>
                             </tr>
                             <tr>
                               <th>Issue Before:</th>
                               <td className="bg-light">
-                                <strong>{ticketingList[0]?.TimeTicks}</strong>
+                                <strong>{ticketingList[0]?.timeTicks}</strong>
                               </td>
                               <td>PNR</td>
                               <td className="bg-light">
@@ -325,13 +326,13 @@ const BookedView = () => {
                               <th>Booking Status:</th>
                               <td className="bg-light">
                                 <strong>
-                                  {ticketingList[0]?.bookingStatus}
+                                  {ticketingList[0]?.status}
                                 </strong>
                               </td>
                               <td>Booked By:</td>
                               <td className="bg-light">
                                 <strong>
-                                  {sessionStorage.getItem("agentName")}
+                                  {ticketingList[0]?.agentName}
                                 </strong>
                               </td>
                             </tr>
@@ -455,7 +456,6 @@ const BookedView = () => {
                               </tr>
                               <tr className="text-center">
                                 <th>DEPARTS</th>
-                                <th></th>
                                 <th>Phone Number</th>
                               </tr>
                             </thead>
@@ -470,7 +470,6 @@ const BookedView = () => {
                                             {item.cityName} (Mandatory)
                                             {/* {bookData.data?.item1.flightInfo.dirrections[0][0].from} */}
                                           </td>
-                                          <td></td>
                                           <td>
                                             {item.phoneCountryCode + item.phone}{" "}
                                           </td>
@@ -480,7 +479,7 @@ const BookedView = () => {
                                             {item.cityName} (Optional)
                                             {/* {bookData.data?.item1.flightInfo.dirrections[0][0].from} */}
                                           </td>
-                                          <td></td>
+
                                           <td>
                                             {item.phoneCountryCode + item.phone}{" "}
                                           </td>
@@ -725,10 +724,7 @@ const BookedView = () => {
                 </div>
               </div>
             </section>
-          </div>
-        </>
-      ) : (
-        <>
+          </div></> : <>
           <div className="content-wrapper search-panel-bg">
             <section className="content-header"></section>
             <section className="content">
@@ -854,21 +850,21 @@ const BookedView = () => {
                             <tr>
                               <th>Booking Date:</th>
                               <td className="bg-light">
-                                {ticketingList[0]?.bookingDate}
+                                {moment(ticketingList[0]?.bookingDate).format("DD-MMMM-yyyy")}
                               </td>
                               <td>Triplover Ref:</td>
                               <td className="bg-light">
                                 <strong>
                                   {" "}
                                   {/* TLL-{ticketingList[0].data?.item1.bookingRefNumber} */}{" "}
-                                  TLL-{Obj.BookingRefNumber}
+                                  {ticketingList[0]?.uniqueTransID}
                                 </strong>
                               </td>
                             </tr>
                             <tr>
                               <th>Issue Before:</th>
                               <td className="bg-light">
-                                <strong>{ticketingList[0]?.TimeTicks}</strong>
+                                <strong>{ticketingList[0]?.timeTicks}</strong>
                               </td>
                               <td>PNR</td>
                               <td className="bg-light">
@@ -889,13 +885,13 @@ const BookedView = () => {
                               <th>Booking Status:</th>
                               <td className="bg-light">
                                 <strong>
-                                  {ticketingList[0]?.bookingStatus}
+                                  {ticketingList[0]?.status}
                                 </strong>
                               </td>
                               <td>Booked By:</td>
                               <td className="bg-light">
                                 <strong>
-                                  {sessionStorage.getItem("agentName")}
+                                  {ticketingList[0]?.agentName}
                                 </strong>
                               </td>
                             </tr>
@@ -1019,7 +1015,6 @@ const BookedView = () => {
                               </tr>
                               <tr className="text-center">
                                 <th>DEPARTS</th>
-                                <th></th>
                                 <th>Phone Number</th>
                               </tr>
                             </thead>
@@ -1034,7 +1029,6 @@ const BookedView = () => {
                                             {item.cityName} (Mandatory)
                                             {/* {bookData.data?.item1.flightInfo.dirrections[0][0].from} */}
                                           </td>
-                                          <td></td>
                                           <td>
                                             {item.phoneCountryCode + item.phone}{" "}
                                           </td>
@@ -1044,7 +1038,7 @@ const BookedView = () => {
                                             {item.cityName} (Optional)
                                             {/* {bookData.data?.item1.flightInfo.dirrections[0][0].from} */}
                                           </td>
-                                          <td></td>
+
                                           <td>
                                             {item.phoneCountryCode + item.phone}{" "}
                                           </td>
@@ -1289,9 +1283,10 @@ const BookedView = () => {
                 </div>
               </div>
             </section>
-          </div>
-        </>
-      )}
+          </div></>
+      }
+
+
       <Footer></Footer>
     </div>
   );

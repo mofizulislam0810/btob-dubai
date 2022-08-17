@@ -249,11 +249,11 @@ const Balance = () => {
   };
 
   const handleGetAgentBankAccounts = (currentPageNumberBank) => {
-    // const getData = async () => {
-    //   const response = await axios.get(environment.cityList);
-    //   setCityList(response.data);
-    // };
-    // getData();
+    const getData = async () => {
+      const response = await axios.get(environment.cityList);
+      setCityList(response.data);
+    };
+    getData();
     let agentId = sessionStorage.getItem("agentId") ?? 0;
     const getAgentBankAccounts = async () => {
       const response = await axios.get(
@@ -267,16 +267,16 @@ const Balance = () => {
     };
     getAgentBankAccounts();
 
-    // const getAgentBankDropdown = async () => {
-    //   const response = await axios.get(
-    //     environment.accountsByAgentDropdown + "?agentId=" + agentId,
-    //     environment.headerToken
-    //   );
-    //   console.log(response.data)
-    //   setAgentAccountDropdownList(response.data);
-    //   console.log()
-    // };
-    // getAgentBankDropdown();
+    const getAgentBankDropdown = async () => {
+      const response = await axios.get(
+        environment.accountsByAgentDropdown + "?agentId=" + agentId,
+        environment.headerToken
+      );
+      console.log(response.data)
+      setAgentAccountDropdownList(response.data);
+      console.log()
+    };
+    getAgentBankDropdown();
   };
 
 

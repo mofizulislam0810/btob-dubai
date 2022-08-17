@@ -141,21 +141,25 @@ const SuccessBookingPanel = () => {
                       </thead>
                       <tbody>
                         <tr>
-                          <th>Booking Date:</th>
-                          <td className="bg-light">26/05/2022 06:01:00</td>
-                          <td>Triplover Ref:</td>
-                          <td className="bg-light">
-                            <strong>
-                              {" "}
-                              TLL-{bookData.data?.item1.bookingRefNumber}
-                            </strong>
-                          </td>
-                        </tr>
-                        <tr>
                           <th>Issue Before:</th>
                           <td className="bg-light">
                             <strong>
                               {bookData.data?.item1.ticketingTimeLimit}
+                            </strong>
+                          </td>
+                          <td>Triplover Ref:</td>
+                          <td className="bg-light">
+                            <strong>
+                              {" "}
+                              {bookData.data?.item1.uniqueTransID}
+                            </strong>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th>Booking Status:</th>
+                          <td className="bg-light">
+                            <strong>
+                              {bookData.data?.item1.bookingStatus}
                             </strong>
                           </td>
                           <td>PNR</td>
@@ -178,12 +182,12 @@ const SuccessBookingPanel = () => {
                           </td>
                         </tr> */}
                         <tr>
-                          <th>Booking Status:</th>
+                          {/* <th>Booking Status:</th>
                           <td className="bg-light">
                             <strong>
                               {bookData.data?.item1.bookingStatus}
                             </strong>
-                          </td>
+                          </td> */}
                           <td>Booked By:</td>
                           <td className="bg-light">
                             <strong>

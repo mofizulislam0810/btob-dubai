@@ -22,6 +22,8 @@ const RightSide = () => {
   const bookingComponents = JSON.parse(
     localStorage.getItem("bookingComponents")
   );
+  const itemCodeRef = JSON.parse(localStorage.getItem("itemCodeRef"));
+  const uniqueTransID = JSON.parse(localStorage.getItem("uniqueTransID"));
   const refundable = JSON.parse(localStorage.getItem("refundable"));
   const adult = JSON.parse(localStorage.getItem("adult"));
   const child = JSON.parse(localStorage.getItem("child"));
@@ -516,6 +518,18 @@ const RightSide = () => {
         <div className="row py-3 m-1">
           <div className="col-lg-12 text-start border mb-1">
             <span className="card-title fw-bold">Fare details</span>
+            <span className="pe-3 text-color float-end">
+                  <i class="fas fa-pen-nib me-1"></i>{" "}
+                  <Link
+                    to=""
+                    style={{ textDecoration: "none" }}
+                    className="fw-bold text-color font-size"
+                    data-bs-toggle="modal"
+                    data-bs-target={"#farerulesModal" + 0}
+                  >
+                    Fare Rules
+                  </Link>
+                </span>
           </div>
 
           {passengerFares.adt !== null ? (
@@ -753,6 +767,8 @@ const RightSide = () => {
         passengerFares={passengerFares}
         passengerCounts={passengerCounts}
         currency={currency}
+        uniqueTransID={uniqueTransID}
+        itemCodeRef={itemCodeRef}
       ></ShowModal>
     </div>
   );

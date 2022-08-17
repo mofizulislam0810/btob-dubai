@@ -13,7 +13,8 @@ const FailedTicketPage = () => {
     const handleOrder=()=>{
         const orderTicket = async () => {
             let transactionId=JSON.parse(localStorage.getItem("uniqueTransID"));
-			const response = await axios.put(environment.changeTicketStatus+"/"+transactionId+"/Ordered",null,environment.headerToken);
+			      const response = await axios.put(environment.changeTicketStatus+"/"+transactionId+"/Ordered",null,environment.headerToken);
+            console.log(response);
             if(response.data>0){
                 navigate('/successorderticket');
             }
@@ -53,7 +54,7 @@ const FailedTicketPage = () => {
                   the support or order e-ticket<br></br>Thank You
                 </p>
                 <hr></hr>
-                <button className="btn button-color mb-3 text-white fw-bold" onClick={()=>handleOrder()}>
+                <button className="btn button-color my-3 text-white fw-bold" onClick={()=>handleOrder()}>
                   Onder e-ticket
                 </button>
               </div>

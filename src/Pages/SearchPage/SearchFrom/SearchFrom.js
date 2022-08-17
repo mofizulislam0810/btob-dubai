@@ -221,8 +221,8 @@ const SearchFrom = () => {
         ? searchList[idx].cabinClass === 1
           ? "Economy"
           : searchList[idx].cabinClass === 3
-          ? "Business"
-          : " "
+            ? "Business"
+            : " "
         : "Economy"
     );
     setAdultCount(searchList !== undefined ? searchList[idx].adults : 1);
@@ -243,10 +243,10 @@ const SearchFrom = () => {
     $("#txtTo").val(
       searchList !== undefined
         ? destination[0].city +
-            " - " +
-            destination[0].country +
-            ", " +
-            destination[0].name
+        " - " +
+        destination[0].country +
+        ", " +
+        destination[0].name
         : destinationRef.current.value
     );
 
@@ -264,8 +264,8 @@ const SearchFrom = () => {
           $(".class_0").tDatePicker("update", [
             searchList !== undefined
               ? moment(searchList[idx].routes[0].departureDate).format(
-                  "yyyy-MM-DD"
-                )
+                "yyyy-MM-DD"
+              )
               : new Date(),
           ]);
         });
@@ -274,13 +274,13 @@ const SearchFrom = () => {
           $(".class_0").tDatePicker("update", [
             searchList !== undefined
               ? moment(searchList[idx].routes[0].departureDate).format(
-                  "yyyy-MM-DD"
-                )
+                "yyyy-MM-DD"
+              )
               : new Date(),
             searchList !== undefined
               ? moment(searchList[idx].routes[1].departureDate).format(
-                  "yyyy-MM-DD"
-                )
+                "yyyy-MM-DD"
+              )
               : new Date(),
           ]);
         });
@@ -395,10 +395,10 @@ const SearchFrom = () => {
       if (results.length >= index + 1) {
         autoinput.val(
           results[index].city +
-            " - " +
-            results[index].country +
-            ", " +
-            results[index].name
+          " - " +
+          results[index].country +
+          ", " +
+          results[index].name
         );
         clearResults();
       }
@@ -693,11 +693,11 @@ const SearchFrom = () => {
                                       title="adultminus"
                                       onClick={
                                         infantCount > 0 &&
-                                        adultCount === infantCount
+                                          adultCount === infantCount
                                           ? () => {
-                                              setAdultCount(adultCount - 1);
-                                              setInfantCount(infantCount - 1);
-                                            }
+                                            setAdultCount(adultCount - 1);
+                                            setInfantCount(infantCount - 1);
+                                          }
                                           : () => setAdultCount(adultCount - 1)
                                       }
                                       disabled={adultCount === 1 ? true : false}
@@ -824,8 +824,8 @@ const SearchFrom = () => {
                                       onClick={
                                         infantCount < adultCount
                                           ? () =>
-                                              setInfantCount(infantCount + 1)
-                                          : () => {}
+                                            setInfantCount(infantCount + 1)
+                                          : () => { }
                                       }
                                       disabled={
                                         infantCount === 9 ? true : false
@@ -1016,7 +1016,7 @@ const SearchFrom = () => {
                           />
                         </span>
                       </div>
-                      <div className="col-lg-4 ">
+                      <div className="col-lg-4">
                         <div className="row">
                           <div className="col-lg-12 ">
                             <label
@@ -1041,11 +1041,11 @@ const SearchFrom = () => {
                       </div>
                     </div>
                     <div
-                      className="row pt-1"
+                      className="row pt-1 position-relative"
                       id="multiCity2"
                       style={{ display: "none" }}
                     >
-                      <div className="col-lg-4">
+                      <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
                           className="form-label text-white"
@@ -1053,17 +1053,25 @@ const SearchFrom = () => {
                           Depart From{" "}
                           <span className="text-white fw-bold">*</span>
                         </label>
-
-                        <input
-                          type="text"
-                          className="form-control input-field autocomplete rounded-3"
-                          ref={originRef2}
-                          placeholder="From"
-                          autoComplete="off"
-                          id="txtFrom2"
-                        />
+                        <span className="address">
+                          <input
+                            type="text"
+                            className="form-control input-field autocomplete rounded-3"
+                            ref={originRef2}
+                            placeholder="From"
+                            autoComplete="off"
+                            id="txtFrom2"
+                          />
+                        </span>
                       </div>
-                      <div className="col-lg-4">
+                      <div className="swap">
+                        <label className="swap">
+                          <span className="text-danger fw-bold icon">
+                            <i className="fas fa-exchange-alt fa-1x"></i>
+                          </span>
+                        </label>
+                      </div>
+                      <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
                           className="form-label text-white"
@@ -1071,14 +1079,16 @@ const SearchFrom = () => {
                           Going To{" "}
                           <span className="text-white fw-bold">*</span>
                         </label>
-                        <input
-                          type="text"
-                          className="form-control input-field autocomplete rounded-3"
-                          ref={destinationRef2}
-                          placeholder="To"
-                          id="txtTo2"
-                          autoComplete="off"
-                        />
+                        <span className="address">
+                          <input
+                            type="text"
+                            className="form-control input-field autocomplete rounded-3"
+                            ref={destinationRef2}
+                            placeholder="To"
+                            id="txtTo2"
+                            autoComplete="off"
+                          />
+                        </span>
                       </div>
                       <div className="col-lg-4">
                         <div className="row">
@@ -1105,11 +1115,11 @@ const SearchFrom = () => {
                       </div>
                     </div>
                     <div
-                      className="row pt-1"
+                      className="row pt-1 position-relative"
                       id="multiCity3"
                       style={{ display: "none" }}
                     >
-                      <div className="col-lg-4">
+                      <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
                           className="form-label text-white"
@@ -1117,17 +1127,25 @@ const SearchFrom = () => {
                           Depart From{" "}
                           <span className="text-white fw-bold">*</span>
                         </label>
-
-                        <input
-                          type="text"
-                          className="form-control input-field autocomplete rounded-3"
-                          ref={originRef3}
-                          placeholder="From"
-                          autoComplete="off"
-                          id="txtFrom3"
-                        />
+                        <span className="address">
+                          <input
+                            type="text"
+                            className="form-control input-field autocomplete rounded-3"
+                            ref={originRef3}
+                            placeholder="From"
+                            autoComplete="off"
+                            id="txtFrom3"
+                          />
+                        </span>
                       </div>
-                      <div className="col-lg-4">
+                      <div className="swap">
+                        <label className="swap">
+                          <span className="text-danger fw-bold icon">
+                            <i className="fas fa-exchange-alt fa-1x"></i>
+                          </span>
+                        </label>
+                      </div>
+                      <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
                           className="form-label text-white"
@@ -1135,15 +1153,18 @@ const SearchFrom = () => {
                           Going To{" "}
                           <span className="text-white fw-bold">*</span>
                         </label>
-                        <input
-                          type="text"
-                          className="form-control input-field autocomplete rounded-3"
-                          ref={destinationRef3}
-                          placeholder="To"
-                          id="txtTo3"
-                          autoComplete="off"
-                        />
+                        <span className="address">
+                          <input
+                            type="text"
+                            className="form-control input-field autocomplete rounded-3"
+                            ref={destinationRef3}
+                            placeholder="To"
+                            id="txtTo3"
+                            autoComplete="off"
+                          />
+                        </span>
                       </div>
+
                       <div className="col-lg-4">
                         <div className="row">
                           <div className="col-lg-12">
@@ -1169,11 +1190,11 @@ const SearchFrom = () => {
                       </div>
                     </div>
                     <div
-                      className="row pt-1"
+                      className="row pt-1 position-relative"
                       id="multiCity4"
                       style={{ display: "none" }}
                     >
-                      <div className="col-lg-4">
+                      <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
                           className="form-label text-white"
@@ -1181,17 +1202,25 @@ const SearchFrom = () => {
                           Depart From{" "}
                           <span className="text-white fw-bold">*</span>
                         </label>
-
-                        <input
-                          type="text"
-                          className="form-control input-field autocomplete rounded-3"
-                          ref={originRef4}
-                          placeholder="From"
-                          autoComplete="off"
-                          id="txtFrom4"
-                        />
+                        <span className="address">
+                          <input
+                            type="text"
+                            className="form-control input-field autocomplete rounded-3"
+                            ref={originRef4}
+                            placeholder="From"
+                            autoComplete="off"
+                            id="txtFrom4"
+                          />
+                        </span>
                       </div>
-                      <div className="col-lg-4">
+                      <div className="swap">
+                        <label className="swap">
+                          <span className="text-danger fw-bold icon">
+                            <i className="fas fa-exchange-alt fa-1x"></i>
+                          </span>
+                        </label>
+                      </div>
+                      <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
                           className="form-label text-white"
@@ -1199,14 +1228,16 @@ const SearchFrom = () => {
                           Going To{" "}
                           <span className="text-white fw-bold">*</span>
                         </label>
-                        <input
-                          type="text"
-                          className="form-control input-field autocomplete rounded-3"
-                          ref={destinationRef4}
-                          placeholder="To"
-                          id="txtTo4"
-                          autoComplete="off"
-                        />
+                        <span className="address">
+                          <input
+                            type="text"
+                            className="form-control input-field autocomplete rounded-3"
+                            ref={destinationRef4}
+                            placeholder="To"
+                            id="txtTo4"
+                            autoComplete="off"
+                          />
+                        </span>
                       </div>
                       <div className="col-lg-4">
                         <div className="row">
@@ -1233,11 +1264,11 @@ const SearchFrom = () => {
                       </div>
                     </div>
                     <div
-                      className="row pt-1"
+                      className="row pt-1 position-relative"
                       id="multiCity5"
                       style={{ display: "none" }}
                     >
-                      <div className="col-lg-4">
+                      <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
                           className="form-label text-white"
@@ -1245,17 +1276,25 @@ const SearchFrom = () => {
                           Depart From{" "}
                           <span className="text-white fw-bold">*</span>
                         </label>
-
-                        <input
-                          type="text"
-                          className="form-control input-field autocomplete rounded-3"
-                          ref={originRef5}
-                          placeholder="From"
-                          autoComplete="off"
-                          id="txtFrom5"
-                        />
+                        <span className="address">
+                          <input
+                            type="text"
+                            className="form-control input-field autocomplete rounded-3"
+                            ref={originRef5}
+                            placeholder="From"
+                            autoComplete="off"
+                            id="txtFrom5"
+                          />
+                        </span>
                       </div>
-                      <div className="col-lg-4">
+                      <div className="swap">
+                        <label className="swap">
+                          <span className="text-danger fw-bold icon">
+                            <i className="fas fa-exchange-alt fa-1x"></i>
+                          </span>
+                        </label>
+                      </div>
+                      <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
                           className="form-label text-white"
@@ -1263,14 +1302,16 @@ const SearchFrom = () => {
                           Going To{" "}
                           <span className="text-white fw-bold">*</span>
                         </label>
-                        <input
-                          type="text"
-                          className="form-control input-field autocomplete rounded-3"
-                          ref={destinationRef5}
-                          placeholder="To"
-                          id="txtTo5"
-                          autoComplete="off"
-                        />
+                        <span className="address">
+                          <input
+                            type="text"
+                            className="form-control input-field autocomplete rounded-3"
+                            ref={destinationRef5}
+                            placeholder="To"
+                            id="txtTo5"
+                            autoComplete="off"
+                          />
+                        </span>
                       </div>
                       <div className="col-lg-4">
                         <div className="row rounded-3">

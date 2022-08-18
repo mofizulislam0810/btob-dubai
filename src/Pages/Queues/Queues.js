@@ -177,6 +177,7 @@ const Queues = () => {
     }
   };
   const handleTicketingVoid = (status, utid, pnr, ticketno) => {
+    // alert(ticketno);
     //window.open("/support?utid="+utid,'_blank')
     if (status === "Issued") {
       window.open(
@@ -221,6 +222,7 @@ const Queues = () => {
           )
           .then((res) => {
             if (res.data > 0) {
+              // window.location.reload();
               toast.success("Thanks! Refund successfully requested..");
             }
           });
@@ -468,6 +470,7 @@ const Queues = () => {
                               <th>Route</th>
                               <th>Reference ID</th>
                               <th>PNR</th>
+                              <th>Ticket Number</th>
                               <th>Total Price</th>
                               <th>Status</th>
                               <th>Action</th>
@@ -535,6 +538,7 @@ const Queues = () => {
                                         {item.pnr}
                                       </a>
                                     </td>
+                                    <td>{item.ticketNumber}</td>
                                     <td>{item.ticketingPrice}</td>
                                     <td>
                                       {item.status} <br />{" "}
@@ -583,7 +587,7 @@ const Queues = () => {
                                                 item.status,
                                                 item.uniqueTransID,
                                                 item.pnr,
-                                                item.ticketNumbers
+                                                item.ticketNumber
                                               )
                                             }
                                           >
@@ -611,7 +615,7 @@ const Queues = () => {
                                                 item.status,
                                                 item.uniqueTransID,
                                                 item.pnr,
-                                                item.ticketNumbers
+                                                item.ticketNumber
                                               )
                                             }
                                           >
@@ -716,7 +720,7 @@ const Queues = () => {
                                                 item.status,
                                                 item.uniqueTransID,
                                                 item.pnr,
-                                                item.ticketNumbers
+                                                item.ticketNumber
                                               )
                                             }
                                           >
@@ -744,7 +748,7 @@ const Queues = () => {
                                                 item.status,
                                                 item.uniqueTransID,
                                                 item.pnr,
-                                                item.ticketNumbers
+                                                item.ticketNumber
                                               )
                                             }
                                           >
@@ -777,7 +781,7 @@ const Queues = () => {
                                                   item.status,
                                                   item.uniqueTransID,
                                                   item.pnr,
-                                                  item.ticketNumbers
+                                                  item.ticketNumber
                                                 )
                                               }
                                             >
@@ -808,7 +812,7 @@ const Queues = () => {
                                                 item.status,
                                                 item.uniqueTransID,
                                                 item.pnr,
-                                                item.ticketNumbers
+                                                item.ticketNumber
                                               )
                                             }
                                           >

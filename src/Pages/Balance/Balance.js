@@ -140,10 +140,6 @@ const Balance = () => {
       }
     }
     if (depositTypeId == 3) {
-      if (checkNo == "") {
-        toast.error("Sorry! Check no is empty..");
-        return;
-      }
       if (depositInAccountId == 0) {
         toast.error("Sorry! Triplover bank is empty..");
         return;
@@ -490,7 +486,7 @@ const Balance = () => {
     }
   };
   useEffect(() => {
-    // handleGetEntry(currentPageNumber);
+    handleGetEntry();
     handleGetTransaction(currentPageNumber);
     handleGetAgentBankAccounts(currentPageNumberBank);
   }, [currentPageNumber,currentPageNumberBank]);
@@ -1258,7 +1254,7 @@ const Balance = () => {
                           <thead>
                             <tr>
                               <th>SL</th>
-                              <th>Holder Name</th>
+                              <th>Account Name</th>
                               <th>Status</th>
                               <th>Account Number</th>
                               <th>Bank Name</th>
@@ -1366,14 +1362,14 @@ const Balance = () => {
                                   ></input> */}
                                   <div className="col-sm-3">
                                     <label>
-                                      Holder Name
+                                    Account Name
                                       <span style={{ color: "red" }}>*</span>
                                     </label>
                                     <input
                                       type={"text"}
                                       value={holderName}
                                       className="form-control"
-                                      placeholder="Holder Name"
+                                      placeholder="Account Name"
                                       onChange={(e) =>
                                         setHolderName(e.target.value)
                                       }

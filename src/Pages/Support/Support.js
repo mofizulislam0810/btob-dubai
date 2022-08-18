@@ -177,7 +177,8 @@ const Support = () => {
 		}
 		const postData = async () => {
 			const response = await axios.post(environment.supportHistory, historyObj, environment.headerToken);
-			if (response.data === true) {
+			console.log(response);
+			if (response.data > 0) {
 				handleGetOngoing();
 				toast.success("Thanks! Message sent successfully..");
 			}

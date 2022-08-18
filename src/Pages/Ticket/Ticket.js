@@ -66,7 +66,7 @@ const Ticket = () => {
         environment.headerToken
       );
       if (response.data > 0) {
-        toast.error("Thanks! data updated successfully..");
+        toast.success("Thanks! data updated successfully..");
         handleGetList();
       }
       else{
@@ -687,7 +687,7 @@ const Ticket = () => {
             tabIndex={-1}
             aria-hidden="true"
           >
-            <div className="modal-dialog">
+            <div className="modal-dialog" style={{minWidth:"1200px"}}>
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title">Edit Price</h5>
@@ -797,7 +797,7 @@ const Ticket = () => {
                                   className="form-control"
                                 />
                               </td>
-                              <td>
+                              <td className="text-end">
                                 {item.basePrice +
                                   item.tax +
                                   item.ait +
@@ -828,14 +828,14 @@ const Ticket = () => {
                 <div className="modal-footer">
                   <button
                     type="button"
-                    className="btn btn-secondary"
+                    className="btn btn-secondary rounded"
                     data-bs-dismiss="modal"
                   >
                     Close
                   </button>
                   <button
                     type="button"
-                    className="btn button-color fw-bold text-white"
+                    className="btn button-color fw-bold text-white rounded"
                     onClick={() => handleSubmit()}
                   >
                     Submit

@@ -30,7 +30,7 @@ const handleViewTicket=()=>{
   .post(environment.airTicketingSearch,searchObj, environment.headerToken)
   .then((res) => {
     console.log(res);
-    if(res.data[0].uniqueTransID !== undefined && res.data[0].uniqueTransID !=='' && res.data[0].uniqueTransID !== null){
+    if(res.data[0].uniqueTransID !== undefined && res.data[0].uniqueTransID !=='' && res.data[0].uniqueTransID !== null && res.data.length > 0){
       window.open("/ticket?utid=" + res.data[0].uniqueTransID, "_blank");
     }else{
       toast.error("Data not found!")

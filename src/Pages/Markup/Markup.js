@@ -22,6 +22,7 @@ const Markup = () => {
   let [airlineList, setAirlineList] = useState([]);
   let [countryList, setCountryList] = useState([]);
   let [agentMarkupList, setAgentMarkupList] = useState([]);
+  console.log(agentMarkupList);
   let [airportList, setAirportList] = useState([]);
   let cabinclassList = [
     { id: 0, name: "ALL" },
@@ -276,6 +277,34 @@ const Markup = () => {
     handleGetAgentMarkups(currentPageNumber)
     handleCreateItem();
   }, [currentPageNumber]);
+
+  const handleDeleteItem = (item) => {
+    let result = window.confirm("Are you sure");
+    if (result) {
+      // const putData = async () => {
+      //   const response = await axios
+      //     .put(
+      //       environment.deleteAgentPassenger + "/" + item.id,
+      //       sendObj,
+      //       environment.headerToken
+      //     )
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
+      //   console.log(response);
+      //   if (response !== undefined && response.data > 0) {
+      //     handleGetPassengers();
+      //     toast.success("Thanks! Data deleted successfully..");
+      //   } else {
+      //     toast.error("Sorry! Data not deleted..");
+      //   }
+      // };
+      // putData();
+    }
+  };
+
+
+
   return (
     <div>
       <Navbar></Navbar>
@@ -1197,6 +1226,9 @@ const Markup = () => {
                             <th>Travell Validity From</th>
                             <th>Travell Validity To</th>
                             <th>Created On</th>
+                            <th>Markup Value</th> 
+                            <th>Discount Value</th>
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -1219,8 +1251,8 @@ const Markup = () => {
                                     ? "Active"
                                     : "Inactive"}
                                 </td>
-                                <td>{item.originAirportName}</td>
-                                <td>{item.destinationAirportName}</td>
+                                <td>{item.originCountryCodes}</td>
+                                <td>{item.destinationCountryCodes}</td>
                                 <td>{item.airlineNames}</td>
                                 <td>
                                   {
@@ -1236,6 +1268,9 @@ const Markup = () => {
                                     "yyyy-MM-DD"
                                   )}
                                 </td>
+                                <td>{item.markupTypeId===1?"Flat":"Percent"} {item.markupValue}</td>
+                                <td>{item.commissionTypeId===1?"Flat":"Percent"} {item.commissionValue}</td>
+                                <td><span onClick={() => handleDeleteItem(item)} className="text-danger me-2"><i class="fa fa-trash" aria-hidden="true"></i></span><span onClick={() => handleDeleteItem(item)} className="text-danger"><i class="fas fa-edit"></i></span></td>
                               </tr>
                             );
                           })}

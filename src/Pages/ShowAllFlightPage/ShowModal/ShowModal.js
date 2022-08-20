@@ -90,83 +90,33 @@ const ShowModal = ({
         JSON.stringify(bookingComponents)
       );
     });
-
-      fetchOptions();
  
   },[]);
-  const fareRulesObj = {
-    itemCodeRef: itemCodeRef,
-    uniqueTransID: uniqueTransID,
-    segmentCodeRefs: []
-  };
-  if (Object.keys(direction0).length > 0) {
-    direction0.segments.map((i) =>
-    fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
-    );
-  }
-  let [fareRules,setFareRules]=useState();
 
-  async function fetchOptions() {
-    await axios
-      .post(environment.getFareRules, fareRulesObj, environment.headerToken)
-      .then((response) => {
-        setFareRules(response.data);
-      });
-      console.log(fareRules)
-  }
+  
+  // const fareRulesObj = {
+  //   itemCodeRef: itemCodeRef,
+  //   uniqueTransID: uniqueTransID,
+  //   segmentCodeRefs: []
+  // };
+  // if (Object.keys(direction0).length > 0) {
+  //   direction0.segments.map((i) =>
+  //   fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
+  //   );
+  // }
+  // let [fareRules,setFareRules]=useState();
+
+  // async function fetchOptions() {
+  //   await axios
+  //     .post(environment.getFareRules, fareRulesObj, environment.headerToken)
+  //     .then((response) => {
+  //       setFareRules(response.data);
+  //     });
+  //     console.log(fareRules)
+  // }
 
 
-  // fetchOptions();
-//   let fareRules={
-//     "item1": {
-//         "fareRuleDetails": [
-//             {
-//                 "type": "ADV RES/TKTG",
-//                 "fareRuleDetail": "UNLESS OTHERWISE SPECIFIED\nRESERVATIONS ARE REQUIRED FOR ALL SECTORS."
-//             },
-//             {
-//                 "type": "Max Stay",
-//                 "fareRuleDetail": "UNLESS OTHERWISE SPECIFIED\nTRAVEL FROM LAST STOPOVER MUST COMMENCE NO LATER THAN 12\nMONTHS AFTER DEPARTURE FROM FARE ORIGIN."
-//             },
-//             {
-//                 "type": "StopOvers",
-//                 "fareRuleDetail": "UNLESS OTHERWISE SPECIFIED\n2 STOPOVERS PERMITTED ON THE PRICING UNIT - 1 IN EACH\nDIRECTION IN INDIA AT USD 40.00 EACH."
-//             },
-//             {
-//                 "type": "Combinations",
-//                 "fareRuleDetail": "UNLESS OTHERWISE SPECIFIED\nSINGLE/DOUBLE OPEN JAWS/CIRCLE TRIPS NOT PERMITTED.\nEND-ON-END NOT PERMITTED. SIDE TRIPS NOT PERMITTED\nAPPLICABLE ADD-ON CONSTRUCTION IS ADDRESSED IN\nMISCELLANEOUS PROVISIONS - CATEGORY 23.\nROUND TRIPS\nFARES MAY BE COMBINED ON A HALF ROUND TRIP BASIS\n-TO FORM ROUND TRIPS.\nPROVIDED -\nCOMBINATIONS ARE WITH ANY FARE FOR CARRIER AI IN ANY\nRULE IN THIS TARIFF."
-//             },
-//             {
-//                 "type": "Surcharges",
-//                 "fareRuleDetail": "UNLESS OTHERWISE SPECIFIED\nA SURCHARGE OF USD 5.00 PER DIRECTION WILL BE ADDED TO THE\nAPPLICABLE FARE FOR WEEKEND TRAVEL ON FRI/SAT."
-//             },
-//             {
-//                 "type": "Travel Restrictions",
-//                 "fareRuleDetail": "UNLESS OTHERWISE SPECIFIED\nVALID FOR TRAVEL COMMENCING ON/AFTER 18MAR 17.\nVALID FOR TRAVEL COMMENCING ON/AFTER 18MAR 17."
-//             },
-//             {
-//                 "type": "Penalties (Or) Change Fee", 
-//                 "fareRuleDetail": "UNLESS OTHERWISE SPECIFIED\nCHANGES\nCHARGE USD 30.00 FOR REISSUE.\nNOTE -\nA CHANGE IS A DATE/FLIGHT/ROUTING/BOOKING\nMODIFICATION.\n--------------------------------------------------\nCHARGE APPLIES PER TRANSACTION. A TRANSACTION MAY\nINCORPORATE ONE OR MORE RESERVATION CHANGE IN THE\nSAME TRANSACTION E.G. FLIGHT AND DATE CHANGE IN\nONE DIRECTION OR BOTH.\n--------------------------------------------------\nCHARGE APPLIES TO ADULT AND CHILD.\nINFANTS NOT OCCUPYING A SEAT ARE EXEMPTED\n--------------------------------------------------\nCHANGE FEE DOES NOT APPLY FOR UPGRADE TO A HIGHER\nCABIN CLASS ON THE SAME FLIGHT. ONLY DIFFERENCE\nIN FARE AND TAXES TO BE COLLECTED. IF THE UPGRADE\nIS WITH A DATE CHANGE/CHANGE FEE ALSO TO BE\nCOLLECTED ALONG WITH DIFFERENCE IN FARE AND TAXES.\n--------------------------------------------------\nWHEN NOSHOW TICKET IS PRESENTED FOR REBOOKING\nBOTH NOSHOW AND REBOOKING/REISSUE CHARGES APPLY.\nNO SHOW IS WHEN A PAX FAILS TO CHANGE BOOKING\nATLEAST 24 HOURS BEFORE DEPARTURE OF THE FLIGHT.\n--------------------------------------------------\nTICKET HAS TO BE REISSUED FOR ANY CHANGE\nINCLUDING DATE/FLIGHT/ROUTING/BOOKING CHANGE.\n--------------------------------------------------\nREBOOKING/REISSUE/UPGRADING MUST BE MADE IN ONE\nTRANSACTION BEFORE DEPARTURE OF THE FLIGHT BEING\nCHANGED.\n--------------------------------------------------\nREISSUE TO BE DONE BY THE ORIGINAL ISSUING AGENT\nOR AI OFFICE ONLY.\n--------------------------------------------------\nPENALTY WAIVED FOR DEATH OF PASSENGER OR\nIMMEDIATE FAMILY MEMBER. WAIVER MUST BE EVIDENCED\nBY DEATH CERTIFICATE.\nIMMEDIATE FAMILY SHALL BE LIMITED TO SPOUSE/\nCHILDREN INCLUDING ADOPTED CHILDREN/ PARENTS/\nBROTHERS/ SISTERS/ GRANDPARENTS/ GRANDCHILDREN/\nFATHER IN LAW/ MOTHER IN LAW/ SISTER IN LAW/\nBROTHER IN LAW/ SON IN LAW AND DAUGHTER IN LAW.\nDEATH CERTIFICATE MEANS A DEATH CERTIFICATE OR\nCOPY THEREOF DULY EXECUTED BY THE COMPETENT\nAUTHORITIES I.E.THOSE DESIGNATED TO ISSUE DEATH\nCERTIFICATE BY APPLICABLE LAWS OF THE COUNTRY\nIN WHICH THE DEATH OCCURRED.\n--------------------------------------------------\nIF NO SEATS ARE AVAILABLE IN THE SAME RBD AS\nTICKETED PASSENGERS MAY BE BOOKED IN THE HIGHER\nRBD BY CHARGING DIFFERENCE OF FARE AND TAXES.\nDOWNSELLING TO A LOWER RBD IS NOT PERMITTED.\n--------------------------------------------------\nTHE CHANGE/REISSUE CHARGE PLUS DIFFERENCE IN FARE\nAND TAXES WILL APPLY EVEN IF THERE IS A CHANGE OF\nDATE/FLIGHT/ROUTING/BOOKING ONLY ON THE\nINTERLINING SECTOR.\n--------------------------------------------------\nWHEN FARES ARE COMBINED THE MOST RESTRICTIVE\nCONDITIONS APPLY FOR THE ENTIRE JOURNEY.\n--------------------------------------------------\nTHE CHANGE/REISSUE CHARGE IS NON - REFUNDABLE.\n--------------------------------------------------\nCHARGES ARE NON COMMISSIONABLE AND INCLUSIVE OF\nSERVICE TAXES.\n--------------------------------------------------\nCANCELLATIONS\nCHARGE USD 40.00 FOR CANCEL.\nNOTE -\nCHARGE APPLIES TO ADULT/ CHILD AND INFANT\nOCCUPYING A SEAT. INFANT NOT OCCUPYING A SEAT IS\nEXEMPTED.\n--------------------------------------------------\nWHEN NOSHOW TICKET IS PRESENTED FOR CANCELLATION/\nBOTH NOSHOW AND CANCELLATION CHARGES APPLY.\nNO SHOW IS WHEN A PAX FAILS TO CANCEL BOOKING\nATLEAST 24 HOURS BEFORE DEPARTURE OF THE FLIGHT\nBEING CANCELLED.\n--------------------------------------------------\nPENALTY WAIVED FOR DEATH OF PASSENGER OR\nIMMEDIATE FAMILY MEMBER. WAIVER MUST BE EVIDENCED\nBY DEATH CERTIFICATE.\nIMMEDIATE FAMILY SHALL BE LIMITED TO SPOUSE/\nCHILDREN INCLUDING ADOPTED CHILDREN/ PARENTS/\nBROTHERS/ SISTERS/ GRANDPARENTS/ GRANDCHILDREN/\nFATHER IN LAW/ MOTHER IN LAW/ SISTER IN LAW/\nBROTHER IN LAW/ SON IN LAW AND DAUGHTER IN LAW.\nDEATH CERTIFICATE MEANS A DEATH CERTIFICATE OR\nCOPY THEREOF DULY EXECUTED BY THE COMPETENT\nAUTHORITIES I.E.THOSE DESIGNATED TO ISSUE DEATH\nCERTIFICATE BY APPLICABLE LAWS OF THE COUNTRY\nIN WHICH THE DEATH OCCURRED.\n--------------------------------------------------\nAPPLICABLE PENALTIES TO BE RECOVERED FROM THE\nBASIC FARE AND FUEL CHARGE ONLY.\n--------------------------------------------------\nIN CASES WHERE THE APPLICABLE PENALTIES ARE HIGHER\nTHAN THE SUM OF THE BASIC FARE AND FUEL CHARGE/\nONLY THE BASIC FARE AND FUEL CHARGE WILL BE\nFORFEITED.\nSTATUTORY TAXES E.G. JN F2 AND G1 TAX EX INDIA\nAND OTHER CHARGES LIKE AIRPORT DEPARTURE TAX ETC.\nTO BE REFUNDED IN FULL.\n--------------------------------------------------\nAGAINST NON - REFUNDABLE TICKETS ONLY THE BASIC\nFARE AND FUEL CHARGE TO BE FORFEITED. STATUTORY\nTAXES AND OTHER CHARGES ARE REFUNDABLE IN FULL.\n--------------------------------------------------\nIN CASE OF PARTIALLY UTILIZED TICKETS CHARGE ONE\nWAY FARE OR HALF ROUND TRIP FARE WHICHEVER IS\nHIGHER IN THE SAME RBD FOR THE SECTOR UTILISED\nPLUS APPLICABLE TAXES.\nIF NO ONE WAY FARE EXISTS FOR THE UTILISED SECTOR\nIN THE SAME RBD THE NEXT HIGHER RBD WILL APPLY IN\nADDITION TO THE CANCELLATION CHARGE.\n--------------------------------------------------\nIF AN OUT OF SEQUENCE COUPON IS PRESENTED FOR\nREFUND THE ITINERARY TO BE REPRICED AND THE\nBALANCE IF ANY MAY BE PROCESSED FOR REFUND AFTER\nDEDUCTING APPLICABLE PENALTIES.\n--------------------------------------------------\nTHE CANCELLATION CHARGE WILL APPLY EVEN IF THERE\nIS CANCELLATION ONLY OF THE INTERLINING SECTOR.\n--------------------------------------------------\nWHEN FARES ARE COMBINED THE MOST RESTRICTIVE\nCONDITIONS APPLY FOR THE ENTIRE JOURNEY.\n--------------------------------------------------\nTHE CHANGE/REISSUE CHARGE IS NON - REFUNDABLE.\n--------------------------------------------------\nCHARGES ARE NON COMMISSIONABLE AND INCLUSIVE OF\nSERVICE TAXES.\n--------------------------------------------------\nCHANGES/CANCELLATIONS\nCHARGE USD 60.00 FOR NO-SHOW.\nNOTE -\nNO SHOW IS WHEN A PAX FAILS TO CHANGE/CANCEL\nBOOKING ATLEAST 24 HOURS BEFORE DEPARTURE OF THE\nFLIGHT BEING CHANGED/CANCELLED.\n--------------------------------------------------\nCHARGE APPLIES TO ADULT/ CHILD AND INFANT\nOCCUPYING A SEAT. INFANT NOT OCCUPYING A SEAT IS\nEXEMPTED.\n--------------------------------------------------\nWHEN NOSHOW TICKET IS PRESENTED FOR REBOOKING/\nBOTH NOSHOW AND REBOOKING/REISSUE CHARGES APPLY.\nWHEN NOSHOW TICKET IS PRESENTED FOR CANCELLATION/\nBOTH NOSHOW AND CANCELLATION CHARGES APPLY.\n--------------------------------------------------\nPENALTY WAIVED FOR DEATH OF PASSENGER OR\nIMMEDIATE FAMILY MEMBER. WAIVER MUST BE EVIDENCED\nBY DEATH CERTIFICATE.\nIMMEDIATE FAMILY SHALL BE LIMITED TO SPOUSE/\nCHILDREN INCLUDING ADOPTED CHILDREN/ PARENTS/\nBROTHERS/ SISTERS/ GRANDPARENTS/ GRANDCHILDREN/\nFATHER IN LAW/ MOTHER IN LAW/ SISTER IN LAW/\nBROTHER IN LAW/ SON IN LAW AND DAUGHTER IN LAW.\nDEATH CERTIFICATE MEANS A DEATH CERTIFICATE OR\nCOPY THEREOF DULY EXECUTED BY THE COMPETENT\nAUTHORITIES I.E.THOSE DESIGNATED TO ISSUE DEATH\nCERTIFICATE BY APPLICABLE LAWS OF THE COUNTRY\nIN WHICH THE DEATH OCCURRED.\n--------------------------------------------------\nTHE NO-SHOW CHARGE WILL APPLY EVEN IF THERE IS\nNO-SHOW ONLY ON THE INTERLINING SECTOR.\n--------------------------------------------------\nWHEN FARES ARE COMBINED THE MOST RESTRICTIVE\nCONDITIONS APPLY FOR THE ENTIRE JOURNEY.\n--------------------------------------------------\nCHARGES ARE NON COMMISSIONABLE AND INCLUSIVE OF\nSERVICE TAXES.\n--------------------------------------------------"
-//             },
-//             {
-//                 "type": "Accompanied Travel Restrictions", 
-//                 "fareRuleDetail": "UNLESS OTHERWISE SPECIFIED\nACCOMPANIED CHILD 2-11 - CHARGE 75 PERCENT OF THE FARE.\nTICKET DESIGNATOR - CH AND PERCENT OF DISCOUNT.\nNOTE -\nNOSHOW/REBOOKING/CANCELLATION PENALTIES FOR CHILD\nSAME AS THAT MENTIONED FOR ADULT\nOR - UNACCOMPANIED CHILD 5-11 - CHARGE 100 PERCENT OF THE\nFARE.\nTICKET DESIGNATOR - CH AND PERCENT OF DISCOUNT.\nNOTE -\nNOSHOW/REBOOKING/CANCELLATION PENALTIES FOR CHILD\nSAME AS THAT MENTIONED FOR ADULT\nOR - INFANT UNDER 2 WITHOUT A SEAT - CHARGE 10 PERCENT OF\nTHE FARE.\nTICKET DESIGNATOR - IN AND PERCENT OF DISCOUNT.\nNOTE -\nINFANT WILL BE TICKETED IN THE SAME RBD AS THAT\nOF THE ACCOMPANIED ADULT PASSENGER.\n--------------------------------------------------\nWHEN INFANT REACHES 2 YEARS OF AGE ON\nDEPARTURE FROM POINT OF TURNAROUND A SEAT\nMUST BE BOOKED ON THE RETURN LEG AND THE\nAPPLICABLE CHILD FARE CHARGED ON HALF ROUNDTRIP\nBASIS WITH OUTBOUND INFANT FARE.\n--------------------------------------------------\nNOSHOW/REBOOKING/CANCELLATION PENALTIES FOR\nINFANT----NIL\nOR - INFANT UNDER 2 WITH A SEAT - CHARGE 75 PERCENT OF THE\nFARE.\nTICKET DESIGNATOR - CH AND PERCENT OF DISCOUNT.\nNOTE -\nNOSHOW/REBOOKING/CANCELLATION PENALTIES FOR CHILD\nSAME AS THAT MENTIONED FOR ADULT"
-//             }
-//         ],
-//         "uniqueTransID": "TLL856722761",
-//         "itemCodeRef": "VExMODU2NzIyNzYxLTYzNzkwNTY4MzA5MzI1NTIzMnxKNFBqSkZVcVdES0FyZEwyQUFBQUFBPT18VUFwaUdhbGlsZW8="
-//     },
-//     "item2": {
-//         "apiRef": 2,
-//         "uniqueTransID": "TLL856722761",
-//         "isSuccess": true,
-//         "requestTime": "12-Jun-2022 12:13:26 PM",
-//         "responseTime": "12-Jun-2022 12:13:38 PM",
-//         "conversionTime": null,
-//         "timeTicks": 637906328065510135,
-//         "message": null
-//     }
-// };
+  
   return (
     <>
      <div
@@ -2137,7 +2087,7 @@ const ShowModal = ({
         </div>
       </div>
     </div>
-    <div className="modal fade" id={"farerulesModal"+ index} tabIndex="-1" aria-labelledby="farerulesModalLabel"
+    {/* <div className="modal fade" id={"farerulesModal"+ index} tabIndex="-1" aria-labelledby="farerulesModalLabel"
     aria-hidden="true">
     <div className="modal-dialog">
         <div className="modal-content">
@@ -2178,7 +2128,7 @@ const ShowModal = ({
             </div>
         </div>
     </div>
-</div>
+</div> */}
     </>
    
   );

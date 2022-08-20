@@ -10,6 +10,8 @@ import airports from "../../../JSON/airports.json";
 import ReactTooltip from "react-tooltip";
 import layOver from "../../SharePages/Utility/layOver";
 import dayCount from "../../SharePages/Utility/dayCount";
+import { environment } from "../../SharePages/Utility/environment";
+import axios from "axios";
 
 let checkList = [];
 const ShowFlight = (props) => {
@@ -33,6 +35,33 @@ const ShowFlight = (props) => {
   const flightType = props.flightType;
   const amountChange = props.amountChange;
   let currency = props.currency;
+
+  let [fareRules,setFareRules]=useState();
+
+
+  const handleFareRules = (uId,dir,itemCode) =>{
+    const fareRulesObj = {
+      itemCodeRef: itemCode,
+      uniqueTransID: uId,
+      segmentCodeRefs: []
+    };
+    if (Object.keys(dir[0][0]).length > 0) {
+      dir[0][0].segments.map((i) =>
+      fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
+      );
+    }
+   
+  async function fetchOptions() {
+    await axios
+      .post(environment.getFareRules, fareRulesObj, environment.headerToken)
+      .then((response) => {
+        setFareRules(response.data);
+      });
+      console.log(fareRules)
+  }
+    fetchOptions();
+  }
+
   const [idxD, setIdxD] = useState(0);
   const [idxA, setIdxA] = useState(0);
   const [idxD1, setIdxD1] = useState(0);
@@ -995,7 +1024,8 @@ const ShowFlight = (props) => {
                     style={{ textDecoration: "none" }}
                     className="fw-bold text-color font-size"
                     data-bs-toggle="modal"
-                    data-bs-target={"#farerulesModal" + props.index}
+                    data-bs-target={"#farerulesModal"}
+                    onClick={()=>handleFareRules(uniqueTransID,directions,itemCodeRef)}
                   >
                     Fare Rules
                   </Link>
@@ -5531,6 +5561,49 @@ const ShowFlight = (props) => {
 
         </>
       )}
+
+<div className="modal fade" id={"farerulesModal"} tabIndex="-1" aria-labelledby="farerulesModalLabel"
+    aria-hidden="true">
+    <div className="modal-dialog">
+        <div className="modal-content">
+            <div className="modal-header">
+              <h3>Fare Rules</h3>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body" style={{fontSize:'10px'}}>
+                        {
+                        fareRules!==undefined && fareRules.item2!=undefined?
+                        fareRules.item2.isSuccess==true?
+                          <>
+                          {
+                            fareRules.item1.fareRuleDetails.map((item,index)=>{
+                              return <>
+                              <p>
+                                  <a class="btn btn-default col-lg-12" style={{backgroundColor:'blue'}} data-bs-toggle="collapse" href={"#rulePanel"+index} role="button" aria-expanded="false" aria-controls={"#rulePanel"+index}>{item.type}</a>
+                                </p>
+                                <div class="row">
+                                  <div class="col">
+                                    <div class="collapse multi-collapse" id={"rulePanel"+index}>
+                                      <div class="card card-body" >
+                                      <div className="row" dangerouslySetInnerHTML={{__html: item.fareRuleDetail.replace(/(?:\r\n|\r|\n)/g, '<br />')}} ></div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </div>
+                             </>
+                            })
+                          }
+                          
+                          </>
+                          
+                          :<></>
+                        :<></>
+                        }
+            </div>
+        </div>
+    </div>
+</div>
     </>
   );
 };

@@ -515,7 +515,7 @@ const Registration = () => {
                           </div>
                         </div>
 
-                        <div className="row">
+                        {/* <div className="row">
                           <div className="col-lg-12">
                             <div
                               className="input-group"
@@ -527,7 +527,7 @@ const Registration = () => {
                               />
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>

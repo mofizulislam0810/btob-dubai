@@ -30,9 +30,12 @@ const handleViewTicket=()=>{
   .post(environment.airTicketingSearch,searchObj, environment.headerToken)
   .then((res) => {
     console.log(res);
-    if( res.data.length > 0){
+    if(res.data.length > 0 && res.data[0].isTicketed === true && res.data[0].uniqueTransID !==""){
       window.open("/ticket?utid=" + res.data[0].uniqueTransID, "_blank");
-    }else{
+    }else if(res.data.length > 0 && res.data[0].isTicketed === false && res.data[0].uniqueTransID !==""){
+      window.open("/bookedview?utid=" + res.data[0].uniqueTransID, "_blank");
+    }
+    else{
       toast.error("Data not found!")
     } 
   })

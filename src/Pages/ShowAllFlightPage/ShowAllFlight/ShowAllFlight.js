@@ -326,7 +326,7 @@ const ShowAllFlight = ({
                       ]}
                       min={Math.floor(mainJson?.minMaxPrice?.minPrice)}
                       max={Math.ceil(mainJson?.minMaxPrice?.maxPrice)}
-                      step={1000}
+                      step={100}
                       minStepsBetweenThumbs={1}
                       onChangeEnd={(val) => setFilterPrice(val)}
                     >

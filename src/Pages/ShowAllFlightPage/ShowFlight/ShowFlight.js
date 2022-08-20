@@ -951,11 +951,9 @@ const ShowFlight = (props) => {
                               <td className="left">
                                 ADT :{" "}
                                 <span className="ms-1 font-size">
-                                  {directions[1][0].segments[0].baggage[0]
-                                    .amount +
+                                  {directions[1][0].segments[0].baggage[0]?.amount +
                                     " " +
-                                    directions[1][0].segments[0].baggage[0]
-                                      .units}
+                                    directions[1][0].segments[0].baggage[0]?.units}
                                 </span>
                               </td>
                             </tr>

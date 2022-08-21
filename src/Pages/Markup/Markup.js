@@ -280,30 +280,30 @@ const Markup = () => {
 
   const handleDeleteItem = (item) => {
     let result = window.confirm("Are you sure");
+    alert(result);
     if (result) {
-      // const putData = async () => {
-      //   const response = await axios
-      //     .put(
-      //       environment.deleteAgentPassenger + "/" + item.id,
-      //       sendObj,
-      //       environment.headerToken
-      //     )
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
-      //   console.log(response);
-      //   if (response !== undefined && response.data > 0) {
-      //     handleGetPassengers();
-      //     toast.success("Thanks! Data deleted successfully..");
-      //   } else {
-      //     toast.error("Sorry! Data not deleted..");
-      //   }
-      // };
-      // putData();
+      const deleteMarkup = async () => {
+        const response = await axios
+          .put(
+            environment.markupsDelete + "/" + item.agentId,
+            environment.headerToken
+          )
+          .catch((error) => {
+            console.log(error);
+          });
+        // console.log(response);
+        // if (response !== undefined && response.data > 0) {
+        //   handleGetAgentMarkups(currentPageNumber);
+        //   toast.success("Thanks! Data deleted successfully..");
+        // } else {
+        //   toast.error("Sorry! Data not deleted..");
+        // }
+      };
+      deleteMarkup();
     }
   };
 
-
+console.log(agentMarkupList);
 
   return (
     <div>
@@ -1270,7 +1270,9 @@ const Markup = () => {
                                 </td>
                                 <td>{item.markupTypeId===1?"Flat":"Percent"} {item.markupValue}</td>
                                 <td>{item.commissionTypeId===1?"Flat":"Percent"} {item.commissionValue}</td>
-                                <td><span onClick={() => handleDeleteItem(item)} className="text-danger me-2"><i class="fa fa-trash" aria-hidden="true"></i></span><span onClick={() => handleDeleteItem(item)} className="text-danger"><i class="fas fa-edit"></i></span></td>
+                                <td><span onClick={() => handleDeleteItem(item)} className="text-danger me-2"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                {/* <span onClick={() => handleEditItem(item)} className="text-danger"><i class="fas fa-edit"></i></span> */}
+                                </td>
                               </tr>
                             );
                           })}

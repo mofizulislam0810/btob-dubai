@@ -99,10 +99,10 @@ const Registration = () => {
       toast.error("Sorry! Country is not selected");
       return;
     }
-    if (postalCode === "") {
-      toast.error("Sorry! Postal Code is empty");
-      return;
-    }
+    // if (postalCode === "") {
+    //   toast.error("Sorry! Postal Code is empty");
+    //   return;
+    // }
     if (cityId === null) {
       toast.error("Sorry! City is not selected");
       return;
@@ -285,7 +285,6 @@ const Registration = () => {
                                 className="form-control rounded"
                                 placeholder="Postal Code"
                                 onChange={(e) => setPostalCode(e.target.value)}
-                                required
                               />
                               <div className="input-group-append">
                                 <div className="input-group-text">

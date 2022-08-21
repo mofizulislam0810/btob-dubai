@@ -36,32 +36,52 @@ const ShowFlight = (props) => {
   const amountChange = props.amountChange;
   let currency = props.currency;
 
-  let [fareRules,setFareRules]=useState();
+  let [fareRules, setFareRules] = useState();
+  const [loading, setLoading] = useState(false);
 
 
-  const handleFareRules = (uId,dir,itemCode) =>{
+  const handleFareRules = (uId, dir, itemCode) => {
     const fareRulesObj = {
       itemCodeRef: itemCode,
       uniqueTransID: uId,
       segmentCodeRefs: []
     };
-    if (Object.keys(dir[0][0]).length > 0) {
+
       dir[0][0].segments.map((i) =>
-      fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
+        fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
       );
+
+
+    // if (Object.keys(dir[0][0]).length > 0) {
+    //   dir[0][0].segments.map((i) =>
+    //     fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
+    //   );
+    // }
+    console.log(fareRulesObj);
+
+    // const fetchOptions = async(fareRulesObj) =>{
+    //     setLoading(true);
+    //     alert(loading);
+    //     const response = await axios.post(environment.getFareRules, fareRulesObj, environment.headerToken);
+    //     setFareRules(await response.data);
+    //     // setLoading(false);
+    // }
+    async function fetchOptions() {
+      // alert("ok");
+      setLoading(true);
+      await axios
+        .post(environment.getFareRules, fareRulesObj, environment.headerToken)
+        .then((response) => {
+          setFareRules(response.data);
+          // console.log(response);
+        })
+        .finally(()=>{
+          setLoading(false);
+        });
     }
-   
-  async function fetchOptions() {
-    await axios
-      .post(environment.getFareRules, fareRulesObj, environment.headerToken)
-      .then((response) => {
-        setFareRules(response.data);
-      });
-      console.log(fareRules)
-  }
     fetchOptions();
   }
-
+  console.log(fareRules);
   const [idxD, setIdxD] = useState(0);
   const [idxA, setIdxA] = useState(0);
   const [idxD1, setIdxD1] = useState(0);
@@ -386,7 +406,7 @@ const ShowFlight = (props) => {
                               .arrival,
                             item[0].segments[0]?.departure
                           ) !== 0 ? (
-                            <span className="text-danger" style={{fontSize:"8px"}}>
+                            <span className="text-danger" style={{ fontSize: "8px" }}>
                               +
                               {dayCount(
                                 item[0].segments[item[0].segments.length - 1]
@@ -627,7 +647,7 @@ const ShowFlight = (props) => {
                           ].arrival,
                           directions[0][0].segments[0]?.departure
                         ) !== 0 ? (
-                          <span className="text-danger" style={{fontSize:"8px"}}>
+                          <span className="text-danger" style={{ fontSize: "8px" }}>
                             +
                             {dayCount(
                               directions[0][0].segments[
@@ -879,7 +899,7 @@ const ShowFlight = (props) => {
                           ].arrival,
                           directions[1][0].segments[0]?.departure
                         ) !== 0 ? (
-                          <span className="text-danger" style={{fontSize:"8px"}}>
+                          <span className="text-danger" style={{ fontSize: "8px" }}>
                             +
                             {dayCount(
                               directions[1][0].segments[
@@ -999,7 +1019,7 @@ const ShowFlight = (props) => {
 
                   {refundable === true ? (
                     <>
-                      <span>
+                      <span className="font-size">
                         <span className="text-success">
                           <i class="fas fa-circle fa-sm me-1"></i>
                         </span>
@@ -1008,7 +1028,7 @@ const ShowFlight = (props) => {
                     </>
                   ) : (
                     <>
-                      <span>
+                      <span className="font-size">
                         <span className="text-danger">
                           <i class="fas fa-circle fa-sm me-1"></i>
                         </span>
@@ -1025,7 +1045,7 @@ const ShowFlight = (props) => {
                     className="fw-bold text-color font-size"
                     data-bs-toggle="modal"
                     data-bs-target={"#farerulesModal"}
-                    onClick={()=>handleFareRules(uniqueTransID,directions,itemCodeRef)}
+                    onClick={() => handleFareRules(uniqueTransID, directions, itemCodeRef)}
                   >
                     Fare Rules
                   </Link>
@@ -1526,7 +1546,7 @@ const ShowFlight = (props) => {
                                     .arrival,
                                   item.segments[0]?.departure
                                 ) !== 0 ? (
-                                  <span className="text-danger" style={{fontSize:"8px"}}>
+                                  <span className="text-danger" style={{ fontSize: "8px" }}>
                                     +
                                     {dayCount(
                                       item.segments[item.segments.length - 1]
@@ -1682,7 +1702,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger" style={{fontSize:"8px"}}>
+                                      <span className="text-danger" style={{ fontSize: "8px" }}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -1846,7 +1866,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger" style={{fontSize:"8px"}}>
+                                      <span className="text-danger" style={{ fontSize: "8px" }}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -2011,7 +2031,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger" style={{fontSize:"8px"}}>
+                                      <span className="text-danger" style={{ fontSize: "8px" }}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -2175,7 +2195,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger" style={{fontSize:"8px"}}>
+                                      <span className="text-danger" style={{ fontSize: "8px" }}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -2340,7 +2360,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger" style={{fontSize:"8px"}}>
+                                      <span className="text-danger" style={{ fontSize: "8px" }}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -2500,7 +2520,7 @@ const ShowFlight = (props) => {
                                 item.segments[item.segments.length - 1].arrival,
                                 item.segments[0]?.departure
                               ) !== 0 ? (
-                                <span className="text-danger" style={{fontSize:"8px"}}>
+                                <span className="text-danger" style={{ fontSize: "8px" }}>
                                   +
                                   {dayCount(
                                     item.segments[item.segments.length - 1]
@@ -2664,7 +2684,7 @@ const ShowFlight = (props) => {
                                       .arrival,
                                     item.segments[0]?.departure
                                   ) !== 0 ? (
-                                    <span className="text-danger" style={{fontSize:"8px"}}>
+                                    <span className="text-danger" style={{ fontSize: "8px" }}>
                                       +
                                       {dayCount(
                                         item.segments[item.segments.length - 1]
@@ -3040,7 +3060,7 @@ const ShowFlight = (props) => {
                               .arrival,
                             item[0].segments[0]?.departure
                           ) !== 0 ? (
-                            <span className="text-danger" style={{fontSize:"8px"}}>
+                            <span className="text-danger" style={{ fontSize: "8px" }}>
                               +
                               {dayCount(
                                 item[0].segments[item[0].segments.length - 1]
@@ -3281,7 +3301,7 @@ const ShowFlight = (props) => {
                           ].arrival,
                           directions[0][0].segments[0]?.departure
                         ) !== 0 ? (
-                          <span className="text-danger" style={{fontSize:"8px"}}>
+                          <span className="text-danger" style={{ fontSize: "8px" }}>
                             +
                             {dayCount(
                               directions[0][0].segments[
@@ -3527,7 +3547,7 @@ const ShowFlight = (props) => {
                           ].arrival,
                           directions[1][0].segments[0]?.departure
                         ) !== 0 ? (
-                          <span className="text-danger" style={{fontSize:"8px"}}>
+                          <span className="text-danger" style={{ fontSize: "8px" }}>
                             +
                             {dayCount(
                               directions[1][0].segments[
@@ -3647,7 +3667,7 @@ const ShowFlight = (props) => {
                 <span className="text-color float-end">
                   {refundable === true ? (
                     <>
-                      <span>
+                      <span className="font-size">
                         <span className="text-success">
                           <i class="fas fa-circle fa-sm me-1"></i>
                         </span>
@@ -3656,7 +3676,7 @@ const ShowFlight = (props) => {
                     </>
                   ) : (
                     <>
-                      <span>
+                      <span className="font-size">
                         <span className="text-danger">
                           <i class="fas fa-circle fa-sm me-1"></i>
                         </span>
@@ -4157,7 +4177,7 @@ const ShowFlight = (props) => {
                                     .arrival,
                                   item.segments[0]?.departure
                                 ) !== 0 ? (
-                                  <span className="text-danger" style={{fontSize:"8px"}}>
+                                  <span className="text-danger" style={{ fontSize: "8px" }}>
                                     +
                                     {dayCount(
                                       item.segments[item.segments.length - 1]
@@ -4313,7 +4333,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger" style={{fontSize:"8px"}}>
+                                      <span className="text-danger" style={{ fontSize: "8px" }}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -4477,7 +4497,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger" style={{fontSize:"8px"}}>
+                                      <span className="text-danger" style={{ fontSize: "8px" }}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -4642,7 +4662,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger" style={{fontSize:"8px"}}>
+                                      <span className="text-danger" style={{ fontSize: "8px" }}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -4806,7 +4826,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger" style={{fontSize:"8px"}}>
+                                      <span className="text-danger" style={{ fontSize: "8px" }}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -4971,7 +4991,7 @@ const ShowFlight = (props) => {
                                         .arrival,
                                       item.segments[0]?.departure
                                     ) !== 0 ? (
-                                      <span className="text-danger" style={{fontSize:"8px"}}>
+                                      <span className="text-danger" style={{ fontSize: "8px" }}>
                                         +
                                         {dayCount(
                                           item.segments[
@@ -5131,7 +5151,7 @@ const ShowFlight = (props) => {
                                 item.segments[item.segments.length - 1].arrival,
                                 item.segments[0]?.departure
                               ) !== 0 ? (
-                                <span className="text-danger" style={{fontSize:"8px"}}>
+                                <span className="text-danger" style={{ fontSize: "8px" }}>
                                   +
                                   {dayCount(
                                     item.segments[item.segments.length - 1]
@@ -5295,7 +5315,7 @@ const ShowFlight = (props) => {
                                       .arrival,
                                     item.segments[0]?.departure
                                   ) !== 0 ? (
-                                    <span className="text-danger" style={{fontSize:"8px"}}>
+                                    <span className="text-danger" style={{ fontSize: "8px" }}>
                                       +
                                       {dayCount(
                                         item.segments[item.segments.length - 1]
@@ -5562,48 +5582,58 @@ const ShowFlight = (props) => {
         </>
       )}
 
-<div className="modal fade" id={"farerulesModal"} tabIndex="-1" aria-labelledby="farerulesModalLabel"
-    aria-hidden="true">
-    <div className="modal-dialog">
-        <div className="modal-content">
+      <div className="modal fade" id={"farerulesModal"} tabIndex="-1" aria-labelledby="farerulesModalLabel"
+        aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
             <div className="modal-header">
               <h3>Fare Rules</h3>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => setFareRules()}></button>
             </div>
-            <div className="modal-body" style={{fontSize:'10px'}}>
-                        {
-                        fareRules!==undefined && fareRules.item2!=undefined?
-                        fareRules.item2.isSuccess==true?
-                          <>
+            <div className="modal-body" style={{ fontSize: '10px' }}>
+              {
+                loading ? 
+                <div className="d-flex justify-content-center">
+                  <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div> : <>
+                  {
+                    fareRules !== undefined && fareRules.item2 != undefined && fareRules !=='' && fareRules.item1 != null ?
+                      fareRules.item2.isSuccess == true ?
+                        <>
                           {
-                            fareRules.item1.fareRuleDetails.map((item,index)=>{
+                            fareRules.item1.fareRuleDetails.map((item, index) => {
                               return <>
-                              <p>
-                                  <a class="btn btn-default col-lg-12" style={{backgroundColor:'blue'}} data-bs-toggle="collapse" href={"#rulePanel"+index} role="button" aria-expanded="false" aria-controls={"#rulePanel"+index}>{item.type}</a>
+                                <p>
+                                  <a class="btn btn-default col-lg-12" style={{ backgroundColor: 'blue' }} data-bs-toggle="collapse" href={"#rulePanel" + index} role="button" aria-expanded="false" aria-controls={"#rulePanel" + index}>{item.type}</a>
                                 </p>
                                 <div class="row">
                                   <div class="col">
-                                    <div class="collapse multi-collapse" id={"rulePanel"+index}>
+                                    <div class="collapse multi-collapse" id={"rulePanel" + index}>
                                       <div class="card card-body" >
-                                      <div className="row" dangerouslySetInnerHTML={{__html: item.fareRuleDetail.replace(/(?:\r\n|\r|\n)/g, '<br />')}} ></div>
+                                        <div className="row" dangerouslySetInnerHTML={{ __html: item.fareRuleDetail.replace(/(?:\r\n|\r|\n)/g, '<br />') }} ></div>
                                       </div>
                                     </div>
                                   </div>
-
                                 </div>
-                             </>
+                              </>
                             })
                           }
-                          
-                          </>
-                          
-                          :<></>
-                        :<></>
-                        }
+                        </>
+                        : <></>
+                      : <>
+                      <div className="d-flex justify-content-center">
+                        <p>No fare rules found</p>
+                      </div>
+                      </>
+                  }
+                </>
+              }
             </div>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
     </>
   );
 };

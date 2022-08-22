@@ -194,14 +194,14 @@ function App() {
                 </PrivateRoute>
               }
             />
-            <Route
+            {/* <Route
               path="/markup"
               element={
                 <PrivateRoute>
                   <Markup></Markup>
                 </PrivateRoute>
               }
-            />
+            /> */}
             <Route
               path="/support"
               element={

@@ -15,7 +15,7 @@ const NoDataFoundPage = () => {
           className="img-fluid"
           alt="no data found"
         /> */}
-        <p className="fs-4 my-2 fw-bold text-center text-white">No flight found!</p>
+        <p className="fs-4 my-2 fw-bold text-center">No flight found!</p>
         <div className="pb-5">
           {/* <Link to="/search" className="btn btn-primary">
             Please Search Again

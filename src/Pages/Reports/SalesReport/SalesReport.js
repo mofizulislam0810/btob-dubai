@@ -147,7 +147,7 @@ const SalesReport = () => {
                         </div>
                         <div style={{ overflowY: "scroll" }}>
                           <table
-                            className="table table-bordered"
+                            className="table table-bordered table-striped"
                             style={{ width: "100%", fontSize: "13px" }}
                           >
                             <thead className="text-center fw-bold">

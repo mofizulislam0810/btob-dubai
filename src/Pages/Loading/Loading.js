@@ -5,7 +5,7 @@ import img from "../../images/icon/loading.gif";
 import $ from "jquery";
 
 const Loading = ({ flag, loading,originCode,destinationCode,tripType }) => {
-//   const searchData = JSON.parse(localStorage.getItem('Database'));
+  const searchData = JSON.parse(localStorage.getItem('Database'));
 //   const originCode = airports
 //   .filter((f) => f.city + " - " + f.country + ", " + f.name === searchData.origin)
 //   .map((item) => item.iata);
@@ -47,7 +47,7 @@ const Loading = ({ flag, loading,originCode,destinationCode,tripType }) => {
                 {flag === 0 ? (
                   <>
                     <p className="fw-bold text-center pt-2" style={{fontSize:"12px"}}>
-                      Getting the best deals from airlines...
+                      Getting The Best Deals From Airlines...
                     </p>
                     <img
                       src={img}
@@ -55,7 +55,7 @@ const Loading = ({ flag, loading,originCode,destinationCode,tripType }) => {
                       alt="fly plan"
                       width={"60%"}
                     />
-                    <h5 className="text-center fw-bold my-3">
+                    <h6 className="text-center fw-bold my-3">
                       {originCode[0]}
                       {tripType === "One Way" ? (
                         <span class="mx-2">
@@ -67,7 +67,23 @@ const Loading = ({ flag, loading,originCode,destinationCode,tripType }) => {
                         </span>
                       )}{" "}
                       {destinationCode[0]}
-                    </h5>
+                    </h6>
+                    <span
+                      className="text-center my-2"
+                      style={{ fontSize: "12px" }}
+                    >
+                      {searchData.qtyList.Adult > 0
+                        ? "Adults " + searchData.qtyList.Adult
+                        : " "}{" "}
+                      {searchData.qtyList.Children > 0
+                        ? "Children " + searchData.qtyList.Children
+                        : " "}{" "}
+                      {searchData.qtyList.Infant > 0
+                        ? "Infants " + searchData.qtyList.Infant
+                        : " "}
+                      <span className="mx-1">|</span>
+                      {searchData.tripTypeModify}
+                    </span>
                   </>
                 ) : flag === 1 ? (
                   <>

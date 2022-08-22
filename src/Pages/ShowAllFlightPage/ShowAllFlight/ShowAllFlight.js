@@ -268,12 +268,12 @@ const ShowAllFlight = ({
           </div>
           <div className="col-lg-6 bg-white py-3 px-5 ">
             <div class="dropdown float-end">
-              <button class="btn fw-bold text-white dropdown-toggle button-color rounded" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              <button class="fw-bold text-color dropdown-toggle" style={{fontSize:"11px"}} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 <span className="me-1"><i class="fas fa-money-bill-wave"></i></span>{amountChange}
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li class="dropdown-item" onClick={() => setAmountChange("Invoice Amount")}>Invoice Amount</li>
-                <li class="dropdown-item" onClick={() => setAmountChange("Gross Amount")}>Gross Amount</li>
+                <li class="dropdown-item" style={{cursor:"pointer"}} onClick={() => setAmountChange("Invoice Amount")}>Invoice Amount</li>
+                <li class="dropdown-item" style={{cursor:"pointer"}} onClick={() => setAmountChange("Gross Amount")}>Gross Amount</li>
               </ul>
             </div>
           </div>
@@ -386,7 +386,7 @@ const ShowAllFlight = ({
                 <div className="col-lg-12 mt-2" id="stopsection">
                   <div className="form-check mt-2">
                     {radioflightName.map((item, index) => (
-                      <div key={index}>
+                      <div key={index} style={{fontSize:"13px"}} className="fw-bold">
                         <input
                           className="form-check-input"
                           type="radio"

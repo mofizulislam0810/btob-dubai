@@ -251,7 +251,9 @@ const Markup = () => {
           environment.headerToken
         );
         if (response.data > 0) {
+          handleGetAgentMarkups(currentPageNumber);
           toast.success("Thanks! Markup updated successfully..");
+          clearForm();
         } else {
           toast.error("Sorry! Markup not updated..");
         }
@@ -266,6 +268,7 @@ const Markup = () => {
         );
         if (response.data > 0) {
           toast.success("Thanks! Markup created successfully..");
+          clearForm();
         } else {
           toast.error("Sorry! Markup not created..");
         }
@@ -280,24 +283,23 @@ const Markup = () => {
 
   const handleDeleteItem = (item) => {
     let result = window.confirm("Are you sure");
-    alert(result);
     if (result) {
       const deleteMarkup = async () => {
         const response = await axios
           .put(
-            environment.markupsDelete + "/" + item.agentId,
+            environment.markupsDelete + "/" + item.id,null,
             environment.headerToken
           )
           .catch((error) => {
             console.log(error);
           });
-        // console.log(response);
-        // if (response !== undefined && response.data > 0) {
-        //   handleGetAgentMarkups(currentPageNumber);
-        //   toast.success("Thanks! Data deleted successfully..");
-        // } else {
-        //   toast.error("Sorry! Data not deleted..");
-        // }
+        console.log(response);
+        if (response !== undefined && response.data > 0) {
+          handleGetAgentMarkups(currentPageNumber);
+          toast.success("Thanks! Data deleted successfully..");
+        } else {
+          toast.error("Sorry! Data not deleted..");
+        }
       };
       deleteMarkup();
     }
@@ -348,9 +350,9 @@ console.log(agentMarkupList);
                   </ul>
                   <div className="tab-content">
                     <div className="tab-pane fade show active" id="newmarkup">
-                      <h4 className="mt-4">New Markup</h4>
-                      <hr className="mb-3" />
-                      <h3>Required Fields</h3>
+                      {/* <h4 className="mt-4">New Markup</h4>
+                      <hr className="mb-3" /> */}
+                      <h3 className="mt-4">Markup Configuration</h3>
                       <hr />
                       <div className="row my-3">
                         <div className="col-sm-3">
@@ -374,6 +376,7 @@ console.log(agentMarkupList);
                           </label>
                           <MultiSelectComponent
                             id="mtselement"
+                            value={originCountryId}
                             dataSource={countryList}
                             fields={fieldIds}
                             placeholder="Select Origin Country"
@@ -387,6 +390,7 @@ console.log(agentMarkupList);
                           </label>
                           <MultiSelectComponent
                             id="mtselement"
+                            value={destinationCountryId}
                             dataSource={countryList}
                             fields={fieldIds}
                             placeholder="Select Destination Country"
@@ -462,7 +466,7 @@ console.log(agentMarkupList);
                           ></input>
                         </div>
                       </div>
-                      <h3>Markup Configuration</h3>
+                      <h3>Markup Value</h3>
                       <hr />
                       <div className="row my-3">
                         <div className="col-sm-3">
@@ -509,7 +513,7 @@ console.log(agentMarkupList);
                           </label>
                           <input
                             type={"number"}
-                            value={null}
+                            value={markupValue}
                             className="form-control"
                             onChange={(e) => setMarkupValue(e.target.value)}
                             placeholder="Markup Value"
@@ -1212,7 +1216,7 @@ console.log(agentMarkupList);
                         </div>
                       </div>
                       <table
-                        className="table table-striped"
+                        className="table table-striped table-bordered"
                         style={{ width: "100%" }}
                       >
                         <thead>
@@ -1237,14 +1241,15 @@ console.log(agentMarkupList);
                               <tr key={index}>
                                 <td>{((currentPageNumber - 1) * pageSize) + index + 1}</td>
                                 <td>
-                                  <a
+                                  {/* <a
                                     href="#"
                                     data-bs-toggle="modal"
                                     onClick={() => handleEditItem(item)}
                                     data-bs-target="#accountModal"
                                   >
                                     {item.code}
-                                  </a>
+                                  </a> */}
+                                    {item.code}
                                 </td>
                                 <td>
                                   {item.isActive === true
@@ -1271,7 +1276,7 @@ console.log(agentMarkupList);
                                 <td>{item.markupTypeId===1?"Flat":"Percent"} {item.markupValue}</td>
                                 <td>{item.commissionTypeId===1?"Flat":"Percent"} {item.commissionValue}</td>
                                 <td><span onClick={() => handleDeleteItem(item)} className="text-danger me-2"><i class="fa fa-trash" aria-hidden="true"></i></span>
-                                {/* <span onClick={() => handleEditItem(item)} className="text-danger"><i class="fas fa-edit"></i></span> */}
+                                <span data-bs-target="#accountModal"  data-bs-toggle="modal"   onClick={() => handleEditItem(item)} className="text-danger"><i class="fas fa-edit"></i></span>
                                 </td>
                               </tr>
                             );

@@ -8,7 +8,7 @@ import "./Navbar.css";
 import moment from "moment";
 import sessionTime from "../Utility/sessionTime";
 import $ from "jquery";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   let [noticeCount, setNoticeCount] = useState(0);
@@ -24,9 +24,9 @@ const Navbar = () => {
     navigate("/");
   };
 
-const handleViewTicket=()=>{
+const handleViewTicket= async ()=>{
   let searchObj={searchText:serchText}
-  axios
+  await axios
   .post(environment.airTicketingSearch,searchObj, environment.headerToken)
   .then((res) => {
     console.log(res);
@@ -122,7 +122,6 @@ const accountManagerInfo = async(agentId)=>{
 
   return (
     <nav className="main-header navbar navbar-expand navbar-white navbar-light" style={{position: "sticky", top: "0"}}>
-      <ToastContainer />
       {/* Left navbar links  */}
       <ul className="navbar-nav">
         <li className="nav-item">

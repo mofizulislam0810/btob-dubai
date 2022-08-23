@@ -1352,8 +1352,7 @@ const ShowModal = ({
                                 </td> */}
                                 <td className="right">{passengerCounts.adt}</td>
                                 <td className="right fw-bold">
-                                  BDT{" "}
-                                  {passengerFares.adt.totalPrice *
+                                {currency !== undefined ? currency : "BDT"} {passengerFares.adt.totalPrice *
                                     passengerCounts.adt}
                                 </td>
                               </tr>
@@ -1380,8 +1379,7 @@ const ShowModal = ({
                                 </td> */}
                                 <td className="right">{passengerCounts.cnn}</td>
                                 <td className="right fw-bold">
-                                  BDT{" "}
-                                  {passengerFares.cnn.totalPrice *
+                                {currency !== undefined ? currency : "BDT"} {passengerFares.cnn.totalPrice *
                                     passengerCounts.cnn}
                                 </td>
                               </tr>
@@ -1408,8 +1406,7 @@ const ShowModal = ({
                                 </td> */}
                                 <td className="right">{passengerCounts.inf}</td>
                                 <td className="right fw-bold">
-                                  BDT{" "}
-                                  {passengerFares.inf.totalPrice *
+                                {currency !== undefined ? currency : "BDT"} {passengerFares.inf.totalPrice *
                                     passengerCounts.inf}
                                 </td>
                               </tr>

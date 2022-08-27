@@ -8,6 +8,7 @@ import { environment } from "../SharePages/Utility/environment";
 import moment from "moment";
 import tllLogo from "../../../src/images/logo/logo-combined.png";
 import produce from "immer";
+import { ToastContainer, toast } from "react-toastify";
 const Invoice = () => {
   let [ticketingList, setTicketingList] = useState([]);
   let [passengerList, setPassengerList] = useState([]);
@@ -82,6 +83,7 @@ const Invoice = () => {
       <SideNavBar></SideNavBar>
       <div className="content-wrapper search-panel-bg">
         <section className="content-header"></section>
+        <ToastContainer />
         <section className="content">
       {/* <div className="container mt-3">
         <div className="row">
@@ -135,7 +137,69 @@ const Invoice = () => {
                 <div className="row text-center">
                   <h4>INVOICE</h4>
                 </div>
-                <div className="row">
+
+
+                <table class="table table-borderless table-sm">
+                  <tbody>
+                    <tr>
+                      <td className="text-start bg-white">
+                      {ticketingList.length > 0 ? (
+                      <>
+                        {ticketingList[0].agentLogo !== null &&
+                        ticketingList[0].agentLogo !== "" ? (
+                          <img
+                            alt="img01"
+                            src={
+                              environment.baseApiURL +
+                              `agentinfo/GetLogo/${ticketingList[0].agentLogo}`
+                            }
+                            style={{ width: "300px", height: "100px" }}
+                          ></img>
+                        ) : (
+                          <>
+                            <img
+                              alt="img01"
+                              className="p-2"
+                              src={tllLogo}
+                              style={{ width: "150px", height: "50px" }}
+                            ></img>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                        {/* <img
+                          alt="img01"
+                          className="p-2"
+                          src={tllLogo}
+                        ></img> */}
+                      </td>
+                      <td className="text-end bg-white">
+                        <address>
+                          <span className="fw-bold fs-6">
+                            Triplover Limited
+                          </span>
+                          <br />
+                          <div
+                            className="mt-2"
+                            style={{ fontSize: "10px", lineHeight: "12px" }}
+                          >
+                            Al Muhairi 113-127,<br></br>
+                            Al Dhagaya Deira, <br></br>
+                            Dubai, United Arab Emirates.
+                            <br></br>
+                            Phone: +97143375728<br></br>
+                            Email: support@triplover.ae
+                          </div>
+                        </address>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                
+                {/* <div className="row">
                   <div className="col-md-8">
                     {ticketingList.length > 0 ? (
                       <>
@@ -180,10 +244,80 @@ const Invoice = () => {
                       <></>
                     )}
                   </div>
-                </div>
-                <br />
+                </div> */}
 
-                <div className="row">
+                <table
+                  class="table table-borderless table-sm"
+                  style={{ fontSize: "10px", lineHeight: "8px"}}
+                >
+                  <tbody>
+                    <tr className="d-flex">
+                      <td className="bg-white" style={{ width: "70%" }}>
+                        <tr>
+                          <td
+                            className="text-start fw-bold"
+                         
+                          >
+                            Customer Name
+                          </td>
+                          <td className="w-50 text-start">
+                            <span className="mx-2">:</span>
+                            Md. Ratul Islam
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="text-start fw-bold"
+                          >
+                            {" "}
+                            Phone Number
+                          </td>
+                          <td className="w-50 text-start">
+                            <span className="mx-2">:</span>
+                            +8809613345345
+                          </td>
+                        </tr>
+                      </td>
+                      <td className="bg-white" style={{ width: "30%" }}>
+                        <tr>
+                          <td
+                            className="text-end fw-bold"
+                            
+                          >
+                            Date<span className="mx-2">:</span>
+                          </td>
+                          <td className="text-end" style={{ width: "7%" }}>
+                           22-04-2022
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="text-end fw-bold"
+                            
+                          >
+                            Invoice Number<span className="mx-2">:</span>
+                          </td>
+                          <td className="text-end" style={{ width: "7%" }}>
+                          22042022
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="text-end fw-bold"
+                            
+                          >
+                            Invoice Date<span className="mx-2">:</span>
+                          </td>
+                          <td className="text-end" style={{ width: "7%" }}>
+                          22-04-2022
+                          </td>
+                        </tr>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                {/* <div className="row">
                   <div className="col-md-2">
                     <strong>Customer :</strong>
                   </div>
@@ -207,18 +341,17 @@ const Invoice = () => {
                     Invoice Date: 22-04-2022
                     <br />
                   </div>
-                </div>
+                </div> */}
 
-                <br />
-                <table className="table table-bordered">
-                  <thead style={{ background: "white", color: "black" }}>
-                    <tr>
-                      <td colSpan={11}>Flights:</td>
-                    </tr>
+                <table className="table table-bordered table-sm" style={{fontSize:"10px"}}>
+                  <thead className="bg-secondary text-white">
+                    {/* <tr>
+                      <td colSpan={11}>Flights</td>
+                    </tr> */}
                     <tr>
                       <td>Booked on</td>
                       <td colSpan={4}>Details</td>
-                      <td>Price</td>
+                      <td className="text-end">Price</td>
                     </tr>
                   </thead>
                   <tbody>
@@ -226,15 +359,16 @@ const Invoice = () => {
                       return (
                         <>
                           <tr>
-                            <th rowSpan={3}>
+                            <th rowSpan={3} className="align-middle">
+                            {ticketingList.length > 0
+                                ? ticketingList[0].uniqueTransID
+                                : ""}
+                             
+                              <br />
                               {ticketingList.length > 0
                                 ? moment(ticketingList[0].bookingDate).format(
                                     "DD-MMMM-yyyy"
                                   )
-                                : ""}
-                              <br />
-                              {ticketingList.length > 0
-                                ? ticketingList[0].uniqueTransID
                                 : ""}
                               <br />
                             </th>
@@ -245,11 +379,11 @@ const Invoice = () => {
                               , &nbsp;{" "}
                               {ticketingList.length > 0
                                 ? ticketingList[0].origin +
-                                  "-" +
-                                  ticketingList[0].origin
+                                  " - " +
+                                  ticketingList[0].destination
                                 : ""}
                             </th>
-                            <th className="text-end" rowSpan={3}>{item.totalPrice}</th>
+                            <th className="text-end align-middle" rowSpan={3}>{item.totalPrice}</th>
                           </tr>
                           <tr>
                             <th>Ticket No</th>
@@ -278,30 +412,35 @@ const Invoice = () => {
                     })}
                     <tr>
                       <td className="fw-bold" colSpan={11} style={{ textAlign: "right" }}>
-                        Total:  BDT {totalPrice}
+                        Total:  AED {totalPrice}
                       </td>
                     </tr>
                   </tbody>
-                  <tfoot>
+                  {/* <tfoot>
                     <tr>
                       <td colSpan={11}>Remarks:</td>
                     </tr>
-                  </tfoot>
+                  </tfoot> */}
                 </table>
-                <div className="row">
-                  <strong>Terms & Conditions :</strong>
-                  <span>
-                    This is a computer generated statement ,hence does not
-                    require any signature
-                  </span>
-                  <span>
-                    * Refunds & Cancellations are subject to Airline's approval.
-                  </span>
-                  <span>
-                    * Kindly check all details carefully to avoid unnecessary
-                    complications.
-                  </span>
-                  <span>* CHEQUE : drawn in favour of Triplover Limited</span>
+                <div className="container pb-5 mt-2">
+                  <div class="row text-start ms-1">
+                    <b className="p-0">Terms & Conditions :</b>
+                    <ul style={{ fontSize: "10px" }}>
+                      <li>
+                        This is a computer generated statement, hence does not
+                        require any signature
+                      </li>
+                      <li>
+                        {" "}
+                        Refunds & Cancellations are subject to Airline's
+                        approval.
+                      </li>
+                      <li>
+                        Kindly check all details carefully to avoid unnecessary
+                        complications.
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -314,7 +453,7 @@ const Invoice = () => {
         tabIndex={-1}
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog" style={{minWidth:"1200px"}}>
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">Edit Price</h5>

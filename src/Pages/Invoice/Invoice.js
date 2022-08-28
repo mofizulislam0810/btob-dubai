@@ -153,7 +153,7 @@ const Invoice = () => {
                               environment.baseApiURL +
                               `agentinfo/GetLogo/${ticketingList[0].agentLogo}`
                             }
-                            style={{ width: "300px", height: "100px" }}
+                            style={{ width: "150px", height: "50px" }}
                           ></img>
                         ) : (
                           <>

@@ -293,7 +293,7 @@ const BookedView = () => {
                               <td className="bg-light">
                                 {moment(ticketingList[0]?.bookingDate).format("DD-MMMM-yyyy")}
                               </td>
-                              <td>Triplover Ref:</td>
+                              <td className="fw-bold">Triplover Ref:</td>
                               <td className="bg-light">
                                 <strong>
                                   {" "}
@@ -307,21 +307,11 @@ const BookedView = () => {
                               <td className="bg-light">
                                 <strong>{ticketingList[0]?.timeTicks}</strong>
                               </td>
-                              <td>PNR</td>
+                              <td className="fw-bold">PNR</td>
                               <td className="bg-light">
                                 <strong> {ticketingList[0]?.pnr}</strong>
                               </td>
                             </tr>
-                            {/* <tr>
-                              <th>Extend Time Limit:</th>
-                              <td className="bg-light">
-                                <strong>{ticketingList[0]?.bookingDate}</strong>
-                              </td>
-                              <td>Airline PNR:</td>
-                              <td className="bg-light">
-                                <strong>{ticketingList[0]?.airlinePNRs}</strong>
-                              </td>
-                            </tr> */}
                             <tr>
                               <th>Booking Status:</th>
                               <td className="bg-light">
@@ -329,7 +319,7 @@ const BookedView = () => {
                                   {ticketingList[0]?.status}
                                 </strong>
                               </td>
-                              <td>Booked By:</td>
+                              <td className="fw-bold">Booked By:</td>
                               <td className="bg-light">
                                 <strong>
                                   {ticketingList[0]?.agentName}
@@ -422,13 +412,13 @@ const BookedView = () => {
                                       <td>{ticketingList[0].airlineName}</td>
                                       <td>{item.flightNumber}</td>
                                       <td>{item.origin}</td>
-                                      <td className="fw-bold">
+                                      <td>
                                         {moment(item.departure).format(
                                           "DD-MMMM-yyyy hh:mm:ss"
                                         )}
                                       </td>
                                       <td>{item.destination}</td>
-                                      <td className="fw-bold">
+                                      <td>
                                         {moment(item.arrival).format(
                                           "DD-MMMM-yyyy hh:mm:ss"
                                         )}
@@ -838,7 +828,7 @@ const BookedView = () => {
                     </ul> */}
                       </div>
                       <div className="card-body" ref={componentRef}>
-                        <table class="table table-bordered my-2 mb-3 table-sm">
+                        <table class="table table-bordered my-2 mb-3 table-sm" style={{fontSize:"11px"}}>
                           <thead>
                             <tr>
                               <th colspan="4" className="fw-bold py-2 bg-light">
@@ -852,7 +842,7 @@ const BookedView = () => {
                               <td className="bg-light">
                                 {moment(ticketingList[0]?.bookingDate).format("DD-MMMM-yyyy")}
                               </td>
-                              <td>Triplover Ref:</td>
+                              <td className="fw-bold">Triplover Ref:</td>
                               <td className="bg-light">
                                 <strong>
                                   {" "}
@@ -866,7 +856,7 @@ const BookedView = () => {
                               <td className="bg-light">
                                 <strong>{ticketingList[0]?.timeTicks}</strong>
                               </td>
-                              <td>PNR</td>
+                              <td className="fw-bold">PNR</td>
                               <td className="bg-light">
                                 <strong> {ticketingList[0]?.pnr}</strong>
                               </td>
@@ -888,7 +878,7 @@ const BookedView = () => {
                                   {ticketingList[0]?.status}
                                 </strong>
                               </td>
-                              <td>Booked By:</td>
+                              <td className="fw-bold">Booked By:</td>
                               <td className="bg-light">
                                 <strong>
                                   {ticketingList[0]?.agentName}
@@ -902,7 +892,7 @@ const BookedView = () => {
                           {/* <p className="bg-dark p-2">
                         PASSENGER DETAILS
                       </p> */}
-                          <table className="table table-bordered table-sm">
+                          <table className="table table-bordered table-sm" style={{fontSize:"11px"}}>
                             <thead>
                               <tr>
                                 <th
@@ -952,7 +942,7 @@ const BookedView = () => {
                           {/* <p className="bg-dark p-2">
                         PASSENGER DETAILS
                       </p> */}
-                          <table className="table table-bordered table-sm">
+                          <table className="table table-bordered table-sm" style={{fontSize:"11px"}}>
                             <thead>
                               <tr>
                                 <th
@@ -981,13 +971,13 @@ const BookedView = () => {
                                       <td>{ticketingList[0].airlineName}</td>
                                       <td>{item.flightNumber}</td>
                                       <td>{item.origin}</td>
-                                      <td className="fw-bold">
+                                      <td>
                                         {moment(item.departure).format(
                                           "DD-MMMM-yyyy hh:mm:ss"
                                         )}
                                       </td>
                                       <td>{item.destination}</td>
-                                      <td className="fw-bold">
+                                      <td>
                                         {moment(item.arrival).format(
                                           "DD-MMMM-yyyy hh:mm:ss"
                                         )}
@@ -1003,7 +993,7 @@ const BookedView = () => {
                         </div>
 
                         <div className="table-responsive-sm">
-                          <table className="table table-bordered table-sm">
+                          <table className="table table-bordered table-sm" style={{fontSize:"11px"}}>
                             <thead>
                               <tr>
                                 <th
@@ -1059,7 +1049,7 @@ const BookedView = () => {
                         <div className="row">
                           <div className="col-lg-12 text-center">
                             <button
-                              className="btn button-color text-white w-25 fw-bold"
+                              className="btn button-color text-white w-25 fw-bold btn-sm rounded"
                               onClick={handleGenerateTicket}
                             >
                               Issue Ticket

@@ -8,6 +8,9 @@ import moment from "moment";
 import { useLocation } from "react-router-dom";
 import tllLogo from "../../../src/images/logo/logo-combined.png";
 import ReactToPrint from "react-to-print";
+import airports from "../../JSON/airports.json";
+
+
 const Voucher = () => {
   let [ticketingList, setTicketingList] = useState([]);
   let [passengerList, setPassengerList] = useState([]);
@@ -121,7 +124,7 @@ const Voucher = () => {
                                       environment.baseApiURL +
                                       `agentinfo/GetLogo/${ticketingList[0].agentLogo}`
                                     }
-                                    style={{ width: "300px", height: "50px" }}
+                                    style={{ width: "150px", height: "50px" }}
                                   ></img>
                                 ) : (
                                   <>
@@ -138,200 +141,308 @@ const Voucher = () => {
                               <></>
                             )}
                           </td>
-                          <td className="text-end">
-                            <address>
+                          <td className="text-end bg-white">
+                          <address>
+                            <span className="fw-bold fs-6">
                               {agentInfo.name} Travel Agrncy
-                              <br />
+                            </span>
+                            <br />
+                            <div
+                              className="mt-2"
+                              style={{ fontSize: "10px", lineHeight: "12px" }}
+                            >
                               {agentInfo.address}
                               <br />
-                              {/* Baridhara Diplomatic Zone, Dhaka-1212, Bangladesh.
-                              <br /> */}
-                              +88{agentInfo.mobileNo}
-                            </address>
-                          </td>
+                              {agentInfo.mobileNo}<br></br>
+                              Email: support@triplover.ae
+                            </div>
+                          </address>
+                        </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <div className="row mb-4">
-                      <div className="col-lg-8">
-                        <table class="table table-bordered my-2 mb-3 table-sm">
-                          <thead>
-                            <tr className="text-center">
-                              <th>PASSENGER NAME</th>
-                              <th>TYPE</th>
-                              <th>TICKET NUMBER</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {passengerList.map((item, index) => {
-                              return (
-                                <tr className="text-center">
-                                  <td>
-                                    {item.title +
-                                      " " +
-                                      item.first +
-                                      " " +
-                                      item.middle +
-                                      " " +
-                                      item.last}
-                                  </td>
-                                  <td>{item.passengerType}</td>
-                                  <td>{item.ticketNumbers}</td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </table>
-                      </div>
-                      <div className="col-lg-4">
-                        <table class="table table-bordered my-2 mb-3 table-sm">
-                          <tbody>
-                            <tr>
-                              <td className="fw-bold">TLL REFERENCE</td>
-                              <td>TLL-220101987654</td>
-                            </tr>
-                            <tr>
-                              <td className="fw-bold">FLIGHT TYPE</td>
-                              <td>Internation</td>
-                            </tr>
-                            <tr>
-                              <td className="fw-bold">JOURNEY TYPE</td>
-                              <td>{ticketingList[0]?.journeyType}</td>
-                            </tr>
-                            <tr>
-                              <td className="fw-bold">STATUS</td>
-                              <td>Confirm</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                    
+                  <table
+                    class="table table-borderless my-1 table-sm"
+                    style={{ fontSize: "10px" }}
+                  >
+                    <tbody>
+                      <tr>
+                        <td
+                          className="text-start bg-white"
+                          style={{ width: "10%" }}
+                        >
+                          Booking Reference :{" "}
+                          <span className="fw-bold fs-6">
+                            {ticketingList[0]?.pnr}
+                          </span>
+                        </td>
+                        <td
+                          className="text-end bg-white"
+                          style={{ width: "10%" }}
+                        >
+                          Issue Date :{" "}
+                          <span className="fw-bold">{moment(ticketingList[0]?.issueDate).format("DD-MMMM-yyyy ddd")}</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
 
-                    <div className="table-responsive-sm">
-                      <p className="bg-dark p-2">FLIGHT DETAILS</p>
-                      {ticketingList.length > 0 ? (
-                        <>
-                          <table class="table table-borderless my-2 mb-3 table-sm lh-1">
-                            <tbody>
-                              <tr>
+                  <div className="d-flex gap-3 justify-content-between">
+                    <div className="">
+                      <table
+                        class="table table-bordered table-sm"
+                        style={{ fontSize: "10px",width:"35rem" }}
+                      >
+                        <thead>
+                          <tr className="text-start">
+                            <th>PASSENGER NAME</th>
+                            <th
+                              className="text-center"
+                              style={{ width: "10%" }}
+                            >
+                              TYPE
+                            </th>
+                            <th style={{ width: "20%" }}>TICKET NUMBER</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {passengerList.map((item, index) => {
+                            return (
+                              <tr className="text-start">
+                                <td>
+                                  {item.title}{" "}
+                                  {item.first}{" "}
+                                  {item.last}
+                                </td>
                                 <td
-                                  className="fw-bold align-middle"
-                                  colSpan={3}
+                                  className="text-center"
+                                  style={{ width: "10%" }}
                                 >
-                                  <img
-                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList[0].airlineCode}.png`}
-                                    className=""
-                                    alt=""
-                                    width="40px"
-                                    height="40px"
-                                  />
-                                  <span className="ms-2">
-                                    {ticketingList[0].airlineName}
-                                  </span>
-                                  <span
-                                    className="ms-2"
+                                  {item.passengerType}
+                                </td>
+                                <td style={{ width: "20%" }}>
+                                  {item.ticketNumbers}
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div className="">
+                      <table
+                        class="table table-bordered table-sm float-right"
+                        style={{ fontSize: "10px", width: "20rem" }}
+                      >
+                        <tbody className="text-start">
+                          <tr>
+                            <td className="fw-bold">TLL REFERENCE</td>
+                            <td>{ticketingList[0]?.uniqueTransID}</td>
+                          </tr>
+                          <tr>
+                            <td className="fw-bold">FLIGHT TYPE</td>
+                            <td>International</td>
+                          </tr>
+                          <tr>
+                            <td className="fw-bold">JOURNEY TYPE</td>
+                            <td>{ticketingList[0]?.journeyType}</td>
+                          </tr>
+                          <tr>
+                            <td className="fw-bold">STATUS</td>
+                            <td>{ticketingList[0]?.status}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <div className="table-responsive-sm mt-2">
+                    <p
+                      className="bg-secondary p-1 fw-bold text-start text-white"
+                      style={{ fontSize: "10px" }}
+                    >
+                      FLIGHT DETAILS
+                    </p>
+                    <table
+                      class="table table-borderless table-sm"
+                      style={{ fontSize: "10px"}}
+                    >
+                      {ticketingList.length > 0 ? (
+                          <tbody>
+                            <tr>
+                              <td
+                                className="fw-bold text-start d-flex bg-white align-items-center"
+                                style={{ paddingTop: "2px" }}
+                                colSpan={1}
+                              >
+                                <img
+                                  src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList[0].airlineCode}.png`}
+                                  className=""
+                                  alt=""
+                                  width="40px"
+                                  height="40px"
+                                />
+                                <div>
+                                  <h6 className="ms-2" style={{ fontSize: "12px" }}>{ticketingList[0].airlineName}</h6>
+                                  {/* <h6
+                                    className="ms-2 pt-1"
                                     style={{ fontSize: "12px" }}
                                   >
-                                    {/* ({item.plane[0]}) */}
-                                  </span>
-                                </td>
-                                <td>
-                                  <tr>
-                                    <td>DEPARTS - {ticketingList[0].origin}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      ARRIVES - {ticketingList[0].destination}
-                                    </td>
-                                  </tr>
-                                </td>
+                                    ({item.plane[0]})
+                                  </h6> */}
+                                </div>
+                              </td>
+                              <td className="ps-1 bg-white">
+                                <tr>
+                                  <td
+                                    className="text-start bg-white"
+                                    style={{ fontSize: "11px" }}
+                                  >
+                                    DEPARTS{" "}
+                                    <span className="ms-5">
+                                    {ticketingList[0].origin},{" "}
+                                      {airports
+                                        .filter((f) => f.iata === ticketingList[0].origin)
+                                        .map((item) => item.city)}
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td
+                                    className="text-start bg-white"
+                                    style={{ fontSize: "11px" }}
+                                  >
+                                    ARRIVES{" "}
+                                    <sapn className="ms-5">
+                                    {ticketingList[0].destination},
+                                      {airports
+                                        .filter((f) => f.iata === ticketingList[0].destination)
+                                        .map((item) => item.city)}
+                                    </sapn>
+                                  </td>
+                                </tr>
+                              </td>
+                            </tr>
 
-                                {/* <td>TLL-220101987654</td> */}
-                              </tr>
-
-                              <tr>
-                                <td className="fw-bold lh-1">
-                                  <h5 className="fw-bold">
-                                    {ticketingList[0].origin}{" "}
-                                  </h5>
-                                  <h6>
-                                    {" "}
-                                    {moment(ticketingList[0].departure).format(
+                            <tr>
+                              <td
+                                className="text-start bg-white"
+                                style={{ paddingTop: "2px" }}
+                                colSpan={1}
+                              >
+                                <tr>
+                                  <td className="" style={{ fontSize: "18px" }}>
+                                    <h4 className="fw-bold">{ticketingList[0].origin}</h4>
+                                    <h6>
+                                      {" "}
+                                      {moment(ticketingList[0].departure).format(
                                       "hh:mm:ss"
                                     )}
-                                  </h6>
-                                  <h6>
-                                    <strong>
+                                    </h6>
+                                    <h6
+                                      className="text-secondary"
+                                      style={{ fontSize: "12px" }}
+                                    >
                                       {" "}
                                       {moment(
                                         ticketingList[0].departure
                                       ).format("DD-MMMM-yyyy ddd")}
-                                    </strong>
-                                  </h6>
-                                </td>
-                                <td className="align-middle">
-                                  {" "}
-                                  <i class="fas fa-circle fa-xs"></i>
-                                  ------------------{" "}
-                                  <i className="fas fa-plane fa-sm"></i>
-                                </td>
-                                <td className="fw-bold">
-                                  <h5 className="fw-bold">
-                                    {ticketingList[0].destination}
-                                  </h5>
-                                  <h6>
+                                    </h6>
+                                  </td>
+                                  <td className="align-middle mx-auto">
+                                    <i class="fas fa-circle fa-xs"></i>
+                                    --------------{" "}
+                                    <i className="fas fa-plane fa-sm"></i>
+                                  </td>
+                                  <td className="" style={{ fontSize: "18px" }}>
+                                    <h6 className="fw-bold">{ticketingList[0].destination}</h6>
+                                    <h6>
                                     {moment(ticketingList[0].arrival).format(
                                       "hh:mm:ss"
                                     )}
-                                  </h6>
-                                  <h6>
-                                    <strong>
+                                    </h6>
+                                    <h6
+                                      className="text-secondary"
+                                      style={{ fontSize: "12px" }}
+                                    >
                                       {" "}
                                       {moment(ticketingList[0].arrival).format(
                                         "DD-MMMM-yyyy ddd"
                                       )}
-                                    </strong>
-                                  </h6>
-                                </td>
-                                <td className="align-middle">
-                                  <tr>
-                                    <td>BAGGAGE:</td>
-                                    <td> ADT25K, CHD-25K, INF-10K</td>
-                                  </tr>
-                                  <tr>
-                                    <td>AIRLINE PNR: </td>
-                                    <td>{ticketingList[0].pnr}</td>
-                                  </tr>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                    </div>
-                    <div className="pb-3">
-                      <p className="bg-dark p-2 ">
-                        IMPORTANT NOTICE FOR TRAVELLERS
-                      </p>
-                      <p>
-                        BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER
-                        STATUS/ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.
-                        Carriage and other services provided by the carrier are
-                        subject to conditions of carriage, which are hereby
-                        incorporated by reference. These conditions may be
-                        obtained from the issuing carrier. Passengers on a
-                        journey involving an ultimate destination or a stop in a
-                        country other than the country of departure are advised
-                        that international treaties known as the Montreal
-                        Convention, or its predecessor, the Warsaw Convention,
-                        including its amendments (the Warsaw Convention System),
-                        may apply to the entire journey, including any portion
-                        thereof within a country.
-                      </p>
-                    </div>
+                                    </h6>
+                                  </td>
+                                </tr>
+                              </td>
+                              <td className="bg-white">
+                                <tr>
+                                  <td
+                                    className="text-start bg-white"
+                                    style={{ fontSize: "12px" }}
+                                  >
+                                    <span className="fw-bold fs-6">
+                                      BS-101
+                                      <span style={{ marginLeft: "45px" }}>
+                                       ECONOMY   
+                                      </span>
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr
+                                  className="text-start"
+                                  style={{ fontSize: "11px" }}
+                                >
+                                  <td className="text-start bg-white">
+                                    BAGGAGE
+                                    <span className="ms-5">
+                                      ADT25K, CHD-25K, INF-10K
+                                    </span>{" "}
+                                  </td>
+                                </tr>
+                                <tr
+                                  className="text-start"
+                                  style={{ fontSize: "11px" }}
+                                >
+                                  <td className="bg-white">
+                                    AIRLINE PNR{" "}
+                                    <span style={{ marginLeft: "30px" }}>
+                                      {ticketingList[0]?.pnr}
+                                    </span>
+                                  </td>
+                                </tr>
+                              </td>
+                            </tr>
+                          </tbody>
+                        ) :(<></>)
+                      }
+                    </table>
+                  </div>
+
+
+                  <div className="mt-2 mb-5">
+                    <p
+                      className="bg-secondary p-1 fw-bold text-start text-white"
+                      style={{ fontSize: "10px" }}
+                    >
+                      IMPORTANT NOTICE FOR TRAVELLERS
+                    </p>
+                    <p style={{ fontSize: "10px" }} className="text-start my-2">
+                      BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER
+                      STATUS/ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.
+                      Carriage and other services provided by the carrier are
+                      subject to conditions of carriage, which are hereby
+                      incorporated by reference. These conditions may be
+                      obtained from the issuing carrier. Passengers on a journey
+                      involving an ultimate destination or a stop in a country
+                      other than the country of departure are advised that
+                      international treaties known as the Montreal Convention,
+                      or its predecessor, the Warsaw Convention, including its
+                      amendments (the Warsaw Convention System), may apply to
+                      the entire journey, including any portion thereof within a
+                      country.
+                    </p>
+                  </div>
                   </div>
                   {/* <div className="card-body">
                     

@@ -518,7 +518,7 @@ const RightSide = () => {
         <div className="row py-3 m-1">
           <div className="col-lg-12 text-start border mb-1">
             <span className="card-title fw-bold">Fare details</span>
-            <span className="pe-3 text-color float-end">
+            {/* <span className="pe-3 text-color float-end">
                   <i class="fas fa-pen-nib me-1"></i>{" "}
                   <Link
                     to=""
@@ -529,7 +529,7 @@ const RightSide = () => {
                   >
                     Fare Rules
                   </Link>
-                </span>
+            </span> */}
           </div>
 
           {passengerFares.adt !== null ? (
@@ -565,7 +565,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div>
-                <div className="row">
+                {/* <div className="row">
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       AIT ({passengerCounts.adt} &#215; {passengerFares.adt.ait}
@@ -577,7 +577,7 @@ const RightSide = () => {
                       {passengerCounts.adt * passengerFares.adt.ait}
                     </h6>
                   </div>
-                </div>
+                </div> */}
                 <div className="row">
                   <div className="col-lg-6">
                     <h6 className="text-start">Discount</h6>
@@ -637,7 +637,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div>
-                <div className="row">
+                {/* <div className="row">
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       AIT ({passengerCounts.cnn} &#215; {passengerFares.cnn.ait}
@@ -650,7 +650,7 @@ const RightSide = () => {
                       {passengerCounts.cnn * passengerFares.cnn.ait}
                     </h6>
                   </div>
-                </div>
+                </div> */}
                 <div className="row">
                   <div className="col-lg-6">
                     <h6 className="text-start">Discount</h6>
@@ -710,7 +710,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div>
-                <div className="row">
+                {/* <div className="row">
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       AIT ({passengerCounts.inf} &#215; {passengerFares.inf.ait}
@@ -722,7 +722,7 @@ const RightSide = () => {
                       {passengerCounts.inf * passengerFares.inf.ait}
                     </h6>
                   </div>
-                </div>
+                </div> */}
                 <div className="row">
                   <div className="col-lg-6">
                     <h6 className="text-start">Discount</h6>

@@ -1287,7 +1287,7 @@ const ShowFlight = (props) => {
                   <th>Base</th>
                   <th>Tax</th>
                   <th>Discount</th>
-                  <th>AIT</th>
+                  {/* <th>AIT</th> */}
                   <th>Pax</th>
                   <th>Total Pax Fare</th>
                 </tr>
@@ -1302,7 +1302,7 @@ const ShowFlight = (props) => {
                       <td className="right">
                         {passengerFares.adt.discountPrice}
                       </td>
-                      <td className="right">{passengerFares.adt.ait}</td>
+                      {/* <td className="right">{passengerFares.adt.ait}</td> */}
                       <td className="right">{passengerCounts.adt}</td>
                       <td className="right fw-bold">
                         {currency !== undefined ? currency : "BDT"}  {" "}
@@ -1323,7 +1323,7 @@ const ShowFlight = (props) => {
                       <td className="right">
                         {passengerFares.cnn.discountPrice}
                       </td>
-                      <td className="right">{passengerFares.cnn.ait}</td>
+                      {/* <td className="right">{passengerFares.cnn.ait}</td> */}
                       <td className="right">{passengerCounts.cnn}</td>
                       <td className="right fw-bold">
                         {currency !== undefined ? currency : "BDT"}  {" "}
@@ -1344,7 +1344,7 @@ const ShowFlight = (props) => {
                       <td className="right">
                         {passengerFares.inf.discountPrice}
                       </td>
-                      <td className="right">{passengerFares.inf.ait}</td>
+                      {/* <td className="right">{passengerFares.inf.ait}</td> */}
                       <td className="right">{passengerCounts.inf}</td>
                       <td className="right fw-bold">
                         {currency !== undefined ? currency : "BDT"}  {" "}

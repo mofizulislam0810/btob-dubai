@@ -10,7 +10,7 @@ import useAuth from "../../../hooks/useAuth";
 import Select from "react-select";
 const LeftSide = () => {
   const navigate = useNavigate();
-  const { setBookData, setLoading} = useAuth();
+  const { setBookData, setLoading } = useAuth();
   const data = localStorage.getItem("Database");
   const searchData = JSON.parse(data);
   const direction0 = JSON.parse(localStorage.getItem("direction0"));
@@ -177,7 +177,7 @@ const LeftSide = () => {
         SearchText: "",
       };
       const response = await axios.post(
-        environment.getAgentPassengers+"?pageNumber=1&pageSize=500",
+        environment.getAgentPassengers + "?pageNumber=1&pageSize=500",
         sendObj,
         environment.headerToken
       );
@@ -196,7 +196,7 @@ const LeftSide = () => {
 
   useEffect(() => {
     handleGetPassengers();
-    $(document).ready(function () {});
+    $(document).ready(function () { });
   }, []);
   const handleClick = (e) => {
     if (e.target.checked) {
@@ -300,16 +300,16 @@ const LeftSide = () => {
   adult.map((i) =>
     i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
       ? Math.floor(
-          Math.abs(
-            new Date(
-              i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
-            ) - new Date()
-          ) /
-            (1000 * 60 * 60 * 24 * 30)
-        ) 
-        // > 6
-        // ? ""
-        // : alert("Passport expiry date does not valid")
+        Math.abs(
+          new Date(
+            i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
+          ) - new Date()
+        ) /
+        (1000 * 60 * 60 * 24 * 30)
+      )
+      // > 6
+      // ? ""
+      // : alert("Passport expiry date does not valid")
       : ""
   );
 
@@ -401,7 +401,7 @@ const LeftSide = () => {
     };
 
     adult.map((item) => {
-      let idObj = passengerADTList.find(f=>(f.title+" " + f.first + " " + f.middle + " " + f.last) === (item.title+" " + item.firstName + " " + item.middleName + " " + item.lastName));
+      let idObj = passengerADTList.find(f => (f.title + " " + f.first + " " + f.middle + " " + f.last) === (item.title + " " + item.firstName + " " + item.middleName + " " + item.lastName));
       let passengerObj = {
         nameElement: {
           title: item.title,
@@ -420,12 +420,12 @@ const LeftSide = () => {
           documentType: item.document,
           documentNumber: item.passportNumber,
           expireDate:
-          item.passportYear > 0 ? 
-          item.passportYear +
-          "-" +
-          item.passportMonth +
-          "-" +
-          item.passportDate : "",
+            item.passportYear > 0 ?
+              item.passportYear +
+              "-" +
+              item.passportMonth +
+              "-" +
+              item.passportDate : "",
           frequentFlyerNumber: "",
           issuingCountry: "BD",
           nationality: "BD",
@@ -433,7 +433,7 @@ const LeftSide = () => {
         passengerType: "ADT",
         gender: "Male",
         dateOfBirth: item.year + "-" + item.month + "-" + item.date,
-        passengerKey: idObj!==undefined ? String(idObj.id) : "0",
+        passengerKey: idObj !== undefined ? String(idObj.id) : "0",
         isLeadPassenger: true,
       };
       sendObj.passengerInfoes.push(passengerObj);
@@ -457,13 +457,13 @@ const LeftSide = () => {
         documentInfo: {
           documentType: item.document,
           documentNumber: item.passportNumber,
-          expireDate: 
-            item.passportYear > 0 ? 
-            item.passportYear +
-            "-" +
-            item.passportMonth +
-            "-" +
-            item.passportDate : "",
+          expireDate:
+            item.passportYear > 0 ?
+              item.passportYear +
+              "-" +
+              item.passportMonth +
+              "-" +
+              item.passportDate : "",
           frequentFlyerNumber: "",
           issuingCountry: "BD",
           nationality: "BD",
@@ -496,12 +496,12 @@ const LeftSide = () => {
           documentType: item.document,
           documentNumber: item.passportNumber,
           expireDate:
-          item.passportYear > 0 ? 
-          item.passportYear +
-          "-" +
-          item.passportMonth +
-          "-" +
-          item.passportDate : "",
+            item.passportYear > 0 ?
+              item.passportYear +
+              "-" +
+              item.passportMonth +
+              "-" +
+              item.passportDate : "",
           frequentFlyerNumber: "",
           issuingCountry: "BD",
           nationality: "BD",
@@ -666,13 +666,13 @@ const LeftSide = () => {
                                   v[index].issuingCountry =
                                     item.documentIssuingCountry;
                                   v[index].passportDate = Number(
-                                    item.expireDate==null?"":  item.expireDate.split("-")[2].split("T")[0]
+                                    item.expireDate == null ? "" : item.expireDate.split("-")[2].split("T")[0]
                                   );
                                   v[index].passportMonth = Number(
-                                    item.expireDate==null?"": item.expireDate.split("-")[1]
+                                    item.expireDate == null ? "" : item.expireDate.split("-")[1]
                                   );
                                   v[index].passportYear = Number(
-                                    item.expireDate==null?"":  item.expireDate.split("-")[0]
+                                    item.expireDate == null ? "" : item.expireDate.split("-")[0]
                                   );
                                   v[index].gender = item.gender;
                                   v[index].phoneNumber = item.phone;
@@ -744,10 +744,10 @@ const LeftSide = () => {
                                   const re = /^[a-zA-Z]*$/;
                                   if (re.test(firstName)) {
                                     setAdult((ob) =>
-                                    produce(ob, (v) => {
-                                      v[index].firstName = firstName;
-                                    })
-                                  );
+                                      produce(ob, (v) => {
+                                        v[index].firstName = firstName;
+                                      })
+                                    );
                                   } else {
 
                                   }
@@ -779,10 +779,10 @@ const LeftSide = () => {
                               const re = /^[a-zA-Z]*$/;
                               if (re.test(middleName)) {
                                 setAdult((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].middleName = middleName;
-                                })
-                              );
+                                  produce(ob, (v) => {
+                                    v[index].middleName = middleName;
+                                  })
+                                );
                               } else {
 
                               }
@@ -810,10 +810,10 @@ const LeftSide = () => {
                               const re = /^[a-zA-Z]*$/;
                               if (re.test(lastName)) {
                                 setAdult((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].lastName = lastName;
-                                })
-                              );
+                                  produce(ob, (v) => {
+                                    v[index].lastName = lastName;
+                                  })
+                                );
                               } else {
 
                               }
@@ -828,107 +828,33 @@ const LeftSide = () => {
                     </div>
 
                     <div className="row">
-                      <div className="col-md-4">
+                      <div className="col-lg-4">
                         <div className="form-group">
-                          <label className="float-start fw-bold" type="">
-                            Date of birth<span className="text-danger">*</span>
+                          <label
+                            className="form-label float-start fw-bold"
+                            htmlFor=""
+                          >
+                            Phone Number
                           </label>
-                          <div className="input-group mb-3 d-flex">
-                            <select
-                              name="date"
-                              className="form-select"
-                              onChange={(e) => {
-                                const date = e.target.value;
-                                setAdult((ob) =>
-                                  produce(ob, (v) => {
-                                    v[index].date = date;
-                                  })
-                                );
-                              }}
-                              value={p.date}
-                              required
-                            >
-                              <option value="">Day</option>
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                              <option>6</option>
-                              <option>7</option>
-                              <option>8</option>
-                              <option>9</option>
-                              <option>10</option>
-                              <option>11</option>
-                              <option>12</option>
-                              <option>13</option>
-                              <option>14</option>
-                              <option>15</option>
-                              <option>16</option>
-                              <option>17</option>
-                              <option>18</option>
-                              <option>19</option>
-                              <option>20</option>
-                              <option>21</option>
-                              <option>22</option>
-                              <option>23</option>
-                              <option>24</option>
-                              <option>25</option>
-                              <option>26</option>
-                              <option>27</option>
-                              <option>28</option>
-                              <option>29</option>
-                              <option>30</option>
-                              <option>31</option>
-                            </select>
-                            <select
-                              name="month"
-                              className="form-select"
-                              onChange={(e) => {
-                                const month = e.target.value;
-                                setAdult((ob) =>
-                                  produce(ob, (v) => {
-                                    v[index].month = month;
-                                  })
-                                );
-                              }}
-                              value={p.month}
-                              required
-                            >
-                              <option value="">Mon</option>
-                              <option value="1">Jan</option>
-                              <option value="2">Feb</option>
-                              <option value="3">Mar</option>
-                              <option value="4">Apr</option>
-                              <option value="5">May</option>
-                              <option value="6">Jun</option>
-                              <option value="7">Jul</option>
-                              <option value="8">Aug</option>
-                              <option value="9">Sep</option>
-                              <option value="10">Oct</option>
-                              <option value="11">Nov</option>
-                              <option value="12">Dec</option>
-                            </select>
-                            <select
-                              name="year"
-                              className="form-select"
-                              onChange={(e) => {
-                                const year = e.target.value;
-                                setAdult((ob) =>
-                                  produce(ob, (v) => {
-                                    v[index].year = year;
-                                  })
-                                );
-                              }}
-                              value={p.year}
-                              required
-                            >
-                              <option value="">Year</option>
-                              {adultYearList.map((i, index) => {
-                                return <option key={index}>{i}</option>;
-                              })}
-                            </select>
-                          </div>
+                        </div>
+                        <div className="input-group mb-3">
+                          <input
+                            type="number"
+                            className="form-control"
+                            name="passport-number"
+                            placeholder="Phone Number"
+                            required
+                            onChange={(e) => {
+                              const phoneNumber = e.target.value;
+                              setAdult((ob) =>
+                                produce(ob, (v) => {
+                                  v[index].phoneNumber = phoneNumber;
+                                })
+                              );
+                            }}
+                            value={p.phoneNumber}
+                            autoComplete="off"
+                          />
                         </div>
                       </div>
                       <div className="col-lg-4">
@@ -995,16 +921,120 @@ const LeftSide = () => {
                         </div>
                       </div>
                     </div>
-                    {(origin.match("Bangladesh") !== null
-                      ? origin.match("Bangladesh")[0]
-                      : "") &&
-                    (destination.match("Bangladesh") !== null
-                      ? destination.match("Bangladesh")[0]
-                      : "") === "Bangladesh" ? (
-                      <>{/* {alert("ok")} */}</>
-                    ) : (
-                      <>
-                        <div className="row">
+                    <div className="row">
+                      {(origin.match("Bangladesh") !== null
+                        ? origin.match("Bangladesh")[0]
+                        : "") &&
+                        (destination.match("Bangladesh") !== null
+                          ? destination.match("Bangladesh")[0]
+                          : "") === "Bangladesh" ? (
+                        <>{/* {alert("ok")} */}</>
+                      ) : (
+                        <>
+
+                          <div className="col-md-4">
+                            <div className="form-group">
+                              <label className="float-start fw-bold" type="">
+                                Date of birth<span className="text-danger">*</span>
+                              </label>
+                              <div className="input-group mb-3 d-flex">
+                                <select
+                                  name="date"
+                                  className="form-select"
+                                  onChange={(e) => {
+                                    const date = e.target.value;
+                                    setAdult((ob) =>
+                                      produce(ob, (v) => {
+                                        v[index].date = date;
+                                      })
+                                    );
+                                  }}
+                                  value={p.date}
+                                  required
+                                >
+                                  <option value="">Day</option>
+                                  <option>1</option>
+                                  <option>2</option>
+                                  <option>3</option>
+                                  <option>4</option>
+                                  <option>5</option>
+                                  <option>6</option>
+                                  <option>7</option>
+                                  <option>8</option>
+                                  <option>9</option>
+                                  <option>10</option>
+                                  <option>11</option>
+                                  <option>12</option>
+                                  <option>13</option>
+                                  <option>14</option>
+                                  <option>15</option>
+                                  <option>16</option>
+                                  <option>17</option>
+                                  <option>18</option>
+                                  <option>19</option>
+                                  <option>20</option>
+                                  <option>21</option>
+                                  <option>22</option>
+                                  <option>23</option>
+                                  <option>24</option>
+                                  <option>25</option>
+                                  <option>26</option>
+                                  <option>27</option>
+                                  <option>28</option>
+                                  <option>29</option>
+                                  <option>30</option>
+                                  <option>31</option>
+                                </select>
+                                <select
+                                  name="month"
+                                  className="form-select"
+                                  onChange={(e) => {
+                                    const month = e.target.value;
+                                    setAdult((ob) =>
+                                      produce(ob, (v) => {
+                                        v[index].month = month;
+                                      })
+                                    );
+                                  }}
+                                  value={p.month}
+                                  required
+                                >
+                                  <option value="">Mon</option>
+                                  <option value="1">Jan</option>
+                                  <option value="2">Feb</option>
+                                  <option value="3">Mar</option>
+                                  <option value="4">Apr</option>
+                                  <option value="5">May</option>
+                                  <option value="6">Jun</option>
+                                  <option value="7">Jul</option>
+                                  <option value="8">Aug</option>
+                                  <option value="9">Sep</option>
+                                  <option value="10">Oct</option>
+                                  <option value="11">Nov</option>
+                                  <option value="12">Dec</option>
+                                </select>
+                                <select
+                                  name="year"
+                                  className="form-select"
+                                  onChange={(e) => {
+                                    const year = e.target.value;
+                                    setAdult((ob) =>
+                                      produce(ob, (v) => {
+                                        v[index].year = year;
+                                      })
+                                    );
+                                  }}
+                                  value={p.year}
+                                  required
+                                >
+                                  <option value="">Year</option>
+                                  {adultYearList.map((i, index) => {
+                                    return <option key={index}>{i}</option>;
+                                  })}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
                           <div className="col-lg-4">
                             <div className="form-group">
                               <label
@@ -1180,40 +1210,9 @@ const LeftSide = () => {
                               </select>
                             </div>
                           </div>
-                        </div>
-                      </>
-                    )}
 
-                    <div className="row">
-                      <div className="col-lg-4">
-                        <div className="form-group">
-                          <label
-                            className="form-label float-start fw-bold"
-                            htmlFor=""
-                          >
-                            Phone Number
-                          </label>
-                        </div>
-                        <div className="input-group mb-3">
-                          <input
-                            type="number"
-                            className="form-control"
-                            name="passport-number"
-                            placeholder="Phone Number"
-                            required
-                            onChange={(e) => {
-                              const phoneNumber = e.target.value;
-                              setAdult((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].phoneNumber = phoneNumber;
-                                })
-                              );
-                            }}
-                            value={p.phoneNumber}
-                            autoComplete="off"
-                          />
-                        </div>
-                      </div>
+                        </>
+                      )}
                       <div className="col-lg-4">
                         <div className="form-group">
                           <label
@@ -1300,12 +1299,13 @@ const LeftSide = () => {
                       </div>
                     </div>
 
+
                     {(origin.match("Bangladesh") !== null
                       ? origin.match("Bangladesh")[0]
                       : "") &&
-                    (destination.match("Bangladesh") !== null
-                      ? destination.match("Bangladesh")[0]
-                      : "") === "Bangladesh" ? (
+                      (destination.match("Bangladesh") !== null
+                        ? destination.match("Bangladesh")[0]
+                        : "") === "Bangladesh" ? (
                       <></>
                     ) : (
                       <>
@@ -1338,7 +1338,7 @@ const LeftSide = () => {
                               )}
 
                               {p.passportCopy != null &&
-                              p.passportCopy != "" ? (
+                                p.passportCopy != "" ? (
                                 <a
                                   href={
                                     environment.baseApiURL +
@@ -1509,10 +1509,10 @@ const LeftSide = () => {
                                   const re = /^[a-zA-Z]*$/;
                                   if (re.test(firstName)) {
                                     setChild((ob) =>
-                                    produce(ob, (v) => {
-                                      v[index].firstName = firstName;
-                                    })
-                                  );
+                                      produce(ob, (v) => {
+                                        v[index].firstName = firstName;
+                                      })
+                                    );
                                   } else {
 
                                   }
@@ -1540,13 +1540,13 @@ const LeftSide = () => {
                               const re = /^[a-zA-Z]*$/;
                               if (re.test(middleName)) {
                                 setChild((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].middleName = middleName;
-                                })
-                              );
+                                  produce(ob, (v) => {
+                                    v[index].middleName = middleName;
+                                  })
+                                );
                               } else {
 
-                              }                             
+                              }
                             }}
                             value={p.middleName}
                             autoComplete="off"
@@ -1568,13 +1568,13 @@ const LeftSide = () => {
                               const re = /^[a-zA-Z]*$/;
                               if (re.test(lastName)) {
                                 setChild((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].lastName = lastName;
-                                })
-                              );
+                                  produce(ob, (v) => {
+                                    v[index].lastName = lastName;
+                                  })
+                                );
                               } else {
 
-                              } 
+                              }
                             }}
                             value={p.lastName}
                             required
@@ -1754,9 +1754,9 @@ const LeftSide = () => {
                     {(origin.match("Bangladesh") !== null
                       ? origin.match("Bangladesh")[0]
                       : "") &&
-                    (destination.match("Bangladesh") !== null
-                      ? destination.match("Bangladesh")[0]
-                      : "") === "Bangladesh" ? (
+                      (destination.match("Bangladesh") !== null
+                        ? destination.match("Bangladesh")[0]
+                        : "") === "Bangladesh" ? (
                       <></>
                     ) : (
                       <>
@@ -2058,9 +2058,9 @@ const LeftSide = () => {
                     {(origin.match("Bangladesh") !== null
                       ? origin.match("Bangladesh")[0]
                       : "") &&
-                    (destination.match("Bangladesh") !== null
-                      ? destination.match("Bangladesh")[0]
-                      : "") === "Bangladesh" ? (
+                      (destination.match("Bangladesh") !== null
+                        ? destination.match("Bangladesh")[0]
+                        : "") === "Bangladesh" ? (
                       <></>
                     ) : (
                       <>
@@ -2093,7 +2093,7 @@ const LeftSide = () => {
                               )}
 
                               {p.passportCopy != null &&
-                              p.passportCopy != "" ? (
+                                p.passportCopy != "" ? (
                                 <a
                                   href={
                                     environment.baseApiURL +
@@ -2263,10 +2263,10 @@ const LeftSide = () => {
                                   const re = /^[a-zA-Z]*$/;
                                   if (re.test(firstName)) {
                                     setInfant((ob) =>
-                                    produce(ob, (v) => {
-                                      v[index].firstName = firstName;
-                                    })
-                                  );
+                                      produce(ob, (v) => {
+                                        v[index].firstName = firstName;
+                                      })
+                                    );
                                   } else {
 
                                   }
@@ -2294,10 +2294,10 @@ const LeftSide = () => {
                               const re = /^[a-zA-Z]*$/;
                               if (re.test(middleName)) {
                                 setInfant((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].middleName = middleName;
-                                })
-                              );
+                                  produce(ob, (v) => {
+                                    v[index].middleName = middleName;
+                                  })
+                                );
                               } else {
 
                               }
@@ -2322,10 +2322,10 @@ const LeftSide = () => {
                               const re = /^[a-zA-Z]*$/;
                               if (re.test(lastName)) {
                                 setInfant((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].lastName = lastName;
-                                })
-                              );
+                                  produce(ob, (v) => {
+                                    v[index].lastName = lastName;
+                                  })
+                                );
                               } else {
 
                               }
@@ -2505,9 +2505,9 @@ const LeftSide = () => {
                     {(origin.match("Bangladesh") !== null
                       ? origin.match("Bangladesh")[0]
                       : "") &&
-                    (destination.match("Bangladesh") !== null
-                      ? destination.match("Bangladesh")[0]
-                      : "") === "Bangladesh" ? (
+                      (destination.match("Bangladesh") !== null
+                        ? destination.match("Bangladesh")[0]
+                        : "") === "Bangladesh" ? (
                       <></>
                     ) : (
                       <>
@@ -2809,9 +2809,9 @@ const LeftSide = () => {
                     {(origin.match("Bangladesh") !== null
                       ? origin.match("Bangladesh")[0]
                       : "") &&
-                    (destination.match("Bangladesh") !== null
-                      ? destination.match("Bangladesh")[0]
-                      : "") === "Bangladesh" ? (
+                      (destination.match("Bangladesh") !== null
+                        ? destination.match("Bangladesh")[0]
+                        : "") === "Bangladesh" ? (
                       <></>
                     ) : (
                       <>
@@ -2844,7 +2844,7 @@ const LeftSide = () => {
                               )}
 
                               {p.passportCopy != null &&
-                              p.passportCopy !== "" ? (
+                                p.passportCopy !== "" ? (
                                 <a
                                   href={
                                     environment.baseApiURL +

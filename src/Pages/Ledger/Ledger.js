@@ -97,7 +97,7 @@ const Ledger = () => {
                                 aria-expanded="false"
                               >
                                 {balanceType === null ? (
-                                  "Balance Type"
+                                  "All"
                                 ) : balanceType === 0 ? (
                                   "Debit"
                                 ) : balanceType === 1 ? (
@@ -114,7 +114,7 @@ const Ledger = () => {
                                   class="dropdown-item"
                                   onClick={() => setBalanceType(null)}
                                 >
-                                  Balance Type
+                                  All
                                 </li>
                                 <li
                                   class="dropdown-item"
@@ -161,20 +161,20 @@ const Ledger = () => {
                         >
                           <thead className="text-center fw-bold">
                             <tr>
-                              <th>Sl</th>
-                              <th>Description</th>
+                              <th>Transaction Date</th>
+                              <th className="text-start">Description</th>
                               <th>Created By</th>
-                              <th>Balance Type</th>
-                              <th>
+                              <th>Type</th>
+                              <th className="text-end">
                                 Debit{" "}
                                 {currencyName ? "(" + currencyName + ")" : ""}
                               </th>
-                              <th>
+                              <th className="text-end">
                                 Credit{" "}
                                 {currencyName ? "(" + currencyName + ")" : ""}
                               </th>
-                              <th>
-                                Balance{" "}
+                              <th className="text-end">
+                                Running Balance{" "}
                                 {currencyName ? "(" + currencyName + ")" : ""}
                               </th>
                             </tr>
@@ -185,26 +185,26 @@ const Ledger = () => {
                                 return (
                                   <>
                                     <tr>
-                                      <td>{index + 1}</td>
-                                      <td>{item.description}</td>
-                                      <td>{item.createdByName}</td>
-                                      <td>
-                                        {item.balanceTypeName}{" "}
+                                      <td>{item.balanceTypeName}{" "}
                                         <span style={{ fontSize: "13px" }}>
                                           (
                                           {moment(item.createdDate).format(
                                             "DD-MMMM-yyyy hh:mm:ss A"
                                           )}
                                           )
-                                        </span>{" "}
+                                        </span></td>
+                                      <td>{item.description}</td>
+                                      <td className="text-center">{item.createdByName}</td>
+                                      <td>
+                                       
                                       </td>
-                                      <td className="fw-bold">
+                                      <td className="fw-bold text-end">
                                         {item.debitAmount}
                                       </td>
-                                      <td className="fw-bold">
+                                      <td className="fw-bold text-end">
                                         {item.creditAmount}
                                       </td>
-                                      <td className="fw-bold">
+                                      <td className="fw-bold text-end">
                                         {item.balanceAmount}
                                       </td>
                                     </tr>

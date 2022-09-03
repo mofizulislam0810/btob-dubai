@@ -279,7 +279,7 @@ const Invoice = () => {
                         </tr>
                       </td>
                       <td className="bg-white" style={{ width: "30%" }}>
-                        <tr>
+                        {/* <tr>
                           <td
                             className="text-end fw-bold"
                             
@@ -289,7 +289,7 @@ const Invoice = () => {
                           <td className="text-end" style={{ width: "7%" }}>
                            22-04-2022
                           </td>
-                        </tr>
+                        </tr> */}
                         <tr>
                           <td
                             className="text-end fw-bold"
@@ -360,11 +360,11 @@ const Invoice = () => {
                         <>
                           <tr>
                             <th rowSpan={3} className="align-middle">
-                            {ticketingList.length > 0
+                            {/* {ticketingList.length > 0
                                 ? ticketingList[0].uniqueTransID
                                 : ""}
                              
-                              <br />
+                              <br /> */}
                               {ticketingList.length > 0
                                 ? moment(ticketingList[0].bookingDate).format(
                                     "DD-MMMM-yyyy"
@@ -472,7 +472,7 @@ const Invoice = () => {
                     <th>Pax Name</th>
                     <th>Base Fare</th>
                     <th>Tax</th>
-                    <th>AIT</th>
+                    {/* <th>AIT</th> */}
                     <th>Discount</th>
                     <th>Additional Price</th>
                     <th>Total Fare</th>
@@ -521,14 +521,14 @@ const Invoice = () => {
                               className="form-control"
                             />
                           </td>
-                          <td>
+                          {/* <td>
                             <label
                               className="form-control"
                               style={{ background: "#F2F3F4" }}
                             >
                               {item.ait}
                             </label>
-                          </td>
+                          </td> */}
                           <td>
                             <input
                               value={item.discount}

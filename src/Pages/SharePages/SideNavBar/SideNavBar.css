@@ -22,3 +22,17 @@
 .nav-sidebar .nav-item .nav-link{
     color: #8796A1 !important;
 }
+
+
+.fa-circle:before{
+    font-size: 13px!important;
+}
+
+.nav__link__font__size{
+   font-size: 13px!important;
+   padding: 0px 10px 3px 16px;
+}
+
+.active__color a .nav-icon+p{
+    color: #aa8439;
+}

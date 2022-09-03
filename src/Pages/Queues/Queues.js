@@ -52,18 +52,18 @@ const Queues = () => {
       statusId === 1
         ? "Hold"
         : statusId === 2
-        ? "Pending"
-        : statusId === 3
-        ? "Booked"
-        : statusId === 4
-        ? "Failed"
-        : statusId === 5
-        ? "Cancelled"
-        : statusId === 6
-        ? "Issued"
-        : statusId === 7
-        ? "Ordered"
-        : "";
+          ? "Pending"
+          : statusId === 3
+            ? "Booked"
+            : statusId === 4
+              ? "Failed"
+              : statusId === 5
+                ? "Cancelled"
+                : statusId === 6
+                  ? "Issued"
+                  : statusId === 7
+                    ? "Ordered"
+                    : "";
     const getTicketingList = async () => {
       let sendObj = {
         agentId: sessionStorage.getItem("agentId") ?? 0,
@@ -75,7 +75,7 @@ const Queues = () => {
       };
       const response = await axios.post(
         environment.getTicketingList +
-          `?pageNumber=${currentPage}&pageSize=${pageSize}`,
+        `?pageNumber=${currentPage}&pageSize=${pageSize}`,
         sendObj,
         environment.headerToken
       );
@@ -109,21 +109,21 @@ const Queues = () => {
     if (status === "Issued") {
       window.open(
         "/support?typeid=2&subjectid=2&utid=" +
-          utid +
-          "&pnr=" +
-          pnr +
-          "&ticketno=" +
-          (ticketno == undefined ? "" : ticketno),
+        utid +
+        "&pnr=" +
+        pnr +
+        "&ticketno=" +
+        (ticketno == undefined ? "" : ticketno),
         "_blank"
       );
     } else {
       window.open(
         "/support?typeid=1&subjectid=2&utid=" +
-          utid +
-          "&pnr=" +
-          pnr +
-          "&ticketno=" +
-          (ticketno == undefined ? "" : ticketno),
+        utid +
+        "&pnr=" +
+        pnr +
+        "&ticketno=" +
+        (ticketno == undefined ? "" : ticketno),
         "_blank"
       );
     }
@@ -133,21 +133,21 @@ const Queues = () => {
     if (status === "Issued") {
       window.open(
         "/support?typeid=2&subjectid=0&utid=" +
-          utid +
-          "&pnr=" +
-          pnr +
-          "&ticketno=" +
-          (ticketno == undefined ? "" : ticketno),
+        utid +
+        "&pnr=" +
+        pnr +
+        "&ticketno=" +
+        (ticketno == undefined ? "" : ticketno),
         "_blank"
       );
     } else {
       window.open(
         "/support?typeid=1&subjectid=0&utid=" +
-          utid +
-          "&pnr=" +
-          pnr +
-          "&ticketno=" +
-          (ticketno == undefined ? "" : ticketno),
+        utid +
+        "&pnr=" +
+        pnr +
+        "&ticketno=" +
+        (ticketno == undefined ? "" : ticketno),
         "_blank"
       );
     }
@@ -157,21 +157,21 @@ const Queues = () => {
     if (status === "Issued") {
       window.open(
         "/support?typeid=2&subjectid=1&utid=" +
-          utid +
-          "&pnr=" +
-          pnr +
-          "&ticketno=" +
-          ticketno,
+        utid +
+        "&pnr=" +
+        pnr +
+        "&ticketno=" +
+        ticketno,
         "_blank"
       );
     } else {
       window.open(
         "/support?typeid=1&subjectid=1&utid=" +
-          utid +
-          "&pnr=" +
-          pnr +
-          "&ticketno=" +
-          ticketno,
+        utid +
+        "&pnr=" +
+        pnr +
+        "&ticketno=" +
+        ticketno,
         "_blank"
       );
     }
@@ -182,11 +182,11 @@ const Queues = () => {
     if (status === "Issued") {
       window.open(
         "/support?typeid=2&subjectid=5&utid=" +
-          utid +
-          "&pnr=" +
-          pnr +
-          "&ticketno=" +
-          ticketno,
+        utid +
+        "&pnr=" +
+        pnr +
+        "&ticketno=" +
+        ticketno,
         "_blank"
       );
     }
@@ -230,6 +230,7 @@ const Queues = () => {
       refundReq();
     }
   };
+
   useEffect(() => {
     handleGetList(statusId, currentPageNumber);
     // $(document).ready(function () {
@@ -273,13 +274,13 @@ const Queues = () => {
                 <div className="m-4">
                   <div className="tab-content">
                     <div className="tab-pane fade show active" id="tp1">
-                      <h4>Flight History</h4>
+                      <h4>All Bookings</h4>
                       <hr className="my-3" />
                       <div
                         className="row"
                         style={{ width: "100%", paddingBottom: "5px" }}
                       >
-                        <div className="col-sm-12 text-left pb-2">
+                        <div className="col-sm-12 pb-2">
                           <ul id="menu-standard">
                             <li id="menu-item">
                               <a
@@ -304,7 +305,7 @@ const Queues = () => {
                                 }
                                 onClick={() => onStatusChange(6)}
                               >
-                                Issued
+                                Ticketed
                               </a>
                             </li>
                             <li id="menu-item">
@@ -359,6 +360,8 @@ const Queues = () => {
                                 Ticket Ordered
                               </a>
                             </li>
+                          </ul>
+                          <ul>
                             <li id="menu-item">
                               {" "}
                               <a
@@ -457,7 +460,7 @@ const Queues = () => {
                         style={{ overflowX: "scroll", marginBottom: "16px" }}
                       >
                         <table
-                          className="table table-bordered table-striped"
+                          className="table table-bordered table-striped table-sm"
                           style={{ width: "100%", fontSize: "13px" }}
                         >
                           <thead className="text-center fw-bold">
@@ -468,7 +471,7 @@ const Queues = () => {
                               <th>Issue Date</th>
                               <th>Flight Date</th>
                               <th>Route</th>
-                              <th>Reference ID</th>
+                              <th>Booking ID</th>
                               <th>PNR</th>
                               <th>Ticket Number</th>
                               <th>Total Price</th>
@@ -514,9 +517,9 @@ const Queues = () => {
                                       {item.origin === "null"
                                         ? ""
                                         : item.origin +
-                                          (item.destination === ""
-                                            ? ""
-                                            : "/" + item.destination)}
+                                        (item.destination === ""
+                                          ? ""
+                                          : "/" + item.destination)}
                                     </td>
                                     <td>
                                       <a
@@ -541,7 +544,7 @@ const Queues = () => {
                                     <td>{item.ticketNumber}</td>
                                     <td>{item.ticketingPrice}</td>
                                     <td>
-                                      {item.status} <br />{" "}
+                                      {item.status === "Issued" ? "Ticketed" : item.status} <br />{" "}
                                       {item.refundStatus != null
                                         ? "Refund " + item.refundStatus
                                         : ""}
@@ -567,10 +570,11 @@ const Queues = () => {
                                               border="2px solid"
                                               colorScheme="messenger"
                                               variant="outline"
-                                              size="sm"
+                                              size="xsm"
                                               borderRadius="16px"
+                                              p='1'
                                             >
-                                              VB
+                                              <span style={{ fontSize: "10px" }}>VB</span>
                                             </Button>
                                           </a>
                                           &nbsp;{" "}
@@ -595,10 +599,11 @@ const Queues = () => {
                                               border="2px solid"
                                               colorScheme="messenger"
                                               variant="outline"
-                                              size="sm"
+                                              size="xsm"
                                               borderRadius="16px"
+                                              p='1'
                                             >
-                                              BS
+                                              <span style={{ fontSize: "10px" }}>BS</span>
                                             </Button>
                                           </a>
                                           &nbsp;{" "}
@@ -623,10 +628,11 @@ const Queues = () => {
                                               border="2px solid"
                                               colorScheme="messenger"
                                               variant="outline"
-                                              size="sm"
+                                              size="xsm"
                                               borderRadius="16px"
+                                              p='1'
                                             >
-                                              RS
+                                              <span style={{ fontSize: "10px" }}>RS</span>
                                             </Button>
                                           </a>
                                         </>
@@ -650,10 +656,11 @@ const Queues = () => {
                                               border="2px solid"
                                               colorScheme="messenger"
                                               variant="outline"
-                                              size="sm"
+                                              size="xsm"
                                               borderRadius="16px"
+                                              p='1'
                                             >
-                                              VT
+                                              <span style={{ fontSize: "10px" }}>VT</span>
                                             </Button>
                                           </a>
                                           &nbsp;{" "}
@@ -675,10 +682,11 @@ const Queues = () => {
                                               border="2px solid"
                                               colorScheme="messenger"
                                               variant="outline"
-                                              size="sm"
+                                              size="xsm"
                                               borderRadius="16px"
+                                              p='1'
                                             >
-                                              IN
+                                              <span style={{ fontSize: "10px" }}>IN</span>
                                             </Button>
                                           </a>
                                           &nbsp;{" "}
@@ -700,10 +708,11 @@ const Queues = () => {
                                               border="2px solid"
                                               colorScheme="messenger"
                                               variant="outline"
-                                              size="sm"
+                                              size="xsm"
                                               borderRadius="16px"
+                                              p='1'
                                             >
-                                              VO
+                                              <span style={{ fontSize: "10px" }}>VO</span>
                                             </Button>
                                           </a>
                                           &nbsp;{" "}
@@ -728,10 +737,11 @@ const Queues = () => {
                                               border="2px solid"
                                               colorScheme="messenger"
                                               variant="outline"
-                                              size="sm"
+                                              size="xsm"
                                               borderRadius="16px"
+                                              p='1'
                                             >
-                                              DC
+                                              <span style={{ fontSize: "10px" }}>DC</span>
                                             </Button>
                                           </a>
                                           &nbsp;{" "}
@@ -756,10 +766,11 @@ const Queues = () => {
                                               border="2px solid"
                                               colorScheme="messenger"
                                               variant="outline"
-                                              size="sm"
+                                              size="xsm"
                                               borderRadius="16px"
+                                              p='1'
                                             >
-                                              RS
+                                              <span style={{ fontSize: "10px" }}>RS</span>
                                             </Button>
                                           </a>
                                           &nbsp;
@@ -789,10 +800,11 @@ const Queues = () => {
                                                 border="2px solid"
                                                 colorScheme="messenger"
                                                 variant="outline"
-                                                size="sm"
+                                                size="xsm"
                                                 borderRadius="16px"
+                                                p='1'
                                               >
-                                                TC
+                                                <span style={{ fontSize: "10px" }}>TC</span>
                                               </Button>
                                             </a>
                                           ) : (
@@ -820,10 +832,11 @@ const Queues = () => {
                                               border="2px solid"
                                               colorScheme="messenger"
                                               variant="outline"
-                                              size="sm"
+                                              size="xsm"
                                               borderRadius="16px"
+                                              p='1'
                                             >
-                                              TV
+                                              <span style={{ fontSize: "10px" }}>TV</span>
                                             </Button>
                                           </a>
                                         </>
@@ -848,10 +861,11 @@ const Queues = () => {
                                               border="2px solid"
                                               colorScheme="messenger"
                                               variant="outline"
-                                              size="sm"
+                                              size="xsm"
                                               borderRadius="16px"
+                                              p='1'
                                             >
-                                              RR
+                                              <span style={{ fontSize: "10px" }}>RR</span>
                                             </Button>
                                           </a>
                                         </>

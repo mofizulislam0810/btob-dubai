@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./SideNavBar.css";
 
 
 const SideNavBar = () => {
+  const [currentPage, setCurrentPage] = useState("");
+  console.log(currentPage);
   return (
     <aside
       className="main-sidebar sidebar-dark-primary elevation-4"
@@ -70,10 +72,28 @@ const SideNavBar = () => {
                 </p>
               </a>
               <ul className="nav nav-treeview">
-                <li className="nav-item">
-                  <Link to="/queues?id=1" className="nav-link">
+                <li className={currentPage === "ticketed" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("ticketed")}>
+                  <Link to="/ticketed" className="nav-link nav__link__font__size">
                     <i className="far fa-circle nav-icon"></i>
-                    <p>Flight</p>
+                    <p>Ticketed</p>
+                  </Link>
+                </li>
+                <li className={currentPage === "booked" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("booked")}>
+                  <Link to="/booked" className="nav-link nav__link__font__size">
+                    <i className="far fa-circle nav-icon"></i>
+                    <p>Booked</p>
+                  </Link>
+                </li>
+                <li className={currentPage === "canceled" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("canceled")}>
+                  <Link to="/canceled" className="nav-link nav__link__font__size">
+                    <i className="far fa-circle nav-icon"></i>
+                    <p>Canceled</p>
+                  </Link>
+                </li>
+                <li className={currentPage === "all" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("all")}>
+                  <Link to="/queues?id=1" className="nav-link nav__link__font__size">
+                    <i className="far fa-circle nav-icon"></i>
+                    <p>All</p>
                   </Link>
                 </li>
               </ul>
@@ -173,13 +193,13 @@ const SideNavBar = () => {
               </a>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
-                  <Link to="/salesreport" className="nav-link">
+                  <Link to="/salesreport" className="nav-link nav__link__font__size">
                     <i className="far fa-circle nav-icon"></i>
                     <p>Sales Report</p>
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/ledger" className="nav-link">
+                  <Link to="/ledger" className="nav-link nav__link__font__size">
                     <i className="far fa-circle nav-icon"></i>
                     <p>Account Ledger</p>
                   </Link>

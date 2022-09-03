@@ -316,7 +316,7 @@ const Ticket = () => {
                       >
                         <tbody className="text-start">
                           <tr>
-                            <td className="fw-bold">TLL REFERENCE</td>
+                            <td className="fw-bold">BOOKING ID</td>
                             <td>{ticketingList[0]?.uniqueTransID}</td>
                           </tr>
                           <tr>
@@ -329,7 +329,7 @@ const Ticket = () => {
                           </tr>
                           <tr>
                             <td className="fw-bold">STATUS</td>
-                            <td>{ticketingList[0]?.status}</td>
+                            <td>{ticketingList[0]?.status === 'Issued' ? "Ticketed":ticketingList[0]?.status}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -516,7 +516,7 @@ const Ticket = () => {
                           <th className="text-start">Type</th>
                           <th>Base Fare</th>
                           <th>Tax</th>
-                          <th>AIT</th>
+                          {/* <th>AIT</th> */}
                           <th>Discount</th>
                           <th>Person</th>
                           <th>Total</th>
@@ -532,7 +532,7 @@ const Ticket = () => {
                                         <td>{item.basePrice}</td>
                                         <td>{item.tax}</td>
 
-                                        <td>{item.ait}</td>
+                                        {/* <td>{item.ait}</td> */}
                                         <td>{item.discount}</td>
                                         <td>{item.passengerCount}</td>
                                         <td className="fw-bold">
@@ -549,7 +549,7 @@ const Ticket = () => {
                                         <td>{item.basePrice}</td>
                                         <td>{item.tax}</td>
 
-                                        <td>{item.ait}</td>
+                                        {/* <td>{item.ait}</td> */}
                                         <td>{item.discount}</td>
                                         <td>{item.passengerCount}</td>
                                         <td className="fw-bold">
@@ -566,7 +566,7 @@ const Ticket = () => {
                                         <td>{item.basePrice}</td>
                                         <td>{item.tax}</td>
 
-                                        <td>{item.ait}</td>
+                                        {/* <td>{item.ait}</td> */}
                                         <td>{item.discount}</td>
                                         <td>{item.passengerCount}</td>
                                         <td className="fw-bold">
@@ -734,7 +734,7 @@ const Ticket = () => {
                         <th>Pax Name</th>
                         <th>Base Fare</th>
                         <th>Tax</th>
-                        <th>AIT</th>
+                        {/* <th>AIT</th> */}
                         <th>Discount</th>
                         <th>Additional Price</th>
                         <th>Total Fare</th>
@@ -785,14 +785,14 @@ const Ticket = () => {
                                   className="form-control"
                                 />
                               </td>
-                              <td>
+                              {/* <td>
                                 <label
                                   className="form-control"
                                   style={{ background: "#F2F3F4" }}
                                 >
                                   {item.ait}
                                 </label>
-                              </td>
+                              </td> */}
                               <td>
                                 <input
                                   value={item.discount}

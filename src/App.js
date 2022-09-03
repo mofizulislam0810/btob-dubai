@@ -49,6 +49,9 @@ import CheckoutFailed from "./Pages/CheckoutConfirmation/CheckoutFailed";
 import { Box } from "@chakra-ui/react";
 import cardBg from "../src/images/landing/landing-bg.png";
 import RegComplete from "./Pages/AuthenticationPage/RegComplete/RegComplete";
+import Issued from "./Pages/Queues/Issued";
+import Booked from "./Pages/Queues/Booked";
+import Canceled from "./Pages/Queues/Canceled";
 function App() {
   // const [token,setToken] = useState(sessionStorage.getItem("token"));
   // if(!token){
@@ -348,6 +351,30 @@ function App() {
               element={
                 <PrivateRoute>
                   <CheckoutFailed></CheckoutFailed>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/ticketed"
+              element={
+                <PrivateRoute>
+                  <Issued/>
+                </PrivateRoute>
+              }
+            />
+             <Route
+              path="/booked"
+              element={
+                <PrivateRoute>
+                  <Booked/>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/canceled"
+              element={
+                <PrivateRoute>
+                  <Canceled/>
                 </PrivateRoute>
               }
             />

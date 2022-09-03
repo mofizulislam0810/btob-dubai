@@ -432,7 +432,14 @@ const LeftSide = () => {
         },
         passengerType: "ADT",
         gender: "Male",
-        dateOfBirth: item.year + "-" + item.month + "-" + item.date,
+        dateOfBirth: (origin.match("Bangladesh") !== null
+        ? origin.match("Bangladesh")[0]
+        : "") &&
+      (destination.match("Bangladesh") !== null
+        ? destination.match("Bangladesh")[0]
+        : "") === "Bangladesh"
+        ? "1990-05-25"
+        : item.year + "-" + item.month + "-" + item.date,
         passengerKey: idObj !== undefined ? String(idObj.id) : "0",
         isLeadPassenger: true,
       };

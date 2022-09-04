@@ -196,7 +196,7 @@ const Ledger = () => {
                                       <td>{item.description}</td>
                                       <td className="text-center">{item.createdByName}</td>
                                       <td>
-                                       
+                                       {item.transactionType}
                                       </td>
                                       <td className="fw-bold text-end">
                                         {item.debitAmount}

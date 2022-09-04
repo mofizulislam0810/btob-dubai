@@ -758,74 +758,6 @@ const BookedView = () => {
                             <span className="ms-1">Email</span>
                           </Link>
                         </span>
-                        {/* {ticketingList.length > 0 ? (
-                      <>
-                        {ticketingList[0].agentLogo !== null &&
-                        ticketingList[0].agentLogo !== "" ? (
-                          <img
-                            alt="img01"
-                            src={
-                              environment.baseApiURL +
-                              `agentinfo/GetLogo/${ticketingList[0].agentLogo}`
-                            }
-                            style={{ width: "300px", height: "100px" }}
-                          ></img>
-                        ) : (
-                          <>
-                            <img
-                              alt="img01"
-                              className="p-2"
-                              src={tllLogo}
-                              style={{ width: "150px", height: "50px" }}
-                            ></img>
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                    <span className="ms-3">
-                      PNR :{" "}
-                      {ticketingList.length > 0 ? ticketingList[0]?.pnr : ""}
-                      <strong> </strong>
-                    </span>
-                    <input
-                      className="ms-3"
-                      type={"checkbox"}
-                      onChange={(e) => {
-                        setIsFareHide(e.target.checked);
-                      }}
-                    />{" "}
-                    Hide Fare Information
-                    <ul id="menu-standard">
-                      <li id="menu-item">
-                        <a
-                          href="javascript:void(0)"
-                          className="btn btn-default"
-                          onClick={print}
-                        >
-                          Print
-                        </a>
-                      </li>
-                      <li id="menu-item">
-                        <a
-                          href="javascript:void(0)"
-                          className="btn btn-default"
-                          data-bs-toggle="modal"
-                          data-bs-target="#priceModal"
-                        >
-                          Edit Price
-                        </a>
-                      </li>
-                      <li id="menu-item">
-                        <a
-                          href="javascript:void(0)"
-                          className="btn btn-default"
-                        >
-                          Download
-                        </a>
-                      </li>
-                    </ul> */}
                       </div>
                       <div className="card-body" ref={componentRef}>
                         <table class="table table-bordered my-2 mb-3 table-sm" style={{fontSize:"11px"}}>
@@ -839,59 +771,38 @@ const BookedView = () => {
                           <tbody>
                             <tr>
                               <th>Booking Date:</th>
-                              <td className="bg-light">
+                              <td style={{color:'red'}}>
                                 {moment(ticketingList[0]?.bookingDate).format("DD-MMMM-yyyy")}
                               </td>
                               <td className="fw-bold">Triplover Ref:</td>
-                              <td className="bg-light">
-                                <strong>
-                                  {" "}
-                                  {/* TLL-{ticketingList[0].data?.item1.bookingRefNumber} */}{" "}
+                              <td>
                                   {ticketingList[0]?.uniqueTransID}
-                                </strong>
                               </td>
                             </tr>
                             <tr>
                               <th>Issue Before:</th>
-                              <td className="bg-light">
-                                <strong>{ticketingList[0]?.timeTicks}</strong>
+                              <td>
+                               {ticketingList[0]?.timeTicks}
                               </td>
                               <td className="fw-bold">PNR</td>
-                              <td className="bg-light">
-                                <strong> {ticketingList[0]?.pnr}</strong>
+                              <td>
+                                 {ticketingList[0]?.pnr}
                               </td>
                             </tr>
-                            {/* <tr>
-                              <th>Extend Time Limit:</th>
-                              <td className="bg-light">
-                                <strong>{ticketingList[0]?.bookingDate}</strong>
-                              </td>
-                              <td>Airline PNR:</td>
-                              <td className="bg-light">
-                                <strong>{ticketingList[0]?.airlinePNRs}</strong>
-                              </td>
-                            </tr> */}
                             <tr>
                               <th>Booking Status:</th>
-                              <td className="bg-light">
-                                <strong>
+                              <td>
                                   {ticketingList[0]?.status}
-                                </strong>
                               </td>
                               <td className="fw-bold">Booked By:</td>
-                              <td className="bg-light">
-                                <strong>
+                              <td>
                                   {ticketingList[0]?.agentName}
-                                </strong>
                               </td>
                             </tr>
                           </tbody>
                         </table>
 
                         <div className="table-responsive-sm">
-                          {/* <p className="bg-dark p-2">
-                        PASSENGER DETAILS
-                      </p> */}
                           <table className="table table-bordered table-sm" style={{fontSize:"11px"}}>
                             <thead>
                               <tr>
@@ -939,9 +850,6 @@ const BookedView = () => {
                         </div>
 
                         <div className="table-responsive-sm">
-                          {/* <p className="bg-dark p-2">
-                        PASSENGER DETAILS
-                      </p> */}
                           <table className="table table-bordered table-sm" style={{fontSize:"11px"}}>
                             <thead>
                               <tr>

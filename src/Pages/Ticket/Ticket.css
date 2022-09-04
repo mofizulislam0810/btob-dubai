@@ -10,3 +10,21 @@
 ul{
     list-style-type:none;
 }
+
+table,
+td,
+th,
+tr {
+  border-collapse: separate;
+  border-spacing: 1px 1px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* td,th {
+    border: 1px solid white!important;
+} */
+
+.h6-line-height {
+    line-height: 8px !important;
+  }

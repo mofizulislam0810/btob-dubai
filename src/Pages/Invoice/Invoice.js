@@ -16,6 +16,12 @@ const Invoice = () => {
   let [totalPrice, setTotalPrice] = useState(0);
   let [totalPriceEdited, setTotalPriceEdited] = useState(0);
   const location = useLocation();
+
+  const table = {
+    backgroundColor : 'gray'
+  }
+
+
   const handleGetList = () => {
     const getTicketingList = async () => {
       let sendObj = { uniqueTransID: location.search.split("=")[1] };
@@ -344,7 +350,7 @@ const Invoice = () => {
                 </div> */}
 
                 <table className="table table-bordered table-sm" style={{fontSize:"10px"}}>
-                  <thead className="bg-secondary text-white">
+                  <thead className="fw-bold text-dark">
                     {/* <tr>
                       <td colSpan={11}>Flights</td>
                     </tr> */}

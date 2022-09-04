@@ -14,8 +14,6 @@ import ReactToPrint from "react-to-print";
 import { ToastContainer, toast } from "react-toastify";
 import airports from "../../JSON/airports.json";
 
-
-
 const Ticket = () => {
   let [ticketingList, setTicketingList] = useState([]);
   let [passengerList, setPassengerList] = useState([]);
@@ -173,18 +171,6 @@ const Ticket = () => {
                         </a>
                       </li>
                     </ul>
-                    {/* <span className="ms-3">
-                  PNR : {ticketingList.length > 0 ? ticketingList[0]?.pnr : ""}
-                  <strong> </strong>
-                </span>
-                <input
-                  className="ms-3"
-                  type={"checkbox"}
-                  onChange={(e) => {
-                    setIsFareHide(e.target.checked);
-                  }}
-                />{" "}
-                Hide Fare Information */}
                   </div>
                   <div className="card-body" ref={componentRef}>
 
@@ -241,7 +227,7 @@ const Ticket = () => {
                   </table>
 
                   <table
-                    class="table table-borderless my-1 table-sm"
+                    class="table table-borderless my-3 table-sm"
                     style={{ fontSize: "10px" }}
                   >
                     <tbody>
@@ -271,7 +257,7 @@ const Ticket = () => {
                     <div className="">
                       <table
                         class="table table-bordered table-sm"
-                        style={{ fontSize: "10px",width:"35rem" }}
+                        style={{ fontSize: "10px",width:"35rem"}}
                       >
                         <thead>
                           <tr className="text-start">
@@ -339,21 +325,21 @@ const Ticket = () => {
 
                   <div className="table-responsive-sm mt-2">
                     <p
-                      className="bg-secondary p-1 fw-bold text-start text-white"
+                      className="bg-secondary ps-1 py-2 fw-bold text-start text-white"
                       style={{ fontSize: "10px" }}
                     >
                       FLIGHT DETAILS
                     </p>
                     <table
                       class="table table-borderless table-sm"
-                      style={{ fontSize: "10px"}}
+                      style={{ fontSize: "10px", lineHeight: "1px"}}
                     >
                       {ticketingList.length > 0 ? (
                           <tbody>
                             <tr>
                               <td
                                 className="fw-bold text-start d-flex bg-white align-items-center"
-                                style={{ paddingTop: "2px" }}
+                                style={{ paddingTop: "8px" }}
                                 colSpan={1}
                               >
                                 <img
@@ -364,24 +350,30 @@ const Ticket = () => {
                                   height="40px"
                                 />
                                 <div>
-                                  <h6 className="ms-2" style={{ fontSize: "12px" }}>{ticketingList[0].airlineName}</h6>
-                                  {/* <h6
-                                    className="ms-2 pt-1"
-                                    style={{ fontSize: "12px" }}
+                                  <h6 className="ms-2 h6-line-height" style={{fontSize:"15px"}}>{ticketingList[0].airlineName}</h6>
+                                  <h6
+                                    className="ms-2 pt-2 h6-line-height"
+                                    style={{
+                                      fontSize: "12px",
+                                      marginBottom: "0px",
+                                    }}
                                   >
-                                    ({item.plane[0]})
-                                  </h6> */}
+                                    (ATR 72-600)
+                                  </h6>
                                 </div>
                               </td>
-                              <td className="ps-1 bg-white">
+                              <td className="bg-white align-middle"
+                                style={{ lineHeight: "13px", paddingTop: "8px" }}>
                                 <tr>
                                   <td
-                                    className="text-start bg-white"
-                                    style={{ fontSize: "11px" }}
+                                    className="text-start bg-white p-0"
+                                    style={{ fontSize: "11px", width: "6rem" }}
                                   >
                                     DEPARTS{" "}
-                                    <span className="ms-5">
-                                    {ticketingList[0].origin},{" "}
+                                  </td>
+                                  <td className="text-start p-0">
+                                  <span>
+                                    {/* {ticketingList[0].origin},{" "} */}Hazrat Shahjalal International Airport,{" "}
                                       {airports
                                         .filter((f) => f.iata === ticketingList[0].origin)
                                         .map((item) => item.city)}
@@ -390,12 +382,15 @@ const Ticket = () => {
                                 </tr>
                                 <tr>
                                   <td
-                                    className="text-start bg-white"
+                                    className="text-start bg-white p-0"
                                     style={{ fontSize: "11px" }}
                                   >
                                     ARRIVES{" "}
-                                    <sapn className="ms-5">
-                                    {ticketingList[0].destination},
+                                    </td>
+                                    <td className="text-start p-0">
+                                    <sapn>
+                                    {/* {ticketingList[0].destination}  */}
+                                    Cox's Bazar Airport,{" "}
                                       {airports
                                         .filter((f) => f.iata === ticketingList[0].destination)
                                         .map((item) => item.city)}
@@ -408,16 +403,15 @@ const Ticket = () => {
                             <tr>
                               <td
                                 className="text-start bg-white"
-                                style={{ paddingTop: "2px" }}
                                 colSpan={1}
                               >
                                 <tr>
-                                  <td className="" style={{ fontSize: "18px" }}>
-                                    <h4 className="fw-bold">{ticketingList[0].origin}</h4>
-                                    <h6>
+                                  <td style={{width:"40%"}}>
+                                    <h6 className="fw-bold" style={{fontSize:"15px"}}>{ticketingList[0].origin}</h6>
+                                    <h6 style={{ fontSize: "12px" }}>
                                       {" "}
                                       {moment(ticketingList[0].departure).format(
-                                      "hh:mm:ss"
+                                      "hh:mm A"
                                     )}
                                     </h6>
                                     <h6
@@ -430,16 +424,16 @@ const Ticket = () => {
                                       ).format("DD-MMMM-yyyy ddd")}
                                     </h6>
                                   </td>
-                                  <td className="align-middle mx-auto">
-                                    <i class="fas fa-circle fa-xs"></i>
+                                  <td className="align-middle" style={{width:"34%"}}>
+                                    <i class="fas fa-circle"></i>
                                     --------------{" "}
-                                    <i className="fas fa-plane fa-sm"></i>
+                                    <i className="fas fa-plane"></i>
                                   </td>
-                                  <td className="" style={{ fontSize: "18px" }}>
-                                    <h6 className="fw-bold">{ticketingList[0].destination}</h6>
-                                    <h6>
+                                  <td>
+                                    <h6 className="fw-bold" style={{fontSize:"15px"}}>{ticketingList[0].destination}</h6>
+                                    <h6 style={{ fontSize: "12px" }}>
                                     {moment(ticketingList[0].arrival).format(
-                                      "hh:mm:ss"
+                                      "hh:mm A"
                                     )}
                                     </h6>
                                     <h6
@@ -454,15 +448,17 @@ const Ticket = () => {
                                   </td>
                                 </tr>
                               </td>
-                              <td className="bg-white">
+                              <td className="bg-white align-middle"
+                              style={{ lineHeight: "13px" }}>
                                 <tr>
                                   <td
-                                    className="text-start bg-white"
-                                    style={{ fontSize: "12px" }}
+                                    className="text-start fw-bold fs-6 bg-white p-0"
+                                    style={{ width: "20%"}}
                                   >
-                                    <span className="fw-bold fs-6">
-                                      BS-101
-                                      <span style={{ marginLeft: "45px" }}>
+                                    BS-101
+                                    <span className="">
+                                      
+                                      <span style={{ marginLeft: "43px" }}>
                                        ECONOMY   
                                       </span>
                                     </span>
@@ -472,7 +468,7 @@ const Ticket = () => {
                                   className="text-start"
                                   style={{ fontSize: "11px" }}
                                 >
-                                  <td className="text-start bg-white">
+                                  <td className="text-start bg-white p-0">
                                     BAGGAGE
                                     <span className="ms-5">
                                       ADT25K, CHD-25K, INF-10K
@@ -483,9 +479,9 @@ const Ticket = () => {
                                   className="text-start"
                                   style={{ fontSize: "11px" }}
                                 >
-                                  <td className="bg-white">
+                                  <td className="bg-white p-0">
                                     AIRLINE PNR{" "}
-                                    <span style={{ marginLeft: "30px" }}>
+                                    <span style={{ marginLeft: "31px" }}>
                                       {ticketingList[0]?.pnr}
                                     </span>
                                   </td>
@@ -501,8 +497,8 @@ const Ticket = () => {
                   {isFareHide === false ? (
                   <div className="table-responsive-sm mt-2">
                     <p
-                      className="bg-secondary  p-1 fw-bold text-start text-white"
-                      style={{ fontSize: "10px" }}
+                      className="bg-secondary ps-1 py-2 fw-bold text-start text-white"
+                      style={{ fontSize: "10px", marginBottom:"8px" }}
                     >
                       FARE DETAILS
                     </p>
@@ -587,101 +583,10 @@ const Ticket = () => {
                     <></>
                   )}
 
-
-
-                    {/* {isFareHide === false ? (
-                      <>
-                        <div className="table-responsive-sm">
-                          <p className="bg-dark p-2">FARE DETAILS</p>
-
-                          <table class="table table-bordered my-2 mb-3 table-sm lh-1 text-center">
-                            <thead>
-                              <tr>
-                                <th>Type</th>
-                                <th>Base Price</th>
-                                <th>Tax</th>
-                                <th>AIT</th>
-                                <th>Discount</th>
-
-                                <th>Pax</th>
-                                <th>Agent Additional Price</th>
-                                <th>Total</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {passengerList.map((item, index) => (
-                                <>
-                                  {item.passengerType === "ADT" ? (
-                                    <>
-                                      <tr>
-                                        <td>Adult</td>
-                                        <td>{item.basePrice}</td>
-                                        <td>{item.tax}</td>
-
-                                        <td>{item.ait}</td>
-                                        <td>{item.discount}</td>
-                                        <td>{item.passengerCount}</td>
-                                        <td>{item.agentAdditionalPrice}</td>
-                                        <td className="fw-bold">
-                                          {item.currencyName}{" "}
-                                          {item.totalPrice *
-                                            item.passengerCount}
-                                        </td>
-                                      </tr>
-                                    </>
-                                  ) : item.passengerType === "CNN" ? (
-                                    <>
-                                      <tr>
-                                        <td>Child</td>
-                                        <td>{item.basePrice}</td>
-                                        <td>{item.tax}</td>
-
-                                        <td>{item.ait}</td>
-                                        <td>{item.discount}</td>
-                                        <td>{item.passengerCount}</td>
-                                        <td>{item.agentAdditionalPrice}</td>
-                                        <td className="fw-bold">
-                                        {item.currencyName}{" "}
-                                          {item.totalPrice *
-                                            item.passengerCount}
-                                        </td>
-                                      </tr>
-                                    </>
-                                  ) : item.passengerType === "INF" ? (
-                                    <>
-                                      <tr>
-                                        <td>Infant</td>
-                                        <td>{item.basePrice}</td>
-                                        <td>{item.tax}</td>
-
-                                        <td>{item.ait}</td>
-                                        <td>{item.discount}</td>
-                                        <td>{item.passengerCount}</td>
-                                        <td>{item.agentAdditionalPrice}</td>
-                                        <td className="fw-bold">
-                                        {item.currencyName}{" "}
-                                          {item.totalPrice *
-                                            item.passengerCount}
-                                        </td>
-                                      </tr>
-                                    </>
-                                  ) : (
-                                    <></>
-                                  )}
-                                </>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      </>
-                    ) : (
-                      <></>
-                    )} */}
-
                   <div className="mt-2">
                     <p
-                      className="bg-secondary p-1 fw-bold text-start text-white"
-                      style={{ fontSize: "10px" }}
+                      className="bg-secondary ps-1 py-2 fw-bold text-start text-white"
+                      style={{ fontSize: "10px",marginBottom:"8px" }}
                     >
                       IMPORTANT NOTICE FOR TRAVELLERS
                     </p>

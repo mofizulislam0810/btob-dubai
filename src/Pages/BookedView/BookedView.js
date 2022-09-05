@@ -732,11 +732,7 @@ const BookedView = () => {
                   <div>
                     <div className="card box-shadow">
                       <div className="card-header">
-                        <img
-                          src={logo}
-                          alt="Triplover logo"
-                          style={{ width: "100px", height: "30px" }}
-                        />
+                      
                         <span className="me-3 float-end">
                           <ReactToPrint
                             trigger={() => (
@@ -750,7 +746,7 @@ const BookedView = () => {
                             content={() => componentRef.current}
                           />
                           <Link
-                            className="btn  btn-secondary ms-2 d-print-none"
+                            className="btn btn-secondary ms-2 d-print-none"
                             to="#"
                             data-abc="true"
                           >
@@ -760,6 +756,12 @@ const BookedView = () => {
                         </span>
                       </div>
                       <div className="card-body" ref={componentRef}>
+                      <img
+                          src={logo}
+                          className="my-3"
+                          alt="Triplover logo"
+                          style={{ width: "100px", height: "30px" }}
+                        />
                         <table class="table table-bordered my-2 mb-3 table-sm" style={{fontSize:"11px"}}>
                           <thead>
                             <tr>
@@ -771,7 +773,7 @@ const BookedView = () => {
                           <tbody>
                             <tr>
                               <th>Booking Date:</th>
-                              <td style={{color:'red'}}>
+                              <td>
                                 {moment(ticketingList[0]?.bookingDate).format("DD-MMMM-yyyy")}
                               </td>
                               <td className="fw-bold">Triplover Ref:</td>
@@ -781,7 +783,7 @@ const BookedView = () => {
                             </tr>
                             <tr>
                               <th>Issue Before:</th>
-                              <td>
+                              <td  style={{color:'red'}}>
                                {ticketingList[0]?.timeTicks}
                               </td>
                               <td className="fw-bold">PNR</td>

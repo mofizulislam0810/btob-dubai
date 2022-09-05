@@ -102,11 +102,7 @@ const SuccessBookingPanel = () => {
               <div>
                 <div className="card box-shadow">
                   <div className="card-header">
-                    <img
-                      src={logo}
-                      alt="Triplover logo"
-                      style={{ width: "100px", height: "30px" }}
-                    />
+                   
                     <span className="me-3 float-end">
                       <ReactToPrint
                         trigger={() => (
@@ -131,7 +127,13 @@ const SuccessBookingPanel = () => {
                     </span>
                   </div>
                   <div className="card-body" ref={componentRef} id="sendEmailDiv">
-                    <table class="table table-bordered my-2 mb-3 table-sm">
+                  <img
+                      src={logo}
+                      className="my-3"
+                      alt="Triplover logo"
+                      style={{ width: "100px", height: "30px" }}
+                    />
+                    <table class="table table-bordered my-2 mb-3 table-sm" style={{fontSize:"11px"}}>
                       <thead>
                         <tr>
                           <th colspan="4" className="fw-bold py-2 bg-light">
@@ -142,67 +144,36 @@ const SuccessBookingPanel = () => {
                       <tbody>
                         <tr>
                           <th>Issue Before:</th>
-                          <td className="bg-light">
-                            <strong>
-                              {bookData.data?.item1.ticketingTimeLimit}
-                            </strong>
+                          <td style={{color:'red'}}>
+                            {moment(bookData.data?.item1.ticketingTimeLimit).format("DD-MMMM-yyyy")}
                           </td>
-                          <td>Triplover Ref:</td>
-                          <td className="bg-light">
-                            <strong>
-                              {" "}
+                          <td className="fw-bold">Triplover Ref:</td>
+                          <td>
                               {bookData.data?.item1.uniqueTransID}
-                            </strong>
                           </td>
                         </tr>
                         <tr>
                           <th>Booking Status:</th>
-                          <td className="bg-light">
-                            <strong>
+                          <td>
                               {bookData.data?.item1.bookingStatus}
-                            </strong>
                           </td>
-                          <td>PNR</td>
-                          <td className="bg-light">
-                            <strong>{bookData.data?.item1.pnr}</strong>
+                          <td className="fw-bold">PNR</td>
+                          <td>
+                            {bookData.data?.item1.pnr}
                           </td>
                         </tr>
-                        {/* <tr>
-                          <th>Extend Time Limit:</th>
-                          <td className="bg-light">
-                            <strong>
-                              {bookData.data?.item1.ticketingTimeLimit}
-                            </strong>
-                          </td>
-                          <td>Airline PNR:</td>
-                          <td className="bg-light">
-                            <strong>
-                              {bookData.data?.item1.airlinesPNR[0]}
-                            </strong>
-                          </td>
-                        </tr> */}
+                        
                         <tr>
-                          {/* <th>Booking Status:</th>
-                          <td className="bg-light">
-                            <strong>
-                              {bookData.data?.item1.bookingStatus}
-                            </strong>
-                          </td> */}
-                          <td>Booked By:</td>
-                          <td className="bg-light">
-                            <strong>
+                          <td className="fw-bold">Booked By:</td>
+                          <td>
                               {sessionStorage.getItem("agentName")}
-                            </strong>
                           </td>
                         </tr>
                       </tbody>
                     </table>
 
                     <div className="table-responsive-sm">
-                      {/* <p className="bg-dark p-2">
-                        PASSENGER DETAILS
-                      </p> */}
-                      <table className="table table-bordered table-sm">
+                      <table className="table table-bordered table-sm" style={{fontSize:"11px"}}>
                         <thead>
                           <tr>
                             <th colspan="5" className="fw-bold py-2 bg-light">
@@ -242,10 +213,7 @@ const SuccessBookingPanel = () => {
                     </div>
 
                     <div className="table-responsive-sm">
-                      {/* <p className="bg-dark p-2">
-                        PASSENGER DETAILS
-                      </p> */}
-                      <table className="table table-bordered table-sm">
+                      <table className="table table-bordered table-sm" style={{fontSize:"11px"}}>
                         <thead>
                           <tr>
                             <th colspan="8" className="fw-bold py-2 bg-light">
@@ -368,7 +336,7 @@ const SuccessBookingPanel = () => {
                     </div>
 
                     <div className="table-responsive-sm">
-                      <table className="table table-bordered table-sm">
+                      <table className="table table-bordered table-sm" style={{fontSize:"11px"}}>
                         <thead>
                           <tr>
                             <th colspan="3" className="fw-bold py-2 bg-light">
@@ -377,7 +345,6 @@ const SuccessBookingPanel = () => {
                           </tr>
                           <tr className="text-center">
                             <th>DEPARTS</th>
-                            <th></th>
                             <th>Phone Number</th>
                           </tr>
                         </thead>
@@ -400,7 +367,6 @@ const SuccessBookingPanel = () => {
                                         (Mandatory)
                                         {/* {bookData.data?.item1.flightInfo.dirrections[0][0].from} */}
                                       </td>
-                                      <td></td>
                                       <td>
                                         {item.contactInfo.phoneCountryCode +
                                           item.contactInfo.phone}{" "}
@@ -419,7 +385,6 @@ const SuccessBookingPanel = () => {
                                         (Optional)
                                         {/* {bookData.data?.item1.flightInfo.dirrections[0][0].from} */}
                                       </td>
-                                      <td></td>
                                       <td>
                                         {item.contactInfo.phoneCountryCode +
                                           item.contactInfo.phone}{" "}
@@ -460,7 +425,7 @@ const SuccessBookingPanel = () => {
                   <div className="row mb-5 mt-2">
                     <div className="col-lg-12 text-center">
                       <button
-                        className="btn button-color text-white fw-bold w-25 mt-2 rounded"
+                        className="btn button-color text-white fw-bold w-25 mt-2 rounded btn-sm"
                         onClick={handleGenarateTicket}
                       >
                         Issue Ticket

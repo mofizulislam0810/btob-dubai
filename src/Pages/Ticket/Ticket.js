@@ -172,7 +172,9 @@ const Ticket = () => {
                       </li>
                     </ul>
                   </div>
-                  <div className="card-body" ref={componentRef}>
+                  <div className="card-body py-5" ref={componentRef}>
+
+                  <h4 className="text-center pb-2">E-Ticket</h4>
 
                   <table class="table table-borderless table-sm">
                     <tbody>
@@ -583,7 +585,7 @@ const Ticket = () => {
                     <></>
                   )}
 
-                  <div className="mt-2">
+                  <div className="mt-2 pb-5">
                     <p
                       className="bg-secondary ps-1 py-2 fw-bold text-start text-white"
                       style={{ fontSize: "10px",marginBottom:"8px" }}

@@ -307,10 +307,10 @@ const Ticket = () => {
                             <td className="fw-bold">BOOKING ID</td>
                             <td>{ticketingList[0]?.uniqueTransID}</td>
                           </tr>
-                          <tr>
+                          {/* <tr>
                             <td className="fw-bold">FLIGHT TYPE</td>
                             <td>International</td>
-                          </tr>
+                          </tr> */}
                           <tr>
                             <td className="fw-bold">JOURNEY TYPE</td>
                             <td>{ticketingList[0]?.journeyType}</td>

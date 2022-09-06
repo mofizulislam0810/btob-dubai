@@ -154,7 +154,7 @@ const ShowModal = ({
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id={"home" + index} role="tabpanel" aria-labelledby="home-tab"><>
                 <div className="p-2">
-                  <div className="container bg-white">
+                  <div className="container">
                     {flightType > 2 ? (
                       <>
                         {direction0.segments.map((seg, index) => (
@@ -1085,7 +1085,7 @@ const ShowModal = ({
                       </>
                     )}
                   </div>
-                  <div className="container my-1 bg-white">
+                  <div className="container my-1">
                     {flightType > 2 ? (
                       <></>
                     ) : (
@@ -1352,8 +1352,8 @@ const ShowModal = ({
                                 </td> */}
                                 <td className="right">{passengerCounts.adt}</td>
                                 <td className="right fw-bold">
-                                {currency !== undefined ? currency : "BDT"} {passengerFares.adt.totalPrice *
-                                    passengerCounts.adt}
+                                {currency !== undefined ? currency : "BDT"} {(passengerFares.adt.totalPrice *
+                                    passengerCounts.adt).toFixed(2)}
                                 </td>
                               </tr>
                             </>
@@ -1379,8 +1379,8 @@ const ShowModal = ({
                                 </td> */}
                                 <td className="right">{passengerCounts.cnn}</td>
                                 <td className="right fw-bold">
-                                {currency !== undefined ? currency : "BDT"} {passengerFares.cnn.totalPrice *
-                                    passengerCounts.cnn}
+                                {currency !== undefined ? currency : "BDT"} {(passengerFares.cnn.totalPrice *
+                                    passengerCounts.cnn).toFixed(2)}
                                 </td>
                               </tr>
                             </>
@@ -1406,8 +1406,8 @@ const ShowModal = ({
                                 </td> */}
                                 <td className="right">{passengerCounts.inf}</td>
                                 <td className="right fw-bold">
-                                {currency !== undefined ? currency : "BDT"} {passengerFares.inf.totalPrice *
-                                    passengerCounts.inf}
+                                {currency !== undefined ? currency : "BDT"} {(passengerFares.inf.totalPrice *
+                                    passengerCounts.inf).toFixed(2)}
                                 </td>
                               </tr>
                             </>
@@ -1937,7 +1937,7 @@ const ShowModal = ({
                             </div>
                           </div>
                         </div>
-                        <div className="row px-2 pb-2 text-white">
+                        <div className="row px-2 pb-2">
                           <div className="col-lg-8">
                             <div className="row my-2">
                               <div className="col-lg-6">
@@ -2019,7 +2019,7 @@ const ShowModal = ({
                                 </div>
                               </div>
                             </div>
-                            <div className="row px-2 pb-2 text-white">
+                            <div className="row px-2 pb-2">
                               <div className="col-lg-8">
                                 <div className="row my-2">
                                   <div className="col-lg-6">
@@ -2067,7 +2067,7 @@ const ShowModal = ({
                 </div>
               </></div>
               <div class="tab-pane fade" id={"about" + index} role="tabpanel" aria-labelledby="about-tab"><>
-                <div className="text-start p-4 text-white">
+                <div className="text-start p-4">
                   <h6 className="fw-bold">
                     Refund or Date Change can be done as per the following
                     policies:

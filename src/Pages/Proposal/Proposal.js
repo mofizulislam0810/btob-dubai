@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../SharePages/Navbar/Navbar";
 import SideNavBar from "../SharePages/SideNavBar/SideNavBar";
 import flightoneway from "../../JSON/flightoneway.json";
 import $ from "jquery";
 import logo from "../../images/logo/logo-combined.png";
+import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import pdfMake from "pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
@@ -14,6 +15,7 @@ import moment from "moment";
 import "./Proposal.css";
 import axios from "axios";
 import { environment } from "../SharePages/Utility/environment";
+import dayCount from "../SharePages/Utility/dayCount";
 
 const Proposal = () => {
   let defaultPriceList = [];
@@ -197,6 +199,25 @@ const Proposal = () => {
   }
   console.log(singleValue);
 
+  const donwloadRef = useRef();
+  const handleDownloadPdf = async () => {
+    const element = donwloadRef.current;
+    const canvas = await html2canvas(element, {
+      scrollX: 0,
+      scrollY: 0,
+    });
+    const data = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF("p", "pt", "a4", true);
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight, "", "FAST");
+    pdf.save("proposal_triplover.pdf");
+
+  }
+
   return (
     <div>
       <Navbar></Navbar>
@@ -272,31 +293,25 @@ const Proposal = () => {
                 <div className="rounded box-shadow bg-white p-3 py-4">
                   <div className="d-flex align-items-centen justify-content-center py-1">
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Increase" defaultChecked={selectedType === "Increase" ? true : false} onChange={() => setSelectedType("Increase")} />
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Increase" defaultChecked={selectedType === "Increase" ? true : false} onChange={() => setSelectedType("Increase")} disabled />
                       <label class="form-check-label" for="flexRadioDefault1">
                         Increase
                       </label>
                     </div>
                     <div class="form-check ms-4">
-                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="Decrease" onChange={() => setSelectedType("Decrease")} />
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="Decrease" onChange={() => setSelectedType("Decrease")} disabled />
                       <label class="form-check-label" for="flexRadioDefault2">
                         Decrease
                       </label>
                     </div>
                   </div>
 
-                  <input className="form-control mt-2" name="increase" type="number" value={inputIncreaseValue} onChange={handleIncreaseChange} placeholder="Enter Amount" />
+                  <input className="form-control mt-2" name="increase" type="number" value={inputIncreaseValue} onChange={handleIncreaseChange} placeholder="Enter Amount" disabled />
                   <button
                     className="btn button-color fw-bold text-white w-100 mt-2 rounded" onClick={handleIncreaseClick} disabled={inputIncreaseValue ? false : true}
                   >
                     Submit
                   </button>
-                  {/* <input className="form-control mt-2" name="decrease" type="number" value={inputDecreaseValue} onChange={handleDecreaseChange} placeholder="Enter Amount" />
-                  <button
-                    className="btn button-color fw-bold text-white w-100 mt-2" onClick={handleDecreaseClick}
-                  >
-                    Decrease
-                  </button> */}
                   <div className="d-flex pb-1">
                     <button
                       className="btn button-color fw-bold text-white w-50 mt-2 me-1 rounded"
@@ -308,7 +323,7 @@ const Proposal = () => {
                       className="btn button-color fw-bold text-white w-50 mt-2 rounded"
                       id="downloadPdf"
                       style={{ fontSize: "12px" }}
-                      onClick={printDocument}
+                      onClick={handleDownloadPdf}
                     >
                       Download
                     </button>
@@ -321,52 +336,60 @@ const Proposal = () => {
                   flightList.map((item, index) => (
                     <>
                       <div className="row my-3 py-2 rounded box-shadow bg-white">
-                        <div className="col-lg-10">
+                        <div className="col-lg-10 my-auto border-end">
                           {/* <!-- up flight section --> */}
-                          <div className="row p-2">
+
+                          <div className="row p-2 text-color">
                             <div className="col-lg-1 my-auto">
-                              <img
-                                src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.directions[0][0].platingCarrierCode}.png`}
-                                alt=""
-                                width="40px"
-                                height="40px"
-                              />
+                              <img src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.directions[0][0].platingCarrierCode}.png`} alt="" width="40px" height="40px" />
                             </div>
-                            <div className="col-lg-3 my-auto" style={{ fontSize: "12px" }}>
-                              <p className="my-auto fw-bold">
-                                {item.platingCarrierName}
+                            <div
+                              className="col-lg-3 my-auto text-center"
+                              style={{ fontSize: "14px" }}
+                            >
+                              <p className="my-auto">
+                                {item.directions[0][0].platingCarrierName}
                               </p>
                               <p className="my-auto">
-                                {
-                                  item.directions[0][0].segments[0].details[0]
-                                    .equipment
-                                }
+                                {item.directions[0][0].segments[0].details[0].equipment}
+                              </p>
+                              <p>
+                                {item.directions[0][0].platingCarrierCode} -{" "}
+                                {item.directions[0][0].segments[0].flightNumber}
                               </p>
                             </div>
                             <div className="col-lg-2 my-auto">
-                              <span className="fw-bold">
-                                {item.directions[0][0].segments[0].departure.substr(
-                                  11,
-                                  5
+                              <h6 className="fw-bold">
+                                <span className="fs-5">{item.directions[0][0].from}</span>
+                                <span className="ms-1 fs-5">
+                                  {item.directions[0][0].segments[0].departure.substr(11, 5)}
+                                </span>
+                                {/* {directions[0][0].segments[0].departure.substr(11, 5)} */}
+                              </h6>
+                              <h6 className="flighttime">
+                                {moment(item.directions[0][0].segments[0].departure).format(
+                                  "DD MMM,yyyy, ddd"
                                 )}
-                              </span>
-                              <p className="my-auto">
-                                {item.directions[0][0].from}
-                              </p>
+                              </h6>
+                              <h6 className="flighttime">
+                                {airports
+                                  .filter((f) => f.iata === item.directions[0][0].from)
+                                  .map((item) => item.city)}
+                              </h6>
+                              {/* <p className="my-auto">{directions[0][0].from}</p> */}
                             </div>
                             <div className="col-lg-4 my-auto">
-                              <div className="row">
+                              <div className="row lh-1">
                                 <div className="col-lg-12 text-center">
-                                  <span className="text-color fw-bold font-size">
+                                  <span className="text-color font-size">
                                     {item.directions[0][0].stops === 0
-                                      ? "Direct"
-                                      : item.directions[0][0].stops + " Stop"}
+                                      ? "Direct" : item.directions[0][0].stops + " Stop"}
                                   </span>
                                 </div>
                                 <div className="col-lg-12 text-center">
                                   <span className="text-color">
                                     <i class="fas fa-circle fa-xs"></i>
-                                    ------------------------------
+                                    ----------------------
                                     <i className="fas fa-plane fa-sm"></i>
                                   </span>
                                 </div>
@@ -374,159 +397,284 @@ const Proposal = () => {
                                   <span className="text-color">
                                     <i className="fas fa-clock fa-sm"></i>
                                     <span className="ms-1 font-size">
-                                      {
-                                        item.directions[0][0].segments[0]
-                                          .duration[0]
-                                      }
+                                      {item.directions[0][0].segments[0].duration[0]}
                                     </span>
                                   </span>
                                 </div>
                               </div>
                             </div>
                             <div className="col-lg-2 my-auto">
-                              <span className="fw-bold">
-                                {item.directions[0][0].segments[
-                                  item.directions[0][0].segments.length - 1
-                                ].arrival.substr(11, 5)}
-                              </span>
-                              <p className="my-auto">
-                                {item.directions[0][0].to}
-                              </p>
+                              <h6 className="fw-bold">
+                                <span className="fs-5">{item.directions[0][0].to}</span>
+                                <span className="ms-1 fs-5">
+                                  {item.directions[0][0].segments[
+                                    item.directions[0][0].segments.length - 1
+                                  ].arrival.substr(11, 5)}
+                                </span>
+
+                                <sup>
+                                  &nbsp;
+                                  {dayCount(
+                                    item.directions[0][0].segments[
+                                      item.directions[0][0].segments.length - 1
+                                    ].arrival,
+                                    item.directions[0][0].segments[0]?.departure
+                                  ) !== 0 ? (
+                                    <span className="text-danger" style={{ fontSize: "8px" }}>
+                                      +
+                                      {dayCount(
+                                        item.directions[0][0].segments[
+                                          item.directions[0][0].segments.length - 1
+                                        ].arrival,
+                                        item.directions[0][0].segments[0]?.departure
+                                      )}
+                                    </span>
+                                  ) : (
+                                    ""
+                                  )}{" "}
+                                </sup>
+                              </h6>
+                              <h6 className="flighttime">
+                                {moment(
+                                  item.directions[0][0].segments[
+                                    item.directions[0][0].segments.length - 1
+                                  ].arrival
+                                ).format("DD MMM,yyyy, ddd")}
+                              </h6>
+                              <h6 className="flighttime">
+                                {airports
+                                  .filter((f) => f.iata === item.directions[0][0].to)
+                                  .map((item) => item.city)}
+                              </h6>
                             </div>
                           </div>
+
 
                           {/* <!-- end of up flight section --> */}
                           {/* <!-- return fight section --> */}
                           {item.directions[1] !== undefined ? (
                             <>
-                              <div className="row p-2 border-top">
+                              <div className="row p-2 text-color">
                                 <div className="col-lg-1 my-auto">
-                                  <img
-                                    src={ImageUrlR}
-                                    alt=""
-                                    width="40px"
-                                    height="40px"
-                                  />
+                                  <img src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.directions[1][0].platingCarrierCode}.png`} alt="" width="40px" height="40px" />
                                 </div>
-                                <div className="col-lg-3 my-auto" style={{ fontSize: "12px" }}>
-                                  <p className="my-auto fw-bold">
-                                    {item.platingCarrierName}
+                                <div
+                                  className="col-lg-3 my-auto text-center"
+                                  style={{ fontSize: "14px" }}
+                                >
+                                  <p className="my-auto">
+                                    {item.directions[1][0].platingCarrierName}
                                   </p>
                                   <p className="my-auto">
-                                    {
-                                      item.directions[1][0].segments[0]
-                                        .details[0].equipment
-                                    }
+                                    {item.directions[1][0].segments[0].details[0].equipment}
+                                  </p>
+                                  <p>
+                                    {item.directions[1][0].platingCarrierCode} -{" "}
+                                    {item.directions[1][0].segments[0].flightNumber}
                                   </p>
                                 </div>
                                 <div className="col-lg-2 my-auto">
-                                  <span className="fw-bold">
-                                    {item.directions[1][0].segments[0].departure.substr(
-                                      11,
-                                      5
+                                  <h6 className="fw-bold">
+                                    <span className="fs-5">{item.directions[1][0].from}</span>
+                                    <span className="ms-1 fs-5">
+                                      {item.directions[1][0].segments[0].departure.substr(11, 5)}
+                                    </span>
+                                    {/* {directions[0][0].segments[0].departure.substr(11, 5)} */}
+                                  </h6>
+                                  <h6 className="flighttime">
+                                    {moment(item.directions[1][0].segments[0].departure).format(
+                                      "DD MMM,yyyy, ddd"
                                     )}
-                                  </span>
-                                  <p className="my-auto">{item.directions[1][0].from}</p>
+                                  </h6>
+                                  <h6 className="flighttime">
+                                    {airports
+                                      .filter((f) => f.iata === item.directions[1][0].from)
+                                      .map((item) => item.city)}
+                                  </h6>
+                                  {/* <p className="my-auto">{directions[0][0].from}</p> */}
                                 </div>
                                 <div className="col-lg-4 my-auto">
-                                  <div className="row">
+                                  <div className="row lh-1">
                                     <div className="col-lg-12 text-center">
-                                      <span className="text-color fw-bold font-size">
+                                      <span className="text-color font-size">
                                         {item.directions[1][0].stops === 0
-                                          ? "Direct"
-                                          : item.directions[1][0].stops +
-                                          " Stop"}
+                                          ? "Direct" : item.directions[1][0].stops + " Stop"}
                                       </span>
                                     </div>
                                     <div className="col-lg-12 text-center">
                                       <span className="text-color">
                                         <i class="fas fa-circle fa-xs"></i>
-                                        ------------------------------
+                                        ----------------------
                                         <i className="fas fa-plane fa-sm"></i>
                                       </span>
                                     </div>
                                     <div className="col-lg-12 text-center">
-                                      <span className="text-color me-5">
+                                      <span className="text-color">
                                         <i className="fas fa-clock fa-sm"></i>
                                         <span className="ms-1 font-size">
-                                          {" "}
-                                          {
-                                            item.directions[1][0].segments[0]
-                                              .duration[0]
-                                          }
-                                        </span>
-                                      </span>
-                                      <span className="text-color">
-                                        <i className="fas fa-briefcase fa-sm"></i>
-                                        <span className="ms-1 font-size">
-                                          {item.directions[1][0].segments[0]
-                                            .baggage[0].amount +
-                                            " " +
-                                            item.directions[1][0].segments[0]
-                                              .baggage[0].units}
+                                          {item.directions[1][0].segments[0].duration[0]}
                                         </span>
                                       </span>
                                     </div>
                                   </div>
                                 </div>
                                 <div className="col-lg-2 my-auto">
-                                  <span className="fw-bold">
-                                    {item.directions[1][0].segments[
-                                      item.directions[1][0].segments.length - 1
-                                    ].arrival.substr(11, 5)}
-                                  </span>
-                                  <p className="my-auto">{item.directions[1][0].to}</p>
+                                  <h6 className="fw-bold">
+                                    <span className="fs-5">{item.directions[1][0].to}</span>
+                                    <span className="ms-1 fs-5">
+                                      {item.directions[1][0].segments[
+                                        item.directions[1][0].segments.length - 1
+                                      ].arrival.substr(11, 5)}
+                                    </span>
+
+                                    <sup>
+                                      &nbsp;
+                                      {dayCount(
+                                        item.directions[1][0].segments[
+                                          item.directions[1][0].segments.length - 1
+                                        ].arrival,
+                                        item.directions[1][0].segments[0]?.departure
+                                      ) !== 0 ? (
+                                        <span className="text-danger" style={{ fontSize: "8px" }}>
+                                          +
+                                          {dayCount(
+                                            item.directions[1][0].segments[
+                                              item.directions[1][0].segments.length - 1
+                                            ].arrival,
+                                            item.directions[1][0].segments[0]?.departure
+                                          )}
+                                        </span>
+                                      ) : (
+                                        ""
+                                      )}{" "}
+                                    </sup>
+                                  </h6>
+                                  <h6 className="flighttime">
+                                    {moment(
+                                      item.directions[1][0].segments[
+                                        item.directions[1][0].segments.length - 1
+                                      ].arrival
+                                    ).format("DD MMM,yyyy, ddd")}
+                                  </h6>
+                                  <h6 className="flighttime">
+                                    {airports
+                                      .filter((f) => f.iata === item.directions[1][0].to)
+                                      .map((item) => item.city)}
+                                  </h6>
                                 </div>
                               </div>
                             </>
                           ) : (
                             <></>
                           )}
-                          <span className="px-3 text-color">
-                            <i class="fas fa-chair me-1"></i>{" "}
-                            {item.directions[0][0].segments[0].bookingCount}(
-                            {item.directions[0][0].segments[0].bookingClass}){" "}
-                          </span>
-                          <span className="text-color">
-                            <span className="text-color briefcase">
-                              {" "}
-                              <i className="fas fa-briefcase fa-sm"></i>
+
+                          <div className="border-top py-2">
+                            {item.directions[0][0].segments[0].bookingCount ? (
+                              <>
+                                <span className="px-3 text-color font-size">
+                                  <i class="fas fa-couch me-1"></i>
+                                  <span className="me-1">Seats</span>
+                                  {item.directions[0][0].segments[0].bookingCount}{" "}
+                                </span>
+                              </>
+                            ) : (
+                              <></>
+                            )}
+
+                            {item.directions[0][0].segments[0].bookingClass ? (
+                              <>
+                                <span className="pe-3 text-color font-size">
+                                  <i class="fas fa-book me-1"></i>{" "}
+                                  <span className="me-1">Class</span>
+                                  {item.directions[0][0].segments[0].bookingClass}{" "}
+                                </span>
+                              </>
+                            ) : (
+                              <></>
+                            )}
+
+                            <span className="pe-3 text-color font-size">
+                              <span className="text-color briefcase">
+                                {" "}
+                                <i className="fas fa-briefcase fa-sm me-1"></i>
+                                <span className="ms-1" style={{ cursor: "pointer" }}>
+                                  Baggage
+                                </span>
+                              </span>
+                              <div class="box">
+                                {" "}
+                                <table
+                                  className="table table-bordered table-sm"
+                                  style={{ fontSize: "12px" }}
+                                >
+                                  <thead className="text-center thead text-white fw-bold">
+                                    <tr>
+                                      <th>Route</th>
+                                      <th>Baggage</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody className="text-center">
+                                    <tr>
+                                      <td className="left">
+                                        {item.directions[0][0].from}-{item.directions[0][0].to}
+                                      </td>
+                                      <td className="left">
+                                        ADT :{" "}
+                                        <span className="ms-1 font-size">
+                                          {item.directions[0][0].segments[0].baggage[0]?.amount +
+                                            " " +
+                                            item.directions[0][0].segments[0].baggage[0]?.units}
+                                        </span>
+                                      </td>
+                                    </tr>
+
+                                    {item.directions[1] !== undefined ? (
+                                      <>
+                                        <tr>
+                                          <td className="left">
+                                            {item.directions[1][0].from}-{item.directions[1][0].to}
+                                          </td>
+                                          <td className="left">
+                                            ADT :{" "}
+                                            <span className="ms-1 font-size">
+                                              {item.directions[1][0].segments[0].baggage[0]?.amount +
+                                                " " +
+                                                item.directions[1][0].segments[0].baggage[0]?.units}
+                                            </span>
+                                          </td>
+                                        </tr>
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </tbody>
+                                </table>
+                              </div>
                             </span>
 
-                            <div className="box-proposal">
-                              {" "}
-                              <table
-                                className="table table-bordered table-sm"
-                                style={{ fontSize: "12px" }}
-                              >
-                                <thead className="text-center thead text-white fw-bold">
-                                  <tr>
-                                    <th>Route</th>
-                                    <th>Baggage</th>
-                                  </tr>
-                                </thead>
-                                <tbody className="text-center">
-                                  <tr>
-                                    <td className="left">
-                                      {item.directions[0][0].from}-
-                                      {item.directions[0][0].to}
-                                    </td>
-                                    <td className="left">
-                                      ADT :{" "}
-                                      <span className="ms-1 font-size">
-                                        {item.directions[0][0].segments[0]
-                                          .baggage[0].amount +
-                                          " " +
-                                          item.directions[0][0].segments[0]
-                                            .baggage[0].units}
-                                      </span>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </span>
-                          {/* <!-- end of return flight section --> */}
+                            <span className="text-color float-end">
+
+                              {item.refundable === true ? (
+                                <>
+                                  <span className="font-size">
+                                    <span className="text-success">
+                                      <i class="fas fa-circle fa-sm me-1"></i>
+                                    </span>
+                                    Refundable
+                                  </span>
+                                </>
+                              ) : (
+                                <>
+                                  <span className="font-size">
+                                    <span className="text-danger">
+                                      <i class="fas fa-circle fa-sm me-1"></i>
+                                    </span>
+                                    Non-Refundable
+                                  </span>
+                                </>
+                              )}
+                            </span>
+                          </div>
                         </div>
 
                         {/* <!-- modal option --> */}
@@ -1103,37 +1251,23 @@ const Proposal = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="col-lg-2 my-auto text-center border-start">
-                          <h5 className="text-color d-flex justify-content-center">
-                            {currency !== undefined ? currency : "BDT"}&nbsp;<span id={"balance" + index}> {parseInt(singleValue[index] ?? 0) + addBalance - decBalance}</span>
-                            <input width={70} type="number" id={"balanceInput" + index} name={"value" + index} value={singleValue[index] ?? 0} onChange={(e) => handleSingleValue(e.target.value, index)} style={{ height: "25px", width: "70px" }} />
-                            <span className="ms-1" id={"edit" + index}><i class="fas fa-edit"></i></span>
-                            <span className="ms-1" id={"right" + index}><i class="fas fa-check"></i></span>
+                        <div className="col-lg-2 my-auto text-center">
+                          <h5 className="text-color d-flex justify-content-center align-items-center">
+                            {currency !== undefined ? currency : "BDT"}&nbsp;<span id={"balance" + index}> {item.bookingComponents[0].totalPrice + addBalance - decBalance}</span>
+                            <input type="number" id={"balanceInput" + index} name={"value" + index} value={singleValue[index] ?? 0} onChange={(e) => handleSingleValue(e.target.value, index)} style={{ height: "25px", width: "70px" }} />
+                            {/* <span className="ms-1" id={"edit" + index}><i class="fas fa-edit"></i></span>
+                            <span className="ms-1" id={"right" + index}><i class="fas fa-check"></i></span> */}
                           </h5>
-                          <p className="text-color fw-bold" style={{ fontSize: "12px" }}>
-                            {item.refundable === true
-                              ? "Refundable"
-                              : "Non-Refundable"}
-                          </p>
-                          <a
-                            href="#"
-                            className="fw-bold text-color"
-                            data-bs-toggle="modal"
-                            data-bs-target={"#exampleModal" + index}
-                            style={{ fontSize: "12px" }}
-                          >
-                            Flight Details
-                          </a>
-                          <h6
-                            className="text-end fw-bold text-color text-center mt-1"
+                          {/* <h6
+                            className="text-end fw-bold text-color text-center"
                             id={"priceDown" + index}
                             style={{ cursor: "pointer", fontSize: "12px" }}
                           >
                             Price Breakdown
-                          </h6>
+                          </h6> */}
                         </div>
-                        <div
-                          className="table-responsive-sm mt-1"
+                        {/* <div
+                          className="table-responsive-sm"
                           id={"passengerBrackdown" + index}
                         >
                           <hr></hr>
@@ -1175,6 +1309,94 @@ const Proposal = () => {
                               </tr>
                             </tbody>
                           </table>
+                        </div> */}
+
+
+                        <div
+                          className="table-responsive-sm mt-1"
+                          id={"passengerBrackdown" + index}
+                        >
+                          <hr></hr>
+                          <table
+                            className="table table-bordered px-3 table-sm"
+                            style={{ fontSize: "12px" }}
+                          >
+                            <thead className="text-center thead text-white fw-bold">
+                              <tr>
+                                <th>Type</th>
+                                <th>Base</th>
+                                <th>Tax</th>
+                                <th>Discount</th>
+                                {/* <th>AIT</th> */}
+                                <th>Pax</th>
+                                <th>Total Pax Fare</th>
+                              </tr>
+                            </thead>
+                            <tbody className="text-center">
+                              {item.passengerFares.adt !== null ? (
+                                <>
+                                  <tr>
+                                    <td className="left">ADT</td>
+                                    <td className="left">{item.passengerFares.adt.basePrice + parseInt(addBalance) - decBalance}</td>
+                                    <td className="center">{item.passengerFares.adt.taxes}</td>
+                                    <td className="right">
+                                      {item.passengerFares.adt.discountPrice}
+                                    </td>
+                                    {/* <td className="right">{passengerFares.adt.ait}</td> */}
+                                    <td className="right">{item.passengerCounts.adt}</td>
+                                    <td className="right fw-bold">
+                                      {currency !== undefined ? currency : "BDT"}  {" "}
+                                      {item.passengerFares.adt.totalPrice + addBalance - decBalance}{" "}
+                                    </td>
+                                  </tr>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+
+                              {item.passengerFares.cnn !== null ? (
+                                <>
+                                  <tr>
+                                    <td className="left">CNN</td>
+                                    <td className="left">{item.passengerFares.cnn.basePrice + parseInt(addBalance) - decBalance}</td>
+                                    <td className="center">{item.passengerFares.cnn.taxes}</td>
+                                    <td className="right">
+                                      {item.passengerFares.cnn.discountPrice}
+                                    </td>
+                                    {/* <td className="right">{passengerFares.adt.ait}</td> */}
+                                    <td className="right">{item.passengerCounts.cnn}</td>
+                                    <td className="right fw-bold">
+                                      {currency !== undefined ? currency : "BDT"}  {" "}
+                                      {item.passengerFares.cnn.totalPrice + addBalance - decBalance}{" "}
+                                    </td>
+                                  </tr>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+
+                              {item.passengerFares.inf !== null ? (
+                                <>
+                                  <tr>
+                                    <td className="left">INF</td>
+                                    <td className="left">{item.passengerFares.inf.taxes + parseInt(addBalance) - decBalance}</td>
+                                    <td className="center">{item.passengerFares.inf.taxes}</td>
+                                    <td className="right">
+                                      {item.passengerFares.inf.discountPrice}
+                                    </td>
+                                    {/* <td className="right">{passengerFares.adt.ait}</td> */}
+                                    <td className="right">{item.passengerCounts.inf}</td>
+                                    <td className="right fw-bold">
+                                      {currency !== undefined ? currency : "BDT"}  {" "}
+                                      {item.passengerFares.inf.totalPrice + addBalance - decBalance}{" "}
+                                    </td>
+                                  </tr>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </tbody>
+                          </table>
                         </div>
                       </div>
                     </>
@@ -1186,8 +1408,11 @@ const Proposal = () => {
             </div>
           </div>
 
+
+
+
           <div
-            className="container my-3"
+            className="container my-3" ref={donwloadRef}
             style={{ maxWidth: "1265px" }}
             id={"proposalPrint"}
           >
@@ -1205,11 +1430,11 @@ const Proposal = () => {
                       <div className="row">
                         <div className="col-lg-12">
                           <h5 className="mb-3 fw-bold text-color">
-                            <u>Flight Information</u>
+                            <u>Flight Information Option ({index + 1})</u>
                           </h5>
                         </div>
                       </div>
-                      <div className="row mb-2" style={{fontSize:"12px"}}>
+                      <div className="row mb-2" style={{ fontSize: "12px" }}>
                         <div className="col-sm-3">
                           <h5 className="mb-1">From</h5>
                           <div>
@@ -1235,12 +1460,49 @@ const Proposal = () => {
                         <div className="col-sm-3">
                           <h5 className="mb-1">Travellers</h5>
                           <div>
-                            <strong>1 Persons</strong>
+                            <strong>{item.passengerCounts.adt + item.passengerCounts.cnn + item.passengerCounts.inf} Person(s)</strong>
                           </div>
                         </div>
                       </div>
 
-                      <div className="row mb-4" style={{fontSize:"12px"}}>
+                      {
+                        item.directions[1] !== undefined ? <>
+                          <div className="row my-2" style={{ fontSize: "12px" }}>
+                            <div className="col-sm-3">
+                              <h5 className="mb-1">From</h5>
+                              <div>
+                                <strong>
+                                  {item.directions[1][0].segments[0].fromAirport}
+                                </strong>
+                              </div>
+                            </div>
+                            <div className="col-sm-3">
+                              <h5 className="mb-1">To</h5>
+                              <div>
+                                <strong>{item.directions[1][0].segments[0].toAirport}</strong>
+                              </div>
+                            </div>
+                            <div className="col-sm-3">
+                              <h5 className="mb-1">Departure Date</h5>
+                              <div>
+                                <strong>{moment(item.directions[1][0].segments[0].departure)
+                                  .utc()
+                                  .format("DD-MMMM-yyyy, dddd")}</strong>
+                              </div>
+                            </div>
+                            <div className="col-sm-3">
+                              <h5 className="mb-1">Travellers</h5>
+                              <div>
+                                <strong>{item.passengerCounts.adt + item.passengerCounts.cnn + item.passengerCounts.inf} Person(s)</strong>
+                              </div>
+                            </div>
+                          </div>
+                        </> : <>
+
+                        </>
+                      }
+
+                      <div className="row mb-4 my-2" style={{ fontSize: "12px" }}>
                         <div className="col-sm-3">
                           <h5 className="mb-1">Class</h5>
                           <div>
@@ -1252,42 +1514,40 @@ const Proposal = () => {
                           <div>
                             <strong>{item.directions[0][0].segments[0].baggage[0].amount +
                               " " +
-                              item.directions[0][0].segments[0].baggage[0].units}</strong>
+                              item.directions[0][0].segments[0].baggage[0].units}(s)</strong>
                           </div>
                         </div>
                         <div className="col-sm-3">
                           <h5 className="mb-1">Trip Type</h5>
                           <div>
-                            <strong>OneWay</strong>
+                            <strong>{item.directions[1] !== undefined ? "Return" : "Oneway"}</strong>
                           </div>
                         </div>
                       </div>
 
                       <div className="table-responsive-sm">
-                        <p className="bg-dark p-2 fw-bold">FLIGHT DETAILS</p>
-                        <table className="table table-striped" style={{fontSize:"12px"}}>
-                          <thead className="text-center">
+                        <p className="bg-dark p-2 mb-2 fw-bold">FLIGHT DETAILS</p>
+                        <table className="table table-borderless" style={{ fontSize: "12px" }}>
+                          <thead className="text-center thead__color">
                             <tr>
-                              <th>#</th>
+                              <th className="text-start">#</th>
                               <th>AirLines</th>
                               <th>Departure</th>
                               <th>Arrival</th>
                               <th>Duration</th>
-                              <th>Passenger</th>
-                              <th>Total</th>
                             </tr>
                           </thead>
                           <tbody className="text-center">
                             <tr>
-                              <td className="center">1</td>
-                              <td className="left">
+                              <td className="text-start">1</td>
+                              <td>
                                 {item.platingCarrierName}<br></br>
                                 {
                                   item.directions[0][0].segments[0].details[0]
                                     .equipment
                                 }
                               </td>
-                              <td className="left">
+                              <td>
                                 {item.directions[0][0].segments[0].departure.substr(11, 5)}<br></br>
                                 {moment(item.directions[0][0].segments[0].departure)
                                   .utc()
@@ -1300,53 +1560,120 @@ const Proposal = () => {
                                   .format("DD-MMMM-yyyy, dddd")}
                               </td>
                               <td className="right">{item.directions[0][0].segments[0].duration[0]}</td>
-                              <td>ADT 1</td>
-                              <td className="right">{currency !== undefined ? currency : "BDT"} {singleValue[index]}</td>
                             </tr>
+                            {
+                              item.directions[1] !== undefined ? <>
+                                <tr>
+                                  <td className="text-start">2</td>
+                                  <td>
+                                    {item.platingCarrierName}<br></br>
+                                    {
+                                      item.directions[1][0].segments[0].details[0]
+                                        .equipment
+                                    }
+                                  </td>
+                                  <td>
+                                    {item.directions[1][0].segments[0].departure.substr(11, 5)}<br></br>
+                                    {moment(item.directions[1][0].segments[0].departure)
+                                      .utc()
+                                      .format("DD-MMMM-yyyy, dddd")}
+                                  </td>
+                                  <td>
+                                    {item.directions[0][0].segments[0].arrival.substr(11, 5)}<br></br>
+                                    {moment(item.directions[1][0].segments[0].arrival)
+                                      .utc()
+                                      .format("DD-MMMM-yyyy, dddd")}
+                                  </td>
+                                  <td className="right">{item.directions[1][0].segments[0].duration[0]}</td>
+                                </tr>
+                              </> : <></>
+                            }
                           </tbody>
                         </table>
                       </div>
                       <div className="table-responsive-sm">
-                      <p className="bg-dark p-2 fw-bold">FARE DETAILS</p>
+                        <p className="bg-dark p-2 mb-2 fw-bold">FARE DETAILS</p>
                         <table
-                            className="table table-bordered px-3 table-sm"
-                            style={{ fontSize: "12px" }}
-                          >
-                            <thead className="text-center thead text-white fw-bold">
-                              <tr>
-                                <th>Type</th>
-                                <th>Base</th>
-                                <th>Taxes</th>
-                                <th>Other Fee</th>
-                                <th>Gross Fare</th>
-                                <th>Discount</th>
-                                <th>Pax</th>
-                                <th>Total Pax Fare</th>
-                              </tr>
-                            </thead>
-                            <tbody className="text-center">
-                              <tr>
-                                <td className="left">ADT</td>
-                                <td className="left">
-                                  {parseInt(singleValue[index]) - item.passengerFares.adt.taxes + parseInt(addBalance) - decBalance}
-                                </td>
-                                <td className="center">
-                                  {item.passengerFares.adt.taxes}
-                                </td>
-                                <td className="right">0</td>
-                                <td className="right">
-                                  {parseInt(singleValue[index]) + addBalance - decBalance}
-                                </td>
-                                <td className="right">190</td>
-                                <td className="right">1</td>
-                                <td className="right">
-                                  {parseInt(singleValue[index]) + addBalance - 190 - decBalance}{" "}
-                                  {currency !== undefined ? currency : "BDT"}
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
+                          className="table table-bordered px-3 table-sm"
+                          style={{ fontSize: "12px" }}
+                        >
+                          <thead className="text-center thead__color fw-bold">
+                            <tr>
+                              <th>Type</th>
+                              <th>Base</th>
+                              <th>Tax</th>
+                              <th>Discount</th>
+                              {/* <th>AIT</th> */}
+                              <th>Pax</th>
+                              <th>Total Pax Fare</th>
+                            </tr>
+                          </thead>
+                          <tbody className="text-center">
+                            {item.passengerFares.adt !== null ? (
+                              <>
+                                <tr>
+                                  <td className="left">ADT</td>
+                                  <td className="left">{item.passengerFares.adt.basePrice + parseInt(addBalance) - decBalance}</td>
+                                  <td className="center">{item.passengerFares.adt.taxes}</td>
+                                  <td className="right">
+                                    {item.passengerFares.adt.discountPrice}
+                                  </td>
+                                  {/* <td className="right">{passengerFares.adt.ait}</td> */}
+                                  <td className="right">{item.passengerCounts.adt}</td>
+                                  <td className="right fw-bold">
+                                    {currency !== undefined ? currency : "BDT"}  {" "}
+                                    {item.passengerFares.adt.totalPrice + addBalance - decBalance}{" "}
+                                  </td>
+                                </tr>
+                              </>
+                            ) : (
+                              <></>
+                            )}
+
+                            {item.passengerFares.cnn !== null ? (
+                              <>
+                                <tr>
+                                  <td className="left">CNN</td>
+                                  <td className="left">{item.passengerFares.cnn.basePrice + parseInt(addBalance) - decBalance}</td>
+                                  <td className="center">{item.passengerFares.cnn.taxes}</td>
+                                  <td className="right">
+                                    {item.passengerFares.cnn.discountPrice}
+                                  </td>
+                                  {/* <td className="right">{passengerFares.adt.ait}</td> */}
+                                  <td className="right">{item.passengerCounts.cnn}</td>
+                                  <td className="right fw-bold">
+                                    {currency !== undefined ? currency : "BDT"}  {" "}
+                                    {item.passengerFares.cnn.totalPrice + addBalance - decBalance}{" "}
+                                  </td>
+                                </tr>
+                              </>
+                            ) : (
+                              <></>
+                            )}
+
+                            {item.passengerFares.inf !== null ? (
+                              <>
+                                <tr>
+                                  <td className="left">INF</td>
+                                  <td className="left">{item.passengerFares.inf.taxes + parseInt(addBalance) - decBalance}</td>
+                                  <td className="center">{item.passengerFares.inf.taxes}</td>
+                                  <td className="right">
+                                    {item.passengerFares.inf.discountPrice}
+                                  </td>
+                                  {/* <td className="right">{passengerFares.adt.ait}</td> */}
+                                  <td className="right">{item.passengerCounts.inf}</td>
+                                  <td className="right fw-bold">
+                                    {currency !== undefined ? currency : "BDT"}  {" "}
+                                    {item.passengerFares.inf.totalPrice + addBalance - decBalance}{" "}
+                                  </td>
+                                </tr>
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>

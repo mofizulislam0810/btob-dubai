@@ -542,12 +542,12 @@ const RightSide = () => {
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Base Fare ({passengerCounts.adt} &#215;{" "}
-                      {passengerFares.adt.basePrice})
+                      {(passengerFares.adt.basePrice).toFixed(2)})
                     </h6>
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end">
-                      {passengerCounts.adt * passengerFares.adt.basePrice}
+                      {(passengerCounts.adt * passengerFares.adt.basePrice).toFixed(2)}
                     </h6>
                   </div>
                 </div>
@@ -555,13 +555,13 @@ const RightSide = () => {
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Taxes ({passengerCounts.adt} &#215;{" "}
-                      {passengerFares.adt.taxes})
+                      {(passengerFares.adt.taxes).toFixed(2)})
                     </h6>
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end">
                       {" "}
-                      {passengerCounts.adt * passengerFares.adt.taxes}
+                      {(passengerCounts.adt * passengerFares.adt.taxes).toFixed(2)}
                     </h6>
                   </div>
                 </div>
@@ -584,7 +584,7 @@ const RightSide = () => {
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end">
-                      {passengerCounts.adt * passengerFares.adt.discountPrice}
+                      {(passengerCounts.adt * passengerFares.adt.discountPrice).toFixed(2)}
                     </h6>
                   </div>
                 </div>
@@ -594,7 +594,7 @@ const RightSide = () => {
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end fw-bold">
-                      {currency!==undefined ? currency : "BDT"}   {passengerFares.adt.totalPrice * passengerCounts.adt}
+                      {currency!==undefined ? currency : "BDT"}   {(passengerFares.adt.totalPrice * passengerCounts.adt).toFixed(2)}
                     </h6>
                   </div>
                 </div>
@@ -614,12 +614,12 @@ const RightSide = () => {
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Base Fare ({passengerCounts.cnn} &#215;{" "}
-                      {passengerFares.cnn.basePrice})
+                      {(passengerFares.cnn.basePrice).toFixed(2)})
                     </h6>
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end">
-                      {passengerCounts.cnn * passengerFares.cnn.basePrice}
+                      {(passengerCounts.cnn * passengerFares.cnn.basePrice).toFixed(2)}
                     </h6>
                   </div>
                 </div>
@@ -627,13 +627,13 @@ const RightSide = () => {
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Taxes ({passengerCounts.cnn} &#215;{" "}
-                      {passengerFares.cnn.taxes})
+                      {(passengerFares.cnn.taxes).toFixed(2)})
                     </h6>
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end">
                       {" "}
-                      {passengerCounts.cnn * passengerFares.cnn.taxes}
+                      {(passengerCounts.cnn * passengerFares.cnn.taxes).toFixed(2)}
                     </h6>
                   </div>
                 </div>
@@ -657,7 +657,7 @@ const RightSide = () => {
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end">
-                      {passengerCounts.cnn * passengerFares.cnn.discountPrice}
+                      {(passengerCounts.cnn * passengerFares.cnn.discountPrice).toFixed(2)}
                     </h6>
                   </div>
                 </div>
@@ -667,7 +667,7 @@ const RightSide = () => {
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end fw-bold">
-                      {currency!==undefined ? currency : "BDT"}   {passengerFares.cnn.totalPrice * passengerCounts.cnn}
+                      {currency!==undefined ? currency : "BDT"}   {(passengerFares.cnn.totalPrice * passengerCounts.cnn).toFixed(2)}
                     </h6>
                   </div>
                 </div>
@@ -687,12 +687,12 @@ const RightSide = () => {
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Base Fare ({passengerCounts.inf} &#215;{" "}
-                      {passengerFares.inf.basePrice})
+                      {(passengerFares.inf.basePrice).toFixed(2)})
                     </h6>
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end">
-                      {passengerCounts.inf * passengerFares.inf.basePrice}
+                      {(passengerCounts.inf * passengerFares.inf.basePrice).toFixed(2)}
                     </h6>
                   </div>
                 </div>
@@ -700,13 +700,13 @@ const RightSide = () => {
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Taxes ({passengerCounts.inf} &#215;{" "}
-                      {passengerFares.inf.taxes})
+                      {(passengerFares.inf.taxes).toFixed(2)})
                     </h6>
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end">
                       {" "}
-                      {passengerCounts.inf * passengerFares.inf.taxes}
+                      {(passengerCounts.inf * passengerFares.inf.taxes).toFixed(2)}
                     </h6>
                   </div>
                 </div>
@@ -729,7 +729,7 @@ const RightSide = () => {
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end">
-                      {passengerCounts.inf * passengerFares.inf.discountPrice}
+                      {(passengerCounts.inf * passengerFares.inf.discountPrice).toFixed(2)}
                     </h6>
                   </div>
                 </div>
@@ -739,7 +739,7 @@ const RightSide = () => {
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end fw-bold">
-                      {currency!==undefined ? currency : "BDT"}   {passengerFares.inf.totalPrice * passengerCounts.inf}
+                      {currency!==undefined ? currency : "BDT"}   {(passengerFares.inf.totalPrice * passengerCounts.inf).toFixed(2)}
                     </h6>
                   </div>
                 </div>

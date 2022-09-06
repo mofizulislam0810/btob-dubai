@@ -89,8 +89,8 @@ const Balance = () => {
     { id: 2, name: "Bank Deposit" },
     { id: 3, name: "Bank Transfer" },
     { id: 4, name: "Cash" },
-    { id: 5, name: "BKash" },
-    { id: 6, name: "Nagad" },
+    // { id: 5, name: "BKash" },
+    // { id: 6, name: "Nagad" },
   ];
 
   const paymenttypeList = [
@@ -122,10 +122,10 @@ const Balance = () => {
       }
     }
     if (depositTypeId == 2) {
-      if (checkNo == "") {
-        toast.error("Sorry! Check no is empty..");
-        return;
-      }
+      // if (checkNo == "") {
+      //   toast.error("Sorry! Check no is empty..");
+      //   return;
+      // }
       if (depositInAccountId == 0) {
         toast.error("Sorry! Deposit bank is empty..");
         return;
@@ -424,30 +424,30 @@ const Balance = () => {
       toast.error("Sorry! Account number is empty");
       return;
     }
-    if (routingNumber === "") {
-      toast.error("Sorry! Routing number is empty");
-      return;
-    }
-    if (branchName === "") {
-      toast.error("Sorry! Branch name is empty");
-      return;
-    }
-    if (branchCode === "") {
-      toast.error("Sorry! Branch code is empty");
-      return;
-    }
-    if (!cityId > 0) {
-      toast.error("Sorry! City is not selected");
-      return;
-    }
-    if (address === "") {
-      toast.error("Sorry! Address is empty");
-      return;
-    }
-    if (swiftCode === "") {
-      toast.error("Sorry! Swift code is empty");
-      return;
-    }
+    // if (routingNumber === "") {
+    //   toast.error("Sorry! Routing number is empty");
+    //   return;
+    // }
+    // if (branchName === "") {
+    //   toast.error("Sorry! Branch name is empty");
+    //   return;
+    // }
+    // if (branchCode === "") {
+    //   toast.error("Sorry! Branch code is empty");
+    //   return;
+    // }
+    // if (!cityId > 0) {
+    //   toast.error("Sorry! City is not selected");
+    //   return;
+    // }
+    // if (address === "") {
+    //   toast.error("Sorry! Address is empty");
+    //   return;
+    // }
+    // if (swiftCode === "") {
+    //   toast.error("Sorry! Swift code is empty");
+    //   return;
+    // }
     if ((currentItem == null ? 0 : currentItem.id) > 0) {
       const putData = async () => {
         const response = await axios.put(
@@ -509,7 +509,7 @@ const Balance = () => {
                   className="card-header fw-bold"
                   style={{ color: "#02046a" }}
                 >
-                  Deposit Balance
+                  Topup Request
                 </div>
                 <div className="card-body">
                   <div className="m-4">
@@ -521,7 +521,7 @@ const Balance = () => {
                           data-bs-toggle="tab"
                           onClick={handleGetEntry}
                         >
-                          Entry
+                          Submit Request
                         </a>
                       </li>
                       <li className="nav-item">
@@ -557,7 +557,7 @@ const Balance = () => {
                     </ul>
                     <div className="tab-content">
                       <div className="tab-pane fade show active" id="entry">
-                        <h4>Entry</h4>
+                        <h4>Submit Request</h4>
                         <hr className="my-3"/>
                         <div className="row">
                           <div className="col-sm-3">
@@ -592,33 +592,33 @@ const Balance = () => {
                             <div className="row my-3">
                               <div className="col-sm-3">
                                 <label>
-                                  Check No
+                                  Cheque No
                                   <span style={{ color: "red" }}>*</span>
                                 </label>
                                 <input
                                   type={"text"}
                                   className="form-control"
-                                  placeholder="Check No"
+                                  placeholder="Cheque No"
                                   onChange={(e) => setCheckNo(e.target.value)}
                                   value={checkNo}
                                 ></input>
                               </div>
                               <div className="col-sm-3">
                                 <label>
-                                  Check Bank
+                                Cheque Bank
                                   <span style={{ color: "red" }}>*</span>
                                 </label>
                                 <input
                                   type={"text"}
                                   className="form-control"
-                                  placeholder="Check Bank"
+                                  placeholder="Cheque Bank"
                                   onChange={(e) => setCheckBank(e.target.value)}
                                   value={checkBank}
                                 ></input>
                               </div>
                               <div className="col-sm-3">
                                 <label>
-                                  Check Issue Date
+                                Cheque Issue Date
                                   <span style={{ color: "red" }}>*</span>
                                 </label>
                                 <input
@@ -628,6 +628,7 @@ const Balance = () => {
                                     setCheckIssueDate(e.target.value)
                                   }
                                   value={checkIssueDate}
+                                  max={new Date().toISOString().slice(0, 10)}
                                 ></input>
                               </div>
                               <div className="col-sm-3">
@@ -747,6 +748,7 @@ const Balance = () => {
                                 className="form-control"
                                 onChange={(e) => setDepositDate(e.target.value)}
                                 value={depositDate}
+                                max={new Date().toISOString().slice(0, 10)}
                               ></input>
                             </div>
                             <div className="col-sm-3">
@@ -869,6 +871,7 @@ const Balance = () => {
                                   setTransferDate(e.target.value)
                                 }
                                 value={transferDate}
+                                max={new Date().toISOString().slice(0, 10)}
                               ></input>
                             </div>
                             <div className="col-sm-3">
@@ -1157,8 +1160,8 @@ const Balance = () => {
                         <h4>Transaction</h4>
                         <hr  className="my-3"/>
                         <table
-                          className="table table-striped"
-                          style={{ width: "100%" }}
+                          className="table table-striped table-sm"
+                          style={{ width: "100%",fontSize:"12px"}}
                         >
                           <thead>
                             <tr>
@@ -1248,8 +1251,8 @@ const Balance = () => {
 
                         
                         <table
-                          className="table table-striped"
-                          style={{ width: "100%" }}
+                          className="table table-striped table-sm"
+                          style={{ width: "100%", fontSize:"12px"}}
                         >
                           <thead>
                             <tr>
@@ -1392,21 +1395,6 @@ const Balance = () => {
                                   </div>
                                   <div className="col-sm-3">
                                     <label>
-                                      Routing Number
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type={"text"}
-                                      value={routingNumber}
-                                      className="form-control"
-                                      placeholder="Routing Number"
-                                      onChange={(e) =>
-                                        setRoutingNumber(e.target.value)
-                                      }
-                                    ></input>
-                                  </div>
-                                  <div className="col-sm-3">
-                                    <label>
                                       Bank Name
                                       <span style={{ color: "red" }}>*</span>
                                     </label>
@@ -1420,8 +1408,6 @@ const Balance = () => {
                                       }
                                     ></input>
                                   </div>
-                                </div>
-                                <div className="row mb-3">
                                   <div className="col-sm-3">
                                     <label>
                                       Branch Name
@@ -1437,10 +1423,27 @@ const Balance = () => {
                                       }
                                     ></input>
                                   </div>
+                                </div>
+                                <div className="row mb-3">
+                                <div className="col-sm-3">
+                                    <label>
+                                      Routing Number
+                                      {/* <span style={{ color: "red" }}>*</span> */}
+                                    </label>
+                                    <input
+                                      type={"text"}
+                                      value={routingNumber}
+                                      className="form-control"
+                                      placeholder="Routing Number"
+                                      onChange={(e) =>
+                                        setRoutingNumber(e.target.value)
+                                      }
+                                    ></input>
+                                  </div>
                                   <div className="col-sm-3">
                                     <label>
                                       Branch Code
-                                      <span style={{ color: "red" }}>*</span>
+                                      {/* <span style={{ color: "red" }}>*</span> */}
                                     </label>
                                     <input
                                       type={"text"}
@@ -1455,7 +1458,7 @@ const Balance = () => {
                                   <div className="col-sm-3">
                                     <label>
                                       City
-                                      <span style={{ color: "red" }}>*</span>
+                                      {/* <span style={{ color: "red" }}>*</span> */}
                                     </label>
                                     <select
                                       className="form-select"
@@ -1481,7 +1484,7 @@ const Balance = () => {
                                   <div className="col-sm-3">
                                     <label>
                                       Address
-                                      <span style={{ color: "red" }}>*</span>
+                                      {/* <span style={{ color: "red" }}>*</span> */}
                                     </label>
                                     <input
                                       type={"text"}
@@ -1498,7 +1501,7 @@ const Balance = () => {
                                   <div className="col-sm-3">
                                     <label>
                                       Swift Code
-                                      <span style={{ color: "red" }}>*</span>
+                                      {/* <span style={{ color: "red" }}>*</span> */}
                                     </label>
                                     <input
                                       type={"text"}

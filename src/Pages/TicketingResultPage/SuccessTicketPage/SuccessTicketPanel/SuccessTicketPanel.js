@@ -133,8 +133,8 @@ const SuccessTicketPanel = () => {
                               >
                                 {agentInfo.address}
                                 <br />
-                                {agentInfo.mobileNo}<br></br>
-                                Email: support@triplover.ae
+                                Phone: {agentInfo.mobileNo}<br></br>
+                                Email: {agentInfo.email}
                               </div>
                             </address>
                           </td>

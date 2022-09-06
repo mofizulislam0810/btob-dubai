@@ -70,7 +70,7 @@ const Invoice = () => {
         environment.headerToken
       );
       if (response.data > 0) {
-        alert("Thanks! data updated successfully..");
+        toast.success("Thanks! data updated successfully..");
         handleGetList();
       }
     };

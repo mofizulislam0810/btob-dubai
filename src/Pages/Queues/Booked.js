@@ -140,7 +140,7 @@ const Booked = () => {
         }
       };
       const handleViewTicket = (utid) => {
-        window.open("/ticket?utid=" + utid, "_blank");
+        window.open("/bookedview?utid=" + utid, "_blank");
         //navigate("/ticket?utid="+utid,'_blank');
       };
     
@@ -206,10 +206,10 @@ const Booked = () => {
                       style={{ overflowX: "scroll", marginBottom: "16px" }}
                     >
                       <table
-                        className="table text-center table-bordered table-striped table-sm"
+                        className="table text-center table-bordered  table-sm"
                         style={{ width: "100%", fontSize: "13px" }}
                       >
-                        <thead className="text-center fw-bold">
+                        <thead className="text-center fw-bold bg-secondary">
                           <tr>
                             <th style={{width:"5%"}}>SL</th>
                             <th className='text-start'>Lead Pax Name</th>
@@ -225,7 +225,7 @@ const Booked = () => {
                             <th>Action</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="tbody">
                           {ticketingList.length > 0 ? (
                             ticketingList.map((item, index) => {
                               return (

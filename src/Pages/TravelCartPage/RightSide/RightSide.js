@@ -79,7 +79,7 @@ const RightSide = () => {
     <div className="col-lg-12">
       <div className="container box-shadow  bg-white">
         <div className="row py-3 m-1">
-          <div className="col-lg-12 text-start border">
+          <div className="col-lg-12 text-start border" style={{color:"#4e4e4e"}}>
             <span className="card-title fw-bold">Flight summary</span>
           </div>
           <div className="col-lg-12 p-2">
@@ -516,7 +516,7 @@ const RightSide = () => {
           </div>
         </div>
         <div className="row py-3 m-1">
-          <div className="col-lg-12 text-start border mb-1">
+          <div className="col-lg-12 text-start border mb-1" style={{color:"#4e4e4e"}}>
             <span className="card-title fw-bold">Fare details</span>
             {/* <span className="pe-3 text-color float-end">
                   <i class="fas fa-pen-nib me-1"></i>{" "}
@@ -534,11 +534,11 @@ const RightSide = () => {
 
           {passengerFares.adt !== null ? (
             <>
-              <div className="col-lg-12 border py-1 mb-1">
-                <h6 className="fw-bold">
+              <div className="col-lg-12 border py-1 mb-1" style={{color:"#67696a"}}>
+                <h6 className="fw-bold" style={{fontSize:"14px",color:"#4e4e4e"}}>
                   <u>Adult Fare</u>
                 </h6>
-                <div className="row mt-2">
+                <div className="row mt-2" style={{fontSize:"12px"}}>
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Base Fare ({passengerCounts.adt} &#215;{" "}
@@ -551,7 +551,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div>
-                <div className="row">
+                <div className="row" style={{fontSize:"12px"}}>
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Taxes ({passengerCounts.adt} &#215;{" "}
@@ -578,7 +578,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div> */}
-                <div className="row">
+                <div className="row" style={{fontSize:"12px"}}>
                   <div className="col-lg-6">
                     <h6 className="text-start">Discount</h6>
                   </div>
@@ -588,7 +588,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div>
-                <div className="row border-top py-1">
+                {/* <div className="row border-top py-1">
                   <div className="col-lg-6">
                     <h6 className="text-start fw-bold">Grand total</h6>
                   </div>
@@ -597,7 +597,7 @@ const RightSide = () => {
                       {currency!==undefined ? currency : "BDT"}   {(passengerFares.adt.totalPrice * passengerCounts.adt).toFixed(2)}
                     </h6>
                   </div>
-                </div>
+                </div> */}
               </div>
             </>
           ) : (
@@ -606,11 +606,11 @@ const RightSide = () => {
 
           {passengerFares.cnn !== null ? (
             <>
-              <div className="col-lg-12 border py-1 mb-1">
-                <h6 className="fw-bold">
+              <div className="col-lg-12 border py-1 mb-1" style={{color:"#67696a"}}>
+                <h6 className="fw-bold" style={{fontSize:"14px",color:"#4e4e4e"}}>
                   <u>Child Fare</u>
                 </h6>
-                <div className="row mt-2">
+                <div className="row mt-2" style={{fontSize:"12px"}}>
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Base Fare ({passengerCounts.cnn} &#215;{" "}
@@ -623,7 +623,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div>
-                <div className="row">
+                <div className="row" style={{fontSize:"12px"}}>
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Taxes ({passengerCounts.cnn} &#215;{" "}
@@ -651,7 +651,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div> */}
-                <div className="row">
+                <div className="row" style={{fontSize:"12px"}}>
                   <div className="col-lg-6">
                     <h6 className="text-start">Discount</h6>
                   </div>
@@ -661,7 +661,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div>
-                <div className="row border-top py-1">
+                {/* <div className="row border-top py-1">
                   <div className="col-lg-6">
                     <h6 className="text-start fw-bold">Grand total</h6>
                   </div>
@@ -670,7 +670,7 @@ const RightSide = () => {
                       {currency!==undefined ? currency : "BDT"}   {(passengerFares.cnn.totalPrice * passengerCounts.cnn).toFixed(2)}
                     </h6>
                   </div>
-                </div>
+                </div> */}
               </div>
             </>
           ) : (
@@ -679,11 +679,11 @@ const RightSide = () => {
 
           {passengerFares.inf !== null ? (
             <>
-              <div className="col-lg-12 border py-1 mb-1">
-                <h6 className="fw-bold">
+              <div className="col-lg-12 border py-1 mb-1" style={{color:"#67696a"}}>
+                <h6 className="fw-bold" style={{fontSize:"14px",color:"#4e4e4e"}}>
                   <u>Infant Fare</u>
                 </h6>
-                <div className="row mt-2">
+                <div className="row mt-2" style={{fontSize:"12px"}}>
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Base Fare ({passengerCounts.inf} &#215;{" "}
@@ -696,7 +696,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div>
-                <div className="row">
+                <div className="row" style={{fontSize:"12px"}}>
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Taxes ({passengerCounts.inf} &#215;{" "}
@@ -723,7 +723,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div> */}
-                <div className="row">
+                <div className="row" style={{fontSize:"12px"}}>
                   <div className="col-lg-6">
                     <h6 className="text-start">Discount</h6>
                   </div>
@@ -733,7 +733,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div>
-                <div className="row border-top py-2">
+                {/* <div className="row border-top py-2">
                   <div className="col-lg-6">
                     <h6 className="text-start fw-bold">Grand total</h6>
                   </div>
@@ -742,12 +742,26 @@ const RightSide = () => {
                       {currency!==undefined ? currency : "BDT"}   {(passengerFares.inf.totalPrice * passengerCounts.inf).toFixed(2)}
                     </h6>
                   </div>
-                </div>
+                </div> */}
               </div>
             </>
           ) : (
             <></>
           )}
+
+              <div className="col-lg-12 border py-1 mb-1" style={{color:"#4e4e4e"}}>
+                <div className="row border-top py-2">
+                  <div className="col-lg-6">
+                    <h6 className="text-start fw-bold">Total payable</h6>
+                  </div>
+                  <div className="col-lg-6">
+                    <h6 className="text-end fw-bold">
+                      {currency!==undefined ? currency : "BDT"}   {bookingComponents[0].totalPrice}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+
         </div>
       </div>
       <ShowModal

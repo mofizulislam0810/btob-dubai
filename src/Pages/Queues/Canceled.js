@@ -207,10 +207,10 @@ const Canceled = () => {
                       style={{ overflowX: "scroll", marginBottom: "16px" }}
                     >
                       <table
-                        className="table table-bordered table-striped table-sm"
+                        className="table table-bordered table-sm"
                         style={{ width: "100%", fontSize: "13px" }}
                       >
-                        <thead className="text-center fw-bold">
+                        <thead className="text-center fw-bold bg-secondary">
                           <tr>
                             <th>SL</th>
                             <th>Lead Pax Name</th>
@@ -226,7 +226,7 @@ const Canceled = () => {
                             <th>Action</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="tbody">
                           {ticketingList.length > 0 ? (
                             ticketingList.map((item, index) => {
                               return (
@@ -318,7 +318,7 @@ const Canceled = () => {
                                             <span style={{fontSize:"10px"}}>VB</span>
                                           </Button>
                                         </a>
-                                        &nbsp;{" "}
+                                        {/* &nbsp;{" "}
                                         <a href="javascript:void(0)"
                                           title="Booking Cancel"
                                           onClick={() =>
@@ -363,7 +363,7 @@ const Canceled = () => {
                                           >
                                             <span style={{fontSize:"10px"}}>RS</span>
                                           </Button>
-                                        </a>
+                                        </a> */}
                                       </>
                                     
                                   </td>

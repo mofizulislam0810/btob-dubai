@@ -1262,10 +1262,10 @@ const Balance = () => {
                               <th>Account Number</th>
                               <th>Bank Name</th>
                               <th>Branch Name</th>
-                              <th>Branch Code</th>
+                              {/* <th>Branch Code</th>
                               <th>Address</th>
                               <th>Swift Code</th>
-                              <th>Routing number</th>
+                              <th>Routing number</th> */}
                             </tr>
                           </thead>
                           <tbody>
@@ -1291,10 +1291,10 @@ const Balance = () => {
                                   <td>{item.accountNumber}</td>
                                   <td>{item.bankName}</td>
                                   <td>{item.branchName}</td>
-                                  <td>{item.branchCode}</td>
+                                  {/* <td>{item.branchCode}</td>
                                   <td>{item.address}</td>
                                   <td>{item.swiftCode}</td>
-                                  <td>{item.routingNumber}</td>
+                                  <td>{item.routingNumber}</td> */}
                                 </tr>
                               );
                             })}

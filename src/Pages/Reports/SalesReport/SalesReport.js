@@ -93,6 +93,8 @@ const SalesReport = () => {
   useEffect(() => {
     getReportData(currentPageNumber);
   }, [currentPageNumber]);
+
+  console.log(reportData);
   return (
     <div>
       <Navbar></Navbar>
@@ -127,6 +129,7 @@ const SalesReport = () => {
                                 name="from"
                                 value={fromDate}
                                 onChange={(e) => handleFromDate(e)}
+                                style={{fontSize:"12px"}}
                               />
                               <input
                                 type="date"
@@ -134,11 +137,12 @@ const SalesReport = () => {
                                 name="to"
                                 value={toDate}
                                 onChange={(e) => handleToDate(e)}
+                                style={{fontSize:"12px"}}
                               />
                               <button
                                 type="button"
-                                className="btn btn-danger fw-bold rounded-end button-color"
-                                onClick={handleSubmit}
+                                className="btn btn-secondary fw-bold rounded-end"
+                                onClick={handleSubmit}  style={{fontSize:"12px"}}
                               >
                                 Search
                               </button>
@@ -147,36 +151,41 @@ const SalesReport = () => {
                         </div>
                         <div style={{ overflowY: "scroll" }}>
                           <table
-                            className="table table-bordered table-striped"
-                            style={{ width: "100%", fontSize: "13px" }}
+                            className="table table-bordered table-sm"
+                            style={{ width: "100%", fontSize: "12px" }}
                           >
-                            <thead className="text-center fw-bold">
+                            <thead className="text-center fw-bold bg-secondary">
                               <tr>
-                                <th rowSpan={2}>Sl</th>
-                                <th rowSpan={2}>PNR</th>
-                                <th rowSpan={2}>Ticket Number</th>
-                                <th colSpan={3}>Buying</th>
-                                <th colSpan={3}>Selling</th>
-                                <th rowSpan={2}>Profit</th>
+                                <th>Sl</th>
+                                <th>PNR</th>
+                                <th>Ticket Number</th>
+                                <th className="text-start">Passanger Name</th>
+                                <th>Type</th>
+                                {/* <th colSpan={3}>Buying</th> */}
+                                {/* <th colSpan={3}>Selling</th> */}
+                                <th className="text-end">Base Fare</th>
+                                <th className="text-end">Tax</th>
+                                <th className="text-end">Total Price</th>
+                                {/* <th rowSpan={2}>Profit</th> */}
                               </tr>
-                              <tr>
+                              {/* <tr>
                                 <th>Base Price</th>
                                 <th>Tax</th>
                                 <th>Total Price</th>
                                 <th>Base Price</th>
                                 <th>Tax</th>
                                 <th>Total Price</th>
-                              </tr>
+                              </tr> */}
                             </thead>
-                            <tbody>
+                            <tbody className="tbody">
                               {reportData !== undefined ? (
                                 reportData?.map((item, index) => {
                                   return (
                                     <>
                                       <tr key={index}>
-                                        <td>{index + 1}</td>
+                                        <td className="text-center">{index + 1}</td>
 
-                                        <td>
+                                        <td className="text-center">
                                           &nbsp;{" "}
                                           <a
                                             style={{ borderRadius: "50%" }}
@@ -191,7 +200,7 @@ const SalesReport = () => {
                                             {item.pnr}
                                           </a>
                                         </td>
-                                        <td>
+                                        <td className="text-center">
                                           {" "}
                                           <span
                                             key={index}
@@ -228,7 +237,8 @@ const SalesReport = () => {
                                             </a>
                                           </span>{" "}
                                         </td>
-                                        <td style={{ textAlign: "right" }}>
+                                        <td className="text-start">{item.paxNames}</td>
+                                        {/* <td style={{ textAlign: "right" }}>
                                           {item.basePriceBuying}
                                         </td>
                                         <td style={{ textAlign: "right" }}>
@@ -236,7 +246,8 @@ const SalesReport = () => {
                                         </td>
                                         <td style={{ textAlign: "right" }}>
                                           {item.priceBuying}
-                                        </td>
+                                        </td> */}
+                                        <td className="text-center"></td>
                                         <td style={{ textAlign: "right" }}>
                                           {item.basePriceSelling}
                                         </td>
@@ -246,9 +257,9 @@ const SalesReport = () => {
                                         <td style={{ textAlign: "right" }}>
                                           {item.priceSelling}
                                         </td>
-                                        <td style={{ textAlign: "right" }}>
+                                        {/* <td style={{ textAlign: "right" }}>
                                           {item.profit}
-                                        </td>
+                                        </td> */}
                                       </tr>
                                     </>
                                   );
@@ -264,34 +275,34 @@ const SalesReport = () => {
                                   {" "}
                                   <tr>
                                     <td
-                                      colSpan={3}
+                                      colSpan={5}
                                       style={{ textAlign: "right" }}
                                     >
                                       <strong>
                                         Grand Total ({currencyName})
                                       </strong>
                                     </td>
-                                    <td style={{ textAlign: "right" }}>
-                                      <strong>{totalBuyingBasePrice}</strong>
+                                    {/* <td style={{ textAlign: "right" }}>
+                                      <strong>{(totalBuyingBasePrice).toFixed(2)}</strong>
                                     </td>
                                     <td style={{ textAlign: "right" }}>
                                       <strong>{totalBuyingTax}</strong>
                                     </td>
                                     <td style={{ textAlign: "right" }}>
                                       <strong>{totalBuyingPrice}</strong>
+                                    </td> */}
+                                    <td style={{ textAlign: "right" }}>
+                                      <strong>{(totalSellingBasePrice).toFixed(2)}</strong>
                                     </td>
                                     <td style={{ textAlign: "right" }}>
-                                      <strong>{totalSellingBasePrice}</strong>
+                                      <strong>{(totalSellingTax).toFixed(2)}</strong>
                                     </td>
                                     <td style={{ textAlign: "right" }}>
-                                      <strong>{totalSellingTax}</strong>
+                                      <strong>{(totalSellingPrice).toFixed(2)}</strong>
                                     </td>
-                                    <td style={{ textAlign: "right" }}>
-                                      <strong>{totalSellingPrice}</strong>
-                                    </td>
-                                    <td style={{ textAlign: "right" }}>
+                                    {/* <td style={{ textAlign: "right" }}>
                                       <strong>{totalProfit}</strong>
-                                    </td>
+                                    </td> */}
                                   </tr>
                                 </>
                               ) : (

@@ -11,3 +11,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 } */
+
+/* .table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th {
+  background-color: rgb(151, 38, 38);
+} */
+.tbody > tr:nth-child(odd) > td,  .tbody > tr:nth-child(odd) > th {
+  background-color: rgb(255, 255, 255)!important;
+}
+.tbody > tr:nth-child(even) > td,  .tbody > tr:nth-child(even) > th {
+  background-color: rgb(230, 230, 230)!important;
+}
+/* .table-striped > tbody > tr:nth-child(n) > td, .table-striped > tbody > tr:nth-child(n) > th {
+  background-color: rgb(255, 255, 255);
+} */
+
+.page-item.active .page-link {
+  background-color: #6c757d!important;
+  border-color: #6c757d!important;
+}
+
+.page-link {
+  color: #6c757d;
+}
+
+.page-item {
+  font-size: 12px;
+}

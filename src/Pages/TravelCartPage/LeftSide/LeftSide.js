@@ -8,6 +8,8 @@ import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
 import useAuth from "../../../hooks/useAuth";
 import Select from "react-select";
+import { toast } from "react-toastify";
+import moment from "moment";
 const LeftSide = () => {
   const navigate = useNavigate();
   const { setBookData, setLoading } = useAuth();
@@ -271,26 +273,21 @@ const LeftSide = () => {
   for (var i = 0; i < adultNumber; i++) {
     let newObj = {
       id: 0,
-      title: "",
+      title: "Mr",
       firstName: "",
       middleName: "",
       lastName: "",
       date: "",
       month: "",
       year: "",
-      nationality: "Bangladesh",
-      gender: "Male",
+      nationality: "BD",
       document: "",
       passportNumber: "",
-      issuingCountry: "",
+      issuingCountry: "BD",
       passportDate: "",
       passportMonth: "",
       passportYear: "",
-      meal: "",
-      wheel: "",
-      phoneNumber: "",
-      passportCopy: "",
-      visaCopy: "",
+      gender: "Male"
     };
     adultList.push(newObj);
   }
@@ -319,26 +316,21 @@ const LeftSide = () => {
   for (var i = 0; i < childrenNumber; i++) {
     let newObj = {
       id: 0,
-      title: "",
+      title: "Mstr",
       firstName: "",
       middleName: "",
       lastName: "",
       date: "",
       month: "",
       year: "",
-      nationality: "Bangladesh",
-      gender: "Male",
+      nationality: "BD",
       document: "",
       passportNumber: "",
-      issuingCountry: "",
+      issuingCountry: "BD",
       passportDate: "",
       passportMonth: "",
       passportYear: "",
-      meal: "",
-      wheel: "",
-      phoneNumber: "",
-      passportCopy: "",
-      visaCopy: "",
+      gender: "Male",
     };
     childList.push(newObj);
   }
@@ -349,23 +341,21 @@ const LeftSide = () => {
   for (var i = 0; i < infantNumber; i++) {
     let newObj = {
       id: 0,
-      title: "",
+      title: "Mstr",
       firstName: "",
       middleName: "",
       lastName: "",
       date: "",
       month: "",
       year: "",
-      nationality: "Bangladesh",
-      gender: "Male",
+      nationality: "BD",
       document: "",
       passportNumber: "",
-      issuingCountry: "",
+      issuingCountry: "BD",
       passportDate: "",
       passportMonth: "",
       passportYear: "",
-      passportCopy: "",
-      visaCopy: "",
+      gender: "Male",
     };
     infantList.push(newObj);
   }
@@ -379,7 +369,7 @@ const LeftSide = () => {
       firstName: "",
       lastName: "",
       email: "",
-      mobailCode: "",
+      mobailCode: "+88",
       mobailNumber: "",
     },
   ];
@@ -391,6 +381,15 @@ const LeftSide = () => {
   localStorage.setItem("contact", JSON.stringify(contact));
 
   const bookingData = (e) => {
+    // infant.map((item,index)=>{
+    //   const ageInYears = moment().diff(moment(item.date+'/'+item.month+'/'+item.year, "DD/MM/YYYY"), 'months'); 
+    //   console.log(ageInYears);      
+    //   if (ageInYears > 24) { 
+    //     toast.error(`Infant ${index+1} age is more than 2 years!`);
+    //     return;
+    //   }
+    // })
+    
     setLoading(true);
     let sendObj = {
       passengerInfoes: [],
@@ -412,9 +411,9 @@ const LeftSide = () => {
         contactInfo: {
           email: contact[0].email,
           phone: contact[0].mobailNumber,
-          phoneCountryCode: "+88",
-          countryCode: "BD",
-          cityName: "Dhaka",
+          phoneCountryCode: contact[0].mobailCode,
+          countryCode: "",
+          cityName: "",
         },
         documentInfo: {
           documentType: item.document,
@@ -431,15 +430,15 @@ const LeftSide = () => {
           nationality: "BD",
         },
         passengerType: "ADT",
-        gender: "Male",
+        gender: item.gender,
         dateOfBirth: (origin.match("Bangladesh") !== null
-        ? origin.match("Bangladesh")[0]
-        : "") &&
-      (destination.match("Bangladesh") !== null
-        ? destination.match("Bangladesh")[0]
-        : "") === "Bangladesh"
-        ? "1990-05-25"
-        : item.year + "-" + item.month + "-" + item.date,
+          ? origin.match("Bangladesh")[0]
+          : "") &&
+          (destination.match("Bangladesh") !== null
+            ? destination.match("Bangladesh")[0]
+            : "") === "Bangladesh"
+          ? ""
+          : item.year + "-" + item.month + "-" + item.date,
         passengerKey: idObj !== undefined ? String(idObj.id) : "0",
         isLeadPassenger: true,
       };
@@ -458,8 +457,8 @@ const LeftSide = () => {
           email: contact[0].email,
           phone: contact[0].mobailNumber,
           phoneCountryCode: contact[0].mobailCode,
-          countryCode: "BD",
-          cityName: "Dhaka",
+          countryCode: "",
+          cityName: "",
         },
         documentInfo: {
           documentType: item.document,
@@ -472,11 +471,11 @@ const LeftSide = () => {
               "-" +
               item.passportDate : "",
           frequentFlyerNumber: "",
-          issuingCountry: "BD",
-          nationality: "BD",
+          issuingCountry: "",
+          nationality: "",
         },
         passengerType: "CNN",
-        gender: "Male",
+        gender: item.gender,
         dateOfBirth: item.year + "-" + item.month + "-" + item.date,
         passengerKey: "0",
         isLeadPassenger: true,
@@ -496,8 +495,8 @@ const LeftSide = () => {
           email: contact[0].email,
           phone: contact[0].mobailNumber,
           phoneCountryCode: contact[0].mobailCode,
-          countryCode: "BD",
-          cityName: "Dhaka",
+          countryCode: "",
+          cityName: "",
         },
         documentInfo: {
           documentType: item.document,
@@ -510,11 +509,11 @@ const LeftSide = () => {
               "-" +
               item.passportDate : "",
           frequentFlyerNumber: "",
-          issuingCountry: "BD",
-          nationality: "BD",
+          issuingCountry: "",
+          nationality: "",
         },
         passengerType: "INF",
-        gender: "Male",
+        gender: item.gender,
         dateOfBirth:
           item.year + "-" + item.month.split("-")[0].trim() + "-" + item.date,
         passengerKey: "0",
@@ -576,7 +575,7 @@ const LeftSide = () => {
             }
           } else {
             setLoading(false);
-            alert(response.data.item2.message);
+            toast.error(response.data.item2.message);
             navigate("/failedbooking");
           }
         });
@@ -604,13 +603,18 @@ const LeftSide = () => {
             }
           } else {
             setLoading(false);
-            alert("Booking Failed! please try again.");
+            toast.error("Booking Failed! please try again.");
             navigate("/failedbooking");
           }
         });
     }
     e.preventDefault();
   };
+
+  // console.log(adult);
+  // console.log(child);
+  // console.log(infant);
+  // console.log(contact);
 
   return (
     <form onSubmit={bookingData}>
@@ -717,58 +721,43 @@ const LeftSide = () => {
                       <div className="col-md-4">
                         <div className="form-group">
                           <label className="form-label float-start fw-bold">
-                            First name <span className="text-danger">*</span>
+                            First name{" "}
+                            <span className="text-danger">*</span>
                           </label>
                           <div className="input-group mb-3">
-                            <div className="input-group-prepend">
-                              <select
-                                id="name"
-                                placeholder="Title"
-                                className="form-select titel-width"
-                                onChange={(e) => {
-                                  const title = e.target.value;
+                            <input
+                              type="text"
+                              name="firstName"
+                              className="form-control w-25"
+                              value={adult[index].title}
+                              disabled
+                              autoComplete="off"
+                            />
+                            <input
+                              type="text"
+                              name="firstName"
+                              className="form-control w-75"
+                              onChange={(e) => {
+                                const firstName = e.target.value;
+                                const re = /^[a-zA-Z]*$/;
+                                if (re.test(firstName)) {
                                   setAdult((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].title = title;
+                                      v[index].firstName = firstName;
                                     })
                                   );
-                                }}
-                                value={p.title}
-                                required
-                              >
-                                <option value=""> Title</option>
-                                <option value="Mr"> Mr</option>
-                                <option value="Ms"> Ms</option>
-                                <option value="Mrs"> Mrs</option>
-                              </select>
-                              <input
-                                type="text"
-                                name="firstName"
-                                className="form-control"
-                                placeholder="First Name"
-                                onChange={(e) => {
-                                  const firstName = e.target.value;
-                                  const re = /^[a-zA-Z]*$/;
-                                  if (re.test(firstName)) {
-                                    setAdult((ob) =>
-                                      produce(ob, (v) => {
-                                        v[index].firstName = firstName;
-                                      })
-                                    );
-                                  } else {
-
-                                  }
-                                }}
-                                value={p.firstName}
-                                onBlur={handleOnChange}
-                                required
-                                autoComplete="off"
-                              />
-                            </div>
+                                } else {
+                                }
+                              }}
+                              value={p.firstName}
+                              onBlur={handleOnChange}
+                              required
+                              autoComplete="off"
+                            />
                           </div>
                         </div>
                       </div>
-                      <div className="col-md-4">
+                      {/* <div className="col-md-4">
                         <div className="form-group">
                           <label
                             className="form-label float-start fw-bold"
@@ -798,19 +787,19 @@ const LeftSide = () => {
                             autoComplete="off"
                           />
                         </div>
-                      </div>
+                      </div> */}
                       <div className="col-md-4">
                         <div className="form-group">
                           <label
                             className="form-label float-start fw-bold"
                             type=""
                           >
-                            Last name <span className="text-danger">*</span>
+                            Last name{" "}
+                            <span className="text-danger">*</span>
                           </label>
                           <input
                             type="text"
                             name="lastName"
-                            placeholder="Last Name"
                             className="form-control"
                             onChange={(e) => {
                               const lastName = e.target.value;
@@ -822,7 +811,6 @@ const LeftSide = () => {
                                   })
                                 );
                               } else {
-
                               }
                             }}
                             value={p.lastName}
@@ -832,89 +820,85 @@ const LeftSide = () => {
                           />
                         </div>
                       </div>
-                    </div>
-
-                    <div className="row">
                       <div className="col-lg-4">
                         <div className="form-group">
                           <label
-                            className="form-label float-start fw-bold"
-                            htmlFor=""
-                          >
-                            Phone Number
-                          </label>
-                        </div>
-                        <div className="input-group mb-3">
-                          <input
-                            type="number"
-                            className="form-control"
-                            name="passport-number"
-                            placeholder="Phone Number"
-                            required
-                            onChange={(e) => {
-                              const phoneNumber = e.target.value;
-                              setAdult((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].phoneNumber = phoneNumber;
-                                })
-                              );
-                            }}
-                            value={p.phoneNumber}
-                            autoComplete="off"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-4">
-                        <div className="form-group">
-                          <label className="float-start fw-bold" type="">
-                            Nationality <span className="text-danger">*</span>
-                          </label>
-                          <div className="input-group mb-3">
-                            <select
-                              name="nationality"
-                              className="form-select"
-                              required
-                              onChange={(e) => {
-                                const nationality = e.target.value;
-                                setAdult((ob) =>
-                                  produce(ob, (v) => {
-                                    v[index].nationality = nationality;
-                                  })
-                                );
-                              }}
-                              value={p.nationality}
-                            >
-                              <option value="Bangladesh" selected>
-                                Bangladesh
-                              </option>
-                              {courtries.map((item, index) => {
-                                return (
-                                  <option key={index} value={item.name}>
-                                    {item.name}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-4">
-                        <div className="form-group">
-                          <label
-                            className="form-label float-start fw-bold"
+                            className={adult[index].gender === "Female" ? "form-label float-start fw-bold mb-0" : "form-label float-start fw-bold"}
                             type=""
                           >
                             Gender <span className="text-danger">*</span>
+                            {adult[index].gender === "Female" ? (
+                              <>
+                                <span className="ms-4">
+                                  <span className="me-3">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="inlineRadioOptions2"
+                                      id="radio1"
+                                      value="option1"
+                                      defaultChecked
+                                      onClick={(e) => {
+                                        setAdult((ob) =>
+                                          produce(ob, (v) => {
+                                            v[index].title = "Ms";
+                                          })
+                                        );
+                                      }}
+                                    />
+                                    <label
+                                      class="ms-1"
+                                      style={{ fontWeight: "400" }}
+                                      for="radio1"
+                                    >
+                                      Ms
+                                    </label>
+                                  </span>
+                                  <span className="ms-3">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="inlineRadioOptions2"
+                                      id="radio2"
+                                      value="option2"
+                                      onClick={(e) => {
+                                        setAdult((ob) =>
+                                          produce(ob, (v) => {
+                                            v[index].title = "Mrs";
+                                          })
+                                        );
+                                      }}
+                                    />
+                                    <label
+                                      class="ms-1"
+                                      style={{ fontWeight: "400" }}
+                                      for="radio2"
+                                    >
+                                      Mrs
+                                    </label>
+                                  </span>
+                                </span>
+                              </>
+                            ) : (
+                              <></>
+                            )}
                           </label>
                           <div className="input-group mb-3">
                             <select
-                              name="date"
+                              name="gender"
                               className="form-select"
                               onChange={(e) => {
                                 const gender = e.target.value;
+                                console.log(gender);
                                 setAdult((ob) =>
                                   produce(ob, (v) => {
                                     v[index].gender = gender;
+                                  })
+                                );
+                                setAdult((ob) =>
+                                  produce(ob, (v) => {
+                                    v[index].title =
+                                      gender === "Male" ? "Mr" : "Ms";
                                   })
                                 );
                               }}
@@ -928,21 +912,25 @@ const LeftSide = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="row">
-                      {(origin.match("Bangladesh") !== null
-                        ? origin.match("Bangladesh")[0]
-                        : "") &&
-                        (destination.match("Bangladesh") !== null
-                          ? destination.match("Bangladesh")[0]
-                          : "") === "Bangladesh" ? (
-                        <>{/* {alert("ok")} */}</>
-                      ) : (
-                        <>
 
+                    {(origin.match("Bangladesh") !== null
+                      ? origin.match("Bangladesh")[0]
+                      : "") &&
+                      (destination.match("Bangladesh") !== null
+                        ? destination.match("Bangladesh")[0]
+                        : "") === "Bangladesh" ? (
+                      <></>
+                    ) : (
+                      <>
+                        <div className="row">
                           <div className="col-md-4">
                             <div className="form-group">
-                              <label className="float-start fw-bold" type="">
-                                Date of birth<span className="text-danger">*</span>
+                              <label
+                                className="form-label float-start fw-bold"
+                                type=""
+                              >
+                                Date of birth
+                                <span className="text-danger">*</span>
                               </label>
                               <div className="input-group mb-3 d-flex">
                                 <select
@@ -1036,7 +1024,51 @@ const LeftSide = () => {
                                 >
                                   <option value="">Year</option>
                                   {adultYearList.map((i, index) => {
-                                    return <option key={index}>{i}</option>;
+                                    return (
+                                      <option key={index}>{i}</option>
+                                    );
+                                  })}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-lg-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                type=""
+                              >
+                                Nationality{" "}
+                                <span className="text-danger">*</span>
+                              </label>
+                              <div className="input-group mb-3">
+                                <select
+                                  name="nationality"
+                                  className="form-select"
+                                  required
+                                  onChange={(e) => {
+                                    const nationality = e.target.value;
+                                    setAdult((ob) =>
+                                      produce(ob, (v) => {
+                                        v[index].nationality =
+                                          nationality;
+                                      })
+                                    );
+                                  }}
+                                  value={p.nationality}
+                                >
+                                  <option value="BD" selected>
+                                    Bangladesh
+                                  </option>
+                                  {courtries.map((item, index) => {
+                                    return (
+                                      <option
+                                        key={index}
+                                        value={item.code}
+                                      >
+                                        {item.name}
+                                      </option>
+                                    );
                                   })}
                                 </select>
                               </div>
@@ -1048,14 +1080,68 @@ const LeftSide = () => {
                                 className="form-label float-start fw-bold"
                                 htmlFor=""
                               >
-                                Passport Number{" "}
+                                WheelChair (If needed)
+                              </label>
+                            </div>
+                            <div className="input-group mb-3">
+                              <select
+                                name="wheel"
+                                className="form-select"
+                                onChange={(e) => {
+                                  const wheel = e.target.value;
+                                  setAdult((ob) =>
+                                    produce(ob, (v) => {
+                                      v[index].wheel = wheel;
+                                    })
+                                  );
+                                }}
+                              >
+                                <option value="">Not Required</option>
+                                <option value="WCHR">
+                                  Passenger can not walk short distance up
+                                  or down stairs.
+                                </option>
+                                <option value="WCHS">
+                                  Passenger can not walk short distance,
+                                  but not up or down stairs
+                                </option>
+                                <option value="WCHC">
+                                  Passenger cannot walk any distance and
+                                  will require the aisle chair to board.
+                                </option>
+                                <option value="WCOB">
+                                  On-board aisle wheelchair requested
+                                </option>
+                                <option value="WCMP">
+                                  Passenger is traveling with a manual
+                                  wheelchair.
+                                </option>
+                                <option value="WCBD">
+                                  Passenger is traveling with a dry cell
+                                  battery-powered wheelchair.
+                                </option>
+                                <option value="WCBW">
+                                  Passenger is traveling with a wet cell
+                                  battery-powered wheelchair.
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-lg-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                htmlFor=""
+                              >
+                                Passport number{" "}
                                 <span className="text-danger">*</span>
                               </label>
                             </div>
                             <div className="input-group mb-3">
                               <input
                                 type="text"
-                                placeholder="Passport Number"
                                 className="form-control"
                                 name="passport-number"
                                 required
@@ -1063,7 +1149,8 @@ const LeftSide = () => {
                                   const passportNumber = e.target.value;
                                   setAdult((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportNumber = passportNumber;
+                                      v[index].passportNumber =
+                                        passportNumber;
                                     })
                                   );
                                 }}
@@ -1089,17 +1176,20 @@ const LeftSide = () => {
                                   const issuingCountry = e.target.value;
                                   setAdult((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].issuingCountry = issuingCountry;
+                                      v[index].issuingCountry =
+                                        issuingCountry;
                                     })
                                   );
                                 }}
                                 value={p.issuingCountry}
                                 required
                               >
-                                <option value="Bangladesh">Bangladesh</option>
+                                <option value="BD">
+                                  Bangladesh
+                                </option>
                                 {courtries.map((item, index) => {
                                   return (
-                                    <option key={index} value={item.name}>
+                                    <option key={index} value={item.code}>
                                       {item.name}
                                     </option>
                                   );
@@ -1124,7 +1214,8 @@ const LeftSide = () => {
                                   const passportDate = e.target.value;
                                   setAdult((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportDate = passportDate;
+                                      v[index].passportDate =
+                                        passportDate;
                                     })
                                   );
                                 }}
@@ -1170,7 +1261,8 @@ const LeftSide = () => {
                                   const passportMonth = e.target.value;
                                   setAdult((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportMonth = passportMonth;
+                                      v[index].passportMonth =
+                                        passportMonth;
                                     })
                                   );
                                 }}
@@ -1197,7 +1289,8 @@ const LeftSide = () => {
                                   const passportYear = e.target.value;
                                   setAdult((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportYear = passportYear;
+                                      v[index].passportYear =
+                                        passportYear;
                                     })
                                   );
                                 }}
@@ -1217,193 +1310,101 @@ const LeftSide = () => {
                               </select>
                             </div>
                           </div>
-
-                        </>
-                      )}
-                      <div className="col-lg-4">
-                        <div className="form-group">
-                          <label
-                            className="form-label float-start fw-bold"
-                            htmlFor=""
-                          >
-                            Meal Preference
-                          </label>
                         </div>
-                        <div className="input-group mb-3">
-                          <select
-                            name="meal"
-                            className="form-select"
-                            onChange={(e) => {
-                              const meal = e.target.value;
-                              setAdult((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].meal = meal;
-                                })
-                              );
-                            }}
-                          >
-                            <option value="">Any</option>
-                            <option value="AVML">ASIAN VEGETARIAN MEAL</option>
-                            <option value="BBML">INFANT/BABY FOOD</option>
-                            <option value="CHML">CHILD MEAL</option>
-                            <option value="DBML">DIABETIC MEAL</option>
-                            <option value="SFML">SEA FOOD MEAL</option>
-                            <option value="MOML">MOSLEM MEAL</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div className="col-lg-4">
-                        <div className="form-group">
-                          <label
-                            className="form-label float-start fw-bold"
-                            htmlFor=""
-                          >
-                            WheelChair (If needed)
-                          </label>
-                        </div>
-                        <div className="input-group mb-3">
-                          <select
-                            name="wheel"
-                            className="form-select"
-                            onChange={(e) => {
-                              const wheel = e.target.value;
-                              setAdult((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].wheel = wheel;
-                                })
-                              );
-                            }}
-                          >
-                            <option value="">Not Required</option>
-                            <option value="WCHR">
-                              Passenger can not walk short distance up or down
-                              stairs.
-                            </option>
-                            <option value="WCHS">
-                              Passenger can not walk short distance, but not up
-                              or down stairs
-                            </option>
-                            <option value="WCHC">
-                              Passenger cannot walk any distance and will
-                              require the aisle chair to board.
-                            </option>
-                            <option value="WCOB">
-                              On-board aisle wheelchair requested
-                            </option>
-                            <option value="WCMP">
-                              Passenger is traveling with a manual wheelchair.
-                            </option>
-                            <option value="WCBD">
-                              Passenger is traveling with a dry cell
-                              battery-powered wheelchair.
-                            </option>
-                            <option value="WCBW">
-                              Passenger is traveling with a wet cell
-                              battery-powered wheelchair.
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    {(origin.match("Bangladesh") !== null
-                      ? origin.match("Bangladesh")[0]
-                      : "") &&
-                      (destination.match("Bangladesh") !== null
-                        ? destination.match("Bangladesh")[0]
-                        : "") === "Bangladesh" ? (
-                      <></>
-                    ) : (
-                      <>
                         <div className="row">
-                          <div className="col-lg-4">
-                            <div className="form-group">
-                              <label
-                                className="form-label float-start fw-bold"
-                                htmlFor=""
-                              >
-                                Passport Copy
-                              </label>
-                            </div>
-                            <div className="input-group mb-3">
-                              {p.passportNumber !== "" ? (
-                                <input
-                                  type={"file"}
-                                  accept=".jpg, .jpeg, .png, .pdf"
-                                  onChange={(e) =>
-                                    handlePassportFileUpload(
-                                      1,
-                                      index,
-                                      e.target.files[0],
-                                      p.passportNumber
-                                    )
-                                  }
-                                />
-                              ) : (
-                                <></>
-                              )}
-
-                              {p.passportCopy != null &&
-                                p.passportCopy != "" ? (
-                                <a
-                                  href={
-                                    environment.baseApiURL +
-                                    `agentinfo/GetPassengerFile/${p.passportCopy}/1`
-                                  }
-                                  download
-                                  target="_blank"
-                                >
-                                  Download Passport Copy
-                                </a>
-                              ) : (
-                                <></>
-                              )}
-                            </div>
-                          </div>
-                          <div className="col-lg-4">
-                            <div className="form-group">
-                              <label
-                                className="form-label float-start fw-bold"
-                                htmlFor=""
-                              >
-                                Visa Copy
-                              </label>
-                            </div>
-                            <div className="input-group mb-3">
-                              {p.passportNumber !== "" ? (
-                                <input
-                                  type={"file"}
-                                  accept=".jpg, .jpeg, .png, .pdf"
-                                  onChange={(e) =>
-                                    handleVisaFileUpload(
-                                      1,
-                                      index,
-                                      e.target.files[0],
-                                      p.passportNumber
-                                    )
-                                  }
-                                />
-                              ) : (
-                                <></>
-                              )}
-
-                              {p.visaCopy != null && p.visaCopy != "" ? (
-                                <a
-                                  href={
-                                    environment.baseApiURL +
-                                    `agentinfo/GetPassengerFile/${p.visaCopy}/2`
-                                  }
-                                  download
-                                  target="_blank"
-                                >
-                                  Download Visa Copy
-                                </a>
-                              ) : (
-                                <></>
-                              )}
-                            </div>
-                          </div>
+                          {/* <div className="col-lg-4">
+                                  <div className="form-group">
+                                    <label
+                                      className="form-label float-start fw-bold"
+                                      htmlFor=""
+                                    >
+                                      Meal Preference
+                                    </label>
+                                  </div>
+                                  <div className="input-group mb-3">
+                                    <select
+                                      name="meal"
+                                      className="form-select"
+                                      onChange={(e) => {
+                                        const meal = e.target.value;
+                                        setAdult((ob) =>
+                                          produce(ob, (v) => {
+                                            v[index].meal = meal;
+                                          })
+                                        );
+                                      }}
+                                    >
+                                      <option value="">Any</option>
+                                      <option value="AVML">
+                                        ASIAN VEGETARIAN MEAL
+                                      </option>
+                                      <option value="BBML">
+                                        INFANT/BABY FOOD
+                                      </option>
+                                      <option value="CHML">CHILD MEAL</option>
+                                      <option value="DBML">
+                                        DIABETIC MEAL
+                                      </option>
+                                      <option value="SFML">
+                                        SEA FOOD MEAL
+                                      </option>
+                                      <option value="MOML">MOSLEM MEAL</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div className="col-lg-4">
+                                  <div className="form-group">
+                                    <label
+                                      className="form-label float-start fw-bold"
+                                      htmlFor=""
+                                    >
+                                      WheelChair (If needed)
+                                    </label>
+                                  </div>
+                                  <div className="input-group mb-3">
+                                    <select
+                                      name="wheel"
+                                      className="form-select"
+                                      onChange={(e) => {
+                                        const wheel = e.target.value;
+                                        setAdult((ob) =>
+                                          produce(ob, (v) => {
+                                            v[index].wheel = wheel;
+                                          })
+                                        );
+                                      }}
+                                    >
+                                      <option value="">Not Required</option>
+                                      <option value="WCHR">
+                                        Passenger can not walk short distance up
+                                        or down stairs.
+                                      </option>
+                                      <option value="WCHS">
+                                        Passenger can not walk short distance,
+                                        but not up or down stairs
+                                      </option>
+                                      <option value="WCHC">
+                                        Passenger cannot walk any distance and
+                                        will require the aisle chair to board.
+                                      </option>
+                                      <option value="WCOB">
+                                        On-board aisle wheelchair requested
+                                      </option>
+                                      <option value="WCMP">
+                                        Passenger is traveling with a manual
+                                        wheelchair.
+                                      </option>
+                                      <option value="WCBD">
+                                        Passenger is traveling with a dry cell
+                                        battery-powered wheelchair.
+                                      </option>
+                                      <option value="WCBW">
+                                        Passenger is traveling with a wet cell
+                                        battery-powered wheelchair.
+                                      </option>
+                                    </select>
+                                  </div>
+                                </div> */}
                         </div>
                       </>
                     )}
@@ -1482,93 +1483,50 @@ const LeftSide = () => {
                       <div className="col-md-4">
                         <div className="form-group">
                           <label className="form-label float-start fw-bold">
-                            First name <span className="text-danger">*</span>
+                            First name{" "}
+                            <span className="text-danger">*</span>
                           </label>
                           <div className="input-group mb-3">
-                            <div className="input-group-prepend">
-                              <select
-                                name=""
-                                placeholder="Title"
-                                className="form-select titel-width"
-                                onChange={(e) => {
-                                  const title = e.target.value;
+                            <input
+                              type="text"
+                              name="firstName"
+                              className="form-control w-25"
+                              value={child[index].title}
+                              disabled
+                              autoComplete="off"
+                            />
+                            <input
+                              type="text"
+                              name="firstName"
+                              className="form-control w-75"
+                              onChange={(e) => {
+                                const firstName = e.target.value;
+                                const re = /^[a-zA-Z]*$/;
+                                if (re.test(firstName)) {
                                   setChild((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].title = title;
+                                      v[index].firstName = firstName;
                                     })
                                   );
-                                }}
-                                value={p.title}
-                                required
-                              >
-                                <option value=""> Title</option>
-                                <option value="Mr"> Mr</option>
-                                <option value="Ms"> Ms</option>
-                                <option value="Mrs"> Mrs</option>
-                              </select>
-                              <input
-                                type="text"
-                                name="firstName"
-                                placeholder="First Name"
-                                className="form-control"
-                                onChange={(e) => {
-                                  const firstName = e.target.value;
-                                  const re = /^[a-zA-Z]*$/;
-                                  if (re.test(firstName)) {
-                                    setChild((ob) =>
-                                      produce(ob, (v) => {
-                                        v[index].firstName = firstName;
-                                      })
-                                    );
-                                  } else {
-
-                                  }
-                                }}
-                                value={p.firstName}
-                                required
-                                autoComplete="off"
-                              />
-                            </div>
+                                } else {
+                                }
+                              }}
+                              value={p.firstName}
+                              required
+                              autoComplete="off"
+                            />
                           </div>
                         </div>
                       </div>
                       <div className="col-md-4">
                         <div className="form-group">
                           <label className="form-label float-start fw-bold">
-                            Middle name (Optional)
-                          </label>
-                          <input
-                            type="text"
-                            name="middleName"
-                            placeholder="Middle Name"
-                            className="form-control"
-                            onChange={(e) => {
-                              const middleName = e.target.value;
-                              const re = /^[a-zA-Z]*$/;
-                              if (re.test(middleName)) {
-                                setChild((ob) =>
-                                  produce(ob, (v) => {
-                                    v[index].middleName = middleName;
-                                  })
-                                );
-                              } else {
-
-                              }
-                            }}
-                            value={p.middleName}
-                            autoComplete="off"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-md-4">
-                        <div className="form-group">
-                          <label className="form-label float-start fw-bold">
-                            Last name <span className="text-danger">*</span>
+                            Last name{" "}
+                            <span className="text-danger">*</span>
                           </label>
                           <input
                             type="text"
                             name="lastName"
-                            placeholder="Last Name"
                             className="form-control"
                             onChange={(e) => {
                               const lastName = e.target.value;
@@ -1580,7 +1538,6 @@ const LeftSide = () => {
                                   })
                                 );
                               } else {
-
                               }
                             }}
                             value={p.lastName}
@@ -1589,13 +1546,52 @@ const LeftSide = () => {
                           />
                         </div>
                       </div>
+                      <div className="col-lg-4">
+                        <div className="form-group">
+                          <label
+                            className="form-label float-start fw-bold"
+                            type=""
+                          >
+                            Gender <span className="text-danger">*</span>
+                          </label>
+                          <div className="input-group mb-3">
+                            <select
+                              name="date"
+                              className="form-select"
+                              onChange={(e) => {
+                                const gender = e.target.value;
+                                setChild((ob) =>
+                                  produce(ob, (v) => {
+                                    v[index].gender = gender;
+                                  })
+                                );
+                                setChild((ob) =>
+                                  produce(ob, (v) => {
+                                    v[index].title =
+                                      gender === "Male" ? "Mstr" : "Miss";
+                                  })
+                                );
+                              }}
+                              value={p.gender}
+                              required
+                            >
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
                     <div className="row">
                       <div className="col-lg-4">
                         <div className="form-group">
-                          <label className="float-start fw-bold" type="">
-                            Date of birth<span className="text-danger">*</span>
+                          <label
+                            className="form-label float-start fw-bold"
+                            type=""
+                          >
+                            Date of birth
+                            <span className="text-danger">*</span>
                           </label>
                           <div className="input-group mb-3 d-flex">
                             <select
@@ -1695,67 +1691,112 @@ const LeftSide = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="col-lg-4">
-                        <div className="form-group">
-                          <label className="form-label float-start" type="">
-                            Nationality
-                          </label>
-                          <div className="input-group mb-3">
-                            <select
-                              name="nationality"
-                              className="form-select"
-                              onChange={(e) => {
-                                const nationality = e.target.value;
-                                setChild((ob) =>
-                                  produce(ob, (v) => {
-                                    v[index].nationality = nationality;
-                                  })
-                                );
-                              }}
-                              value={p.nationality}
-                              required
-                            >
-                              <option value="Bangladesh">Bangladesh</option>
-                              {courtries.map((item, index) => {
-                                return (
-                                  <option key={index} value={item.name}>
-                                    {item.name}
+
+                      {(origin.match("Bangladesh") !== null
+                        ? origin.match("Bangladesh")[0]
+                        : "") &&
+                        (destination.match("Bangladesh") !== null
+                          ? destination.match("Bangladesh")[0]
+                          : "") === "Bangladesh" ? (
+                        <></>
+                      ) : (
+                        <>
+                          <div className="col-lg-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                type=""
+                              >
+                                Nationality
+                              </label>
+                              <div className="input-group mb-3">
+                                <select
+                                  name="nationality"
+                                  className="form-select"
+                                  onChange={(e) => {
+                                    const nationality = e.target.value;
+                                    setChild((ob) =>
+                                      produce(ob, (v) => {
+                                        v[index].nationality =
+                                          nationality;
+                                      })
+                                    );
+                                  }}
+                                  value={p.nationality}
+                                  required
+                                >
+                                  <option value="BD">
+                                    Bangladesh
                                   </option>
-                                );
-                              })}
-                            </select>
+                                  {courtries.map((item, index) => {
+                                    return (
+                                      <option
+                                        key={index}
+                                        value={item.code}
+                                      >
+                                        {item.name}
+                                      </option>
+                                    );
+                                  })}
+                                </select>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-4">
-                        <div className="form-group">
-                          <label
-                            className="form-label float-start fw-bold"
-                            type=""
-                          >
-                            Gender <span className="text-danger">*</span>
-                          </label>
-                          <div className="input-group mb-3">
-                            <select
-                              name="date"
-                              className="form-select"
-                              onChange={(e) => {
-                                const gender = e.target.value;
-                                setChild((ob) =>
-                                  produce(ob, (v) => {
-                                    v[index].gender = gender;
-                                  })
-                                );
-                              }}
-                              value={p.gender}
-                              required
-                            >
-                              <option value="Male">Male</option>
-                              <option value="Female">Female</option>
-                            </select>
+                          <div className="col-lg-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                htmlFor=""
+                              >
+                                WheelChair (If needed)
+                              </label>
+                            </div>
+                            <div className="input-group mb-3">
+                              <select
+                                name="wheel"
+                                className="form-select"
+                                onChange={(e) => {
+                                  const wheel = e.target.value;
+                                  setChild((ob) =>
+                                    produce(ob, (v) => {
+                                      v[index].wheel = wheel;
+                                    })
+                                  );
+                                }}
+                              >
+                                <option value="">Not Required</option>
+                                <option value="WCHR">
+                                  Passenger can not walk short distance up
+                                  or down stairs.
+                                </option>
+                                <option value="WCHS">
+                                  Passenger can not walk short distance,
+                                  but not up or down stairs
+                                </option>
+                                <option value="WCHC">
+                                  Passenger cannot walk any distance and
+                                  will require the aisle chair to board.
+                                </option>
+                                <option value="WCOB">
+                                  On-board aisle wheelchair requested
+                                </option>
+                                <option value="WCMP">
+                                  Passenger is traveling with a manual
+                                  wheelchair.
+                                </option>
+                                <option value="WCBD">
+                                  Passenger is traveling with a dry cell
+                                  battery-powered wheelchair.
+                                </option>
+                                <option value="WCBW">
+                                  Passenger is traveling with a wet cell
+                                  battery-powered wheelchair.
+                                </option>
+                              </select>
+                            </div>
                           </div>
-                        </div>
-                      </div>
+                        </>
+                      )}
                     </div>
 
                     {(origin.match("Bangladesh") !== null
@@ -1788,7 +1829,8 @@ const LeftSide = () => {
                                   const passportNumber = e.target.value;
                                   setChild((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportNumber = passportNumber;
+                                      v[index].passportNumber =
+                                        passportNumber;
                                     })
                                   );
                                 }}
@@ -1814,17 +1856,20 @@ const LeftSide = () => {
                                   const issuingCountry = e.target.value;
                                   setChild((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].issuingCountry = issuingCountry;
+                                      v[index].issuingCountry =
+                                        issuingCountry;
                                     })
                                   );
                                 }}
                                 value={p.issuingCountry}
                                 required
                               >
-                                <option value="Bangladesh">Bangladesh</option>
+                                <option value="BD">
+                                  Bangladesh
+                                </option>
                                 {courtries.map((item, index) => {
                                   return (
-                                    <option key={index} value={item.name}>
+                                    <option key={index} value={item.code}>
                                       {item.name}
                                     </option>
                                   );
@@ -1849,7 +1894,8 @@ const LeftSide = () => {
                                   const passportDate = e.target.value;
                                   setChild((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportDate = passportDate;
+                                      v[index].passportDate =
+                                        passportDate;
                                     })
                                   );
                                 }}
@@ -1895,7 +1941,8 @@ const LeftSide = () => {
                                   const passportMonth = e.target.value;
                                   setChild((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportMonth = passportMonth;
+                                      v[index].passportMonth =
+                                        passportMonth;
                                     })
                                   );
                                 }}
@@ -1922,7 +1969,8 @@ const LeftSide = () => {
                                   const passportYear = e.target.value;
                                   setChild((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportYear = passportYear;
+                                      v[index].passportYear =
+                                        passportYear;
                                     })
                                   );
                                 }}
@@ -1943,10 +1991,7 @@ const LeftSide = () => {
                             </div>
                           </div>
                         </div>
-                      </>
-                    )}
-
-                    <div className="row">
+                        {/* <div className="row">
                       <div className="col-lg-4">
                         <div className="form-group">
                           <label
@@ -1959,7 +2004,6 @@ const LeftSide = () => {
                         <div className="input-group mb-3">
                           <input
                             type="number"
-                            placeholder="Phone Number"
                             className="form-control"
                             name="passport-number"
                             required
@@ -2060,106 +2104,7 @@ const LeftSide = () => {
                           </select>
                         </div>
                       </div>
-                    </div>
-
-                    {(origin.match("Bangladesh") !== null
-                      ? origin.match("Bangladesh")[0]
-                      : "") &&
-                      (destination.match("Bangladesh") !== null
-                        ? destination.match("Bangladesh")[0]
-                        : "") === "Bangladesh" ? (
-                      <></>
-                    ) : (
-                      <>
-                        <div className="row">
-                          <div className="col-lg-4">
-                            <div className="form-group">
-                              <label
-                                className="form-label float-start fw-bold"
-                                htmlFor=""
-                              >
-                                Passport Copy
-                              </label>
-                            </div>
-                            <div className="input-group mb-3">
-                              {p.passportNumber !== "" ? (
-                                <input
-                                  type={"file"}
-                                  accept=".jpg, .jpeg, .png, .pdf"
-                                  onChange={(e) =>
-                                    handlePassportFileUpload(
-                                      2,
-                                      index,
-                                      e.target.files[0],
-                                      p.passportNumber
-                                    )
-                                  }
-                                />
-                              ) : (
-                                <></>
-                              )}
-
-                              {p.passportCopy != null &&
-                                p.passportCopy != "" ? (
-                                <a
-                                  href={
-                                    environment.baseApiURL +
-                                    `agentinfo/GetPassengerFile/${p.passportCopy}/1`
-                                  }
-                                  download
-                                  target="_blank"
-                                >
-                                  Download Passport Copy
-                                </a>
-                              ) : (
-                                <></>
-                              )}
-                            </div>
-                          </div>
-                          <div className="col-lg-4">
-                            <div className="form-group">
-                              <label
-                                className="form-label float-start fw-bold"
-                                htmlFor=""
-                              >
-                                Visa Copy
-                              </label>
-                            </div>
-                            <div className="input-group mb-3">
-                              {p.passportNumber !== "" ? (
-                                <input
-                                  type={"file"}
-                                  accept=".jpg, .jpeg, .png, .pdf"
-                                  onChange={(e) =>
-                                    handleVisaFileUpload(
-                                      2,
-                                      index,
-                                      e.target.files[0],
-                                      p.passportNumber
-                                    )
-                                  }
-                                />
-                              ) : (
-                                <></>
-                              )}
-
-                              {p.visaCopy != null && p.visaCopy != "" ? (
-                                <a
-                                  href={
-                                    environment.baseApiURL +
-                                    `agentinfo/GetPassengerFile/${p.visaCopy}/2`
-                                  }
-                                  download
-                                  target="_blank"
-                                >
-                                  Download Visa Copy
-                                </a>
-                              ) : (
-                                <></>
-                              )}
-                            </div>
-                          </div>
-                        </div>
+                    </div> */}
                       </>
                     )}
                   </div>
@@ -2236,93 +2181,50 @@ const LeftSide = () => {
                       <div className="col-md-4">
                         <div className="form-group">
                           <label className="form-label float-start fw-bold">
-                            First name <span className="text-danger">*</span>
+                            First name{" "}
+                            <span className="text-danger">*</span>
                           </label>
                           <div className="input-group mb-3">
-                            <div className="input-group-prepend">
-                              <select
-                                name=""
-                                placeholder="Title"
-                                className="form-select titel-width"
-                                onChange={(e) => {
-                                  const title = e.target.value;
+                            <input
+                              type="text"
+                              name="firstName"
+                              className="form-control w-25"
+                              value={infant[index].title}
+                              disabled
+                              autoComplete="off"
+                            />
+                            <input
+                              type="text"
+                              name="firstName"
+                              className="form-control w-75"
+                              onChange={(e) => {
+                                const firstName = e.target.value;
+                                const re = /^[a-zA-Z]*$/;
+                                if (re.test(firstName)) {
                                   setInfant((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].title = title;
+                                      v[index].firstName = firstName;
                                     })
                                   );
-                                }}
-                                value={p.title}
-                                required
-                              >
-                                <option value=""> Title</option>
-                                <option value="Mr"> Mr</option>
-                                <option value="Ms"> Ms</option>
-                                <option value="Mrs"> Mrs</option>
-                              </select>
-                              <input
-                                type="text"
-                                name="firstName"
-                                placeholder="First Name"
-                                className="form-control"
-                                onChange={(e) => {
-                                  const firstName = e.target.value;
-                                  const re = /^[a-zA-Z]*$/;
-                                  if (re.test(firstName)) {
-                                    setInfant((ob) =>
-                                      produce(ob, (v) => {
-                                        v[index].firstName = firstName;
-                                      })
-                                    );
-                                  } else {
-
-                                  }
-                                }}
-                                value={p.firstName}
-                                required
-                                autoComplete="off"
-                              />
-                            </div>
+                                } else {
+                                }
+                              }}
+                              value={p.firstName}
+                              required
+                              autoComplete="off"
+                            />
                           </div>
                         </div>
                       </div>
                       <div className="col-md-4">
                         <div className="form-group">
                           <label className="form-label float-start fw-bold">
-                            Middle name (Optional)
-                          </label>
-                          <input
-                            type="text"
-                            name="middleName"
-                            placeholder="Middle Name"
-                            className="form-control"
-                            onChange={(e) => {
-                              const middleName = e.target.value;
-                              const re = /^[a-zA-Z]*$/;
-                              if (re.test(middleName)) {
-                                setInfant((ob) =>
-                                  produce(ob, (v) => {
-                                    v[index].middleName = middleName;
-                                  })
-                                );
-                              } else {
-
-                              }
-                            }}
-                            value={p.middleName}
-                            autoComplete="off"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-md-4">
-                        <div className="form-group">
-                          <label className="form-label float-start fw-bold">
-                            Last name <span className="text-danger">*</span>
+                            Last name{" "}
+                            <span className="text-danger">*</span>
                           </label>
                           <input
                             type="text"
                             name="lastName"
-                            placeholder="Last Name"
                             className="form-control"
                             onChange={(e) => {
                               const lastName = e.target.value;
@@ -2334,7 +2236,6 @@ const LeftSide = () => {
                                   })
                                 );
                               } else {
-
                               }
                             }}
                             value={p.lastName}
@@ -2343,13 +2244,52 @@ const LeftSide = () => {
                           />
                         </div>
                       </div>
+                      <div className="col-lg-4">
+                        <div className="form-group">
+                          <label
+                            className="form-label float-start fw-bold"
+                            type=""
+                          >
+                            Gender <span className="text-danger">*</span>
+                          </label>
+                          <div className="input-group mb-3">
+                            <select
+                              name="date"
+                              className="form-select"
+                              onChange={(e) => {
+                                const gender = e.target.value;
+                                setInfant((ob) =>
+                                  produce(ob, (v) => {
+                                    v[index].gender = gender;
+                                  })
+                                );
+                                setInfant((ob) =>
+                                  produce(ob, (v) => {
+                                    v[index].title =
+                                      gender === "Male" ? "Mstr" : "Miss";
+                                  })
+                                );
+                              }}
+                              value={p.gender}
+                              required
+                            >
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
                     <div className="row">
                       <div className="col-lg-4">
                         <div className="form-group">
-                          <label className="float-start fw-bold" type="">
-                            Date of birth<span className="text-danger">*</span>
+                          <label
+                            className="form-label float-start fw-bold"
+                            type=""
+                          >
+                            Date of birth
+                            <span className="text-danger">*</span>
                           </label>
                           <div className="input-group mb-3 d-flex">
                             <select
@@ -2446,67 +2386,59 @@ const LeftSide = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="col-lg-4">
-                        <div className="form-group">
-                          <label className="form-label float-start" type="">
-                            Nationality
-                          </label>
-                          <div className="input-group mb-3">
-                            <select
-                              name="nationality"
-                              className="form-select"
-                              onChange={(e) => {
-                                const nationality = e.target.value;
-                                setInfant((ob) =>
-                                  produce(ob, (v) => {
-                                    v[index].nationality = nationality;
-                                  })
-                                );
-                              }}
-                              value={p.nationality}
-                              required
-                            >
-                              <option value="Bangladesh">Bangladesh</option>
-                              {courtries.map((item, index) => {
-                                return (
-                                  <option key={index} value={item.name}>
-                                    {item.name}
+
+                      {(origin.match("Bangladesh") !== null
+                        ? origin.match("Bangladesh")[0]
+                        : "") &&
+                        (destination.match("Bangladesh") !== null
+                          ? destination.match("Bangladesh")[0]
+                          : "") === "Bangladesh" ? (
+                        <></>
+                      ) : (
+                        <>
+                          <div className="col-lg-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                type=""
+                              >
+                                Nationality
+                              </label>
+                              <div className="input-group mb-3">
+                                <select
+                                  name="nationality"
+                                  className="form-select"
+                                  onChange={(e) => {
+                                    const nationality = e.target.value;
+                                    setInfant((ob) =>
+                                      produce(ob, (v) => {
+                                        v[index].nationality =
+                                          nationality;
+                                      })
+                                    );
+                                  }}
+                                  value={p.nationality}
+                                  required
+                                >
+                                  <option value="BD">
+                                    Bangladesh
                                   </option>
-                                );
-                              })}
-                            </select>
+                                  {courtries.map((item, index) => {
+                                    return (
+                                      <option
+                                        key={index}
+                                        value={item.code}
+                                      >
+                                        {item.name}
+                                      </option>
+                                    );
+                                  })}
+                                </select>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-4">
-                        <div className="form-group">
-                          <label
-                            className="form-label float-start fw-bold"
-                            type=""
-                          >
-                            Gender <span className="text-danger">*</span>
-                          </label>
-                          <div className="input-group mb-3">
-                            <select
-                              name="date"
-                              className="form-select"
-                              onChange={(e) => {
-                                const gender = e.target.value;
-                                setInfant((ob) =>
-                                  produce(ob, (v) => {
-                                    v[index].gender = gender;
-                                  })
-                                );
-                              }}
-                              value={p.gender}
-                              required
-                            >
-                              <option value="Male">Male</option>
-                              <option value="Female">Female</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
+                        </>
+                      )}
                     </div>
 
                     {(origin.match("Bangladesh") !== null
@@ -2525,14 +2457,13 @@ const LeftSide = () => {
                                 className="form-label float-start fw-bold"
                                 htmlFor=""
                               >
-                                Passport Number{" "}
+                                Passport number{" "}
                                 <span className="text-danger">*</span>
                               </label>
                             </div>
                             <div className="input-group mb-3">
                               <input
                                 type="text"
-                                placeholder="Passport Number"
                                 className="form-control"
                                 name="passport-number"
                                 required
@@ -2540,7 +2471,8 @@ const LeftSide = () => {
                                   const passportNumber = e.target.value;
                                   setInfant((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportNumber = passportNumber;
+                                      v[index].passportNumber =
+                                        passportNumber;
                                     })
                                   );
                                 }}
@@ -2566,17 +2498,20 @@ const LeftSide = () => {
                                   const issuingCountry = e.target.value;
                                   setInfant((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].issuingCountry = issuingCountry;
+                                      v[index].issuingCountry =
+                                        issuingCountry;
                                     })
                                   );
                                 }}
                                 value={p.issuingCountry}
                                 required
                               >
-                                <option value="Bangladesh">Bangladesh</option>
+                                <option value="BD">
+                                  Bangladesh
+                                </option>
                                 {courtries.map((item, index) => {
                                   return (
-                                    <option key={index} value={item.name}>
+                                    <option key={index} value={item.code}>
                                       {item.name}
                                     </option>
                                   );
@@ -2601,7 +2536,8 @@ const LeftSide = () => {
                                   const passportDate = e.target.value;
                                   setInfant((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportDate = passportDate;
+                                      v[index].passportDate =
+                                        passportDate;
                                     })
                                   );
                                 }}
@@ -2647,7 +2583,8 @@ const LeftSide = () => {
                                   const passportMonth = e.target.value;
                                   setInfant((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportMonth = passportMonth;
+                                      v[index].passportMonth =
+                                        passportMonth;
                                     })
                                   );
                                 }}
@@ -2674,7 +2611,8 @@ const LeftSide = () => {
                                   const passportYear = e.target.value;
                                   setInfant((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportYear = passportYear;
+                                      v[index].passportYear =
+                                        passportYear;
                                     })
                                   );
                                 }}
@@ -2695,9 +2633,8 @@ const LeftSide = () => {
                             </div>
                           </div>
                         </div>
-                      </>
-                    )}
-                    <div className="row">
+
+                        {/* <div className="row">
                       <div className="col-lg-4">
                         <div className="form-group">
                           <label
@@ -2710,7 +2647,6 @@ const LeftSide = () => {
                         <div className="input-group mb-3">
                           <input
                             type="number"
-                            placeholder="Phone Number"
                             className="form-control"
                             name="passport-number"
                             required
@@ -2811,106 +2747,7 @@ const LeftSide = () => {
                           </select>
                         </div>
                       </div>
-                    </div>
-
-                    {(origin.match("Bangladesh") !== null
-                      ? origin.match("Bangladesh")[0]
-                      : "") &&
-                      (destination.match("Bangladesh") !== null
-                        ? destination.match("Bangladesh")[0]
-                        : "") === "Bangladesh" ? (
-                      <></>
-                    ) : (
-                      <>
-                        <div className="row">
-                          <div className="col-lg-4">
-                            <div className="form-group">
-                              <label
-                                className="form-label float-start fw-bold"
-                                htmlFor=""
-                              >
-                                Passport Copy
-                              </label>
-                            </div>
-                            <div className="input-group mb-3">
-                              {p.passportNumber !== "" ? (
-                                <input
-                                  type={"file"}
-                                  accept=".jpg, .jpeg, .png, .pdf"
-                                  onChange={(e) =>
-                                    handlePassportFileUpload(
-                                      3,
-                                      index,
-                                      e.target.files[0],
-                                      p.passportNumber
-                                    )
-                                  }
-                                />
-                              ) : (
-                                <></>
-                              )}
-
-                              {p.passportCopy != null &&
-                                p.passportCopy !== "" ? (
-                                <a
-                                  href={
-                                    environment.baseApiURL +
-                                    `agentinfo/GetPassengerFile/${p.passportCopy}/1`
-                                  }
-                                  download
-                                  target="_blank"
-                                >
-                                  Download Passport Copy
-                                </a>
-                              ) : (
-                                <></>
-                              )}
-                            </div>
-                          </div>
-                          <div className="col-lg-4">
-                            <div className="form-group">
-                              <label
-                                className="form-label float-start fw-bold"
-                                htmlFor=""
-                              >
-                                Visa Copy
-                              </label>
-                            </div>
-                            <div className="input-group mb-3">
-                              {p.passportNumber !== "" ? (
-                                <input
-                                  type={"file"}
-                                  accept=".jpg, .jpeg, .png, .pdf"
-                                  onChange={(e) =>
-                                    handleVisaFileUpload(
-                                      3,
-                                      index,
-                                      e.target.files[0],
-                                      p.passportNumber
-                                    )
-                                  }
-                                />
-                              ) : (
-                                <></>
-                              )}
-
-                              {p.visaCopy != null && p.visaCopy !== "" ? (
-                                <a
-                                  href={
-                                    environment.baseApiURL +
-                                    `agentinfo/GetPassengerFile/${p.visaCopy}/2`
-                                  }
-                                  download
-                                  target="_blank"
-                                >
-                                  Download Visa Copy
-                                </a>
-                              ) : (
-                                <></>
-                              )}
-                            </div>
-                          </div>
-                        </div>
+                    </div> */}
                       </>
                     )}
                   </div>
@@ -2985,12 +2822,13 @@ const LeftSide = () => {
                               className="form-select titel-width"
                               onChange={(e) => {
                                 const mobailCode = e.target.value;
-                                setAdult((ob) =>
+                                setContact((ob) =>
                                   produce(ob, (v) => {
                                     v[index].mobailCode = mobailCode;
                                   })
                                 );
                               }}
+                              value={p.mobailCode}
                               required
                             >
                               <option value="+88">+88</option>

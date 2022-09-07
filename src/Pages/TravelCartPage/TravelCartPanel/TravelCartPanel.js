@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import currentYear from "../../SharePages/Utility/currentYear";
 import LeftSide from "../LeftSide/LeftSide";
 import RightSide from "../RightSide/RightSide";
@@ -13,6 +14,7 @@ const TravelCartPanel = () => {
 
   return (
     <div className="content-wrapper search-panel-bg">
+    <ToastContainer />
     <section className="content-header"></section>
     <section className="content">
     <div className="container-fluid pt-2">

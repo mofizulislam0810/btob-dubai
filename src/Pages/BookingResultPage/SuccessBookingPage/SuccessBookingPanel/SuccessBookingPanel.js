@@ -347,6 +347,105 @@ const SuccessBookingPanel = () => {
                       <table className="table table-bordered table-sm" style={{ fontSize: "11px" }}>
                         <thead>
                           <tr>
+                            <th colspan="6" className="fw-bold py-2 bg-light">
+                              FARE DETAILS
+                            </th>
+                          </tr>
+                          <tr className="text-center">
+                            <th>Type</th>
+                            <th>Base</th>
+                            <th>Tax</th>
+                            <th>Discount</th>
+                            {/* <th>AIT</th> */}
+                            <th>Pax</th>
+                            <th>Total Pax Fare</th>
+                          </tr>
+                        </thead>
+                        <tbody className="text-center">
+
+                        {bookData.data?.item1.flightInfo?.passengerFares.adt !== null ? (
+                            <>
+                              <tr>
+                                <td className="left">ADT</td>
+                                <td className="left">
+                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.basePrice}
+                                </td>
+                                <td className="center">
+                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.taxes}
+                                </td>
+                                <td className="right">
+                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.discountPrice}
+                                </td>
+                                {/* <td className="right">
+                                  {passengerFares.adt.ait}
+                                </td> */}
+                                <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.adt}</td>
+                                <td className="right fw-bold">
+                                AED {(bookData.data?.item1.flightInfo?.passengerFares.adt.totalPrice *
+                                    bookData.data?.item1.flightInfo?.passengerCounts.adt).toFixed(2)}
+                                </td>
+                              </tr>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+
+                          {bookData.data?.item1.flightInfo?.passengerFares.cnn !== null ? (
+                            <>
+                              <tr>
+                                <td className="left">CNN</td>
+                                <td className="left">
+                                  {bookData.data?.item1.flightInfo?.passengerFares.cnn.basePrice}
+                                </td>
+                                <td className="center">
+                                  {bookData.data?.item1.flightInfo?.passengerFares.cnn.taxes}
+                                </td>
+                                <td className="right">
+                                  {bookData.data?.item1.flightInfo?.passengerFares.cnn.discountPrice}
+                                </td>
+                                <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.cnn}</td>
+                                <td className="right fw-bold">
+                                AED {(bookData.data?.item1.flightInfo?.passengerFares.cnn.totalPrice *
+                                    bookData.data?.item1.flightInfo?.passengerCounts.cnn).toFixed(2)}
+                                </td>
+                              </tr>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+
+                          {bookData.data?.item1.flightInfo?.passengerFares.inf !== null ? (
+                            <>
+                              <tr>
+                                <td className="left">INF</td>
+                                <td className="left">
+                                  {bookData.data?.item1.flightInfo?.passengerFares.inf.basePrice}
+                                </td>
+                                <td className="center">
+                                  {bookData.data?.item1.flightInfo?.passengerFares.inf.taxes}
+                                </td>
+                                <td className="right">
+                                  {bookData.data?.item1.flightInfo?.passengerFares.inf.discountPrice}
+                                </td>
+                                <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.inf}</td>
+                                <td className="right fw-bold">
+                                AED {(bookData.data?.item1.flightInfo?.passengerFares.inf.totalPrice *
+                                    bookData.data?.item1.flightInfo?.passengerCounts.inf).toFixed(2)}
+                                </td>
+                              </tr>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+
+
+                    <div className="table-responsive-sm">
+                      <table className="table table-bordered table-sm" style={{ fontSize: "11px" }}>
+                        <thead>
+                          <tr>
                             <th colspan="3" className="fw-bold py-2 bg-light">
                               CONTACT DETAILS
                             </th>

@@ -96,6 +96,8 @@ const BookedView = () => {
     handleGetList();
   }, []);
 
+  console.log(passengerList);
+
   const handleSubmit = () => {
     console.log(passengerListEdited);
     const postPassengerList = async () => {
@@ -731,8 +733,11 @@ const BookedView = () => {
                 <div id="ui-view" data-select2-id="ui-view">
                   <div>
                     <div className="card box-shadow">
-                      <div className="card-header">
+                      {/* <div className="card-header">
                       
+                      {
+                        ticketingList[0]?.status==="Booking Cancelled" ||  ticketingList[0]?.status==="Ticket Cancelled" ? <> </> :
+                        <>
                         <span className="me-3 float-end">
                           <ReactToPrint
                             trigger={() => (
@@ -754,7 +759,10 @@ const BookedView = () => {
                             <span className="ms-1">Email</span>
                           </Link>
                         </span>
-                      </div>
+                        </>
+                      }
+                        
+                      </div> */}
                       <div className="card-body" ref={componentRef}>
                       <img
                           src={logo}
@@ -907,6 +915,46 @@ const BookedView = () => {
                             <thead>
                               <tr>
                                 <th
+                                  colspan="6"
+                                  className="fw-bold py-2 bg-light"
+                                >
+                                  FARE DETAILS
+                                </th>
+                              </tr>
+                              <tr className="text-center">
+                                <th>Type</th>
+                                <th>Base</th>
+                                <th>Tax</th>
+                                <th>Discount</th>
+                                {/* <th>AIT</th> */}
+                                <th>Pax</th>
+                                <th>Total Pax Fare</th>
+                             </tr>
+                            </thead>
+                            <tbody className="text-center">
+                              {passengerList.map((item, index) => {
+                                return (
+                                  <>
+                                    <tr>
+                                      <td>{item.passengerType}</td>
+                                      <td>{item.basePrice}</td>
+                                      <td>{item.tax}</td>
+                                      <td>{item.discount}</td>
+                                      <td>{item.passengerCount}</td>
+                                      <td>{item.totalPrice}</td>
+                                    </tr>
+                                  </>
+                                );
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div className="table-responsive-sm">
+                          <table className="table table-bordered table-sm" style={{fontSize:"11px"}}>
+                            <thead>
+                              <tr>
+                                <th
                                   colspan="3"
                                   className="fw-bold py-2 bg-light"
                                 >
@@ -955,6 +1003,8 @@ const BookedView = () => {
                         </div>
                       </div>
 
+                      {ticketingList[0]?.status==="Booking Cancelled" ||  ticketingList[0]?.status==="Ticket Cancelled" 	?<>
+                      </>:<>
                       <div className="container mt-3 mb-5">
                         <div className="row">
                           <div className="col-lg-12 text-center">
@@ -967,6 +1017,7 @@ const BookedView = () => {
                           </div>
                         </div>
                       </div>
+                      </>}
                     </div>
                   </div>
                 </div>

@@ -12,37 +12,17 @@ const SideNavBar = () => {
       style={{ position: "fixed", height: "100%", backgroundColor: "#FFFFFF" }}
     >
       {/* Brand Logo  */}
-      <Link to="/dashboard" className="brand-link">
+      {/* <Link to="/dashboard" className="brand-link">
         <img
           src="../../dist/img/AdminLTELogo.png"
           alt=""
           className="brand-image img-circle elevation-3"
-        // style={{ opacity: ".8" }}
         />
         <span className="brand-text font-weight-light" style={{ color: "#8796A1" }}>Dashboard</span>
-      </Link>
+      </Link> */}
 
       {/* Sidebar  */}
       <div className="sidebar">
-        {/* Sidebar user (optional)  */}
-
-        {/* SidebarSearch Form */}
-        {/* <div className="form-inline">
-          <div className="input-group" data-widget="sidebar-search">
-            <input
-              className="form-control form-control-sidebar"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <div className="input-group-append">
-              <button className="btn btn-sidebar">
-                <i className="fas fa-search fa-fw"></i>
-              </button>
-            </div>
-          </div>
-        </div> */}
-
         {/* Sidebar Menu  */}
         <nav className="mt-2">
           <ul
@@ -53,6 +33,17 @@ const SideNavBar = () => {
           >
             {/* Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library  */}
+            
+            <li className="nav-item">
+              <Link to="/dashboard" className="nav-link">
+                <i className="nav-icon fa fa-desktop"></i>
+                <p>
+                  Dashboard
+                </p>
+              </Link>
+            </li>
+
+            
             <li className="nav-item">
               <Link to="/search" className="nav-link">
                 <i className="nav-icon fas fa-search"></i>
@@ -72,27 +63,27 @@ const SideNavBar = () => {
                 </p>
               </a>
               <ul className="nav nav-treeview">
-                <li className={currentPage === "ticketed" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("ticketed")}>
-                  <Link to="/ticketed" className="nav-link nav__link__font__size">
-                    <i className="far fa-circle nav-icon"></i>
-                    <p>Ticketed</p>
+               <li className={currentPage === "booked" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("booked")}>
+                  <Link to="/booked" className="nav-link nav__link__font__size">
+                    <i className="fa fa-minus nav-icon"></i>
+                    <p>On Hold</p>
                   </Link>
                 </li>
-                <li className={currentPage === "booked" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("booked")}>
-                  <Link to="/booked" className="nav-link nav__link__font__size">
-                    <i className="far fa-circle nav-icon"></i>
-                    <p>Booked</p>
+                <li className={currentPage === "ticketed" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("ticketed")}>
+                  <Link to="/ticketed" className="nav-link nav__link__font__size">
+                    <i className="fa fa-minus nav-icon"></i>
+                    <p>Ticketed</p>
                   </Link>
                 </li>
                 <li className={currentPage === "canceled" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("canceled")}>
                   <Link to="/canceled" className="nav-link nav__link__font__size">
-                    <i className="far fa-circle nav-icon"></i>
+                    <i className="fa fa-minus nav-icon"></i>
                     <p>Canceled</p>
                   </Link>
                 </li>
                 <li className={currentPage === "all" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("all")}>
                   <Link to="/queues?id=1" className="nav-link nav__link__font__size">
-                    <i className="far fa-circle nav-icon"></i>
+                    <i className="fa fa-minus nav-icon"></i>
                     <p>All</p>
                   </Link>
                 </li>
@@ -194,13 +185,13 @@ const SideNavBar = () => {
               <ul className="nav nav-treeview">
                 <li className="nav-item">
                   <Link to="/salesreport" className="nav-link nav__link__font__size">
-                    <i className="far fa-circle nav-icon"></i>
+                    <i className="fa fa-minus nav-icon"></i>
                     <p>Sales Report</p>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link to="/ledger" className="nav-link nav__link__font__size">
-                    <i className="far fa-circle nav-icon"></i>
+                    <i className="fa fa-minus nav-icon"></i>
                     <p>Account Ledger</p>
                   </Link>
                 </li>

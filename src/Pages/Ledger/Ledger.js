@@ -90,11 +90,12 @@ const Ledger = () => {
                           <div className="d-flex float-end pb-2">
                             <div class="dropdown">
                               <button
-                                class="btn button-color dropdown-toggle fw-bold rounded-start text-white"
+                                class="btn btn-secondary dropdown-toggle fw-bold rounded-start text-white"
                                 type="button"
                                 id="dropdownMenuButton1"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
+                                style={{fontSize:"12px",height:"100%"}}
                               >
                                 {balanceType === null ? (
                                   "All"
@@ -113,18 +114,21 @@ const Ledger = () => {
                                 <li
                                   class="dropdown-item"
                                   onClick={() => setBalanceType(null)}
+                                  style={{fontSize:"12px"}}
                                 >
                                   All
                                 </li>
                                 <li
                                   class="dropdown-item"
                                   onClick={() => setBalanceType(0)}
+                                  style={{fontSize:"12px"}}
                                 >
                                   Debit
                                 </li>
                                 <li
                                   class="dropdown-item"
                                   onClick={() => setBalanceType(1)}
+                                  style={{fontSize:"12px"}}
                                 >
                                   Credit
                                 </li>
@@ -136,6 +140,7 @@ const Ledger = () => {
                               name="from"
                               value={fromDate}
                               onChange={(e) => handleFromDate(e)}
+                              style={{fontSize:"12px"}}
                             />
                             <input
                               type="date"
@@ -143,11 +148,13 @@ const Ledger = () => {
                               name="to"
                               value={toDate}
                               onChange={(e) => handleToDate(e)}
+                              style={{fontSize:"12px"}}
                             />
                             <button
                               type="button"
-                              className="btn button-color fw-bold rounded-end text-white"
+                              className="btn btn-secondary fw-bold rounded-end text-white"
                               onClick={handleSubmit}
+                              style={{fontSize:"12px"}}
                             >
                               Search
                             </button>
@@ -156,10 +163,10 @@ const Ledger = () => {
                       </div>
                       <div style={{ overflowY: "scroll" }}>
                         <table
-                          className="table table-bordered table-striped"
+                          className="table table-bordered table-sm"
                           style={{ width: "100%", fontSize: "13px" }}
                         >
-                          <thead className="text-center fw-bold">
+                          <thead className="text-center fw-bold bg-secondary">
                             <tr>
                               <th>Transaction Date</th>
                               <th className="text-start">Description</th>
@@ -179,7 +186,7 @@ const Ledger = () => {
                               </th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody className="tbody">
                             {ledgerData !== undefined ? (
                               ledgerData?.map((item, index) => {
                                 return (

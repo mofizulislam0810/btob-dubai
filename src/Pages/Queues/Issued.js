@@ -211,10 +211,10 @@ const Issued = () => {
                                                 style={{ overflowX: "scroll", marginBottom: "16px" }}
                                             >
                                                 <table
-                                                    className="table table-bordered table-striped table-sm"
+                                                    className="table table-bordered table-sm"
                                                     style={{ width: "100%", fontSize: "13px" }}
                                                 >
-                                                    <thead className="text-center fw-bold">
+                                                    <thead className="text-center fw-bold bg-secondary">
                                                         <tr>
                                                             <th>SL</th>
                                                             <th className='text-start'>Lead Pax Name</th>
@@ -230,7 +230,7 @@ const Issued = () => {
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
+                                                    <tbody className="tbody">
                                                         {ticketingList.length > 0 ? (
                                                             ticketingList.map((item, index) => {
                                                                 return (
@@ -360,7 +360,7 @@ const Issued = () => {
                                                                                         VO
                                                                                     </Button>
                                                                                 </a> */}
-                                                                                &nbsp;{" "}
+                                                                                {/* &nbsp;{" "}
                                                                                 <a href="javascript:void(0)"
                                                                                     title="Date Change"
                                                                                     onClick={() =>
@@ -382,7 +382,7 @@ const Issued = () => {
                                                                                     >
                                                                                       <span style={{fontSize:"10px"}}>DC</span>
                                                                                     </Button>
-                                                                                </a>
+                                                                                </a> */}
                                                                                 &nbsp;{" "}
                                                                                 <a href="javascript:void(0)"
                                                                                     title="Raise Support"
@@ -437,7 +437,7 @@ const Issued = () => {
                                                                                 ) : (
                                                                                     <></>
                                                                                 )}
-                                                                                &nbsp;{" "}
+                                                                                {/* &nbsp;{" "}
                                                                                 <a href="javascript:void(0)"
                                                                                     title="Ticketing Void"
                                                                                     onClick={() =>
@@ -459,7 +459,7 @@ const Issued = () => {
                                                                                     >
                                                                                         <span style={{fontSize:"10px"}}>TV</span>
                                                                                     </Button>
-                                                                                </a>
+                                                                                </a> */}
                                                                             </>
 
                                                                         </td>

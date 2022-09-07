@@ -114,7 +114,7 @@ const accountManagerInfo = async(agentId)=>{
     getData();
   };
 
-  console.log(agentInfo);
+  console.log(accountManager);
 
   useEffect(() => {
     handleInit();
@@ -144,7 +144,7 @@ const accountManagerInfo = async(agentId)=>{
       {/* Right navbar links */}
       <ul className="navbar-nav ml-auto">
         {/* Navbar Search */}
-        <li className="nav-item">
+        <li className="nav-item me-2">
           <form class="form-inline">
             <input
               class="form-control search-input rounded-start"
@@ -162,44 +162,13 @@ const accountManagerInfo = async(agentId)=>{
               <i class="fas fa-search"></i>
             </button>
           </form>
-          {/* <Link
-            className="nav-link"
-            data-widget="navbar-search"
-            to="#"
-            role="button"
-          >
-            <i className="fas fa-search"></i>
-          </Link> */}
-          {/* <div className="navbar-search-block"> */}
-          {/* <form className="form-inline">
-              <div className="input-group input-group-sm">
-                <input
-                  className="form-control form-control-navbar"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <div className="input-group-append">
-                  <button className="btn btn-navbar" type="submit">
-                    <i className="fas fa-search"></i>
-                  </button> */}
-          {/* <button
-                    className="btn btn-navbar"
-                    type="button"
-                    data-widget="navbar-search"
-                  >
-                    <i className="fas fa-times"></i>
-                  </button> */}
-          {/* </div>
-              </div>
-            </form> */}
-          {/* </div> */}
         </li>
-        <li className="nav-item dropdown" title="Account Manager">
+        {
+          accountManager === '' ? <> </> : <>
+            <li className="nav-item dropdown me-1" title="Account Manager">
           <a className="nav-link" data-toggle="dropdown" href="#">
             <span className="fw-bold">
               <i className="fa fa-cog"></i>
-              {/* &nbsp;Account Manager */}
             </span>
           </a>
           <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -220,18 +189,12 @@ const accountManagerInfo = async(agentId)=>{
               Mobile: {accountManager?.mobileNo}
             </span>
             <div className="dropdown-divider"></div>
-            {/* <span className="dropdown-item fw-bold text-black-50">
-              Branch: {accountManager?.mobileNo} <span className="text-black-50">Dhaka,Bangladesh</span>
-            </span>
-            <span className="dropdown-item fw-bold text-black-50">
-              Email: {accountManager?.email} <span className="text-black-50">habib@gmail.com</span>
-            </span>
-            <span className="dropdown-item fw-bold text-black-50">
-              Phone: {accountManager?.email} <span className="text-black-50">01625032562</span>
-            </span> */}
           </div>
         </li>
 
+          </>
+        }
+      
         <li className="nav-item dropdown me-1">
           <a
             className="nav-link btn button-color rounded"
@@ -240,7 +203,7 @@ const accountManagerInfo = async(agentId)=>{
             href="#"
           >
             <span className="text-white fw-bold">
-            {agentInfo?.currencyName !== undefined ? agentInfo?.currencyName : "BDT"} {agentInfo?.currentBalance ?? 0}
+            {agentInfo?.currencyName !== undefined ? agentInfo?.currencyName : "AED"} {agentInfo?.currentBalance ?? 0}
             </span>
           </a>
           <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -251,7 +214,7 @@ const accountManagerInfo = async(agentId)=>{
                 className="btn text-white fw-bold button-color rounded"
                 // style={{ backgroundColor: "#02046a" }}
               >
-                {agentInfo?.currencyName !== undefined ? agentInfo?.currencyName : "BDT"} {agentInfo?.currentBalance ?? 0}
+                {agentInfo?.currencyName !== undefined ? agentInfo?.currencyName : "AED"} {agentInfo?.currentBalance ?? 0}
               </button>
             </div>
             <div className="dropdown-divider"></div>
@@ -260,17 +223,6 @@ const accountManagerInfo = async(agentId)=>{
             </Link>
           </div>
         </li>
-        {/* <li className="nav-item me-3">
-          <Link
-            to="/balance"
-            className="btn"
-            style={{ backgroundColor: "#1741c1" }}
-          >
-            <span className="text-white fw-bold">
-              BDT {agentInfo?.currentBalance}
-            </span>
-          </Link>
-        </li> */}
         {/* Profile Dropdown Menu */}
         <li className="nav-item dropdown" title="My Account">
           <a className="nav-link" data-toggle="dropdown" href="#">
@@ -284,12 +236,6 @@ const accountManagerInfo = async(agentId)=>{
               <i className="fas fa-user mr-2"></i> Profile
             </Link>
             <div className="dropdown-divider"></div>
-            {/* <Link to="/flighthistory" className="dropdown-item">
-              <i className="fas fa-tags mr-2"></i> My Booking
-            </Link>
-            <Link to="/view" className="dropdown-item">
-              <i className="fas fa-tags mr-2"></i> View Booking Information
-            </Link> */}
             <div className="dropdown-divider"></div>
             <div className="dropdown-item" onClick={handelLogout} id="logOut">
               <i className="fas fa-sign-out-alt mr-2"></i>Logout
@@ -306,39 +252,22 @@ const accountManagerInfo = async(agentId)=>{
             <span class="badge badge-warning navbar-badge">{noticeCount}</span>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-item dropdown-header">
+            {/* <span class="dropdown-item dropdown-header">
               {noticeCount} Notifications
-            </span>
-            <div class="dropdown-divider"></div>
-            {/* <Link to="#" class="dropdown-item">
-              <i class="fas fa-envelope mr-2"></i> 4 new messages
-              <span class="float-right text-muted text-sm">3 mins</span>
-            </Link>
-            <div class="dropdown-divider"></div>
-            <Link to="#" class="dropdown-item">
-              <i class="fas fa-users mr-2"></i> 8 friend requests
-              <span class="float-right text-muted text-sm">12 hours</span>
-            </Link>
-            <div class="dropdown-divider"></div>
-            <Link to="#" class="dropdown-item">
-              <i class="fas fa-file mr-2"></i> 3 new reports
-              <span class="float-right text-muted text-sm">2 days</span>
-            </Link>
-            <div class="dropdown-divider"></div> */}
-           
-            {noticeList.map((item, index) => {
+            </span> */}
+            <div class="dropdown-divider"></div>           
+            {/* {noticeList.map((item, index) => {
               return (
                 <div>
                   <Link to="#" class="dropdown-item">
                     <i class="fas fa-envelope mr-2"></i> {item.ticketNo} &nbsp;{" "}
                     {item.supportTypeName} &nbsp; {item.subjectName}
                     <p style={{ paddingLeft: "28px" }}>{item.message} </p>
-                    {/* <span class="float-right text-muted text-sm">{moment(item.createdDate).format('HH:MM A')}</span> */}
                   </Link>
                   <div class="dropdown-divider"></div>
                 </div>
               );
-            })}
+            })} */}
              <Link to="/support" class="dropdown-item dropdown-footer">
               See All Notifications
             </Link>

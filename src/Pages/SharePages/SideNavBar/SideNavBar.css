@@ -20,12 +20,12 @@
 } */
 
 .nav-sidebar .nav-item .nav-link{
-    color: #8796A1 !important;
+    color: #78797a !important;
 }
 
 
-.fa-circle:before{
-    font-size: 13px!important;
+.fa-minus:before{
+    font-size: 10px!important;
 }
 
 .nav__link__font__size{

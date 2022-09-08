@@ -331,25 +331,26 @@ const QuickPassenger = () => {
               <div className="card-body">
                 <div className="tab-content">
                   <div className="tab-pane fade show active" id="tp1">
-                    <span className="mt-1 fs-4">Quick Passenger List</span>
+                    <span className="mt-1 fs-4">Add Passenger</span>
                     <ul id="menu-standard">
                       <li id="menu-item">
                         <a
                           href="javascript:void(0)"
-                          className="btn btn-sm button-color float-right mr-1 d-print-none rounded text-white"
+                          className="btn btn-sm btn-secondary float-right mr-1 d-print-none rounded text-white"
                           data-bs-toggle="modal"
                           data-bs-target="#accountModal"
                           onClick={() => handleCreateItem()}
+                          style={{fontSize:"12px"}}
                         >
                           <span className="me-1">
                             <i class="fas fa-user-plus"></i>
                           </span>{" "}
-                          Add quick passenger
+                          Add 
                         </a>
                       </li>
                     </ul>
-                    <table className="table table-bordered align-middle text-center mt-1 table-sm">
-                      <thead>
+                    <table className="table table-bordered text-center mt-1 table-sm" style={{ width: "100%", fontSize: "13px" }}>
+                      <thead className="text-center fw-bold bg-secondary">
                         <tr>
                           <th>SL</th>
                           <th>Name</th>
@@ -361,7 +362,7 @@ const QuickPassenger = () => {
                           <th>Action</th>
                         </tr>
                       </thead>
-                      <tbody className="lh-1 table">
+                      <tbody className="lh-1 tbody">
                         {passengerList.map((item, index) => {
                           return (
                             <tr key={index}>

@@ -289,7 +289,7 @@ const Support = () => {
 									</ul>
 									<div className="tab-content">
 										<div className="tab-pane  show active" id="opened">
-											<button type="button" id="btnOpenModal" className="btn button-color fw-bold text-white my-2 rounded" data-bs-toggle="modal" data-bs-target="#supportModal">
+											<button type="button" id="btnOpenModal" className="btn btn-sm btn-secondary fw-bold text-white my-2 rounded" data-bs-toggle="modal" data-bs-target="#supportModal">
 												Add
 											</button>
 
@@ -304,17 +304,6 @@ const Support = () => {
 															<div className='row'>
 																<input type={'hidden'} ></input>
 																<div className='row my-3'>
-																	{/* <div className='col-sm-5'>
-																		<label>Support Type<span style={{ color: 'red' }}>*</span></label>
-																		<select className="form-select" value={supportTypeId} placeholder='Support Type' onChange={(e) => setSupportTypeId(e.target.value)}>
-																			<option key={0}>Select Support Type</option>
-																			{
-																				supporttypeList.map((item, index) => {
-																					return <option key={index + 1} value={item.id} >{item.name}</option>
-																				})
-																			}
-																		</select>
-																	</div> */}
 																	<div className='col-sm-5'>
 																		<label>Support Type<span style={{ color: 'red' }}>*</span></label>
 																		<select className="form-select" value={subjectId} placeholder='Subject' onChange={(e) => setSubjectId(Number(e.target.value))}>
@@ -380,8 +369,8 @@ const Support = () => {
 													</div>
 												</div>
 											</div>
-											<table className="table table-boardered" style={{ width: '100%' }}>
-												<thead>
+											<table className="table table-boardered table-sm" style={{ width: '100%',fontSize:"13px" }}>
+												<thead className="bg-secondary">
 													<tr>
 														<th>SL</th>
 														<th>Support Type</th>
@@ -393,13 +382,14 @@ const Support = () => {
 														<th>Action</th>
 													</tr>
 												</thead>
-												<tbody>
+												<tbody className='tbody'>
 													{
-
 														supportOpenedList.map((item, index) => {
 															return <tr key={index}>
 																<td>{((pageNumber - 1) * pageSize) + index + 1}</td>
-																<td>{item.subjectName}</td><td>{item.message.length > 50 ? item.message.substr(0, 50) + "..." : item.message}</td><td>{item.createdDate.split('T')[0]}</td>
+																<td>{item.subjectName}</td>
+																<td>{item.message.length > 50 ? item.message.substr(0, 50) + "..." : item.message}</td>
+																<td>{moment(item.createdDate).format("DD-MM-YYYY hh:mm:ss A")}</td>
 																<td>
 																	{item.uniqueTransID}
 																</td>
@@ -410,14 +400,13 @@ const Support = () => {
 																	{item.ticketNumber}
 																</td>
 																<td>
-																	<a href='#' data-bs-toggle="modal" data-bs-target="#supportModal" onClick={() => handleEditItem(item)}>
-																		Edit
+																	<a href='#' data-bs-toggle="modal" data-bs-target="#viewModal" onClick={() => getSupportHistory(item, 1)}>
+																		View
 																	</a>
 																</td>
 															</tr>
 														})
 													}
-
 												</tbody>
 											</table>
 											<ReactPaginate
@@ -439,6 +428,90 @@ const Support = () => {
 												breakLinkClassName={"page-link"}
 												activeClassName={"active"}
 											/>
+											<div className="modal fade" id="viewModal" tabIndex={-1} aria-labelledby="replayModalLabel" aria-hidden="true">
+												<div className="modal-dialog">
+													<div className="modal-content">
+														<div className="modal-header">
+															<h5 className="modal-title" id="replayModalLabel"> View</h5>
+															<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div className="modal-body">
+															<div className='row'>
+																<div className="container bootstrap snippets bootdey">
+																	<div className="row">
+																		<div className="col-md-12 bg-white ">
+																			<div className="chat-message">
+																				<ul className="chat">
+																					{
+																						supportHistoryList.map((item, index) => {
+																							return <li className={`text-${item.isAgent === true ? 'right' : 'left'} clearfix`} >
+																								<span className="chat-img">
+																									{/* <img src={require(`../../images/icon/${'user.png'}`)} alt=''/> */}
+
+																								</span>
+																								<div className="chat-body clearfix">
+																									<div className="header">
+																										<strong className="primary-font">{item.createdByName}</strong><br />
+																										<small className={`text-${item.isAgent === true ? 'right' : 'left'} text-muted`}><i className="fa fa-clock-o"></i> {moment(item.createdDate).format('DD-MMMM-yyyy hh:mm:ss a')}</small>
+
+
+																									</div>
+																									<p className={`text-${item.isAgent === true ? 'right' : 'left'} text-muted`}>
+																										{item.message}
+																									</p>
+																									{/* <a href={require(`../../images/icon/${'user.png'}`)} download>download</a> */}
+																									{
+																										item.fileName != null && item.fileName != "" ? <a href={environment.baseApiURL + `supporthistory/getfile/${item.fileName}`} download target="_blank">{item.fileName.length > 50 ? item.fileName.substr(0, 50) + '...' : item.fileName}</a>
+																											: <></>
+																									}
+																									{
+																										<span style={{ color: 'green' }}>{item.isAgent === true && item.isAdminRead === true ? "Seen" : ""}</span>
+																									}
+																								</div>
+																							</li>
+																						})
+																					}
+																				</ul>
+																				<ReactPaginate
+																					previousLabel={"previous"}
+																					nextLabel={"next"}
+																					breakLabel={"..."}
+																					pageCount={pageCountH}
+																					marginPagesDisplayed={2}
+																					pageRangeDisplayed={3}
+																					onPageChange={handlePageClickH}
+																					containerClassName={"pagination justify-content-center"}
+																					pageClassName={"page-item"}
+																					pageLinkClassName={"page-link"}
+																					previousClassName={"page-item"}
+																					previousLinkClassName={"page-link"}
+																					nextClassName={"page-item"}
+																					nextLinkClassName={"page-link"}
+																					breakClassName={"page-item"}
+																					breakLinkClassName={"page-link"}
+																					activeClassName={"active"}
+																				/>
+																			</div>
+																			{/* <div className="chat-box bg-white">
+																				<div className='row'>{fileCurrentName}</div>
+																				<div className="input-group">
+																					<span className="btn btn-primary btn-file">
+																						<i className='fa fa-paperclip'></i><input type="file" onChange={(e) => handleHistoryFileUpload(e.target.files[0])} />
+																					</span>
+																					<input className="form-control border no-shadow no-rounded" placeholder="Type your message here" onChange={(e) => setHistoryMessage(e.target.value)} />
+																					<span className="input-group-btn">
+																						<button className="btn btn-success no-rounded" type="button" onClick={() => handleHistorySubmit()}>Send</button>
+																					</span>
+																				</div>
+																			</div> */}
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 										<div className="tab-pane fade" id="ongoing">
 											<div className="modal fade" id="replayModal" tabIndex={-1} aria-labelledby="replayModalLabel" aria-hidden="true">
@@ -450,10 +523,8 @@ const Support = () => {
 														</div>
 														<div className="modal-body">
 															<div className='row'>
-
 																<div className="container bootstrap snippets bootdey">
 																	<div className="row">
-
 																		<div className="col-md-12 bg-white ">
 																			<div className="chat-message">
 																				<ul className="chat">
@@ -530,8 +601,8 @@ const Support = () => {
 													</div>
 												</div>
 											</div>
-											<table className='table table-boardered' style={{ width: '100%' }}>
-												<thead>
+											<table className='table table-boardered table-sm' style={{ width: '100%',fontSize:"13px" }}>
+												<thead className='bg-secondary'>
 													<tr>
 														<th>SL</th>
 														<th>Support Type</th>
@@ -546,11 +617,13 @@ const Support = () => {
 												<tbody>
 													{
 														supportOngoingList.map((item, index) => {
-															let bgColor = item.isAgentRead === true ? "white" : "#ed5c2b";
+															let bgColor = item.isAgentRead === true ? "white" : "#c1bebe";
 															console.log(bgColor)
 															return <tr key={index} style={{ background: bgColor }}>
 																<td>{((pageNumber - 1) * pageSize) + index + 1}</td>
-																<td>{item.subjectName}</td><td>{item.message.length > 50 ? item.message.substr(0, 50) + "..." : item.message}</td><td>{item.createdDate.split('T')[0]}</td>
+																<td>{item.subjectName}</td>
+																<td>{item.message.length > 50 ? item.message.substr(0, 50) + "..." : item.message}</td>
+																<td>{moment(item.createdDate).format("DD-MM-YYYY hh:mm:ss A")}</td>
 																<td>
 																	{item.uniqueTransID}
 																</td>
@@ -592,8 +665,8 @@ const Support = () => {
 											/>
 										</div>
 										<div className="tab-pane fade" id="closed">
-											<table className='table table-boardered' style={{ width: '100%' }}>
-												<thead>
+											<table className='table table-boardered table-sm' style={{ width: '100%',fontSize:"13px" }}>
+												<thead className='bg-secondary'>
 													<tr>
 														<th>SL</th>
 														<th>Support Type</th>
@@ -604,12 +677,14 @@ const Support = () => {
 														<th>Ticket Number</th>
 													</tr>
 												</thead>
-												<tbody>
+												<tbody className='tbody'>
 													{
 														supportClosedList.map((item, index) => {
 															return <tr key={index}>
 																<td>{((pageNumber - 1) * pageSize) + index + 1}</td>
-																<td>{item.subjectName}</td><td>{item.message.length > 50 ? item.message.substr(0, 50) + "..." : item.message}</td><td>{item.createdDate.split('T')[0]}</td>
+																<td>{item.subjectName}</td>
+																<td>{item.message.length > 50 ? item.message.substr(0, 50) + "..." : item.message}</td>
+																<td>{moment(item.createdDate).format("DD-MM-YYYY hh:mm:ss A")}</td>
 																<td>
 																	{item.uniqueTransID}
 																</td>
@@ -645,10 +720,7 @@ const Support = () => {
 												activeClassName={"active"}
 											/>
 										</div>
-
 									</div>
-
-
 								</div>
 							</div>
 						</div>

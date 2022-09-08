@@ -14,7 +14,7 @@ const TravelCartPanel = () => {
 
   return (
     <div className="content-wrapper search-panel-bg">
-    <ToastContainer />
+    <ToastContainer position="bottom-right" autoClose={1500}/>
     <section className="content-header"></section>
     <section className="content">
     <div className="container-fluid pt-2">

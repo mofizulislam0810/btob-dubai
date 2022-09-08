@@ -552,7 +552,7 @@ const SearchFrom = () => {
 
   return (
     <div>
-      <ToastContainer />
+      <ToastContainer position="bottom-right" autoClose={1500} />
       <form onSubmit={handleSearchFlight}>
         <div className="container">
           <div className="row">

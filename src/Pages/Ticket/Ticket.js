@@ -332,6 +332,7 @@ const Ticket = () => {
                         style={{ fontSize: "10px", lineHeight: "1px" }}
                       >
                         {ticketingList.segmentInfo?.map((item, index) => {
+                          let baggage = JSON.parse(item.baggageInfo);
                           return (
                             <>
                               <tbody key={index} className={index == 1 ? "border-top" : ""}>
@@ -468,7 +469,7 @@ const Ticket = () => {
                                       <td className="text-start bg-white p-0">
                                         BAGGAGE
                                         <span className="ms-5">
-                                          {console.log((item.baggageInfo[0]?.Amount))}
+                                          {baggage[0].Amount}{baggage[0].Units}
                                         </span>{" "}
                                       </td>
                                     </tr>
@@ -479,7 +480,7 @@ const Ticket = () => {
                                       <td className="bg-white p-0">
                                         AIRLINE PNR{" "}
                                         <span style={{ marginLeft: "31px" }}>
-                                          {item.pnr}
+                                          {ticketingList.ticketInfo?.airlinePNRs}
                                         </span>
                                       </td>
                                     </tr>

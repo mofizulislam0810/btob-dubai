@@ -9,7 +9,7 @@ const RegComplete = () => {
     return (
         <div>
             <Navbar />
-            <ToastContainer />
+            <ToastContainer position="bottom-right" autoClose={1500}/>
             <div style={{ height: "400px" }} className="d-flex align-items-center justify-content-center">
                 <div className="card rounded" style={{ width: "35%" }}>
                     <div className="card-body">

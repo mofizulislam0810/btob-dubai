@@ -81,7 +81,7 @@ const ShowFlight = (props) => {
     }
     fetchOptions();
   }
-  console.log(fareRules);
+  // console.log(fareRules);
   const [idxD, setIdxD] = useState(0);
   const [idxA, setIdxA] = useState(0);
   const [idxD1, setIdxD1] = useState(0);

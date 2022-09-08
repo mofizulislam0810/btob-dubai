@@ -6,7 +6,7 @@ import axios from "axios";
 import moment from "moment";
 import ReactPaginate from "react-paginate";
 import { Box, Button, Center, Spinner, Text } from "@chakra-ui/react";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useState } from 'react';
 import { useEffect } from 'react';
 
@@ -159,14 +159,14 @@ const Canceled = () => {
         window.open("/voucher?utid=" + utid, "_blank");
         // navigate("/voucher?utid="+utid,'_blank');
       };
-      const handleRefundReq = (utid) => {
+      const handleRefundReq = (utid,ticketNumber) => {
         var result = window.confirm("Are you sure to request refund");
         if (result) {
           console.log(environment.headerToken);
           const refundReq = async () => {
             await axios
               .put(
-                environment.ticketRefundRequest + "/" + utid,
+                environment.ticketRefundRequest + "/" + utid + "/" + ticketNumber,
                 null,
                 environment.headerToken
               )
@@ -174,6 +174,7 @@ const Canceled = () => {
                 if (res.data > 0) {
                   // window.location.reload();
                   toast.success("Thanks! Refund successfully requested..");
+                  handleGetList(currentPageNumber)
                 }
               });
           };
@@ -188,6 +189,7 @@ const Canceled = () => {
         <div>
         <Navbar></Navbar>
          <SideNavBar></SideNavBar>
+         <ToastContainer />
          <div className="content-wrapper search-panel-bg">
       <section className="content-header"></section>
       <section className="content">
@@ -297,75 +299,79 @@ const Canceled = () => {
                                       : ""}
                                   </td>
                                   <td className="text-left">
-                                  
                                       <>
-                                        <a href="javascript:void(0)"
-                                          title="View Booking"
-                                          onClick={() =>
-                                            handleBookedView(
-                                              item.uniqueTransID
-                                            )
-                                          }
-                                        >
-                                          <Button
-                                            border="2px solid"
-                                            colorScheme="messenger"
-                                            variant="outline"
-                                            size="xsm"
-                                            borderRadius="16px"
-                                            p='1'
-                                          >
-                                            <span style={{fontSize:"10px"}}>VB</span>
-                                          </Button>
-                                        </a>
-                                        {/* &nbsp;{" "}
-                                        <a href="javascript:void(0)"
-                                          title="Booking Cancel"
-                                          onClick={() =>
-                                            handleCancel(
-                                              item.status,
-                                              item.uniqueTransID,
-                                              item.pnr,
-                                              item.ticketNumber
-                                            )
-                                          }
-                                        >
-                                          <Button
-                                            border="2px solid"
-                                            colorScheme="messenger"
-                                            variant="outline"
-                                            size="xsm"
-                                            borderRadius="16px"
-                                            p='1'
-                                          >
-                                            <span style={{fontSize:"10px"}}>BS</span>
-                                          </Button>
-                                        </a>
-                                        &nbsp;{" "}
-                                        <a href="javascript:void(0)"
-                                          title="Raise Support"
-                                          onClick={() =>
-                                            handleRaiseSupport(
-                                              item.status,
-                                              item.uniqueTransID,
-                                              item.pnr,
-                                              item.ticketNumber
-                                            )
-                                          }
-                                        >
-                                          <Button
-                                            border="2px solid"
-                                            colorScheme="messenger"
-                                            variant="outline"
-                                            size="xsm"
-                                            borderRadius="16px"
-                                            p='1'
-                                          >
-                                            <span style={{fontSize:"10px"}}>RS</span>
-                                          </Button>
-                                        </a> */}
+                                       {
+                                         item.status === "Booking Cancelled" ? <>
+                                         <a
+                                              href="javascript:void(0)"
+                                              title="View Booking"
+                                              onClick={() =>
+                                                handleBookedView(
+                                                  item.uniqueTransID
+                                                )
+                                              }
+                                            >
+                                              <Button
+                                                border="2px solid"
+                                                colorScheme="messenger"
+                                                variant="outline"
+                                                size="xsm"
+                                                borderRadius="16px"
+                                                p='1'
+                                              >
+                                                <span style={{ fontSize: "10px" }}>VB</span>
+                                              </Button>
+                                            </a>
+                                         </> :
+                                         item.status === "Ticket Cancelled" && item.refundStatus == null ? (
+                                          <>
+                                            <a
+                                              href="javascript:void(0)"
+                                              title="Refund Request"
+                                              onClick={() =>
+                                                handleRefundReq(
+                                                  item.uniqueTransID,item.ticketNumber
+                                                )
+                                              }
+                                            >
+                                              <Button
+                                                border="2px solid"
+                                                colorScheme="messenger"
+                                                variant="outline"
+                                                size="xsm"
+                                                borderRadius="16px"
+                                                p='1'
+                                              >
+                                                <span style={{ fontSize: "10px" }}>RR</span>
+                                              </Button>
+                                            </a>
+                                          </>
+                                        ) : (
+                                          <>
+                                          <a
+                                              href="javascript:void(0)"
+                                              title="View Booking"
+                                              onClick={() =>
+                                                handleViewTicket(
+                                                  item.uniqueTransID
+                                                )
+                                              }
+                                            >
+                                              <Button
+                                                border="2px solid"
+                                                colorScheme="messenger"
+                                                variant="outline"
+                                                size="xsm"
+                                                borderRadius="16px"
+                                                p='1'
+                                              >
+                                                <span style={{ fontSize: "10px" }}>VT</span>
+                                              </Button>
+                                            </a>
+                                          </>
+                                        )
+                                       }
                                       </>
-                                    
                                   </td>
                                 </tr>
                               );

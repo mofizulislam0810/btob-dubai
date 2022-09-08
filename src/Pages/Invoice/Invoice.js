@@ -89,7 +89,7 @@ const Invoice = () => {
       <SideNavBar></SideNavBar>
       <div className="content-wrapper search-panel-bg">
         <section className="content-header"></section>
-        <ToastContainer />
+        <ToastContainer position="bottom-right" autoClose={1500}/>
         <section className="content">
       {/* <div className="container mt-3">
         <div className="row">

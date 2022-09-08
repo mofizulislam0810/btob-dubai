@@ -97,7 +97,7 @@ const ProfilePagePanel = () => {
   return (
     <div>
       <div className="content-wrapper search-panel-bg">
-        <ToastContainer />
+        <ToastContainer position="bottom-right" autoClose={1500}/>
         <section className="content-header">
           <div className="container-fluid">
             <div className="row mb-2">

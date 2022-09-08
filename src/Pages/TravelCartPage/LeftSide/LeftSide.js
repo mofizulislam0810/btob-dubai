@@ -47,7 +47,7 @@ const LeftSide = () => {
         fileExt === "pdf"
       )
     ) {
-      alert("sorry! invalid file type..");
+      toast.error("sorry! invalid file type..");
       if (flag === 1) {
         setAdult((ob) =>
           produce(ob, (v) => {
@@ -114,7 +114,7 @@ const LeftSide = () => {
         fileExt === "pdf"
       )
     ) {
-      alert("sorry! invalid file type..");
+      toast.error("sorry! invalid file type..");
       if (flag === 1) {
         setAdult((ob) =>
           produce(ob, (v) => {
@@ -287,7 +287,8 @@ const LeftSide = () => {
       passportDate: "",
       passportMonth: "",
       passportYear: "",
-      gender: "Male"
+      gender: "Male",
+      countryCode: "BD"
     };
     adultList.push(newObj);
   }
@@ -304,11 +305,14 @@ const LeftSide = () => {
         ) /
         (1000 * 60 * 60 * 24 * 30)
       )
-      // > 6
-      // ? ""
-      // : alert("Passport expiry date does not valid")
+      > 6
+      ? ""
+      : toast.error("Passport expiry date does not valid")
       : ""
   );
+
+ 
+
 
   let dataObj = courtries.find((i) => i.name === adult[0].nationality);
   // console.log(dataObj!=undefined?dataObj.dial_code:"")
@@ -331,6 +335,7 @@ const LeftSide = () => {
       passportMonth: "",
       passportYear: "",
       gender: "Male",
+      countryCode: "BD"
     };
     childList.push(newObj);
   }
@@ -356,6 +361,7 @@ const LeftSide = () => {
       passportMonth: "",
       passportYear: "",
       gender: "Male",
+      countryCode: "BD"
     };
     infantList.push(newObj);
   }
@@ -379,6 +385,49 @@ const LeftSide = () => {
   localStorage.setItem("child", JSON.stringify(child));
   localStorage.setItem("infant", JSON.stringify(infant));
   localStorage.setItem("contact", JSON.stringify(contact));
+
+  child.map((i) =>
+  i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
+    ? Math.floor(
+      Math.abs(
+        new Date(
+          i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
+        ) - new Date()
+      ) /
+      (1000 * 60 * 60 * 24 * 30)
+    )
+    > 6
+    ? ""
+    : toast.error("Passport expiry date does not valid")
+    : ""
+);
+
+infant.map((i) =>
+i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
+  ? Math.floor(
+    Math.abs(
+      new Date(
+        i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
+      ) - new Date()
+    ) /
+    (1000 * 60 * 60 * 24 * 30)
+  )
+  > 6
+  ? ""
+  : toast.error("Passport expiry date does not valid")
+  : ""
+);
+
+ infant.map((item,index)=>{
+      const ageInYears = moment().diff(moment(item.date+'/'+item.month+'/'+item.year, "DD/MM/YYYY"), 'months'); 
+      console.log(ageInYears);      
+      if (ageInYears > 24) { 
+        toast.error(`Infant ${index+1} age is more than 2 years!`);
+        return;
+      }
+  })
+
+
 
   const bookingData = (e) => {
     // infant.map((item,index)=>{
@@ -412,7 +461,7 @@ const LeftSide = () => {
           email: contact[0].email,
           phone: contact[0].mobailNumber,
           phoneCountryCode: contact[0].mobailCode,
-          countryCode: "",
+          countryCode: item.countryCode,
           cityName: "",
         },
         documentInfo: {
@@ -426,8 +475,8 @@ const LeftSide = () => {
               "-" +
               item.passportDate : "",
           frequentFlyerNumber: "",
-          issuingCountry: "BD",
-          nationality: "BD",
+          issuingCountry: item.issuingCountry,
+          nationality: item.nationality,
         },
         passengerType: "ADT",
         gender: item.gender,
@@ -457,7 +506,7 @@ const LeftSide = () => {
           email: contact[0].email,
           phone: contact[0].mobailNumber,
           phoneCountryCode: contact[0].mobailCode,
-          countryCode: "",
+          countryCode: item.countryCode,
           cityName: "",
         },
         documentInfo: {
@@ -471,8 +520,8 @@ const LeftSide = () => {
               "-" +
               item.passportDate : "",
           frequentFlyerNumber: "",
-          issuingCountry: "",
-          nationality: "",
+          issuingCountry: item.issuingCountry,
+          nationality: item.nationality,
         },
         passengerType: "CNN",
         gender: item.gender,
@@ -495,7 +544,7 @@ const LeftSide = () => {
           email: contact[0].email,
           phone: contact[0].mobailNumber,
           phoneCountryCode: contact[0].mobailCode,
-          countryCode: "",
+          countryCode: item.countryCode,
           cityName: "",
         },
         documentInfo: {
@@ -509,8 +558,8 @@ const LeftSide = () => {
               "-" +
               item.passportDate : "",
           frequentFlyerNumber: "",
-          issuingCountry: "",
-          nationality: "",
+          issuingCountry: item.issuingCountry,
+          nationality: item.nationality,
         },
         passengerType: "INF",
         gender: item.gender,
@@ -1052,6 +1101,7 @@ const LeftSide = () => {
                                       produce(ob, (v) => {
                                         v[index].nationality =
                                           nationality;
+                                        v[index].countryCode = nationality;
                                       })
                                     );
                                   }}
@@ -1719,6 +1769,7 @@ const LeftSide = () => {
                                       produce(ob, (v) => {
                                         v[index].nationality =
                                           nationality;
+                                        v[index].countryCode = nationality;
                                       })
                                     );
                                   }}
@@ -2414,6 +2465,7 @@ const LeftSide = () => {
                                       produce(ob, (v) => {
                                         v[index].nationality =
                                           nationality;
+                                        v[index].countryCode = nationality;
                                       })
                                     );
                                   }}

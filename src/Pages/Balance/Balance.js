@@ -498,7 +498,7 @@ const Balance = () => {
         <div className="content-wrapper search-panel-bg">
           <section className="content-header"></section>
           <section className="content">
-            <ToastContainer />
+            <ToastContainer position="bottom-right" autoClose={1500}/>
             <form
               className="mx-5 mt-3"
               encType="multipart/form-data"

@@ -197,6 +197,17 @@ const SideNavBar = () => {
                 </li>
               </ul>
             </li>
+            <li className="nav-item">
+              <Link to="/quickpassenger" className="nav-link">
+                {/* <i class="nav-icon fas fa-tasks"></i> */}
+                {/* <i className="nav-icon fas fa-tachometer-alt"></i> */}
+                <i className="nav-icon fas fa-users"></i>
+                <p>
+                  Add Passenger
+                  {/* <i className="right fas fa-angle-left"></i> */}
+                </p>
+              </Link>
+            </li>
             {/* <li className="nav-item">
               <Link to="/markup" className="nav-link">
                 <i class="nav-icon fas fa-comments-dollar"></i>

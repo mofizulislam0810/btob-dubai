@@ -191,7 +191,7 @@ const Registration = () => {
     <VStack>
     <div className="hold-transition py-5 w-100 mb-5">
       <div className="login-box" style={{ minWidth: "70%", marginLeft: "15%" }}>
-        <ToastContainer />
+        <ToastContainer position="bottom-right" autoClose={1500}/>
 
         <div className="card">
           <div className="card-header text-center">

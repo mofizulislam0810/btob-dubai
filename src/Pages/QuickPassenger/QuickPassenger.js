@@ -324,7 +324,7 @@ const QuickPassenger = () => {
       <SideNavBar></SideNavBar>
       <div className="content-wrapper search-panel-bg px-4">
         <section className="content-header"></section>
-        <ToastContainer />
+        <ToastContainer position="bottom-right" autoClose={1500}/>
         <section className="content">
           <div className="mx-5 mt-3" style={{ minHeight: "500px" }}>
             <div className="card pb-5">
@@ -348,7 +348,7 @@ const QuickPassenger = () => {
                         </a>
                       </li>
                     </ul>
-                    <table className="table table-bordered align-middle table-striped text-center mt-3">
+                    <table className="table table-bordered align-middle text-center mt-1 table-sm">
                       <thead>
                         <tr>
                           <th>SL</th>
@@ -361,7 +361,7 @@ const QuickPassenger = () => {
                           <th>Action</th>
                         </tr>
                       </thead>
-                      <tbody className="lh-1">
+                      <tbody className="lh-1 table">
                         {passengerList.map((item, index) => {
                           return (
                             <tr key={index}>

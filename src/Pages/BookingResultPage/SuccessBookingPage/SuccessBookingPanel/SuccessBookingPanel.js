@@ -143,13 +143,13 @@ const SuccessBookingPanel = () => {
                       </thead>
                       <tbody>
                         <tr>
-                          <th>Issue Before:</th>
-                          <td style={{ color: 'red' }}>
-                            {moment(bookData.data?.item1.ticketingTimeLimit).format("DD-MMMM-yyyy")}
-                          </td>
                           <td className="fw-bold">Triplover Ref:</td>
                           <td>
                             {bookData.data?.item1.uniqueTransID}
+                          </td>
+                          <td className="fw-bold">PNR</td>
+                          <td>
+                            {bookData.data?.item1.pnr}
                           </td>
                         </tr>
                         <tr>
@@ -157,18 +157,25 @@ const SuccessBookingPanel = () => {
                           <td>
                             {bookData.data?.item1.bookingStatus}
                           </td>
-                          <td className="fw-bold">PNR</td>
-                          <td>
-                            {bookData.data?.item1.pnr}
-                          </td>
-                        </tr>
-
-                        <tr>
                           <td className="fw-bold">Booked By:</td>
                           <td>
                             {sessionStorage.getItem("agentName")}
                           </td>
                         </tr>
+
+                        {
+                          bookData.data?.item1.ticketingTimeLimit !== '' ? <>
+                           <tr>
+                            <th>Issue Before:</th>
+                          <td style={{ color: 'red' }}>
+                            {bookData.data?.item1.ticketingTimeLimit}
+                          </td>
+                        </tr>
+                          </> : <>
+                          
+                          </>
+                        }
+                       
                       </tbody>
                     </table>
 

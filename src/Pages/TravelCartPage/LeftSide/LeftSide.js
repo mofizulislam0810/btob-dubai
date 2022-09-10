@@ -2940,7 +2940,7 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
                   <div className="col-lg-12 text-center">
                     <button
                       type="submit"
-                      className="btn button-color text-white fw-bold w-25 mt-2 rounded"
+                      className="btn button-color text-white fw-bold w-25 mt-2 rounded btn-sm"
                     >
                       Book Now
                     </button>

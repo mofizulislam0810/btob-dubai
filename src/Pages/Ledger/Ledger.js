@@ -168,7 +168,10 @@ const Ledger = () => {
                         >
                           <thead className="text-center fw-bold bg-secondary">
                             <tr>
-                              <th>Transaction Date</th>
+                              <th>Booking ID</th>
+                              <th>PNR</th>
+                              <th>Ticket Number</th>
+                              <th>Passenger Name</th>
                               <th className="text-start">Description</th>
                               <th>Created By</th>
                               <th>Type</th>
@@ -192,14 +195,10 @@ const Ledger = () => {
                                 return (
                                   <>
                                     <tr>
-                                      <td>{item.balanceTypeName}{" "}
-                                        <span style={{ fontSize: "13px" }}>
-                                          (
-                                          {moment(item.createdDate).format(
-                                            "DD-MMMM-yyyy hh:mm:ss A"
-                                          )}
-                                          )
-                                        </span></td>
+                                      <td>{item.uniqueTransID}</td>
+                                      <td>{item.pnr}</td>
+                                      <td>{item.ticketNumbers}</td>
+                                      <td>{item.passengerName}</td>
                                       <td>{item.description}</td>
                                       <td className="text-center">{item.createdByName}</td>
                                       <td>

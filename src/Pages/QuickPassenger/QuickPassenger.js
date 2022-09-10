@@ -209,7 +209,7 @@ const QuickPassenger = () => {
           });
         console.log(response);
         if (response !== undefined && response.data > 0) {
-          handleGetPassengers();
+          handleGetPassengers(currentPageNumber)
           toast.success("Thanks! Data deleted successfully..");
         } else {
           toast.error("Sorry! Data not deleted..");

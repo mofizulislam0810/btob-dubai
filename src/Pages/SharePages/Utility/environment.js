@@ -1,6 +1,6 @@
-const baseURL='http://localhost:7236/';
+// const baseURL='http://localhost:7236/';
 // const baseURL='http://52.221.202.198:83/';
-// const baseURL='http://13.212.45.180:81/';
+const baseURL='http://13.212.45.180:81/';
 const baseApiURL =baseURL+ 'api/';
 const tokenData = JSON.parse(sessionStorage.getItem('token'));
 let headerToken = { headers: { Authorization: '' } };
@@ -23,6 +23,7 @@ export const environment = {
   ticketingFlight: baseApiURL + 'Ticket',
   priceCheck: baseApiURL + 'RePrice',
   getFareRules:baseApiURL + 'FareRules',
+  getLastTicketTime:baseApiURL + 'pnr',
 
   
   getCalendarEventBooking : baseApiURL + 'B2BDashboard/GetCalendarEventBooking',
@@ -104,5 +105,4 @@ export const environment = {
   getTicketingDetails:baseApiURL + 'B2BReport/AirTicketingDetails',
   airTicketingSearch:baseApiURL+'B2BReport/AirTicketingSearch',
   searchLogs : baseApiURL+"B2BReport/SearchLogsByUser",
-
 }

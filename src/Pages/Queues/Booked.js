@@ -211,10 +211,10 @@ const Booked = () => {
                       >
                         <thead className="text-center fw-bold bg-secondary">
                           <tr>
-                            <th style={{width:"5%"}}>SL</th>
-                            <th className='text-start'>Lead Pax Name</th>
+                            {/* <th style={{width:"5%"}}>SL</th> */}
                             <th>Booking Date</th>
-                            <th>Time Limit</th>
+                            <th className='text-start'>Passenger Name</th>
+                            {/* <th>Time Limit</th> */}
                             <th>Flight Date</th>
                             <th>Route</th>
                             <th>Booking ID</th>
@@ -230,18 +230,18 @@ const Booked = () => {
                             ticketingList.map((item, index) => {
                               return (
                                 <tr key={index}>
-                                  <td>
+                                  {/* <td>
                                     {(currentPageNumber - 1) * pageSize +
                                       index +
                                       1}
-                                  </td>
-                                  <td className='text-start'>{item.leadPaxName}</td>
-                                  <td>
+                                  </td> */}
+                                   <td>
                                     {moment(item.bookingDate).format(
                                       "DD-MM-YYYY hh:mm:ss A"
                                     )}
                                   </td>
-                                  <td></td>
+                                  <td className='text-start'>{item.leadPaxName}</td>
+                                  {/* <td></td> */}
                                   {/* <td>
                                     {item.issueDate != null ? (
                                       moment(item.issueDate).format(

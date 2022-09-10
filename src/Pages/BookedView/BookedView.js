@@ -13,6 +13,8 @@ import logo from "../../images/logo/logo-combined.png";
 import ReactToPrint from "react-to-print";
 import airports from "../../JSON/airports.json";
 import Footer from "../SharePages/Footer/Footer";
+import { Button } from "@chakra-ui/react";
+import { toast, ToastContainer } from "react-toastify";
 
 const BookedView = () => {
   const { setLoading, setTicketData, loading } = useAuth();
@@ -30,6 +32,9 @@ const BookedView = () => {
   let [passengerListEdited, setPassengerListEdited] = useState([]);
   let [totalPriceEdited, setTotalPriceEdited] = useState(0);
   let [isFareHide, setIsFareHide] = useState(false);
+  let [lastTicketTime,setLastTicketTime] = useState('');
+  let [isLoading,setIsLoading] = useState(false);
+
   const location = useLocation();
   console.log(ticketingList);
   const handleGetList = () => {
@@ -41,6 +46,7 @@ const BookedView = () => {
         environment.headerToken
       );
       setTicketingList(response.data.data);
+      setLastTicketTime(response.data.data[0]?.lastTicketTimeNote)
       console.log(response.data.data);
       // alert(ticketingList[0].uniqueTransID)
       handleGetPassengerList(
@@ -107,7 +113,7 @@ const BookedView = () => {
         environment.headerToken
       );
       if (response.data > 0) {
-        alert("Thanks! data updated successfully..");
+        toast.success("Thanks! data updated successfully..");
         handleGetList();
       }
     };
@@ -161,10 +167,42 @@ const BookedView = () => {
     fetchOptions();
   };
 
+  const handleGetTime=(referenceLog)=>{
+    setIsLoading(true);
+    // alert(referenceLog);
+    const getTimeReq = async () => {
+      await axios
+        .post(
+          environment.getLastTicketTime,
+          JSON.parse(referenceLog),
+          environment.headerToken
+        )
+        .then((res) => {
+          // console.log(res.data.item1)
+          // console.log(res.data.item1?.remarks)
+          if(res.data.item1 !== undefined && res.data.item1 !== null && res.data.item1?.remarks !== null && res.data.item1?.remarks !== ""){
+            // console.log('SET Ticketing Time');
+            setLastTicketTime(res.data.item1?.remarks);
+          }else{
+            toast.error("Please try again after five minutes.")
+            setIsLoading(false);
+          }
+        })
+        .catch((res) => {
+          toast.error("Please try again after five minutes.")
+          setIsLoading(false);
+        });
+    };
+    getTimeReq();
+  }
+
+ console.log(lastTicketTime);
+
   return (
     <div>
       <Navbar></Navbar>
       <SideNavBar></SideNavBar>
+      <ToastContainer position="bottom-right" autoClose={1500} />
       {
         loading ? <>
          <Loading flag={2} loading={loading}></Loading>
@@ -307,7 +345,7 @@ const BookedView = () => {
                             <tr>
                               <th>Issue Before:</th>
                               <td className="bg-light">
-                                <strong>{ticketingList[0]?.timeTicks}</strong>
+                                <strong> {ticketingList[0]?.lastTicketTimeNote}</strong>
                               </td>
                               <td className="fw-bold">PNR</td>
                               <td className="bg-light">
@@ -792,7 +830,33 @@ const BookedView = () => {
                             <tr>
                               <th>Issue Before:</th>
                               <td  style={{color:'red'}}>
-                               {ticketingList[0]?.timeTicks}
+                              {
+                                lastTicketTime !== '' && lastTicketTime !== null && lastTicketTime !== undefined? lastTicketTime : <>
+                                  <a href="javascript:void(0)"
+                                          title="Last Ticketing Time"
+                                          onClick={() =>
+                                            handleGetTime(
+                                              ticketingList[0]?.referenceLog,
+                                            )
+                                          }
+                                        >
+                                          <Button
+                                            isLoading = {isLoading}
+                                            border="2px solid"
+                                            colorScheme='blue'
+                                            variant="outline"
+                                            size="xsm"
+                                            borderRadius="16px"
+                                            p="1"
+                                            m="1"
+                                            // disabled = {click}
+                                          >
+                                            <span style={{fontSize:"10px"}}>Get Date</span>
+                                          </Button>
+                                    </a>
+                                </>  
+                                }
+                                    
                               </td>
                               <td className="fw-bold">PNR</td>
                               <td>

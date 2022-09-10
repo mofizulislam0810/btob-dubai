@@ -476,10 +476,9 @@ const Queues = () => {
                         >
                           <thead className="text-center fw-bold bg-secondary">
                             <tr>
-                              <th>SL</th>
-                              <th>Lead Pax Name</th>
                               <th>Booking Date</th>
                               <th>Issue Date</th>
+                              <th>Passenger Name</th>
                               <th>Flight Date</th>
                               <th>Route</th>
                               <th>Booking ID</th>
@@ -495,12 +494,11 @@ const Queues = () => {
                               ticketingList.map((item, index) => {
                                 return (
                                   <tr key={index}>
-                                    <td>
+                                    {/* <td>
                                       {(currentPageNumber - 1) * pageSize +
                                         index +
                                         1}
-                                    </td>
-                                    <td>{item.leadPaxName}</td>
+                                    </td> */}
                                     <td>
                                       {moment(item.bookingDate).format(
                                         "DD-MM-YYYY hh:mm:ss A"
@@ -515,6 +513,8 @@ const Queues = () => {
                                         <></>
                                       )}
                                     </td>
+                                    <td>{item.leadPaxName}</td>
+                                    
                                     <td>
                                       {item.departure != null ? (
                                         moment(item.departure).format(

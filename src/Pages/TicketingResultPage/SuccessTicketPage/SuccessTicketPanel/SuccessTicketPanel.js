@@ -215,7 +215,7 @@ const SuccessTicketPanel = () => {
                           </tr> */}
                             <tr>
                               <td className="fw-bold">JOURNEY TYPE</td>
-                              <td>Round way</td>
+                              <td>{ticketData.item1?.flightInfo.directions[0] !==undefined && ticketData.item1?.flightInfo.directions[1] !==undefined ? "Return" : "Oneway"}</td>
                             </tr>
                             <tr>
                               <td className="fw-bold">STATUS</td>

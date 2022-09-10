@@ -216,10 +216,10 @@ const Issued = () => {
                                                 >
                                                     <thead className="text-center fw-bold bg-secondary">
                                                         <tr>
-                                                            <th>SL</th>
-                                                            <th className='text-start'>Lead Pax Name</th>
+                                                            {/* <th>SL</th> */}
                                                             <th>Booking Date</th>
                                                             <th>Issue Date</th>
+                                                            <th className='text-start'>Passenger Name</th>
                                                             <th>Flight Date</th>
                                                             <th>Route</th>
                                                             <th>Booking ID</th>
@@ -235,12 +235,11 @@ const Issued = () => {
                                                             ticketingList.map((item, index) => {
                                                                 return (
                                                                     <tr key={index}>
-                                                                        <td>
+                                                                        {/* <td>
                                                                             {(currentPageNumber - 1) * pageSize +
                                                                                 index +
                                                                                 1}
-                                                                        </td>
-                                                                        <td className='text-start'>{item.leadPaxName}</td>
+                                                                        </td> */}
                                                                         <td>
                                                                             {moment(item.bookingDate).format(
                                                                                 "DD-MM-YYYY hh:mm:ss A"
@@ -255,6 +254,7 @@ const Issued = () => {
                                                                                 <></>
                                                                             )}
                                                                         </td>
+                                                                        <td className='text-start'>{item.leadPaxName}</td>
                                                                         <td>
                                                                             {item.departure != null ? (
                                                                                 moment(item.departure).format(

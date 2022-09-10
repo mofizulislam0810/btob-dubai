@@ -13,7 +13,7 @@ import RevoCalendar from "revo-calendar";
 const DashboardPanel = () => {
  const [eventList,setEventList] = useState([]);
   const getEventBooking = async() => {
-    const response = await axios.get(environment.getCalendarEventBooking+`/2022/7`,environment.headerToken);
+    const response = await axios.get(environment.getCalendarEventBooking+`/2022/8`,environment.headerToken);
     console.log(response);
     setEventList(await response.data.map((obj) => {
       var date = new Date(obj.date);

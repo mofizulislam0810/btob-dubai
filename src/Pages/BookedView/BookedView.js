@@ -333,7 +333,7 @@ const BookedView = () => {
                               <td className="bg-light">
                                 {moment(ticketingList[0]?.bookingDate).format("DD-MMMM-yyyy")}
                               </td>
-                              <td className="fw-bold">Triplover Ref:</td>
+                              <td className="fw-bold">Booking ID:</td>
                               <td className="bg-light">
                                 <strong>
                                   {" "}
@@ -822,7 +822,7 @@ const BookedView = () => {
                               <td>
                                 {moment(ticketingList[0]?.bookingDate).format("DD-MMMM-yyyy")}
                               </td>
-                              <td className="fw-bold">Triplover Ref:</td>
+                              <td className="fw-bold">Booking ID:</td>
                               <td>
                                   {ticketingList[0]?.uniqueTransID}
                               </td>
@@ -851,7 +851,7 @@ const BookedView = () => {
                                             m="1"
                                             // disabled = {click}
                                           >
-                                            <span style={{fontSize:"10px"}}>Get Date</span>
+                                            <span style={{fontSize:"10px"}}>Get Limit</span>
                                           </Button>
                                     </a>
                                 </>  

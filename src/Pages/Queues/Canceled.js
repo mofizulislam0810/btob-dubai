@@ -220,7 +220,7 @@ const Canceled = () => {
                             <th>Passenger Name</th>
                             <th>Flight Date</th>
                             <th>Route</th>
-                            <th>Reference ID</th>
+                            <th>Booking ID</th>
                             <th>PNR</th>
                             <th>Ticket Number</th>
                             <th>Total Price</th>

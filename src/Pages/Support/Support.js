@@ -289,7 +289,7 @@ const Support = () => {
 									</ul>
 									<div className="tab-content">
 										<div className="tab-pane  show active" id="opened">
-											<button type="button" id="btnOpenModal" className="btn btn-sm btn-secondary fw-bold text-white my-2 rounded" data-bs-toggle="modal" data-bs-target="#supportModal">
+											<button type="button" id="btnOpenModal" className="btn btn-sm btn-secondary text-white my-2 rounded" style={{fontSize:"12px"}} data-bs-toggle="modal" data-bs-target="#supportModal">
 												Add
 											</button>
 
@@ -305,7 +305,7 @@ const Support = () => {
 																<input type={'hidden'} ></input>
 																<div className='row my-3'>
 																	<div className='col-sm-5'>
-																		<label>Support Type<span style={{ color: 'red' }}>*</span></label>
+																		<label  class="form-label">Support Type<span style={{ color: 'red' }}>*</span></label>
 																		<select className="form-select" value={subjectId} placeholder='Subject' onChange={(e) => setSubjectId(Number(e.target.value))}>
 																			<option key={0}>Select Type</option>
 																			{
@@ -315,34 +315,36 @@ const Support = () => {
 																			}
 																		</select>
 																	</div>
+																	<div className='col-sm-5'>
+																		<label  class="form-label">Booking ID</label>
+																		<input class="form-control" type={'text'} placeholder={'Booking ID'} value={uniqueTransID} className="form-control" onChange={(e) => setUniqueTransID()}></input>
+																	</div>
+																	<div className='col-sm-5'>
+																		<label  class="form-label">PNR</label>
+																		<input class="form-control" type={'text'} placeholder={'PNR'} value={pnr} className="form-control" onChange={(e) => setPNR()}></input>
+																	</div>
+																	<div className='col-sm-5'>
+																		<label  class="form-label">Ticket Number</label>
+																		<input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumber === "null" ? "" : ticketNumber} className="form-control" onChange={(e) => setTicketno()}></input>
+																	</div>
 																	{
-																		
-																		subjectId===4?<>		<div className='col-sm-5'>
-																		<label></label>
-																		<input   type="radio" value={refundType}  name="refundType" checked={refundType == "Full"}
-																				onClick={() => { setRefundType("Full"); }} />&nbsp; Full &nbsp;&nbsp;
-	
-																			<input   type="radio" disabled value={refundType}  name="refundType" checked={refundType == "Partial"}
-																				onClick={() => { setRefundType("Partial"); }} />&nbsp; Partial &nbsp;&nbsp;
-	
-																			<input   type="radio" disabled value={refundType}  name="refundType" checked={refundType == "Split"}
-																				onClick={() => { setRefundType("Split"); }} /> &nbsp;Split
-																			
-																		</div></>:<></>
+																		subjectId === 2 ? 
+																		<>		
+																			<div className='col-sm-5'>
+																				<label  class="form-label my-2">Refund Type</label><br></br>
+																				<input type="radio" value={refundType} name="refundType" checked={refundType == "Full"}
+																					onClick={() => { setRefundType("Full"); }} />&nbsp; Full &nbsp;&nbsp;
+
+																				<input type="radio" disabled value={refundType} name="refundType" checked={refundType == "Partial"}
+																					onClick={() => { setRefundType("Partial"); }} />&nbsp; Partial &nbsp;&nbsp;
+
+																				<input type="radio" disabled value={refundType} name="refundType" checked={refundType == "Split"}
+																					onClick={() => { setRefundType("Split"); }} /> &nbsp;Split
+
+																			</div>
+																		</> : <>
+																		</>
 																	}
-															
-																	<div className='col-sm-5'>
-																		<label>Reference</label>
-																		<input type={'text'} placeholder={'Reference'} value={uniqueTransID} className="form-control" onChange={(e) => setUniqueTransID()}></input>
-																	</div>
-																	<div className='col-sm-5'>
-																		<label>PNR</label>
-																		<input type={'text'} placeholder={'PNR'} value={pnr} className="form-control" onChange={(e) => setPNR()}></input>
-																	</div>
-																	<div className='col-sm-5'>
-																		<label>Ticket Number</label>
-																		<input type={'text'} placeholder={'Ticket Number'} value={ticketNumber === "null" ? "" : ticketNumber} className="form-control" onChange={(e) => setTicketno()}></input>
-																	</div>
 
 																</div>
 																<div className='row mb-3'>
@@ -376,7 +378,7 @@ const Support = () => {
 														<th>Support Type</th>
 														<th>Message</th>
 														<th>Date</th>
-														<th>Reference</th>
+														<th>Booking ID</th>
 														<th>PNR</th>
 														<th>Ticket Number</th>
 														<th>Action</th>
@@ -608,7 +610,7 @@ const Support = () => {
 														<th>Support Type</th>
 														<th>Message</th>
 														<th>Date</th>
-														<th>Reference</th>
+														<th>Booking ID</th>
 														<th>PNR</th>
 														<th>Ticket Number</th>
 														<th>Action</th>
@@ -672,7 +674,7 @@ const Support = () => {
 														<th>Support Type</th>
 														<th>Message</th>
 														<th>Date</th>
-														<th>Reference</th>
+														<th>Booking ID</th>
 														<th>PNR</th>
 														<th>Ticket Number</th>
 													</tr>

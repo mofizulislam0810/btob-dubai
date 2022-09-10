@@ -1171,6 +1171,7 @@ const Balance = () => {
                               <th>Date</th>
                               <th>Status</th>
                               <th>Amount</th>
+                              <th>Image</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -1211,6 +1212,10 @@ const Balance = () => {
                                                 : ""}
                                       </td>
                                       <td>{item.currencyName} {item.amount}</td>
+                                      <td><a href="https://thumbs.dreamstime.com/b/smooth-nature-pic-full-hd-126695318.jpg" download>
+                                          <img src="https://thumbs.dreamstime.com/b/smooth-nature-pic-full-hd-126695318.jpg" alt="W3Schools" width="50" height="15"/>
+                                          </a>
+                                      </td>
                                     </tr>
                                   );
                                 }) : <></>}
@@ -1242,9 +1247,10 @@ const Balance = () => {
                         <button
                           onClick={() => handleCreateItem()}
                           type="button"
-                          className="btn button-color fw-bold text-white my-2 rounded"
+                          className="btn btn-secondary btn-sm text-white my-2 rounded"
                           data-bs-toggle="modal"
                           data-bs-target="#accountModal"
+                          style={{fontSize:"12px"}}
                         >
                           Add
                         </button>

@@ -143,7 +143,7 @@ const SuccessBookingPanel = () => {
                       </thead>
                       <tbody>
                         <tr>
-                          <td className="fw-bold">Triplover Ref:</td>
+                          <td className="fw-bold">Booking ID:</td>
                           <td>
                             {bookData.data?.item1.uniqueTransID}
                           </td>

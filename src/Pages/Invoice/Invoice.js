@@ -20,7 +20,15 @@ const Invoice = () => {
   const table = {
     backgroundColor : 'gray'
   }
-
+  let [agentInfo, setAgentInfo] = useState([]);
+  const getAgentInfo = async () => {
+    const response = await axios.get(
+      environment.agentInfo,
+      environment.headerToken
+    );
+    console.log(response);
+    setAgentInfo(response.data);
+  };
 
   const handleGetList = () => {
     const getTicketingList = async () => {
@@ -79,10 +87,13 @@ const Invoice = () => {
 
   useEffect(() => {
     handleGetList();
+    getAgentInfo();
   }, []);
   const print = () => {
     window.print();
   };
+
+  // console.log(passengerList);
   return (
     <div>
       <Navbar></Navbar>
@@ -132,11 +143,11 @@ const Invoice = () => {
                       Edit Price
                     </a>
                   </li>
-                  <li id="menu-item">
+                  {/* <li id="menu-item">
                     <a href="javascript:void(0)" className="btn btn-sm btn-secondary float-right mr-1 d-print-none">
                       Download
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
               <div className="card-body">
@@ -183,22 +194,20 @@ const Invoice = () => {
                       </td>
                       <td className="text-end bg-white">
                         <address>
-                          <span className="fw-bold fs-6">
-                            Triplover Limited
-                          </span>
-                          <br />
-                          <div
-                            className="mt-2"
-                            style={{ fontSize: "10px", lineHeight: "12px" }}
-                          >
-                            Al Muhairi 113-127,<br></br>
-                            Al Dhagaya Deira, <br></br>
-                            Dubai, United Arab Emirates.
-                            <br></br>
-                            Phone: +97143375728<br></br>
-                            Email: support@triplover.ae
-                          </div>
-                        </address>
+                              <span className="fw-bold fs-6">
+                                {agentInfo.name} Travel Agrncy
+                              </span>
+                              <br />
+                              <div
+                                className="mt-2"
+                                style={{ fontSize: "10px", lineHeight: "12px" }}
+                              >
+                                {agentInfo.address}
+                                <br />
+                                Phone: {agentInfo.mobileNo}<br></br>
+                                Email: {agentInfo.email}
+                              </div>
+                            </address>
                       </td>
                     </tr>
                   </tbody>
@@ -315,7 +324,7 @@ const Invoice = () => {
                             Invoice Date<span className="mx-2">:</span>
                           </td>
                           <td className="text-end" style={{ width: "7%" }}>
-                          22-04-2022
+                            {moment(ticketingList[0]?.issueDate).format("DD-MMMM-yyyy ddd")}
                           </td>
                         </tr>
                       </td>

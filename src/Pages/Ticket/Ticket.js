@@ -226,7 +226,7 @@ const Ticket = () => {
                           <td className="text-end bg-white">
                             <address>
                               <span className="fw-bold fs-6">
-                                {agentInfo.name} Travel Agrncy
+                                {agentInfo.name}
                               </span>
                               <br />
                               <div
@@ -490,7 +490,7 @@ const Ticket = () => {
                                       <td className="text-start bg-white p-0">
                                         BAGGAGE
                                         <span className="ms-5">
-                                          {baggage[0].Amount}{baggage[0].Units}
+                                          {baggage[0]?.Amount}{baggage[0]?.Units}
                                         </span>{" "}
                                       </td>
                                     </tr>

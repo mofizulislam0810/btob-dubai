@@ -28,3 +28,7 @@ tr {
 .h6-line-height {
     line-height: 8px !important;
   }
+
+  /* .table-secondary tbody+tbody, .table-secondary td, .table-secondary th, .table-secondary thead th{
+    border-color : white !important;
+  } */

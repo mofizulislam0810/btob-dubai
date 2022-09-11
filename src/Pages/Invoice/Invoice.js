@@ -220,7 +220,7 @@ const Invoice = () => {
                       <td className="text-end bg-white">
                         <address>
                               <span className="fw-bold fs-6">
-                                {agentInfo.name} Travel Agrncy
+                                {agentInfo.name}
                               </span>
                               <br />
                               <div

@@ -13,6 +13,8 @@ import tllLogo from "../../../src/images/logo/logo-combined.png";
 import ReactToPrint from "react-to-print";
 import { ToastContainer, toast } from "react-toastify";
 import airports from "../../JSON/airports.json";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const Ticket = () => {
   let [ticketingList, setTicketingList] = useState([]);
@@ -106,8 +108,26 @@ const Ticket = () => {
     window.print();
   };
 
-  console.log(ticketingList);
-  console.log(agentInfo);
+  // console.log(ticketingList);
+  // console.log(agentInfo);
+  const donwloadRef = useRef();
+  const handleDownloadPdf = async () => {
+    const element = donwloadRef.current;
+    const canvas = await html2canvas(element, {
+      scrollX: 0,
+      scrollY: 0,
+    });
+    const data = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF("p", "pt", "a4", true);
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight, "", "FAST");
+    pdf.save("ticket_triplover.pdf");
+
+  }
   return (
     <div>
       <Navbar></Navbar>
@@ -167,6 +187,7 @@ const Ticket = () => {
                         <a
                           href="javascript:void(0)"
                           className="btn btn-sm btn-secondary float-right mr-1 d-print-none"
+                          onClick={handleDownloadPdf}
                         >
                           Download
                         </a>
@@ -174,7 +195,7 @@ const Ticket = () => {
                     </ul>
                   </div>
                   <div className="card-body py-5" ref={componentRef}>
-
+                  <div className="px-5" ref={donwloadRef}>
                     <h4 className="text-center pb-2">E-Ticket</h4>
 
                     <table class="table table-borderless table-sm">
@@ -348,7 +369,7 @@ const Ticket = () => {
                                       alt=""
                                       width="40px"
                                       height="40px"
-                                    />
+                                      ></img>
                                     <div>
                                       <h6 className="ms-2 h6-line-height" style={{ fontSize: "15px" }}>{item.operationCarrierName}</h6>
                                       <h6
@@ -608,9 +629,7 @@ const Ticket = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="card-body">
-
-                  </div>
+                 </div>
                 </div>
               </div>
             </div>

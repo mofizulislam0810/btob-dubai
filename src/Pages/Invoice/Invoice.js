@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
@@ -9,6 +9,10 @@ import moment from "moment";
 import tllLogo from "../../../src/images/logo/logo-combined.png";
 import produce from "immer";
 import { ToastContainer, toast } from "react-toastify";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+
+
 const Invoice = () => {
   let [ticketingList, setTicketingList] = useState([]);
   let [passengerList, setPassengerList] = useState([]);
@@ -93,6 +97,25 @@ const Invoice = () => {
     window.print();
   };
 
+  const donwloadRef = useRef();
+  const handleDownloadPdf = async () => {
+    const element = donwloadRef.current;
+    const canvas = await html2canvas(element, {
+      scrollX: 0,
+      scrollY: 0,
+    });
+    const data = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF("p", "pt", "a4", true);
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight, "", "FAST");
+    pdf.save("invoice_triplover.pdf");
+
+  }
+
   // console.log(passengerList);
   return (
     <div>
@@ -143,14 +166,16 @@ const Invoice = () => {
                       Edit Price
                     </a>
                   </li>
-                  {/* <li id="menu-item">
-                    <a href="javascript:void(0)" className="btn btn-sm btn-secondary float-right mr-1 d-print-none">
+                  <li id="menu-item">
+                    <a href="javascript:void(0)" className="btn btn-sm btn-secondary float-right mr-1 d-print-none"
+                    onClick={handleDownloadPdf}
+                    >
                       Download
                     </a>
-                  </li> */}
+                  </li>
                 </ul>
               </div>
-              <div className="card-body">
+              <div className="card-body"  ref={donwloadRef}>
                 <div className="row text-center">
                   <h4>INVOICE</h4>
                 </div>
@@ -403,7 +428,7 @@ const Invoice = () => {
                           <tr>
                             <th>Ticket No</th>
                             <th>Passenger</th>
-                            <th>Travel Class</th>
+                            {/* <th>Travel Class</th> */}
                           </tr>
                           <tr>
                             <td>{item.ticketNumbers}</td>
@@ -416,11 +441,11 @@ const Invoice = () => {
                                 " " +
                                 item.last}
                             </td>
-                            <td>
+                            {/* <td>
                               {ticketingList.length > 0
                                 ? ticketingList[0].cabinClass
                                 : ""}
-                            </td>
+                            </td> */}
                           </tr>
                         </>
                       );

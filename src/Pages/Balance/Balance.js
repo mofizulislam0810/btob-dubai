@@ -490,6 +490,8 @@ const Balance = () => {
     handleGetTransaction(currentPageNumber);
     handleGetAgentBankAccounts(currentPageNumberBank);
   }, [currentPageNumber,currentPageNumberBank]);
+
+  console.log(balanceList);
   return (
     <div>
       <Navbar></Navbar>
@@ -1212,10 +1214,17 @@ const Balance = () => {
                                                 : ""}
                                       </td>
                                       <td>{item.currencyName} {item.amount}</td>
-                                      <td><a href="https://thumbs.dreamstime.com/b/smooth-nature-pic-full-hd-126695318.jpg" download>
-                                          <img src="https://thumbs.dreamstime.com/b/smooth-nature-pic-full-hd-126695318.jpg" alt="W3Schools" width="50" height="15"/>
+                                      {
+                                        item.attachment !== null && item.attachment !== "" ? <>
+                                         <td><a href={environment.baseApiURL+"agentBalance/GetAttachment/"+item.attachment} download>Download
+                                          {/* <img src="https://thumbs.dreamstime.com/b/smooth-nature-pic-full-hd-126695318.jpg" alt="W3Schools" width="50" height="15"/> */}
                                           </a>
-                                      </td>
+                                        </td>
+                                        </> : <>
+                                        <td></td>
+                                        </>
+                                      }
+                                     
                                     </tr>
                                   );
                                 }) : <></>}

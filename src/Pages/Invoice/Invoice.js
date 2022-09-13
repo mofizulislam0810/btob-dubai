@@ -156,7 +156,7 @@ const Invoice = () => {
                       Print
                     </a>
                   </li>
-                  <li id="menu-item">
+                  {/* <li id="menu-item">
                     <a
                       href="javascript:void(0)"
                       className="btn btn-sm btn-secondary float-right mr-1 d-print-none"
@@ -172,12 +172,12 @@ const Invoice = () => {
                     >
                       Download
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
-              <div className="card-body"  ref={donwloadRef}>
+              <div className="card-body pt-5"  ref={donwloadRef}>
                 <div className="row text-center">
-                  <h4>INVOICE</h4>
+                  <h4 className="pb-2">INVOICE</h4>
                 </div>
 
 

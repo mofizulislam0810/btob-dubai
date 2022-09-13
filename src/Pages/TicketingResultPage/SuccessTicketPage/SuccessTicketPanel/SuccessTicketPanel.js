@@ -151,7 +151,7 @@ const SuccessTicketPanel = () => {
                           </td>
                           <td className="text-end bg-white" style={{ width: "10%" }}>
                             Issue Date :
-                            <span className="fw-bold">03-Mar-2022</span>
+                            <span className="fw-bold">{moment().format("DD-MMMM-yyyy ddd")}</span>
                           </td>
                         </tr>
                       </tbody>

@@ -54,8 +54,8 @@ const CreditNotes = () => {
                   <div className="tab-pane fade show active" id="tp1">
                     <h4>Credit Note List</h4>
                     <hr className="my-3" />
-                    <table className="table table-bordered align-middle table-striped text-center">
-                      <thead>
+                    <table className="table table-borderless table-sm" style={{ width: "100%", fontSize: "13px" }}>
+                      <thead className="text-center fw-bold bg-secondary">
                         <tr>
                           <th>SL</th>
                           <th>Reference</th>
@@ -66,7 +66,7 @@ const CreditNotes = () => {
                           <th>Status</th>
                         </tr>
                       </thead>
-                      <tbody className="lh-1">
+                      <tbody className="tbody text-center">
                         {creditNoteList.map((item, index) => {
                           return (
                             <tr>

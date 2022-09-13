@@ -19,28 +19,76 @@ const Support = () => {
 	let [status, setStatus] = useState(0);
 	let [historyFileName, setHistoryFileName] = useState('');
 	let [historyMessage, setHistoryMessage] = useState('');
+	let [passengerList, setPassengerList] = useState([]);
+	let [i,setI]=useState(0);
 	let typeid = 2;
 	let subjectid = 0;
 	let utid = "";
 	let pnrs = "";
 	let ticketno = "";
+	const handleGetPassengerList = (trid) => {
+		const getPassengerList = async () => {
+		  const response = await axios.get(
+			environment.passengerListByIds + "/" + "All" + "/" + trid,
+			environment.headerToken
+		  );
+		  setPassengerList(response.data);
+			console.log(response.data)
+		};
+		getPassengerList();
+	  };
+	  const handleGetPassengerListByPNr = (pnr) => {
+		const getPassengerList = async () => {
+		  const response = await axios.get(
+			environment.passengerListByPnr +"/"+ pnr,
+			environment.headerToken
+		  );
+		  setPassengerList(response.data);
+			console.log(response.data)
+		};
+		getPassengerList();
+	  };
 	console.log(location)
 	if (location.search !== "") {
-		typeid = Number(location.search.split('=')[1].split('&')[0]);
-		subjectid = Number(location.search.split('=')[2].split('&')[0]);
-		utid = location.search.split('=')[3].split('&')[0];
-		pnrs = location.search.split('=')[4].split('&')[0];
-		ticketno = location.search.split('=')[5].split('&')[0];
+		
+		if(i==0){
+			typeid = Number(location.search.split('=')[1].split('&')[0]);
+			subjectid = Number(location.search.split('=')[2].split('&')[0]);
+			utid = location.search.split('=')[3].split('&')[0];
+			pnrs = location.search.split('=')[4].split('&')[0];
+			ticketno = location.search.split('=')[5].split('&')[0];
+			setUniqueTransID(utid);
+			handleGetPassengerList(utid);
+			setI(i+1);
+		}
+		
 	}
 
-
-
+	const handleSetUniqueTransID=(utid)=>{
+		setUniqueTransID(utid);
+		handleGetPassengerList(utid);
+	}
+const handleSetPNR=(pnr)=>{
+	setPNR(pnr);
+	handleGetPassengerListByPNr(pnr);
+}
 	let [supportTypeId, setSupportTypeId] = useState(typeid);
 	let [subjectId, setSubjectId] = useState(subjectid);
 	let [searchSubjectId,setSearchSubjectId]=useState(0);
-	let [uniqueTransID, setUniqueTransID] = useState(utid);
+	let [uniqueTransID, setUniqueTransID] = useState("");
 	let [pnr, setPNR] = useState(pnrs);
-	let [ticketNumber, setTicketno] = useState(ticketno);
+	let [defaultTicketNumber, setDefaultTicketno] = useState(ticketno);
+	let [ticketNumbers, setTicketno] = useState(ticketno!=""?","+ticketno:"");
+	const handleSetTicketNo=(isChecked,tNo)=>{
+		if(isChecked){
+				let ticketNew=ticketNumbers+","+tNo
+				// ticketNew=ticketNew.substring(1,ticketNew.length())
+				setTicketno(ticketNew);
+		}else{
+			let ticketNew=ticketNumbers.replace(","+tNo,"");
+			setTicketno(ticketNew)
+		}
+	}
 
 	let [supporttypeList, setSupportTypeList] = useState([]);
 	let [subjectList, setSubjectList] = useState([]);
@@ -168,9 +216,9 @@ const Support = () => {
 
 
 
-	let historyObj = { supportId: currentItem == null ? 0 : currentItem.id, agentId: (sessionStorage.getItem('agentId') ?? 0), message: historyMessage, fileName: historyFileName, isAgent: true };
+	
 	const handleHistorySubmit = () => {
-		console.log(supportObj)
+		let historyObj = { supportId: currentItem == null ? 0 : currentItem.id, agentId: (sessionStorage.getItem('agentId') ?? 0), message: historyMessage, fileName: historyFileName, isAgent: true };
 		if (historyMessage == "") {
 			toast.error("Sorry! Message is empty..");
 			return;
@@ -190,11 +238,15 @@ const Support = () => {
 
 
 	}
-	let supportObj = {
-		id: currentItem == null ? 0 : currentItem.id, agentId: (sessionStorage.getItem('agentId') ?? 0), supportTypeId: supportTypeId, subjectId: subjectId,
-		message: message, fileName: fileName, status: status, uniqueTransID: uniqueTransID, pnr: pnr, ticketNumber: ticketNumber
-	};
+
 	const handleSupportSubmit = () => {
+		let ticketNumbersN=ticketNumbers.substring(1,ticketNumbers.length);
+		alert(uniqueTransID)
+		alert(pnr)
+		let supportObj = {
+			id: currentItem == null ? 0 : currentItem.id, agentId: (sessionStorage.getItem('agentId') ?? 0), supportTypeId: supportTypeId, subjectId: subjectId,
+			message: message, fileName: fileName, status: status, uniqueTransID: uniqueTransID, pnr: pnr, ticketNumber: ticketNumbersN
+		};
 		if (supportTypeId === 0) {
 			toast.error("Sorry! Support type not selected..");
 			return;
@@ -237,6 +289,9 @@ const Support = () => {
 		}
 
 	}
+
+
+
 	useEffect(() => {
 		handleGetOpened(pageNumber);
 		$(document).ready(function () {
@@ -304,7 +359,7 @@ const Support = () => {
 															<div className='row'>
 																<input type={'hidden'} ></input>
 																<div className='row my-3'>
-																	<div className='col-sm-5'>
+																	<div className='col-sm-4'>
 																		<label  class="form-label">Support Type<span style={{ color: 'red' }}>*</span></label>
 																		<select className="form-select" value={subjectId} placeholder='Subject' onChange={(e) => setSubjectId(Number(e.target.value))}>
 																			<option key={0}>Select Type</option>
@@ -315,17 +370,57 @@ const Support = () => {
 																			}
 																		</select>
 																	</div>
-																	<div className='col-sm-5'>
+																	<div className='col-sm-4'>
 																		<label  class="form-label">Booking ID</label>
-																		<input class="form-control" type={'text'} placeholder={'Booking ID'} value={uniqueTransID} className="form-control" onChange={(e) => setUniqueTransID()}></input>
+																		<input class="form-control" type={'text'} placeholder={'Booking ID'} value={uniqueTransID} className="form-control" onChange={(e) => handleSetUniqueTransID(e.target.value)}></input>
 																	</div>
-																	<div className='col-sm-5'>
+																	<div className='col-sm-4'>
 																		<label  class="form-label">PNR</label>
-																		<input class="form-control" type={'text'} placeholder={'PNR'} value={pnr} className="form-control" onChange={(e) => setPNR()}></input>
+																		<input class="form-control" type={'text'} placeholder={'PNR'} value={pnr} className="form-control" onChange={(e) => handleSetPNR(e.target.value)}></input>
 																	</div>
-																	<div className='col-sm-5'>
-																		<label  class="form-label">Ticket Number</label>
-																		<input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumber === "null" ? "" : ticketNumber} className="form-control" onChange={(e) => setTicketno()}></input>
+																	<div className='col-sm-12'>
+																		<label  className="form-label">Ticket Number</label><br/>
+																		<table className="table table-boardered table-sm">
+																			<thead>
+																				<tr>
+																					<th>Pax Name</th>
+																					<th>Type</th>
+																					<th>Ticket Number</th>
+																				</tr>
+																			</thead>
+																		<tbody>
+																		{
+																			passengerList.length>0?
+																			passengerList.map((item,index)=>{
+																				{
+																					//alert(item.ticketNumbers);
+																					// alert(ticketNumbers)
+																				}
+																				return <>
+																						<tr>
+																							<td>{item.first}</td>
+																						<td>{item.passengerType}</td>
+																					 <td>
+																			
+																						{
+																							
+						
+																								<><input type={'checkbox'} defaultChecked={ item.ticketNumbers===defaultTicketNumber?true:false} onChange={(e)=>handleSetTicketNo(e.target.checked, item.ticketNumbers)}></input>&nbsp; {item.ticketNumbers}</>
+																								
+																							
+																						}
+																						</td>
+																					</tr>
+																					</>
+																			})
+																			:
+																			<input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumbers === "null" ? "" : ticketNumbers} className="form-control" onChange={(e) => setTicketno()}></input>
+																		}
+																		</tbody>
+																		</table>
+																		<br/>
+																		<label>{ticketNumbers}</label>
+																		{/* <input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumber === "null" ? "" : ticketNumber} className="form-control" onChange={(e) => setTicketno()}></input> */}
 																	</div>
 																	{
 																		subjectId === 2 ? 

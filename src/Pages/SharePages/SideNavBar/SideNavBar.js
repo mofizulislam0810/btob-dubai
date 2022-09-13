@@ -195,6 +195,12 @@ const SideNavBar = () => {
                     <p>Account Ledger</p>
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link to="/creditnote" className="nav-link nav__link__font__size">
+                    <i className="fa fa-minus nav-icon"></i>
+                    <p>Refund In Process</p>
+                  </Link>
+                </li>
               </ul>
             </li>
             <li className="nav-item">

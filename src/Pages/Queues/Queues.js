@@ -525,12 +525,11 @@ const Queues = () => {
                                       )}
                                     </td>
                                     <td>
-                                      {item.origin === "null"
-                                        ? ""
-                                        : item.origin +
-                                        (item.destination === ""
-                                          ? ""
-                                          : "/" + item.destination)}
+                                    {
+                                      item.origin === "null"? "": 
+                                      item.journeyType=="Round Trip"?item.origin + (item.destination === "" ? "" : "⇔" + item.destination)
+                                      :item.origin + (item.destination === "" ? "" : "→" + item.destination)
+                                    }
                                     </td>
                                     <td>
                                       <a

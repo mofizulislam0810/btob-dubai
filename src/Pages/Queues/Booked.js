@@ -213,11 +213,12 @@ const Booked = () => {
                           <tr>
                             {/* <th style={{width:"5%"}}>SL</th> */}
                             <th>Booking Date</th>
+                            <th>Booking ID</th>
                             <th className='text-start'>Passenger Name</th>
+                            <th className='text-start'>Passenger Type</th>
                             {/* <th>Time Limit</th> */}
                             <th>Flight Date</th>
                             <th>Route</th>
-                            <th>Booking ID</th>
                             <th>PNR</th>
                             {/* <th>Ticket Number</th> */}
                             <th>Total Price</th>
@@ -240,8 +241,18 @@ const Booked = () => {
                                       "DD-MM-YYYY hh:mm:ss A"
                                     )}
                                   </td>
+                                  <td>
+                                    <a
+                                      href="javascript:void(0)"
+                                      onClick={() =>
+                                        handleViewTicket(item.uniqueTransID)
+                                      }
+                                    >
+                                      {item.uniqueTransID}
+                                    </a>
+                                  </td>
                                   <td className='text-start'>{item.leadPaxName}</td>
-                                  {/* <td></td> */}
+                                  <td></td>
                                   {/* <td>
                                     {item.issueDate != null ? (
                                       moment(item.issueDate).format(
@@ -261,23 +272,13 @@ const Booked = () => {
                                     )}
                                   </td>
                                   <td>
-                                    {item.origin === "null"
-                                      ? ""
-                                      : item.origin +
-                                        (item.destination === ""
-                                          ? ""
-                                          : "/" + item.destination)}
+                                  {
+                                    item.origin === "null"? "": 
+                                    item.journeyType=="Round Trip"?item.origin + (item.destination === "" ? "" : "⇔" + item.destination)
+                                    :item.origin + (item.destination === "" ? "" : "→" + item.destination)
+                                  }
                                   </td>
-                                  <td>
-                                    <a
-                                      href="javascript:void(0)"
-                                      onClick={() =>
-                                        handleViewTicket(item.uniqueTransID)
-                                      }
-                                    >
-                                      {item.uniqueTransID}
-                                    </a>
-                                  </td>
+                                  
                                   <td>
                                     <a
                                       href="javascript:void(0)"
@@ -291,7 +292,7 @@ const Booked = () => {
                                   {/* <td>{item.ticketNumber}</td> */}
                                   <td>{item.ticketingPrice}</td>
                                   <td>
-                                    {item.status} <br />{" "}
+                                    {item.status === "Booked" ? "On Hold" : " "} <br />{" "}
                                     {item.refundStatus != null
                                       ? "Refund " + item.refundStatus
                                       : ""}

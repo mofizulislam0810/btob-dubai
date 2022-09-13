@@ -69,6 +69,12 @@ const SideNavBar = () => {
                     <p>On Hold</p>
                   </Link>
                 </li>
+                <li className={currentPage === "canceled" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("canceled")}>
+                  <Link to="/expired" className="nav-link nav__link__font__size">
+                    <i className="fa fa-minus nav-icon"></i>
+                    <p>Expired</p>
+                  </Link>
+                </li>
                 <li className={currentPage === "ticketed" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("ticketed")}>
                   <Link to="/ticketed" className="nav-link nav__link__font__size">
                     <i className="fa fa-minus nav-icon"></i>
@@ -222,7 +228,17 @@ const SideNavBar = () => {
                 </p>
               </Link>
             </li> */}
-
+           <li className="nav-item">
+              <Link to="/staff" className="nav-link">
+                {/* <i class="nav-icon fas fa-tasks"></i> */}
+                {/* <i className="nav-icon fas fa-tachometer-alt"></i> */}
+                <i className="nav-icon fas fa-users"></i>
+                <p>
+                  My Users
+                  {/* <i className="right fas fa-angle-left"></i> */}
+                </p>
+              </Link>
+            </li>
 
             {/* <li className="nav-item">
               <a href="#" className="nav-link">

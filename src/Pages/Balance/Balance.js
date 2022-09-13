@@ -543,7 +543,7 @@ const Balance = () => {
                           data-bs-toggle="tab"
                           onClick={() => handleGetAgentBankAccounts(currentPageNumberBank)}
                         >
-                          Bank Accounts
+                          My Bank Accounts
                         </a>
                       </li>
                       {/* <li className='nav-item text-end' style={{ marginLeft: "62.3%" }}>
@@ -620,7 +620,7 @@ const Balance = () => {
                               </div>
                               <div className="col-sm-3">
                                 <label>
-                                Cheque Issue Date
+                                Deposit Date
                                   <span style={{ color: "red" }}>*</span>
                                 </label>
                                 <input
@@ -1170,7 +1170,7 @@ const Balance = () => {
                               <th>SL</th>
                               <th>Deposit Type</th>
                               <th>Reference</th>
-                              <th>Date</th>
+                              <th>Submitted Date</th>
                               <th>Status</th>
                               <th>Amount</th>
                               <th>Image</th>
@@ -1251,7 +1251,7 @@ const Balance = () => {
                         />
                       </div>
                       <div className="tab-pane fade" id="bankaccounts">
-                        <h4>Bank Accounts</h4>
+                        <h4>My Bank Accounts</h4>
                         <hr  className="my-3"/>
                         <button
                           onClick={() => handleCreateItem()}

@@ -20,6 +20,7 @@ const Support = () => {
 	let [historyFileName, setHistoryFileName] = useState('');
 	let [historyMessage, setHistoryMessage] = useState('');
 	let [passengerList, setPassengerList] = useState([]);
+	let [uniqueTransID, setUniqueTransID] = useState("");
 	let [i,setI]=useState(0);
 	let typeid = 2;
 	let subjectid = 0;
@@ -75,7 +76,7 @@ const handleSetPNR=(pnr)=>{
 	let [supportTypeId, setSupportTypeId] = useState(typeid);
 	let [subjectId, setSubjectId] = useState(subjectid);
 	let [searchSubjectId,setSearchSubjectId]=useState(0);
-	let [uniqueTransID, setUniqueTransID] = useState("");
+
 	let [pnr, setPNR] = useState(pnrs);
 	let [defaultTicketNumber, setDefaultTicketno] = useState(ticketno);
 	let [ticketNumbers, setTicketno] = useState(ticketno!=""?","+ticketno:"");
@@ -379,47 +380,39 @@ const handleSetPNR=(pnr)=>{
 																		<input class="form-control" type={'text'} placeholder={'PNR'} value={pnr} className="form-control" onChange={(e) => handleSetPNR(e.target.value)}></input>
 																	</div>
 																	<div className='col-sm-12'>
-																		<label  className="form-label">Ticket Number</label><br/>
-																		<table className="table table-boardered table-sm">
-																			<thead>
+																		<table className="table table-boardered table-sm mt-3" style={{ width: "100%", fontSize: "13px" }}>
+																			<thead className="text-center fw-bold bg-secondary">
 																				<tr>
 																					<th>Pax Name</th>
 																					<th>Type</th>
 																					<th>Ticket Number</th>
 																				</tr>
 																			</thead>
-																		<tbody>
+																		<tbody className="lh-1 tbody text-center">
 																		{
 																			passengerList.length>0?
 																			passengerList.map((item,index)=>{
-																				{
-																					//alert(item.ticketNumbers);
-																					// alert(ticketNumbers)
-																				}
 																				return <>
-																						<tr>
-																							<td>{item.first}</td>
+																					<tr>
+																						<td>{item.title +" " +item.first + " " +item.middle +" " +item.last}</td>
 																						<td>{item.passengerType}</td>
-																					 <td>
-																			
-																						{
-																							
-						
-																								<><input type={'checkbox'} defaultChecked={ item.ticketNumbers===defaultTicketNumber?true:false} onChange={(e)=>handleSetTicketNo(e.target.checked, item.ticketNumbers)}></input>&nbsp; {item.ticketNumbers}</>
-																								
-																							
-																						}
+																						<td>
+																						  {
+																							<>
+																								<input type={'checkbox'} defaultChecked={ item.ticketNumbers===defaultTicketNumber?true:false} onChange={(e)=>handleSetTicketNo(e.target.checked, item.ticketNumbers)}></input>&nbsp; {item.ticketNumbers}
+																							</>
+																						  }
 																						</td>
 																					</tr>
 																					</>
 																			})
 																			:
-																			<input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumbers === "null" ? "" : ticketNumbers} className="form-control" onChange={(e) => setTicketno()}></input>
+																			""
 																		}
 																		</tbody>
 																		</table>
 																		<br/>
-																		<label>{ticketNumbers}</label>
+																		{/* <label>{ticketNumbers}</label> */}
 																		{/* <input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumber === "null" ? "" : ticketNumber} className="form-control" onChange={(e) => setTicketno()}></input> */}
 																	</div>
 																	{
@@ -443,7 +436,7 @@ const handleSetPNR=(pnr)=>{
 
 																</div>
 																<div className='row mb-3'>
-																	<div className='col-sm-10'>
+																	<div className='col-sm-12'>
 																		<label>Message<span style={{ color: 'red' }}>*</span></label>
 																		<textarea rows={3} type={'text'} value={message} className="form-control" placeholder='Message' onChange={(e) => setMessage(e.target.value)}></textarea>
 																	</div>

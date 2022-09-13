@@ -34,7 +34,7 @@ const Canceled = () => {
             fromDate: fromDate,
             toDate: toDate,
             pnr: gdsPnr,
-            status: "Cancelled",
+            status: "Ticket Cancelled",
           };
           const response = await axios.post(
             environment.getTicketingList +
@@ -203,7 +203,7 @@ const Canceled = () => {
               <div className="m-4">
                 <div className="tab-content">
                   <div className="tab-pane fade show active" id="tp1">
-                    <h4>Canceled Booking</h4>
+                    <h4>Canceled Ticket</h4>
                     <hr className="my-3" />
                     <div
                       style={{ overflowX: "scroll", marginBottom: "16px" }}
@@ -214,13 +214,13 @@ const Canceled = () => {
                       >
                         <thead className="text-center fw-bold bg-secondary">
                           <tr>
-                            {/* <th>SL</th> */}
-                            <th>Booking Date</th>
                             <th>Issue Date</th>
-                            <th>Passenger Name</th>
+                            <th>Booking Date</th>
+                            <th>Booking ID</th>
+                            <th className='text-start'>Passenger Name</th>
+                            <th>Passenger Type</th>
                             <th>Flight Date</th>
                             <th>Route</th>
-                            <th>Booking ID</th>
                             <th>PNR</th>
                             <th>Ticket Number</th>
                             <th>Total Price</th>
@@ -238,12 +238,6 @@ const Canceled = () => {
                                       index +
                                       1}
                                   </td> */}
-                                  
-                                  <td>
-                                    {moment(item.bookingDate).format(
-                                      "DD-MM-YYYY hh:mm:ss A"
-                                    )}
-                                  </td>
                                   <td>
                                     {item.issueDate != null ? (
                                       moment(item.issueDate).format(
@@ -253,23 +247,10 @@ const Canceled = () => {
                                       <></>
                                     )}
                                   </td>
-                                  <td>{item.leadPaxName}</td>
                                   <td>
-                                    {item.departure != null ? (
-                                      moment(item.departure).format(
-                                        "DD-MM-YYYY hh:mm:ss A"
-                                      )
-                                    ) : (
-                                      <></>
+                                    {moment(item.bookingDate).format(
+                                      "DD-MM-YYYY hh:mm:ss A"
                                     )}
-                                  </td>
-                                  <td>
-                                    {item.origin === "null"
-                                      ? ""
-                                      : item.origin +
-                                        (item.destination === ""
-                                          ? ""
-                                          : "/" + item.destination)}
                                   </td>
                                   <td>
                                     <a
@@ -280,6 +261,24 @@ const Canceled = () => {
                                     >
                                       {item.uniqueTransID}
                                     </a>
+                                  </td>
+                                  <td>{item.leadPaxName}</td>
+                                  <td></td>
+                                  <td>
+                                    {item.departure != null ? (
+                                      moment(item.departure).format(
+                                        "DD-MM-YYYY hh:mm:ss A"
+                                      )
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </td>
+                                  <td>
+                                  {
+                                    item.origin === "null"? "": 
+                                    item.journeyType=="Round Trip"?item.origin + (item.destination === "" ? "" : "⇔" + item.destination)
+                                    :item.origin + (item.destination === "" ? "" : "→" + item.destination)
+                                  }
                                   </td>
                                   <td>
                                     <a

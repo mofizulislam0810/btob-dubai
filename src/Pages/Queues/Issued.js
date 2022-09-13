@@ -217,12 +217,13 @@ const Issued = () => {
                                                     <thead className="text-center fw-bold bg-secondary">
                                                         <tr>
                                                             {/* <th>SL</th> */}
-                                                            <th>Booking Date</th>
                                                             <th>Issue Date</th>
+                                                            <th>Booking Date</th>
+                                                            <th>Booking ID</th>
                                                             <th className='text-start'>Passenger Name</th>
+                                                            <th>Passenger Type</th>
                                                             <th>Flight Date</th>
                                                             <th>Route</th>
-                                                            <th>Booking ID</th>
                                                             <th>PNR</th>
                                                             <th>Ticket Number</th>
                                                             <th>Total Price</th>
@@ -240,12 +241,7 @@ const Issued = () => {
                                                                                 index +
                                                                                 1}
                                                                         </td> */}
-                                                                        <td>
-                                                                            {moment(item.bookingDate).format(
-                                                                                "DD-MM-YYYY hh:mm:ss A"
-                                                                            )}
-                                                                        </td>
-                                                                        <td>
+                                                                         <td>
                                                                             {item.issueDate != null ? (
                                                                                 moment(item.issueDate).format(
                                                                                     "DD-MM-YYYY hh:mm:ss A"
@@ -254,7 +250,23 @@ const Issued = () => {
                                                                                 <></>
                                                                             )}
                                                                         </td>
+                                                                        <td>
+                                                                            {moment(item.bookingDate).format(
+                                                                                "DD-MM-YYYY hh:mm:ss A"
+                                                                            )}
+                                                                        </td>
+                                                                        <td>
+                                                                            <a
+                                                                                href="javascript:void(0)"
+                                                                                onClick={() =>
+                                                                                    handleViewTicket(item.uniqueTransID)
+                                                                                }
+                                                                            >
+                                                                                {item.uniqueTransID}
+                                                                            </a>
+                                                                        </td>
                                                                         <td className='text-start'>{item.leadPaxName}</td>
+                                                                        <td></td>
                                                                         <td>
                                                                             {item.departure != null ? (
                                                                                 moment(item.departure).format(
@@ -271,16 +283,7 @@ const Issued = () => {
                                                                                 :item.origin + (item.destination === "" ? "" : "→" + item.destination)
                                                                             }
                                                                         </td>
-                                                                        <td>
-                                                                            <a
-                                                                                href="javascript:void(0)"
-                                                                                onClick={() =>
-                                                                                    handleViewTicket(item.uniqueTransID)
-                                                                                }
-                                                                            >
-                                                                                {item.uniqueTransID}
-                                                                            </a>
-                                                                        </td>
+                                                                       
                                                                         <td>
                                                                             <a
                                                                                 href="javascript:void(0)"

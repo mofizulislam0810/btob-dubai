@@ -165,10 +165,11 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
                       <li id="menu-item">
                         <a
                           href="javascript:void(0)"
-                          className="btn btn-sm button-color float-right mr-1 d-print-none rounded text-white"
+                          className="btn btn-sm btn-secondary float-right mr-1 d-print-none rounded text-white"
                           data-bs-toggle="modal"
                           data-bs-target="#accountModal"
                           onClick={() => handleCreateItem()}
+                          style={{fontSize:"12px"}}
                         >
                           <span className="me-1">
                             <i class="fas fa-user-plus"></i>
@@ -177,8 +178,8 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
                         </a>
                       </li>
                     </ul>
-                    <table className="table table-bordered align-middle table-striped text-center mt-3">
-                      <thead>
+                    <table className="table table-bordered text-center mt-1 table-sm" style={{ width: "100%", fontSize: "13px" }}>
+                      <thead className="text-center fw-bold bg-secondary">
                         <tr>
                           <th>SL</th>
                           <th>Name</th>
@@ -189,7 +190,7 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
                           <th>Member Since</th>
                         </tr>
                       </thead>
-                      <tbody className="lh-1">
+                      <tbody className="lh-1 tbody">
                         {staffList.map((item, index) => {
                           return (
                             <tr key={index}>

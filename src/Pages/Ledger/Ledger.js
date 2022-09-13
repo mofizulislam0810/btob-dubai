@@ -63,6 +63,22 @@ const Ledger = () => {
   useEffect(() => {
     getLedgerData(currentPageNumber);
   }, [currentPageNumber]);
+
+  const handleViewTicket = (utid) => {
+    window.open("/ticket?utid=" + utid, "_blank");
+    //navigate("/ticket?utid="+utid,'_blank');
+  };
+
+  const handleInvoice = (utid) => {
+    window.open("/invoice?utid=" + utid, "_blank");
+    //navigate("/invoice?utid="+utid,'_blank');
+  };
+
+  const handleViewInvoice = (id) => {
+    window.open("/invoiceview?utid=" + id, "_blank");
+    //navigate("/invoice?utid="+utid,'_blank');
+  };
+
   return (
     <div>
       <Navbar></Navbar>
@@ -80,7 +96,7 @@ const Ledger = () => {
                 <div className="m-4">
                   <div className="tab-content">
                     <div className="tab-pane fade show active" id="tp1">
-                      <h4> Account ledger</h4>
+                      <h4> Account's Ledger</h4>
                       <hr className="my-3" />
                       <div
                         className="row"
@@ -168,12 +184,13 @@ const Ledger = () => {
                         >
                           <thead className="text-center fw-bold bg-secondary">
                             <tr>
+                              <th>Date</th>
+                              <th>Invoice Number</th>
                               <th>Booking ID</th>
                               <th>PNR</th>
                               <th>Ticket Number</th>
-                              <th>Passenger Name</th>
+                              {/* <th>Passenger Name</th> */}
                               <th className="text-start">Description</th>
-                              <th>Created By</th>
                               <th>Type</th>
                               <th className="text-end">
                                 Debit{" "}
@@ -187,6 +204,7 @@ const Ledger = () => {
                                 Running Balance{" "}
                                 {currencyName ? "(" + currencyName + ")" : ""}
                               </th>
+                              <th>Created By</th>
                             </tr>
                           </thead>
                           <tbody className="tbody">
@@ -195,12 +213,32 @@ const Ledger = () => {
                                 return (
                                   <>
                                     <tr>
-                                      <td>{item.uniqueTransID}</td>
+                                      <td>{moment(item.createdDate).format("DD-MMM-yyyy hh:mm:ss")}</td>
+                                      <td>
+                                        <a
+                                          href="javascript:void(0)"
+                                          onClick={() =>
+                                            item.ticketNumbers !== null && item.transactionType === "Invoice" ?
+                                              handleInvoice(item.uniqueTransID) : item.ticketNumbers === null && item.transactionType === "Invoice" ? handleViewInvoice(item.tnxNumber) : ""
+                                          }
+                                        >
+                                          {item.tnxNumber}
+                                        </a>
+                                      </td>
+                                      <td>
+                                        <a
+                                          href="javascript:void(0)"
+                                          onClick={() =>
+                                            handleViewTicket(item.uniqueTransID)
+                                          }
+                                        >
+                                          {item.uniqueTransID}
+                                        </a>
+                                      </td>
                                       <td>{item.pnr}</td>
                                       <td>{item.ticketNumbers}</td>
-                                      <td>{item.passengerName}</td>
+                                      {/* <td>{item.passengerName}</td> */}
                                       <td>{item.description}</td>
-                                      <td className="text-center">{item.createdByName}</td>
                                       <td>
                                        {item.transactionType}
                                       </td>
@@ -213,6 +251,7 @@ const Ledger = () => {
                                       <td className="fw-bold text-end">
                                         {item.balanceAmount}
                                       </td>
+                                      <td className="text-center">{item.createdByName}</td>
                                     </tr>
                                   </>
                                 );

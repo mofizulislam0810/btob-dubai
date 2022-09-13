@@ -52,6 +52,8 @@ import RegComplete from "./Pages/AuthenticationPage/RegComplete/RegComplete";
 import Issued from "./Pages/Queues/Issued";
 import Booked from "./Pages/Queues/Booked";
 import Canceled from "./Pages/Queues/Canceled";
+import InvoiceView from "./Pages/InvoiceView/InvoiceView";
+import Expired from "./Pages/Queues/Expired";
 function App() {
   // const [token,setToken] = useState(sessionStorage.getItem("token"));
   // if(!token){
@@ -375,6 +377,22 @@ function App() {
               element={
                 <PrivateRoute>
                   <Canceled/>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/invoiceview"
+              element={
+                <PrivateRoute>
+                  <InvoiceView />
+                </PrivateRoute>
+              }
+            />
+              <Route
+              path="/expired"
+              element={
+                <PrivateRoute>
+                  <Expired />
                 </PrivateRoute>
               }
             />

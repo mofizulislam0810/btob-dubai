@@ -409,7 +409,7 @@ const Queues = () => {
                                 ></input>
                               </div>
                               <div className="col-sm-3">
-                                <label>Reference ID</label>
+                                <label>Booking ID</label>
                                 <input
                                   type={"text"}
                                   value={uniqueTransID}
@@ -450,7 +450,7 @@ const Queues = () => {
                                 <button
                                   type="button"
                                   class="btn button-color fw-bold text-white ms-4 rounded"
-                                  onClick={() => handleGetList(statusId)}
+                                  onClick={() => handleGetList(statusId, 1)}
                                 >
                                   Search
                                 </button>
@@ -476,17 +476,18 @@ const Queues = () => {
                         >
                           <thead className="text-center fw-bold bg-secondary">
                             <tr>
-                              <th>Booking Date</th>
-                              <th>Issue Date</th>
-                              <th>Passenger Name</th>
-                              <th>Flight Date</th>
-                              <th>Route</th>
-                              <th>Booking ID</th>
-                              <th>PNR</th>
-                              <th>Ticket Number</th>
-                              <th>Total Price</th>
-                              <th>Status</th>
-                              <th>Action</th>
+                                <th>Issue Date</th>
+                                <th>Booking Date</th>
+                                <th>Booking ID</th>
+                                <th className='text-start'>Passenger Name</th>
+                                <th>Passenger Type</th>
+                                <th>Flight Date</th>
+                                <th>Route</th>
+                                <th>PNR</th>
+                                <th>Ticket Number</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                           </thead>
                           <tbody className="tbody">
@@ -500,11 +501,6 @@ const Queues = () => {
                                         1}
                                     </td> */}
                                     <td>
-                                      {moment(item.bookingDate).format(
-                                        "DD-MM-YYYY hh:mm:ss A"
-                                      )}
-                                    </td>
-                                    <td>
                                       {item.issueDate != null ? (
                                         moment(item.issueDate).format(
                                           "DD-MM-YYYY hh:mm:ss A"
@@ -513,8 +509,23 @@ const Queues = () => {
                                         <></>
                                       )}
                                     </td>
+                                    <td>
+                                      {moment(item.bookingDate).format(
+                                        "DD-MM-YYYY hh:mm:ss A"
+                                      )}
+                                    </td>
+                                    <td>
+                                      <a
+                                        href="javascript:void(0)"
+                                        onClick={() =>
+                                          handleViewTicket(item.uniqueTransID)
+                                        }
+                                      >
+                                        {item.uniqueTransID}
+                                      </a>
+                                    </td>
                                     <td>{item.leadPaxName}</td>
-                                    
+                                    <td></td>
                                     <td>
                                       {item.departure != null ? (
                                         moment(item.departure).format(
@@ -538,23 +549,13 @@ const Queues = () => {
                                           handleViewTicket(item.uniqueTransID)
                                         }
                                       >
-                                        {item.uniqueTransID}
-                                      </a>
-                                    </td>
-                                    <td>
-                                      <a
-                                        href="javascript:void(0)"
-                                        onClick={() =>
-                                          handleViewTicket(item.uniqueTransID)
-                                        }
-                                      >
                                         {item.pnr}
                                       </a>
                                     </td>
                                     <td>{item.ticketNumber}</td>
                                     <td>{item.ticketingPrice}</td>
                                     <td>
-                                      {item.status === "Issued" ? "Ticketed" : item.status} <br />{" "}
+                                      {item.status === "Issued" ? "Ticketed" : item.status === "Booked" ? "On Hold" : item.status} <br />{" "}
                                       {item.refundStatus != null
                                         ? "Refund " + item.refundStatus
                                         : ""}

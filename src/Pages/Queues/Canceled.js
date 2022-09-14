@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 
 const Canceled = () => {
     let [pageCount, setPageCount] = useState(0);
-    let [pageSize, setPageSize] = useState(10);
+    let [pageSize, setPageSize] = useState(50);
     let [currentPageNumber, setCurrentPageNumber] = useState(1);
     let [ticketingList, setTicketingList] = useState([]);
     let [uniqueTransID, setUniqueTransID] = useState("");

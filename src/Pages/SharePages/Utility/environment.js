@@ -97,6 +97,7 @@ export const environment = {
 
   getTicketingList : baseApiURL+'B2BReport/AirTicketing',
   passengerListByIds: baseApiURL + 'B2BReport/PassengerListByIds',
+  passengerListByPnr: baseApiURL + 'B2BReport/PassengerListByPnr',
   udatePriceByReference: baseApiURL + 'B2BReport/UpdatePriceByReference',
   updateBookingFareBreakdown:baseApiURL + 'B2BReport/UpdateBookingFareBreakdown',
   salesReport:baseApiURL + 'B2BReport/GetSalesReport',

@@ -160,7 +160,7 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
               <div className="card-body">
                 <div className="tab-content">
                   <div className="tab-pane fade show active" id="tp1">
-                    <span className="mt-1 fs-4">Staff List</span>
+                    <span className="mt-1 fs-4">My Users</span>
                     <ul id="menu-standard">
                       <li id="menu-item">
                         <a
@@ -174,7 +174,7 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
                           <span className="me-1">
                             <i class="fas fa-user-plus"></i>
                           </span>{" "}
-                          Add new staff
+                          Add new User
                         </a>
                       </li>
                     </ul>
@@ -183,11 +183,12 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
                         <tr>
                           <th>SL</th>
                           <th>Name</th>
-                          <th>Is Active?</th>
                           <th>Email</th>
                           <th>Mobile</th>
                           <th>Balance Limit</th>
+                          <th>Password</th>
                           <th>Member Since</th>
+                          <th>Is Active?</th>
                         </tr>
                       </thead>
                       <tbody className="lh-1 tbody">
@@ -205,16 +206,17 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
                                   {item.userName}
                                 </a>
                               </td>
-                              <td>
-                                {item.isActive === true ? "Active" : "Inactive"}
-                              </td>
                               <td>{item.userEmail}</td>
                               <td>{item.userMobileNo}</td>
                               <td>{item.balanceLimit}</td>
+                              <td>{item.password}</td>
                               <td>
                                 {moment(item.createdDate).format(
                                   "DD-MMMM-yyyy"
                                 )}
+                              </td>
+                              <td>
+                                {item.isActive === true ? "Active" : "Inactive"}
                               </td>
                             </tr>
                           );

@@ -25,7 +25,7 @@ const SalesReport = () => {
   let [currencyName, setCurrencyName] = useState("");
 
   let [pageCount, setPageCount] = useState(0);
-  let [pageSize, setPageSize] = useState(10);
+  let [pageSize, setPageSize] = useState(50);
   let [currentPageNumber, setCurrentPageNumber] = useState(1);
 
   const [isTimeOut, setIsTimeOut] = useState(false);
@@ -102,9 +102,6 @@ const SalesReport = () => {
       <div className="content-wrapper search-panel-bg">
         <section className="content-header"></section>
         <section className="content">
-          {loading ? (
-            <Loading flag={2}></Loading>
-          ) : (
             <form
               className="mx-5 mt-3"
               encType="multipart/form-data"
@@ -149,14 +146,15 @@ const SalesReport = () => {
                             </div>
                           </div>
                         </div>
-                        <div style={{ overflowY: "scroll" }}>
+                        <div className="tableFixHead">
                           <table
                             className="table table-bordered table-sm"
                             style={{ width: "100%", fontSize: "12px" }}
                           >
                             <thead className="text-center fw-bold bg-secondary">
                               <tr>
-                                <th>Sl</th>
+                                <th>Date Time</th>
+                                <th>Booking ID</th>
                                 <th>PNR</th>
                                 <th>Ticket Number</th>
                                 <th className="text-start">Passanger Name</th>
@@ -183,8 +181,22 @@ const SalesReport = () => {
                                   return (
                                     <>
                                       <tr key={index}>
-                                        <td className="text-center">{index + 1}</td>
-
+                                        <td className="text-center">{moment(item.createdDate).format("DD-MMM-yyyy hh:mm")}</td>
+                                        <td>
+                                        <a
+                                            style={{ borderRadius: "50%" }}
+                                            href="javascript:void(0)"
+                                            title="Ticket"
+                                            onClick={() =>
+                                              handleViewTicket(
+                                                item.uniqueTransID
+                                              )
+                                            }
+                                          >
+                                             {item.uniqueTransID}
+                                          </a>
+                                         
+                                          </td>
                                         <td className="text-center">
                                           &nbsp;{" "}
                                           <a
@@ -247,7 +259,7 @@ const SalesReport = () => {
                                         <td style={{ textAlign: "right" }}>
                                           {item.priceBuying}
                                         </td> */}
-                                        <td className="text-center"></td>
+                                        <td className="text-center">{item.passengerType}</td>
                                         <td style={{ textAlign: "right" }}>
                                           {item.basePriceSelling}
                                         </td>
@@ -323,6 +335,9 @@ const SalesReport = () => {
                             </Center>
                           )}
 
+                         
+                        </div>
+                        <div className="my-2">
                           <ReactPaginate
                             previousLabel={"previous"}
                             nextLabel={"next"}
@@ -344,7 +359,7 @@ const SalesReport = () => {
                             breakLinkClassName={"page-link"}
                             activeClassName={"active"}
                           />
-                        </div>
+                          </div>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </div>
                     </div>
@@ -352,7 +367,6 @@ const SalesReport = () => {
                 </div>
               </div>
             </form>
-          )}
         </section>
       </div>
       <Footer />

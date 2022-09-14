@@ -11,7 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const Issued = () => {
     let [pageCount, setPageCount] = useState(0);
-    let [pageSize, setPageSize] = useState(10);
+    let [pageSize, setPageSize] = useState(50);
     let [currentPageNumber, setCurrentPageNumber] = useState(1);
     const location = useLocation();
     let searchId = Number(location.search.split("=")[1]);

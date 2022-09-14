@@ -16,7 +16,7 @@ const Ledger = () => {
   let [currencyName, setCurrencyName] = useState("");
 
   let [pageCount, setPageCount] = useState(0);
-  let [pageSize, setPageSize] = useState(10);
+  let [pageSize, setPageSize] = useState(50);
   let [currentPageNumber, setCurrentPageNumber] = useState(1);
 
   const [isTimeOut, setIsTimeOut] = useState(false);
@@ -177,7 +177,7 @@ const Ledger = () => {
                           </div>
                         </div>
                       </div>
-                      <div style={{ overflowY: "scroll" }}>
+                      <div className="tableFixHead">
                         <table
                           className="table table-bordered table-sm"
                           style={{ width: "100%", fontSize: "13px" }}
@@ -273,8 +273,9 @@ const Ledger = () => {
                             />
                           </Center>
                         )}
-
-                        <ReactPaginate
+                      </div>
+                      <div className="my-2">
+                      <ReactPaginate
                           previousLabel={"previous"}
                           nextLabel={"next"}
                           breakLabel={"..."}

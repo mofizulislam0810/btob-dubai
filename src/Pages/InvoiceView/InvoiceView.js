@@ -15,7 +15,8 @@ const InvoiceView = () => {
     const location = useLocation();
     const handleGetInvoiceList = () => {
         const getInvoiceList = async () => {
-            let sendObj = { uniqueTransID: location.search.split("=")[1] };
+            let sendObj = location.search.split("=")[1] ;
+            console.log(sendObj);
             const response = await axios.get(
                 environment.getInvoice + '/' + sendObj,
                 environment.headerToken

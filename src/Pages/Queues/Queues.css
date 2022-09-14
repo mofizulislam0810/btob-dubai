@@ -35,3 +35,11 @@ th,td{
   th {
    width: 10%;
   }
+
+
+.tableFixHead          { overflow: auto; height: 500px; }
+.tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+
+.bg-secondary th {
+    background-color: #6c757d;
+}

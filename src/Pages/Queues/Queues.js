@@ -17,7 +17,7 @@ import { Box, Button, Center, Spinner, Text } from "@chakra-ui/react";
 const Queues = () => {
   const [loading, setLoading] = useState(false);
   let [pageCount, setPageCount] = useState(0);
-  let [pageSize, setPageSize] = useState(10);
+  let [pageSize, setPageSize] = useState(50);
   let [currentPageNumber, setCurrentPageNumber] = useState(1);
   const location = useLocation();
   const navigate = useNavigate();

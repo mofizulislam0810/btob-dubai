@@ -13,7 +13,7 @@ import ReactPaginate from 'react-paginate';
 const Balance = () => {
   let [pageCount, setPageCount] = useState(0);
   let [pageCountBank, setPageCountBank] = useState(0);
-  let [pageSize, setPageSize] = useState(10);
+  let [pageSize, setPageSize] = useState(50);
   let [currentPageNumber, setCurrentPageNumber] = useState(1);
   let [currentPageNumberBank, setCurrentPageNumberBank] = useState(1);
   let [depositTypeId, setDepositType] = useState(1);
@@ -1162,27 +1162,27 @@ const Balance = () => {
                         <h4>Transaction</h4>
                         <hr  className="my-3"/>
                         <table
-                          className="table table-striped table-sm"
+                          className="table table-bordered table-sm"
                           style={{ width: "100%",fontSize:"12px"}}
                         >
-                          <thead>
+                          <thead className="text-center fw-bold bg-secondary">
                             <tr>
-                              <th>SL</th>
+                              <th>Submitted Date</th>
                               <th>Deposit Type</th>
                               <th>Reference</th>
-                              <th>Submitted Date</th>
                               <th>Status</th>
                               <th>Amount</th>
                               <th>Image</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody className="tbody text-center">
                             {
                               balanceList.length > 0 ?
                                 balanceList.map((item, index) => {
                                   return (
                                     <tr key={index}>
-                                      <td>{((currentPageNumber - 1) * pageSize) + index + 1}</td>
+                                      {/* <td>{((currentPageNumber - 1) * pageSize) + index + 1}</td> */}
+                                      <td>{moment(item.createdDate).format('DD-MM-yyyy hh:mm A')}</td>
                                       <td>
                                         {item.depositTypeId === 1
                                           ? "Cheque"
@@ -1201,7 +1201,7 @@ const Balance = () => {
                                                       : ""}
                                       </td>
                                       <td>{item.reference}</td>
-                                      <td>{moment(item.createdDate).format('DD-MM-yyyy hh:mm A')}</td>
+                                
                                       <td>
                                         {item.status === 1
                                           ? "Processing"
@@ -1266,10 +1266,10 @@ const Balance = () => {
 
                         
                         <table
-                          className="table table-striped table-sm"
+                          className="table table-bordered table-sm"
                           style={{ width: "100%", fontSize:"12px"}}
                         >
-                          <thead>
+                          <thead className="text-center fw-bold bg-secondary">
                             <tr>
                               <th>SL</th>
                               <th>Account Name</th>
@@ -1283,7 +1283,7 @@ const Balance = () => {
                               <th>Routing number</th> */}
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody className="tbody text-center">
                             {agentBankAccountList.map((item, index) => {
                               return (
                                 <tr key={index}>

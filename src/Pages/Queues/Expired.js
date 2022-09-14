@@ -11,7 +11,7 @@ import ReactPaginate from "react-paginate";
 
 const Expired = () => {
     let [pageCount, setPageCount] = useState(0);
-    let [pageSize, setPageSize] = useState(10);
+    let [pageSize, setPageSize] = useState(50);
     let [currentPageNumber, setCurrentPageNumber] = useState(1);
     let [ticketingList, setTicketingList] = useState([]);
     let [uniqueTransID, setUniqueTransID] = useState("");

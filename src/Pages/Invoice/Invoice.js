@@ -181,10 +181,7 @@ const Invoice = () => {
                 </div>
 
 
-                <table class="table table-borderless table-sm">
-                  <tbody>
-                    <tr>
-                      <td className="text-start bg-white">
+                <div className="text-start my-2">
                       {ticketingList.length > 0 ? (
                       <>
                         {ticketingList[0].agentLogo !== null &&
@@ -211,34 +208,54 @@ const Invoice = () => {
                     ) : (
                       <></>
                     )}
-                        {/* <img
-                          alt="img01"
-                          className="p-2"
-                          src={tllLogo}
-                        ></img> */}
-                      </td>
-                      <td className="text-end bg-white">
-                        <address>
-                              <span className="fw-bold fs-6">
-                                {agentInfo.name}
-                              </span>
-                              <br />
-                              <div
-                                className="mt-2"
-                                style={{ fontSize: "10px", lineHeight: "12px" }}
-                              >
-                                {agentInfo.address}
-                                <br />
-                                Phone: {agentInfo.mobileNo}<br></br>
-                                Email: {agentInfo.email}
-                              </div>
-                            </address>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                  </div>
 
                 
+                                        <table class="table table-borderless table-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <td className="text-start bg-white">
+                                                        <address>
+                                                            <span className="fw-bold fs-6">
+                                                                {agentInfo.name}
+                                                            </span>
+                                                            <br />
+                                                            <div
+                                                                className="mt-2"
+                                                                style={{ fontSize: "10px", lineHeight: "12px" }}
+                                                            >
+                                                                {agentInfo.address}
+                                                                <br />
+                                                                Phone: {agentInfo.mobileNo}<br></br>
+                                                                Email: {agentInfo.email}
+                                                            </div>
+                                                        </address>
+
+                                                    </td>
+                                                    <td className="text-end bg-white">
+                                                        <address>
+                                                            <span className="fw-bold fs-6">
+                                                                Triplover Travel Agency LLC
+                                                            </span>
+                                                            <br />
+                                                            <div
+                                                                className="mt-2"
+                                                                style={{ fontSize: "10px", lineHeight: "12px" }}
+                                                            >
+                                                                Al Muhairi 113-127, Al Dhagaya
+                                                                <br />
+                                                                Dubai, United Arab Emirates<br></br>
+                                                                Phone: +97143375728<br></br>
+                                                                Email: support@triplover.ae
+                                                            </div>
+                                                        </address>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+
                 {/* <div className="row">
                   <div className="col-md-8">
                     {ticketingList.length > 0 ? (

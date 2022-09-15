@@ -19,10 +19,10 @@ const useAuthentication = () => {
         if (response.data.isSuccess==true) {
           sessionStorage.setItem("token", JSON.stringify(response.data.data));
           sessionStorage.setItem("LoginData", JSON.stringify(loginData));
-          // setLogin(true);
-          const destination = location.state?.from || "/search";
-          navigate(destination);
-          window.location.reload();
+          setLogin(true);
+          const destination = location.state?.from.pathname || "/search";
+          // navigate(destination);
+          window.location.href = destination;
         } else {
           toast.error("Email or password is wrong!");
         }

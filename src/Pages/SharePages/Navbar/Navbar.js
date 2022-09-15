@@ -29,7 +29,7 @@ const handleViewTicket= async ()=>{
   await axios
   .post(environment.airTicketingSearch,searchObj, environment.headerToken)
   .then((res) => {
-    console.log(res);
+    // console.log(res);
     if(res.data.length > 0 && res.data[0].isTicketed === true && res.data[0].uniqueTransID !==""){
       window.open("/ticket?utid=" + res.data[0].uniqueTransID, "_blank");
     }else if(res.data.length > 0 && res.data[0].isTicketed === false && res.data[0].uniqueTransID !==""){
@@ -61,7 +61,7 @@ const accountManagerInfo = async(agentId)=>{
   const handleInit = () => {
     axios.get(environment.agentInfo, environment.headerToken)
       .then((agentRes) => {
-        console.log(agentRes.data);
+        // console.log(agentRes.data);
         accountManagerInfo(agentRes.data.id);
         sessionStorage.setItem("agentId", agentRes.data.id);
         sessionStorage.setItem("agentName", agentRes.data.name);
@@ -102,7 +102,7 @@ const accountManagerInfo = async(agentId)=>{
       )
       .then((noticeRes) => {
         setNoticeList(noticeRes.data);
-        console.log(noticeList);
+        // console.log(noticeList);
       })
       .catch((err) => {
         //alert('Invalid login')
@@ -114,7 +114,7 @@ const accountManagerInfo = async(agentId)=>{
     getData();
   };
 
-  console.log(accountManager);
+  console.log(agentInfo);
 
   useEffect(() => {
     handleInit();
@@ -227,7 +227,7 @@ const accountManagerInfo = async(agentId)=>{
         <li className="nav-item dropdown" title="My Account">
           <a className="nav-link" data-toggle="dropdown" href="#">
             <span>
-              <i className="fas fa-user"></i><span className="ms-2">{sessionStorage.getItem("userName")}</span>
+              <i className="fas fa-user"></i><span className="ms-2">{agentInfo?.name}({agentInfo?.code})</span>
             </span>
           </a>
           <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">

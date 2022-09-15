@@ -511,7 +511,7 @@ const handleSetPNR=(pnr)=>{
 																	{item.ticketNumber}
 																</td>
 																<td>
-																	<a href='#' data-bs-toggle="modal" data-bs-target="#viewModal" onClick={() => getSupportHistory(item, 1)}>
+																	<a href='#' className='me-2' data-bs-toggle="modal" data-bs-target="#viewModal" onClick={() => getSupportHistory(item, 1)}>
 																		View
 																	</a>
 																	<a href='#' style={{ color: '#02046a' }} data-bs-toggle="modal" data-bs-target="#replayModal" onClick={() => getSupportHistory(item, 1)}>
@@ -735,9 +735,7 @@ const handleSetPNR=(pnr)=>{
 																</td>
 																<td>
 																<a href='#' style={{ color: '#02046a' }} data-bs-toggle="modal" data-bs-target="#replayModal" onClick={() => getSupportHistory(item, 1)}>
-																	{
-																	</a>
-																	}
+																	View
 																	</a>
 																</td>
 															</tr>

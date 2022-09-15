@@ -133,6 +133,7 @@ const handleSetPNR=(pnr)=>{
 			const response = await axios.get(environment.getSupportInfoesByStatustList + "/" + (sessionStorage.getItem('agentId') ?? 0) + "/" + 1+ "/" + searchSubjectId + `?pageNumber=${pageNumber}&pageSize=${pageSize}`, environment.headerToken);
 			setSupportOpenedList(response.data.data)
 			setPageCount(response.data.totalPages);
+			console.log(response.data.data)
 		};
 		getSupport();
 
@@ -478,7 +479,8 @@ const handleSetPNR=(pnr)=>{
 															return <tr key={index}>
 																<td>{((pageNumber - 1) * pageSize) + index + 1}</td>
 																<td>{item.subjectName}</td>
-																<td>{item.message.length > 50 ? item.message.substr(0, 50) + "..." : item.message}</td>
+																<td title={item.message} style={{ background:  item.isAgent === true ? "white" : "#F486A1" }}>
+																	{item.message.length > 50 ? item.message.substr(0, 50) + "..." : item.message} {item.isAgent}</td>
 																<td>{moment(item.createdDate).format("DD-MM-YYYY hh:mm:ss A")}</td>
 																<td>
 																	{item.uniqueTransID}
@@ -492,6 +494,11 @@ const handleSetPNR=(pnr)=>{
 																<td>
 																	<a href='#' data-bs-toggle="modal" data-bs-target="#viewModal" onClick={() => getSupportHistory(item, 1)}>
 																		View
+																	</a>
+																	<a href='#' style={{ color: '#02046a' }} data-bs-toggle="modal" data-bs-target="#replayModal" onClick={() => getSupportHistory(item, 1)}>
+																	{
+																		item.isAgent==true?"Message":"Reply"
+																	}
 																	</a>
 																</td>
 															</tr>
@@ -712,7 +719,7 @@ const handleSetPNR=(pnr)=>{
 															return <tr key={index} style={{ background: bgColor }}>
 																<td>{((pageNumber - 1) * pageSize) + index + 1}</td>
 																<td>{item.subjectName}</td>
-																<td>{item.message.length > 50 ? item.message.substr(0, 50) + "..." : item.message}</td>
+																<td title={item.message} style={{ background:  item.isAgent === true ? "white" : "#F486A1" }}>{item.message.length > 50 ? item.message.substr(0, 50) + "..." : item.message} {item.isAgent}</td>
 																<td>{moment(item.createdDate).format("DD-MM-YYYY hh:mm:ss A")}</td>
 																<td>
 																	{item.uniqueTransID}
@@ -725,7 +732,9 @@ const handleSetPNR=(pnr)=>{
 																</td>
 																<td>
 																	<a href='#' style={{ color: '#02046a' }} data-bs-toggle="modal" data-bs-target="#replayModal" onClick={() => getSupportHistory(item, 1)}>
-																		Reply
+																	{
+																		item.isAgent==true?"Message":"Reply"
+																	}
 																	</a>
 																</td>
 															</tr>
@@ -765,6 +774,7 @@ const handleSetPNR=(pnr)=>{
 														<th>Booking ID</th>
 														<th>PNR</th>
 														<th>Ticket Number</th>
+														<th>Action</th>
 													</tr>
 												</thead>
 												<tbody className='tbody'>
@@ -773,7 +783,7 @@ const handleSetPNR=(pnr)=>{
 															return <tr key={index}>
 																<td>{((pageNumber - 1) * pageSize) + index + 1}</td>
 																<td>{item.subjectName}</td>
-																<td>{item.message.length > 50 ? item.message.substr(0, 50) + "..." : item.message}</td>
+																<td title={item.message} style={{ background:  item.isAgent === true ? "white" : "#F486A1" }}>{item.message.length > 50 ? item.message.substr(0, 50) + "..." : item.message} {item.isAgent}</td>
 																<td>{moment(item.createdDate).format("DD-MM-YYYY hh:mm:ss A")}</td>
 																<td>
 																	{item.uniqueTransID}
@@ -783,6 +793,13 @@ const handleSetPNR=(pnr)=>{
 																</td>
 																<td>
 																	{item.ticketNumber}
+																</td>
+																<td>
+																<a href='#' style={{ color: '#02046a' }} data-bs-toggle="modal" data-bs-target="#replayModal" onClick={() => getSupportHistory(item, 1)}>
+																	{
+																		item.isAgent==true?"Message":"Reply"
+																	}
+																	</a>
 																</td>
 															</tr>
 														})

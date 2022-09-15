@@ -287,7 +287,7 @@ const SalesReport = () => {
                                   {" "}
                                   <tr>
                                     <td
-                                      colSpan={5}
+                                      colSpan={6}
                                       style={{ textAlign: "right" }}
                                     >
                                       <strong>

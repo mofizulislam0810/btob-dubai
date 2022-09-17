@@ -499,7 +499,7 @@ const handleSetPNR=(pnr)=>{
 																<td>{((pageNumber - 1) * pageSize) + index + 1}</td>
 																<td>{item.subjectName}</td>
 																<td title={item.message} style={{ background:  item.isAgent === true ? "white" : "#F486A1" }}>
-																	{item.message.length > 50 ? item.message.substr(0, 50) + "..." : item.message} {item.isAgent}</td>
+																	{item.message?.length > 50 ? item.message.substr(0, 50) + "..." : item.message} {item.isAgent}</td>
 																<td>{moment(item.createdDate).format("DD-MM-YYYY hh:mm:ss A")}</td>
 																<td>
 																	{item.uniqueTransID}
@@ -569,7 +569,7 @@ const handleSetPNR=(pnr)=>{
 															return <tr key={index} style={{ background: bgColor }}>
 																<td>{((pageNumber - 1) * pageSize) + index + 1}</td>
 																<td>{item.subjectName}</td>
-																<td title={item.message} style={{ background:  item.isAgent === true ? "white" : "#F486A1" }}>{item.message.length > 50 ? item.message.substr(0, 50) + "..." : item.message} {item.isAgent}</td>
+																<td title={item.message} style={{ background:  item.isAgent === true ? "white" : "#F486A1" }}>{item.message?.length > 50 ? item.message.substr(0, 50) + "..." : item.message} {item.isAgent}</td>
 																<td>{moment(item.createdDate).format("DD-MM-YYYY hh:mm:ss A")}</td>
 																<td>
 																	{item.uniqueTransID}
@@ -636,7 +636,7 @@ const handleSetPNR=(pnr)=>{
 															return <tr key={index}>
 																<td>{((pageNumber - 1) * pageSize) + index + 1}</td>
 																<td>{item.subjectName}</td>
-																<td title={item.message} style={{ background:  item.isAgent === true ? "white" : "#F486A1" }}>{item.message.length > 50 ? item.message.substr(0, 50) + "..." : item.message} {item.isAgent}</td>
+																<td title={item.message} style={{ background:  item.isAgent === true ? "white" : "#F486A1" }}>{item.message?.length > 50 ? item.message.substr(0, 50) + "..." : item.message} {item.isAgent}</td>
 																<td>{moment(item.createdDate).format("DD-MM-YYYY hh:mm:ss A")}</td>
 																<td>
 																	{item.uniqueTransID}

@@ -384,14 +384,14 @@ const SuccessTicketPanel = () => {
                                           BAGGAGE
                                           <span className="ms-5">
                                             ADT-
-                                            {item.baggage[0].amount +
-                                              item.baggage[0].units}
+                                            {item.baggage[0]?.amount +
+                                              item.baggage[0]?.units}
                                             {ticketData.item1?.flightInfo.passengerCounts
                                               .cnn > 0 ? (
                                               <>
                                                 , CHD-
-                                                {item.baggage[0].amount +
-                                                  item.baggage[0].units}
+                                                {item.baggage[0]?.amount +
+                                                  item.baggage[0]?.units}
                                               </>
                                             ) : (
                                               <></>
@@ -573,14 +573,14 @@ const SuccessTicketPanel = () => {
                                         BAGGAGE
                                         <span className="ms-5">
                                           ADT-
-                                          {item.baggage[0].amount +
-                                            item.baggage[0].units}
+                                          {item.baggage[0]?.amount +
+                                            item.baggage[0]?.units}
                                           {ticketData.item1?.flightInfo.passengerCounts
                                             .cnn > 0 ? (
                                             <>
                                               , CHD-
-                                              {item.baggage[0].amount +
-                                                item.baggage[0].units}
+                                              {item.baggage[0]?.amount +
+                                                item.baggage[0]?.units}
                                             </>
                                           ) : (
                                             <></>

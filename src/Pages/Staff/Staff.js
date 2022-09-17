@@ -154,7 +154,7 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
       <div className="content-wrapper search-panel-bg px-4">
         <section className="content-header"></section>
         <section className="content">
-        <ToastContainer />
+        <ToastContainer position="bottom-right" autoClose={1500}/>
           <div className="mx-5">
             <div className="card">
               <div className="card-body">
@@ -185,7 +185,7 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
                           <th>Name</th>
                           <th>Email</th>
                           <th>Mobile</th>
-                          <th>Balance Limit</th>
+                          <th>Transaction Limit</th>
                           <th>Password</th>
                           <th>Member Since</th>
                           <th>Is Active?</th>
@@ -310,7 +310,7 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
                       </div>
                       <div className="col-sm-3">
                         <label>
-                          Balance Limit<span style={{ color: "red" }}>*</span>
+                         Transaction Limit<span style={{ color: "red" }}>*</span>
                         </label>
                         <input
                           type={"number"}

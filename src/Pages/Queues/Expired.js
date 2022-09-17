@@ -94,7 +94,7 @@ const Expired = () => {
                            <th>Booking Date</th>
                             <th>Booking ID</th>
                             <th className='text-start'>Passenger Name</th>
-                            <th className='text-start'>Passenger Type</th>
+                            {/* <th className='text-start'>Passenger Type</th> */}
                             {/* <th>Time Limit</th> */}
                             <th>Flight Date</th>
                             <th>Route</th>
@@ -126,7 +126,7 @@ const Expired = () => {
                                     </a>
                                   </td>
                                   <td className='text-start'>{item.leadPaxName}</td>
-                                  <td></td>
+                                  {/* <td></td> */}
                                   <td>
                                     {item.departure != null ? (
                                       moment(item.departure).format(

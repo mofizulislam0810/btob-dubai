@@ -221,7 +221,7 @@ const Issued = () => {
                                                             <th>Booking Date</th>
                                                             <th>Booking ID</th>
                                                             <th className='text-start'>Passenger Name</th>
-                                                            <th>Passenger Type</th>
+                                                            {/* <th>Passenger Type</th> */}
                                                             <th>Flight Date</th>
                                                             <th>Route</th>
                                                             <th>PNR</th>
@@ -266,7 +266,7 @@ const Issued = () => {
                                                                             </a>
                                                                         </td>
                                                                         <td className='text-start'>{item.leadPaxName}</td>
-                                                                        <td></td>
+                                                                        {/* <td></td> */}
                                                                         <td>
                                                                             {item.departure != null ? (
                                                                                 moment(item.departure).format(

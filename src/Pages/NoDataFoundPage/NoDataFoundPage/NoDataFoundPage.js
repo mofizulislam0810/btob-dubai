@@ -4,8 +4,8 @@ import useAuth from '../../../hooks/useAuth';
 import Loading from '../../Loading/Loading';
 // import nodata from "../../../images/icon/no-result.gif";
 
-const NoDataFoundPage = () => {
-  const {loading} = useAuth();
+const NoDataFoundPage = ({loading}) => {
+  // const loading = false;
     return (
       <>
       <Loading loading={loading}></Loading>

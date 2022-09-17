@@ -256,8 +256,8 @@ const handleSetPNR=(pnr)=>{
 
 	const handleSupportSubmit = () => {
 		let ticketNumbersN=ticketNumbers.substring(1,ticketNumbers.length);
-		alert(uniqueTransID)
-		alert(pnr)
+		// alert(uniqueTransID)
+		// alert(pnr)
 		let supportObj = {
 			id: currentItem == null ? 0 : currentItem.id, agentId: (sessionStorage.getItem('agentId') ?? 0), supportTypeId: supportTypeId, subjectId: subjectId,
 			message: message, fileName: fileName, status: status, uniqueTransID: uniqueTransID, pnr: pnr, ticketNumber: ticketNumbersN
@@ -437,7 +437,7 @@ const handleSetPNR=(pnr)=>{
 																		{/* <label>{ticketNumbers}</label> */}
 																		{/* <input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumber === "null" ? "" : ticketNumber} className="form-control" onChange={(e) => setTicketno()}></input> */}
 																	</div>
-																	{
+																	{/* {
 																		subjectId === 2 ? 
 																		<>		
 																			<div className='col-sm-5'>
@@ -454,7 +454,7 @@ const handleSetPNR=(pnr)=>{
 																			</div>
 																		</> : <>
 																		</>
-																	}
+																	} */}
 
 																</div>
 																<div className='row mb-3'>
@@ -547,93 +547,7 @@ const handleSetPNR=(pnr)=>{
 											
 										</div>
 										<div className="tab-pane fade" id="ongoing">
-											<div className="modal fade" id="replayModal" tabIndex={-1} aria-labelledby="replayModalLabel" aria-hidden="true">
-												<div className="modal-dialog">
-													<div className="modal-content">
-														<div className="modal-header">
-															<h5 className="modal-title" id="replayModalLabel"> Reply</h5>
-															<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-														</div>
-														<div className="modal-body">
-															<div className='row'>
-																<div className="container bootstrap snippets bootdey">
-																	<div className="row">
-																		<div className="col-md-12 bg-white ">
-																			<div className="chat-message">
-																				<ul className="chat">
-																					{
-																						supportHistoryList.map((item, index) => {
-																							return <li className={`text-${item.isAgent === true ? 'right' : 'left'} clearfix`} >
-																								<span className="chat-img">
-																									{/* <img src={require(`../../images/icon/${'user.png'}`)} alt=''/> */}
-
-																								</span>
-																								<div className="chat-body clearfix">
-																									<div className="header">
-																										<strong className="primary-font">{item.createdByName}</strong><br />
-																										<small className={`text-${item.isAgent === true ? 'right' : 'left'} text-muted`}><i className="fa fa-clock-o"></i> {moment(item.createdDate).format('DD-MMMM-yyyy hh:mm:ss a')}</small>
-
-
-																									</div>
-																									<p className={`text-${item.isAgent === true ? 'right' : 'left'} text-muted`}>
-																										{item.message}
-																									</p>
-																									{/* <a href={require(`../../images/icon/${'user.png'}`)} download>download</a> */}
-																									{
-																										item.fileName != null && item.fileName != "" ? <a href={environment.baseApiURL + `supporthistory/getfile/${item.fileName}`} download target="_blank">{item.fileName.length > 50 ? item.fileName.substr(0, 50) + '...' : item.fileName}</a>
-																											: <></>
-																									}
-																									{
-																										<span style={{ color: 'green' }}>{item.isAgent === true && item.isAdminRead === true ? "Seen" : ""}</span>
-																									}
-																								</div>
-																							</li>
-																						})
-																					}
-																				</ul>
-																				<ReactPaginate
-																					previousLabel={"previous"}
-																					nextLabel={"next"}
-																					breakLabel={"..."}
-																					pageCount={pageCountH}
-																					marginPagesDisplayed={2}
-																					pageRangeDisplayed={3}
-																					onPageChange={handlePageClickH}
-																					containerClassName={"pagination justify-content-center"}
-																					pageClassName={"page-item"}
-																					pageLinkClassName={"page-link"}
-																					previousClassName={"page-item"}
-																					previousLinkClassName={"page-link"}
-																					nextClassName={"page-item"}
-																					nextLinkClassName={"page-link"}
-																					breakClassName={"page-item"}
-																					breakLinkClassName={"page-link"}
-																					activeClassName={"active"}
-																				/>
-																			</div>
-																			<div className="chat-box bg-white">
-																				<div className='row'>{fileCurrentName}</div>
-																				<div className="input-group">
-																					<span className="btn btn-primary btn-file">
-																						<i className='fa fa-paperclip'></i><input type="file" onChange={(e) => handleHistoryFileUpload(e.target.files[0])} />
-																					</span>
-																					<input className="form-control border no-shadow no-rounded" placeholder="Type your message here" onChange={(e) => setHistoryMessage(e.target.value)} />
-																					<span className="input-group-btn">
-																						<button className="btn btn-success no-rounded" type="button" onClick={() => handleHistorySubmit()}>Send</button>
-																					</span>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-
-
-
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
+											
 											<table className='table table-boardered table-sm' style={{ width: '100%',fontSize:"13px" }}>
 												<thead className='bg-secondary'>
 													<tr>
@@ -848,6 +762,93 @@ const handleSetPNR=(pnr)=>{
 														</div>
 													</div>
 										</div>
+									</div>
+									<div className="modal fade" id="replayModal" tabIndex={-1} aria-labelledby="replayModalLabel" aria-hidden="true">
+												<div className="modal-dialog">
+													<div className="modal-content">
+														<div className="modal-header">
+															<h5 className="modal-title" id="replayModalLabel"> Reply</h5>
+															<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div className="modal-body">
+															<div className='row'>
+																<div className="container bootstrap snippets bootdey">
+																	<div className="row">
+																		<div className="col-md-12 bg-white ">
+																			<div className="chat-message">
+																				<ul className="chat">
+																					{
+																						supportHistoryList.map((item, index) => {
+																							return <li className={`text-${item.isAgent === true ? 'right' : 'left'} clearfix`} >
+																								<span className="chat-img">
+																									{/* <img src={require(`../../images/icon/${'user.png'}`)} alt=''/> */}
+
+																								</span>
+																								<div className="chat-body clearfix">
+																									<div className="header">
+																										<strong className="primary-font">{item.createdByName}</strong><br />
+																										<small className={`text-${item.isAgent === true ? 'right' : 'left'} text-muted`}><i className="fa fa-clock-o"></i> {moment(item.createdDate).format('DD-MMMM-yyyy hh:mm:ss a')}</small>
+
+
+																									</div>
+																									<p className={`text-${item.isAgent === true ? 'right' : 'left'} text-muted`}>
+																										{item.message}
+																									</p>
+																									{/* <a href={require(`../../images/icon/${'user.png'}`)} download>download</a> */}
+																									{
+																										item.fileName != null && item.fileName != "" ? <a href={environment.baseApiURL + `supporthistory/getfile/${item.fileName}`} download target="_blank">{item.fileName.length > 50 ? item.fileName.substr(0, 50) + '...' : item.fileName}</a>
+																											: <></>
+																									}
+																									{
+																										<span style={{ color: 'green' }}>{item.isAgent === true && item.isAdminRead === true ? "Seen" : ""}</span>
+																									}
+																								</div>
+																							</li>
+																						})
+																					}
+																				</ul>
+																				<ReactPaginate
+																					previousLabel={"previous"}
+																					nextLabel={"next"}
+																					breakLabel={"..."}
+																					pageCount={pageCountH}
+																					marginPagesDisplayed={2}
+																					pageRangeDisplayed={3}
+																					onPageChange={handlePageClickH}
+																					containerClassName={"pagination justify-content-center"}
+																					pageClassName={"page-item"}
+																					pageLinkClassName={"page-link"}
+																					previousClassName={"page-item"}
+																					previousLinkClassName={"page-link"}
+																					nextClassName={"page-item"}
+																					nextLinkClassName={"page-link"}
+																					breakClassName={"page-item"}
+																					breakLinkClassName={"page-link"}
+																					activeClassName={"active"}
+																				/>
+																			</div>
+																			<div className="chat-box bg-white">
+																				<div className='row'>{fileCurrentName}</div>
+																				<div className="input-group">
+																					<span className="btn btn-primary btn-file">
+																						<i className='fa fa-paperclip'></i><input type="file" onChange={(e) => handleHistoryFileUpload(e.target.files[0])} />
+																					</span>
+																					<input className="form-control border no-shadow no-rounded" placeholder="Type your message here" onChange={(e) => setHistoryMessage(e.target.value)} />
+																					<span className="input-group-btn">
+																						<button className="btn btn-success no-rounded" type="button" onClick={() => handleHistorySubmit()}>Send</button>
+																					</span>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+
+
+
+															</div>
+														</div>
+													</div>
+												</div>
 									</div>
 								</div>
 							</div>

@@ -21,7 +21,7 @@ const Navbar = () => {
   const handelLogout = () => {
     localStorage.clear();
     sessionStorage.clear();
-    navigate("/");
+    window.location.href = "/";
   };
 
 const handleViewTicket= async ()=>{
@@ -227,7 +227,7 @@ const accountManagerInfo = async(agentId)=>{
         <li className="nav-item dropdown" title="My Account">
           <a className="nav-link" data-toggle="dropdown" href="#">
             <span>
-              <i className="fas fa-user"></i><span className="ms-2">{agentInfo?.name}({agentInfo?.code})</span>
+              <i className="fas fa-user"></i><span className="ms-2">{agentInfo?.name} ({agentInfo?.code})</span>
             </span>
           </a>
           <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -237,7 +237,7 @@ const accountManagerInfo = async(agentId)=>{
             </Link>
             <div className="dropdown-divider"></div>
             <div className="dropdown-divider"></div>
-            <div className="dropdown-item" onClick={handelLogout} id="logOut">
+            <div className="dropdown-item" onClick={handelLogout} id="logOut" style={{cursor:"pointer"}}>
               <i className="fas fa-sign-out-alt mr-2"></i>Logout
             </div>
           </div>

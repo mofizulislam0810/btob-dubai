@@ -480,7 +480,7 @@ const Queues = () => {
                                 <th>Booking Date</th>
                                 <th>Booking ID</th>
                                 <th className='text-start'>Passenger Name</th>
-                                <th>Passenger Type</th>
+                                {/* <th>Passenger Type</th> */}
                                 <th>Flight Date</th>
                                 <th>Route</th>
                                 <th>PNR</th>
@@ -525,7 +525,7 @@ const Queues = () => {
                                       </a>
                                     </td>
                                     <td>{item.leadPaxName}</td>
-                                    <td></td>
+                                    {/* <td></td> */}
                                     <td>
                                       {item.departure != null ? (
                                         moment(item.departure).format(

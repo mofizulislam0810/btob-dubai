@@ -92,7 +92,7 @@ const LoginPage = () => {
           boxShadow="0px 4px 67px rgba(156, 156, 156, 0.25)"
         >
           <div className="login-box">
-            <ToastContainer />
+            <ToastContainer position="bottom-right" autoClose={1500}/>
             <div className="card">
               <Center className="text-center">
                 <Image

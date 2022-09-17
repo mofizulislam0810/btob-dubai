@@ -55,13 +55,8 @@ import Canceled from "./Pages/Queues/Canceled";
 import InvoiceView from "./Pages/InvoiceView/InvoiceView";
 import Expired from "./Pages/Queues/Expired";
 function App() {
-  // const [token,setToken] = useState(sessionStorage.getItem("token"));
-  // if(!token){
-  //   return(
-  //     <LoginPage></LoginPage>
-  //   );
-  // }
-
+  var isLoggedIn = sessionStorage.getItem("token");
+  console.log(isLoggedIn);
   return (
     <Box>
       <Box
@@ -74,8 +69,8 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/registration" element={<Registration />} />
+            <Route path="/" element={isLoggedIn?<SearchPage /> : <LoginPage />} />
+            <Route path="/registration" element={isLoggedIn?<SearchPage /> :<Registration />} />
             <Route path="/loading" element={<Loading />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/bankdetail" element={<BankDetails />} />

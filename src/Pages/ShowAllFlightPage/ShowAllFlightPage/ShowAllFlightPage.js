@@ -19,7 +19,7 @@ import currentYear from "../../SharePages/Utility/currentYear";
 import ReactTooltip from "react-tooltip";
 let cIndex = 1;
 const ShowAllFlightPage = () => {
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
   const { state } = useLocation();
   const {
     origin,
@@ -402,7 +402,7 @@ const ShowAllFlightPage = () => {
         setLoading(true);
         const response = await axios.post(
           environment.searchFlight,
-          searchParamOnedWay,environment.headerToken
+          searchParamOnedWay, environment.headerToken
         );
         console.log(response.data.item1);
         setFetchFlighData(await response.data.item1);
@@ -424,7 +424,7 @@ const ShowAllFlightPage = () => {
         setLoading(true);
         const response = await axios.post(
           environment.searchFlight,
-          searchParamRoundWay,environment.headerToken
+          searchParamRoundWay, environment.headerToken
         );
         setFetchFlighData(await response.data.item1);
         // setFetchFlighData(flightoneway.item1);
@@ -446,7 +446,7 @@ const ShowAllFlightPage = () => {
       getData();
     }
   }, []);
- console.log(fetchFlighData)
+  console.log(fetchFlighData)
   useEffect(() => {
     $(".slide-toggle").hide();
     $(".search-again").click(function () {
@@ -559,10 +559,10 @@ const ShowAllFlightPage = () => {
       if (results.length >= index + 1) {
         autoinput.val(
           results[index].city +
-            " - " +
-            results[index].country +
-            ", " +
-            results[index].name
+          " - " +
+          results[index].country +
+          ", " +
+          results[index].name
         );
         clearResults();
       }
@@ -891,7 +891,7 @@ const ShowAllFlightPage = () => {
         setLoading(true);
         const response = await axios.post(
           environment.searchFlight,
-          searchParamMulti,environment.headerToken
+          searchParamMulti, environment.headerToken
         );
         setFetchFlighData(await response.data.item1);
         // setFetchFlighData(flightmulticity.item1);
@@ -967,7 +967,7 @@ const ShowAllFlightPage = () => {
         setLoading(true);
         const response = await axios.post(
           environment.searchFlight,
-          searchParamRoundWay,environment.headerToken
+          searchParamRoundWay, environment.headerToken
         );
         setFetchFlighData(await response.data.item1);
         // setFetchFlighData(roundtrip.item1);
@@ -1036,7 +1036,7 @@ const ShowAllFlightPage = () => {
         setLoading(true);
         const response = await axios.post(
           environment.searchFlight,
-          searchParamOnedWay,environment.headerToken
+          searchParamOnedWay, environment.headerToken
         );
         setFetchFlighData(await response.data.item1);
         // setFetchFlighData(flightoneway.item1);
@@ -1086,163 +1086,163 @@ const ShowAllFlightPage = () => {
                     </span>
                     <ReactTooltip effect="solid" html={true}></ReactTooltip>
                   </span>
-                     <span className="px-1">|</span> 
+                  <span className="px-1">|</span>
                   <span className="fw-bold" style={{ fontSize: "14px" }}>
                     <span className="me-2">
                       <i className="fas fa-plane-arrival"></i>
                     </span>
-                  {
-                    searchData.returnDate === "null" ? <span data-tip={searchData.destination.split(",")[1]}>
-                    {destinationCode[0]}
-                  </span> : <span data-tip={searchData.destination.split(",")[1] + "<br>" + searchData.returnDate}>
-                      {destinationCode[0]}
-                    </span>
-                  }
-                    
+                    {
+                      searchData.returnDate === "null" ? <span data-tip={searchData.destination.split(",")[1]}>
+                        {destinationCode[0]}
+                      </span> : <span data-tip={searchData.destination.split(",")[1] + "<br>" + searchData.returnDate}>
+                        {destinationCode[0]}
+                      </span>
+                    }
+
                     <ReactTooltip effect="solid" html={true}></ReactTooltip>
                   </span>
                 </span>
-                {searchData.origin1 !== '' &&  searchData.origin1 !==undefined ? (
+                {searchData.origin1 !== '' && searchData.origin1 !== undefined ? (
                   <>
-                   <span className="p-2 border ms-1">
-                  <span className="fw-bold" style={{ fontSize: "14px" }}>
-                    <span className="me-2">
-                      <i className="fas fa-plane-departure"></i>
-                    </span>{" "}
-                    <span data-tip={searchData.origin1.split(",")[1] + "<br>" + searchData.inputDateMulti1}>
-                      {originCode1[0]}
+                    <span className="p-2 border ms-1">
+                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                        <span className="me-2">
+                          <i className="fas fa-plane-departure"></i>
+                        </span>{" "}
+                        <span data-tip={searchData.origin1.split(",")[1] + "<br>" + searchData.inputDateMulti1}>
+                          {originCode1[0]}
+                        </span>
+                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
+                      </span>
+                      <span className="px-1">|</span>
+                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                        <span className="me-2">
+                          <i className="fas fa-plane-arrival"></i>
+                        </span>
+
+                        <span data-tip={searchData.destination1.split(",")[1]}>
+                          {destinationCode1[0]}
+                        </span>
+
+
+                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
+                      </span>
                     </span>
-                    <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                  </span>
-                     <span className="px-1">|</span> 
-                  <span className="fw-bold" style={{ fontSize: "14px" }}>
-                    <span className="me-2">
-                      <i className="fas fa-plane-arrival"></i>
-                    </span>
-               
-                    <span data-tip={searchData.destination1.split(",")[1]}>
-                      {destinationCode1[0]}
-                    </span>
-                  
-                    
-                    <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                  </span>
-                </span>
                   </>
                 ) : (
                   <></>
                 )}
                 {searchData.origin2 !== '' && searchData.origin2 !== undefined ? (
                   <>
-                   <span className="p-2 border ms-1">
-                  <span className="fw-bold" style={{ fontSize: "14px" }}>
-                    <span className="me-2">
-                      <i className="fas fa-plane-departure"></i>
-                    </span>{" "}
-                    <span data-tip={searchData.origin2.split(",")[1] + "<br>" + searchData.inputDateMulti2}>
-                      {originCode2[0]}
+                    <span className="p-2 border ms-1">
+                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                        <span className="me-2">
+                          <i className="fas fa-plane-departure"></i>
+                        </span>{" "}
+                        <span data-tip={searchData.origin2.split(",")[1] + "<br>" + searchData.inputDateMulti2}>
+                          {originCode2[0]}
+                        </span>
+                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
+                      </span>
+                      <span className="px-1">|</span>
+                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                        <span className="me-2">
+                          <i className="fas fa-plane-arrival"></i>
+                        </span>
+
+                        <span data-tip={searchData.destination2.split(",")[1]}>
+                          {destinationCode2[0]}
+                        </span>
+                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
+                      </span>
                     </span>
-                    <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                  </span>
-                     <span className="px-1">|</span> 
-                  <span className="fw-bold" style={{ fontSize: "14px" }}>
-                    <span className="me-2">
-                      <i className="fas fa-plane-arrival"></i>
-                    </span>
-               
-                    <span data-tip={searchData.destination2.split(",")[1]}>
-                      {destinationCode2[0]}
-                    </span>
-                    <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                  </span>
-                </span>
                   </>
                 ) : (
                   <></>
                 )}
 
-                 {searchData.origin3 !== '' &&  searchData.origin3 !==undefined? (
+                {searchData.origin3 !== '' && searchData.origin3 !== undefined ? (
                   <>
-                   <span className="p-2 border ms-1">
-                  <span className="fw-bold" style={{ fontSize: "14px" }}>
-                    <span className="me-2">
-                      <i className="fas fa-plane-departure"></i>
-                    </span>{" "}
-                    <span data-tip={searchData.origin3.split(",")[1] + "<br>" + searchData.inputDateMulti3}>
-                      {originCode3[0]}
+                    <span className="p-2 border ms-1">
+                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                        <span className="me-2">
+                          <i className="fas fa-plane-departure"></i>
+                        </span>{" "}
+                        <span data-tip={searchData.origin3.split(",")[1] + "<br>" + searchData.inputDateMulti3}>
+                          {originCode3[0]}
+                        </span>
+                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
+                      </span>
+                      <span className="px-1">|</span>
+                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                        <span className="me-2">
+                          <i className="fas fa-plane-arrival"></i>
+                        </span>
+
+                        <span data-tip={searchData.destination3.split(",")[1]}>
+                          {destinationCode3[0]}
+                        </span>
+                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
+                      </span>
                     </span>
-                    <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                  </span>
-                     <span className="px-1">|</span> 
-                  <span className="fw-bold" style={{ fontSize: "14px" }}>
-                    <span className="me-2">
-                      <i className="fas fa-plane-arrival"></i>
-                    </span>
-               
-                    <span data-tip={searchData.destination3.split(",")[1]}>
-                      {destinationCode3[0]}
-                    </span>
-                    <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                  </span>
-                </span>
                   </>
                 ) : (
                   <></>
                 )}
 
-                 {searchData.origin4 !== '' &&  searchData.origin4 !==undefined? (
+                {searchData.origin4 !== '' && searchData.origin4 !== undefined ? (
                   <>
-                   <span className="p-2 border ms-1">
-                  <span className="fw-bold" style={{ fontSize: "14px" }}>
-                    <span className="me-2">
-                      <i className="fas fa-plane-departure"></i>
-                    </span>{" "}
-                    <span data-tip={searchData.origin4.split(",")[1] + "<br>" + searchData.inputDateMulti4}>
-                      {originCode4[0]}
+                    <span className="p-2 border ms-1">
+                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                        <span className="me-2">
+                          <i className="fas fa-plane-departure"></i>
+                        </span>{" "}
+                        <span data-tip={searchData.origin4.split(",")[1] + "<br>" + searchData.inputDateMulti4}>
+                          {originCode4[0]}
+                        </span>
+                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
+                      </span>
+                      <span className="px-1">|</span>
+                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                        <span className="me-2">
+                          <i className="fas fa-plane-arrival"></i>
+                        </span>
+
+                        <span data-tip={searchData.destination4.split(",")[1]}>
+                          {destinationCode4[0]}
+                        </span>
+                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
+                      </span>
                     </span>
-                    <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                  </span>
-                     <span className="px-1">|</span> 
-                  <span className="fw-bold" style={{ fontSize: "14px" }}>
-                    <span className="me-2">
-                      <i className="fas fa-plane-arrival"></i>
-                    </span>
-               
-                    <span data-tip={searchData.destination4.split(",")[1]}>
-                      {destinationCode4[0]}
-                    </span>
-                    <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                  </span>
-                </span>
                   </>
                 ) : (
                   <></>
                 )}
 
-                {searchData.origin5 !== '' &&  searchData.origin5 !==undefined? (
+                {searchData.origin5 !== '' && searchData.origin5 !== undefined ? (
                   <>
-                   <span className="p-2 border">
-                  <span className="fw-bold" style={{ fontSize: "14px" }}>
-                    <span className="me-2">
-                      <i className="fas fa-plane-departure"></i>
-                    </span>{" "}
-                    <span data-tip={searchData.origin5.split(",")[1] + "<br>" + searchData.inputDateMulti5}>
-                      {originCode5[0]}
+                    <span className="p-2 border">
+                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                        <span className="me-2">
+                          <i className="fas fa-plane-departure"></i>
+                        </span>{" "}
+                        <span data-tip={searchData.origin5.split(",")[1] + "<br>" + searchData.inputDateMulti5}>
+                          {originCode5[0]}
+                        </span>
+                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
+                      </span>
+                      <span className="px-1">|</span>
+                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                        <span className="me-2">
+                          <i className="fas fa-plane-arrival"></i>
+                        </span>
+
+                        <span data-tip={searchData.destination5.split(",")[1]}>
+                          {destinationCode5[0]}
+                        </span>
+                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
+                      </span>
                     </span>
-                    <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                  </span>
-                     <span className="px-1">|</span> 
-                  <span className="fw-bold" style={{ fontSize: "14px" }}>
-                    <span className="me-2">
-                      <i className="fas fa-plane-arrival"></i>
-                    </span>
-               
-                    <span data-tip={searchData.destination5.split(",")[1]}>
-                      {destinationCode5[0]}
-                    </span>
-                    <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                  </span>
-                </span>
                   </>
                 ) : (
                   <></>
@@ -1377,7 +1377,7 @@ const ShowAllFlightPage = () => {
                                         <div className="d-flex ageselectpadnotx align-items-center inputgroup">
                                           <div style={{ position: "relative" }}>
                                             <button
-                                              className="form-select border-0 inputgroup rounded-end" 
+                                              className="form-select border-0 inputgroup rounded-end"
                                               type="button"
                                               id="dropdownMenuButtonpassenger"
                                               data-bs-toggle="dropdown"
@@ -1428,20 +1428,20 @@ const ShowAllFlightPage = () => {
                                                       title="adultminus"
                                                       onClick={
                                                         infantCount > 0 &&
-                                                        adultCount ===
+                                                          adultCount ===
                                                           infantCount
                                                           ? () => {
-                                                              setAdultCount(
-                                                                adultCount - 1
-                                                              );
-                                                              setInfantCount(
-                                                                infantCount - 1
-                                                              );
-                                                            }
+                                                            setAdultCount(
+                                                              adultCount - 1
+                                                            );
+                                                            setInfantCount(
+                                                              infantCount - 1
+                                                            );
+                                                          }
                                                           : () =>
-                                                              setAdultCount(
-                                                                adultCount - 1
-                                                              )
+                                                            setAdultCount(
+                                                              adultCount - 1
+                                                            )
                                                       }
                                                       disabled={
                                                         adultCount === 1
@@ -1609,10 +1609,10 @@ const ShowAllFlightPage = () => {
                                                       onClick={
                                                         infantCount < adultCount
                                                           ? () =>
-                                                              setInfantCount(
-                                                                infantCount + 1
-                                                              )
-                                                          : () => {}
+                                                            setInfantCount(
+                                                              infantCount + 1
+                                                            )
+                                                          : () => { }
                                                       }
                                                       disabled={
                                                         infantCount === 9
@@ -2119,7 +2119,7 @@ const ShowAllFlightPage = () => {
                                     </div>
                                     <div className="my-2 d-flex justify-content-center">
                                       <button
-                                      type="button"
+                                        type="button"
                                         className="btn button-color rounded-pill text-white"
                                         id="btnp-1"
                                         onClick={() => handleFlightOptionP()}
@@ -2128,7 +2128,7 @@ const ShowAllFlightPage = () => {
                                       </button>
                                       &nbsp;
                                       <button
-                                      type="button"
+                                        type="button"
                                         className="btn button-color rounded-pill text-white"
                                         id="btnm-1"
                                         style={{ display: "none" }}
@@ -2147,7 +2147,7 @@ const ShowAllFlightPage = () => {
                                     <div className="d-flex justify-content-center">
                                       <button
                                         className="btn text-white mt-3 text-center fw-bold rounded-3"
-                                        id="search-flight" style={{backgroundColor:"#390404"}}
+                                        id="search-flight" style={{ backgroundColor: "#390404" }}
                                       >
                                         Search Flight
                                       </button>
@@ -2190,7 +2190,14 @@ const ShowAllFlightPage = () => {
                 </>
               )
             ) : (
-              <NoDataFoundPage></NoDataFoundPage>
+              loading ? <Loading
+                flag={0}
+                loading={loading}
+                originCode={originCode}
+                destinationCode={destinationCode}
+                tripType={tripType}
+              ></Loading> :
+                <NoDataFoundPage loading={loading}></NoDataFoundPage>
             )}
           </div>
         </section>

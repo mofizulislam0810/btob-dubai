@@ -1169,9 +1169,12 @@ const Balance = () => {
                             <tr>
                               <th>Submitted Date</th>
                               <th>Deposit Type</th>
+                              <th>TnxNumber</th>
                               <th>Reference</th>
                               <th>Status</th>
                               <th>Amount</th>
+                              <th>Bank Charge</th>
+                              <th>Topup Amount</th>
                               <th>Image</th>
                             </tr>
                           </thead>
@@ -1200,6 +1203,7 @@ const Balance = () => {
                                                       ? "Online"
                                                       : ""}
                                       </td>
+                                      <td>{item.tnxNumber}</td>
                                       <td>{item.reference}</td>
                                 
                                       <td>
@@ -1214,6 +1218,8 @@ const Balance = () => {
                                                 : ""}
                                       </td>
                                       <td>{item.currencyName} {item.amount}</td>
+                                      <td>{item.currencyName} {item.bankChargeAdmin}</td>
+                                      <td>{item.currencyName} {item.topupAmountAdmin}</td>
                                       {
                                         item.attachment !== null && item.attachment !== "" ? <>
                                          <td><a href={environment.baseApiURL+"agentBalance/GetAttachment/"+item.attachment} download>Download
@@ -1224,7 +1230,6 @@ const Balance = () => {
                                         <td></td>
                                         </>
                                       }
-                                     
                                     </tr>
                                   );
                                 }) : <></>}

@@ -9,6 +9,7 @@ import SideNavBar from '../SharePages/SideNavBar/SideNavBar';
 import { environment } from '../SharePages/Utility/environment';
 import tllLogo from "../../../src/images/logo/logo-combined.png";
 import { useLocation } from 'react-router-dom';
+import moment from 'moment';
 
 const InvoiceView = () => {
     let [invoice, setInvoice] = useState([]);
@@ -162,14 +163,11 @@ const InvoiceView = () => {
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td
-                                                                className="text-end fw-bold"
-
-                                                            >
+                                                            <td className="text-end fw-bold">
                                                                 Invoice Date<span className="mx-2">:</span>
                                                             </td>
                                                             <td className="text-end" style={{ width: "7%" }}>
-                                                                {/* {moment(ticketingList[0]?.issueDate).format("DD-MMMM-yyyy ddd")} */}
+                                                                {moment(invoice?.invoiceDate).format("DD-MMM-yyyy")} 
                                                             </td>
                                                         </tr>
                                                     </td>

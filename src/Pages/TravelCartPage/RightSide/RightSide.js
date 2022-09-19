@@ -3,8 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import $ from "jquery";
 import ShowModal from "../../ShowAllFlightPage/ShowModal/ShowModal";
 import "./RightSide.css";
+import { environment } from "../../SharePages/Utility/environment";
+import axios from "axios";
+import { useState } from "react";
 
 const RightSide = () => {
+  let [fareRules, setFareRules] = useState({});
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigate();
   // const data = localStorage.getItem('Database');
   const filterParam = JSON.parse(localStorage.getItem("Database"));
@@ -43,6 +48,48 @@ const RightSide = () => {
     };
     navigation("/travellcartconfirm");
   };
+
+  const handleFareRules = (uId, dir, itemCode) => {
+    const fareRulesObj = {
+      itemCodeRef: itemCode,
+      uniqueTransID: uId,
+      segmentCodeRefs: []
+    };
+
+    dir.segments.map((i) =>
+      fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
+    );
+
+
+    // if (Object.keys(dir[0][0]).length > 0) {
+    //   dir[0][0].segments.map((i) =>
+    //     fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
+    //   );
+    // }
+    console.log(fareRulesObj);
+
+    // const fetchOptions = async(fareRulesObj) =>{
+    //     setLoading(true);
+    //     alert(loading);
+    //     const response = await axios.post(environment.getFareRules, fareRulesObj, environment.headerToken);
+    //     setFareRules(await response.data);
+    //     // setLoading(false);
+    // }
+    async function fetchOptions() {
+      // alert("ok");
+      setLoading(true);
+      await axios
+        .post(environment.getFareRules, fareRulesObj, environment.headerToken)
+        .then((response) => {
+          setFareRules(response.data);
+          // console.log(response);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+    fetchOptions();
+  }
 
   useEffect(() => {
     $("#flight" + 0).show();
@@ -518,18 +565,19 @@ const RightSide = () => {
         <div className="row py-3 m-1">
           <div className="col-lg-12 text-start border mb-1" style={{color:"#4e4e4e"}}>
             <span className="card-title fw-bold">Fare details</span>
-            {/* <span className="pe-3 text-color float-end">
+            <span className="pe-3 text-color float-end">
                   <i class="fas fa-pen-nib me-1"></i>{" "}
                   <Link
                     to=""
                     style={{ textDecoration: "none" }}
                     className="fw-bold text-color font-size"
                     data-bs-toggle="modal"
-                    data-bs-target={"#farerulesModal" + 0}
+                    data-bs-target={"#farerulesModal"}
+                    onClick={() => handleFareRules(uniqueTransID, direction0, itemCodeRef)}
                   >
                     Fare Rules
                   </Link>
-            </span> */}
+            </span>
           </div>
 
           {passengerFares.adt !== null ? (
@@ -784,6 +832,58 @@ const RightSide = () => {
         uniqueTransID={uniqueTransID}
         itemCodeRef={itemCodeRef}
       ></ShowModal>
+        <div className="modal fade" id={"farerulesModal"} tabIndex="-1" aria-labelledby="farerulesModalLabel"
+        aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h3>Fare Rules</h3>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => setFareRules()}></button>
+            </div>
+            <div className="modal-body" style={{ fontSize: '10px' }}>
+              {
+                loading ?
+                  <div className="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div> : <>
+                    {
+                      fareRules !== undefined && fareRules.item2 != undefined && fareRules !== '' && fareRules.item1 != null ?
+                        fareRules.item2.isSuccess == true ?
+                          <>
+                            {
+                              fareRules.item1.fareRuleDetails.map((item, index) => {
+                                return <>
+                                  <p>
+                                    <a class="btn btn-default col-lg-12" style={{ backgroundColor: '#c7c9cb' }} data-bs-toggle="collapse" href={"#rulePanel" + index} role="button" aria-expanded="false" aria-controls={"#rulePanel" + index}>{item.type}</a>
+                                  </p>
+                                  <div class="row">
+                                    <div class="col">
+                                      <div class="collapse multi-collapse" id={"rulePanel" + index}>
+                                        <div class="card card-body" >
+                                          <div className="row" dangerouslySetInnerHTML={{ __html: item.fareRuleDetail.replace(/(?:\r\n|\r|\n)/g, '<br />') }} ></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </>
+                              })
+                            }
+                          </>
+                          : <></>
+                        : <>
+                          <div className="d-flex justify-content-center">
+                            <p>No fare rules found</p>
+                          </div>
+                        </>
+                    }
+                  </>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

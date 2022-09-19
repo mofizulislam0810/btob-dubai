@@ -15,7 +15,7 @@ import axios from "axios";
 
 let checkList = [];
 const ShowFlight = (props) => {
-  const { setCount } = useAuth();
+  const { setCount,handleFareRules,loading,fareRules,setFareRules } = useAuth();
   const navigate = useNavigate();
   // const handleClick =(direction,index) =>{
   //   console.log(index);
@@ -36,51 +36,53 @@ const ShowFlight = (props) => {
   const amountChange = props.amountChange;
   let currency = props.currency;
 
-  let [fareRules, setFareRules] = useState();
-  const [loading, setLoading] = useState(false);
+  
+
+const getFareRules = (uId, dir, itemCode) =>{
+  handleFareRules(uId, dir, itemCode);
+}
+
+  // const handleFareRules = (uId, dir, itemCode) => {
+  //   const fareRulesObj = {
+  //     itemCodeRef: itemCode,
+  //     uniqueTransID: uId,
+  //     segmentCodeRefs: []
+  //   };
+
+  //   dir[0][0].segments.map((i) =>
+  //     fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
+  //   );
 
 
-  const handleFareRules = (uId, dir, itemCode) => {
-    const fareRulesObj = {
-      itemCodeRef: itemCode,
-      uniqueTransID: uId,
-      segmentCodeRefs: []
-    };
+  //   // if (Object.keys(dir[0][0]).length > 0) {
+  //   //   dir[0][0].segments.map((i) =>
+  //   //     fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
+  //   //   );
+  //   // }
+  //   console.log(fareRulesObj);
 
-    dir[0][0].segments.map((i) =>
-      fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
-    );
-
-
-    // if (Object.keys(dir[0][0]).length > 0) {
-    //   dir[0][0].segments.map((i) =>
-    //     fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
-    //   );
-    // }
-    console.log(fareRulesObj);
-
-    // const fetchOptions = async(fareRulesObj) =>{
-    //     setLoading(true);
-    //     alert(loading);
-    //     const response = await axios.post(environment.getFareRules, fareRulesObj, environment.headerToken);
-    //     setFareRules(await response.data);
-    //     // setLoading(false);
-    // }
-    async function fetchOptions() {
-      // alert("ok");
-      setLoading(true);
-      await axios
-        .post(environment.getFareRules, fareRulesObj, environment.headerToken)
-        .then((response) => {
-          setFareRules(response.data);
-          // console.log(response);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-    fetchOptions();
-  }
+  //   // const fetchOptions = async(fareRulesObj) =>{
+  //   //     setLoading(true);
+  //   //     alert(loading);
+  //   //     const response = await axios.post(environment.getFareRules, fareRulesObj, environment.headerToken);
+  //   //     setFareRules(await response.data);
+  //   //     // setLoading(false);
+  //   // }
+  //   async function fetchOptions() {
+  //     // alert("ok");
+  //     setLoading(true);
+  //     await axios
+  //       .post(environment.getFareRules, fareRulesObj, environment.headerToken)
+  //       .then((response) => {
+  //         setFareRules(response.data);
+  //         // console.log(response);
+  //       })
+  //       .finally(() => {
+  //         setLoading(false);
+  //       });
+  //   }
+  //   fetchOptions();
+  // }
   // console.log(fareRules);
   const [idxD, setIdxD] = useState(0);
   const [idxA, setIdxA] = useState(0);
@@ -1022,7 +1024,7 @@ const ShowFlight = (props) => {
                   className="text-color font-size"
                   data-bs-toggle="modal"
                   data-bs-target={"#farerulesModal"}
-                  onClick={() => handleFareRules(uniqueTransID, directions, itemCodeRef)}
+                  onClick={() => getFareRules(uniqueTransID, directions, itemCodeRef)}
                 >
                   Fare Rules
                 </Link>
@@ -2809,7 +2811,7 @@ const ShowFlight = (props) => {
                               fareRules.item1.fareRuleDetails.map((item, index) => {
                                 return <>
                                   <p>
-                                    <a class="btn btn-default col-lg-12" style={{ backgroundColor: 'blue' }} data-bs-toggle="collapse" href={"#rulePanel" + index} role="button" aria-expanded="false" aria-controls={"#rulePanel" + index}>{item.type}</a>
+                                    <a class="btn btn-default col-lg-12" style={{ backgroundColor: '#c7c9cb' }} data-bs-toggle="collapse" href={"#rulePanel" + index} role="button" aria-expanded="false" aria-controls={"#rulePanel" + index}>{item.type}</a>
                                   </p>
                                   <div class="row">
                                     <div class="col">

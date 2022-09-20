@@ -16,6 +16,8 @@ const Navbar = () => {
   let [agentInfo, setAgentInfo] = useState(0);
   let [accountManager, setAccountManager] = useState({});
   let [serchText,setSearchText]=useState('');
+  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+  let localURL ="wwwroot/Uploads/Agent/"
 
   const navigate = useNavigate();
   const handelLogout = () => {
@@ -61,7 +63,7 @@ const accountManagerInfo = async(agentId)=>{
   const handleInit = () => {
     axios.get(environment.agentInfo, environment.headerToken)
       .then((agentRes) => {
-        // console.log(agentRes.data);
+         console.log('------------------',agentRes.data);
         accountManagerInfo(agentRes.data.id);
         sessionStorage.setItem("agentId", agentRes.data.id);
         sessionStorage.setItem("agentName", agentRes.data.name);
@@ -136,7 +138,7 @@ const accountManagerInfo = async(agentId)=>{
         </li>
         <li className="nav-item d-none d-sm-inline-block">
           <Link to="/search">
-            <img src={logo} alt="" width="60%" height="40"/>
+            <img src={s3URL + sessionStorage.getItem("logoName")} alt="" width="60%" height="40"/>
           </Link>
         </li>
       </ul>

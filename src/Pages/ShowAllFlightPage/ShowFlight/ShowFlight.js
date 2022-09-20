@@ -12,6 +12,7 @@ import layOver from "../../SharePages/Utility/layOver";
 import dayCount from "../../SharePages/Utility/dayCount";
 import { environment } from "../../SharePages/Utility/environment";
 import axios from "axios";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 
 let checkList = [];
 const ShowFlight = (props) => {
@@ -2806,26 +2807,30 @@ const getFareRules = (uId, dir, itemCode) =>{
                     {
                       fareRules !== undefined && fareRules.item2 != undefined && fareRules !== '' && fareRules.item1 != null ?
                         fareRules.item2.isSuccess == true ?
-                          <>
-                            {
-                              fareRules.item1.fareRuleDetails.map((item, index) => {
-                                return <>
-                                  <p>
-                                    <a class="btn btn-default col-lg-12" style={{ backgroundColor: '#c7c9cb' }} data-bs-toggle="collapse" href={"#rulePanel" + index} role="button" aria-expanded="false" aria-controls={"#rulePanel" + index}>{item.type}</a>
-                                  </p>
-                                  <div class="row">
-                                    <div class="col">
-                                      <div class="collapse multi-collapse" id={"rulePanel" + index}>
-                                        <div class="card card-body" >
-                                          <div className="row" dangerouslySetInnerHTML={{ __html: item.fareRuleDetail.replace(/(?:\r\n|\r|\n)/g, '<br />') }} ></div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </>
-                              })
-                            }
-                          </>
+                        <Tabs>
+                        <TabList>
+                          {
+                            fareRules.item1.fareRuleDetails.map((item, index) => {
+                              return <>
+                                <Tab>
+                                  <p>{item.type}</p>
+                                </Tab>
+                              </>
+                            })
+                          }
+                        </TabList>
+                        {
+                          fareRules.item1.fareRuleDetails.map((item, index) => {
+                            return <>
+                              <TabPanel>
+                                <div className="panel-content">
+                                  <div dangerouslySetInnerHTML={{ __html: item.fareRuleDetail.replace(/(?:\r\n|\r|\n)/g, '<br />') }}></div>
+                                </div>
+                              </TabPanel>
+                            </>
+                          })
+                        }
+                      </Tabs>
                           : <></>
                         : <>
                           <div className="d-flex justify-content-center">

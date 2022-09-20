@@ -41,6 +41,8 @@ const Balance = () => {
   let [onlineCharge, setOnlineCharge] = useState(5);
   let [branchList, setBranchList] = useState([]);
   let [branchNameCash,setBranchNameCash] = useState("");
+  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+	let staticURL ="wwwroot/Uploads/Support/";
   let sendObj = {
     agentId: sessionStorage.getItem("agentId") ?? 0,
     fromOfPaymentType: depositTypeId,
@@ -1222,7 +1224,7 @@ const Balance = () => {
                                       <td>{item.currencyName} {item.topupAmountAdmin}</td>
                                       {
                                         item.attachment !== null && item.attachment !== "" ? <>
-                                         <td><a href={environment.baseApiURL+"agentBalance/GetAttachment/"+item.attachment} download>Download
+                                         <td><a href={s3URL+item.attachment} download>Download
                                           {/* <img src="https://thumbs.dreamstime.com/b/smooth-nature-pic-full-hd-126695318.jpg" alt="W3Schools" width="50" height="15"/> */}
                                           </a>
                                         </td>

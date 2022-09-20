@@ -6,6 +6,7 @@ import "./RightSide.css";
 import { environment } from "../../SharePages/Utility/environment";
 import axios from "axios";
 import { useState } from "react";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 
 const RightSide = () => {
   let [fareRules, setFareRules] = useState({});
@@ -126,125 +127,30 @@ const RightSide = () => {
     <div className="col-lg-12">
       <div className="container box-shadow  bg-white">
         <div className="row py-3 m-1">
-          <div className="col-lg-12 text-start border" style={{color:"#4e4e4e"}}>
+          <div className="col-lg-12 text-start border" style={{ color: "#4e4e4e" }}>
             <span className="card-title fw-bold">Flight summary</span>
           </div>
           <div className="col-lg-12 p-2">
             {flightType === "Multi City" ? (
               <>
-               <>
-                <div className="row border text-color p-2">
-                  <div className="col-lg-2 my-auto">
-                    <img src={ImageUrlD} alt="" width="50px" height="50px" />
-                  </div>
-                  <div className="col-lg-2 my-auto">
-                    <h6 className="my-auto fw-bold">{direction0.from}</h6>
-                    <span className="fs-6">
-                      {direction0.segments[0].departure.substr(11, 5)}
-                    </span>
-                  </div>
-                  <div className="col-lg-6 my-auto text-center lh-1">
-                    <div className="row">
-                      <div className="col-lg-12 text-center">
-                        <span className="text-color fw-bold font-size">
-                          {direction0.stops === 0
-                            ? "Direct"
-                            : direction0.stops + " Stop"}
-                        </span>
-                      </div>
-                      <div className="col-lg-12 text-center">
-                        <span className="text-color ">
-                          <i class="fas fa-circle fa-xs"></i>
-                          --------------
-                          <i className="fas fa-plane fa-sm"></i>
-                        </span>
-                      </div>
-                      <div className="col-lg-12 text-center ms-4">
-                        <span className="text-color me-5">
-                          <i className="fas fa-clock fa-sm"></i>
-                          <span className="ms-1 font-size">
-                            {direction0.segments[0].duration[0]}
-                          </span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-2 my-auto">
-                    <h6 className="my-auto fw-bold">{direction0.to}</h6>
-                    <span className="fs-6">
-                      {direction0.segments[
-                        direction0.segments.length - 1
-                      ].arrival.substr(11, 5)}
-                    </span>
-                  </div>
-                </div>
-              </>
-              <>
-                <div className="row border text-color p-2">
-                  <div className="col-lg-2 my-auto">
-                    <img src={ImageUrlD} alt="" width="50px" height="50px" />
-                  </div>
-                  <div className="col-lg-2 my-auto">
-                    <h6 className="my-auto fw-bold">{direction1.from}</h6>
-                    <span className="fs-6">
-                      {direction1.segments[0].departure.substr(11, 5)}
-                    </span>
-                  </div>
-                  <div className="col-lg-6 my-auto text-center lh-1">
-                    <div className="row">
-                      <div className="col-lg-12 text-center">
-                        <span className="text-color fw-bold font-size">
-                          {direction1.stops === 0
-                            ? "Direct"
-                            : direction1.stops + " Stop"}
-                        </span>
-                      </div>
-                      <div className="col-lg-12 text-center">
-                        <span className="text-color ">
-                          <i class="fas fa-circle fa-xs"></i>
-                          --------------
-                          <i className="fas fa-plane fa-sm"></i>
-                        </span>
-                      </div>
-                      <div className="col-lg-12 text-center ms-4">
-                        <span className="text-color me-5">
-                          <i className="fas fa-clock fa-sm"></i>
-                          <span className="ms-1 font-size">
-                            {direction1.segments[0].duration[0]}
-                          </span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-2 my-auto">
-                    <h6 className="my-auto fw-bold">{direction1.to}</h6>
-                    <span className="fs-6">
-                      {direction1.segments[
-                        direction1.segments.length - 1
-                      ].arrival.substr(11, 5)}
-                    </span>
-                  </div>
-                </div>
-              </>
-                {direction2.segments !== undefined ? (
-                  <>
+                <>
                   <div className="row border text-color p-2">
                     <div className="col-lg-2 my-auto">
                       <img src={ImageUrlD} alt="" width="50px" height="50px" />
                     </div>
                     <div className="col-lg-2 my-auto">
-                      <h6 className="my-auto fw-bold">{direction2.from}</h6>
+                      <h6 className="my-auto fw-bold">{direction0.from}</h6>
                       <span className="fs-6">
-                        {direction2.segments[0].departure.substr(11, 5)}
+                        {direction0.segments[0].departure.substr(11, 5)}
                       </span>
                     </div>
                     <div className="col-lg-6 my-auto text-center lh-1">
                       <div className="row">
                         <div className="col-lg-12 text-center">
                           <span className="text-color fw-bold font-size">
-                            {direction2.stops === 0
+                            {direction0.stops === 0
                               ? "Direct"
-                              : direction2.stops + " Stop"}
+                              : direction0.stops + " Stop"}
                           </span>
                         </div>
                         <div className="col-lg-12 text-center">
@@ -258,178 +164,273 @@ const RightSide = () => {
                           <span className="text-color me-5">
                             <i className="fas fa-clock fa-sm"></i>
                             <span className="ms-1 font-size">
-                              {direction2.segments[0].duration[0]}
+                              {direction0.segments[0].duration[0]}
                             </span>
                           </span>
                         </div>
                       </div>
                     </div>
                     <div className="col-lg-2 my-auto">
-                      <h6 className="my-auto fw-bold">{direction2.to}</h6>
+                      <h6 className="my-auto fw-bold">{direction0.to}</h6>
                       <span className="fs-6">
-                        {direction2.segments[
-                          direction2.segments.length - 1
+                        {direction0.segments[
+                          direction0.segments.length - 1
                         ].arrival.substr(11, 5)}
                       </span>
                     </div>
                   </div>
                 </>
+                <>
+                  <div className="row border text-color p-2">
+                    <div className="col-lg-2 my-auto">
+                      <img src={ImageUrlD} alt="" width="50px" height="50px" />
+                    </div>
+                    <div className="col-lg-2 my-auto">
+                      <h6 className="my-auto fw-bold">{direction1.from}</h6>
+                      <span className="fs-6">
+                        {direction1.segments[0].departure.substr(11, 5)}
+                      </span>
+                    </div>
+                    <div className="col-lg-6 my-auto text-center lh-1">
+                      <div className="row">
+                        <div className="col-lg-12 text-center">
+                          <span className="text-color fw-bold font-size">
+                            {direction1.stops === 0
+                              ? "Direct"
+                              : direction1.stops + " Stop"}
+                          </span>
+                        </div>
+                        <div className="col-lg-12 text-center">
+                          <span className="text-color ">
+                            <i class="fas fa-circle fa-xs"></i>
+                            --------------
+                            <i className="fas fa-plane fa-sm"></i>
+                          </span>
+                        </div>
+                        <div className="col-lg-12 text-center ms-4">
+                          <span className="text-color me-5">
+                            <i className="fas fa-clock fa-sm"></i>
+                            <span className="ms-1 font-size">
+                              {direction1.segments[0].duration[0]}
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-lg-2 my-auto">
+                      <h6 className="my-auto fw-bold">{direction1.to}</h6>
+                      <span className="fs-6">
+                        {direction1.segments[
+                          direction1.segments.length - 1
+                        ].arrival.substr(11, 5)}
+                      </span>
+                    </div>
+                  </div>
+                </>
+                {direction2.segments !== undefined ? (
+                  <>
+                    <div className="row border text-color p-2">
+                      <div className="col-lg-2 my-auto">
+                        <img src={ImageUrlD} alt="" width="50px" height="50px" />
+                      </div>
+                      <div className="col-lg-2 my-auto">
+                        <h6 className="my-auto fw-bold">{direction2.from}</h6>
+                        <span className="fs-6">
+                          {direction2.segments[0].departure.substr(11, 5)}
+                        </span>
+                      </div>
+                      <div className="col-lg-6 my-auto text-center lh-1">
+                        <div className="row">
+                          <div className="col-lg-12 text-center">
+                            <span className="text-color fw-bold font-size">
+                              {direction2.stops === 0
+                                ? "Direct"
+                                : direction2.stops + " Stop"}
+                            </span>
+                          </div>
+                          <div className="col-lg-12 text-center">
+                            <span className="text-color ">
+                              <i class="fas fa-circle fa-xs"></i>
+                              --------------
+                              <i className="fas fa-plane fa-sm"></i>
+                            </span>
+                          </div>
+                          <div className="col-lg-12 text-center ms-4">
+                            <span className="text-color me-5">
+                              <i className="fas fa-clock fa-sm"></i>
+                              <span className="ms-1 font-size">
+                                {direction2.segments[0].duration[0]}
+                              </span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-lg-2 my-auto">
+                        <h6 className="my-auto fw-bold">{direction2.to}</h6>
+                        <span className="fs-6">
+                          {direction2.segments[
+                            direction2.segments.length - 1
+                          ].arrival.substr(11, 5)}
+                        </span>
+                      </div>
+                    </div>
+                  </>
                 ) : (
                   <></>
                 )}
 
                 {direction3.segments !== undefined ? (
-                   <>
-                   <div className="row border text-color p-2">
-                     <div className="col-lg-2 my-auto">
-                       <img src={ImageUrlD} alt="" width="50px" height="50px" />
-                     </div>
-                     <div className="col-lg-2 my-auto">
-                       <h6 className="my-auto fw-bold">{direction3.from}</h6>
-                       <span className="fs-6">
-                         {direction3.segments[0].departure.substr(11, 5)}
-                       </span>
-                     </div>
-                     <div className="col-lg-6 my-auto text-center lh-1">
-                       <div className="row">
-                         <div className="col-lg-12 text-center">
-                           <span className="text-color fw-bold font-size">
-                             {direction3.stops === 0
-                               ? "Direct"
-                               : direction3.stops + " Stop"}
-                           </span>
-                         </div>
-                         <div className="col-lg-12 text-center">
-                           <span className="text-color ">
-                             <i class="fas fa-circle fa-xs"></i>
-                             --------------
-                             <i className="fas fa-plane fa-sm"></i>
-                           </span>
-                         </div>
-                         <div className="col-lg-12 text-center ms-4">
-                           <span className="text-color me-5">
-                             <i className="fas fa-clock fa-sm"></i>
-                             <span className="ms-1 font-size">
-                               {direction3.segments[0].duration[0]}
-                             </span>
-                           </span>
-                         </div>
-                       </div>
-                     </div>
-                     <div className="col-lg-2 my-auto">
-                       <h6 className="my-auto fw-bold">{direction3.to}</h6>
-                       <span className="fs-6">
-                         {direction3.segments[
-                           direction3.segments.length - 1
-                         ].arrival.substr(11, 5)}
-                       </span>
-                     </div>
-                   </div>
-                 </>
+                  <>
+                    <div className="row border text-color p-2">
+                      <div className="col-lg-2 my-auto">
+                        <img src={ImageUrlD} alt="" width="50px" height="50px" />
+                      </div>
+                      <div className="col-lg-2 my-auto">
+                        <h6 className="my-auto fw-bold">{direction3.from}</h6>
+                        <span className="fs-6">
+                          {direction3.segments[0].departure.substr(11, 5)}
+                        </span>
+                      </div>
+                      <div className="col-lg-6 my-auto text-center lh-1">
+                        <div className="row">
+                          <div className="col-lg-12 text-center">
+                            <span className="text-color fw-bold font-size">
+                              {direction3.stops === 0
+                                ? "Direct"
+                                : direction3.stops + " Stop"}
+                            </span>
+                          </div>
+                          <div className="col-lg-12 text-center">
+                            <span className="text-color ">
+                              <i class="fas fa-circle fa-xs"></i>
+                              --------------
+                              <i className="fas fa-plane fa-sm"></i>
+                            </span>
+                          </div>
+                          <div className="col-lg-12 text-center ms-4">
+                            <span className="text-color me-5">
+                              <i className="fas fa-clock fa-sm"></i>
+                              <span className="ms-1 font-size">
+                                {direction3.segments[0].duration[0]}
+                              </span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-lg-2 my-auto">
+                        <h6 className="my-auto fw-bold">{direction3.to}</h6>
+                        <span className="fs-6">
+                          {direction3.segments[
+                            direction3.segments.length - 1
+                          ].arrival.substr(11, 5)}
+                        </span>
+                      </div>
+                    </div>
+                  </>
                 ) : (
                   <></>
                 )}
 
                 {direction4.segments !== undefined ? (
-                   <>
-                   <div className="row border text-color p-2">
-                     <div className="col-lg-2 my-auto">
-                       <img src={ImageUrlD} alt="" width="50px" height="50px" />
-                     </div>
-                     <div className="col-lg-2 my-auto">
-                       <h6 className="my-auto fw-bold">{direction4.from}</h6>
-                       <span className="fs-6">
-                         {direction4.segments[0].departure.substr(11, 5)}
-                       </span>
-                     </div>
-                     <div className="col-lg-6 my-auto text-center lh-1">
-                       <div className="row">
-                         <div className="col-lg-12 text-center">
-                           <span className="text-color fw-bold font-size">
-                             {direction4.stops === 0
-                               ? "Direct"
-                               : direction4.stops + " Stop"}
-                           </span>
-                         </div>
-                         <div className="col-lg-12 text-center">
-                           <span className="text-color ">
-                             <i class="fas fa-circle fa-xs"></i>
-                             --------------
-                             <i className="fas fa-plane fa-sm"></i>
-                           </span>
-                         </div>
-                         <div className="col-lg-12 text-center ms-4">
-                           <span className="text-color me-5">
-                             <i className="fas fa-clock fa-sm"></i>
-                             <span className="ms-1 font-size">
-                               {direction4.segments[0].duration[0]}
-                             </span>
-                           </span>
-                         </div>
-                       </div>
-                     </div>
-                     <div className="col-lg-2 my-auto">
-                       <h6 className="my-auto fw-bold">{direction4.to}</h6>
-                       <span className="fs-6">
-                         {direction4.segments[
-                           direction4.segments.length - 1
-                         ].arrival.substr(11, 5)}
-                       </span>
-                     </div>
-                   </div>
-                 </>
+                  <>
+                    <div className="row border text-color p-2">
+                      <div className="col-lg-2 my-auto">
+                        <img src={ImageUrlD} alt="" width="50px" height="50px" />
+                      </div>
+                      <div className="col-lg-2 my-auto">
+                        <h6 className="my-auto fw-bold">{direction4.from}</h6>
+                        <span className="fs-6">
+                          {direction4.segments[0].departure.substr(11, 5)}
+                        </span>
+                      </div>
+                      <div className="col-lg-6 my-auto text-center lh-1">
+                        <div className="row">
+                          <div className="col-lg-12 text-center">
+                            <span className="text-color fw-bold font-size">
+                              {direction4.stops === 0
+                                ? "Direct"
+                                : direction4.stops + " Stop"}
+                            </span>
+                          </div>
+                          <div className="col-lg-12 text-center">
+                            <span className="text-color ">
+                              <i class="fas fa-circle fa-xs"></i>
+                              --------------
+                              <i className="fas fa-plane fa-sm"></i>
+                            </span>
+                          </div>
+                          <div className="col-lg-12 text-center ms-4">
+                            <span className="text-color me-5">
+                              <i className="fas fa-clock fa-sm"></i>
+                              <span className="ms-1 font-size">
+                                {direction4.segments[0].duration[0]}
+                              </span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-lg-2 my-auto">
+                        <h6 className="my-auto fw-bold">{direction4.to}</h6>
+                        <span className="fs-6">
+                          {direction4.segments[
+                            direction4.segments.length - 1
+                          ].arrival.substr(11, 5)}
+                        </span>
+                      </div>
+                    </div>
+                  </>
                 ) : (
                   <></>
                 )}
 
                 {direction5.segments !== undefined ? (
-                   <>
-                   <div className="row border text-color p-2">
-                     <div className="col-lg-2 my-auto">
-                       <img src={ImageUrlD} alt="" width="50px" height="50px" />
-                     </div>
-                     <div className="col-lg-2 my-auto">
-                       <h6 className="my-auto fw-bold">{direction5.from}</h6>
-                       <span className="fs-6">
-                         {direction5.segments[0].departure.substr(11, 5)}
-                       </span>
-                     </div>
-                     <div className="col-lg-6 my-auto text-center lh-1">
-                       <div className="row">
-                         <div className="col-lg-12 text-center">
-                           <span className="text-color fw-bold font-size">
-                             {direction5.stops === 0
-                               ? "Direct"
-                               : direction5.stops + " Stop"}
-                           </span>
-                         </div>
-                         <div className="col-lg-12 text-center">
-                           <span className="text-color ">
-                             <i class="fas fa-circle fa-xs"></i>
-                             --------------
-                             <i className="fas fa-plane fa-sm"></i>
-                           </span>
-                         </div>
-                         <div className="col-lg-12 text-center ms-4">
-                           <span className="text-color me-5">
-                             <i className="fas fa-clock fa-sm"></i>
-                             <span className="ms-1 font-size">
-                               {direction5.segments[0].duration[0]}
-                             </span>
-                           </span>
-                         </div>
-                       </div>
-                     </div>
-                     <div className="col-lg-2 my-auto">
-                       <h6 className="my-auto fw-bold">{direction5.to}</h6>
-                       <span className="fs-6">
-                         {direction5.segments[
-                           direction5.segments.length - 1
-                         ].arrival.substr(11, 5)}
-                       </span>
-                     </div>
-                   </div>
-                 </>
+                  <>
+                    <div className="row border text-color p-2">
+                      <div className="col-lg-2 my-auto">
+                        <img src={ImageUrlD} alt="" width="50px" height="50px" />
+                      </div>
+                      <div className="col-lg-2 my-auto">
+                        <h6 className="my-auto fw-bold">{direction5.from}</h6>
+                        <span className="fs-6">
+                          {direction5.segments[0].departure.substr(11, 5)}
+                        </span>
+                      </div>
+                      <div className="col-lg-6 my-auto text-center lh-1">
+                        <div className="row">
+                          <div className="col-lg-12 text-center">
+                            <span className="text-color fw-bold font-size">
+                              {direction5.stops === 0
+                                ? "Direct"
+                                : direction5.stops + " Stop"}
+                            </span>
+                          </div>
+                          <div className="col-lg-12 text-center">
+                            <span className="text-color ">
+                              <i class="fas fa-circle fa-xs"></i>
+                              --------------
+                              <i className="fas fa-plane fa-sm"></i>
+                            </span>
+                          </div>
+                          <div className="col-lg-12 text-center ms-4">
+                            <span className="text-color me-5">
+                              <i className="fas fa-clock fa-sm"></i>
+                              <span className="ms-1 font-size">
+                                {direction5.segments[0].duration[0]}
+                              </span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-lg-2 my-auto">
+                        <h6 className="my-auto fw-bold">{direction5.to}</h6>
+                        <span className="fs-6">
+                          {direction5.segments[
+                            direction5.segments.length - 1
+                          ].arrival.substr(11, 5)}
+                        </span>
+                      </div>
+                    </div>
+                  </>
                 ) : (
                   <></>
                 )}
@@ -563,30 +564,30 @@ const RightSide = () => {
           </div>
         </div>
         <div className="row py-3 m-1">
-          <div className="col-lg-12 text-start border mb-1" style={{color:"#4e4e4e"}}>
+          <div className="col-lg-12 text-start border mb-1" style={{ color: "#4e4e4e" }}>
             <span className="card-title fw-bold">Fare details</span>
             <span className="pe-3 text-color float-end">
-                  <i class="fas fa-pen-nib me-1"></i>{" "}
-                  <Link
-                    to=""
-                    style={{ textDecoration: "none" }}
-                    className="fw-bold text-color font-size"
-                    data-bs-toggle="modal"
-                    data-bs-target={"#farerulesModal"}
-                    onClick={() => handleFareRules(uniqueTransID, direction0, itemCodeRef)}
-                  >
-                    Fare Rules
-                  </Link>
+              <i class="fas fa-pen-nib me-1"></i>{" "}
+              <Link
+                to=""
+                style={{ textDecoration: "none" }}
+                className="fw-bold text-color font-size"
+                data-bs-toggle="modal"
+                data-bs-target={"#farerulesModal"}
+                onClick={() => handleFareRules(uniqueTransID, direction0, itemCodeRef)}
+              >
+                Fare Rules
+              </Link>
             </span>
           </div>
 
           {passengerFares.adt !== null ? (
             <>
-              <div className="col-lg-12 border py-1 mb-1" style={{color:"#67696a"}}>
-                <h6 className="fw-bold" style={{fontSize:"14px",color:"#4e4e4e"}}>
+              <div className="col-lg-12 border py-1 mb-1" style={{ color: "#67696a" }}>
+                <h6 className="fw-bold" style={{ fontSize: "14px", color: "#4e4e4e" }}>
                   <u>Adult Fare</u>
                 </h6>
-                <div className="row mt-2" style={{fontSize:"12px"}}>
+                <div className="row mt-2" style={{ fontSize: "12px" }}>
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Base Fare ({passengerCounts.adt} &#215;{" "}
@@ -599,7 +600,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div>
-                <div className="row" style={{fontSize:"12px"}}>
+                <div className="row" style={{ fontSize: "12px" }}>
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Taxes ({passengerCounts.adt} &#215;{" "}
@@ -626,7 +627,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div> */}
-                <div className="row" style={{fontSize:"12px"}}>
+                <div className="row" style={{ fontSize: "12px" }}>
                   <div className="col-lg-6">
                     <h6 className="text-start">Discount</h6>
                   </div>
@@ -654,11 +655,11 @@ const RightSide = () => {
 
           {passengerFares.cnn !== null ? (
             <>
-              <div className="col-lg-12 border py-1 mb-1" style={{color:"#67696a"}}>
-                <h6 className="fw-bold" style={{fontSize:"14px",color:"#4e4e4e"}}>
+              <div className="col-lg-12 border py-1 mb-1" style={{ color: "#67696a" }}>
+                <h6 className="fw-bold" style={{ fontSize: "14px", color: "#4e4e4e" }}>
                   <u>Child Fare</u>
                 </h6>
-                <div className="row mt-2" style={{fontSize:"12px"}}>
+                <div className="row mt-2" style={{ fontSize: "12px" }}>
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Base Fare ({passengerCounts.cnn} &#215;{" "}
@@ -671,7 +672,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div>
-                <div className="row" style={{fontSize:"12px"}}>
+                <div className="row" style={{ fontSize: "12px" }}>
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Taxes ({passengerCounts.cnn} &#215;{" "}
@@ -699,7 +700,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div> */}
-                <div className="row" style={{fontSize:"12px"}}>
+                <div className="row" style={{ fontSize: "12px" }}>
                   <div className="col-lg-6">
                     <h6 className="text-start">Discount</h6>
                   </div>
@@ -727,11 +728,11 @@ const RightSide = () => {
 
           {passengerFares.inf !== null ? (
             <>
-              <div className="col-lg-12 border py-1 mb-1" style={{color:"#67696a"}}>
-                <h6 className="fw-bold" style={{fontSize:"14px",color:"#4e4e4e"}}>
+              <div className="col-lg-12 border py-1 mb-1" style={{ color: "#67696a" }}>
+                <h6 className="fw-bold" style={{ fontSize: "14px", color: "#4e4e4e" }}>
                   <u>Infant Fare</u>
                 </h6>
-                <div className="row mt-2" style={{fontSize:"12px"}}>
+                <div className="row mt-2" style={{ fontSize: "12px" }}>
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Base Fare ({passengerCounts.inf} &#215;{" "}
@@ -744,7 +745,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div>
-                <div className="row" style={{fontSize:"12px"}}>
+                <div className="row" style={{ fontSize: "12px" }}>
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       Taxes ({passengerCounts.inf} &#215;{" "}
@@ -771,7 +772,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div> */}
-                <div className="row" style={{fontSize:"12px"}}>
+                <div className="row" style={{ fontSize: "12px" }}>
                   <div className="col-lg-6">
                     <h6 className="text-start">Discount</h6>
                   </div>
@@ -797,18 +798,18 @@ const RightSide = () => {
             <></>
           )}
 
-              <div className="col-lg-12 border py-1 mb-1" style={{color:"#4e4e4e"}}>
-                <div className="row border-top py-2">
-                  <div className="col-lg-6">
-                    <h6 className="text-start fw-bold">Total payable</h6>
-                  </div>
-                  <div className="col-lg-6">
-                    <h6 className="text-end fw-bold">
-                      {currency!==undefined ? currency : "BDT"}   {bookingComponents[0].totalPrice}
-                    </h6>
-                  </div>
-                </div>
+          <div className="col-lg-12 border py-1 mb-1" style={{ color: "#4e4e4e" }}>
+            <div className="row border-top py-2">
+              <div className="col-lg-6">
+                <h6 className="text-start fw-bold">Total payable</h6>
               </div>
+              <div className="col-lg-6">
+                <h6 className="text-end fw-bold">
+                  {currency !== undefined ? currency : "BDT"}   {bookingComponents[0].totalPrice}
+                </h6>
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>
@@ -832,7 +833,7 @@ const RightSide = () => {
         uniqueTransID={uniqueTransID}
         itemCodeRef={itemCodeRef}
       ></ShowModal>
-        <div className="modal fade" id={"farerulesModal"} tabIndex="-1" aria-labelledby="farerulesModalLabel"
+      <div className="modal fade" id={"farerulesModal"} tabIndex="-1" aria-labelledby="farerulesModalLabel"
         aria-hidden="true">
         <div className="modal-dialog">
           <div className="modal-content">
@@ -851,26 +852,30 @@ const RightSide = () => {
                     {
                       fareRules !== undefined && fareRules.item2 != undefined && fareRules !== '' && fareRules.item1 != null ?
                         fareRules.item2.isSuccess == true ?
-                          <>
+                          <Tabs>
+                            <TabList>
+                              {
+                                fareRules.item1.fareRuleDetails.map((item, index) => {
+                                  return <>
+                                    <Tab>
+                                      <p>{item.type}</p>
+                                    </Tab>
+                                  </>
+                                })
+                              }
+                            </TabList>
                             {
                               fareRules.item1.fareRuleDetails.map((item, index) => {
                                 return <>
-                                  <p>
-                                    <a class="btn btn-default col-lg-12" style={{ backgroundColor: '#c7c9cb' }} data-bs-toggle="collapse" href={"#rulePanel" + index} role="button" aria-expanded="false" aria-controls={"#rulePanel" + index}>{item.type}</a>
-                                  </p>
-                                  <div class="row">
-                                    <div class="col">
-                                      <div class="collapse multi-collapse" id={"rulePanel" + index}>
-                                        <div class="card card-body" >
-                                          <div className="row" dangerouslySetInnerHTML={{ __html: item.fareRuleDetail.replace(/(?:\r\n|\r|\n)/g, '<br />') }} ></div>
-                                        </div>
-                                      </div>
+                                  <TabPanel>
+                                    <div className="panel-content">
+                                      <div dangerouslySetInnerHTML={{ __html: item.fareRuleDetail.replace(/(?:\r\n|\r|\n)/g, '<br />') }}></div>
                                     </div>
-                                  </div>
+                                  </TabPanel>
                                 </>
                               })
                             }
-                          </>
+                          </Tabs>
                           : <></>
                         : <>
                           <div className="d-flex justify-content-center">

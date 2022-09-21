@@ -28,6 +28,8 @@ const Ticket = () => {
   let [passengerListEdited, setPassengerListEdited] = useState([]);
   let [totalPriceEdited, setTotalPriceEdited] = useState(0);
   let [agentInfo, setAgentInfo] = useState([]);
+  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+	let staticURL ="wwwroot/Uploads/Support/";
   const componentRef = useRef();
   const getAgentInfo = async () => {
     const response = await axios.get(
@@ -207,8 +209,7 @@ const Ticket = () => {
                               <img
                                 alt="img01"
                                 src={
-                                  environment.baseApiURL +
-                                  `agentinfo/GetLogo/${ticketingList.ticketInfo?.agentLogo}`
+                                  s3URL+`${ticketingList.ticketInfo?.agentLogo}`
                                 }
                                 style={{ width: "150px", height: "50px" }}
                               ></img>

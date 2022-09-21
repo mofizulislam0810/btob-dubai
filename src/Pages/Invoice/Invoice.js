@@ -19,6 +19,8 @@ const Invoice = () => {
   let [passengerListEdited, setPassengerListEdited] = useState([]);
   let [totalPrice, setTotalPrice] = useState(0);
   let [totalPriceEdited, setTotalPriceEdited] = useState(0);
+  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+	let staticURL ="wwwroot/Uploads/Support/";
   const location = useLocation();
 
   const table = {
@@ -189,8 +191,7 @@ const Invoice = () => {
                           <img
                             alt="img01"
                             src={
-                              environment.baseApiURL +
-                              `agentinfo/GetLogo/${ticketingList[0].agentLogo}`
+                               s3URL+`${ticketingList[0].agentLogo}`
                             }
                             style={{ width: "150px", height: "50px" }}
                           ></img>

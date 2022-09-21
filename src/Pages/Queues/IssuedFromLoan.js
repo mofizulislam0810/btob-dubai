@@ -184,7 +184,26 @@ const IssuedFromLoan = () => {
         }
     };
     const handleLoanAdjust=()=>{
-        alert(uniqueTransIDAdj)
+        const loanAdj = async () => {
+            let sendObj={uniqueTransID:uniqueTransIDAdj}
+            await axios
+                .put(
+                    environment.agentLoanAdjust,
+                    sendObj,
+                    environment.headerToken
+                )
+                .then((res) => {
+                    console.log(res.data.item1)
+                    if (res.data.item1==true) {
+                        handleGetList(1);
+                        toast.success("Thanks! Adjusted successfully..");
+                    }
+                    else{
+                        toast.warning(res.data.item2);
+                    }
+                });
+        };
+        loanAdj();
     }
     const handleOpenAdjustModal=(utid)=>{
         setUniqueTransIDAdj(utid);
@@ -200,6 +219,7 @@ const IssuedFromLoan = () => {
             <div className="content-wrapper search-panel-bg">
                 <section className="content-header"></section>
                 <section className="content">
+                <ToastContainer position="bottom-right" autoClose={1500}/>
                     {/* <Loading loading={loading}></Loading> */}
                     <form
                         className="mx-5 mt-3"
@@ -211,7 +231,7 @@ const IssuedFromLoan = () => {
                                 <div className="m-4">
                                     <div className="tab-content">
                                         <div className="tab-pane fade show active" id="tp1">
-                                            <h4>Ticketed Bookings</h4>
+                                            <h4>Ticketed From Loan</h4>
                                             <hr className="my-3" />
                                             <div
                                                 style={{ overflowX: "scroll", marginBottom: "16px" }}
@@ -301,7 +321,7 @@ const IssuedFromLoan = () => {
                                                                             </a>
                                                                         </td>
                                                                         <td>{item.ticketNumber}</td>
-                                                                        <td>{item.ticketingPrice}</td>
+                                                                        <td>{item.ticketingPrice + " "+(item.isReturned==true?"(Adjusted)":"")+""}</td>
                                                                         <td>
                                                                             {item.status === "Issued" ? "Ticketed" :" "} <br />{" "}
                                                                             {item.refundStatus != null
@@ -417,27 +437,33 @@ const IssuedFromLoan = () => {
                                                                                 {/* <button type="button" id="btnOpenModal" className="btn btn-sm btn-secondary text-white my-2 rounded" style={{fontSize:"12px"}} data-bs-toggle="modal" data-bs-target="#supportModal" onClick={()=>clearSupportForm()}>
 												Add
 											</button> */}
-                                                                                <a href="javascript:void(0)"
+                                            {
+                                                                                            item.isReturned==false?
+                                                <><a href="javascript:void(0)"
                                                                                 
-                                                                                    title="Loan Adjust"
-                                                                                    onClick={() =>
-                                                                                        handleOpenAdjustModal(
-                                                                                            item.uniqueTransID
-                                                                                        )
-                                                                                    }
-                                                                                >
-                                                                                    <Button type="button"
-                                                                                    data-bs-toggle="modal" data-bs-target="#confirmModal"
-                                                                                        border="2px solid"
-                                                                                        colorScheme="messenger"
-                                                                                        variant="outline"
-                                                                                        size="xsm"
-                                                                                        borderRadius="16px"
-                                                                                        p='1'
-                                                                                    >
-                                                                                         <span style={{fontSize:"10px"}}>LA</span>
-                                                                                    </Button>
-                                                                                </a>
+                                                title="Loan Adjust"
+                                                onClick={() =>
+                                                    handleOpenAdjustModal(
+                                                        item.uniqueTransID
+                                                    )
+                                                }
+                                            >
+                                                <Button type="button"
+                                                data-bs-toggle="modal" data-bs-target="#confirmModal"
+                                                    border="2px solid"
+                                                    colorScheme="messenger"
+                                                    variant="outline"
+                                                    size="xsm"
+                                                    borderRadius="16px"
+                                                    p='1'
+                                                >
+                                                     <span style={{fontSize:"10px"}}>LA</span>
+                                                </Button>
+                                            </a>
+                                                </>:
+                                                <></>
+                                            }
+                                                                                
                                                                                 &nbsp;
                                                                                 {moment(
                                                                                     moment(item.issueDate).format(
@@ -542,8 +568,8 @@ const IssuedFromLoan = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="modal fade modal-sm" id="confirmModal" tabIndex={-1} aria-hidden="true">
-                            <div className="modal-dialog ">
+                        <div className="modal fade" id="confirmModal" tabIndex={-1} aria-hidden="true">
+                            <div className="modal-dialog modal-sm">
                                 <div className="modal-content">
                                     <div className="modal-header">
                                         <h5 className="modal-title"> Support</h5>

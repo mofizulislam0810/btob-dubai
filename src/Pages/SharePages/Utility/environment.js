@@ -109,4 +109,5 @@ export const environment = {
 
   agentLoanList : baseApiURL+"B2BLoan/GetAgentLoans",
   agentLoan : baseApiURL + 'B2BLoan',
+  agentLoanAdjust: baseApiURL + 'B2BLoan/Adjust',
 }

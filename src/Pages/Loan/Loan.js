@@ -20,7 +20,7 @@ const Loan = () => {
     let [returnDate, setReturnDate] = useState("");
     const handleGetTransaction = (currentPageNumber) => {
         const getData = async () => {
-            let sendObj={remarks:""}
+            let sendObj={remarks:"",isAdmin:false}
           const response = await axios.post(
             environment.agentLoanList + `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,sendObj,
             environment.headerToken
@@ -217,6 +217,7 @@ const Loan = () => {
                             <tr>
                               <th>Submitted Date</th>
                               <th>Adjustement Date</th>
+                              <th>Loan Code</th>
                               <th>Remarks</th>
                               <th>Status</th>
                               <th>Requested Amount</th>
@@ -232,6 +233,7 @@ const Loan = () => {
                                       {/* <td>{((currentPageNumber - 1) * pageSize) + index + 1}</td> */}
                                       <td>{moment(item.createdDate).format('DD-MM-yyyy hh:mm A')}</td>
                                       <td>{moment(item.returnDate).format('DD-MM-yyyy hh:mm A')}</td>
+                                      <td>{item.loanCode}</td>
                                       <td>{item.remarks}</td>
                                       <td>{item.status}</td>
                                       <td>{item.requestedAmount}</td>

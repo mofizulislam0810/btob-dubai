@@ -79,6 +79,7 @@ export const environment = {
   passengerupload : baseApiURL + 'B2BInfo/passengerupload',
 
   accountLedger: baseApiURL + 'B2BAccountLadger/AgentAccountLadger',
+  agentLoanLedger: baseApiURL + 'B2BLoan/AgentloanLadger',
   marqueeList : baseApiURL + 'B2BMarquee',
   paymentGateway:baseApiURL+'PaymentGateway',
 

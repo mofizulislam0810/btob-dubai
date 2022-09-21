@@ -10,14 +10,15 @@ tbody{
 .box-proposal {
     display: none;
     position: absolute;
-    top: 94px;
-    left: 11%;
+    top: 92%;
+    left: 24%;
     color: #02046a;
     padding: 5px;
-    z-index: 100;
+    z-index: 1000;
     /* border: 1px solid black; */
   }
   
   .briefcase:hover+.box-proposal {
     display: block;
+    z-index: 1000;
   }

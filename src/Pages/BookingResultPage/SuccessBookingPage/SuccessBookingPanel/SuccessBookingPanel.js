@@ -209,8 +209,8 @@ const SuccessBookingPanel = () => {
                                 <td>{item.passengerType}</td>
                                 <td>{item.gender}</td>
                                 <td>
-                                  {moment(item.dateOfBirth).format(
-                                    "DD-MMMM-yyyy"
+                                  {item.dateOfBirth === null? "---" : moment(item.dateOfBirth).format(
+                                        "DD-MMMM-yyyy"
                                   )}
                                 </td>
                                 <td>{item.documentInfo.documentNumber}</td>

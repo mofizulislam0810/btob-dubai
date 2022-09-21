@@ -55,6 +55,7 @@ import Canceled from "./Pages/Queues/Canceled";
 import InvoiceView from "./Pages/InvoiceView/InvoiceView";
 import Expired from "./Pages/Queues/Expired";
 import Loan from "./Pages/Loan/Loan";
+import LoanLedger from "./Pages/Ledger/LoanLedger";
 import IssuedFromLoan from "./Pages/Queues/IssuedFromLoan";
 function App() {
   var isLoggedIn = sessionStorage.getItem("token");
@@ -309,6 +310,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <Ledger />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/loanledger"
+              element={
+                <PrivateRoute>
+                  <LoanLedger />
                 </PrivateRoute>
               }
             />

@@ -8,6 +8,7 @@ const useAuthentication = () => {
   const [loading, setLoading] = useState(false);
   const token = sessionStorage.getItem("token");
   const [login, setLogin] = useState(token && token.length > 0);
+  let [fareRules, setFareRules] = useState({});
   const [count,setCount] = useState(0);
   const [id,setId] = useState();
 
@@ -52,6 +53,49 @@ const useAuthentication = () => {
     //   }
   };
 
+  const handleFareRules = (uId, dir, itemCode) => {
+    const fareRulesObj = {
+      itemCodeRef: itemCode,
+      uniqueTransID: uId,
+      segmentCodeRefs: []
+    };
+
+    dir[0][0].segments.map((i) =>
+      fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
+    );
+
+
+    // if (Object.keys(dir[0][0]).length > 0) {
+    //   dir[0][0].segments.map((i) =>
+    //     fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
+    //   );
+    // }
+    console.log(fareRulesObj);
+
+    // const fetchOptions = async(fareRulesObj) =>{
+    //     setLoading(true);
+    //     alert(loading);
+    //     const response = await axios.post(environment.getFareRules, fareRulesObj, environment.headerToken);
+    //     setFareRules(await response.data);
+    //     // setLoading(false);
+    // }
+    async function fetchOptions() {
+      // alert("ok");
+      setLoading(true);
+      await axios
+        .post(environment.getFareRules, fareRulesObj, environment.headerToken)
+        .then((response) => {
+          setFareRules(response.data);
+          // console.log(response);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+    fetchOptions();
+  }
+
+
   return {
     onClickLoginButton,
     login,
@@ -64,7 +108,10 @@ const useAuthentication = () => {
     setCount,
     count,
     setId,
-    id
+    id,
+    handleFareRules,
+    fareRules,
+    setFareRules
   };
 };
 

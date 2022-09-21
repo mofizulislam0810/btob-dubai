@@ -407,7 +407,7 @@ const BookedView = () => {
                                     <td>{item.passengerType}</td>
                                     <td>{item.gender}</td>
                                     <td>
-                                      {moment(item.dateOfBirth).format(
+                                      {item.dateOfBirth === null? "---" : moment(item.dateOfBirth).format(
                                         "DD-MMMM-yyyy"
                                       )}
                                     </td>
@@ -911,7 +911,7 @@ const BookedView = () => {
                                     <td>{item.passengerType}</td>
                                     <td>{item.gender}</td>
                                     <td>
-                                      {moment(item.dateOfBirth).format(
+                                      {item.dateOfBirth === null? "---" : moment(item.dateOfBirth).format(
                                         "DD-MMMM-yyyy"
                                       )}
                                     </td>

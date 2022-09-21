@@ -108,7 +108,7 @@ const Ticket = () => {
     window.print();
   };
 
-  // console.log(ticketingList);
+  console.log(ticketingList);
   // console.log(agentInfo);
   const donwloadRef = useRef();
   const handleDownloadPdf = async () => {
@@ -356,7 +356,7 @@ const Ticket = () => {
                           let baggage = JSON.parse(item.baggageInfo);
                           return (
                             <>
-                              <tbody key={index} className={index == 1 ? "border-top" : ""}>
+                              <tbody key={index} className={index !== 0 ? "border-top" : ""}>
                                 <tr>
                                   <td
                                     className="fw-bold text-start d-flex bg-white align-items-center"

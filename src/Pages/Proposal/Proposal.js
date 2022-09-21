@@ -1614,12 +1614,12 @@ const Proposal = () => {
                                   <>
                                     <tr style={{border: "1px solid black"}}>
                                       <td style={{border: "1px solid black"}}>CNN</td>
-                                      <td style={{border: "1px solid black"}}>{item.passengerFares.cnn.basePrice + parseInt(addBalance) - decBalance + parseInt(adultPriceValue[index])}</td>
+                                      <td style={{border: "1px solid black"}}>{item.passengerFares.cnn.basePrice + parseInt(addBalance) - decBalance + parseInt(childPriceValue[index])}</td>
                                       <td style={{border: "1px solid black"}}>{item.passengerFares.cnn.taxes}</td>
                                       <td style={{border: "1px solid black"}}>{item.passengerFares.cnn.discountPrice}</td>
                                       <td style={{border: "1px solid black"}}>{item.passengerCounts.cnn}</td>
                                       <td style={{border: "1px solid black"}}>{currency !== undefined ? currency : "BDT"}  {" "}
-                                    {item.passengerFares.cnn.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])}</td>
+                                    {item.passengerFares.cnn.totalPrice + addBalance - decBalance + parseInt(childPriceValue[index])}</td>
                                   </tr>
                                   </>
                                 ) : (
@@ -1629,12 +1629,12 @@ const Proposal = () => {
                                   <>
                                     <tr style={{border: "1px solid black"}}>
                                       <td style={{border: "1px solid black"}}>INF</td>
-                                      <td style={{border: "1px solid black"}}>{item.passengerFares.inf.basePrice + parseInt(addBalance) - decBalance + parseInt(adultPriceValue[index])}</td>
+                                      <td style={{border: "1px solid black"}}>{item.passengerFares.inf.basePrice + parseInt(addBalance) - decBalance + parseInt(infantPriceValue[index])}</td>
                                       <td style={{border: "1px solid black"}}>{item.passengerFares.inf.taxes}</td>
                                       <td style={{border: "1px solid black"}}>{item.passengerFares.inf.discountPrice}</td>
                                       <td style={{border: "1px solid black"}}>{item.passengerCounts.inf}</td>
                                       <td style={{border: "1px solid black"}}>{currency !== undefined ? currency : "BDT"}  {" "}
-                                    {item.passengerFares.inf.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])}</td>
+                                    {item.passengerFares.inf.totalPrice + addBalance - decBalance + parseInt(infantPriceValue[index])}</td>
                                   </tr>
                                   </>
                                 ) : (

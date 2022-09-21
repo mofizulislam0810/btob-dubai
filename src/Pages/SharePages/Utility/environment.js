@@ -1,6 +1,6 @@
-// const baseURL='http://localhost:7236/';
+const baseURL='http://localhost:7236/';
 // const baseURL='http://52.221.202.198:83/';
-const baseURL='http://13.212.45.180:81/';
+// const baseURL='http://13.212.45.180:81/';
 const baseApiURL =baseURL+ 'api/';
 const tokenData = JSON.parse(sessionStorage.getItem('token'));
 let headerToken = { headers: { Authorization: '' } };
@@ -79,6 +79,7 @@ export const environment = {
   passengerupload : baseApiURL + 'B2BInfo/passengerupload',
 
   accountLedger: baseApiURL + 'B2BAccountLadger/AgentAccountLadger',
+  agentLoanLedger: baseApiURL + 'B2BLoan/AgentloanLadger',
   marqueeList : baseApiURL + 'B2BMarquee',
   paymentGateway:baseApiURL+'PaymentGateway',
 

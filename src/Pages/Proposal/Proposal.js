@@ -27,6 +27,28 @@ const Proposal = () => {
     defaultPriceList.push(item.bookingComponents[0].totalPrice);
   });
 
+
+  let adultPrice = [];
+  let childPrice = [];
+  let infantPrice = [];
+
+  flightList.map((item, index) => {
+    console.log(item.passengerFares.adt.totalPrice)
+    if (item.passengerFares.adt !== null) {
+      adultPrice.push(0);
+    }
+    if (item.passengerFares.cnn !== null) {
+      childPrice.push(0);
+    }
+    if (item.passengerFares.inf !== null) {
+      infantPrice.push(0);
+    }
+  });
+
+  // console.log(adultPrice);
+  // console.log(childePrice);
+  // console.log(infantPrice);
+
   const ImageUrlD = `https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${flightList[0].directions[0][0].platingCarrierCode}.png`;
   const ImageUrlR =
     flightList[0].directions[1] !== undefined
@@ -145,8 +167,14 @@ const Proposal = () => {
     pdfMake.createPdf(documentDefinition).download();
   };
 
+
   const [singleValue, setSingleValue] = useState(defaultPriceList);
-  const [inputIncreaseValue, setInputIncreaseValue] = useState();
+  const [value, setValue] = useState();
+  const [adultPriceValue, setAdultPriceValue] = useState(adultPrice);
+  const [childPriceValue, setChildPriceValue] = useState(childPrice);
+  const [infantPriceValue, setInfantPriceValue] = useState(infantPrice);
+  // const [balance, setBalance] = useState(adultPrice);
+  // const [balanceChild, setBalanceChild] = useState(childPrice);
   const [inputDecreaseValue, setInputDecreaseValue] = useState();
   const [addBalance, setAddBalance] = useState(0);
   const [decBalance, setDecBalance] = useState(0);
@@ -172,32 +200,83 @@ const Proposal = () => {
     e.preventDefault();
   }
 
-  const handleIncreaseChange = (e) => {
-    setInputIncreaseValue(e.target.value)
+  const handleChange = (e) => {
+    setValue(e.target.value)
   }
 
-  const handleDecreaseChange = (e) => {
-    setInputDecreaseValue(e.target.value)
-  }
+  // const handleDecreaseChange = (e) => {
+  //   setInputDecreaseValue(e.target.value)
+  // }
 
-  const handleIncreaseClick = () => {
+  const handleClick = () => {
     if (selectedType === "Increase") {
-      setAddBalance(parseInt(addBalance) + parseInt(inputIncreaseValue));
-      setInputIncreaseValue('');
+      setAddBalance(parseInt(addBalance) + parseInt(value));
+      setValue('');
     } else {
-      setAddBalance(parseInt(addBalance) - parseInt(inputIncreaseValue));
-      setInputDecreaseValue('');
+      setAddBalance(parseInt(addBalance) - parseInt(value));
+      setValue('');
     }
   }
 
+  // const handleSingleValue = (index,type) => {
+  //   if(type === 'adt'){
+  //     const singleValueList = [...balance];
+  //     singleValueList[index] = adultPriceValue[index];
+  //     setBalance(singleValueList);
+  //     // setBalance(parseInt(balance[index]) + parseInt(adultPriceValue));
+  //     setAdultPriceValue(adultPrice);
+  //   }else if(type === 'cnn'){
+  //     const singleValueList = [...balanceChild];
+  //     singleValueList[index] = childPriceValue[index];
+  //     setBalanceChild(singleValueList);
+  //     // setBalance(parseInt(balance[index]) + parseInt(adultPriceValue));
+  //     setChildPriceValue(childPrice);
+  //   }
+  // }
 
 
-  const handleSingleValue = (value, index) => {
-    const singleValueList = [...singleValue];
-    singleValueList[index] = value;
-    setSingleValue(singleValueList);
+
+  const handleValue = (value, index, type) => {
+    if (type === 'adt') {
+      if (value === '') {
+        setAdultPriceValue(adultPriceValue)
+      } else {
+        const singleValueList = [...adultPriceValue];
+        singleValueList[index] = value;
+        setAdultPriceValue(singleValueList);
+      }
+    }
+    if (type === 'cnn') {
+      if (value === '') {
+        setChildPriceValue(childPriceValue);
+      } else {
+        const singleValueList = [...childPriceValue];
+        singleValueList[index] = value;
+        setChildPriceValue(singleValueList);
+      }
+    }
+    if (type === 'inf') {
+      if (value === '') {
+        setInfantPriceValue(infantPriceValue);
+      } else {
+        const singleValueList = [...infantPriceValue];
+        singleValueList[index] = value;
+        setInfantPriceValue(singleValueList);
+      }
+    }
+    // const singleValueList = [...adultPriceValue];
+    // singleValueList[index] = value;
+    // setAdultPriceValue(singleValueList);
   }
-  console.log(singleValue);
+
+  // const handleValueChild = (value,index) =>{
+  //   const singleValueList = [...childPriceValue];
+  //   singleValueList[index] = value;
+  //   setChildPriceValue(singleValueList);
+  // }
+
+
+  console.log(adultPriceValue);
 
   const donwloadRef = useRef();
   const handleDownloadPdf = async () => {
@@ -240,27 +319,27 @@ const Proposal = () => {
                   <form onSubmit={handleMessageUser}>
                     <div className="card-body">
                       <div className="form-group">
-                        <input className="form-control" name="to" onBlur={handleOnBlur} placeholder="To:" />
+                        <input className="form-control rounded" name="ToEmail" onBlur={handleOnBlur} placeholder="To:" />
                       </div>
                       <div className="form-group">
-                        <input className="form-control" name="subject" onBlur={handleOnBlur} placeholder="Subject:" />
+                        <input className="form-control rounded" name="subject" onBlur={handleOnBlur} placeholder="Subject:" />
                       </div>
                       <div className="form-group">
                         <textarea
                           name="body"
                           onBlur={handleOnBlur}
-                          className="form-control"
+                          className="form-control rounded"
                           placeholder="Message: "
-                          style={{ height: "300px" }}
+                          style={{ height: "100px" }}
                         ></textarea>
                       </div>
-                      <div className="form-group">
+                      {/* <div className="form-group">
                         <div className="btn btn-default btn-file">
                           <i className="fas fa-paperclip"></i> Attachment
                           <input type="file" name="attachment" onBlur={handleOnBlur} disabled />
                         </div>
                         <p className="help-block">Max. 32MB</p>
-                      </div>
+                      </div> */}
                     </div>
                     {/* <!-- /.card-body --> */}
                     <div className="card-footer">
@@ -268,7 +347,7 @@ const Proposal = () => {
                         {/* <button type="button" className="btn btn-default">
                         <i className="fas fa-pencil-alt"></i> Draft
                       </button> */}
-                        <button type="submit" className="btn btn-primary">
+                        <button type="submit" className="btn btn-secondary btn-sm rounded">
                           <i className="far fa-envelope"></i> Send
                         </button>
                       </div>
@@ -293,22 +372,22 @@ const Proposal = () => {
                 <div className="rounded box-shadow bg-white p-3 py-4">
                   <div className="d-flex align-items-centen justify-content-center py-1">
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Increase" defaultChecked={selectedType === "Increase" ? true : false} onChange={() => setSelectedType("Increase")} disabled />
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Increase" defaultChecked={selectedType === "Increase" ? true : false} onChange={() => setSelectedType("Increase")} />
                       <label class="form-check-label" for="flexRadioDefault1">
                         Increase
                       </label>
                     </div>
                     <div class="form-check ms-4">
-                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="Decrease" onChange={() => setSelectedType("Decrease")} disabled />
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="Decrease" onChange={() => setSelectedType("Decrease")} />
                       <label class="form-check-label" for="flexRadioDefault2">
                         Decrease
                       </label>
                     </div>
                   </div>
 
-                  <input className="form-control mt-2" name="increase" type="number" value={inputIncreaseValue} onChange={handleIncreaseChange} placeholder="Enter Amount" disabled />
+                  <input className="form-control mt-2" name="increase" type="number" value={value} onChange={handleChange} placeholder="Enter Amount" />
                   <button
-                    className="btn button-color fw-bold text-white w-100 mt-2 rounded" onClick={handleIncreaseClick} disabled={inputIncreaseValue ? false : true}
+                    className="btn button-color fw-bold text-white w-100 mt-2 rounded" onClick={handleClick} disabled={value ? false : true}
                   >
                     Submit
                   </button>
@@ -454,7 +533,7 @@ const Proposal = () => {
                           {/* <!-- return fight section --> */}
                           {item.directions[1] !== undefined ? (
                             <>
-                              <div className="row p-2 text-color">
+                              <div className="row p-2 text-color border-top">
                                 <div className="col-lg-1 my-auto">
                                   <img src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.directions[1][0].platingCarrierCode}.png`} alt="" width="40px" height="40px" />
                                 </div>
@@ -601,7 +680,7 @@ const Proposal = () => {
                                   Baggage
                                 </span>
                               </span>
-                              <div class="box">
+                              <div class="box-proposal">
                                 {" "}
                                 <table
                                   className="table table-bordered table-sm"
@@ -1253,64 +1332,29 @@ const Proposal = () => {
                         </div>
                         <div className="col-lg-2 my-auto text-center">
                           <h5 className="text-color d-flex justify-content-center align-items-center">
-                            {currency !== undefined ? currency : "BDT"}&nbsp;<span id={"balance" + index}> {item.bookingComponents[0].totalPrice + addBalance - decBalance}</span>
-                            <input type="number" id={"balanceInput" + index} name={"value" + index} value={singleValue[index] ?? 0} onChange={(e) => handleSingleValue(e.target.value, index)} style={{ height: "25px", width: "70px" }} />
-                            {/* <span className="ms-1" id={"edit" + index}><i class="fas fa-edit"></i></span>
+                            {currency !== undefined ? currency : "BDT"}&nbsp;<span id={"balance" + index}>
+
+                              {
+                                item.passengerFares.adt !== null && item.passengerFares.cnn === null && item.passengerFares.inf === null ?
+                                  item.bookingComponents[0].totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index]) : item.passengerFares.adt !== null && item.passengerFares.cnn !== null && item.passengerFares.inf === null ?
+                                    item.bookingComponents[0].totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index]) + parseInt(childPriceValue[index]) : item.passengerFares.adt !== null && item.passengerFares.cnn !== null && item.passengerFares.inf !== null ?
+                                      item.bookingComponents[0].totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index]) + parseInt(childPriceValue[index]) + parseInt(infantPriceValue[index]) : 0
+                              }
+
+                              {/* {item.bookingComponents[0].totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index]) + item.passengerFares.cnn !== null ? parseInt(childPriceValue[index]) : 0} */}
+                            </span>
+                            {/* <input type="number" id={"balanceInput" + index} name={"value" + index} value={singleValue[index] ?? 0} onChange={(e) => handleSingleValue(e.target.value, index)} style={{ height: "25px", width: "70px" }} />
+                            <span className="ms-1" id={"edit" + index}><i class="fas fa-edit"></i></span>
                             <span className="ms-1" id={"right" + index}><i class="fas fa-check"></i></span> */}
                           </h5>
-                          {/* <h6
+                          <h6
                             className="text-end fw-bold text-color text-center"
                             id={"priceDown" + index}
                             style={{ cursor: "pointer", fontSize: "12px" }}
                           >
                             Price Breakdown
-                          </h6> */}
+                          </h6>
                         </div>
-                        {/* <div
-                          className="table-responsive-sm"
-                          id={"passengerBrackdown" + index}
-                        >
-                          <hr></hr>
-                          <table
-                            className="table table-bordered px-3 table-sm"
-                            style={{ fontSize: "12px" }}
-                          >
-                            <thead className="text-center thead text-white fw-bold">
-                              <tr>
-                                <th>Type</th>
-                                <th>Base</th>
-                                <th>Taxes</th>
-                                <th>Other Fee</th>
-                                <th>Gross Fare</th>
-                                <th>Discount</th>
-                                <th>Pax</th>
-                                <th>Total Pax Fare</th>
-                              </tr>
-                            </thead>
-                            <tbody className="text-center">
-                              <tr>
-                                <td className="left">ADT</td>
-                                <td className="left">
-                                  {parseInt(singleValue[index]) - item.passengerFares.adt.taxes + parseInt(addBalance) - decBalance}
-                                </td>
-                                <td className="center">
-                                  {item.passengerFares.adt.taxes}
-                                </td>
-                                <td className="right">0</td>
-                                <td className="right">
-                                  {parseInt(singleValue[index]) + addBalance - decBalance}
-                                </td>
-                                <td className="right">190</td>
-                                <td className="right">1</td>
-                                <td className="right">
-                                  {parseInt(singleValue[index]) + addBalance - 190 - decBalance}{" "}
-                                  {currency !== undefined ? currency : "BDT"}
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div> */}
-
 
                         <div
                           className="table-responsive-sm mt-1"
@@ -1327,9 +1371,9 @@ const Proposal = () => {
                                 <th>Base</th>
                                 <th>Tax</th>
                                 <th>Discount</th>
-                                {/* <th>AIT</th> */}
                                 <th>Pax</th>
                                 <th>Total Pax Fare</th>
+                                <th>Action</th>
                               </tr>
                             </thead>
                             <tbody className="text-center">
@@ -1337,7 +1381,7 @@ const Proposal = () => {
                                 <>
                                   <tr>
                                     <td className="left">ADT</td>
-                                    <td className="left">{item.passengerFares.adt.basePrice + parseInt(addBalance) - decBalance}</td>
+                                    <td className="left">{item.passengerFares.adt.basePrice + parseInt(addBalance) - decBalance + parseInt(adultPriceValue[index])}</td>
                                     <td className="center">{item.passengerFares.adt.taxes}</td>
                                     <td className="right">
                                       {item.passengerFares.adt.discountPrice}
@@ -1346,8 +1390,10 @@ const Proposal = () => {
                                     <td className="right">{item.passengerCounts.adt}</td>
                                     <td className="right fw-bold">
                                       {currency !== undefined ? currency : "BDT"}  {" "}
-                                      {item.passengerFares.adt.totalPrice + addBalance - decBalance}{" "}
+                                      {item.passengerFares.adt.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])}{" "}
                                     </td>
+                                    {/* <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "70px" }} value={adultPriceValue[index]} name="value" onChange={(e) => handleValue(e.target.value,index)}/><button className="btn-secondary btn-sm rounded py-0" style={{fontSize:'10px', height:"20px"}} onClick={()=>handleSingleValue(index,"adt")} disabled={adultPriceValue[index] !==0 ? false : true}>Save</button></td> */}
+                                    <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "90px" }} defaultValue={0} name="value" onChange={(e) => handleValue(e.target.value, index, 'adt')} /></td>
                                   </tr>
                                 </>
                               ) : (
@@ -1358,7 +1404,7 @@ const Proposal = () => {
                                 <>
                                   <tr>
                                     <td className="left">CNN</td>
-                                    <td className="left">{item.passengerFares.cnn.basePrice + parseInt(addBalance) - decBalance}</td>
+                                    <td className="left">{item.passengerFares.cnn.basePrice + parseInt(addBalance) - decBalance + parseInt(childPriceValue[index])}</td>
                                     <td className="center">{item.passengerFares.cnn.taxes}</td>
                                     <td className="right">
                                       {item.passengerFares.cnn.discountPrice}
@@ -1367,8 +1413,10 @@ const Proposal = () => {
                                     <td className="right">{item.passengerCounts.cnn}</td>
                                     <td className="right fw-bold">
                                       {currency !== undefined ? currency : "BDT"}  {" "}
-                                      {item.passengerFares.cnn.totalPrice + addBalance - decBalance}{" "}
+                                      {item.passengerFares.cnn.totalPrice + addBalance - decBalance + parseInt(childPriceValue[index])}{" "}
                                     </td>
+                                    {/* <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "70px" }} value={childPriceValue[index]} name="value" onChange={(e) => handleValueChild(e.target.value,index)}/><button className="btn-secondary btn-sm rounded py-0" style={{fontSize:'10px', height:"20px"}} onClick={()=>handleSingleValue(index,"cnn")} disabled={childPriceValue[index] !==0 ? false : true}>Save</button></td> */}
+                                    <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "90px" }} defaultValue={0} name="value" onChange={(e) => handleValue(e.target.value, index, 'cnn')} /></td>
                                   </tr>
                                 </>
                               ) : (
@@ -1379,7 +1427,7 @@ const Proposal = () => {
                                 <>
                                   <tr>
                                     <td className="left">INF</td>
-                                    <td className="left">{item.passengerFares.inf.taxes + parseInt(addBalance) - decBalance}</td>
+                                    <td className="left">{(item.passengerFares.inf.taxes + parseInt(addBalance) - decBalance + parseInt(infantPriceValue[index])).toFixed(2)}</td>
                                     <td className="center">{item.passengerFares.inf.taxes}</td>
                                     <td className="right">
                                       {item.passengerFares.inf.discountPrice}
@@ -1388,8 +1436,10 @@ const Proposal = () => {
                                     <td className="right">{item.passengerCounts.inf}</td>
                                     <td className="right fw-bold">
                                       {currency !== undefined ? currency : "BDT"}  {" "}
-                                      {item.passengerFares.inf.totalPrice + addBalance - decBalance}{" "}
+                                      {item.passengerFares.inf.totalPrice + addBalance - decBalance + parseInt(infantPriceValue[index])}{" "}
                                     </td>
+                                    {/* <td> <input type="number" name={"value" + index} value={singleValue[index] ?? 0} onChange={(e) => handleSingleValue(e.target.value, index)} style={{ height: "25px", width: "70px" }} /></td> */}
+                                    <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "90px" }} defaultValue={0} name="value" onChange={(e) => handleValue(e.target.value, index, 'inf')} /></td>
                                   </tr>
                                 </>
                               ) : (
@@ -1418,7 +1468,7 @@ const Proposal = () => {
           >
             {flightList.map((item, index) => (
               <>
-                <div className="row" >
+                <div className="row" style={{ fontSize: "12px" }}>
                   <div className="card box-shadow">
                     <div className="card-header">
                       <span>
@@ -1434,100 +1484,158 @@ const Proposal = () => {
                           </h5>
                         </div>
                       </div>
-                      <div className="row mb-2" style={{ fontSize: "12px" }}>
-                        <div className="col-sm-3">
-                          <h5 className="mb-1">From</h5>
-                          <div>
-                            <strong>
-                              {item.directions[0][0].segments[0].fromAirport}
-                            </strong>
-                          </div>
-                        </div>
-                        <div className="col-sm-3">
-                          <h5 className="mb-1">To</h5>
-                          <div>
-                            <strong>{item.directions[0][0].segments[0].toAirport}</strong>
-                          </div>
-                        </div>
-                        <div className="col-sm-3">
-                          <h5 className="mb-1">Departure Date</h5>
-                          <div>
-                            <strong>{moment(item.directions[0][0].segments[0].departure)
-                              .utc()
-                              .format("DD-MMMM-yyyy, dddd")}</strong>
-                          </div>
-                        </div>
-                        <div className="col-sm-3">
-                          <h5 className="mb-1">Travellers</h5>
-                          <div>
-                            <strong>{item.passengerCounts.adt + item.passengerCounts.cnn + item.passengerCounts.inf} Person(s)</strong>
-                          </div>
-                        </div>
-                      </div>
+                     
 
-                      {
-                        item.directions[1] !== undefined ? <>
-                          <div className="row my-2" style={{ fontSize: "12px" }}>
-                            <div className="col-sm-3">
-                              <h5 className="mb-1">From</h5>
-                              <div>
-                                <strong>
-                                  {item.directions[1][0].segments[0].fromAirport}
-                                </strong>
+                        {
+                          item.directions[1] !== undefined ? <>
+                            <div className="row my-2" style={{ fontSize: "12px" }}>
+                              <div className="col-sm-3">
+                                <h5 className="mb-1">From</h5>
+                                <div>
+                                  <strong>
+                                    {item.directions[1][0].segments[0].fromAirport}
+                                  </strong>
+                                </div>
+                              </div>
+                              <div className="col-sm-3">
+                                <h5 className="mb-1">To</h5>
+                                <div>
+                                  <strong>{item.directions[1][0].segments[0].toAirport}</strong>
+                                </div>
+                              </div>
+                              <div className="col-sm-3">
+                                <h5 className="mb-1">Departure Date</h5>
+                                <div>
+                                  <strong>{moment(item.directions[1][0].segments[0].departure)
+                                    .utc()
+                                    .format("DD-MMMM-yyyy, dddd")}</strong>
+                                </div>
+                              </div>
+                              <div className="col-sm-3">
+                                <h5 className="mb-1">Travellers</h5>
+                                <div>
+                                  <strong>{item.passengerCounts.adt + item.passengerCounts.cnn + item.passengerCounts.inf} Person(s)</strong>
+                                </div>
                               </div>
                             </div>
-                            <div className="col-sm-3">
-                              <h5 className="mb-1">To</h5>
-                              <div>
-                                <strong>{item.directions[1][0].segments[0].toAirport}</strong>
-                              </div>
-                            </div>
-                            <div className="col-sm-3">
-                              <h5 className="mb-1">Departure Date</h5>
-                              <div>
-                                <strong>{moment(item.directions[1][0].segments[0].departure)
-                                  .utc()
-                                  .format("DD-MMMM-yyyy, dddd")}</strong>
-                              </div>
-                            </div>
-                            <div className="col-sm-3">
-                              <h5 className="mb-1">Travellers</h5>
-                              <div>
-                                <strong>{item.passengerCounts.adt + item.passengerCounts.cnn + item.passengerCounts.inf} Person(s)</strong>
-                              </div>
-                            </div>
-                          </div>
-                        </> : <>
+                          </> : <>
+                          </>
+                        }
 
-                        </>
-                      }
+                
+                         <table class="table" style={{width:"100%",  border:"1px solid black", borderCollapse: "collapse",fontSize: "12px"}}>
+                            <tr style={{border: "1px solid black"}}>
+                                <td style={{border: "1px solid black"}}><b>FLIGHT DETAILS</b></td>
+                            </tr>
+                        </table>
+                        <table class="table" style={{width:"100%",border:"1px solid black",borderCollapse: "collapse",textAlign:"center",fontSize: "12px"}}>
+                          <thead>
+                            <tr style={{border: "1px solid black"}}>
+                                <th style={{border: "1px solid black"}}><b>AirLines</b></th>
+                                <th style={{border: "1px solid black"}}><b>Departure</b></th>
+                                <th style={{border: "1px solid black"}}><b>Arrival</b></th>
+                                <th style={{border: "1px solid black"}}><b>Duration</b></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr style={{border: "1px solid black"}}>
+                                  <td style={{border: "1px solid black"}}><b>{item.platingCarrierName}<br></br>
+                                {
+                                  item.directions[0][0].segments[0].details[0]
+                                    .equipment
+                                }</b></td>
+                                  <td style={{border: "1px solid black"}}>
+                                    <b>
+                                      {item.directions[0][0].segments[0].fromAirport}<br></br>
+                                      {moment(item.directions[0][0].segments[0].departure).format("DD-MMM-yyyy, dddd")}({item.directions[0][0].segments[0].departure.substr(11, 5)})</b></td>
+                                  <td style={{border: "1px solid black"}}>
+                                    <b>
+                                      {item.directions[0][0].segments[0].toAirport}<br></br>
+                                      {moment(item.directions[0][0].segments[0].arrival).format("DD-MMM-yyyy, dddd")}({item.directions[0][0].segments[0].arrival.substr(11, 5)})</b></td>
+                                  <td style={{border: "1px solid black"}}><b>{item.directions[0][0].segments[0].duration[0]}</b></td>
+                              </tr>
+                              {
+                                  item.directions[1] !== undefined ? <>
+                                <tr>
+                                  <td style={{border: "1px solid black"}}><b>{item.platingCarrierName}<br></br>
+                                  {
+                                    item.directions[1][0].segments[0].details[0]
+                                      .equipment
+                                  }</b></td>
+                                    <td style={{border: "1px solid black"}}>
+                                      <b>
+                                        {item.directions[1][0].segments[0].fromAirport}<br></br>
+                                        {moment(item.directions[1][0].segments[0].departure).format("DD-MMM-yyyy, dddd")}({item.directions[1][0].segments[0].departure.substr(11, 5)})</b></td>
+                                    <td style={{border: "1px solid black"}}>
+                                      <b>
+                                        {item.directions[1][0].segments[0].toAirport}<br></br>
+                                        {moment(item.directions[1][0].segments[0].arrival).format("DD-MMM-yyyy, dddd")}({item.directions[1][0].segments[0].arrival.substr(11, 5)})</b></td>
+                                    <td style={{border: "1px solid black"}}><b>{item.directions[1][0].segments[0].duration[0]}</b></td>
+                                </tr>
+                              </> : <></>
+                            }
+                          </tbody>
+                        </table>
+                       
+                        <table class="table" style={{width:"100%",  border:"1px solid black", borderCollapse: "collapse",fontSize: "12px",marginTop:"10px"}}>
+                            <tr style={{border: "1px solid black"}}>
+                                <td style={{border: "1px solid black"}}><b>OTHER INFORMATION</b></td>
+                            </tr>
+                        </table>
+                        <table class="table" style={{width:"100%",border:"1px solid black",borderCollapse: "collapse",textAlign:"center",fontSize: "12px"}}>
+                          <thead>
+                            <tr style={{border: "1px solid black"}}>
+                                <th style={{border: "1px solid black"}}><b>Class</b></th>
+                                <th style={{border: "1px solid black"}}><b>Trip Type</b></th>
+                                <th style={{border: "1px solid black"}}><b>Baggage Allowance</b></th>
+                                <th style={{border: "1px solid black"}}><b>Travellers</b></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr style={{border: "1px solid black"}}>
+                                  <td style={{border: "1px solid black"}}><b>Economy</b></td>
+                                  <td style={{border: "1px solid black"}}>
+                                    <b>{item.directions[1] !== undefined ? "Return" : "Oneway"}</b></td>
+                                  <td style={{border: "1px solid black"}}>
+                                    <b>
+                                    {item.directions[0][0].segments[0].baggage[0].amount + " " + item.directions[0][0].segments[0].baggage[0].units}(s)</b></td>
+                                  <td style={{border: "1px solid black"}}><b>{item.directions[0][0].segments[0].duration[0]}</b></td>
+                              </tr>
+                          </tbody>
+                        </table>
+                         
+                        
 
-                      <div className="row mb-4 my-2" style={{ fontSize: "12px" }}>
-                        <div className="col-sm-3">
-                          <h5 className="mb-1">Class</h5>
-                          <div>
-                            <strong>Economy</strong>
-                          </div>
-                        </div>
-                        <div className="col-sm-3">
-                          <h5 className="mb-1">Baggage Allowance</h5>
-                          <div>
-                            <strong>{item.directions[0][0].segments[0].baggage[0].amount +
+                        <div className="row mb-2" style={{ fontSize: "12px" }}>
+                          <table style={{margin:"5px", border: "1px solid black", textAlign:"center"}}>
+                            <tr>
+                              <td style={{border: "1px solid black", padding:"5px"}}>
+                                <h6>Class(Economy)</h6>
+                                 
+                              </td>
+                              <td style={{border: "1px solid black", padding:"5px"}}>
+                                <h6>Baggage Allowance({item.directions[0][0].segments[0].baggage[0].amount +
                               " " +
-                              item.directions[0][0].segments[0].baggage[0].units}(s)</strong>
-                          </div>
+                              item.directions[0][0].segments[0].baggage[0].units}(s))</h6>
+                              </td>
+                              <td style={{border: "1px solid black", padding:"5px"}}>
+                                <h6>Trip Type({item.directions[1] !== undefined ? "Return" : "Oneway"})</h6>
+                              </td>
+                              <td style={{border: "1px solid black", padding:"5px"}}>
+                                <h6>Travellers({item.passengerCounts.adt + item.passengerCounts.cnn + item.passengerCounts.inf} Person(s))</h6>
+                              </td>
+                            </tr>
+                          </table>
                         </div>
-                        <div className="col-sm-3">
-                          <h5 className="mb-1">Trip Type</h5>
-                          <div>
-                            <strong>{item.directions[1] !== undefined ? "Return" : "Oneway"}</strong>
-                          </div>
-                        </div>
-                      </div>
 
-                      <div className="table-responsive-sm">
-                        <p className="bg-dark p-2 mb-2 fw-bold">FLIGHT DETAILS</p>
-                        <table className="table table-borderless" style={{ fontSize: "12px" }}>
+
+
+
+
+
+                      <div className="table-responsive-sm mt-3">
+                        <p className="bg-secondary p-2 mb-2 fw-bold" style={{ fontSize: "12px" }}>FLIGHT DETAILS</p>
+                        <table className="table table-bordered table-sm" style={{ fontSize: "12px" }}>
                           <thead className="text-center thead__color">
                             <tr>
                               <th className="text-start">#</th>
@@ -1592,7 +1700,7 @@ const Proposal = () => {
                         </table>
                       </div>
                       <div className="table-responsive-sm">
-                        <p className="bg-dark p-2 mb-2 fw-bold">FARE DETAILS</p>
+                        <p className="bg-secondary p-2 mb-2 fw-bold" style={{ fontSize: "12px" }}>FARE DETAILS</p>
                         <table
                           className="table table-bordered px-3 table-sm"
                           style={{ fontSize: "12px" }}
@@ -1613,7 +1721,7 @@ const Proposal = () => {
                               <>
                                 <tr>
                                   <td className="left">ADT</td>
-                                  <td className="left">{item.passengerFares.adt.basePrice + parseInt(addBalance) - decBalance}</td>
+                                  <td className="left">{item.passengerFares.adt.basePrice + parseInt(addBalance) - decBalance + parseInt(adultPriceValue[index])}</td>
                                   <td className="center">{item.passengerFares.adt.taxes}</td>
                                   <td className="right">
                                     {item.passengerFares.adt.discountPrice}
@@ -1622,7 +1730,7 @@ const Proposal = () => {
                                   <td className="right">{item.passengerCounts.adt}</td>
                                   <td className="right fw-bold">
                                     {currency !== undefined ? currency : "BDT"}  {" "}
-                                    {item.passengerFares.adt.totalPrice + addBalance - decBalance}{" "}
+                                    {item.passengerFares.adt.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])}{" "}
                                   </td>
                                 </tr>
                               </>
@@ -1634,7 +1742,7 @@ const Proposal = () => {
                               <>
                                 <tr>
                                   <td className="left">CNN</td>
-                                  <td className="left">{item.passengerFares.cnn.basePrice + parseInt(addBalance) - decBalance}</td>
+                                  <td className="left">{item.passengerFares.cnn.basePrice + parseInt(addBalance) - decBalance + parseInt(childPriceValue[index])}</td>
                                   <td className="center">{item.passengerFares.cnn.taxes}</td>
                                   <td className="right">
                                     {item.passengerFares.cnn.discountPrice}
@@ -1643,7 +1751,7 @@ const Proposal = () => {
                                   <td className="right">{item.passengerCounts.cnn}</td>
                                   <td className="right fw-bold">
                                     {currency !== undefined ? currency : "BDT"}  {" "}
-                                    {item.passengerFares.cnn.totalPrice + addBalance - decBalance}{" "}
+                                    {item.passengerFares.cnn.totalPrice + addBalance - decBalance + parseInt(childPriceValue[index])}{" "}
                                   </td>
                                 </tr>
                               </>
@@ -1655,7 +1763,7 @@ const Proposal = () => {
                               <>
                                 <tr>
                                   <td className="left">INF</td>
-                                  <td className="left">{item.passengerFares.inf.taxes + parseInt(addBalance) - decBalance}</td>
+                                  <td className="left">{item.passengerFares.inf.taxes + parseInt(addBalance) - decBalance + parseInt(infantPriceValue[index])}</td>
                                   <td className="center">{item.passengerFares.inf.taxes}</td>
                                   <td className="right">
                                     {item.passengerFares.inf.discountPrice}
@@ -1664,7 +1772,7 @@ const Proposal = () => {
                                   <td className="right">{item.passengerCounts.inf}</td>
                                   <td className="right fw-bold">
                                     {currency !== undefined ? currency : "BDT"}  {" "}
-                                    {item.passengerFares.inf.totalPrice + addBalance - decBalance}{" "}
+                                    {item.passengerFares.inf.totalPrice + addBalance - decBalance + parseInt(infantPriceValue[index])}{" "}
                                   </td>
                                 </tr>
                               </>

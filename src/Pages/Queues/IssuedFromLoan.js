@@ -321,7 +321,7 @@ const IssuedFromLoan = () => {
                                                                             </a>
                                                                         </td>
                                                                         <td>{item.ticketNumber}</td>
-                                                                        <td>{item.ticketingPrice + " "+(item.isReturned==true?"(Adjusted)":"")+""}</td>
+                                                                        <td>{item.ticketingPrice + " "+(item.isReturned==true?"(Adjusted)":"")+""}{item.returnDate}</td>
                                                                         <td>
                                                                             {item.status === "Issued" ? "Ticketed" :" "} <br />{" "}
                                                                             {item.refundStatus != null

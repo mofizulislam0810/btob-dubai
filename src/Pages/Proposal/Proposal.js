@@ -1477,6 +1477,7 @@ const Proposal = () => {
                       </span>
                     </div>
                     <div className="card-body">
+                     
                       <div className="row">
                         <div className="col-lg-12">
                           <h5 className="mb-3 fw-bold text-color">
@@ -1484,9 +1485,7 @@ const Proposal = () => {
                           </h5>
                         </div>
                       </div>
-                     
-
-                        {
+                        {/* {
                           item.directions[1] !== undefined ? <>
                             <div className="row my-2" style={{ fontSize: "12px" }}>
                               <div className="col-sm-3">
@@ -1520,7 +1519,7 @@ const Proposal = () => {
                             </div>
                           </> : <>
                           </>
-                        }
+                        } */}
 
                 
                          <table class="table" style={{width:"100%",  border:"1px solid black", borderCollapse: "collapse",fontSize: "12px"}}>
@@ -1554,8 +1553,9 @@ const Proposal = () => {
                                       {moment(item.directions[0][0].segments[0].arrival).format("DD-MMM-yyyy, dddd")}({item.directions[0][0].segments[0].arrival.substr(11, 5)})</b></td>
                                   <td style={{border: "1px solid black"}}><b>{item.directions[0][0].segments[0].duration[0]}</b></td>
                               </tr>
-                              {
-                                  item.directions[1] !== undefined ? <>
+                            {
+                              item.directions[1] !== undefined ? 
+                              <>
                                 <tr>
                                   <td style={{border: "1px solid black"}}><b>{item.platingCarrierName}<br></br>
                                   {
@@ -1572,11 +1572,77 @@ const Proposal = () => {
                                         {moment(item.directions[1][0].segments[0].arrival).format("DD-MMM-yyyy, dddd")}({item.directions[1][0].segments[0].arrival.substr(11, 5)})</b></td>
                                     <td style={{border: "1px solid black"}}><b>{item.directions[1][0].segments[0].duration[0]}</b></td>
                                 </tr>
-                              </> : <></>
+                              </> : 
+                              <></>
                             }
                           </tbody>
                         </table>
                        
+                        <table class="table" style={{width:"100%",  border:"1px solid black", borderCollapse: "collapse",fontSize: "12px",marginTop:"10px"}}>
+                            <tr style={{border: "1px solid black"}}>
+                                <td style={{border: "1px solid black"}}><b>FARE DETAILS</b></td>
+                            </tr>
+                        </table>
+                        <table class="table" style={{width:"100%",border:"1px solid black",borderCollapse: "collapse",textAlign:"center",fontSize: "12px"}}>
+                          <thead>
+                            <tr style={{border: "1px solid black"}}>
+                                <th style={{border: "1px solid black"}}><b>Type</b></th>
+                                <th style={{border: "1px solid black"}}><b>Base</b></th>
+                                <th style={{border: "1px solid black"}}><b>Tax</b></th>
+                                <th style={{border: "1px solid black"}}><b>Discount</b></th>
+                                <th style={{border: "1px solid black"}}><b>Pax</b></th>
+                                <th style={{border: "1px solid black"}}><b>Total Pax Fare</b></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              {item.passengerFares.adt !== null ? (
+                                  <>
+                                    <tr style={{border: "1px solid black"}}>
+                                      <td style={{border: "1px solid black"}}>ADT</td>
+                                      <td style={{border: "1px solid black"}}>{item.passengerFares.adt.basePrice + parseInt(addBalance) - decBalance + parseInt(adultPriceValue[index])}</td>
+                                      <td style={{border: "1px solid black"}}>{item.passengerFares.adt.taxes}</td>
+                                      <td style={{border: "1px solid black"}}>{item.passengerFares.adt.discountPrice}</td>
+                                      <td style={{border: "1px solid black"}}>{item.passengerCounts.adt}</td>
+                                      <td style={{border: "1px solid black"}}>{currency !== undefined ? currency : "BDT"}  {" "}
+                                    {item.passengerFares.adt.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])}</td>
+                                  </tr>
+                                  </>
+                                ) : (
+                                  <></>
+                                )}
+                                {item.passengerFares.cnn !== null ? (
+                                  <>
+                                    <tr style={{border: "1px solid black"}}>
+                                      <td style={{border: "1px solid black"}}>CNN</td>
+                                      <td style={{border: "1px solid black"}}>{item.passengerFares.cnn.basePrice + parseInt(addBalance) - decBalance + parseInt(adultPriceValue[index])}</td>
+                                      <td style={{border: "1px solid black"}}>{item.passengerFares.cnn.taxes}</td>
+                                      <td style={{border: "1px solid black"}}>{item.passengerFares.cnn.discountPrice}</td>
+                                      <td style={{border: "1px solid black"}}>{item.passengerCounts.cnn}</td>
+                                      <td style={{border: "1px solid black"}}>{currency !== undefined ? currency : "BDT"}  {" "}
+                                    {item.passengerFares.cnn.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])}</td>
+                                  </tr>
+                                  </>
+                                ) : (
+                                  <></>
+                                )}
+                                {item.passengerFares.inf !== null ? (
+                                  <>
+                                    <tr style={{border: "1px solid black"}}>
+                                      <td style={{border: "1px solid black"}}>INF</td>
+                                      <td style={{border: "1px solid black"}}>{item.passengerFares.inf.basePrice + parseInt(addBalance) - decBalance + parseInt(adultPriceValue[index])}</td>
+                                      <td style={{border: "1px solid black"}}>{item.passengerFares.inf.taxes}</td>
+                                      <td style={{border: "1px solid black"}}>{item.passengerFares.inf.discountPrice}</td>
+                                      <td style={{border: "1px solid black"}}>{item.passengerCounts.inf}</td>
+                                      <td style={{border: "1px solid black"}}>{currency !== undefined ? currency : "BDT"}  {" "}
+                                    {item.passengerFares.inf.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])}</td>
+                                  </tr>
+                                  </>
+                                ) : (
+                                  <></>
+                                )}
+                          </tbody>
+                        </table>
+
                         <table class="table" style={{width:"100%",  border:"1px solid black", borderCollapse: "collapse",fontSize: "12px",marginTop:"10px"}}>
                             <tr style={{border: "1px solid black"}}>
                                 <td style={{border: "1px solid black"}}><b>OTHER INFORMATION</b></td>
@@ -1603,9 +1669,11 @@ const Proposal = () => {
                               </tr>
                           </tbody>
                         </table>
+
+                       
                          
                         
-
+{/* 
                         <div className="row mb-2" style={{ fontSize: "12px" }}>
                           <table style={{margin:"5px", border: "1px solid black", textAlign:"center"}}>
                             <tr>
@@ -1626,14 +1694,14 @@ const Proposal = () => {
                               </td>
                             </tr>
                           </table>
-                        </div>
+                        </div> */}
 
 
 
 
 
 
-                      <div className="table-responsive-sm mt-3">
+                      {/* <div className="table-responsive-sm mt-3">
                         <p className="bg-secondary p-2 mb-2 fw-bold" style={{ fontSize: "12px" }}>FLIGHT DETAILS</p>
                         <table className="table table-bordered table-sm" style={{ fontSize: "12px" }}>
                           <thead className="text-center thead__color">
@@ -1698,8 +1766,8 @@ const Proposal = () => {
                             }
                           </tbody>
                         </table>
-                      </div>
-                      <div className="table-responsive-sm">
+                      </div> */}
+                      {/* <div className="table-responsive-sm">
                         <p className="bg-secondary p-2 mb-2 fw-bold" style={{ fontSize: "12px" }}>FARE DETAILS</p>
                         <table
                           className="table table-bordered px-3 table-sm"
@@ -1711,7 +1779,6 @@ const Proposal = () => {
                               <th>Base</th>
                               <th>Tax</th>
                               <th>Discount</th>
-                              {/* <th>AIT</th> */}
                               <th>Pax</th>
                               <th>Total Pax Fare</th>
                             </tr>
@@ -1726,7 +1793,6 @@ const Proposal = () => {
                                   <td className="right">
                                     {item.passengerFares.adt.discountPrice}
                                   </td>
-                                  {/* <td className="right">{passengerFares.adt.ait}</td> */}
                                   <td className="right">{item.passengerCounts.adt}</td>
                                   <td className="right fw-bold">
                                     {currency !== undefined ? currency : "BDT"}  {" "}
@@ -1747,7 +1813,6 @@ const Proposal = () => {
                                   <td className="right">
                                     {item.passengerFares.cnn.discountPrice}
                                   </td>
-                                  {/* <td className="right">{passengerFares.adt.ait}</td> */}
                                   <td className="right">{item.passengerCounts.cnn}</td>
                                   <td className="right fw-bold">
                                     {currency !== undefined ? currency : "BDT"}  {" "}
@@ -1768,7 +1833,6 @@ const Proposal = () => {
                                   <td className="right">
                                     {item.passengerFares.inf.discountPrice}
                                   </td>
-                                  {/* <td className="right">{passengerFares.adt.ait}</td> */}
                                   <td className="right">{item.passengerCounts.inf}</td>
                                   <td className="right fw-bold">
                                     {currency !== undefined ? currency : "BDT"}  {" "}
@@ -1781,7 +1845,7 @@ const Proposal = () => {
                             )}
                           </tbody>
                         </table>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

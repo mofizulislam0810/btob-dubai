@@ -81,6 +81,12 @@ const SideNavBar = () => {
                     <p>Ticketed</p>
                   </Link>
                 </li>
+                <li className={currentPage === "ticketed" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("ticketedfromloan")}>
+                  <Link to="/ticketedfromloan" className="nav-link nav__link__font__size">
+                    <i className="fa fa-minus nav-icon"></i>
+                    <p>Ticketed From Loan</p>
+                  </Link>
+                </li>
                 <li className={currentPage === "canceled" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("canceled")}>
                   <Link to="/canceled" className="nav-link nav__link__font__size">
                     <i className="fa fa-minus nav-icon"></i>
@@ -324,6 +330,17 @@ const SideNavBar = () => {
                 </li>
               </ul>
             </li> */}
+             <li className="nav-item">
+              <Link to="/loan" className="nav-link">
+                {/* <i class="nav-icon fas fa-tasks"></i> */}
+                {/* <i className="nav-icon fas fa-tachometer-alt"></i> */}
+                <i className="nav-icon fas fa-headset"></i>
+                <p>
+                  Loan Request
+                  {/* <i className="right fas fa-angle-left"></i> */}
+                </p>
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { environment } from "../../../SharePages/Utility/environment";
 import { Link } from "react-router-dom";
@@ -12,6 +12,7 @@ import ReactToPrint from 'react-to-print';
 import { getDefaultNormalizer } from "@testing-library/react";
 
 const SuccessBookingPanel = () => {
+  let [deductionFrom,setDeductionFrom]=useState("AccountBalance");
   const { bookData, setTicketData, setLoading, loading } = useAuth();
   console.log(bookData);
   const handleEmail = () => {
@@ -53,6 +54,7 @@ const SuccessBookingPanel = () => {
       itemCodeRef: bookData.data.item1.itemCodeRef,
       bookingCodeRef: bookData.data.item1.bookingCodeRef,
       commission: 0,
+      deductionFrom:deductionFrom
     };
 
     async function fetchOptions() {
@@ -519,6 +521,11 @@ const SuccessBookingPanel = () => {
                   </div>
                   <div className="row mb-5 mt-2">
                     <div className="col-lg-12 text-center">
+                    <input type="radio" value={deductionFrom} name="deductionFrom" checked={deductionFrom == "AccountBalance"}
+																					onClick={() => { setDeductionFrom("AccountBalance"); }} />&nbsp; From Account Balance &nbsp;&nbsp;
+
+																				<input type="radio"  value={deductionFrom} name="deductionFrom" checked={deductionFrom == "LoanBalance"}
+																					onClick={() => { setDeductionFrom("LoanBalance"); }} />&nbsp; From Loan Balance &nbsp;&nbsp;
                       <button
                         className="btn button-color text-white fw-bold w-25 mt-2 rounded btn-sm"
                         onClick={handleGenarateTicket}

@@ -9,7 +9,7 @@ import { Box, Button, Center, Spinner, Text } from "@chakra-ui/react";
 import { ToastContainer, toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Issued = () => {
+const IssuedFromLoan = () => {
     let [pageCount, setPageCount] = useState(0);
     let [pageSize, setPageSize] = useState(50);
     let [currentPageNumber, setCurrentPageNumber] = useState(1);
@@ -21,7 +21,7 @@ const Issued = () => {
     let [fromDate, setFromDate] = useState("");
     let [toDate, setToDate] = useState("");
     let [gdsPnr, setGDSPNR] = useState("");
-
+    let [uniqueTransIDAdj,setUniqueTransIDAdj]=useState("");
     const [isTimeOut, setIsTimeOut] = useState(false);
 
     useEffect(() => {
@@ -37,7 +37,7 @@ const Issued = () => {
                 toDate: toDate,
                 pnr: gdsPnr,
                 status: "Issued",
-                isFromLoan:false
+                isFromLoan:true
             };
             const response = await axios.post(
                 environment.getTicketingList +
@@ -183,7 +183,12 @@ const Issued = () => {
             refundReq();
         }
     };
-
+    const handleLoanAdjust=()=>{
+        alert(uniqueTransIDAdj)
+    }
+    const handleOpenAdjustModal=(utid)=>{
+        setUniqueTransIDAdj(utid);
+    }
     useEffect(() => {
         handleGetList(currentPageNumber);
     }, [currentPageNumber]);
@@ -298,8 +303,7 @@ const Issued = () => {
                                                                         <td>{item.ticketNumber}</td>
                                                                         <td>{item.ticketingPrice}</td>
                                                                         <td>
-                                                        
-                                                                            {(item.status === "Issued" ? "Ticketed" :" ")+" "+(item.isFromLoan==true?" (From Loan)":"")}  <br />{" "}
+                                                                            {item.status === "Issued" ? "Ticketed" :" "} <br />{" "}
                                                                             {item.refundStatus != null
                                                                                 ? "Refund " + item.refundStatus
                                                                                 : ""}
@@ -409,6 +413,30 @@ const Issued = () => {
                                                                                     >
                                                                                          <span style={{fontSize:"10px"}}>RS</span>
                                                                                     </Button>
+                                                                                </a>&nbsp;{" "}
+                                                                                {/* <button type="button" id="btnOpenModal" className="btn btn-sm btn-secondary text-white my-2 rounded" style={{fontSize:"12px"}} data-bs-toggle="modal" data-bs-target="#supportModal" onClick={()=>clearSupportForm()}>
+												Add
+											</button> */}
+                                                                                <a href="javascript:void(0)"
+                                                                                
+                                                                                    title="Loan Adjust"
+                                                                                    onClick={() =>
+                                                                                        handleOpenAdjustModal(
+                                                                                            item.uniqueTransID
+                                                                                        )
+                                                                                    }
+                                                                                >
+                                                                                    <Button type="button"
+                                                                                    data-bs-toggle="modal" data-bs-target="#confirmModal"
+                                                                                        border="2px solid"
+                                                                                        colorScheme="messenger"
+                                                                                        variant="outline"
+                                                                                        size="xsm"
+                                                                                        borderRadius="16px"
+                                                                                        p='1'
+                                                                                    >
+                                                                                         <span style={{fontSize:"10px"}}>LA</span>
+                                                                                    </Button>
                                                                                 </a>
                                                                                 &nbsp;
                                                                                 {moment(
@@ -438,6 +466,7 @@ const Issued = () => {
                                                                                             <span style={{fontSize:"10px"}}>TC</span>
                                                                                         </Button>
                                                                                     </a>
+                                                                                    
                                                                                 ) : (
                                                                                     <></>
                                                                                 )}
@@ -513,6 +542,26 @@ const Issued = () => {
                                 </div>
                             </div>
                         </div>
+                        <div className="modal fade modal-sm" id="confirmModal" tabIndex={-1} aria-hidden="true">
+                            <div className="modal-dialog ">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h5 className="modal-title"> Support</h5>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div className="modal-body">
+                                        <div className='row'>
+                                                <p>Are you sure want adjust {uniqueTransIDAdj}?</p>
+                                            
+                                        </div>
+                                    </div>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary rounded" data-bs-dismiss="modal">No</button>
+                                        <button type="button" className="btn button-color fw-bold text-white rounded" onClick={() => handleLoanAdjust()}>Ok</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </section>
             </div>
@@ -520,4 +569,4 @@ const Issued = () => {
     );
 };
 
-export default Issued;
+export default IssuedFromLoan;

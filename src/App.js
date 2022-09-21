@@ -54,6 +54,8 @@ import Booked from "./Pages/Queues/Booked";
 import Canceled from "./Pages/Queues/Canceled";
 import InvoiceView from "./Pages/InvoiceView/InvoiceView";
 import Expired from "./Pages/Queues/Expired";
+import Loan from "./Pages/Loan/Loan";
+import IssuedFromLoan from "./Pages/Queues/IssuedFromLoan";
 function App() {
   var isLoggedIn = sessionStorage.getItem("token");
   console.log(isLoggedIn);
@@ -360,6 +362,14 @@ function App() {
               }
             />
              <Route
+              path="/ticketedfromloan"
+              element={
+                <PrivateRoute>
+                  <IssuedFromLoan/>
+                </PrivateRoute>
+              }
+            />
+             <Route
               path="/booked"
               element={
                 <PrivateRoute>
@@ -388,6 +398,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <Expired />
+                </PrivateRoute>
+              }
+            />
+             <Route
+              path="/loan"
+              element={
+                <PrivateRoute>
+                  <Loan />
                 </PrivateRoute>
               }
             />

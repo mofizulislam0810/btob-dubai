@@ -555,7 +555,7 @@ const Queues = () => {
                                     <td>{item.ticketNumber}</td>
                                     <td>{item.ticketingPrice}</td>
                                     <td>
-                                      {item.status === "Issued" ? "Ticketed" : item.status === "Booked" ? "On Hold" : item.status} <br />{" "}
+                                      {(item.status === "Issued" ? "Ticketed" : item.status === "Booked" ? "On Hold" : item.status)+" "+(item.isFromLoan==true?" (From Loan)":"")} <br />{" "}
                                       {item.refundStatus != null
                                         ? "Refund " + item.refundStatus
                                         : ""}

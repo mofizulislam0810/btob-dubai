@@ -217,6 +217,15 @@ const accountManagerInfo = async(agentId)=>{
                 {agentInfo?.currencyName !== undefined ? agentInfo?.currencyName : "AED"} {agentInfo?.currentBalance ?? 0}
               </button>
             </div>
+            <div className="p-3 text-center">
+              <h6>Your Loan Balance</h6>
+              <button
+                className="btn text-white fw-bold button-color rounded"
+                // style={{ backgroundColor: "#02046a" }}
+              >
+                {agentInfo?.currencyName !== undefined ? agentInfo?.currencyName : "AED"} {agentInfo?.currentBalanceLoan ?? 0}
+              </button>
+            </div>
             <div className="dropdown-divider"></div>
             <Link to="/balance" className="dropdown-item">
               Deposite Request

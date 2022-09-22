@@ -519,13 +519,36 @@ const SuccessBookingPanel = () => {
                     </div>
 
                   </div>
+
+                  <div className="row mt-2">
+                    <div className="col-lg-12 d-flex justify-content-center">
+                      <div class="form-check me-3">
+                        <input class="form-check-input" type="radio" value={deductionFrom} name="deductionFrom" checked={deductionFrom == "AccountBalance"} id="flexRadioDefault1"
+                        onClick={() => { setDeductionFrom("AccountBalance"); }}
+                        />
+                        <label class="form-check-label" for="flexRadioDefault1">
+                          From Account Balance
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" value={deductionFrom} name="deductionFrom" checked={deductionFrom == "LoanBalance"}
+													onClick={() => { setDeductionFrom("LoanBalance"); }} id="flexRadioDefault2" />
+                        <label class="form-check-label" for="flexRadioDefault2">
+                        From Loan Balance
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+
+
                   <div className="row mb-5 mt-2">
                     <div className="col-lg-12 text-center">
-                    <input type="radio" value={deductionFrom} name="deductionFrom" checked={deductionFrom == "AccountBalance"}
-																					onClick={() => { setDeductionFrom("AccountBalance"); }} />&nbsp; From Account Balance &nbsp;&nbsp;
+                    {/* <input type="radio" value={deductionFrom} name="deductionFrom" checked={deductionFrom == "AccountBalance"}
+													onClick={() => { setDeductionFrom("AccountBalance"); }} />&nbsp; From Account Balance &nbsp;&nbsp;
 
-																				<input type="radio"  value={deductionFrom} name="deductionFrom" checked={deductionFrom == "LoanBalance"}
-																					onClick={() => { setDeductionFrom("LoanBalance"); }} />&nbsp; From Loan Balance &nbsp;&nbsp;
+										<input type="radio"  value={deductionFrom} name="deductionFrom" checked={deductionFrom == "LoanBalance"}
+													onClick={() => { setDeductionFrom("LoanBalance"); }} />&nbsp; From Loan Balance &nbsp;&nbsp; */}
                       <button
                         className="btn button-color text-white fw-bold w-25 mt-2 rounded btn-sm"
                         onClick={handleGenarateTicket}

@@ -18,6 +18,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 const BookedView = () => {
   const { setLoading, setTicketData, loading } = useAuth();
+  let [deductionFrom,setDeductionFrom]=useState("AccountBalance");
   const navigate = useNavigate();
   const componentRef = useRef();
   let [ticketingList, setTicketingList] = useState([]);
@@ -129,7 +130,8 @@ const BookedView = () => {
       ? ticketingList[0].referenceLog
       : "{}";
   const Obj = JSON.parse(refLog);
-  // console.log(Obj.BookingRefNumber);
+  const newObj = {...Obj,deductionFrom:deductionFrom}
+  console.log(Obj);
   const handleGenerateTicket = () => {
     setLoading(true);
     const sendObjTicket = {
@@ -147,7 +149,7 @@ const BookedView = () => {
 
     async function fetchOptions() {
       await axios
-        .post(environment.ticketingFlight, Obj, environment.headerToken)
+        .post(environment.ticketingFlight, newObj, environment.headerToken)
         .then((response) => {
           if (response.data.item2?.isSuccess === true) {
             console.log(response);
@@ -538,53 +540,7 @@ const BookedView = () => {
                           </div>
                         </div>
                       </div>
-                      {/* <div className="card-body">
-                <div className="card-head">
-                  <h4>Notes</h4>
-                </div>
-                <p>
-                  BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER
-                  STATUS/ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.
-                  <h5>
-                    IMPORTANT INFORMATION FOR TRAVELERS WITH ELECTRONIC TICKETS
-                    ‐ PLEASE READ:
-                  </h5>
-                  Carriage and other services provided by the carrier are
-                  subject to conditions of carriage, which are hereby
-                  incorporated by reference. These conditions may be obtained
-                  from the issuing carrier. Passengers on a journey involving an
-                  ultimate destination or a stop in a country other than the
-                  country of departure are advised that international treaties
-                  known as the Montreal Convention, or its predecessor, the
-                  Warsaw Convention, including its amendments (the Warsaw
-                  Convention System), may apply to the entire journey, including
-                  any portion thereof within a country. For such passengers, the
-                  applicable treaty, including special contracts of carriage
-                  embodied in any applicable tariffs, governs and may limit the
-                  liability of the carrier. The carriage of certain hazardous
-                  materials, like aerosols, fireworks, and flammable liquids,
-                  aboard the aircraft is forbidden. If you do not understand
-                  these restrictions, further information may be obtained from
-                  your airline The passengers are requested to follow below
-                  notes accordingly: * Domestic Passengers should report to the
-                  Airport before 90 minutes (maximum) and 30 minutes (minimum)
-                  of flight departure.* International Passengers should report
-                  to the Airport before 180 minutes (maximum) and 90 minutes
-                  (minimum) of flight departure.* All Passengers to mandatorily
-                  wear musk and hand gloves all the way from entering the
-                  Airport up to delivery of baggage on Arrival.* Any Passenger
-                  with minimum COVID19 symptom or body temperature of 99°
-                  Fahrenheit or above should avoid travelling on Air.*
-                  Passengers to maintain social distance in different parts of
-                  the Airport area as shall be guided by the Airline and Airport
-                  Authority.* No Passenger meal shall be offered by the Domestic
-                  Airlines except plain water.* Passengers should be encouraged
-                  to use our web check-in for contactless check in process and
-                  to avoid queue in check in counters. COUNTER CLOSE
-                  TIME:International before 90 Minutes & Domestic before 30
-                  Minutes of Flight Departure.
-                </p>
-              </div> */}
+                      
                     </div>
                   </div>
                 </div>
@@ -1067,8 +1023,30 @@ const BookedView = () => {
                         </div>
                       </div>
 
+
+
                       {ticketingList[0]?.status==="Booking Cancelled" ||  ticketingList[0]?.status==="Ticket Cancelled" 	?<>
                       </>:<>
+                      <div className="row mt-2">
+                    <div className="col-lg-12 d-flex justify-content-center">
+                      <div class="form-check me-3">
+                        <input class="form-check-input" type="radio" value={deductionFrom} name="deductionFrom" checked={deductionFrom == "AccountBalance"} id="flexRadioDefault1"
+                        onClick={() => { setDeductionFrom("AccountBalance"); }}
+                        />
+                        <label class="form-check-label" for="flexRadioDefault1">
+                          From Account Balance
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" value={deductionFrom} name="deductionFrom" checked={deductionFrom == "LoanBalance"}
+													onClick={() => { setDeductionFrom("LoanBalance"); }} id="flexRadioDefault2" />
+                        <label class="form-check-label" for="flexRadioDefault2">
+                        From Loan Balance
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
                       <div className="container mt-3 mb-5">
                         <div className="row">
                           <div className="col-lg-12 text-center">
@@ -1253,8 +1231,6 @@ const BookedView = () => {
             </section>
           </div></>
       }
-
-
       <Footer></Footer>
     </div>
   );

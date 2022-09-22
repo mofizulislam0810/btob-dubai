@@ -218,8 +218,8 @@ const IssuedFromLoan = () => {
         handleGetList(currentPageNumber);
     }, [currentPageNumber]);
     
-    const today = moment().format('YYYY-MM-DD'); 
-    console.log(today);
+
+    console.log(ticketingList);
     
 
     return (

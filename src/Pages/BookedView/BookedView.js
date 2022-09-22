@@ -130,7 +130,7 @@ const BookedView = () => {
       ? ticketingList[0].referenceLog
       : "{}";
   const Obj = JSON.parse(refLog);
-  const newObj = {...Obj,deductionFrom:deductionFrom}
+  const newObj = {...Obj,balanceDeductionFrom:deductionFrom=="LoanBalance"?1:0}
   console.log(Obj);
   const handleGenerateTicket = () => {
     setLoading(true);

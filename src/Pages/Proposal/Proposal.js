@@ -1590,8 +1590,8 @@ const Proposal = () => {
                         </table>
                        
                         <table class="table" style={{width:"100%",  border:"1px solid black", borderCollapse: "collapse",fontSize: "12px",marginTop:"10px"}}>
-                            <tr style={{border: "1px solid black"}}>
-                                <td style={{border: "1px solid black"}}><b>FARE DETAILS</b></td>
+                            <tr style={{border: "1px solid black",backgroundColor:"#6c757d",color:"white"}}>
+                                <td style={{border: "1px solid black"}}>FARE DETAILS</td>
                             </tr>
                         </table>
                         <table class="table" style={{width:"100%",border:"1px solid black",borderCollapse: "collapse",textAlign:"center",fontSize: "12px"}}>
@@ -1655,8 +1655,8 @@ const Proposal = () => {
                         </table>
 
                         <table class="table" style={{width:"100%",  border:"1px solid black", borderCollapse: "collapse",fontSize: "12px",marginTop:"10px"}}>
-                            <tr style={{border: "1px solid black"}}>
-                                <td style={{border: "1px solid black"}}><b>OTHER INFORMATION</b></td>
+                            <tr style={{border: "1px solid black",backgroundColor:"#6c757d",color:"white"}}>
+                                <td style={{border: "1px solid black"}}>OTHER INFORMATION</td>
                             </tr>
                         </table>
                         <table class="table" style={{width:"100%",border:"1px solid black",borderCollapse: "collapse",textAlign:"center",fontSize: "12px"}}>

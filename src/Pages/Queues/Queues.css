@@ -43,3 +43,8 @@ th,td{
 .bg-secondary th {
     background-color: #6c757d;
 }
+
+.tr-color td,.tr-color button{
+    background-color: rgb(149, 97, 97)!important;
+    color: white;
+}

@@ -95,7 +95,7 @@ const LoanLedger = () => {
                                 <div className="m-4">
                                     <div className="tab-content">
                                         <div className="tab-pane fade show active" id="tp1">
-                                            <h4> Account's Ledger</h4>
+                                            <h4> Loan Ledger</h4>
                                             <hr className="my-3" />
                                             <div
                                                 className="row"

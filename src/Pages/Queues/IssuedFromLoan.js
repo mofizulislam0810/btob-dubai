@@ -8,6 +8,7 @@ import ReactPaginate from "react-paginate";
 import { Box, Button, Center, Spinner, Text } from "@chakra-ui/react";
 import { ToastContainer, toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./Queues.css";
 
 const IssuedFromLoan = () => {
     let [pageCount, setPageCount] = useState(0);
@@ -211,6 +212,10 @@ const IssuedFromLoan = () => {
     useEffect(() => {
         handleGetList(currentPageNumber);
     }, [currentPageNumber]);
+    
+    const today = moment().format('YYYY-MM-DD'); 
+    console.log(today);
+    
 
     return (
         <div>
@@ -261,13 +266,14 @@ const IssuedFromLoan = () => {
                                                         {ticketingList.length > 0 ? (
                                                             ticketingList.map((item, index) => {
                                                                 return (
-                                                                    <tr key={index}>
+                                                                    <tr key={index} className={moment().format('YYYY-MM-DD') === moment(item.returnDate).format('YYYY-MM-DD') && item.isReturned==false? "tr-color" : ""}>
                                                                         {/* <td>
                                                                             {(currentPageNumber - 1) * pageSize +
                                                                                 index +
                                                                                 1}
                                                                         </td> */}
                                                                          <td>
+                                                                            {item.returnDate}
                                                                             {item.issueDate != null ? (
                                                                                 moment(item.issueDate).format(
                                                                                     "DD-MM-YYYY hh:mm:ss A"
@@ -321,7 +327,7 @@ const IssuedFromLoan = () => {
                                                                             </a>
                                                                         </td>
                                                                         <td>{item.ticketNumber}</td>
-                                                                        <td>{item.ticketingPrice + " "+(item.isReturned==true?"(Adjusted)":"")+""}{item.returnDate}</td>
+                                                                        <td>{item.ticketingPrice + " "+(item.isReturned==true?"(Adjusted)":"")+""}</td>
                                                                         <td>
                                                                             {item.status === "Issued" ? "Ticketed" :" "} <br />{" "}
                                                                             {item.refundStatus != null

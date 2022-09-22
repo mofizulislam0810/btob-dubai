@@ -16,6 +16,7 @@ import "./Proposal.css";
 import axios from "axios";
 import { environment } from "../SharePages/Utility/environment";
 import dayCount from "../SharePages/Utility/dayCount";
+import { toast, ToastContainer } from "react-toastify";
 
 const Proposal = () => {
   let defaultPriceList = [];
@@ -169,6 +170,7 @@ const Proposal = () => {
 
 
   const [singleValue, setSingleValue] = useState(defaultPriceList);
+  const [btnDisabled,setbtnDisabled] = useState(false);
   const [value, setValue] = useState();
   const [adultPriceValue, setAdultPriceValue] = useState(adultPrice);
   const [childPriceValue, setChildPriceValue] = useState(childPrice);
@@ -193,10 +195,14 @@ const Proposal = () => {
   };
 
   const handleMessageUser = (e) => {
+    setbtnDisabled(true);
     //  console.log(pdfTable);
     axios.post(environment.sendEmailProposal, messageData)
-      .then(response => (response.status === 200 ? alert("Success") : alert("Failed")));
-    console.log(messageData)
+      .then(response => (response.status === 200 && response.data === true ? toast.success("Email send successfully.") : toast.error("Please try again.")))
+      .catch(() => toast.error("Please try again."))
+      .finally(()=>{
+        setbtnDisabled(false);
+      });
     e.preventDefault();
   }
 
@@ -301,6 +307,7 @@ const Proposal = () => {
     <div>
       <Navbar></Navbar>
       <SideNavBar></SideNavBar>
+      <ToastContainer position="bottom-right" autoClose={1500}/>
       <div className="content-wrapper search-panel-bg">
         <section className="content-header"></section>
         <section className="content">
@@ -347,7 +354,7 @@ const Proposal = () => {
                         {/* <button type="button" className="btn btn-default">
                         <i className="fas fa-pencil-alt"></i> Draft
                       </button> */}
-                        <button type="submit" className="btn btn-secondary btn-sm rounded">
+                        <button type="submit" className="btn btn-secondary btn-sm rounded" disabled={btnDisabled === true ? true : false}>
                           <i className="far fa-envelope"></i> Send
                         </button>
                       </div>
@@ -370,7 +377,7 @@ const Proposal = () => {
             <div className="row">
               <div className="col-lg-3 my-3">
                 <div className="rounded box-shadow bg-white p-3 py-4">
-                  <div className="d-flex align-items-centen justify-content-center py-1">
+                  {/* <div className="d-flex align-items-centen justify-content-center py-1">
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Increase" defaultChecked={selectedType === "Increase" ? true : false} onChange={() => setSelectedType("Increase")} />
                       <label class="form-check-label" for="flexRadioDefault1">
@@ -390,7 +397,7 @@ const Proposal = () => {
                     className="btn button-color fw-bold text-white w-100 mt-2 rounded" onClick={handleClick} disabled={value ? false : true}
                   >
                     Submit
-                  </button>
+                  </button> */}
                   <div className="d-flex pb-1">
                     <button
                       className="btn button-color fw-bold text-white w-50 mt-2 me-1 rounded"
@@ -1467,12 +1474,19 @@ const Proposal = () => {
               <>
                 <div className="row" style={{ fontSize: "15px" }}>
                   <div className="card box-shadow">
-                    <div className="card-header">
+                    {
+                      index === 0 ? <>
+                      <div className="card-header">
                       <span>
                         Flight Proposal (Please find the flight options as per
                         your request)
                       </span>
                     </div>
+                      </> : <>
+                      
+                      </>
+                    }
+                    
                     <div className="card-body">
                      
                       <div className="row">
@@ -1520,8 +1534,8 @@ const Proposal = () => {
 
                 
                          <table class="table" style={{width:"100%",  border:"1px solid black", borderCollapse: "collapse",fontSize: "12px"}}>
-                            <tr style={{border: "1px solid black"}}>
-                                <td style={{border: "1px solid black"}}><b>FLIGHT DETAILS</b></td>
+                            <tr style={{border: "1px solid black",backgroundColor:"#6c757d",color:"white"}}>
+                                <td style={{border: "1px solid black"}}>FLIGHT DETAILS</td>
                             </tr>
                         </table>
                         <table class="table" style={{width:"100%",border:"1px solid black",borderCollapse: "collapse",textAlign:"center",fontSize: "12px"}}>

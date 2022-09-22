@@ -9,6 +9,7 @@ import { Box, Button, Center, Spinner, Text } from "@chakra-ui/react";
 import { ToastContainer, toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Queues.css";
+import $ from "jquery";
 
 const IssuedFromLoan = () => {
     let [pageCount, setPageCount] = useState(0);
@@ -198,6 +199,10 @@ const IssuedFromLoan = () => {
                     if (res.data.item1==true) {
                         handleGetList(1);
                         toast.success("Thanks! Adjusted successfully..");
+                        $("#closeModal").click();
+                        $(".modal-backdrop").remove();
+                        $("body").removeClass("modal-open");
+                        $("body").removeAttr("style");
                     }
                     else{
                         toast.warning(res.data.item2);
@@ -575,20 +580,19 @@ const IssuedFromLoan = () => {
                             </div>
                         </div>
                         <div className="modal fade" id="confirmModal" tabIndex={-1} aria-hidden="true">
-                            <div className="modal-dialog modal-sm">
+                            <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "300px" }}>
                                 <div className="modal-content">
                                     <div className="modal-header">
                                         <h5 className="modal-title"> Support</h5>
-                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
                                     </div>
                                     <div className="modal-body">
-                                        <div className='row'>
+                                        <div className='row text-center' style={{fontSize:"12px"}}>
                                                 <p>Are you sure want adjust {uniqueTransIDAdj}?</p>
-                                            
                                         </div>
                                     </div>
                                     <div className="modal-footer">
-                                        <button type="button" className="btn btn-secondary rounded" data-bs-dismiss="modal">No</button>
+                                        <button type="button" className="btn btn-secondary rounded" id="closeModal" data-bs-dismiss="modal">No</button>
                                         <button type="button" className="btn button-color fw-bold text-white rounded" onClick={() => handleLoanAdjust()}>Ok</button>
                                     </div>
                                 </div>

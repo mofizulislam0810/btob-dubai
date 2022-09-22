@@ -1427,7 +1427,7 @@ const Proposal = () => {
                                 <>
                                   <tr>
                                     <td className="left">INF</td>
-                                    <td className="left">{(item.passengerFares.inf.taxes + parseInt(addBalance) - decBalance + parseInt(infantPriceValue[index])).toFixed(2)}</td>
+                                    <td className="left">{(item.passengerFares.inf.basePrice + parseInt(addBalance) - decBalance + parseInt(infantPriceValue[index])).toFixed(2)}</td>
                                     <td className="center">{item.passengerFares.inf.taxes}</td>
                                     <td className="right">
                                       {item.passengerFares.inf.discountPrice}
@@ -1458,9 +1458,6 @@ const Proposal = () => {
             </div>
           </div>
 
-
-
-
           <div
             className="container my-3" ref={donwloadRef}
             style={{ maxWidth: "1265px" }}
@@ -1468,7 +1465,7 @@ const Proposal = () => {
           >
             {flightList.map((item, index) => (
               <>
-                <div className="row" style={{ fontSize: "12px" }}>
+                <div className="row" style={{ fontSize: "15px" }}>
                   <div className="card box-shadow">
                     <div className="card-header">
                       <span>
@@ -1629,7 +1626,7 @@ const Proposal = () => {
                                   <>
                                     <tr style={{border: "1px solid black"}}>
                                       <td style={{border: "1px solid black"}}>INF</td>
-                                      <td style={{border: "1px solid black"}}>{item.passengerFares.inf.basePrice + parseInt(addBalance) - decBalance + parseInt(infantPriceValue[index])}</td>
+                                      <td style={{border: "1px solid black"}}>{(item.passengerFares.inf.basePrice + parseInt(addBalance) - decBalance + parseInt(infantPriceValue[index])).toFixed(2)}</td>
                                       <td style={{border: "1px solid black"}}>{item.passengerFares.inf.taxes}</td>
                                       <td style={{border: "1px solid black"}}>{item.passengerFares.inf.discountPrice}</td>
                                       <td style={{border: "1px solid black"}}>{item.passengerCounts.inf}</td>

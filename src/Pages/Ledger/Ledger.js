@@ -236,7 +236,16 @@ const Ledger = () => {
                                         </a>
                                       </td>
                                       <td>{item.pnr}</td>
-                                      <td>{item.ticketNumbers}</td>
+                                      <td>
+                                        <a
+                                            href="javascript:void(0)"
+                                            onClick={() =>
+                                              handleViewTicket(item.uniqueTransID)
+                                            }
+                                          >
+                                            {item.ticketNumbers}
+                                        </a>
+                                      </td>
                                       {/* <td>{item.passengerName}</td> */}
                                       <td>{item.description}</td>
                                       <td>

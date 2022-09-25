@@ -12,7 +12,7 @@ import Footer from "../SharePages/Footer/Footer";
 const QuickPassenger = () => {
   let [pageCount, setPageCount] = useState(0);
   let [pageSize, setPageSize] = useState(10);
-  let [currentPageNumber,setCurrentPageNumber]=useState(1);
+  let [currentPageNumber, setCurrentPageNumber] = useState(1);
   let [currentItem, setCurrentItem] = useState({});
   let [passengerList, setPassengerList] = useState([]);
   let [passengerType, setPassengerType] = useState("ADT");
@@ -47,7 +47,7 @@ const QuickPassenger = () => {
         fileExt === "pdf"
       )
     ) {
-      
+
       var formData = new FormData();
       formData.append(`file`, file);
       const config = {
@@ -65,8 +65,8 @@ const QuickPassenger = () => {
       };
       postData();
     }
-   else {
-    toast.error("Sorry! file format not valid..");
+    else {
+      toast.error("Sorry! file format not valid..");
     }
   };
   const handleVisaFileUpload = (file) => {
@@ -79,28 +79,28 @@ const QuickPassenger = () => {
         fileExt === "pdf"
       )
     ) {
-    setVisaFileName(file.name);
-    var formData = new FormData();
+      setVisaFileName(file.name);
+      var formData = new FormData();
 
-    formData.append(`file`, file);
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    };
-    const postData = async () => {
-      const response = await axios.post(
-        environment.passengerupload + "/2/" + passportNo,
-        formData,
-        config
-      );
-      setVisaFileName(response.data.fileName);
-    };
-    postData();
-  }
-  else {
-   toast.error("Sorry! file format not valid..");
-   }
+      formData.append(`file`, file);
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      };
+      const postData = async () => {
+        const response = await axios.post(
+          environment.passengerupload + "/2/" + passportNo,
+          formData,
+          config
+        );
+        setVisaFileName(response.data.fileName);
+      };
+      postData();
+    }
+    else {
+      toast.error("Sorry! file format not valid..");
+    }
   };
   var thisYear = new Date().getFullYear();
 
@@ -131,7 +131,7 @@ const QuickPassenger = () => {
         SearchText: "",
       };
       const response = await axios.post(
-        environment.getAgentPassengers+`?pageNumber=${currentPage}&pageSize=${pageSize}`,
+        environment.getAgentPassengers + `?pageNumber=${currentPage}&pageSize=${pageSize}`,
         sendObj,
         environment.headerToken
       );
@@ -146,7 +146,7 @@ const QuickPassenger = () => {
     let currentPage = data.selected + 1;
     setCurrentPageNumber(currentPage);
   };
-  const clearForm=()=>{
+  const clearForm = () => {
     setCurrentItem(null);
     setTitle("");
     setFirstName("");
@@ -231,7 +231,7 @@ const QuickPassenger = () => {
     gender: gender,
     documentNumber: passportNo,
     documentIssuingCountry: issuingCountry,
-    expireDate: (peYear=="" || peMonth=="" || peDay=="")?null:(peYear + "-" + peMonth + "-" + peDay),
+    expireDate: (peYear == "" || peMonth == "" || peDay == "") ? null : (peYear + "-" + peMonth + "-" + peDay),
     phone: phone,
     email: email,
     phoneCountryCode: phoneCountryCode,
@@ -240,15 +240,15 @@ const QuickPassenger = () => {
     visaCopy: visaFileName,
   };
   const handleSubmit = () => {
-    if(firstName===""){
+    if (firstName === "") {
       toast.error("Sorry! First Name is empty..")
       return;
     }
-    if(lastName===""){
+    if (lastName === "") {
       toast.error("Sorry! Last Name is empty..")
       return;
     }
-    if(dobYear=="" || dobMonth=="" || dobDay==""){
+    if (dobYear == "" || dobMonth == "" || dobDay == "") {
       toast.error("Sorry! DOB is not selected..")
       return;
     }
@@ -289,17 +289,17 @@ const QuickPassenger = () => {
         } else {
           toast.error("Sorry! Data not updated..");
         }
-        
+
       };
       putData();
     } else {
       const postData = async () => {
 
         const response = await axios.post(
-            environment.saveAgentPassenger,
-            sendObj,
-            environment.headerToken
-          )
+          environment.saveAgentPassenger,
+          sendObj,
+          environment.headerToken
+        )
           .catch((error) => {
             console.log(error);
           });
@@ -324,7 +324,7 @@ const QuickPassenger = () => {
       <SideNavBar></SideNavBar>
       <div className="content-wrapper search-panel-bg px-4">
         <section className="content-header"></section>
-        <ToastContainer position="bottom-right" autoClose={1500}/>
+        <ToastContainer position="bottom-right" autoClose={1500} />
         <section className="content">
           <div className="mx-5 mt-3" style={{ minHeight: "500px" }}>
             <div className="card pb-5">
@@ -340,12 +340,12 @@ const QuickPassenger = () => {
                           data-bs-toggle="modal"
                           data-bs-target="#accountModal"
                           onClick={() => handleCreateItem()}
-                          style={{fontSize:"12px"}}
+                          style={{ fontSize: "12px" }}
                         >
                           <span className="me-1">
                             <i class="fas fa-user-plus"></i>
                           </span>{" "}
-                          Add 
+                          Add
                         </a>
                       </li>
                     </ul>
@@ -357,6 +357,7 @@ const QuickPassenger = () => {
                           <th>Email</th>
                           <th>Mobile</th>
                           <th>DOB</th>
+                          <th>Gender</th>
                           <th>Passport Copy</th>
                           <th>Visa Copy</th>
                           <th>Action</th>
@@ -390,9 +391,10 @@ const QuickPassenger = () => {
                                   "DD-MMMM-yyyy"
                                 )}
                               </td>
+                              <td>{item.gender}</td>
                               <td>
                                 {item.passportCopy != null &&
-                                item.passportCopy != "" ? (
+                                  item.passportCopy != "" ? (
                                   <a
                                     href={
                                       environment.baseApiURL +
@@ -409,7 +411,7 @@ const QuickPassenger = () => {
                               </td>
                               <td>
                                 {item.visaCopy != null &&
-                                item.visaCopy != "" ? (
+                                  item.visaCopy != "" ? (
                                   <a
                                     href={
                                       environment.baseApiURL +
@@ -433,24 +435,24 @@ const QuickPassenger = () => {
                       </tbody>
                     </table>
                     <ReactPaginate
-                    previousLabel={"previous"}
-                    nextLabel={"next"}
-                    breakLabel={"..."}
-                    pageCount={pageCount}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={3}
-                    onPageChange={handlePageClick}
-                    containerClassName={"pagination justify-content-center"}
-                    pageClassName={"page-item"}
-                    pageLinkClassName={"page-link"}
-                    previousClassName={"page-item"}
-                    previousLinkClassName={"page-link"}
-                    nextClassName={"page-item"}
-                    nextLinkClassName={"page-link"}
-                    breakClassName={"page-item"}
-                    breakLinkClassName={"page-link"}
-                    activeClassName={"active"}
-                  />
+                      previousLabel={"previous"}
+                      nextLabel={"next"}
+                      breakLabel={"..."}
+                      pageCount={pageCount}
+                      marginPagesDisplayed={2}
+                      pageRangeDisplayed={3}
+                      onPageChange={handlePageClick}
+                      containerClassName={"pagination justify-content-center"}
+                      pageClassName={"page-item"}
+                      pageLinkClassName={"page-link"}
+                      previousClassName={"page-item"}
+                      previousLinkClassName={"page-link"}
+                      nextClassName={"page-item"}
+                      nextLinkClassName={"page-link"}
+                      breakClassName={"page-item"}
+                      breakLinkClassName={"page-link"}
+                      activeClassName={"active"}
+                    />
                   </div>
                 </div>
               </div>
@@ -485,7 +487,7 @@ const QuickPassenger = () => {
                             <select
                               id="name"
                               placeholder="Passenger Type"
-                              className="form-select titel-width"
+                              className="form-select titel-width rounded"
                               onChange={(e) => setPassengerType(e.target.value)}
                               required
                               value={passengerType}
@@ -497,6 +499,7 @@ const QuickPassenger = () => {
                           </div>
                         </div>
                       </div>
+
                       <div className="row">
                         <div className="col-md-4">
                           <div className="form-group">
@@ -508,19 +511,26 @@ const QuickPassenger = () => {
                                 <select
                                   id="name"
                                   placeholder="Title"
-                                  className="form-select titel-width"
+                                  className="form-select titel-width rounded-start"
                                   onChange={(e) => setTitle(e.target.value)}
                                   value={title}
                                   required
                                 >
                                   <option value=""> Title</option>
-                                  <option value="Mr"> Mr</option>
-                                  <option value="Ms"> Ms</option>
-                                  <option value="Mrs"> Mrs</option>
+                                  {
+                                    passengerType === "ADT" ? <>
+                                      <option value="Mr"> Mr</option>
+                                      <option value="Ms"> Ms</option>
+                                      <option value="Mrs"> Mrs</option>
+                                    </> : <>
+                                      <option value="Mstr">Mstr</option>
+                                      <option value="Miss">Miss</option>
+                                    </>
+                                  }
                                 </select>
                                 <input
                                   name="firstName"
-                                  className="form-control"
+                                  className="form-control rounded-end"
                                   onChange={(e) => setFirstName(e.target.value)}
                                   value={firstName}
                                   required
@@ -531,7 +541,7 @@ const QuickPassenger = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="col-md-4">
+                        {/* <div className="col-md-4">
                           <div className="form-group">
                             <label
                               className="form-label float-start fw-bold"
@@ -541,14 +551,14 @@ const QuickPassenger = () => {
                             </label>
                             <input
                               name="middleName"
-                              className="form-control"
+                              className="form-control "
                               onChange={(e) => setMiddleName(e.target.value)}
                               value={middleName}
                               autoComplete="off"
                               placeholder="Middle Name"
                             />
                           </div>
-                        </div>
+                        </div> */}
                         <div className="col-md-4">
                           <div className="form-group">
                             <label
@@ -559,13 +569,35 @@ const QuickPassenger = () => {
                             </label>
                             <input
                               name="lastName"
-                              className="form-control"
+                              className="form-control rounded"
                               onChange={(e) => setLastName(e.target.value)}
                               value={lastName}
                               required
                               autoComplete="off"
                               placeholder="Last Name"
                             />
+                          </div>
+                        </div>
+                        <div className="col-lg-4">
+                          <div className="form-group">
+                            <label
+                              className="form-label float-start fw-bold"
+                              type=""
+                            >
+                              Gender <span className="text-danger">*</span>
+                            </label>
+                            <div className="input-group mb-3">
+                              <select
+                                name="date"
+                                className="form-select rounded"
+                                onChange={(e) => setGender(e.target.value)}
+                                value={gender}
+                                required
+                              >
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                              </select>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -580,7 +612,7 @@ const QuickPassenger = () => {
                             <div className="input-group mb-3 d-flex">
                               <select
                                 name="date"
-                                className="form-select"
+                                className="form-select rounded-start"
                                 onChange={(e) => setDOBDay(e.target.value)}
                                 value={dobDay}
                                 required
@@ -641,7 +673,7 @@ const QuickPassenger = () => {
                               </select>
                               <select
                                 name="year"
-                                className="form-select"
+                                className="form-select rounded-end"
                                 onChange={(e) => setDOBYear(e.target.value)}
                                 value={dobYear}
                                 required
@@ -662,7 +694,7 @@ const QuickPassenger = () => {
                             <div className="input-group mb-3">
                               <select
                                 name="nationality"
-                                className="form-select"
+                                className="form-select rounded"
                                 onChange={(e) => setNationality(e.target.value)}
                                 value={nationality}
                                 required
@@ -681,23 +713,23 @@ const QuickPassenger = () => {
                         <div className="col-lg-4">
                           <div className="form-group">
                             <label
-                              className="form-label float-start fw-bold"
-                              type=""
+                              className="float-start fw-bold"
+                              htmlFor=""
                             >
-                              Gender <span className="text-danger">*</span>
+                              Email
                             </label>
-                            <div className="input-group mb-3">
-                              <select
-                                name="date"
-                                className="form-select"
-                                onChange={(e) => setGender(e.target.value)}
-                                value={gender}
-                                required
-                              >
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                              </select>
-                            </div>
+                          </div>
+                          <div className="input-group mb-3">
+                            <input
+                              type="email"
+                              className="form-control rounded"
+                              name="email"
+                              onChange={(e) => setEmail(e.target.value)}
+                              value={email}
+                              required
+                              autoComplete="off"
+                              placeholder="Email"
+                            />
                           </div>
                         </div>
                       </div>
@@ -716,7 +748,7 @@ const QuickPassenger = () => {
                           <div className="input-group mb-3">
                             <input
                               type="text"
-                              className="form-control"
+                              className="form-control rounded"
                               name="passport-number"
                               required
                               onChange={(e) => setPassportNo(e.target.value)}
@@ -738,7 +770,7 @@ const QuickPassenger = () => {
                           </div>
                           <div className="input-group mb-3">
                             <select
-                              className="form-select"
+                              className="form-select rounded"
                               onChange={(e) =>
                                 setIssuingCountry(e.target.value)
                               }
@@ -768,7 +800,7 @@ const QuickPassenger = () => {
                           </div>
                           <div className="input-group mb-3 d-flex">
                             <select
-                              className="form-select"
+                              className="form-select rounded-start"
                               onChange={(e) => setPEDay(e.target.value)}
                               value={peDay}
                               required
@@ -827,7 +859,7 @@ const QuickPassenger = () => {
                               <option value="12">Dec</option>
                             </select>
                             <select
-                              className="form-select"
+                              className="form-select rounded-end"
                               onChange={(e) => setPEYear(e.target.value)}
                               value={peYear}
                               required
@@ -860,7 +892,7 @@ const QuickPassenger = () => {
                           <div className="input-group mb-3">
                             <input
                               type="text"
-                              className="form-control"
+                              className="form-control rounded"
                               name="cityName"
                               onChange={(e) => setCityName(e.target.value)}
                               value={cityName}
@@ -883,12 +915,13 @@ const QuickPassenger = () => {
                             <select
                               id="name"
                               placeholder="Title"
-                              className="form-select titel-width"
+                              className="form-select rounded-start"
                               onChange={(e) =>
                                 setPhoneCountryCode(e.target.value)
                               }
                               value={phoneCountryCode}
                               required
+                              style={{ maxWidth: "5rem" }}
                             >
                               <option value="+88">+88</option>
                               {courtries.map((item, index) => {
@@ -901,7 +934,7 @@ const QuickPassenger = () => {
                             </select>
                             <input
                               type="number"
-                              className="form-control"
+                              className="form-control rounded-end"
                               name="passport-number"
                               onChange={(e) => setPhone(e.target.value)}
                               value={phone}
@@ -917,32 +950,8 @@ const QuickPassenger = () => {
                               className="form-label float-start fw-bold"
                               htmlFor=""
                             >
-                              Email
-                            </label>
-                          </div>
-                          <div className="input-group mb-3">
-                            <input
-                              type="email"
-                              className="form-control"
-                              name="email"
-                              onChange={(e) => setEmail(e.target.value)}
-                              value={email}
-                              required
-                              autoComplete="off"
-                              placeholder="Email"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-lg-4">
-                          <div className="form-group">
-                            <label
-                              className="form-label float-start fw-bold"
-                              htmlFor=""
-                            >
                               Passport Copy
-                             
+
                             </label>
                           </div>
                           <div className="input-group mb-3 d-flex">
@@ -950,6 +959,7 @@ const QuickPassenger = () => {
                               <input
                                 type={"file"}
                                 accept=".jpg, .jpeg, .png, .pdf"
+                                className="form-control rounded"
                                 onChange={(e) =>
                                   handlePassportFileUpload(e.target.files[0])
                                 }
@@ -959,6 +969,10 @@ const QuickPassenger = () => {
                             )}
                           </div>
                         </div>
+                      </div>
+
+
+                      <div className="row">
                         <div className="col-lg-4">
                           <div className="form-group">
                             <label
@@ -966,7 +980,7 @@ const QuickPassenger = () => {
                               htmlFor=""
                             >
                               Visa Copy
-                              
+
                             </label>
                           </div>
                           <div className="input-group mb-3 d-flex">
@@ -974,6 +988,7 @@ const QuickPassenger = () => {
                               <input
                                 type={"file"}
                                 accept=".jpg, .jpeg, .png, .pdf"
+                                className="form-control rounded"
                                 onChange={(e) =>
                                   handleVisaFileUpload(e.target.files[0])
                                 }
@@ -984,19 +999,21 @@ const QuickPassenger = () => {
                           </div>
                         </div>
                       </div>
+
+
                     </div>
                   </div>
                   <div className="modal-footer">
                     <button
                       type="button"
-                      className="btn btn-secondary rounded"
+                      className="btn btn-secondary rounded btn-sm"
                       data-bs-dismiss="modal"
                     >
                       Close
                     </button>
                     <button
                       type="button"
-                      className="btn button-color fw-bold text-white rounded"
+                      className="btn button-color text-white rounded btn-sm"
                       onClick={() => handleSubmit()}
                     >
                       Submit
@@ -1008,7 +1025,7 @@ const QuickPassenger = () => {
           </div>
         </section>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

@@ -245,7 +245,7 @@ const Proposal = () => {
   const handleValue = (value, index, type) => {
     if (type === 'adt') {
       if (value === '') {
-        setAdultPriceValue(adultPriceValue)
+        setAdultPriceValue(adultPrice)
       } else {
         const singleValueList = [...adultPriceValue];
         singleValueList[index] = value;
@@ -254,7 +254,7 @@ const Proposal = () => {
     }
     if (type === 'cnn') {
       if (value === '') {
-        setChildPriceValue(childPriceValue);
+        setChildPriceValue(childPrice);
       } else {
         const singleValueList = [...childPriceValue];
         singleValueList[index] = value;
@@ -263,7 +263,7 @@ const Proposal = () => {
     }
     if (type === 'inf') {
       if (value === '') {
-        setInfantPriceValue(infantPriceValue);
+        setInfantPriceValue(infantPrice);
       } else {
         const singleValueList = [...infantPriceValue];
         singleValueList[index] = value;
@@ -1400,7 +1400,7 @@ const Proposal = () => {
                                       {item.passengerFares.adt.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])}{" "}
                                     </td>
                                     {/* <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "70px" }} value={adultPriceValue[index]} name="value" onChange={(e) => handleValue(e.target.value,index)}/><button className="btn-secondary btn-sm rounded py-0" style={{fontSize:'10px', height:"20px"}} onClick={()=>handleSingleValue(index,"adt")} disabled={adultPriceValue[index] !==0 ? false : true}>Save</button></td> */}
-                                    <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "90px" }} defaultValue={0} name="value" onChange={(e) => handleValue(e.target.value, index, 'adt')} /></td>
+                                    <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "90px" }} name="value" onChange={(e) => handleValue(e.target.value, index, 'adt')} /></td>
                                   </tr>
                                 </>
                               ) : (
@@ -1423,7 +1423,7 @@ const Proposal = () => {
                                       {item.passengerFares.cnn.totalPrice + addBalance - decBalance + parseInt(childPriceValue[index])}{" "}
                                     </td>
                                     {/* <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "70px" }} value={childPriceValue[index]} name="value" onChange={(e) => handleValueChild(e.target.value,index)}/><button className="btn-secondary btn-sm rounded py-0" style={{fontSize:'10px', height:"20px"}} onClick={()=>handleSingleValue(index,"cnn")} disabled={childPriceValue[index] !==0 ? false : true}>Save</button></td> */}
-                                    <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "90px" }} defaultValue={0} name="value" onChange={(e) => handleValue(e.target.value, index, 'cnn')} /></td>
+                                    <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "90px" }} name="value" onChange={(e) => handleValue(e.target.value, index, 'cnn')} /></td>
                                   </tr>
                                 </>
                               ) : (
@@ -1446,7 +1446,7 @@ const Proposal = () => {
                                       {item.passengerFares.inf.totalPrice + addBalance - decBalance + parseInt(infantPriceValue[index])}{" "}
                                     </td>
                                     {/* <td> <input type="number" name={"value" + index} value={singleValue[index] ?? 0} onChange={(e) => handleSingleValue(e.target.value, index)} style={{ height: "25px", width: "70px" }} /></td> */}
-                                    <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "90px" }} defaultValue={0} name="value" onChange={(e) => handleValue(e.target.value, index, 'inf')} /></td>
+                                    <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "90px" }} name="value" onChange={(e) => handleValue(e.target.value, index, 'inf')} /></td>
                                   </tr>
                                 </>
                               ) : (

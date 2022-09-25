@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { environment } from "../../../SharePages/Utility/environment";
 import { Link } from "react-router-dom";
@@ -12,6 +12,7 @@ import ReactToPrint from 'react-to-print';
 import { getDefaultNormalizer } from "@testing-library/react";
 
 const SuccessBookingPanel = () => {
+  let [deductionFrom,setDeductionFrom]=useState("AccountBalance");
   const { bookData, setTicketData, setLoading, loading } = useAuth();
   console.log(bookData);
   const handleEmail = () => {
@@ -43,43 +44,43 @@ const SuccessBookingPanel = () => {
       : ``;
 
   const handleGenarateTicket = () => {
+alert(deductionFrom)
+    // setLoading(true);
+    // const sendObjTicket = {
+    //   pnr: bookData.data.item1.pnr,
+    //   bookingRefNumber: bookData.data.item1.bookingRefNumber,
+    //   priceCodeRef: bookData.data.item1.priceCodeRef,
+    //   uniqueTransID: bookData.data.item1.uniqueTransID,
+    //   itemCodeRef: bookData.data.item1.itemCodeRef,
+    //   bookingCodeRef: bookData.data.item1.bookingCodeRef,
+    //   commission: 0,
+    // };
 
-    setLoading(true);
-    const sendObjTicket = {
-      pnr: bookData.data.item1.pnr,
-      bookingRefNumber: bookData.data.item1.bookingRefNumber,
-      priceCodeRef: bookData.data.item1.priceCodeRef,
-      uniqueTransID: bookData.data.item1.uniqueTransID,
-      itemCodeRef: bookData.data.item1.itemCodeRef,
-      bookingCodeRef: bookData.data.item1.bookingCodeRef,
-      commission: 0,
-    };
-
-    async function fetchOptions() {
-      await axios
-        .post(
-          environment.ticketingFlight,
-          sendObjTicket,
-          environment.headerToken
-        )
-        .then((response) => {
-          if (response.data.item2?.isSuccess === true) {
-            console.log(response);
-            setTicketData(response.data);
-            // localStorage.setItem(
-            //   "ticketConfirm",
-            //   JSON.stringify(response.data)
-            // );
-            setLoading(false);
-            navigate("/successticket");
-          } else {
-            setLoading(false);
-            setTicketData(response.data);
-            navigate("/failticket");
-          }
-        });
-    }
-    fetchOptions();
+    // async function fetchOptions() {
+    //   await axios
+    //     .post(
+    //       environment.ticketingFlight,
+    //       sendObjTicket,
+    //       environment.headerToken
+    //     )
+    //     .then((response) => {
+    //       if (response.data.item2?.isSuccess === true) {
+    //         console.log(response);
+    //         setTicketData(response.data);
+    //         // localStorage.setItem(
+    //         //   "ticketConfirm",
+    //         //   JSON.stringify(response.data)
+    //         // );
+    //         setLoading(false);
+    //         navigate("/successticket");
+    //       } else {
+    //         setLoading(false);
+    //         setTicketData(response.data);
+    //         navigate("/failticket");
+    //       }
+    //     });
+    // }
+    // fetchOptions();
   };
   return (
     <div>
@@ -516,6 +517,25 @@ const SuccessBookingPanel = () => {
                       </table>
                     </div>
 
+                  </div>
+                  <div className="row mt-2">
+                    <div className="col-lg-12 d-flex justify-content-center">
+                      <div class="form-check me-3">
+                        <input class="form-check-input" type="radio" value={deductionFrom} name="deductionFrom" checked={deductionFrom == "AccountBalance"} id="flexRadioDefault1"
+                        onClick={() => { setDeductionFrom("AccountBalance"); }}
+                        />
+                        <label class="form-check-label" for="flexRadioDefault1">
+                          From Account Balance
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" value={deductionFrom} name="deductionFrom" checked={deductionFrom == "PartialPayment"}
+													onClick={() => { setDeductionFrom("PartialPayment"); }} id="flexRadioDefault2" />
+                        <label class="form-check-label" for="flexRadioDefault2">
+                        With Partial Payment
+                        </label>
+                      </div>
+                    </div>
                   </div>
                   <div className="row mb-5 mt-2">
                     <div className="col-lg-12 text-center">

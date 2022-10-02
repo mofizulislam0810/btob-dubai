@@ -13,6 +13,7 @@ import { getDefaultNormalizer } from "@testing-library/react";
 
 const SuccessBookingPanel = () => {
   let [deductionFrom,setDeductionFrom]=useState("AccountBalance");
+  let [checkIssueDate, setCheckIssueDate] = useState("");
   const { bookData, setTicketData, setLoading, loading } = useAuth();
   console.log(bookData);
   const handleEmail = () => {
@@ -536,6 +537,38 @@ alert(deductionFrom)
                         </label>
                       </div>
                     </div>
+                    {
+                      deductionFrom=="PartialPayment"?<>     <div className="col-lg-12 d-flex justify-content-center">
+                      <div className="col-sm-2">
+                                  <label>
+                                  Amount
+                                    <span style={{ color: "red" }}>*</span>
+                                  </label>
+                                  <input
+                                    type={"text"}
+                                    placeholder={"Amount"}
+                                    className="form-control"
+                                    value={0}
+                                  ></input>
+                                </div>
+                      <div className="col-sm-2">
+                                  <label>
+                                  Adjustment Date
+                                    <span style={{ color: "red" }}>*</span>
+                                  </label>
+                                  <input
+                                    type={"date"}
+                                    className="form-control"
+                                    onChange={(e) =>
+                                      setCheckIssueDate(e.target.value)
+                                    }
+                                    value={checkIssueDate}
+                                    max={new Date().toISOString().slice(0, 10)}
+                                  ></input>
+                                </div>
+                    </div></>:<></>
+                    }
+               
                   </div>
                   <div className="row mb-5 mt-2">
                     <div className="col-lg-12 text-center">

@@ -155,7 +155,7 @@ const SuccessBookingPanel = () => {
                         <tr>
                           <th>Booking Status:</th>
                           <td>
-                            {bookData.data?.item1.bookingStatus}
+                            {bookData.data?.item1.bookingStatus === 'Created'? 'Booked' : bookData.data?.item1.bookingStatus}
                           </td>
                           <td className="fw-bold">Booked By:</td>
                           <td>
@@ -168,7 +168,7 @@ const SuccessBookingPanel = () => {
                            <tr>
                             <th>Issue Before:</th>
                           <td style={{ color: 'red' }}>
-                            {bookData.data?.item1.ticketingTimeLimit}
+                           {moment(bookData.data?.item1.ticketingTimeLimit).format("DD-MMMM-yyyy hh:mm:ss")}
                           </td>
                         </tr>
                           </> : <>

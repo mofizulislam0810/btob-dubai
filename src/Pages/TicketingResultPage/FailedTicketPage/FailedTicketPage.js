@@ -55,7 +55,7 @@ const FailedTicketPage = () => {
                 </p>
                 <hr></hr>
                 <button className="btn button-color my-3 text-white fw-bold" onClick={()=>handleOrder()}>
-                  Onder e-ticket
+                  Order e-ticket
                 </button>
               </div>
             </div>

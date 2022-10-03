@@ -204,9 +204,9 @@ const Balance = () => {
       );
       if (response.data > 0) {
         clearDepositEntry();
-        toast.success("Thanks! Data created successfully..");
+        toast.success("Thanks! Request send successfully..");
       } else {
-        toast.error("Sorry! Data not created..");
+        toast.error("Sorry! Try again..");
       }
 
     };

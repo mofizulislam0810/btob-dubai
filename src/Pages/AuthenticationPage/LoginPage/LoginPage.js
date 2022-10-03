@@ -29,10 +29,10 @@ import flightsImg from "../../../images/landing/flights.png";
 import hotlelsImg from "../../../images/landing/hotels.png";
 import holidaysImg from "../../../images/landing/holidays.png";
 import visaProcessingImg from "../../../images/landing/visa-processing.png";
-import airlines1 from "../../../images/landing/airlines-1.png";
-import airlines2 from "../../../images/landing/airlines-2.png";
-import airlines3 from "../../../images/landing/airlines-3.png";
-import airlines4 from "../../../images/landing/airlines-4.png";
+import airlines1 from "../../../images/landing/airlines-5.png";
+import airlines2 from "../../../images/landing/airlines-6.png";
+import airlines3 from "../../../images/landing/airlines-7.png";
+import airlines4 from "../../../images/landing/airlines-8.png";
 
 import { MdOutlineEmail } from "react-icons/md";
 import { BsEyeSlash } from "react-icons/bs";

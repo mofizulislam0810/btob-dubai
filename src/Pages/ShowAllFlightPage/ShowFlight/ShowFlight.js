@@ -1057,12 +1057,12 @@ const getFareRules = (uId, dir, itemCode) =>{
           </div>
 
           <div className="col-lg-2 my-auto text-center">
-            <h5 className="text-end text-color text-center fw-bold">
+            <h5 className="text-end text-color fw-bold">
               {
-                amountChange === "Invoice Amount" ? <><del className="text-danger font-size">
+                amountChange === "Invoice Amount" ? <><span className="text-secondary" style={{fontSize:"12px"}}>
 
                   {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
-                </del>
+                </span>
                   <br></br></> : <></>
               }
 

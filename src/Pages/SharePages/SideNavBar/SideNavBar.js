@@ -201,12 +201,12 @@ const SideNavBar = () => {
                     <p>Account Ledger</p>
                   </Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link to="/loanledger" className="nav-link nav__link__font__size">
                     <i className="fa fa-minus nav-icon"></i>
                     <p>Loan Ledger</p>
                   </Link>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <Link to="/creditnote" className="nav-link nav__link__font__size">
                     <i className="fa fa-minus nav-icon"></i>

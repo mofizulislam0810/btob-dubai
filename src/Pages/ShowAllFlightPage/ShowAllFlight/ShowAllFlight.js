@@ -21,7 +21,7 @@ const ShowAllFlight = ({
 }) => {
   const { count } = useAuth();
   // console.log(count);
-  const [amountChange, setAmountChange] = useState('Invoice Amount');
+  const [amountChange, setAmountChange] = useState('Gross Amount');
   const { state } = useLocation();
   const navigate = useNavigate();
   const { tripTypeModify } = state;
@@ -272,8 +272,8 @@ const ShowAllFlight = ({
                 <span className="me-1"><i class="fas fa-money-bill-wave"></i></span>{amountChange}
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li class="dropdown-item" style={{cursor:"pointer"}} onClick={() => setAmountChange("Invoice Amount")}>Invoice Amount</li>
                 <li class="dropdown-item" style={{cursor:"pointer"}} onClick={() => setAmountChange("Gross Amount")}>Gross Amount</li>
+                <li class="dropdown-item" style={{cursor:"pointer"}} onClick={() => setAmountChange("Invoice Amount")}>Invoice Amount</li>
               </ul>
             </div>
           </div>

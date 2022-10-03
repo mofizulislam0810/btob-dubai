@@ -106,4 +106,5 @@ export const environment = {
   getTicketingDetails:baseApiURL + 'B2BReport/AirTicketingDetails',
   airTicketingSearch:baseApiURL+'B2BReport/AirTicketingSearch',
   searchLogs : baseApiURL+"B2BReport/SearchLogsByUser",
+  checkPartialPayment : baseApiURL + 'B2BPartialPayment/IsValid',
 }

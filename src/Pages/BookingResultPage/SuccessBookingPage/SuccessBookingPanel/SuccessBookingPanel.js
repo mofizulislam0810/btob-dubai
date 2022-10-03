@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { environment } from "../../../SharePages/Utility/environment";
 import { Link } from "react-router-dom";
@@ -43,9 +43,24 @@ const SuccessBookingPanel = () => {
     Object.keys(direction1).length > 0
       ? `https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction1.platingCarrierCode}.png`
       : ``;
+      const checkPartialPayment = () => {
+        const obj = {
+         uniqueTransID:bookData.data?.item1.uniqueTransID
+        }
+        axios.post(environment.checkPartialPayment, obj,environment.headerToken)
+          .then((response) => 
+          {
+            alert(response.item1)
+            if(response.item1){
+
+            }
+          }
+          );
+        // window.print();
+      };
 
   const handleGenarateTicket = () => {
-alert(deductionFrom)
+    checkPartialPayment();
     // setLoading(true);
     // const sendObjTicket = {
     //   pnr: bookData.data.item1.pnr,

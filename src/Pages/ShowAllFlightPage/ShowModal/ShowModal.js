@@ -155,7 +155,7 @@ const ShowModal = ({
               <div class="tab-pane fade show active" id={"home" + index} role="tabpanel" aria-labelledby="home-tab"><>
                 <div className="p-2">
                   <div className="container">
-                    {flightType > 2 ? (
+                    {flightType === "Multi City" ? (
                       <>
                         {direction0.segments.map((seg, index) => (
                           <div key={index}>
@@ -1086,7 +1086,7 @@ const ShowModal = ({
                     )}
                   </div>
                   <div className="container my-1">
-                    {flightType > 2 ? (
+                    {flightType === "Multi City" ? (
                       <></>
                     ) : (
                       <>
@@ -1423,7 +1423,7 @@ const ShowModal = ({
               <div class="tab-pane fade" id={"contact" + index} role="tabpanel" aria-labelledby="contact-tab"><>
                 <div className="">
                   <div className="container p-2">
-                    {flightType > 2 ? (
+                    {flightType === "Multi City" ? (
                       <>
                         <>
                           <div className="row px-2 pb-2">
@@ -1977,7 +1977,7 @@ const ShowModal = ({
                     )}
                   </div>
 
-                  {flightType > 2 ? (
+                  {flightType === "Multi City" ? (
                     <></>
                   ) : (
                     <>

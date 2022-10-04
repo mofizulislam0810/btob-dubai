@@ -40,7 +40,7 @@ const Balance = () => {
   let [onlineAmount, setOnlineAmount] = useState(0);
   let [onlineCharge, setOnlineCharge] = useState(5);
   let [branchList, setBranchList] = useState([]);
-  let [branchNameCash,setBranchNameCash] = useState("");
+  let [branchNameCash, setBranchNameCash] = useState("");
   let [loading, setLoading] = useState(false);
 
   let sendObj = {
@@ -258,7 +258,7 @@ const Balance = () => {
     let agentId = sessionStorage.getItem("agentId") ?? 0;
     const getAgentBankAccounts = async () => {
       const response = await axios.get(
-        environment.bankAccountsByAgent + "/" + agentId+ `?pageNumber=${currentPageNumberBank}&pageSize=${pageSize}`,
+        environment.bankAccountsByAgent + "/" + agentId + `?pageNumber=${currentPageNumberBank}&pageSize=${pageSize}`,
         environment.headerToken
       );
       console.log(response.data.data)
@@ -412,12 +412,12 @@ const Balance = () => {
   };
 
 
-  function handleCloseModal(){
+  function handleCloseModal() {
     $("#accountModal").click();
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
     $("body").removeAttr("style");
-}
+  }
 
 
   const handleBankSubmit = () => {
@@ -433,10 +433,14 @@ const Balance = () => {
     //   toast.error("Sorry! Routing number is empty");
     //   return;
     // }
-    // if (branchName === "") {
-    //   toast.error("Sorry! Branch name is empty");
-    //   return;
-    // }
+    if (bankName === "") {
+      toast.error("Sorry! Bank name is empty");
+      return;
+    }
+    if (branchName === "") {
+      toast.error("Sorry! Branch name is empty");
+      return;
+    }
     // if (branchCode === "") {
     //   toast.error("Sorry! Branch code is empty");
     //   return;
@@ -500,7 +504,7 @@ const Balance = () => {
     handleGetEntry();
     handleGetTransaction(currentPageNumber);
     handleGetAgentBankAccounts(currentPageNumberBank);
-  }, [currentPageNumber,currentPageNumberBank]);
+  }, [currentPageNumber, currentPageNumberBank]);
 
   console.log(balanceList);
   return (
@@ -511,7 +515,7 @@ const Balance = () => {
         <div className="content-wrapper search-panel-bg">
           <section className="content-header"></section>
           <section className="content">
-            <ToastContainer position="bottom-right" autoClose={1500}/>
+            <ToastContainer position="bottom-right" autoClose={1500} />
             <form
               className="mx-5 mt-3"
               encType="multipart/form-data"
@@ -571,7 +575,7 @@ const Balance = () => {
                     <div className="tab-content">
                       <div className="tab-pane fade show active" id="entry">
                         <h4>Submit Request</h4>
-                        <hr className="my-3"/>
+                        <hr className="my-3" />
                         <div className="row">
                           <div className="col-sm-3">
                             <label>
@@ -618,7 +622,7 @@ const Balance = () => {
                               </div>
                               <div className="col-sm-3">
                                 <label>
-                                Cheque Bank
+                                  Cheque Bank
                                   <span style={{ color: "red" }}>*</span>
                                 </label>
                                 <input
@@ -631,7 +635,7 @@ const Balance = () => {
                               </div>
                               <div className="col-sm-3">
                                 <label>
-                                Deposit Date
+                                  Deposit Date
                                   <span style={{ color: "red" }}>*</span>
                                 </label>
                                 <input
@@ -677,13 +681,13 @@ const Balance = () => {
                                     Select One
                                   </option>
                                   {
-                                  accountList.map((item, index) => {
-                                    return (
-                                      <option key={index + 1} value={item.id}>
-                                        {item.name}
-                                      </option>
-                                    );
-                                  })}
+                                    accountList.map((item, index) => {
+                                      return (
+                                        <option key={index + 1} value={item.id}>
+                                          {item.name}
+                                        </option>
+                                      );
+                                    })}
                                 </select>
                               </div>
                               <div className="col-sm-3">
@@ -851,32 +855,32 @@ const Balance = () => {
                                 <span style={{ color: "red" }}>*</span>
                               </label>
                               <div className="d-flex">
-                              <select
-                                className="form-select"
-                                value={depositFromAccountId}
-                                placeholder="My Bank A/C"
-                                onChange={(e) =>
-                                  setDepositFromAccount(Number(e.target.value))
-                                }
+                                <select
+                                  className="form-select"
+                                  value={depositFromAccountId}
+                                  placeholder="My Bank A/C"
+                                  onChange={(e) =>
+                                    setDepositFromAccount(Number(e.target.value))
+                                  }
 
-                              >
-                                <option key={0} value="0">
-                                  Select One
-                                </option>
-                                {agentAccountDropdownList.map((item, index) => {
-                                  return (
-                                    <option key={index + 1} value={item.id}>
-                                      {item.name}
-                                    </option>
-                                  );
-                                })}
-                              </select>
-                              <div className="btn button-color text-white fw-bold px-3" 
-                              onClick={() => handleCreateItem()}
-                              data-bs-toggle="modal"
-                              data-bs-target="#accountModal">New</div>
+                                >
+                                  <option key={0} value="0">
+                                    Select One
+                                  </option>
+                                  {agentAccountDropdownList.map((item, index) => {
+                                    return (
+                                      <option key={index + 1} value={item.id}>
+                                        {item.name}
+                                      </option>
+                                    );
+                                  })}
+                                </select>
+                                <div className="btn button-color text-white fw-bold px-3"
+                                  onClick={() => handleCreateItem()}
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#accountModal">New</div>
                               </div>
-                             
+
                             </div>
                             <div className="col-sm-3">
                               <label>
@@ -932,11 +936,14 @@ const Balance = () => {
                             </div>
                             <div className="col-sm-12 text-right">
                               <button
-                                className="btn button-color col-sm-1 mt-3 text-white rounded"
+                                className="btn button-color col-sm-1 mt-3 text-white rounded btn-sm"
                                 type="button"
                                 onClick={() => handleSubmit()}
+                                disabled={loading ? true : false}
                               >
-                                Submit
+                                {
+                                  loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
+                                }
                               </button>
                             </div>
                           </div>
@@ -965,7 +972,7 @@ const Balance = () => {
                                   );
                                 })}
                               </select> */}
-                              <input type="text" className="form-control" placeholder="Branch Name" onChange={(e)=>setBranchNameCash(e.target.value)} required/>
+                              <input type="text" className="form-control" placeholder="Branch Name" onChange={(e) => setBranchNameCash(e.target.value)} required />
                             </div>
 
                             <div className="col-sm-3">
@@ -1007,11 +1014,14 @@ const Balance = () => {
                             </div>
                             <div className="col-sm-12 text-right">
                               <button
-                                className="btn button-color col-sm-1 mt-3 text-white rounded"
+                                className="btn button-color col-sm-1 mt-3 text-white rounded btn-sm"
                                 type="button"
                                 onClick={() => handleSubmit()}
+                                disabled={loading ? true : false}
                               >
-                                Submit
+                                {
+                                  loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
+                                }
                               </button>
                             </div>
                           </div>
@@ -1110,11 +1120,14 @@ const Balance = () => {
                             )}
                             <div className="col-sm-12 text-right">
                               <button
-                                className="btn button-color col-sm-1 mt-3 text-white rounded"
+                                className="btn button-color col-sm-1 mt-3 text-white rounded btn-sm"
                                 type="button"
                                 onClick={() => handleSubmit()}
+                                disabled={loading ? true : false}
                               >
-                                Submit
+                                {
+                                  loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
+                                }
                               </button>
                             </div>
                           </div>
@@ -1162,11 +1175,14 @@ const Balance = () => {
                             </div>
                             <div className="col-sm-12 text-right">
                               <button
-                                className="btn button-color col-sm-1 mt-3 text-white rounded"
+                                className="btn button-color col-sm-1 mt-3 text-white rounded btn-sm"
                                 type="button"
                                 onClick={() => handleSubmit()}
+                                disabled={loading ? true : false}
                               >
-                                Submit
+                                {
+                                  loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
+                                }
                               </button>
                             </div>
                           </div>
@@ -1177,10 +1193,10 @@ const Balance = () => {
 
                       <div className="tab-pane fade" id="transaction">
                         <h4>Transaction</h4>
-                        <hr  className="my-3"/>
+                        <hr className="my-3" />
                         <table
                           className="table table-bordered table-sm"
-                          style={{ width: "100%",fontSize:"12px"}}
+                          style={{ width: "100%", fontSize: "12px" }}
                         >
                           <thead className="text-center fw-bold bg-secondary">
                             <tr>
@@ -1222,7 +1238,7 @@ const Balance = () => {
                                       </td>
                                       <td>{item.tnxNumber}</td>
                                       <td>{item.reference}</td>
-                                
+
                                       <td>
                                         {item.status === 1
                                           ? "Processing"
@@ -1239,12 +1255,12 @@ const Balance = () => {
                                       <td>{item.currencyName} {item.topupAmountAdmin}</td>
                                       {
                                         item.attachment !== null && item.attachment !== "" ? <>
-                                         <td><a href={environment.baseApiURL+"agentBalance/GetAttachment/"+item.attachment} download>Download
-                                          {/* <img src="https://thumbs.dreamstime.com/b/smooth-nature-pic-full-hd-126695318.jpg" alt="W3Schools" width="50" height="15"/> */}
+                                          <td><a href={environment.baseApiURL + "agentBalance/GetAttachment/" + item.attachment} download>Download
+                                            {/* <img src="https://thumbs.dreamstime.com/b/smooth-nature-pic-full-hd-126695318.jpg" alt="W3Schools" width="50" height="15"/> */}
                                           </a>
-                                        </td>
+                                          </td>
                                         </> : <>
-                                        <td></td>
+                                          <td></td>
                                         </>
                                       }
                                     </tr>
@@ -1274,22 +1290,22 @@ const Balance = () => {
                       </div>
                       <div className="tab-pane fade" id="bankaccounts">
                         <h4>My Bank Accounts</h4>
-                        <hr  className="my-3"/>
+                        <hr className="my-3" />
                         <button
                           onClick={() => handleCreateItem()}
                           type="button"
                           className="btn btn-secondary btn-sm text-white my-2 rounded"
                           data-bs-toggle="modal"
                           data-bs-target="#accountModal"
-                          style={{fontSize:"12px"}}
+                          style={{ fontSize: "12px" }}
                         >
                           Add
                         </button>
 
-                        
+
                         <table
                           className="table table-bordered table-sm"
-                          style={{ width: "100%", fontSize:"12px"}}
+                          style={{ width: "100%", fontSize: "12px" }}
                         >
                           <thead className="text-center fw-bold bg-secondary">
                             <tr>
@@ -1367,224 +1383,219 @@ const Balance = () => {
       </div>
 
       <div
-                          className="modal fade"
-                          id="accountModal"
-                          tabIndex={-1}
-                          aria-labelledby="accountModalLabel"
-                          aria-hidden="true"
+        className="modal fade"
+        id="accountModal"
+        tabIndex={-1}
+        aria-labelledby="accountModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5
+                className="modal-title"
+                id="accountModalLabel"
+              >
+                {currentItem === null ? "Add" : "Edit"} Bank
+                Account
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <div className="row my-3">
+                <div className="col-sm-3">
+                  <label>
+                    Account Name
+                    <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    type={"text"}
+                    value={holderName}
+                    className="form-control"
+                    placeholder="Account Name"
+                    onChange={(e) =>
+                      setHolderName(e.target.value)
+                    }
+                  ></input>
+                </div>
+                <div className="col-sm-3">
+                  <label>
+                    Account Number
+                    <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    type={"text"}
+                    value={accountNumber}
+                    className="form-control"
+                    placeholder="Account Number"
+                    onChange={(e) =>
+                      setAccountNumber(e.target.value)
+                    }
+                  ></input>
+                </div>
+                <div className="col-sm-3">
+                  <label>
+                    Bank Name
+                    <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    type={"text"}
+                    value={bankName}
+                    className="form-control"
+                    placeholder="Bank Name"
+                    onChange={(e) =>
+                      setBankName(e.target.value)
+                    }
+                  ></input>
+                </div>
+                <div className="col-sm-3">
+                  <label>
+                    Branch Name
+                    <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    type={"text"}
+                    value={branchName}
+                    className="form-control"
+                    placeholder="Branch Name"
+                    onChange={(e) =>
+                      setBranchName(e.target.value)
+                    }
+                  ></input>
+                </div>
+              </div>
+              <div className="row mb-3">
+                <div className="col-sm-3">
+                  <label>
+                    Routing Number
+                    {/* <span style={{ color: "red" }}>*</span> */}
+                  </label>
+                  <input
+                    type={"text"}
+                    value={routingNumber}
+                    className="form-control"
+                    placeholder="Routing Number"
+                    onChange={(e) =>
+                      setRoutingNumber(e.target.value)
+                    }
+                  ></input>
+                </div>
+                <div className="col-sm-3">
+                  <label>
+                    Branch Code
+                    {/* <span style={{ color: "red" }}>*</span> */}
+                  </label>
+                  <input
+                    type={"text"}
+                    value={branchCode}
+                    className="form-control"
+                    placeholder="Branch Code"
+                    onChange={(e) =>
+                      setBranchCode(e.target.value)
+                    }
+                  ></input>
+                </div>
+                <div className="col-sm-3">
+                  <label>
+                    City
+                    {/* <span style={{ color: "red" }}>*</span> */}
+                  </label>
+                  <select
+                    className="form-select"
+                    value={cityId}
+                    placeholder="City"
+                    onChange={(e) =>
+                      setCityId(Number(e.target.value))
+                    }
+                  >
+                    <option key={0}>Select One</option>
+                    {cityList.map((item, index) => {
+                      return (
+                        <option
+                          key={index + 1}
+                          value={item.id}
                         >
-                          <div className="modal-dialog">
-                            <div className="modal-content">
-                              <div className="modal-header">
-                                <h5
-                                  className="modal-title"
-                                  id="accountModalLabel"
-                                >
-                                  {currentItem === null ? "Add" : "Edit"} Bank
-                                  Account
-                                </h5>
-                                <button
-                                  type="button"
-                                  className="btn-close"
-                                  data-bs-dismiss="modal"
-                                  aria-label="Close"
-                                ></button>
-                              </div>
-                              <div className="modal-body">
-                                <div className="row my-3">
-                                  {/* <input
-                                    type={"hidden"}
-                                    value={
-                                      currentItem === null
-                                        ? 0
-                                        : currentItem.id ?? 0
-                                    }
-                                  ></input> */}
-                                  <div className="col-sm-3">
-                                    <label>
-                                    Account Name
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type={"text"}
-                                      value={holderName}
-                                      className="form-control"
-                                      placeholder="Account Name"
-                                      onChange={(e) =>
-                                        setHolderName(e.target.value)
-                                      }
-                                    ></input>
-                                  </div>
-                                  <div className="col-sm-3">
-                                    <label>
-                                      Account Number
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type={"text"}
-                                      value={accountNumber}
-                                      className="form-control"
-                                      placeholder="Account Number"
-                                      onChange={(e) =>
-                                        setAccountNumber(e.target.value)
-                                      }
-                                    ></input>
-                                  </div>
-                                  <div className="col-sm-3">
-                                    <label>
-                                      Bank Name
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type={"text"}
-                                      value={bankName}
-                                      className="form-control"
-                                      placeholder="Bank Name"
-                                      onChange={(e) =>
-                                        setBankName(e.target.value)
-                                      }
-                                    ></input>
-                                  </div>
-                                  <div className="col-sm-3">
-                                    <label>
-                                      Branch Name
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type={"text"}
-                                      value={branchName}
-                                      className="form-control"
-                                      placeholder="Branch Name"
-                                      onChange={(e) =>
-                                        setBranchName(e.target.value)
-                                      }
-                                    ></input>
-                                  </div>
-                                </div>
-                                <div className="row mb-3">
-                                <div className="col-sm-3">
-                                    <label>
-                                      Routing Number
-                                      {/* <span style={{ color: "red" }}>*</span> */}
-                                    </label>
-                                    <input
-                                      type={"text"}
-                                      value={routingNumber}
-                                      className="form-control"
-                                      placeholder="Routing Number"
-                                      onChange={(e) =>
-                                        setRoutingNumber(e.target.value)
-                                      }
-                                    ></input>
-                                  </div>
-                                  <div className="col-sm-3">
-                                    <label>
-                                      Branch Code
-                                      {/* <span style={{ color: "red" }}>*</span> */}
-                                    </label>
-                                    <input
-                                      type={"text"}
-                                      value={branchCode}
-                                      className="form-control"
-                                      placeholder="Branch Code"
-                                      onChange={(e) =>
-                                        setBranchCode(e.target.value)
-                                      }
-                                    ></input>
-                                  </div>
-                                  <div className="col-sm-3">
-                                    <label>
-                                      City
-                                      {/* <span style={{ color: "red" }}>*</span> */}
-                                    </label>
-                                    <select
-                                      className="form-select"
-                                      value={cityId}
-                                      placeholder="City"
-                                      onChange={(e) =>
-                                        setCityId(Number(e.target.value))
-                                      }
-                                    >
-                                      <option key={0}>Select One</option>
-                                      {cityList.map((item, index) => {
-                                        return (
-                                          <option
-                                            key={index + 1}
-                                            value={item.id}
-                                          >
-                                            {item.name}
-                                          </option>
-                                        );
-                                      })}
-                                    </select>
-                                  </div>
-                                  <div className="col-sm-3">
-                                    <label>
-                                      Address
-                                      {/* <span style={{ color: "red" }}>*</span> */}
-                                    </label>
-                                    <input
-                                      type={"text"}
-                                      value={address}
-                                      className="form-control"
-                                      placeholder="Address"
-                                      onChange={(e) =>
-                                        setAddress(e.target.value)
-                                      }
-                                    ></input>
-                                  </div>
-                                </div>
-                                <div className="row mt-3">
-                                  <div className="col-sm-3">
-                                    <label>
-                                      Swift Code
-                                      {/* <span style={{ color: "red" }}>*</span> */}
-                                    </label>
-                                    <input
-                                      type={"text"}
-                                      value={swiftCode}
-                                      className="form-control"
-                                      placeholder="Swift Code"
-                                      onChange={(e) =>
-                                        setSwiftCode(e.target.value)
-                                      }
-                                    ></input>
-                                  </div>
-                                  <div className="col-sm-3">
-                                    <label>
-                                      Is Active?
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <input
-                                      type={"checkbox"}
-                                      checked={isActive ?? true}
-                                      onChange={(e) =>
-                                        setIsActive(e.target.checked)
-                                      }
-                                      className="form-check"
-                                    ></input>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="modal-footer">
-                                <button
-                                  type="button"
-                                  className="btn btn-secondary rounded btn-sm"
-                                  data-bs-dismiss="modal"
-                                >
-                                  Close
-                                </button>
-                                <button
-                                  type="button"
-                                  className="btn button-color text-white rounded btn-sm"
-                                  onClick={() => handleBankSubmit()}
-                                >
-                                  Submit
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                          {item.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div className="col-sm-3">
+                  <label>
+                    Address
+                    {/* <span style={{ color: "red" }}>*</span> */}
+                  </label>
+                  <input
+                    type={"text"}
+                    value={address}
+                    className="form-control"
+                    placeholder="Address"
+                    onChange={(e) =>
+                      setAddress(e.target.value)
+                    }
+                  ></input>
+                </div>
+              </div>
+              <div className="row mt-3">
+                <div className="col-sm-3">
+                  <label>
+                    Swift Code
+                    {/* <span style={{ color: "red" }}>*</span> */}
+                  </label>
+                  <input
+                    type={"text"}
+                    value={swiftCode}
+                    className="form-control"
+                    placeholder="Swift Code"
+                    onChange={(e) =>
+                      setSwiftCode(e.target.value)
+                    }
+                  ></input>
+                </div>
+                <div className="col-sm-3">
+                  <label>
+                    Is Active?
+                    <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    type={"checkbox"}
+                    checked={isActive ?? true}
+                    onChange={(e) =>
+                      setIsActive(e.target.checked)
+                    }
+                    className="form-check"
+                  ></input>
+                </div>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary rounded btn-sm"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                className="btn button-color text-white rounded btn-sm"
+                onClick={() => handleBankSubmit()}
+                disabled={loading ? true : false}
+              >
+                {
+                  loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
+                }
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div
         className="modal fade"
         id="onlineModal"

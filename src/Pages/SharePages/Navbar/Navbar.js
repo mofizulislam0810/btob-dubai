@@ -110,6 +110,8 @@ const accountManagerInfo = async(agentId)=>{
       const getData = async () => {
         const response = await axios.get(environment.currentUserInfo,environment.headerToken);
         sessionStorage.setItem("userName",response.data.fullName);
+        console.log(response.data.isTempInspector);
+        sessionStorage.setItem("isTempInspector",response.data.isTempInspector);
     };
     getData();
   };

@@ -278,10 +278,10 @@ const SuccessBookingPanel = () => {
                                   </td>
                                   <td>{item.fareBasisCode}</td>
                                   <td>{item.serviceClass === "Y"
-                                    ? "ECONOMY"
-                                    : item.serviceClass === "C"
-                                      ? "BUSINESS CLASS"
-                                      : item.serviceClass}</td>
+                                      ? "ECONOMY" + " (" + item.serviceClass + ")"
+                                      : item.serviceClass === "C"
+                                        ? "BUSINESS CLASS" + " (" + item.serviceClass + ")"
+                                        : item.serviceClass}</td>
                                 </tr>
                               );
                             }
@@ -332,9 +332,9 @@ const SuccessBookingPanel = () => {
                                     </td>
                                     <td>{item.fareBasisCode}</td>
                                     <td>{item.serviceClass === "Y"
-                                      ? "ECONOMY"
+                                      ? "ECONOMY" + " (" + item.serviceClass + ")"
                                       : item.serviceClass === "C"
-                                        ? "BUSINESS CLASS"
+                                        ? "BUSINESS CLASS" + " (" + item.serviceClass + ")"
                                         : item.serviceClass}</td>
                                   </tr>
                                 )

@@ -1308,12 +1308,20 @@ const ShowFlight = (props) => {
                       </td>
                       {/* <td className="right">{passengerFares.adt.ait}</td> */}
                       <td className="right">{passengerCounts.adt}</td>
-                      <td className="right fw-bold" title={JSON.parse(base64_decode(bookingComponents[0].fareReference)).map((item) => {
+                      {
+                        sessionStorage.getItem("isTempInspector")=='true'?<>
+                        <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ? JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
                         return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
-                      })}>
+                      }):""}>
                         {currency !== undefined ? currency : "BDT"}  {" "}
                         {(passengerFares.adt.totalPrice * passengerCounts.adt) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
                       </td>
+                        </>:<>
+                        <td className="right fw-bold">
+                        {currency !== undefined ? currency : "BDT"}  {" "}
+                        {(passengerFares.adt.totalPrice * passengerCounts.adt) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
+                      </td></>
+                      }
                     </tr>
                   </>
                 ) : (
@@ -1331,12 +1339,18 @@ const ShowFlight = (props) => {
                       </td>
                       {/* <td className="right">{passengerFares.cnn.ait}</td> */}
                       <td className="right">{passengerCounts.cnn}</td>
-                      <td className="right fw-bold" title={JSON.parse(base64_decode(bookingComponents[0].fareReference)).map((item) => {
-                        return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
-                      })}>
+                      {
+                        sessionStorage.getItem("isTempInspector")=='true'?<>              <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ? JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
+                          return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
+                        }):""}>
+                          {currency !== undefined ? currency : "BDT"}  {" "}
+                          {(passengerFares.cnn.totalPrice * passengerCounts.cnn) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
+                        </td></>:<>              <td className="right fw-bold" >
                         {currency !== undefined ? currency : "BDT"}  {" "}
                         {(passengerFares.cnn.totalPrice * passengerCounts.cnn) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
-                      </td>
+                      </td></>
+                      }
+        
                     </tr>
                   </>
                 ) : (
@@ -1354,12 +1368,18 @@ const ShowFlight = (props) => {
                       </td>
                       {/* <td className="right">{passengerFares.inf.ait}</td> */}
                       <td className="right">{passengerCounts.inf}</td>
-                      <td className="right fw-bold" title={JSON.parse(base64_decode(bookingComponents[0].fareReference)).map((item) => {
-                        return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
-                      })}>
+                      {
+                        sessionStorage.getItem("isTempInspector")=='true'?<> <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ?JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
+                          return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
+                        }):" "}>
+                          {currency !== undefined ? currency : "BDT"}  {" "}
+                          {(passengerFares.inf.totalPrice * passengerCounts.inf) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
+                        </td></>:<> <td className="right fw-bold" >
                         {currency !== undefined ? currency : "BDT"}  {" "}
                         {(passengerFares.inf.totalPrice * passengerCounts.inf) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
-                      </td>
+                      </td></>
+                      }
+
                     </tr>
                   </>
                 ) : (

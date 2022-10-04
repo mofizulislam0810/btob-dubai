@@ -40,7 +40,7 @@ import { nanoid } from "nanoid";
 import Footer from "../../SharePages/Footer/Footer";
 
 const LoginPage = () => {
-  const { onClickLoginButton } = useAuth();
+  const { onClickLoginButton, loading } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({});
@@ -92,7 +92,7 @@ const LoginPage = () => {
           boxShadow="0px 4px 67px rgba(156, 156, 156, 0.25)"
         >
           <div className="login-box">
-            <ToastContainer position="bottom-right" autoClose={1500}/>
+            <ToastContainer position="bottom-right" autoClose={1500} />
             <div className="card">
               <Center className="text-center">
                 <Image
@@ -198,6 +198,7 @@ const LoginPage = () => {
                       <button
                         type="submit"
                         className="btn text-white fw-bold btn-block rounded btn-sm"
+                        disabled={ loading ? true : false}
                       >
                         <Center
                           bg="gradient"
@@ -205,7 +206,11 @@ const LoginPage = () => {
                           h="55px"
                           _hover={{ opacity: 0.9 }}
                         >
-                          <Text color="white">Sign In</Text>
+                          {
+                            loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <>
+                            <Text color="white">Sign In</Text>
+                            </>
+                          }
                         </Center>
                       </button>
                     </div>

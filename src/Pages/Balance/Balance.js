@@ -41,6 +41,8 @@ const Balance = () => {
   let [onlineCharge, setOnlineCharge] = useState(5);
   let [branchList, setBranchList] = useState([]);
   let [branchNameCash,setBranchNameCash] = useState("");
+  let [loading, setLoading] = useState(false);
+
   let sendObj = {
     agentId: sessionStorage.getItem("agentId") ?? 0,
     fromOfPaymentType: depositTypeId,
@@ -197,6 +199,7 @@ const Balance = () => {
     }
     const postData = async () => {
       console.log(sendObj)
+      setLoading(true);
       const response = await axios.post(
         environment.depositRequest,
         sendObj,
@@ -204,9 +207,11 @@ const Balance = () => {
       );
       if (response.data > 0) {
         clearDepositEntry();
-        toast.success("Thanks! Request send successfully..");
+        toast.success("Request send successfully..");
+        setLoading(false);
       } else {
         toast.error("Sorry! Try again..");
+        setLoading(false);
       }
 
     };
@@ -408,7 +413,7 @@ const Balance = () => {
 
 
   function handleCloseModal(){
-    document.getElementById("accountModal").classList.remove("show");
+    $("#accountModal").click();
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
     $("body").removeAttr("style");
@@ -450,6 +455,7 @@ const Balance = () => {
     // }
     if ((currentItem == null ? 0 : currentItem.id) > 0) {
       const putData = async () => {
+        setLoading(true);
         const response = await axios.put(
           environment.bankAccount,
           bankObj,
@@ -458,15 +464,18 @@ const Balance = () => {
         if (response.data > 0) {
           handleGetAgentBankAccounts(currentPageNumberBank);
           clearBankForm();
-          toast.success("Thanks! Bank Account updated successfully..");
+          toast.success("Bank Account updated successfully..");
           handleCloseModal();
+          setLoading(false);
         } else {
           toast.error("Sorry! Bank Account not updated..");
+          setLoading(false);
         }
       };
       putData();
     } else {
       const postData = async () => {
+        setLoading(true);
         const response = await axios.post(
           environment.bankAccount,
           bankObj,
@@ -476,10 +485,12 @@ const Balance = () => {
         if (response.data > 0) {
           handleGetAgentBankAccounts(currentPageNumberBank);
           clearBankForm();
-          toast.success("Thanks! Bank Account created successfully..");
+          toast.success("Bank Account created successfully..");
           handleCloseModal();
+          setLoading(false);
         } else {
           toast.error("Sorry! Bank Account not created..");
+          setLoading(false);
         }
       };
       postData();
@@ -704,11 +715,14 @@ const Balance = () => {
                             <div className="row mt-3">
                               <div className="col-sm-12 text-center">
                                 <button
-                                  className="btn button-color col-sm-1 fw-bold text-white rounded"
+                                  className="btn button-color col-sm-1 text-white rounded btn-sm"
                                   type="button"
                                   onClick={() => handleSubmit()}
+                                  disabled={loading ? true : false}
                                 >
-                                  Submit
+                                  {
+                                    loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
+                                  }
                                 </button>
                               </div>
                             </div>
@@ -792,11 +806,14 @@ const Balance = () => {
                             </div>
                             <div className="col-sm-12 text-right mt-3">
                               <button
-                                className="btn button-color col-sm-1 text-white rounded"
+                                className="btn button-color col-sm-1 text-white rounded btn-sm"
                                 type="button"
                                 onClick={() => handleSubmit()}
+                                disabled={loading ? true : false}
                               >
-                                Submit
+                                {
+                                  loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
+                                }
                               </button>
                             </div>
                           </div>
@@ -1552,14 +1569,14 @@ const Balance = () => {
                               <div className="modal-footer">
                                 <button
                                   type="button"
-                                  className="btn btn-secondary rounded"
+                                  className="btn btn-secondary rounded btn-sm"
                                   data-bs-dismiss="modal"
                                 >
                                   Close
                                 </button>
                                 <button
                                   type="button"
-                                  className="btn button-color fw-bold text-white rounded"
+                                  className="btn button-color text-white rounded btn-sm"
                                   onClick={() => handleBankSubmit()}
                                 >
                                   Submit

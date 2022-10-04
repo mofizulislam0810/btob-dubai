@@ -14,17 +14,16 @@ import { getDefaultNormalizer } from "@testing-library/react";
 const SuccessBookingPanel = () => {
   const { bookData, setTicketData, setLoading, loading } = useAuth();
   console.log(bookData);
-  const handleEmail = () => {
-    const html = document.getElementById("sendEmailDiv").innerHTML;
-    const obj = {
-      to: bookData.data?.item1.passengerInfoes[0].contactInfo.email,
-      templateCode: "T0017",
-      html: html
-    }
-    axios.post(environment.sendEmailBooking, obj)
-      .then(response => (response.status === 200 ? alert("Success") : alert("Failed")));
-    // window.print();
-  };
+  // const handleEmail = () => {
+  //   const html = document.getElementById("sendEmailDiv").innerHTML;
+  //   const obj = {
+  //     to: bookData.data?.item1.passengerInfoes[0].contactInfo.email,
+  //     templateCode: "T0017",
+  //     html: html
+  //   }
+  //   axios.post(environment.sendEmailBooking, obj)
+  //     .then(response => (response.status === 200 ? alert("Success") : alert("Failed")));
+  // };
   const navigate = useNavigate();
   const componentRef = useRef();
 
@@ -106,7 +105,7 @@ const SuccessBookingPanel = () => {
                     <span className="me-3 float-end">
                       <ReactToPrint
                         trigger={() => (
-                          <button className="btn btn-secondary">
+                          <button className="btn btn-secondary rounded btn-sm">
                             <span className="me-1">
                               <i className="fa fa-print"></i>
                             </span>
@@ -115,15 +114,15 @@ const SuccessBookingPanel = () => {
                         )}
                         content={() => componentRef.current}
                       />
-                      <Link
-                        className="btn  btn-secondary ms-2 d-print-none"
+                      {/* <Link
+                        className="btn btn-secondary ms-2 d-print-none rounded btn-sm"
                         to="#"
                         onClick={handleEmail}
                         data-abc="true"
                       >
                         <i className="fa fa-envelope"></i>
                         <span className="ms-1">Email</span>
-                      </Link>
+                      </Link> */}
                     </span>
                   </div>
                   <div className="card-body" ref={componentRef} id="sendEmailDiv">
@@ -162,7 +161,6 @@ const SuccessBookingPanel = () => {
                             {sessionStorage.getItem("agentName")}
                           </td>
                         </tr>
-
                         {
                           bookData.data?.item1.ticketingTimeLimit !== '' ? <>
                            <tr>
@@ -175,7 +173,6 @@ const SuccessBookingPanel = () => {
                           
                           </>
                         }
-                       
                       </tbody>
                     </table>
 
@@ -522,6 +519,7 @@ const SuccessBookingPanel = () => {
                       <button
                         className="btn button-color text-white fw-bold w-25 mt-2 rounded btn-sm"
                         onClick={handleGenarateTicket}
+                        disabled={loading ? true : false}
                       >
                         Issue Ticket
                       </button>

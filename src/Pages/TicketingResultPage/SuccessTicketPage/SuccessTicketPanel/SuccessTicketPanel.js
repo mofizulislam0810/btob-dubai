@@ -68,7 +68,7 @@ const SuccessTicketPanel = () => {
                     Hide Fare Information
                     <ReactToPrint
                       trigger={() => (
-                        <button className="btn btn-sm btn-secondary float-right mr-1 d-print-none">
+                        <button className="btn btn-sm btn-secondary float-right mr-1 d-print-none rounded">
                           <span className="me-1">
                             <i className="fa fa-print"></i>
                           </span>

@@ -13,10 +13,11 @@ import dayCount from "../../SharePages/Utility/dayCount";
 import { environment } from "../../SharePages/Utility/environment";
 import axios from "axios";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import { decode as base64_decode, encode as base64_encode } from 'base-64';
 
 let checkList = [];
 const ShowFlight = (props) => {
-  const { setCount,handleFareRules,loading,fareRules,setFareRules } = useAuth();
+  const { setCount, handleFareRules, loading, fareRules, setFareRules } = useAuth();
   const navigate = useNavigate();
   // const handleClick =(direction,index) =>{
   //   console.log(index);
@@ -37,11 +38,11 @@ const ShowFlight = (props) => {
   const amountChange = props.amountChange;
   let currency = props.currency;
 
-  
 
-const getFareRules = (uId, dir, itemCode) =>{
-  handleFareRules(uId, dir, itemCode);
-}
+
+  const getFareRules = (uId, dir, itemCode) => {
+    handleFareRules(uId, dir, itemCode);
+  }
 
   // const handleFareRules = (uId, dir, itemCode) => {
   //   const fareRulesObj = {
@@ -1052,14 +1053,14 @@ const getFareRules = (uId, dir, itemCode) =>{
                   </>
                 )}
               </span>
-              
+
             </div>
           </div>
 
           <div className="col-lg-2 my-auto text-center">
             <h5 className="text-end text-color fw-bold">
               {
-                amountChange === "Invoice Amount" ? <><span className="text-secondary" style={{fontSize:"12px"}}>
+                amountChange === "Invoice Amount" ? <><span className="text-secondary" style={{ fontSize: "12px" }}>
 
                   {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
                 </span>
@@ -1307,7 +1308,9 @@ const getFareRules = (uId, dir, itemCode) =>{
                       </td>
                       {/* <td className="right">{passengerFares.adt.ait}</td> */}
                       <td className="right">{passengerCounts.adt}</td>
-                      <td className="right fw-bold">
+                      <td className="right fw-bold" title={JSON.parse(base64_decode(bookingComponents[0].fareReference)).map((item) => {
+                        return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
+                      })}>
                         {currency !== undefined ? currency : "BDT"}  {" "}
                         {(passengerFares.adt.totalPrice * passengerCounts.adt) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
                       </td>
@@ -1328,7 +1331,9 @@ const getFareRules = (uId, dir, itemCode) =>{
                       </td>
                       {/* <td className="right">{passengerFares.cnn.ait}</td> */}
                       <td className="right">{passengerCounts.cnn}</td>
-                      <td className="right fw-bold">
+                      <td className="right fw-bold" title={JSON.parse(base64_decode(bookingComponents[0].fareReference)).map((item) => {
+                        return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
+                      })}>
                         {currency !== undefined ? currency : "BDT"}  {" "}
                         {(passengerFares.cnn.totalPrice * passengerCounts.cnn) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
                       </td>
@@ -1349,7 +1354,9 @@ const getFareRules = (uId, dir, itemCode) =>{
                       </td>
                       {/* <td className="right">{passengerFares.inf.ait}</td> */}
                       <td className="right">{passengerCounts.inf}</td>
-                      <td className="right fw-bold">
+                      <td className="right fw-bold" title={JSON.parse(base64_decode(bookingComponents[0].fareReference)).map((item) => {
+                        return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
+                      })}>
                         {currency !== undefined ? currency : "BDT"}  {" "}
                         {(passengerFares.inf.totalPrice * passengerCounts.inf) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
                       </td>
@@ -2756,7 +2763,7 @@ const getFareRules = (uId, dir, itemCode) =>{
 
               {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice}
             </h5>
-            
+
             <button
               type="submit"
               className="btn button-color text-white fw-bold w-100 mb-1 rounded"
@@ -2807,30 +2814,30 @@ const getFareRules = (uId, dir, itemCode) =>{
                     {
                       fareRules !== undefined && fareRules.item2 != undefined && fareRules !== '' && fareRules.item1 != null ?
                         fareRules.item2.isSuccess == true ?
-                        <Tabs>
-                        <TabList>
-                          {
-                            fareRules.item1.fareRuleDetails.map((item, index) => {
-                              return <>
-                                <Tab>
-                                  <p>{item.type}</p>
-                                </Tab>
-                              </>
-                            })
-                          }
-                        </TabList>
-                        {
-                          fareRules.item1.fareRuleDetails.map((item, index) => {
-                            return <>
-                              <TabPanel>
-                                <div className="panel-content">
-                                  <div dangerouslySetInnerHTML={{ __html: item.fareRuleDetail.replace(/(?:\r\n|\r|\n)/g, '<br />') }}></div>
-                                </div>
-                              </TabPanel>
-                            </>
-                          })
-                        }
-                      </Tabs>
+                          <Tabs>
+                            <TabList>
+                              {
+                                fareRules.item1.fareRuleDetails.map((item, index) => {
+                                  return <>
+                                    <Tab>
+                                      <p>{item.type}</p>
+                                    </Tab>
+                                  </>
+                                })
+                              }
+                            </TabList>
+                            {
+                              fareRules.item1.fareRuleDetails.map((item, index) => {
+                                return <>
+                                  <TabPanel>
+                                    <div className="panel-content">
+                                      <div dangerouslySetInnerHTML={{ __html: item.fareRuleDetail.replace(/(?:\r\n|\r|\n)/g, '<br />') }}></div>
+                                    </div>
+                                  </TabPanel>
+                                </>
+                              })
+                            }
+                          </Tabs>
                           : <></>
                         : <>
                           <div className="d-flex justify-content-center">

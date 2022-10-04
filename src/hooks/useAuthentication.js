@@ -13,6 +13,7 @@ const useAuthentication = () => {
   const [id,setId] = useState();
 
   const onClickLoginButton = (loginData, navigate, location, toast) => {
+    setLoading(true);
     axios
       .post(environment.login, loginData)
       .then((response) => {
@@ -30,6 +31,9 @@ const useAuthentication = () => {
       })
       .catch((err) => {
         toast.error("Email or password is wrong!");
+      })
+      .finally(()=>{
+        setLoading(false);
       });
     // const onClickLoginButton = (loginData, navigate, location, toast) => {
     //   let data = {

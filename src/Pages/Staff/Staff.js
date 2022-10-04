@@ -9,6 +9,7 @@ import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactPaginate from 'react-paginate';
+import $ from 'jquery';
 const Staff = () => {
   let [userName, setUserName] = useState("");
   let [userEmail, setUserEmail] = useState("");
@@ -18,6 +19,7 @@ const Staff = () => {
   let [currentItem, setCurrentItem] = useState({});
   let [staffList, setStaffList] = useState([]);
   let [settingItem, setSettingItem] = useState({});
+  let [loading, setLoading] = useState(false);
   let sendObj = {
     id: currentItem === null ? 0 : currentItem.id,
     userId: currentItem === null ? 0 : currentItem.userId,
@@ -29,26 +31,28 @@ const Staff = () => {
     isActive: isActive,
   };
   const handleSubmit = () => {
-    if(userName===""){
-        toast.error("Sorry! User name is empty..");
+    if (userName === "") {
+      toast.error("Sorry! User name is empty..");
       return;
     }
-    if(userMobileNo===""){
-      toast.error("Sorry! Mobile no is empty..");
-    return;
-  }
-  if(userEmail===""){
-    toast.error("Sorry! Email is empty..");
-  return;
-}
+    if (userEmail === "") {
+      toast.error("Sorry! Email is empty..");
+      return;
+    }
 
-if((balanceLimit==""?0:balanceLimit)===0){
-  toast.error("Sorry! Balance limit is zero..");
-return;
-}
+    if (userMobileNo === "") {
+      toast.error("Sorry! Mobile no is empty..");
+      return;
+    }
+
+    if ((balanceLimit == "" ? 0 : balanceLimit) === 0) {
+      toast.error("Sorry! Balance limit is zero..");
+      return;
+    }
     console.log(sendObj);
     if (sendObj.id > 0) {
       const putData = async () => {
+        setLoading(true);
         const response = await axios
           .put(environment.agentStaff, sendObj, environment.headerToken)
           .catch((error) => {
@@ -57,10 +61,16 @@ return;
         console.log(response);
 
         if (response !== undefined && response.data > 0) {
-          toast.success("Thanks! Data updated successfully..");
+          toast.success("User updated successfully..");
           handleGetStaffs(1);
+          setLoading(false);
+          $("#modal-close").click();
+          $(".modal-backdrop").remove();
+          $("body").removeClass("modal-open");
+          $("body").removeAttr("style");
         } else {
-          toast.error("Sorry! Data not updated..");
+          toast.error("Please try again..");
+          setLoading(false);
         }
 
       };
@@ -70,6 +80,7 @@ return;
         toast.error("Sorrry! Max staff limit " + settingItem.maxStaff + " has been over");
       } else {
         const postData = async () => {
+          setLoading(true);
           const response = await axios
             .post(environment.agentStaff, sendObj, environment.headerToken)
             .catch((error) => {
@@ -83,22 +94,33 @@ return;
             setUserMobileNo("");
             setBalanceLimit(0);
             setIsActive(true);
-            toast.success("Thanks! Data created successfully..");
+            toast.success("User added successfully..");
+            // $(document).ready(function(){
+            //   $("p").click(function(){
+            //     $(this).hide();
+            //   });
+            // });
+            $("#modal-close").click();
+            $(".modal-backdrop").remove();
+            $("body").removeClass("modal-open");
+            $("body").removeAttr("style");
+            setLoading(false);
           } else {
-            toast.error("Sorry! Data not created..");
+            toast.error("Please try again..");
+            setLoading(false);
           }
         };
         postData();
       }
     }
   };
-let [pageCount, setPageCount] = useState(0);
-let [pageSize, setPageSize] = useState(10);
-let [currentPageNumber,setCurrentPageNumber]=useState(1);
+  let [pageCount, setPageCount] = useState(0);
+  let [pageSize, setPageSize] = useState(10);
+  let [currentPageNumber, setCurrentPageNumber] = useState(1);
   const handleGetStaffs = (currentPageNumber) => {
     const getData = async () => {
       const response = await axios.get(
-        environment.getAgentStaffByAgent + "/" + (sessionStorage.getItem("agentId") ?? 0)+`?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
+        environment.getAgentStaffByAgent + "/" + (sessionStorage.getItem("agentId") ?? 0) + `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
         environment.headerToken
       );
       setStaffList(response.data.data);
@@ -109,10 +131,10 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
     const getSetting = async () => {
       const response = await axios.get(
         environment.getAgentSettingById +
-          "/" +
-          (sessionStorage.getItem("agentId") ?? 0) +
-          "/" +
-          1,
+        "/" +
+        (sessionStorage.getItem("agentId") ?? 0) +
+        "/" +
+        1,
         environment.headerToken
       );
       setSettingItem(response.data);
@@ -147,6 +169,7 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
   useEffect(() => {
     handleGetStaffs(currentPageNumber);
   }, [currentPageNumber]);
+
   return (
     <div>
       <Navbar></Navbar>
@@ -154,7 +177,7 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
       <div className="content-wrapper search-panel-bg px-4">
         <section className="content-header"></section>
         <section className="content">
-        <ToastContainer position="bottom-right" autoClose={1500}/>
+          <ToastContainer position="bottom-right" autoClose={1500} />
           <div className="mx-5">
             <div className="card">
               <div className="card-body">
@@ -169,7 +192,7 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
                           data-bs-toggle="modal"
                           data-bs-target="#accountModal"
                           onClick={() => handleCreateItem()}
-                          style={{fontSize:"12px"}}
+                          style={{ fontSize: "12px" }}
                         >
                           <span className="me-1">
                             <i class="fas fa-user-plus"></i>
@@ -224,24 +247,24 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
                       </tbody>
                     </table>
                     <ReactPaginate
-                          previousLabel={"previous"}
-                          nextLabel={"next"}
-                          breakLabel={"..."}
-                          pageCount={pageCount}
-                          marginPagesDisplayed={2}
-                          pageRangeDisplayed={3}
-                          onPageChange={handlePageClick}
-                          containerClassName={"pagination justify-content-center"}
-                          pageClassName={"page-item"}
-                          pageLinkClassName={"page-link"}
-                          previousClassName={"page-item"}
-                          previousLinkClassName={"page-link"}
-                          nextClassName={"page-item"}
-                          nextLinkClassName={"page-link"}
-                          breakClassName={"page-item"}
-                          breakLinkClassName={"page-link"}
-                          activeClassName={"active"}
-                        />
+                      previousLabel={"previous"}
+                      nextLabel={"next"}
+                      breakLabel={"..."}
+                      pageCount={pageCount}
+                      marginPagesDisplayed={2}
+                      pageRangeDisplayed={3}
+                      onPageChange={handlePageClick}
+                      containerClassName={"pagination justify-content-center"}
+                      pageClassName={"page-item"}
+                      pageLinkClassName={"page-link"}
+                      previousClassName={"page-item"}
+                      previousLinkClassName={"page-link"}
+                      nextClassName={"page-item"}
+                      nextLinkClassName={"page-link"}
+                      breakClassName={"page-item"}
+                      breakLinkClassName={"page-link"}
+                      activeClassName={"active"}
+                    />
                   </div>
                 </div>
               </div>
@@ -267,6 +290,7 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
                       className="btn-close"
                       data-bs-dismiss="modal"
                       aria-label="Close"
+                      id="modal-close"
                     ></button>
                   </div>
                   <div className="modal-body">
@@ -310,7 +334,7 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
                       </div>
                       <div className="col-sm-3">
                         <label>
-                         Transaction Limit<span style={{ color: "red" }}>*</span>
+                          Transaction Limit<span style={{ color: "red" }}>*</span>
                         </label>
                         <input
                           type={"number"}
@@ -338,17 +362,20 @@ let [currentPageNumber,setCurrentPageNumber]=useState(1);
                   <div className="modal-footer">
                     <button
                       type="button"
-                      className="btn btn-secondary rounded"
+                      className="btn btn-secondary rounded btn-sm"
                       data-bs-dismiss="modal"
                     >
                       Close
                     </button>
                     <button
                       type="button"
-                      className="btn button-color fw-bold text-white rounded"
+                      className="btn button-color text-white rounded btn-sm"
                       onClick={() => handleSubmit()}
+                      disabled={loading ? true : false}
                     >
-                      Submit
+                      {
+                        loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
+                      }
                     </button>
                   </div>
                 </div>

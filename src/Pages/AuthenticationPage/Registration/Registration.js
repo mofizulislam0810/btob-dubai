@@ -31,10 +31,10 @@ import flightsImg from "../../../images/landing/flights.png";
 import hotlelsImg from "../../../images/landing/hotels.png";
 import holidaysImg from "../../../images/landing/holidays.png";
 import visaProcessingImg from "../../../images/landing/visa-processing.png";
-import airlines1 from "../../../images/landing/airlines-1.png";
-import airlines2 from "../../../images/landing/airlines-2.png";
-import airlines3 from "../../../images/landing/airlines-3.png";
-import airlines4 from "../../../images/landing/airlines-4.png";
+import airlines1 from "../../../images/landing/airlines-5.png";
+import airlines2 from "../../../images/landing/airlines-6.png";
+import airlines3 from "../../../images/landing/airlines-7.png";
+import airlines4 from "../../../images/landing/airlines-8.png";
 import { nanoid } from "nanoid";
 
 const Registration = () => {
@@ -57,6 +57,8 @@ const Registration = () => {
   let [zoneId, setZoneId] = useState(null);
   let [cityList, setCityList] = useState([]);
   let [cityId, setCityId] = useState(null);
+  let [loading,setLoading] = useState(false);
+  let [captchaValue,setCaptchaValue] = useState('');
   const getZoneData = async (countryName) => {
     const responseZ = await axios.get(
       environment.getzoneListbycountryName + "/" + countryName
@@ -95,6 +97,7 @@ const Registration = () => {
   // const [loginData, setLoginData] = useState({});
 
   const handleSubmit = () => {
+
     if (countryName === "") {
       toast.error("Sorry! Country is not selected");
       return;
@@ -132,10 +135,13 @@ const Registration = () => {
       return;
     }
     if (userPassword !== userConfirmPassword) {
-      toast.error("Sorry! Password does not match");
+      toast.error("Sorry! Password does not same");
       return;
     }
-
+    if(captchaValue === ''){
+      toast.error("Please selecte captcha");
+      return;
+    }
     let registerObj = {
       CountryName: countryName,
       ZoneId: zoneId,
@@ -157,19 +163,22 @@ const Registration = () => {
     };
     console.log(registerObj);
     const postData = async () => {
+        setLoading(true);
       const response = await axios.post(environment.register, registerObj);
       if (response.data.isSuccess == true) {
         toast.success("Thanks! Registration successfully submited..");
         navigate('/regsuccess');
+        setLoading(false);
       } else {
         toast.error(response.data.message);
+        setLoading(false);
       }
     };
     postData();
   };
 
   function onChange(value) {
-    console.log("Captcha value:", value);
+    setCaptchaValue(value);
   }
 
   const ourServiceData = [
@@ -514,19 +523,19 @@ const Registration = () => {
                           </div>
                         </div>
 
-                        {/* <div className="row">
+                        <div className="row">
                           <div className="col-lg-12">
                             <div
                               className="input-group"
                               style={{ marginBottom: "1.8rem" }}
                             >
                               <ReCAPTCHA
-                                sitekey="6LfzGsUgAAAAACI2Gfqgw7mwc_IdT5MA7ZIs71wZ"
+                                sitekey="6LeG91EiAAAAAA9WieRYE-UzIgTpkV11PDab8uxB"
                                 onChange={onChange}
                               />
                             </div>
                           </div>
-                        </div> */}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -539,6 +548,7 @@ const Registration = () => {
                     type="button"
                     className="btn text-white fw-bold btn-block w-25 mx-auto rounded btn-sm"
                     onClick={() => handleSubmit()}
+                    disabled={ loading ? true : false}
                   >
                     <Center
                       bg="gradient"
@@ -546,7 +556,9 @@ const Registration = () => {
                       h="55px"
                       _hover={{ opacity: 0.9 }}
                     >
-                      <Text color="white">Sing Up</Text>
+                      {
+                        loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> :  <Text color="white">Sing Up</Text>
+                      }
                     </Center>
                   </button>
                 </div>

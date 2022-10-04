@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactPaginate from 'react-paginate';
 import Footer from "../SharePages/Footer/Footer";
+import $ from 'jquery';
 const QuickPassenger = () => {
   let [pageCount, setPageCount] = useState(0);
   let [pageSize, setPageSize] = useState(10);
@@ -37,6 +38,8 @@ const QuickPassenger = () => {
   let yearList = [];
   let [passportFileName, setPassportFileName] = useState("");
   let [visaFileName, setVisaFileName] = useState("");
+  let [loading, setLoading] = useState(false);
+
   const handlePassportFileUpload = (file) => {
     let fileExt = file.name.split(".").pop().toLowerCase();
     if (
@@ -198,6 +201,7 @@ const QuickPassenger = () => {
     let result = window.confirm("Are you sure");
     if (result) {
       const putData = async () => {
+        setLoading(true);
         const response = await axios
           .put(
             environment.deleteAgentPassenger + "/" + item.id,
@@ -210,9 +214,11 @@ const QuickPassenger = () => {
         console.log(response);
         if (response !== undefined && response.data > 0) {
           handleGetPassengers(currentPageNumber)
-          toast.success("Thanks! Data deleted successfully..");
+          toast.success("Passenger deleted successfully..");
+          setLoading(false);
         } else {
-          toast.error("Sorry! Data not deleted..");
+          toast.error("Please try again..");
+          setLoading(false);
         }
       };
       putData();
@@ -272,6 +278,7 @@ const QuickPassenger = () => {
     console.log(sendObj);
     if (sendObj.id > 0) {
       const putData = async () => {
+        setLoading(true);
         const response = await axios
           .post(
             environment.saveAgentPassenger,
@@ -285,16 +292,22 @@ const QuickPassenger = () => {
         if (response !== undefined && response.data > 0) {
           handleGetPassengers(currentPageNumber);
           clearForm();
-          toast.success("Thanks! Data updated successfully..");
+          toast.success("Passenger updated successfully..");
+          $("#modal-close").click();
+            $(".modal-backdrop").remove();
+            $("body").removeClass("modal-open");
+            $("body").removeAttr("style");
+            setLoading(false);
         } else {
-          toast.error("Sorry! Data not updated..");
+          toast.error("Please try again..");
+          setLoading(false);
         }
 
       };
       putData();
     } else {
       const postData = async () => {
-
+        setLoading(true);
         const response = await axios.post(
           environment.saveAgentPassenger,
           sendObj,
@@ -307,9 +320,15 @@ const QuickPassenger = () => {
         if (response !== undefined && response.data > 0) {
           handleGetPassengers(1);
           clearForm();
-          toast.success("Thanks! Data created successfully..");
+          toast.success("Passenger added successfully..");
+          $("#modal-close").click();
+          $(".modal-backdrop").remove();
+          $("body").removeClass("modal-open");
+          $("body").removeAttr("style");
+          setLoading(false);
         } else {
-          toast.error("Sorry! Data not created..");
+          toast.error("Please try again..");
+          setLoading(false);
         }
       };
       postData();
@@ -476,6 +495,7 @@ const QuickPassenger = () => {
                       className="btn-close"
                       data-bs-dismiss="modal"
                       aria-label="Close"
+                      id="modal-close"
                     ></button>
                   </div>
                   <div className="modal-body">
@@ -1015,8 +1035,11 @@ const QuickPassenger = () => {
                       type="button"
                       className="btn button-color text-white rounded btn-sm"
                       onClick={() => handleSubmit()}
+                      disabled = {loading ? true : false}
                     >
-                      Submit
+                      {
+                        loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
+                      }
                     </button>
                   </div>
                 </div>

@@ -2812,7 +2812,7 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
                 );
               })}
               {/* <div>{JSON.stringify(infant, null, 2)}</div> */}
-              <div className="row">
+              {/* <div className="row">
                 <div className="col-lg-12">
                   <div class="form-check ">
                     <input
@@ -2830,7 +2830,7 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
                     </label>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -360,7 +360,7 @@ const Queues = () => {
                               <a
                                 href="javascript:void(0)"
                                 className={
-                                  idxD === 8
+                                  idxD === 7
                                     ? "btn btn-secondary text-white rounded"
                                     : "btn btn-default rounded"
                                 }

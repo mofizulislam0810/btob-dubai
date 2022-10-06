@@ -305,6 +305,7 @@ const ShowFlight = (props) => {
     }
   };
   // console.log(currency);
+  const isTempInspector = sessionStorage.getItem("isTempInspector");
   return (
     <>
       <>
@@ -1309,7 +1310,7 @@ const ShowFlight = (props) => {
                       {/* <td className="right">{passengerFares.adt.ait}</td> */}
                       <td className="right">{passengerCounts.adt}</td>
                       {
-                        sessionStorage.getItem("isTempInspector")=='true'?<>
+                       isTempInspector !==null && isTempInspector=='true'?<>
                         <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ? JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
                         return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
                       }):""}>
@@ -1340,7 +1341,7 @@ const ShowFlight = (props) => {
                       {/* <td className="right">{passengerFares.cnn.ait}</td> */}
                       <td className="right">{passengerCounts.cnn}</td>
                       {
-                        sessionStorage.getItem("isTempInspector")=='true'?<>              <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ? JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
+                        isTempInspector !==null && isTempInspector=='true'?<>              <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ? JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
                           return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
                         }):""}>
                           {currency !== undefined ? currency : "BDT"}  {" "}
@@ -1369,7 +1370,7 @@ const ShowFlight = (props) => {
                       {/* <td className="right">{passengerFares.inf.ait}</td> */}
                       <td className="right">{passengerCounts.inf}</td>
                       {
-                        sessionStorage.getItem("isTempInspector")=='true'?<> <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ?JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
+                        isTempInspector !==null && isTempInspector=='true'?<> <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ?JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
                           return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
                         }):" "}>
                           {currency !== undefined ? currency : "BDT"}  {" "}

@@ -964,7 +964,7 @@ const ShowModal = ({
                                         {item.equipment}
                                       </p>
                                       <p className="my-auto text-start">
-                                        Class {seg.serviceClass}
+                                        Class {seg.serviceClass} ({seg.bookingClass})
                                       </p>
                                     </div>
                                     <div className="col-lg-4">
@@ -1038,7 +1038,7 @@ const ShowModal = ({
                                       {seg.details[0].equipment}
                                     </p>
                                     <p className="my-auto text-start">
-                                      Class {seg.serviceClass}
+                                      Class {seg.serviceClass} ({seg.bookingClass})
                                     </p>
                                   </div>
                                   <div className="col-lg-4">
@@ -1184,7 +1184,7 @@ const ShowModal = ({
                                           {item.equipment}
                                         </p>
                                         <p className="my-auto text-start">
-                                          Class {seg.serviceClass}
+                                          Class {seg.serviceClass} ({seg.bookingClass})
                                         </p>
                                       </div>
                                       <div className="col-lg-4">
@@ -1257,7 +1257,7 @@ const ShowModal = ({
                                         {seg.details[0].equipment}
                                       </p>
                                       <p className="my-auto text-start">
-                                        Class {seg.serviceClass}
+                                        Class {seg.serviceClass} ({seg.bookingClass})
                                       </p>
                                     </div>
                                     <div className="col-lg-4">

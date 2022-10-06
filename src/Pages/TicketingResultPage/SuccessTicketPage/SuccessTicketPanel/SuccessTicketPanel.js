@@ -283,6 +283,7 @@ const SuccessTicketPanel = () => {
                                             {airports
                                               .filter((f) => f.iata === item.from)
                                               .map((item) => item.city)}
+                                              {(item.details[0].originTerminal)}
                                           </span>
                                         </td>
                                       </tr>
@@ -299,6 +300,7 @@ const SuccessTicketPanel = () => {
                                             {airports
                                               .filter((f) => f.iata === item.to)
                                               .map((item) => item.city)}
+                                              {(item.details[0].destinationTerminal)}
                                           </sapn>
                                         </td>
                                       </tr>
@@ -368,10 +370,10 @@ const SuccessTicketPanel = () => {
 
                                             <span style={{ marginLeft: "43px" }}>
                                               {item.serviceClass === "Y"
-                                                ? "ECONOMY"
+                                                ? "ECONOMY" + "(" + item.bookingClass + ")"
                                                 : item.serviceClass === "C"
-                                                  ? "BUSINESS CLASS"
-                                                  : item.serviceClass}
+                                                  ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
+                                                  : item.serviceClass +"(" + item.bookingClass + ")"}
                                             </span>
                                           </span>
                                         </td>
@@ -472,6 +474,7 @@ const SuccessTicketPanel = () => {
                                           {airports
                                             .filter((f) => f.iata === item.from)
                                             .map((item) => item.city)}
+                                            {(item.details[0].originTerminal)}
                                         </span>
                                       </td>
                                     </tr>
@@ -488,6 +491,7 @@ const SuccessTicketPanel = () => {
                                           {airports
                                             .filter((f) => f.iata === item.to)
                                             .map((item) => item.city)}
+                                            {(item.details[0].destinationTerminal)}
                                         </sapn>
                                       </td>
                                     </tr>
@@ -557,10 +561,10 @@ const SuccessTicketPanel = () => {
 
                                           <span style={{ marginLeft: "43px" }}>
                                             {item.serviceClass === "Y"
-                                              ? "ECONOMY"
+                                              ? "ECONOMY" + "(" + item.bookingClass + ")"
                                               : item.serviceClass === "C"
-                                                ? "BUSINESS CLASS"
-                                                : item.serviceClass}
+                                                ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
+                                                : item.serviceClass +"(" + item.bookingClass + ")"}
                                           </span>
                                         </span>
                                       </td>

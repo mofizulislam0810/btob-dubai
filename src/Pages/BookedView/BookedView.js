@@ -464,7 +464,7 @@ const BookedView = () => {
                                         )}
                                       </td>
                                       <td>{item.fareBasisCode}</td>
-                                      <td>{item.cabinClass}</td>
+                                      <td>{item.cabinClass} ({item.bookingCode})</td>
                                     </tr>
                                   </>
                                 );
@@ -965,7 +965,7 @@ const BookedView = () => {
                                         )}
                                       </td>
                                       <td>{item.fareBasisCode}</td>
-                                      <td>{item.cabinClass}</td>
+                                      <td>{item.cabinClass} ({item.bookingCode})</td>
                                     </tr>
                                   </>
                                 );

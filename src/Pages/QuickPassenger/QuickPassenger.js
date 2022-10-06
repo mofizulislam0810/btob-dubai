@@ -477,7 +477,7 @@ const QuickPassenger = () => {
               </div>
             </div>
 
-            <div
+            {/* <div
               className="modal fade"
               id="accountModal"
               tabIndex={-1}
@@ -503,7 +503,6 @@ const QuickPassenger = () => {
                       <div className="row">
                         <div className="col-md-6">
                           <div className="form-group">
-                            {/* <span>Adult </span> */}
                             <select
                               id="name"
                               placeholder="Passenger Type"
@@ -561,24 +560,6 @@ const QuickPassenger = () => {
                             </div>
                           </div>
                         </div>
-                        {/* <div className="col-md-4">
-                          <div className="form-group">
-                            <label
-                              className="form-label float-start fw-bold"
-                              type=""
-                            >
-                              Middle name (Optional)
-                            </label>
-                            <input
-                              name="middleName"
-                              className="form-control "
-                              onChange={(e) => setMiddleName(e.target.value)}
-                              value={middleName}
-                              autoComplete="off"
-                              placeholder="Middle Name"
-                            />
-                          </div>
-                        </div> */}
                         <div className="col-md-4">
                           <div className="form-group">
                             <label
@@ -1044,7 +1025,7 @@ const QuickPassenger = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </section>
       </div>

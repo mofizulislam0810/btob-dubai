@@ -288,7 +288,8 @@ const LeftSide = () => {
       passportMonth: "",
       passportYear: "",
       gender: "Male",
-      countryCode: "BD"
+      countryCode: "BD",
+      frequentFlyerNumber: ""
     };
     adultList.push(newObj);
   }
@@ -305,13 +306,13 @@ const LeftSide = () => {
         ) /
         (1000 * 60 * 60 * 24 * 30)
       )
-      > 6
-      ? ""
-      : toast.error("Passport expiry date does not valid")
+        > 6
+        ? ""
+        : toast.error("Passport expiry date does not valid")
       : ""
   );
 
- 
+
 
 
   let dataObj = courtries.find((i) => i.name === adult[0].nationality);
@@ -335,7 +336,8 @@ const LeftSide = () => {
       passportMonth: "",
       passportYear: "",
       gender: "Male",
-      countryCode: "BD"
+      countryCode: "BD",
+      frequentFlyerNumber: ""
     };
     childList.push(newObj);
   }
@@ -361,7 +363,8 @@ const LeftSide = () => {
       passportMonth: "",
       passportYear: "",
       gender: "Male",
-      countryCode: "BD"
+      countryCode: "BD",
+      frequentFlyerNumber: ""
     };
     infantList.push(newObj);
   }
@@ -377,6 +380,7 @@ const LeftSide = () => {
       email: "",
       mobailCode: "+88",
       mobailNumber: "",
+      nationality: "BD"
     },
   ];
   const [contact, setContact] = useState(contactDetail);
@@ -387,44 +391,44 @@ const LeftSide = () => {
   localStorage.setItem("contact", JSON.stringify(contact));
 
   child.map((i) =>
-  i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
-    ? Math.floor(
-      Math.abs(
-        new Date(
-          i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
-        ) - new Date()
-      ) /
-      (1000 * 60 * 60 * 24 * 30)
-    )
-    > 6
-    ? ""
-    : toast.error("Passport expiry date does not valid")
-    : ""
-);
+    i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
+      ? Math.floor(
+        Math.abs(
+          new Date(
+            i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
+          ) - new Date()
+        ) /
+        (1000 * 60 * 60 * 24 * 30)
+      )
+        > 6
+        ? ""
+        : toast.error("Passport expiry date does not valid")
+      : ""
+  );
 
-infant.map((i) =>
-i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
-  ? Math.floor(
-    Math.abs(
-      new Date(
-        i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
-      ) - new Date()
-    ) /
-    (1000 * 60 * 60 * 24 * 30)
-  )
-  > 6
-  ? ""
-  : toast.error("Passport expiry date does not valid")
-  : ""
-);
+  infant.map((i) =>
+    i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
+      ? Math.floor(
+        Math.abs(
+          new Date(
+            i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
+          ) - new Date()
+        ) /
+        (1000 * 60 * 60 * 24 * 30)
+      )
+        > 6
+        ? ""
+        : toast.error("Passport expiry date does not valid")
+      : ""
+  );
 
- infant.map((item,index)=>{
-      const ageInYears = moment().diff(moment(item.date+'/'+item.month+'/'+item.year, "DD/MM/YYYY"), 'months'); 
-      console.log(ageInYears);      
-      if (ageInYears > 24) { 
-        toast.error(`Infant ${index+1} age is more than 2 years!`);
-        return;
-      }
+  infant.map((item, index) => {
+    const ageInYears = moment().diff(moment(item.date + '/' + item.month + '/' + item.year, "DD/MM/YYYY"), 'months');
+    console.log(ageInYears);
+    if (ageInYears > 24) {
+      toast.error(`Infant ${index + 1} age is more than 2 years!`);
+      return;
+    }
   })
 
 
@@ -438,7 +442,7 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
     //     return;
     //   }
     // })
-    
+
     setLoading(true);
     let sendObj = {
       passengerInfoes: [],
@@ -474,7 +478,7 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
               item.passportMonth +
               "-" +
               item.passportDate : "",
-          frequentFlyerNumber: "",
+          frequentFlyerNumber: item.frequentFlyerNumber,
           issuingCountry: item.issuingCountry,
           nationality: item.nationality,
         },
@@ -519,7 +523,7 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
               item.passportMonth +
               "-" +
               item.passportDate : "",
-          frequentFlyerNumber: "",
+          frequentFlyerNumber: item.frequentFlyerNumber,
           issuingCountry: item.issuingCountry,
           nationality: item.nationality,
         },
@@ -557,7 +561,7 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
               item.passportMonth +
               "-" +
               item.passportDate : "",
-          frequentFlyerNumber: "",
+          frequentFlyerNumber: item.frequentFlyerNumber,
           issuingCountry: item.issuingCountry,
           nationality: item.nationality,
         },
@@ -664,6 +668,9 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
   // console.log(child);
   // console.log(infant);
   // console.log(contact);
+
+  let phoneCode = courtries.filter((item) => item.code === contact[0].nationality);
+
 
   return (
     <form onSubmit={bookingData}>
@@ -806,37 +813,6 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
                           </div>
                         </div>
                       </div>
-                      {/* <div className="col-md-4">
-                        <div className="form-group">
-                          <label
-                            className="form-label float-start fw-bold"
-                            type=""
-                          >
-                            Middle name (Optional)
-                          </label>
-                          <input
-                            type="text"
-                            name="middleName"
-                            placeholder="Middle Name"
-                            className="form-control"
-                            onChange={(e) => {
-                              const middleName = e.target.value;
-                              const re = /^[a-zA-Z]*$/;
-                              if (re.test(middleName)) {
-                                setAdult((ob) =>
-                                  produce(ob, (v) => {
-                                    v[index].middleName = middleName;
-                                  })
-                                );
-                              } else {
-
-                              }
-                            }}
-                            value={p.middleName}
-                            autoComplete="off"
-                          />
-                        </div>
-                      </div> */}
                       <div className="col-md-4">
                         <div className="form-group">
                           <label
@@ -1363,103 +1339,91 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
                             </div>
                           </div>
                         </div>
-                        <div className="row">
-                          {/* <div className="col-lg-4">
-                                  <div className="form-group">
-                                    <label
-                                      className="form-label float-start fw-bold"
-                                      htmlFor=""
-                                    >
-                                      Meal Preference
-                                    </label>
-                                  </div>
-                                  <div className="input-group mb-3">
-                                    <select
-                                      name="meal"
-                                      className="form-select"
-                                      onChange={(e) => {
-                                        const meal = e.target.value;
-                                        setAdult((ob) =>
-                                          produce(ob, (v) => {
-                                            v[index].meal = meal;
-                                          })
-                                        );
-                                      }}
-                                    >
-                                      <option value="">Any</option>
-                                      <option value="AVML">
-                                        ASIAN VEGETARIAN MEAL
-                                      </option>
-                                      <option value="BBML">
-                                        INFANT/BABY FOOD
-                                      </option>
-                                      <option value="CHML">CHILD MEAL</option>
-                                      <option value="DBML">
-                                        DIABETIC MEAL
-                                      </option>
-                                      <option value="SFML">
-                                        SEA FOOD MEAL
-                                      </option>
-                                      <option value="MOML">MOSLEM MEAL</option>
-                                    </select>
-                                  </div>
-                                </div>
-                                <div className="col-lg-4">
-                                  <div className="form-group">
-                                    <label
-                                      className="form-label float-start fw-bold"
-                                      htmlFor=""
-                                    >
-                                      WheelChair (If needed)
-                                    </label>
-                                  </div>
-                                  <div className="input-group mb-3">
-                                    <select
-                                      name="wheel"
-                                      className="form-select"
-                                      onChange={(e) => {
-                                        const wheel = e.target.value;
-                                        setAdult((ob) =>
-                                          produce(ob, (v) => {
-                                            v[index].wheel = wheel;
-                                          })
-                                        );
-                                      }}
-                                    >
-                                      <option value="">Not Required</option>
-                                      <option value="WCHR">
-                                        Passenger can not walk short distance up
-                                        or down stairs.
-                                      </option>
-                                      <option value="WCHS">
-                                        Passenger can not walk short distance,
-                                        but not up or down stairs
-                                      </option>
-                                      <option value="WCHC">
-                                        Passenger cannot walk any distance and
-                                        will require the aisle chair to board.
-                                      </option>
-                                      <option value="WCOB">
-                                        On-board aisle wheelchair requested
-                                      </option>
-                                      <option value="WCMP">
-                                        Passenger is traveling with a manual
-                                        wheelchair.
-                                      </option>
-                                      <option value="WCBD">
-                                        Passenger is traveling with a dry cell
-                                        battery-powered wheelchair.
-                                      </option>
-                                      <option value="WCBW">
-                                        Passenger is traveling with a wet cell
-                                        battery-powered wheelchair.
-                                      </option>
-                                    </select>
-                                  </div>
-                                </div> */}
-                        </div>
                       </>
                     )}
+
+                    <div className="row">
+                      <div className="col-md-4">
+                        <div className="form-group">
+                          <label
+                            className="form-label float-start fw-bold"
+                            type=""
+                          >
+                            Frequent flyer number(If any)
+                          </label>
+                          <input
+                            type="text"
+                            name="frequentFlyerNumber"
+                            className="form-control"
+                            onChange={(e) => {
+                              const frequentFlyerNumber = e.target.value;
+                              setAdult((ob) =>
+                                produce(ob, (v) => {
+                                  v[index].frequentFlyerNumber = frequentFlyerNumber;
+                                })
+                              );
+                            }}
+                            value={p.frequentFlyerNumber}
+                            autoComplete="off"
+                          />
+                        </div>
+                      </div>
+                      {(origin.match("Bangladesh") !== null
+                        ? origin.match("Bangladesh")[0]
+                        : "") &&
+                        (destination.match("Bangladesh") !== null
+                          ? destination.match("Bangladesh")[0]
+                          : "") === "Bangladesh" ? (
+                        <></>
+                      ) : (
+                        <>
+                          <div className="col-lg-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                htmlFor=""
+                              >
+                                Passport Copy
+                              </label>
+                            </div>
+                            <div className="input-group mb-3">
+                              {p.passportNumber !== "" ? (
+                                <input
+                                  type={"file"}
+                                  accept=".jpg, .jpeg, .png, .pdf"
+                                  onChange={(e) =>
+                                    handlePassportFileUpload(
+                                      1,
+                                      index,
+                                      e.target.files[0],
+                                      p.passportNumber
+                                    )
+                                  }
+                                />
+                              ) : (
+                                <></>
+                              )}
+
+                              {p.passportCopy != null &&
+                                p.passportCopy != "" ? (
+                                <a
+                                  href={
+                                    environment.baseApiURL +
+                                    `agentinfo/GetPassengerFile/${p.passportCopy}/1`
+                                  }
+                                  download
+                                  target="_blank"
+                                >
+                                  Download Passport Copy
+                                </a>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
                 );
               })}
@@ -1743,7 +1707,31 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
                           </div>
                         </div>
                       </div>
-
+                      <div className="col-md-4">
+                        <div className="form-group">
+                          <label
+                            className="form-label float-start fw-bold"
+                            type=""
+                          >
+                            Frequent flyer number(If any)
+                          </label>
+                          <input
+                            type="text"
+                            name="frequentFlyerNumber"
+                            className="form-control"
+                            onChange={(e) => {
+                              const frequentFlyerNumber = e.target.value;
+                              setChild((ob) =>
+                                produce(ob, (v) => {
+                                  v[index].frequentFlyerNumber = frequentFlyerNumber;
+                                })
+                              );
+                            }}
+                            value={p.frequentFlyerNumber}
+                            autoComplete="off"
+                          />
+                        </div>
+                      </div>
                       {(origin.match("Bangladesh") !== null
                         ? origin.match("Bangladesh")[0]
                         : "") &&
@@ -1760,6 +1748,7 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
                                 type=""
                               >
                                 Nationality
+                                <span className="text-danger">*</span>
                               </label>
                               <div className="input-group mb-3">
                                 <select
@@ -1795,7 +1784,7 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
                               </div>
                             </div>
                           </div>
-                          <div className="col-lg-4">
+                          {/* <div className="col-lg-4">
                             <div className="form-group">
                               <label
                                 className="form-label float-start fw-bold"
@@ -1847,7 +1836,7 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
                                 </option>
                               </select>
                             </div>
-                          </div>
+                          </div> */}
                         </>
                       )}
                     </div>
@@ -2046,122 +2035,65 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
                             </div>
                           </div>
                         </div>
-                        {/* <div className="row">
-                      <div className="col-lg-4">
-                        <div className="form-group">
-                          <label
-                            className="form-label float-start fw-bold"
-                            htmlFor=""
-                          >
-                            Phone Number
-                          </label>
-                        </div>
-                        <div className="input-group mb-3">
-                          <input
-                            type="number"
-                            className="form-control"
-                            name="passport-number"
-                            required
-                            onChange={(e) => {
-                              const phoneNumber = e.target.value;
-                              setChild((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].phoneNumber = phoneNumber;
-                                })
-                              );
-                            }}
-                            value={p.phoneNumber}
-                            autoComplete="off"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-4">
-                        <div className="form-group">
-                          <label
-                            className="form-label float-start fw-bold"
-                            htmlFor=""
-                          >
-                            Meal Preference
-                          </label>
-                        </div>
-                        <div className="input-group mb-3">
-                          <select
-                            name="meal"
-                            className="form-select"
-                            onChange={(e) => {
-                              const meal = e.target.value;
-                              setChild((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].meal = meal;
-                                })
-                              );
-                            }}
-                          >
-                            <option value="">Any</option>
-                            <option value="AVML">ASIAN VEGETARIAN MEAL</option>
-                            <option value="BBML">INFANT/BABY FOOD</option>
-                            <option value="CHML">CHILD MEAL</option>
-                            <option value="DBML">DIABETIC MEAL</option>
-                            <option value="SFML">SEA FOOD MEAL</option>
-                            <option value="MOML">MOSLEM MEAL</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div className="col-lg-4">
-                        <div className="form-group">
-                          <label
-                            className="form-label float-start fw-bold"
-                            htmlFor=""
-                          >
-                            WheelChair (If needed)
-                          </label>
-                        </div>
-                        <div className="input-group mb-3">
-                          <select
-                            name="wheel"
-                            className="form-select"
-                            onChange={(e) => {
-                              const wheel = e.target.value;
-                              setChild((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].wheel = wheel;
-                                })
-                              );
-                            }}
-                          >
-                            <option value="">Not Required</option>
-                            <option value="WCHR">
-                              Passenger can not walk short distance up or down
-                              stairs.
-                            </option>
-                            <option value="WCHS">
-                              Passenger can not walk short distance, but not up
-                              or down stairs
-                            </option>
-                            <option value="WCHC">
-                              Passenger cannot walk any distance and will
-                              require the aisle chair to board.
-                            </option>
-                            <option value="WCOB">
-                              On-board aisle wheelchair requested
-                            </option>
-                            <option value="WCMP">
-                              Passenger is traveling with a manual wheelchair.
-                            </option>
-                            <option value="WCBD">
-                              Passenger is traveling with a dry cell
-                              battery-powered wheelchair.
-                            </option>
-                            <option value="WCBW">
-                              Passenger is traveling with a wet cell
-                              battery-powered wheelchair.
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                    </div> */}
                       </>
                     )}
+                    <div className="row"> 
+                      {(origin.match("Bangladesh") !== null
+                        ? origin.match("Bangladesh")[0]
+                        : "") &&
+                        (destination.match("Bangladesh") !== null
+                          ? destination.match("Bangladesh")[0]
+                          : "") === "Bangladesh" ? (
+                        <></>
+                      ) : (
+                        <>
+                          <div className="col-lg-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                htmlFor=""
+                              >
+                                Passport Copy
+                              </label>
+                            </div>
+                            <div className="input-group mb-3">
+                              {p.passportNumber !== "" ? (
+                                <input
+                                  type={"file"}
+                                  accept=".jpg, .jpeg, .png, .pdf"
+                                  onChange={(e) =>
+                                    handlePassportFileUpload(
+                                      2,
+                                      index,
+                                      e.target.files[0],
+                                      p.passportNumber
+                                    )
+                                  }
+                                />
+                              ) : (
+                                <></>
+                              )}
+
+                              {p.passportCopy != null &&
+                                p.passportCopy != "" ? (
+                                <a
+                                  href={
+                                    environment.baseApiURL +
+                                    `agentinfo/GetPassengerFile/${p.passportCopy}/1`
+                                  }
+                                  download
+                                  target="_blank"
+                                >
+                                  Download Passport Copy
+                                </a>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
                 );
               })}
@@ -2441,7 +2373,31 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
                           </div>
                         </div>
                       </div>
-
+                      <div className="col-md-4">
+                        <div className="form-group">
+                          <label
+                            className="form-label float-start fw-bold"
+                            type=""
+                          >
+                            Frequent flyer number(If any)
+                          </label>
+                          <input
+                            type="text"
+                            name="frequentFlyerNumber"
+                            className="form-control"
+                            onChange={(e) => {
+                              const frequentFlyerNumber = e.target.value;
+                              setInfant((ob) =>
+                                produce(ob, (v) => {
+                                  v[index].frequentFlyerNumber = frequentFlyerNumber;
+                                })
+                              );
+                            }}
+                            value={p.frequentFlyerNumber}
+                            autoComplete="off"
+                          />
+                        </div>
+                      </div>
                       {(origin.match("Bangladesh") !== null
                         ? origin.match("Bangladesh")[0]
                         : "") &&
@@ -2458,6 +2414,7 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
                                 type=""
                               >
                                 Nationality
+                                <span className="text-danger">*</span>
                               </label>
                               <div className="input-group mb-3">
                                 <select
@@ -2691,123 +2648,66 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
                             </div>
                           </div>
                         </div>
-
-                        {/* <div className="row">
-                      <div className="col-lg-4">
-                        <div className="form-group">
-                          <label
-                            className="form-label float-start fw-bold"
-                            htmlFor=""
-                          >
-                            Phone Number
-                          </label>
-                        </div>
-                        <div className="input-group mb-3">
-                          <input
-                            type="number"
-                            className="form-control"
-                            name="passport-number"
-                            required
-                            onChange={(e) => {
-                              const phoneNumber = e.target.value;
-                              setInfant((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].phoneNumber = phoneNumber;
-                                })
-                              );
-                            }}
-                            value={p.phoneNumber}
-                            autoComplete="off"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-4">
-                        <div className="form-group">
-                          <label
-                            className="form-label float-start fw-bold"
-                            htmlFor=""
-                          >
-                            Meal Preference
-                          </label>
-                        </div>
-                        <div className="input-group mb-3">
-                          <select
-                            name="meal"
-                            className="form-select"
-                            onChange={(e) => {
-                              const meal = e.target.value;
-                              setInfant((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].meal = meal;
-                                })
-                              );
-                            }}
-                          >
-                            <option value="">Any</option>
-                            <option value="AVML">ASIAN VEGETARIAN MEAL</option>
-                            <option value="BBML">INFANT/BABY FOOD</option>
-                            <option value="CHML">CHILD MEAL</option>
-                            <option value="DBML">DIABETIC MEAL</option>
-                            <option value="SFML">SEA FOOD MEAL</option>
-                            <option value="MOML">MOSLEM MEAL</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div className="col-lg-4">
-                        <div className="form-group">
-                          <label
-                            className="form-label float-start fw-bold"
-                            htmlFor=""
-                          >
-                            WheelChair (If needed)
-                          </label>
-                        </div>
-                        <div className="input-group mb-3">
-                          <select
-                            name="wheel"
-                            className="form-select"
-                            onChange={(e) => {
-                              const wheel = e.target.value;
-                              setInfant((ob) =>
-                                produce(ob, (v) => {
-                                  v[index].wheel = wheel;
-                                })
-                              );
-                            }}
-                          >
-                            <option value="">Not Required</option>
-                            <option value="WCHR">
-                              Passenger can not walk short distance up or down
-                              stairs.
-                            </option>
-                            <option value="WCHS">
-                              Passenger can not walk short distance, but not up
-                              or down stairs
-                            </option>
-                            <option value="WCHC">
-                              Passenger cannot walk any distance and will
-                              require the aisle chair to board.
-                            </option>
-                            <option value="WCOB">
-                              On-board aisle wheelchair requested
-                            </option>
-                            <option value="WCMP">
-                              Passenger is traveling with a manual wheelchair.
-                            </option>
-                            <option value="WCBD">
-                              Passenger is traveling with a dry cell
-                              battery-powered wheelchair.
-                            </option>
-                            <option value="WCBW">
-                              Passenger is traveling with a wet cell
-                              battery-powered wheelchair.
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                    </div> */}
                       </>
                     )}
+
+                    <div className="row">
+                      {(origin.match("Bangladesh") !== null
+                        ? origin.match("Bangladesh")[0]
+                        : "") &&
+                        (destination.match("Bangladesh") !== null
+                          ? destination.match("Bangladesh")[0]
+                          : "") === "Bangladesh" ? (
+                        <></>
+                      ) : (
+                        <>
+                          <div className="col-lg-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                htmlFor=""
+                              >
+                                Passport Copy
+                              </label>
+                            </div>
+                            <div className="input-group mb-3">
+                              {p.passportNumber !== "" ? (
+                                <input
+                                  type={"file"}
+                                  accept=".jpg, .jpeg, .png, .pdf"
+                                  onChange={(e) =>
+                                    handlePassportFileUpload(
+                                      3,
+                                      index,
+                                      e.target.files[0],
+                                      p.passportNumber
+                                    )
+                                  }
+                                />
+                              ) : (
+                                <></>
+                              )}
+
+                              {p.passportCopy != null &&
+                                p.passportCopy !== "" ? (
+                                <a
+                                  href={
+                                    environment.baseApiURL +
+                                    `agentinfo/GetPassengerFile/${p.passportCopy}/1`
+                                  }
+                                  download
+                                  target="_blank"
+                                >
+                                  Download Passport Copy
+                                </a>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
                 );
               })}
@@ -2877,26 +2777,53 @@ i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
                             <select
                               id="name"
                               placeholder="Title"
-                              className="form-select titel-width"
+                              className="form-select"
+                              style={{ width: "9rem" }}
                               onChange={(e) => {
-                                const mobailCode = e.target.value;
+                                const nationality = e.target.value;
                                 setContact((ob) =>
                                   produce(ob, (v) => {
-                                    v[index].mobailCode = mobailCode;
+                                    v[index].nationality = nationality;
+                                    v[index].mobailCode = phoneCode[0].dial_code;
                                   })
                                 );
                               }}
-                              value={p.mobailCode}
+                              value={p.nationality}
                               required
                             >
-                              <option value="+88">+88</option>
+                              <option value="BD">Bangladesh</option>
                               {courtries.map((item, index) => {
+                                return (
+                                  <option key={index} value={item.code}>
+                                    {item.name}
+                                  </option>
+                                );
+                              })}
+                            </select>
+                            <select
+                              id="name"
+                              placeholder="Title"
+                              className="form-select titel-width"
+                              // onChange={(e) => {
+                              //   const mobailCode = e.target.value;
+                              //   setContact((ob) =>
+                              //     produce(ob, (v) => {
+                              //       v[index].mobailCode = mobailCode;
+                              //     })
+                              //   );
+                              // }}
+                              value={p.mobailCode}
+                              required
+                              disabled
+                            >
+                              <option value={phoneCode[0].dial_code}>{phoneCode[0].dial_code}</option>
+                              {/* {courtries.map((item, index) => {
                                 return (
                                   <option key={index} value={item.dial_code}>
                                     {item.dial_code}
                                   </option>
                                 );
-                              })}
+                              })} */}
                             </select>
                             <input
                               type="number"

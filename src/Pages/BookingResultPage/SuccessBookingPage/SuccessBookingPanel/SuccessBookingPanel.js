@@ -154,7 +154,7 @@ const SuccessBookingPanel = () => {
                         <tr>
                           <th>Booking Status:</th>
                           <td>
-                            {bookData.data?.item1.bookingStatus === 'Created'? 'Booked' : bookData.data?.item1.bookingStatus}
+                            {bookData.data?.item1.bookingStatus === 'Created' ? 'Booked' : bookData.data?.item1.bookingStatus}
                           </td>
                           <td className="fw-bold">Booked By:</td>
                           <td>
@@ -163,14 +163,14 @@ const SuccessBookingPanel = () => {
                         </tr>
                         {
                           bookData.data?.item1.ticketingTimeLimit !== '' ? <>
-                           <tr>
-                            <th>Issue Before:</th>
-                          <td style={{ color: 'red' }}>
-                           {moment(bookData.data?.item1.ticketingTimeLimit).format("DD-MMMM-yyyy hh:mm:ss")}
-                          </td>
-                        </tr>
+                            <tr>
+                              <th>Issue Before:</th>
+                              <td style={{ color: 'red' }}>
+                                {moment(bookData.data?.item1.ticketingTimeLimit).format("DD-MMMM-yyyy hh:mm:ss")}
+                              </td>
+                            </tr>
                           </> : <>
-                          
+
                           </>
                         }
                       </tbody>
@@ -204,8 +204,8 @@ const SuccessBookingPanel = () => {
                                 <td>{item.passengerType}</td>
                                 <td>{item.gender}</td>
                                 <td>
-                                  {item.dateOfBirth === null? "---" : moment(item.dateOfBirth).format(
-                                        "DD-MMMM-yyyy"
+                                  {item.dateOfBirth === null ? "---" : moment(item.dateOfBirth).format(
+                                    "DD-MMMM-yyyy"
                                   )}
                                 </td>
                                 <td>{item.documentInfo.documentNumber}</td>
@@ -255,6 +255,7 @@ const SuccessBookingPanel = () => {
                                       {airports
                                         .filter((f) => f.iata === item.from)
                                         .map((item) => item.city)}
+                                       {(item.details[0].originTerminal)}
                                     </span>
                                   </td>
                                   <td>
@@ -269,6 +270,7 @@ const SuccessBookingPanel = () => {
                                       {airports
                                         .filter((f) => f.iata === item.to)
                                         .map((item) => item.city)}
+                                      {(item.details[0].destinationTerminal)}
                                     </span>
                                   </td>
                                   <td>
@@ -277,11 +279,11 @@ const SuccessBookingPanel = () => {
                                     )}
                                   </td>
                                   <td>{item.fareBasisCode}</td>
-                                  <td>{item.serviceClass === "Y"
-                                      ? "ECONOMY" + " (" + item.serviceClass + ")"
-                                      : item.serviceClass === "C"
-                                        ? "BUSINESS CLASS" + " (" + item.serviceClass + ")"
-                                        : item.serviceClass}</td>
+                                  <td> {item.serviceClass === "Y"
+                                    ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                    : item.serviceClass === "C"
+                                      ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                      : item.serviceClass + " (" + item.bookingClass + ")"}</td>
                                 </tr>
                               );
                             }
@@ -331,11 +333,11 @@ const SuccessBookingPanel = () => {
                                       )}
                                     </td>
                                     <td>{item.fareBasisCode}</td>
-                                    <td>{item.serviceClass === "Y"
-                                      ? "ECONOMY" + " (" + item.serviceClass + ")"
+                                    <td> {item.serviceClass === "Y"
+                                      ? "ECONOMY" + " (" + item.bookingClass + ")"
                                       : item.serviceClass === "C"
-                                        ? "BUSINESS CLASS" + " (" + item.serviceClass + ")"
-                                        : item.serviceClass}</td>
+                                        ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                        : item.serviceClass + " (" + item.bookingClass + ")"}</td>
                                   </tr>
                                 )
                               )}
@@ -367,7 +369,7 @@ const SuccessBookingPanel = () => {
                         </thead>
                         <tbody className="text-center">
 
-                        {bookData.data?.item1.flightInfo?.passengerFares.adt !== null ? (
+                          {bookData.data?.item1.flightInfo?.passengerFares.adt !== null ? (
                             <>
                               <tr>
                                 <td className="left">ADT</td>
@@ -385,7 +387,7 @@ const SuccessBookingPanel = () => {
                                 </td> */}
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.adt}</td>
                                 <td className="right fw-bold">
-                                AED {(bookData.data?.item1.flightInfo?.passengerFares.adt.totalPrice *
+                                  AED {(bookData.data?.item1.flightInfo?.passengerFares.adt.totalPrice *
                                     bookData.data?.item1.flightInfo?.passengerCounts.adt).toFixed(2)}
                                 </td>
                               </tr>
@@ -409,7 +411,7 @@ const SuccessBookingPanel = () => {
                                 </td>
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.cnn}</td>
                                 <td className="right fw-bold">
-                                AED {(bookData.data?.item1.flightInfo?.passengerFares.cnn.totalPrice *
+                                  AED {(bookData.data?.item1.flightInfo?.passengerFares.cnn.totalPrice *
                                     bookData.data?.item1.flightInfo?.passengerCounts.cnn).toFixed(2)}
                                 </td>
                               </tr>
@@ -433,7 +435,7 @@ const SuccessBookingPanel = () => {
                                 </td>
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.inf}</td>
                                 <td className="right fw-bold">
-                                AED {(bookData.data?.item1.flightInfo?.passengerFares.inf.totalPrice *
+                                  AED {(bookData.data?.item1.flightInfo?.passengerFares.inf.totalPrice *
                                     bookData.data?.item1.flightInfo?.passengerCounts.inf).toFixed(2)}
                                 </td>
                               </tr>

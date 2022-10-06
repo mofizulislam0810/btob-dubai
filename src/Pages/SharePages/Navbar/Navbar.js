@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
 const handleViewTicket= async ()=>{
-  let searchObj={searchText:serchText}
+  let searchObj={searchText:serchText.trim()}
   await axios
   .post(environment.airTicketingSearch,searchObj, environment.headerToken)
   .then((res) => {

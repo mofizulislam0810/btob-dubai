@@ -379,7 +379,7 @@ const QuickPassenger = () => {
                           <th>Gender</th>
                           <th>Passport Copy</th>
                           <th>Visa Copy</th>
-                          <th>Action</th>
+                          {/* <th>Action</th> */}
                         </tr>
                       </thead>
                       <tbody className="lh-1 tbody">
@@ -388,12 +388,12 @@ const QuickPassenger = () => {
                             <tr key={index}>
                               <td>{index + 1}</td>
                               <td>
-                                <a
+                                {/* <a
                                   onClick={() => handleEditItem(item)}
                                   href="#"
                                   data-bs-toggle="modal"
                                   data-bs-target="#accountModal"
-                                >
+                                > */}
                                   {item.title +
                                     " " +
                                     item.first +
@@ -401,7 +401,7 @@ const QuickPassenger = () => {
                                     item.middle +
                                     " " +
                                     item.last}
-                                </a>
+                                {/* </a> */}
                               </td>
                               <td>{item.email}</td>
                               <td>{item.phone}</td>
@@ -445,9 +445,9 @@ const QuickPassenger = () => {
                                   <></>
                                 )}
                               </td>
-                              <td>
+                              {/* <td>
                                 <span onClick={() => handleDeleteItem(item)} className="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></span>
-                              </td>
+                              </td> */}
                             </tr>
                           );
                         })}
@@ -477,7 +477,7 @@ const QuickPassenger = () => {
               </div>
             </div>
 
-            {/* <div
+            <div
               className="modal fade"
               id="accountModal"
               tabIndex={-1}
@@ -1025,7 +1025,7 @@ const QuickPassenger = () => {
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
         </section>
       </div>

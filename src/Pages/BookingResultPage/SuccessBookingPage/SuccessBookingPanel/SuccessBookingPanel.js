@@ -485,7 +485,7 @@ const SuccessBookingPanel = () => {
                                           item.contactInfo.phone}{" "}
                                       </td>
                                     </tr>
-                                    <tr key={index}>
+                                    {/* <tr key={index}>
                                       <td>
                                         {airports
                                           .filter(
@@ -496,13 +496,12 @@ const SuccessBookingPanel = () => {
                                           )
                                           .map((item) => item.city)}{" "}
                                         (Optional)
-                                        {/* {bookData.data?.item1.flightInfo.dirrections[0][0].from} */}
                                       </td>
                                       <td>
                                         {item.contactInfo.phoneCountryCode +
                                           item.contactInfo.phone}{" "}
                                       </td>
-                                    </tr>
+                                    </tr> */}
                                   </>
                                 ) : (
                                   <>

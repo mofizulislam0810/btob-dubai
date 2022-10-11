@@ -504,16 +504,15 @@ const BookedView = () => {
                                             {item.phoneCountryCode + item.phone}{" "}
                                           </td>
                                         </tr>
-                                        <tr key={index}>
+                                        {/* <tr key={index}>
                                           <td>
                                             {item.cityName} (Optional)
-                                            {/* {bookData.data?.item1.flightInfo.dirrections[0][0].from} */}
                                           </td>
 
                                           <td>
                                             {item.phoneCountryCode + item.phone}{" "}
                                           </td>
-                                        </tr>
+                                        </tr> */}
                                       </>
                                     ) : (
                                       <></>
@@ -1045,16 +1044,15 @@ const BookedView = () => {
                                             {item.phoneCountryCode + item.phone}{" "}
                                           </td>
                                         </tr>
-                                        <tr key={index}>
+                                        {/* <tr key={index}>
                                           <td>
                                             {item.cityName} (Optional)
-                                            {/* {bookData.data?.item1.flightInfo.dirrections[0][0].from} */}
                                           </td>
 
                                           <td>
                                             {item.phoneCountryCode + item.phone}{" "}
                                           </td>
-                                        </tr>
+                                        </tr> */}
                                       </>
                                     ) : (
                                       <></>

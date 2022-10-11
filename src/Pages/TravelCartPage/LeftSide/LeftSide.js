@@ -11,6 +11,7 @@ import Select from "react-select";
 import { toast } from "react-toastify";
 import moment from "moment";
 const LeftSide = () => {
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const navigate = useNavigate();
   const { setBookData, setLoading } = useAuth();
   const data = localStorage.getItem("Database");
@@ -278,14 +279,14 @@ const LeftSide = () => {
       middleName: "",
       lastName: "",
       date: "",
-      month: "",
+      month: "01",
       year: "",
       nationality: "BD",
       document: "",
       passportNumber: "",
       issuingCountry: "BD",
       passportDate: "",
-      passportMonth: "",
+      passportMonth: "01",
       passportYear: "",
       gender: "Male",
       countryCode: "BD",
@@ -326,14 +327,14 @@ const LeftSide = () => {
       middleName: "",
       lastName: "",
       date: "",
-      month: "",
+      month: "01",
       year: "",
       nationality: "BD",
       document: "",
       passportNumber: "",
       issuingCountry: "BD",
       passportDate: "",
-      passportMonth: "",
+      passportMonth: "01",
       passportYear: "",
       gender: "Male",
       countryCode: "BD",
@@ -353,14 +354,14 @@ const LeftSide = () => {
       middleName: "",
       lastName: "",
       date: "",
-      month: "",
+      month: "01",
       year: "",
       nationality: "BD",
       document: "",
       passportNumber: "",
       issuingCountry: "BD",
       passportDate: "",
-      passportMonth: "",
+      passportMonth: "01",
       passportYear: "",
       gender: "Male",
       countryCode: "BD",
@@ -431,6 +432,7 @@ const LeftSide = () => {
     }
   })
 
+  console.log(contact);
 
 
   const bookingData = (e) => {
@@ -669,9 +671,18 @@ const LeftSide = () => {
   // console.log(infant);
   // console.log(contact);
 
-  let phoneCode = courtries.filter((item) => item.code === contact[0].nationality);
+  // let phoneCode = courtries.filter((item) => item.code === contact[0].nationality);
+  // console.log(courtries.filter((item) => item.code === contact[0].nationality)[0].dial_code);
 
+  const handleChange = event => {
+    if (event.target.checked) {
+      setIsSubscribed(true);
+    } else {
+      setIsSubscribed(false);
+    }
+  };
 
+  // console.log(isSubscribed);
   return (
     <form onSubmit={bookingData}>
       <div className="col-lg-12">
@@ -795,7 +806,7 @@ const LeftSide = () => {
                               className="form-control w-75"
                               onChange={(e) => {
                                 const firstName = e.target.value;
-                                const re = /^[a-zA-Z]*$/;
+                                const re = /^[a-zA-Z ]*$/;
                                 if (re.test(firstName)) {
                                   setAdult((ob) =>
                                     produce(ob, (v) => {
@@ -1019,16 +1030,15 @@ const LeftSide = () => {
                                   value={p.month}
                                   required
                                 >
-                                  <option value="">Mon</option>
-                                  <option value="1">Jan</option>
-                                  <option value="2">Feb</option>
-                                  <option value="3">Mar</option>
-                                  <option value="4">Apr</option>
-                                  <option value="5">May</option>
-                                  <option value="6">Jun</option>
-                                  <option value="7">Jul</option>
-                                  <option value="8">Aug</option>
-                                  <option value="9">Sep</option>
+                                  <option value="01" selected>Jan</option>
+                                  <option value="02">Feb</option>
+                                  <option value="03">Mar</option>
+                                  <option value="04">Apr</option>
+                                  <option value="05">May</option>
+                                  <option value="06">Jun</option>
+                                  <option value="07">Jul</option>
+                                  <option value="08">Aug</option>
+                                  <option value="09">Sep</option>
                                   <option value="10">Oct</option>
                                   <option value="11">Nov</option>
                                   <option value="12">Dec</option>
@@ -1295,16 +1305,15 @@ const LeftSide = () => {
                                 value={p.passportMonth}
                                 required
                               >
-                                <option value="">Mon</option>
-                                <option value="1">Jan</option>
-                                <option value="2">Feb</option>
-                                <option value="3">Mar</option>
-                                <option value="4">Apr</option>
-                                <option value="5">May</option>
-                                <option value="6">Jun</option>
-                                <option value="7">Jul</option>
-                                <option value="8">Aug</option>
-                                <option value="9">Sep</option>
+                                <option value="01" selected>Jan</option>
+                                <option value="02">Feb</option>
+                                <option value="03">Mar</option>
+                                <option value="04">Apr</option>
+                                <option value="05">May</option>
+                                <option value="06">Jun</option>
+                                <option value="07">Jul</option>
+                                <option value="08">Aug</option>
+                                <option value="09">Sep</option>
                                 <option value="10">Oct</option>
                                 <option value="11">Nov</option>
                                 <option value="12">Dec</option>
@@ -1517,7 +1526,7 @@ const LeftSide = () => {
                               className="form-control w-75"
                               onChange={(e) => {
                                 const firstName = e.target.value;
-                                const re = /^[a-zA-Z]*$/;
+                                const re = /^[a-zA-Z ]*$/;
                                 if (re.test(firstName)) {
                                   setChild((ob) =>
                                     produce(ob, (v) => {
@@ -1671,16 +1680,15 @@ const LeftSide = () => {
                               value={p.month}
                               required
                             >
-                              <option value="">Mon</option>
-                              <option value="1">Jan</option>
-                              <option value="2">Feb</option>
-                              <option value="3">Mar</option>
-                              <option value="4">Apr</option>
-                              <option value="5">May</option>
-                              <option value="6">Jun</option>
-                              <option value="7">Jul</option>
-                              <option value="8">Aug</option>
-                              <option value="9">Sep</option>
+                              <option value="01" selected>Jan</option>
+                              <option value="02">Feb</option>
+                              <option value="03">Mar</option>
+                              <option value="04">Apr</option>
+                              <option value="05">May</option>
+                              <option value="06">Jun</option>
+                              <option value="07">Jul</option>
+                              <option value="08">Aug</option>
+                              <option value="09">Sep</option>
                               <option value="10">Oct</option>
                               <option value="11">Nov</option>
                               <option value="12">Dec</option>
@@ -1991,16 +1999,15 @@ const LeftSide = () => {
                                 value={p.passportMonth}
                                 required
                               >
-                                <option value="">Mon</option>
-                                <option value="1">Jan</option>
-                                <option value="2">Feb</option>
-                                <option value="3">Mar</option>
-                                <option value="4">Apr</option>
-                                <option value="5">May</option>
-                                <option value="6">Jun</option>
-                                <option value="7">Jul</option>
-                                <option value="8">Aug</option>
-                                <option value="9">Sep</option>
+                                <option value="01" selected>Jan</option>
+                                <option value="02">Feb</option>
+                                <option value="03">Mar</option>
+                                <option value="04">Apr</option>
+                                <option value="05">May</option>
+                                <option value="06">Jun</option>
+                                <option value="07">Jul</option>
+                                <option value="08">Aug</option>
+                                <option value="09">Sep</option>
                                 <option value="10">Oct</option>
                                 <option value="11">Nov</option>
                                 <option value="12">Dec</option>
@@ -2037,7 +2044,7 @@ const LeftSide = () => {
                         </div>
                       </>
                     )}
-                    <div className="row"> 
+                    <div className="row">
                       {(origin.match("Bangladesh") !== null
                         ? origin.match("Bangladesh")[0]
                         : "") &&
@@ -2186,7 +2193,7 @@ const LeftSide = () => {
                               className="form-control w-75"
                               onChange={(e) => {
                                 const firstName = e.target.value;
-                                const re = /^[a-zA-Z]*$/;
+                                const re = /^[a-zA-Z ]*$/;
                                 if (re.test(firstName)) {
                                   setInfant((ob) =>
                                     produce(ob, (v) => {
@@ -2338,16 +2345,15 @@ const LeftSide = () => {
                               }}
                               required
                             >
-                              <option value="">Mon</option>
-                              <option value="1">Jan</option>
-                              <option value="2">Feb</option>
-                              <option value="3">Mar</option>
-                              <option value="4">Apr</option>
-                              <option value="5">May</option>
-                              <option value="6">Jun</option>
-                              <option value="7">Jul</option>
-                              <option value="8">Aug</option>
-                              <option value="9">Sep</option>
+                              <option value="01" selected>Jan</option>
+                              <option value="02">Feb</option>
+                              <option value="03">Mar</option>
+                              <option value="04">Apr</option>
+                              <option value="05">May</option>
+                              <option value="06">Jun</option>
+                              <option value="07">Jul</option>
+                              <option value="08">Aug</option>
+                              <option value="09">Sep</option>
                               <option value="10">Oct</option>
                               <option value="11">Nov</option>
                               <option value="12">Dec</option>
@@ -2604,16 +2610,15 @@ const LeftSide = () => {
                                 value={p.passportMonth}
                                 required
                               >
-                                <option value="">Mon</option>
-                                <option value="1">Jan</option>
-                                <option value="2">Feb</option>
-                                <option value="3">Mar</option>
-                                <option value="4">Apr</option>
-                                <option value="5">May</option>
-                                <option value="6">Jun</option>
-                                <option value="7">Jul</option>
-                                <option value="8">Aug</option>
-                                <option value="9">Sep</option>
+                                <option value="01" selected>Jan</option>
+                                <option value="02">Feb</option>
+                                <option value="03">Mar</option>
+                                <option value="04">Apr</option>
+                                <option value="05">May</option>
+                                <option value="06">Jun</option>
+                                <option value="07">Jul</option>
+                                <option value="08">Aug</option>
+                                <option value="09">Sep</option>
                                 <option value="10">Oct</option>
                                 <option value="11">Nov</option>
                                 <option value="12">Dec</option>
@@ -2738,6 +2743,12 @@ const LeftSide = () => {
           <div className="card-body border py-4">
             <h5 className="from-label fw-bold text-start">
               Enter contact details
+              {/* <span className="ms-5"> 
+                <input class="form-check-input mt-0" type="checkbox"  value={isSubscribed}  id="flexCheckDefault50" onChange={handleChange}/>
+                <label class="form-check-label" for="flexCheckDefault50">
+                  Optional  Phone Number
+                </label>
+              </span> */}
             </h5>
             {contact.map((p, index) => {
               return (
@@ -2784,7 +2795,7 @@ const LeftSide = () => {
                                 setContact((ob) =>
                                   produce(ob, (v) => {
                                     v[index].nationality = nationality;
-                                    v[index].mobailCode = phoneCode[0].dial_code;
+                                    v[index].mobailCode = courtries.filter((item) => item.code === nationality)[0].dial_code;
                                   })
                                 );
                               }}
@@ -2816,7 +2827,7 @@ const LeftSide = () => {
                               required
                               disabled
                             >
-                              <option value={phoneCode[0].dial_code}>{phoneCode[0].dial_code}</option>
+                              <option value={courtries.filter((item) => item.code === contact[0].nationality)[0].dial_code}>{courtries.filter((item) => item.code === contact[0].nationality)[0].dial_code}</option>
                               {/* {courtries.map((item, index) => {
                                 return (
                                   <option key={index} value={item.dial_code}>
@@ -2847,6 +2858,77 @@ const LeftSide = () => {
                       </div>
                     </div>
                   </div>
+                  {/* {
+                    isSubscribed ? <>
+                     <div className="row">
+                    <div className="col-lg-6">
+                      <div className="form-group">
+                        <label className="form-label float-start fw-bold">
+                        Optional  Phone Number
+                        </label>
+                        <div className="input-group mb-3">
+                          <div className="input-group-prepend w-100">
+                            <select
+                              id="name"
+                              placeholder="Title"
+                              className="form-select"
+                              style={{ width: "9rem" }}
+                              onChange={(e) => {
+                                const nationality = e.target.value;
+                                setContact((ob) =>
+                                  produce(ob, (v) => {
+                                    v[index].nationality = nationality;
+                                    v[index].mobailCode = courtries.filter((item) => item.code === nationality)[0].dial_code;
+                                  })
+                                );
+                              }}
+                              value={p.nationality}
+                              required
+                            >
+                              <option value="BD">Bangladesh</option>
+                              {courtries.map((item, index) => {
+                                return (
+                                  <option key={index} value={item.code}>
+                                    {item.name}
+                                  </option>
+                                );
+                              })}
+                            </select>
+                            <select
+                              id="name"
+                              placeholder="Title"
+                              className="form-select titel-width"
+                              value={p.mobailCode}
+                              required
+                              disabled
+                            >
+                              <option value={courtries.filter((item) => item.code === contact[0].nationality)[0].dial_code}>{courtries.filter((item) => item.code === contact[0].nationality)[0].dial_code}</option>
+                            </select>
+                            <input
+                              type="number"
+                              name="phoneNumber"
+                              className="form-control"
+                              onChange={(e) => {
+                                const mobailNumber = e.target.value;
+                                setContact((ob) =>
+                                  produce(ob, (v) => {
+                                    v[index].mobailNumber = mobailNumber;
+                                  })
+                                );
+                              }}
+                              value={p.mobailNumber}
+                              placeholder="Phone Number"
+                              required
+                              autoComplete="off"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    </> : <>
+                    </>
+                  } */}
                 </div>
               );
             })}

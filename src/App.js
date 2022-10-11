@@ -55,7 +55,7 @@ import Canceled from "./Pages/Queues/Canceled";
 import InvoiceView from "./Pages/InvoiceView/InvoiceView";
 import Expired from "./Pages/Queues/Expired";
 function App() {
-  var isLoggedIn = sessionStorage.getItem("token");
+  var isLoggedIn = sessionStorage.getItem("token")??false;
   console.log(isLoggedIn);
   return (
     <Box>

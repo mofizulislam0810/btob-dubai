@@ -29,7 +29,9 @@ const SuccessBookingPanel = () => {
   };
   const navigate = useNavigate();
   const componentRef = useRef();
-
+ let [adjustmentDate,setAdjustmentDte]=useState('');
+ let [partialAmount,setPartialAmount]=useState(0);
+ let [isPartialPaymentValid,setIsPartialPaymentValid]=useState(false);
   const filterParam = JSON.parse(localStorage.getItem("Database"));
   const flightType = filterParam.flightType;
   const direction0 = JSON.parse(localStorage.getItem("direction0"));
@@ -50,53 +52,57 @@ const SuccessBookingPanel = () => {
         axios.post(environment.checkPartialPayment, obj,environment.headerToken)
           .then((response) => 
           {
-            alert(response.item1)
-            if(response.item1){
-
+            console.log(response)
+            setIsPartialPaymentValid(response.data.item1);
+            setPartialAmount(response.data.item3);
+            if(response.data.item1){
+              setAdjustmentDte(response.data.item4);
             }
           }
           );
         // window.print();
       };
-
+      useEffect(() => {
+        checkPartialPayment();
+      }, []);
   const handleGenarateTicket = () => {
-    checkPartialPayment();
-    // setLoading(true);
-    // const sendObjTicket = {
-    //   pnr: bookData.data.item1.pnr,
-    //   bookingRefNumber: bookData.data.item1.bookingRefNumber,
-    //   priceCodeRef: bookData.data.item1.priceCodeRef,
-    //   uniqueTransID: bookData.data.item1.uniqueTransID,
-    //   itemCodeRef: bookData.data.item1.itemCodeRef,
-    //   bookingCodeRef: bookData.data.item1.bookingCodeRef,
-    //   commission: 0,
-    // };
+    //checkPartialPayment();
+    setLoading(true);
+    const sendObjTicket = {
+      pnr: bookData.data.item1.pnr,
+      bookingRefNumber: bookData.data.item1.bookingRefNumber,
+      priceCodeRef: bookData.data.item1.priceCodeRef,
+      uniqueTransID: bookData.data.item1.uniqueTransID,
+      itemCodeRef: bookData.data.item1.itemCodeRef,
+      bookingCodeRef: bookData.data.item1.bookingCodeRef,
+      commission: 0,
+    };
 
-    // async function fetchOptions() {
-    //   await axios
-    //     .post(
-    //       environment.ticketingFlight,
-    //       sendObjTicket,
-    //       environment.headerToken
-    //     )
-    //     .then((response) => {
-    //       if (response.data.item2?.isSuccess === true) {
-    //         console.log(response);
-    //         setTicketData(response.data);
-    //         // localStorage.setItem(
-    //         //   "ticketConfirm",
-    //         //   JSON.stringify(response.data)
-    //         // );
-    //         setLoading(false);
-    //         navigate("/successticket");
-    //       } else {
-    //         setLoading(false);
-    //         setTicketData(response.data);
-    //         navigate("/failticket");
-    //       }
-    //     });
-    // }
-    // fetchOptions();
+    async function fetchOptions() {
+      await axios
+        .post(
+          environment.ticketingFlight,
+          sendObjTicket,
+          environment.headerToken
+        )
+        .then((response) => {
+          if (response.data.item2?.isSuccess === true) {
+            console.log(response);
+            setTicketData(response.data);
+            // localStorage.setItem(
+            //   "ticketConfirm",
+            //   JSON.stringify(response.data)
+            // );
+            setLoading(false);
+            navigate("/successticket");
+          } else {
+            setLoading(false);
+            setTicketData(response.data);
+            navigate("/failticket");
+          }
+        });
+    }
+    fetchOptions();
   };
   return (
     <div>
@@ -544,18 +550,22 @@ const SuccessBookingPanel = () => {
                           From Account Balance
                         </label>
                       </div>
-                      <div class="form-check">
+                      {
+                        isPartialPaymentValid==true?<> <div class="form-check">
                         <input class="form-check-input" type="radio" value={deductionFrom} name="deductionFrom" checked={deductionFrom == "PartialPayment"}
 													onClick={() => { setDeductionFrom("PartialPayment"); }} id="flexRadioDefault2" />
                         <label class="form-check-label" for="flexRadioDefault2">
                         With Partial Payment
                         </label>
-                      </div>
+                      </div></>:<></>
+                      }
+                     
                     </div>
                     {
                       deductionFrom=="PartialPayment"?<>     <div className="col-lg-12 d-flex justify-content-center">
-                      <div className="col-sm-2">
-                                  <label>
+                      <div className="col-sm-4">
+                        <p>Minimum Payable {partialAmount}</p>
+                                  {/* <label>
                                   Amount
                                     <span style={{ color: "red" }}>*</span>
                                   </label>
@@ -563,11 +573,13 @@ const SuccessBookingPanel = () => {
                                     type={"text"}
                                     placeholder={"Amount"}
                                     className="form-control"
-                                    value={0}
-                                  ></input>
-                                </div>
-                      <div className="col-sm-2">
-                                  <label>
+                                    value={partialAmount}
+                                    disabled={true}
+                                    onChange={(e)=>setPartialAmount(e.target.value)}
+                                  ></input> */}
+               
+                        Remaining {bookData.data?.item1.flightInfo.bookingComponents[0].totalPrice-partialAmount} has to be paid by {adjustmentDate}
+                                  {/* <label>
                                   Adjustment Date
                                     <span style={{ color: "red" }}>*</span>
                                   </label>
@@ -575,11 +587,12 @@ const SuccessBookingPanel = () => {
                                     type={"date"}
                                     className="form-control"
                                     onChange={(e) =>
-                                      setCheckIssueDate(e.target.value)
+                                      setAdjustmentDte(e.target.value)
                                     }
-                                    value={checkIssueDate}
+                                    disabled={true}
+                                    value={adjustmentDate}
                                     max={new Date().toISOString().slice(0, 10)}
-                                  ></input>
+                                  ></input> */}
                                 </div>
                     </div></>:<></>
                     }

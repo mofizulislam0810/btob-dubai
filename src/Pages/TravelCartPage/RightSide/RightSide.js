@@ -40,6 +40,36 @@ const RightSide = () => {
     Object.keys(direction1).length > 0
       ? `https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction1.platingCarrierCode}.png`
       : ``;
+
+      let [adjustmentDate,setAdjustmentDte]=useState('');
+      let [partialAmount,setPartialAmount]=useState(0);
+      let [isPartialPaymentValid,setIsPartialPaymentValid]=useState(false);
+      const checkPartialPayment = () => {
+        const obj = {
+            uniqueTransID: "",
+            platingCarrier: "BS",
+            origin: "DAC",
+            destination: "DXB",
+            journeyType: "Round Trip",
+            departure: "2022-11-10T10:43:53.215Z",
+            totalPrice: 500000
+        }
+        axios.post(environment.getPartialPaymentChart, obj,environment.headerToken)
+          .then((response) => 
+          {
+            console.log(response)
+            setIsPartialPaymentValid(response.data.item1);
+            setPartialAmount(response.data.item3);
+            if(response.data.item1){
+              setAdjustmentDte(response.data.item4);
+            }
+          }
+          );
+        // window.print();
+      };
+      useEffect(() => {
+        checkPartialPayment();
+      }, []);
   const submitFlight = () => {
     let sendObj = {
       Adult: adult,
@@ -807,6 +837,15 @@ const RightSide = () => {
                 <h6 className="text-end fw-bold">
                   {currency !== undefined ? currency : "BDT"}   {bookingComponents[0].totalPrice}
                 </h6>
+              </div>
+            </div>
+            <div className="row border-top py-2">
+            <div className="col-lg-12">
+                <h6 className="text-start fw-bold">Partial Pay Eligible  (Minimum payable {partialAmount})</h6>
+              </div>
+
+              <div className="col-lg-12">
+              Remaining   {(bookingComponents[0].totalPrice-partialAmount).toFixed(2)} has to be paid by {adjustmentDate}
               </div>
             </div>
           </div>

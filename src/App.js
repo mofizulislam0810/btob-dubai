@@ -56,7 +56,7 @@ import InvoiceView from "./Pages/InvoiceView/InvoiceView";
 import Expired from "./Pages/Queues/Expired";
 import LoanLedger from "./Pages/Ledger/LoanLedger";
 function App() {
-  var isLoggedIn = sessionStorage.getItem("token");
+  var isLoggedIn = sessionStorage.getItem("token") !== null ? true : false;
   console.log(isLoggedIn);
   return (
     <Box>

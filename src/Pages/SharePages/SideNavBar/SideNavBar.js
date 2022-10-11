@@ -55,8 +55,8 @@ const SideNavBar = () => {
 
             <li className="nav-item">
               <a href="#" className="nav-link">
-                {/* <i class="nav-icon fas fa-tasks"></i> */}
-                <i class="nav-icon fas fa-ticket-alt"></i>
+                {/* <i className="nav-icon fas fa-tasks"></i> */}
+                <i className="nav-icon fas fa-ticket-alt"></i>
                 <p>
                   My Booking
                   <i className="right fas fa-angle-left"></i>
@@ -133,7 +133,7 @@ const SideNavBar = () => {
             </li> */}
             <li className="nav-item">
               <Link to="/balance" className="nav-link">
-                <i class="nav-icon fas fa-comment-dollar"></i>
+                <i className="nav-icon fas fa-comment-dollar"></i>
                 <p>
                   Topup Request
                   {/* <i className="right fas fa-angle-left"></i> */}
@@ -169,7 +169,7 @@ const SideNavBar = () => {
 
             <li className="nav-item">
               <Link to="/support" className="nav-link">
-                {/* <i class="nav-icon fas fa-tasks"></i> */}
+                {/* <i className="nav-icon fas fa-tasks"></i> */}
                 {/* <i className="nav-icon fas fa-tachometer-alt"></i> */}
                 <i className="nav-icon fas fa-headset"></i>
                 <p>
@@ -180,8 +180,8 @@ const SideNavBar = () => {
             </li>
             <li className="nav-item">
               <a href="#" className="nav-link">
-                {/* <i class="nav-icon fas fa-tasks"></i> */}
-                <i class="nav-icon  fa fa-file" aria-hidden="true"></i>
+                {/* <i className="nav-icon fas fa-tasks"></i> */}
+                <i className="nav-icon  fa fa-file" aria-hidden="true"></i>
                 {/* <i className="nav-icon fas fa-tachometer-alt"></i> */}
                 <p>
                   Reports
@@ -217,7 +217,7 @@ const SideNavBar = () => {
             </li>
             <li className="nav-item">
               <Link to="/quickpassenger" className="nav-link">
-                {/* <i class="nav-icon fas fa-tasks"></i> */}
+                {/* <i className="nav-icon fas fa-tasks"></i> */}
                 {/* <i className="nav-icon fas fa-tachometer-alt"></i> */}
                 <i className="nav-icon fas fa-users"></i>
                 <p>
@@ -228,7 +228,7 @@ const SideNavBar = () => {
             </li>
             {/* <li className="nav-item">
               <Link to="/markup" className="nav-link">
-                <i class="nav-icon fas fa-comments-dollar"></i>
+                <i className="nav-icon fas fa-comments-dollar"></i>
                 <p>
                   Markup / Discount
                 </p>
@@ -236,7 +236,7 @@ const SideNavBar = () => {
             </li> */}
            <li className="nav-item">
               <Link to="/staff" className="nav-link">
-                {/* <i class="nav-icon fas fa-tasks"></i> */}
+                {/* <i className="nav-icon fas fa-tasks"></i> */}
                 {/* <i className="nav-icon fas fa-tachometer-alt"></i> */}
                 <i className="nav-icon fas fa-users"></i>
                 <p>
@@ -248,7 +248,7 @@ const SideNavBar = () => {
 
             {/* <li className="nav-item">
               <a href="#" className="nav-link">
-                <i class="nav-icon fas fa-tasks"></i>
+                <i className="nav-icon fas fa-tasks"></i>
               
                 <p>
                   Queues

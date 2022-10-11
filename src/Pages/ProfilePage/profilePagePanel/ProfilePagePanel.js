@@ -53,8 +53,6 @@ const ProfilePagePanel = () => {
       }
     };
     putData();
-
-
   }
 
   const logoFileUpload = (file) => {

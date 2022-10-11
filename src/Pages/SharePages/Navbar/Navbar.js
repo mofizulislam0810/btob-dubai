@@ -147,21 +147,21 @@ const accountManagerInfo = async(agentId)=>{
       <ul className="navbar-nav ml-auto">
         {/* Navbar Search */}
         <li className="nav-item me-2">
-          <form class="form-inline">
+          <form className="form-inline">
             <input
-              class="form-control search-input rounded-start"
+              className="form-control search-input rounded-start"
               type="search"
               aria-label="Search"
               placeholder="Name/PNR/Ticket no/Booking Ref"
               onChange={(e)=>setSearchText(e.target.value)}
             />
             <button
-              class="btn button-color text-white fw-bold my-2 my-sm-0 rounded-end"
+              className="btn button-color text-white fw-bold my-2 my-sm-0 rounded-end"
               onClick={handleViewTicket}
               type="button"
               disabled={serchText === '' ? true : false}
             >
-              <i class="fas fa-search"></i>
+              <i className="fas fa-search"></i>
             </button>
           </form>
         </li>
@@ -245,32 +245,32 @@ const accountManagerInfo = async(agentId)=>{
           </div>
         </li>
         {/* Notifications Dropdown Menu */}
-        <li class="nav-item dropdown" title="Notification">
-          <a class="nav-link" data-toggle="dropdown" href="#">
+        <li className="nav-item dropdown" title="Notification">
+          <a className="nav-link" data-toggle="dropdown" href="#">
             <span>
               {" "}
-              <i class="far fa-bell"></i>
+              <i className="far fa-bell"></i>
             </span>
-            <span class="badge badge-warning navbar-badge">{noticeCount}</span>
+            <span className="badge badge-warning navbar-badge">{noticeCount}</span>
           </a>
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            {/* <span class="dropdown-item dropdown-header">
+          <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            {/* <span className="dropdown-item dropdown-header">
               {noticeCount} Notifications
             </span> */}
-            <div class="dropdown-divider"></div>           
+            <div className="dropdown-divider"></div>           
             {/* {noticeList.map((item, index) => {
               return (
                 <div>
-                  <Link to="#" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> {item.ticketNo} &nbsp;{" "}
+                  <Link to="#" className="dropdown-item">
+                    <i className="fas fa-envelope mr-2"></i> {item.ticketNo} &nbsp;{" "}
                     {item.supportTypeName} &nbsp; {item.subjectName}
                     <p style={{ paddingLeft: "28px" }}>{item.message} </p>
                   </Link>
-                  <div class="dropdown-divider"></div>
+                  <div className="dropdown-divider"></div>
                 </div>
               );
             })} */}
-             <Link to="/support" class="dropdown-item dropdown-footer">
+             <Link to="/support" className="dropdown-item dropdown-footer">
               See All Notifications
             </Link>
           </div>

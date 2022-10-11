@@ -38,8 +38,9 @@ const QuickPassenger = () => {
   let yearList = [];
   let [passportFileName, setPassportFileName] = useState("");
   let [visaFileName, setVisaFileName] = useState("");
-  let [loading, setLoading] = useState(false);
-
+  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+	let staticURL ="wwwroot/Uploads/Support/";
+let [loading, setLoading] = useState(false);
   const handlePassportFileUpload = (file) => {
     let fileExt = file.name.split(".").pop().toLowerCase();
     if (

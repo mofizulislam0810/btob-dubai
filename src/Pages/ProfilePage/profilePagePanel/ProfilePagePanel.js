@@ -18,6 +18,9 @@ const ProfilePagePanel = () => {
   let [mobile, setMobile] = useState();
   let [userId, setUserId] = useState();
   let [logoName, setLogoName] = useState();
+  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+  let localURL ="wwwroot/Uploads/Agent/"
+  
   const handleGetUser = () => {
     const getData = async () => {
       const response = await axios.get(environment.currentUserInfo, environment.headerToken);
@@ -26,6 +29,7 @@ const ProfilePagePanel = () => {
       setFullName(response.data.fullName);
       setEmail(response.data.email);
       setMobile(response.data.mobile);
+      setLogoName(response.data.logoName)
     };
     getData();
   };
@@ -82,6 +86,7 @@ const ProfilePagePanel = () => {
         ).then((res => {
           setLogoName(file.name);
           sessionStorage.setItem("logoName", file.name);
+          window.location.reload();
         }));
       }
       postData();
@@ -121,7 +126,7 @@ const ProfilePagePanel = () => {
                         <img
                         alt="img01"
                         className="mx-auto mb-3"
-                        src={logo}
+                        src={s3URL +''+logoName}
                         style={{ width: "150px", height: "80px" }}
                       ></img>
                         </> : 
@@ -129,9 +134,8 @@ const ProfilePagePanel = () => {
                          <img
                         alt="img01"
                         className="mx-auto mb-3"
-                        src={
-                          environment.baseApiURL +
-                          `agentinfo/GetLogo/${logoName}`
+                        src={ 
+                          s3URL +''+logoName
                         }
                         style={{ width: "150px", height: "80px" }}
                       ></img>

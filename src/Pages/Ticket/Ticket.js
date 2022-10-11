@@ -28,6 +28,8 @@ const Ticket = () => {
   let [passengerListEdited, setPassengerListEdited] = useState([]);
   let [totalPriceEdited, setTotalPriceEdited] = useState(0);
   let [agentInfo, setAgentInfo] = useState([]);
+  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+	let staticURL ="wwwroot/Uploads/Support/";
   const [isDownloading, setIsDownloading] = useState(false);
   const componentRef = useRef();
   const getAgentInfo = async () => {
@@ -206,21 +208,20 @@ const Ticket = () => {
                     <div className="px-5" ref={donwloadRef}>
                       <h4 className="text-center pb-2">E-Ticket</h4>
 
-                      <table class="table table-borderless table-sm">
-                        <tbody>
-                          <tr>
-                            <td className="text-start bg-white">
-                              {ticketingList.ticketInfo?.agentLogo !== null &&
-                                ticketingList.ticketInfo?.agentLogo !== "" ? (
-                                <img
-                                  alt="img01"
-                                  src={
-                                    environment.baseApiURL +
-                                    `agentinfo/GetLogo/${ticketingList.ticketInfo?.agentLogo}`
-                                  }
-                                  style={{ width: "150px", height: "50px" }}
-                                ></img>
-                              ) : (
+                    <table class="table table-borderless table-sm">
+                      <tbody>
+                        <tr>
+                          <td className="text-start bg-white">
+                            {ticketingList.ticketInfo?.agentLogo !== null &&
+                              ticketingList.ticketInfo?.agentLogo !== "" ? (
+                              <img
+                                alt="img01"
+                                src={
+                                  s3URL+`${ticketingList.ticketInfo?.agentLogo}`
+                                }
+                                style={{ width: "150px", height: "50px" }}
+                              ></img>
+                            ) : (
                                 <>
                                   <img
                                     alt="img01"

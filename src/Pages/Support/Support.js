@@ -27,6 +27,9 @@ const Support = () => {
 	let utid = "";
 	let pnrs = "";
 	let ticketno = "";
+	let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+	let staticURL ="wwwroot/Uploads/Support/";
+
 	const handleGetPassengerList = (trid) => {
 		const getPassengerList = async () => {
 		  const response = await axios.get(
@@ -712,7 +715,7 @@ const handleSetPNR=(pnr)=>{
 																									</p>
 																									{/* <a href={require(`../../images/icon/${'user.png'}`)} download>download</a> */}
 																									{
-																										item.fileName != null && item.fileName != "" ? <a href={environment.baseApiURL + `supporthistory/getfile/${item.fileName}`} download target="_blank">{item.fileName.length > 50 ? item.fileName.substr(0, 50) + '...' : item.fileName}</a>
+																										item.fileName != null && item.fileName != "" ? <a href={s3URL+`${item.fileName}`} download target="_blank">{item.fileName.length > 50 ? item.fileName.substr(0, 50) + '...' : item.fileName}</a>
 																											: <></>
 																									}
 																									{
@@ -796,7 +799,7 @@ const handleSetPNR=(pnr)=>{
 																									</p>
 																									{/* <a href={require(`../../images/icon/${'user.png'}`)} download>download</a> */}
 																									{
-																										item.fileName != null && item.fileName != "" ? <a href={environment.baseApiURL + `supporthistory/getfile/${item.fileName}`} download target="_blank">{item.fileName.length > 50 ? item.fileName.substr(0, 50) + '...' : item.fileName}</a>
+																										item.fileName != null && item.fileName != "" ? <a href={s3URL + `${item.fileName}`} download target="_blank">{item.fileName.length > 50 ? item.fileName.substr(0, 50) + '...' : item.fileName}</a>
 																											: <></>
 																									}
 																									{

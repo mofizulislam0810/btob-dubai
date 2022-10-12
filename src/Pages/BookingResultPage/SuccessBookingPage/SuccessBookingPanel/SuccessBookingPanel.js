@@ -76,6 +76,7 @@ const SuccessBookingPanel = () => {
       itemCodeRef: bookData.data.item1.itemCodeRef,
       bookingCodeRef: bookData.data.item1.bookingCodeRef,
       commission: 0,
+      balanceDeductionFrom:deductionFrom=="PartialPayment"?2:0
     };
 
     async function fetchOptions() {

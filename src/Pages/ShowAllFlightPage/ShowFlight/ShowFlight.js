@@ -1060,15 +1060,20 @@ const ShowFlight = (props) => {
 
           <div className="col-lg-2 my-auto text-center">
             <h5 className="text-end text-color fw-bold">
+           
+              {/* {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice} */}
               {
-                amountChange === "Invoice Amount" ? <><span className="text-secondary" style={{ fontSize: "12px" }}>
-
+                amountChange === "Invoice Amount" ? <><div>
+                  <div  className="text-secondary" style={{ fontSize: "12px" }}>
+                  {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice}
+                  </div>
                   {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
-                </span>
-                  <br></br></> : <></>
+                  
+                </div></> : <div>
+                {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
+                </div>
               }
 
-              {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice}
             </h5>
             <Link
               to="/travellcart"
@@ -2773,16 +2778,18 @@ const ShowFlight = (props) => {
             {/* end of return flight section for hide*/}
           </div>
           <div className="col-lg-2 my-auto text-center">
-            <h5 className="text-end text-color text-center fw-bold">
-              {
-                amountChange === "Invoice Amount" ? <><del className="text-danger font-size">
-
+            <h5 className="text-end text-color text-end fw-bold">
+            {
+                amountChange === "Invoice Amount" ? <><div>
+                  <div  className="text-secondary" style={{ fontSize: "12px" }}>
+                  {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice}
+                  </div>
                   {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
-                </del>
-                  <br></br></> : <></>
+                  
+                </div></> : <div>
+                {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
+                </div>
               }
-
-              {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice}
             </h5>
 
             <button

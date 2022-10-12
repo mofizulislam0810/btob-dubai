@@ -9,16 +9,18 @@ import axios from "axios";
 import { environment } from "../../../SharePages/Utility/environment";
 import './SuccessTicketPanel.css';
 import airports from "../../../../JSON/airports.json";
+let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+let staticURL ="wwwroot/Uploads/Support/";
 
 const SuccessTicketPanel = () => {
-  const { ticketData, loading } = useAuth();
+  const { loading } = useAuth();
   let [isFareHide, setIsFareHide] = useState(false);
   let [agentInfo, setAgentInfo] = useState([]);
   const componentRef = useRef();
   const print = () => {
     window.print();
   };
-
+  const ticketData = JSON.parse(sessionStorage.getItem("ticketData"));
   const getAgentInfo = async () => {
     const response = await axios.get(environment.agentInfo, environment.headerToken);
     console.log(response);
@@ -90,11 +92,10 @@ const SuccessTicketPanel = () => {
                               <>
                                 {agentInfo.logoName !== null &&
                                   agentInfo.logoName !== "" ? (
-                                  <img
+                                    <img
                                     alt="img01"
                                     src={
-                                      environment.baseApiURL +
-                                      `agentinfo/GetLogo/${agentInfo.logoName}`
+                                      s3URL+`${agentInfo?.logoName}`
                                     }
                                     style={{ width: "150px", height: "50px" }}
                                   ></img>

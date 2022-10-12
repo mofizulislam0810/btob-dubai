@@ -12,8 +12,9 @@ import ReactToPrint from 'react-to-print';
 import { getDefaultNormalizer } from "@testing-library/react";
 
 const SuccessBookingPanel = () => {
-  const { bookData, setTicketData, setLoading, loading } = useAuth();
-  console.log(bookData);
+  const { setTicketData, setLoading, loading } = useAuth();
+
+  const bookData = JSON.parse(sessionStorage.getItem('bookData'));
   // const handleEmail = () => {
   //   const html = document.getElementById("sendEmailDiv").innerHTML;
   //   const obj = {
@@ -65,10 +66,7 @@ const SuccessBookingPanel = () => {
           if (response.data.item2?.isSuccess === true) {
             console.log(response);
             setTicketData(response.data);
-            // localStorage.setItem(
-            //   "ticketConfirm",
-            //   JSON.stringify(response.data)
-            // );
+            sessionStorage.setItem("ticketData",JSON.stringify(response.data));
             setLoading(false);
             navigate("/successticket");
           } else {
@@ -126,12 +124,12 @@ const SuccessBookingPanel = () => {
                     </span>
                   </div>
                   <div className="card-body" ref={componentRef} id="sendEmailDiv">
-                    <img
+                    {/* <img
                       src={logo}
                       className="my-3"
                       alt="Triplover logo"
                       style={{ width: "100px", height: "30px" }}
-                    />
+                    /> */}
                     <table class="table table-bordered my-2 mb-3 table-sm" style={{ fontSize: "11px" }}>
                       <thead>
                         <tr>
@@ -166,7 +164,8 @@ const SuccessBookingPanel = () => {
                             <tr>
                               <th>Issue Before:</th>
                               <td style={{ color: 'red' }}>
-                                {moment(bookData.data?.item1.ticketingTimeLimit).format("DD-MMMM-yyyy hh:mm:ss")}
+                                {/* {console.log(bookData.data?.item1.ticketingTimeLimit)} */}
+                                 {bookData.data?.item1.ticketingTimeLimit}
                               </td>
                             </tr>
                           </> : <>
@@ -255,7 +254,7 @@ const SuccessBookingPanel = () => {
                                       {airports
                                         .filter((f) => f.iata === item.from)
                                         .map((item) => item.city)}
-                                       {(item.details[0].originTerminal)}
+                                       (Terminal-{(item.details[0].originTerminal)})
                                     </span>
                                   </td>
                                   <td>
@@ -270,7 +269,7 @@ const SuccessBookingPanel = () => {
                                       {airports
                                         .filter((f) => f.iata === item.to)
                                         .map((item) => item.city)}
-                                      {(item.details[0].destinationTerminal)}
+                                      (Terminal-{(item.details[0].destinationTerminal)})
                                     </span>
                                   </td>
                                   <td>
@@ -311,6 +310,7 @@ const SuccessBookingPanel = () => {
                                         {airports
                                           .filter((f) => f.iata === item.from)
                                           .map((item) => item.city)}
+                                        (Terminal-{(item.details[0].originTerminal)})
                                       </span>
                                     </td>
                                     <td>
@@ -325,6 +325,7 @@ const SuccessBookingPanel = () => {
                                         {airports
                                           .filter((f) => f.iata === item.to)
                                           .map((item) => item.city)}
+                                        (Terminal-{(item.details[0].destinationTerminal)})
                                       </span>
                                     </td>
                                     <td>
@@ -443,6 +444,13 @@ const SuccessBookingPanel = () => {
                           ) : (
                             <></>
                           )}
+                           <tr className="fw-bold">
+                                <td colSpan={4} className='border-none'></td>
+                                    <td>Grand Total</td>
+                                    <td>AED{" "}
+                                    {bookData.data?.item1.flightInfo?.bookingComponents[0].totalPrice}
+                                    </td>
+                          </tr>
                         </tbody>
                       </table>
                     </div>

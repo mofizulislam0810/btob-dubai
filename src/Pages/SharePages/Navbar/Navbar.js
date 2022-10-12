@@ -210,19 +210,13 @@ const accountManagerInfo = async(agentId)=>{
             {agentInfo?.currencyName !== undefined ? agentInfo?.currencyName : "AED"} {agentInfo?.currentBalance ?? 0}
             </span>
           </a>
-          <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right" style={{minWidth:"325px"}}>
             <div className="dropdown-divider"></div>
-            <div className="p-3 text-center">
-              <h6>Your Account Balance</h6>
-              <button
-                className="btn text-white fw-bold button-color rounded"
-                // style={{ backgroundColor: "#02046a" }}
-              >
-                {agentInfo?.currencyName !== undefined ? agentInfo?.currencyName : "AED"} {agentInfo?.currentBalance ?? 0}
-              </button>
+            <div className="p-3 text-end">
+              <p>Your Account Balance ({agentInfo?.currencyName !== undefined ? agentInfo?.currencyName : "AED"} {agentInfo?.currentBalance ?? 0})</p>
             </div>
             <div className="dropdown-divider"></div>
-            <Link to="/balance" className="dropdown-item">
+            <Link to="/balance" className="dropdown-item text-end">
               Deposite Request
             </Link>
           </div>

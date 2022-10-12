@@ -178,12 +178,15 @@ const BookedView = () => {
           environment.headerToken
         )
         .then((res) => {
-          // console.log(res.data.item1)
+          console.log(res.data.item1)
           // console.log(res.data.item1?.remarks)
-          if(res.data.item1 !== undefined && res.data.item1 !== null && res.data.item1?.remarks !== null && res.data.item1?.remarks !== ""){
+          if(res.data.item1 !== undefined && res.data.item1 !== null && res.data.item1?.lastTicketTime !== null && res.data.item1?.lastTicketTime !== ""){
             // console.log('SET Ticketing Time');
+            setLastTicketTime(res.data.item1?.lastTicketTime);
+          }else if(res.data.item1 !== undefined && res.data.item1 !== null && res.data.item1?.remarks !== null && res.data.item1?.remarks !== ""){
             setLastTicketTime(res.data.item1?.remarks);
-          }else{
+          }
+          else{
             toast.error("Please try again after five minutes.")
             setIsLoading(false);
           }
@@ -196,7 +199,7 @@ const BookedView = () => {
     getTimeReq();
   }
 
- console.log(lastTicketTime);
+ console.log(ticketingList);
 
   return (
     <div>
@@ -801,12 +804,12 @@ const BookedView = () => {
                         
                       </div> */}
                       <div className="card-body" ref={componentRef}>
-                      <img
+                      {/* <img
                           src={logo}
                           className="my-3"
                           alt="Triplover logo"
                           style={{ width: "100px", height: "30px" }}
-                        />
+                        /> */}
                         <table class="table table-bordered my-2 mb-3 table-sm" style={{fontSize:"11px"}}>
                           <thead>
                             <tr>

@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import moment from "moment";
 const LeftSide = () => {
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
   const { setBookData, setLoading } = useAuth();
   const data = localStorage.getItem("Database");
@@ -297,21 +298,24 @@ const LeftSide = () => {
 
   const [adult, setAdult] = useState(adultList);
 
-  adult.map((i) =>
-    i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
-      ? Math.floor(
-        Math.abs(
-          new Date(
-            i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
-          ) - new Date()
-        ) /
-        (1000 * 60 * 60 * 24 * 30)
-      )
-        > 6
-        ? ""
-        : toast.error("Passport expiry date does not valid")
-      : ""
-  );
+
+  if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
+    adult.map((i) =>
+      i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
+        ? Math.floor(
+          Math.abs(
+            new Date(
+              i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
+            ) - new Date()
+          ) /
+          (1000 * 60 * 60 * 24 * 30)
+        )
+          > 6
+          ? ""
+          : toast.error("Passport expiry date does not valid")
+        : ""
+    );
+  }
 
 
 
@@ -391,37 +395,44 @@ const LeftSide = () => {
   localStorage.setItem("infant", JSON.stringify(infant));
   localStorage.setItem("contact", JSON.stringify(contact));
 
-  child.map((i) =>
-    i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
-      ? Math.floor(
-        Math.abs(
-          new Date(
-            i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
-          ) - new Date()
-        ) /
-        (1000 * 60 * 60 * 24 * 30)
-      )
-        > 6
-        ? ""
-        : toast.error("Passport expiry date does not valid")
-      : ""
-  );
+  if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
+    child.map((i) =>
+      i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
+        ? Math.floor(
+          Math.abs(
+            new Date(
+              i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
+            ) - new Date()
+          ) /
+          (1000 * 60 * 60 * 24 * 30)
+        )
+          > 6
+          ? ""
+          : toast.error("Passport expiry date does not valid")
+        : ""
+    );
+  }
 
-  infant.map((i) =>
-    i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
-      ? Math.floor(
-        Math.abs(
-          new Date(
-            i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
-          ) - new Date()
-        ) /
-        (1000 * 60 * 60 * 24 * 30)
-      )
-        > 6
-        ? ""
-        : toast.error("Passport expiry date does not valid")
-      : ""
-  );
+
+
+  if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
+    infant.map((i) =>
+      i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
+        ? Math.floor(
+          Math.abs(
+            new Date(
+              i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
+            ) - new Date()
+          ) /
+          (1000 * 60 * 60 * 24 * 30)
+        )
+          > 6
+          ? ""
+          : toast.error("Passport expiry date does not valid")
+        : ""
+    );
+  }
+
 
   infant.map((item, index) => {
     const ageInYears = moment().diff(moment(item.date + '/' + item.month + '/' + item.year, "DD/MM/YYYY"), 'months');
@@ -496,6 +507,7 @@ const LeftSide = () => {
           : item.year + "-" + item.month + "-" + item.date,
         passengerKey: idObj !== undefined ? String(idObj.id) : "0",
         isLeadPassenger: true,
+        isQuickPassenger: isChecked
       };
       sendObj.passengerInfoes.push(passengerObj);
     });
@@ -534,6 +546,7 @@ const LeftSide = () => {
         dateOfBirth: item.year + "-" + item.month + "-" + item.date,
         passengerKey: "0",
         isLeadPassenger: true,
+        isQuickPassenger: isChecked
       };
       sendObj.passengerInfoes.push(passengerObj);
     });
@@ -573,6 +586,7 @@ const LeftSide = () => {
           item.year + "-" + item.month.split("-")[0].trim() + "-" + item.date,
         passengerKey: "0",
         isLeadPassenger: true,
+        isQuickPassenger: isChecked
       };
       sendObj.passengerInfoes.push(passengerObj);
     });
@@ -649,7 +663,7 @@ const LeftSide = () => {
             if (response.data.item2?.isSuccess === true) {
               console.log(response);
               setBookData(response);
-              // localStorage.setItem('flightConfirm',JSON.stringify(response.data));
+              sessionStorage.setItem('bookData', JSON.stringify(response));
               setLoading(false);
               navigate("/successbooking");
             } else {
@@ -676,13 +690,13 @@ const LeftSide = () => {
 
   const handleChange = event => {
     if (event.target.checked) {
-      setIsSubscribed(true);
+      setIsChecked(true);
     } else {
-      setIsSubscribed(false);
+      setIsChecked(false);
     }
   };
 
-  // console.log(isSubscribed);
+  console.log(isChecked);
   return (
     <form onSubmit={bookingData}>
       <div className="col-lg-12">
@@ -730,13 +744,13 @@ const LeftSide = () => {
                                   v[index].firstName = item.first;
                                   v[index].middleName = item.middle;
                                   v[index].lastName = item.last;
-                                  v[index].date = Number(
+                                  v[index].date = Number(item.dateOfBirth == null ? "" :
                                     item.dateOfBirth.split("-")[2].split("T")[0]
                                   );
-                                  v[index].month = Number(
+                                  v[index].month = Number(item.dateOfBirth == null ? "" :
                                     item.dateOfBirth.split("-")[1]
                                   );
-                                  v[index].year = Number(
+                                  v[index].year = Number(item.dateOfBirth == null ? "" :
                                     item.dateOfBirth.split("-")[0]
                                   );
                                   v[index].nationality = item.nationality;
@@ -1473,13 +1487,13 @@ const LeftSide = () => {
                                   v[index].firstName = item.first;
                                   v[index].middleName = item.middle;
                                   v[index].lastName = item.last;
-                                  v[index].date = Number(
+                                  v[index].date = Number(item.dateOfBirth == null ? "" :
                                     item.dateOfBirth.split("-")[2].split("T")[0]
                                   );
-                                  v[index].month = Number(
+                                  v[index].month = Number(item.dateOfBirth == null ? "" :
                                     item.dateOfBirth.split("-")[1]
                                   );
-                                  v[index].year = Number(
+                                  v[index].year = Number(item.dateOfBirth == null ? "" :
                                     item.dateOfBirth.split("-")[0]
                                   );
                                   v[index].nationality = item.nationality;
@@ -2140,13 +2154,13 @@ const LeftSide = () => {
                                   v[index].firstName = item.first;
                                   v[index].middleName = item.middle;
                                   v[index].lastName = item.last;
-                                  v[index].date = Number(
+                                  v[index].date = Number(item.dateOfBirth == null ? "" :
                                     item.dateOfBirth.split("-")[2].split("T")[0]
                                   );
-                                  v[index].month = Number(
+                                  v[index].month = Number(item.dateOfBirth == null ? "" :
                                     item.dateOfBirth.split("-")[1]
                                   );
-                                  v[index].year = Number(
+                                  v[index].year = Number(item.dateOfBirth == null ? "" :
                                     item.dateOfBirth.split("-")[0]
                                   );
                                   v[index].nationality = item.nationality;
@@ -2717,25 +2731,25 @@ const LeftSide = () => {
                 );
               })}
               {/* <div>{JSON.stringify(infant, null, 2)}</div> */}
-              {/* <div className="row">
+              <div className="row">
                 <div className="col-lg-12">
                   <div class="form-check ">
                     <input
                       class="form-check-input"
                       type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                      checked
+                      value={isChecked}
+                      id="flexCheckDefault100"
+                      onChange={handleChange}
                     />
                     <label
                       class="form-check-label fw-bold"
-                      for="flexCheckDefault"
+                      for="flexCheckDefault100"
                     >
                       Add this person to passenger quick pick list
                     </label>
                   </div>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>

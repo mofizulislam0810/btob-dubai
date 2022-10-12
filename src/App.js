@@ -55,6 +55,7 @@ import Canceled from "./Pages/Queues/Canceled";
 import InvoiceView from "./Pages/InvoiceView/InvoiceView";
 import Expired from "./Pages/Queues/Expired";
 import LoanLedger from "./Pages/Ledger/LoanLedger";
+import ResetPassword from "./Pages/AuthenticationPage/ResetPassword/ResetPassword";
 function App() {
   var isLoggedIn = sessionStorage.getItem("token") !== null ? true : false;
   console.log(isLoggedIn);
@@ -78,6 +79,12 @@ function App() {
             <Route path="/privacypolicy" element={<PrivacyPolicy />} />
             <Route path="/termandcondition" element={<TermCondition />} />
             <Route path="/regsuccess" element={<RegComplete />} />
+            <Route
+              path="/resetpassword"
+              element={
+                  <ResetPassword />
+              }
+            />
             <Route
               path="/refundandcancellation"
               element={<RefundAndCancellation />}

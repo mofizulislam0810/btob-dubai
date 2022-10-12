@@ -19,6 +19,7 @@ import jsPDF from "jspdf";
 const Ticket = () => {
   let [ticketingList, setTicketingList] = useState([]);
   let [passengerList, setPassengerList] = useState([]);
+  const [loading, setLoading] = useState(false);
   let [basePrice, setBasePrice] = useState(0);
   let [tax, setTax] = useState(0);
   let [ait, setAIT] = useState(0);
@@ -66,6 +67,7 @@ const Ticket = () => {
     getTicketingList();
   };
   const handleSubmit = () => {
+    setLoading(true);
     console.log(passengerListEdited);
     const postPassengerList = async () => {
       const response = await axios.post(
@@ -74,12 +76,13 @@ const Ticket = () => {
         environment.headerToken
       );
       if (response.data > 0) {
-        toast.success("Thanks! data updated successfully..");
+        toast.success("Price updated successfully..");
         handleGetList();
       }
       else {
-        toast.error("Sorry! Data not updated..");
+        toast.error("Price not updated..");
       }
+      setLoading(false);
     };
     postPassengerList();
   };
@@ -111,7 +114,7 @@ const Ticket = () => {
     window.print();
   };
 
-  console.log(ticketingList?.bookingType);
+  console.log(ticketingList);
   const donwloadRef = useRef();
   const handleDownloadPdf = async () => {
     setIsDownloading(true);
@@ -139,7 +142,7 @@ const Ticket = () => {
       <SideNavBar></SideNavBar>
       <div className="content-wrapper search-panel-bg">
         <section className="content-header"></section>
-        <ToastContainer />
+        <ToastContainer position="bottom-right" autoClose={1500} />
         <section className="content">
           <div className="container mt-3">
             <div className="row">
@@ -168,7 +171,7 @@ const Ticket = () => {
                       <li id="menu-item">
                         <ReactToPrint
                           trigger={() => (
-                            <button className="btn btn-sm btn-secondary float-right mr-1 d-print-none">
+                            <button className="btn btn-sm btn-secondary float-right mr-1 d-print-none rounded">
                               <span className="me-1">
                                 <i className="fa fa-print"></i>
                               </span>
@@ -181,7 +184,7 @@ const Ticket = () => {
                       <li id="menu-item">
                         <a
                           href="javascript:void(0)"
-                          className="btn btn-sm btn-secondary float-right mr-1 d-print-none"
+                          className="btn btn-sm btn-secondary float-right mr-1 d-print-none rounded"
                           data-bs-toggle="modal"
                           data-bs-target="#priceModal"
                         >
@@ -191,7 +194,7 @@ const Ticket = () => {
                       <li id="menu-item">
                         <button
                           href="javascript:void(0)"
-                          className="btn btn-sm btn-secondary float-right mr-1 d-print-none"
+                          className="btn btn-sm btn-secondary float-right mr-1 d-print-none rounded"
                           onClick={handleDownloadPdf}
                           disabled={isDownloading ? true : false}
                         >
@@ -286,7 +289,7 @@ const Ticket = () => {
                             class="table table-bordered table-sm"
                             style={{ fontSize: "12px", width: "35rem" }}
                           >
-                            <thead>
+                            <thead className="bg-secondary text-white">
                               <tr className="text-start">
                                 <th>PASSENGER NAME</th>
                                 <th
@@ -329,7 +332,7 @@ const Ticket = () => {
                           >
                             <tbody className="text-start">
                               <tr>
-                                <td className="fw-bold">BOOKING ID</td>
+                                <td className="fw-bold bg-secondary text-white">BOOKING ID</td>
                                 <td>{ticketingList.ticketInfo?.uniqueTransID}</td>
                               </tr>
                               {/* <tr>
@@ -337,11 +340,11 @@ const Ticket = () => {
                             <td>International</td>
                           </tr> */}
                               <tr>
-                                <td className="fw-bold">JOURNEY TYPE</td>
+                                <td className="fw-bold bg-secondary text-white">JOURNEY TYPE</td>
                                 <td>{ticketingList.ticketInfo?.journeyType}</td>
                               </tr>
                               <tr>
-                                <td className="fw-bold">STATUS</td>
+                                <td className="fw-bold bg-secondary text-white">STATUS</td>
                                 <td>{ticketingList.ticketInfo?.status === 'Issued' ? "Ticketed" : ticketingList.ticketInfo?.status}</td>
                               </tr>
                             </tbody>
@@ -352,8 +355,8 @@ const Ticket = () => {
 
                       <div className="table-responsive-sm mt-2">
                         <p
-                          className="bg-secondary ps-1 py-2 fw-bold text-start text-white"
-                          style={{ fontSize: "12px" }}
+                          className="ps-1 py-2 fw-bold text-start text-white"
+                          style={{ fontSize: "12px", backgroundColor:"#8c8f93" }}
                         >
                           FLIGHT DETAILS
                         </p>
@@ -570,8 +573,7 @@ const Ticket = () => {
                                                   {item.fromAirport},{" "}
                                                   {airports
                                                     .filter((f) => f.iata === item.from)
-                                                    .map((item) => item.city)}
-                                                  {(item.details[0].originTerminal)}
+                                                    .map((item) => item.city)} (Terminal-{item.details[0].originTerminal})
                                                 </span>
                                               </td>
                                             </tr>
@@ -587,8 +589,7 @@ const Ticket = () => {
                                                   {item.toAirport},{" "}
                                                   {airports
                                                     .filter((f) => f.iata === item.to)
-                                                    .map((item) => item.city)}
-                                                  {(item.details[0].destinationTerminal)}
+                                                    .map((item) => item.city)} (Terminal-{item.details[0].destinationTerminal})
                                                 </sapn>
                                               </td>
                                             </tr>
@@ -739,8 +740,7 @@ const Ticket = () => {
                                                         {item.fromAirport},{" "}
                                                         {airports
                                                           .filter((f) => f.iata === item.from)
-                                                          .map((item) => item.city)}
-                                                        {(item.details[0].originTerminal)}
+                                                          .map((item) => item.city)} (Terminal-{item.details[0].originTerminal})
                                                       </span>
                                                     </td>
                                                   </tr>
@@ -756,8 +756,7 @@ const Ticket = () => {
                                                         {item.toAirport},{" "}
                                                         {airports
                                                           .filter((f) => f.iata === item.to)
-                                                          .map((item) => item.city)}
-                                                        {(item.details[0].destinationTerminal)}
+                                                          .map((item) => item.city)} (Terminal-{item.details[0].destinationTerminal})
                                                       </sapn>
                                                     </td>
                                                   </tr>
@@ -872,8 +871,8 @@ const Ticket = () => {
                       {isFareHide === false ? (
                         <div className="table-responsive-sm mt-2">
                           <p
-                            className="bg-secondary ps-1 py-2 fw-bold text-start text-white"
-                            style={{ fontSize: "12px", marginBottom: "8px" }}
+                            className="ps-1 py-2 fw-bold text-start text-white"
+                            style={{ fontSize: "12px", marginBottom: "8px",backgroundColor:"#8c8f93" }}
                           >
                             FARE DETAILS
                           </p>
@@ -952,6 +951,13 @@ const Ticket = () => {
                                   )}
                                 </>
                               ))}
+                                  <tr className="fw-bold">
+                                    <td colSpan={4} className='border-none'></td>
+                                    <td>Grand Total</td>
+                                    <td>{ticketingList.passengerInfo[0]?.currencyName}{" "}
+                                    {ticketingList.ticketInfo?.ticketingPrice}
+                                    </td>
+                                  </tr>
                             </tbody>
                           </table>
                         </div>) : (
@@ -960,8 +966,8 @@ const Ticket = () => {
 
                       <div className="mt-2 pb-5">
                         <p
-                          className="bg-secondary ps-1 py-2 fw-bold text-start text-white"
-                          style={{ fontSize: "12px", marginBottom: "8px" }}
+                          className="ps-1 py-2 fw-bold text-start text-white"
+                          style={{ fontSize: "12px", marginBottom: "8px",backgroundColor:"#8c8f93" }}
                         >
                           IMPORTANT NOTICE FOR TRAVELLERS
                         </p>
@@ -1104,10 +1110,10 @@ const Ticket = () => {
                                 />
                               </td>
                               <td className="text-end">
-                                {item.basePrice +
+                                {(item.basePrice +
                                   item.tax +
                                   item.ait +
-                                  item.discount}
+                                  item.discount).toFixed(2)}
                               </td>
                             </tr>
                           </>
@@ -1117,13 +1123,13 @@ const Ticket = () => {
                         <td colSpan={11} style={{ textAlign: "right" }}>
                           Total:{" "}
                           {passengerListEdited.map((item, index) => {
-                            totalPriceEdited +=
+                            (totalPriceEdited +=
                               item.basePrice +
                               item.tax +
                               item.ait +
-                              item.discount;
+                              item.discount).toFixed(2);
                             return index === passengerListEdited.length - 1
-                              ? totalPriceEdited
+                              ? (totalPriceEdited).toFixed(2)
                               : "";
                           })}
                         </td>
@@ -1142,6 +1148,7 @@ const Ticket = () => {
                   <button
                     type="button"
                     className="btn button-color fw-bold text-white rounded"
+                    disabled = {loading ? true : false}
                     onClick={() => handleSubmit()}
                   >
                     Submit

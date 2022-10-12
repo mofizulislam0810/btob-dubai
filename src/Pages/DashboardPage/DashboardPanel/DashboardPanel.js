@@ -19,7 +19,8 @@ const DashboardPanel = () => {
       var date = new Date(obj.date);
       var timestamp = +date;
       return {
-        name: obj.id,
+        id:obj.id,
+        name: obj.name,
         date: timestamp,
       };
     }))
@@ -33,7 +34,7 @@ const DashboardPanel = () => {
       }
     })
     // console.log(obj[0].name);
-    window.open("/ticket?utid=" + obj[0].name, "_blank");
+    window.open("/ticket?utid=" + obj[0].id, "_blank");
     //navigate("/ticket?utid="+utid,'_blank');
   };
 

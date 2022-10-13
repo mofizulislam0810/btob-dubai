@@ -608,17 +608,25 @@ const LeftSide = () => {
         priceCheck.segmentCodeRefs.push(i.segmentCodeRef)
       );
     }
-    if (direction2.length > 0) {
-      priceCheck.segmentCodeRefs.push(direction2.segments[0].segmentCodeRef);
+    if (Object.keys(direction2).length > 0) {
+      direction2.segments.map((i) =>
+        priceCheck.segmentCodeRefs.push(i.segmentCodeRef)
+      );
     }
-    if (direction3.length > 0) {
-      priceCheck.segmentCodeRefs.push(direction3.segments[0].segmentCodeRef);
+    if (Object.keys(direction3).length > 0) {
+      direction3.segments.map((i) =>
+        priceCheck.segmentCodeRefs.push(i.segmentCodeRef)
+      );
     }
-    if (direction4.length > 0) {
-      priceCheck.segmentCodeRefs.push(direction4.segments[0].segmentCodeRef);
+    if (Object.keys(direction4).length > 0) {
+      direction4.segments.map((i) =>
+        priceCheck.segmentCodeRefs.push(i.segmentCodeRef)
+      );
     }
-    if (direction5.length > 0) {
-      priceCheck.segmentCodeRefs.push(direction5.segments[0].segmentCodeRef);
+    if (Object.keys(direction5).length > 0) {
+      direction5.segments.map((i) =>
+        priceCheck.segmentCodeRefs.push(i.segmentCodeRef)
+      );
     }
 
     console.log(priceCheck);

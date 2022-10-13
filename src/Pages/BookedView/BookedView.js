@@ -1188,6 +1188,238 @@ const BookedView = () => {
 
                                         </> : <></>
                                     }
+
+                                    {
+                                      ticketingList?.directions[2] !== undefined && ticketingList?.directions !== undefined ?
+                                        <>
+                                          {ticketingList?.directions[2][0].segments.map((item, index) => {
+                                            return (
+                                              <tr key={index}>
+                                                <td>
+                                                  {item.airline}
+                                                  <br></br>
+                                                  <span style={{ fontSize: "12px" }}>
+                                                    {item.plane[0]}
+                                                  </span>
+                                                </td>
+                                                <td>{item.flightNumber}</td>
+                                                <td>
+                                                  {item.from}
+                                                  <br></br>
+                                                  <span style={{ fontSize: "12px" }}>
+                                                    {airports
+                                                      .filter((f) => f.iata === item.from)
+                                                      .map((item) => item.city)}
+                                                    {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.departure).format(
+                                                    "DD-MMMM-yyyy hh:mm:ss"
+                                                  )}
+                                                </td>
+                                                <td>
+                                                  {item.to}
+                                                  <span style={{ fontSize: "12px" }}>
+                                                    {airports
+                                                      .filter((f) => f.iata === item.to)
+                                                      .map((item) => item.city)}
+                                                    <br></br>
+                                                    {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.arrival).format(
+                                                    "DD-MMMM-yyyy hh:mm:ss"
+                                                  )}
+                                                </td>
+                                                <td>{item.fareBasisCode}</td>
+                                                <td> {item.serviceClass === "Y"
+                                                  ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                                  : item.serviceClass === "C"
+                                                    ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                                    : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                              </tr>
+                                            )
+                                          })
+                                          }
+
+                                        </> : <></>
+                                    }
+
+                                    {
+                                      ticketingList?.directions[3] !== undefined && ticketingList?.directions !== undefined ?
+                                        <>
+                                          {ticketingList?.directions[3][0].segments.map((item, index) => {
+                                            return (
+                                              <tr key={index}>
+                                                <td>
+                                                  {item.airline}
+                                                  <br></br>
+                                                  <span style={{ fontSize: "12px" }}>
+                                                    {item.plane[0]}
+                                                  </span>
+                                                </td>
+                                                <td>{item.flightNumber}</td>
+                                                <td>
+                                                  {item.from}
+                                                  <br></br>
+                                                  <span style={{ fontSize: "12px" }}>
+                                                    {airports
+                                                      .filter((f) => f.iata === item.from)
+                                                      .map((item) => item.city)}
+                                                    {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.departure).format(
+                                                    "DD-MMMM-yyyy hh:mm:ss"
+                                                  )}
+                                                </td>
+                                                <td>
+                                                  {item.to}
+                                                  <span style={{ fontSize: "12px" }}>
+                                                    {airports
+                                                      .filter((f) => f.iata === item.to)
+                                                      .map((item) => item.city)}
+                                                    <br></br>
+                                                    {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.arrival).format(
+                                                    "DD-MMMM-yyyy hh:mm:ss"
+                                                  )}
+                                                </td>
+                                                <td>{item.fareBasisCode}</td>
+                                                <td> {item.serviceClass === "Y"
+                                                  ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                                  : item.serviceClass === "C"
+                                                    ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                                    : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                              </tr>
+                                            )
+                                          })
+                                          }
+
+                                        </> : <></>
+                                    }
+
+                                    {
+                                      ticketingList?.directions[4] !== undefined && ticketingList?.directions !== undefined ?
+                                        <>
+                                          {ticketingList?.directions[4][0].segments.map((item, index) => {
+                                            return (
+                                              <tr key={index}>
+                                                <td>
+                                                  {item.airline}
+                                                  <br></br>
+                                                  <span style={{ fontSize: "12px" }}>
+                                                    {item.plane[0]}
+                                                  </span>
+                                                </td>
+                                                <td>{item.flightNumber}</td>
+                                                <td>
+                                                  {item.from}
+                                                  <br></br>
+                                                  <span style={{ fontSize: "12px" }}>
+                                                    {airports
+                                                      .filter((f) => f.iata === item.from)
+                                                      .map((item) => item.city)}
+                                                    {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.departure).format(
+                                                    "DD-MMMM-yyyy hh:mm:ss"
+                                                  )}
+                                                </td>
+                                                <td>
+                                                  {item.to}
+                                                  <span style={{ fontSize: "12px" }}>
+                                                    {airports
+                                                      .filter((f) => f.iata === item.to)
+                                                      .map((item) => item.city)}
+                                                    <br></br>
+                                                    {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.arrival).format(
+                                                    "DD-MMMM-yyyy hh:mm:ss"
+                                                  )}
+                                                </td>
+                                                <td>{item.fareBasisCode}</td>
+                                                <td> {item.serviceClass === "Y"
+                                                  ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                                  : item.serviceClass === "C"
+                                                    ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                                    : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                              </tr>
+                                            )
+                                          })
+                                          }
+
+                                        </> : <></>
+                                    }
+
+                                    {
+                                      ticketingList?.directions[5] !== undefined && ticketingList?.directions !== undefined ?
+                                        <>
+                                          {ticketingList?.directions[5][0].segments.map((item, index) => {
+                                            return (
+                                              <tr key={index}>
+                                                <td>
+                                                  {item.airline}
+                                                  <br></br>
+                                                  <span style={{ fontSize: "12px" }}>
+                                                    {item.plane[0]}
+                                                  </span>
+                                                </td>
+                                                <td>{item.flightNumber}</td>
+                                                <td>
+                                                  {item.from}
+                                                  <br></br>
+                                                  <span style={{ fontSize: "12px" }}>
+                                                    {airports
+                                                      .filter((f) => f.iata === item.from)
+                                                      .map((item) => item.city)}
+                                                    {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.departure).format(
+                                                    "DD-MMMM-yyyy hh:mm:ss"
+                                                  )}
+                                                </td>
+                                                <td>
+                                                  {item.to}
+                                                  <span style={{ fontSize: "12px" }}>
+                                                    {airports
+                                                      .filter((f) => f.iata === item.to)
+                                                      .map((item) => item.city)}
+                                                    <br></br>
+                                                    {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.arrival).format(
+                                                    "DD-MMMM-yyyy hh:mm:ss"
+                                                  )}
+                                                </td>
+                                                <td>{item.fareBasisCode}</td>
+                                                <td> {item.serviceClass === "Y"
+                                                  ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                                  : item.serviceClass === "C"
+                                                    ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                                    : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                              </tr>
+                                            )
+                                          })
+                                          }
+
+                                        </> : <></>
+                                    }
                                   </>
                               }
                             </tbody>

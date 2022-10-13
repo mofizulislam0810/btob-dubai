@@ -863,6 +863,690 @@ const Ticket = () => {
 
                                     </> : <></>
                                 }
+
+                                {
+                                  ticketingList?.directions[2] !== undefined && ticketingList?.directions !== undefined ?
+                                    <>
+                                      {ticketingList?.directions[2][0].segments.map((item, index) => {
+                                        return (
+                                          <>
+                                            <tbody key={index} className="border-top">
+                                              <tr>
+                                                <td
+                                                  className="fw-bold text-start d-flex bg-white align-items-center"
+                                                  style={{ paddingTop: "8px" }}
+                                                  colSpan={1}
+                                                >
+                                                  <img
+                                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                    className=""
+                                                    alt=""
+                                                    width="40px"
+                                                    height="40px"
+                                                  ></img>
+                                                  <div>
+                                                    <h6 className="ms-2 h6-line-height" style={{ fontSize: "15px" }}>{item.airline}</h6>
+                                                    <h6
+                                                      className="ms-2 pt-2 h6-line-height"
+                                                      style={{
+                                                        fontSize: "12px",
+                                                        marginBottom: "0px",
+                                                      }}
+                                                    >
+                                                      {(item.plane[0])}
+                                                    </h6>
+                                                  </div>
+                                                </td>
+                                                <td className="bg-white align-middle"
+                                                  style={{ lineHeight: "13px", paddingTop: "8px" }}>
+                                                  <tr>
+                                                    <td
+                                                      className="text-start bg-white p-0"
+                                                      style={{ fontSize: "11px", width: "6rem" }}
+                                                    >
+                                                      DEPARTS{" "}
+                                                    </td>
+                                                    <td className="text-start p-0">
+                                                      <span>
+                                                        {item.fromAirport},{" "}
+                                                        {airports
+                                                          .filter((f) => f.iata === item.from)
+                                                          .map((item) => item.city)} {item.details[0].originTerminal !== null && item.details[0].originTerminal !==''? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                                      </span>
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td
+                                                      className="text-start bg-white p-0"
+                                                      style={{ fontSize: "11px" }}
+                                                    >
+                                                      ARRIVES{" "}
+                                                    </td>
+                                                    <td className="text-start p-0">
+                                                      <sapn>
+                                                        {item.toAirport},{" "}
+                                                        {airports
+                                                          .filter((f) => f.iata === item.to)
+                                                          .map((item) => item.city)} {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !==''? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                                      </sapn>
+                                                    </td>
+                                                  </tr>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td
+                                                  className="text-start bg-white"
+                                                  colSpan={1}
+                                                >
+                                                  <tr>
+                                                    <td style={{ width: "40%" }}>
+                                                      <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.from}</h6>
+                                                      <h6 style={{ fontSize: "12px" }}>
+                                                        {" "}
+                                                        {moment(item.departure).format(
+                                                          "hh:mm A"
+                                                        )}
+                                                      </h6>
+                                                      <h6
+                                                        className="text-secondary"
+                                                        style={{ fontSize: "12px" }}
+                                                      >
+                                                        {" "}
+                                                        {moment(
+                                                          item.departure
+                                                        ).format("DD-MMMM-yyyy ddd")}
+                                                      </h6>
+                                                    </td>
+                                                    <td className="align-middle" style={{ width: "34%" }}>
+                                                      <i class="fas fa-circle"></i>
+                                                      --------------{" "}
+                                                      <i className="fas fa-plane"></i>
+                                                    </td>
+                                                    <td>
+                                                      <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.to}</h6>
+                                                      <h6 style={{ fontSize: "12px" }}>
+                                                        {moment(item.arrival).format(
+                                                          "hh:mm A"
+                                                        )}
+                                                      </h6>
+                                                      <h6
+                                                        className="text-secondary"
+                                                        style={{ fontSize: "12px" }}
+                                                      >
+                                                        {" "}
+                                                        {moment(item.arrival).format(
+                                                          "DD-MMMM-yyyy ddd"
+                                                        )}
+                                                      </h6>
+                                                    </td>
+                                                  </tr>
+                                                </td>
+                                                <td className="bg-white align-middle"
+                                                  style={{ lineHeight: "13px" }}>
+                                                  <tr>
+                                                    <td
+                                                      className="text-start fw-bold fs-6 bg-white p-0"
+                                                      style={{ width: "20%" }}
+                                                    >
+                                                      {item.airlineCode}-{item.flightNumber}
+                                                      <span className="">
+
+                                                        <span style={{ marginLeft: "43px" }}>
+                                                          {item.serviceClass === "Y"
+                                                            ? "ECONOMY" + "(" + item.bookingClass + ")"
+                                                            : item.serviceClass === "C"
+                                                              ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
+                                                              : item.serviceClass + "(" + item.bookingClass + ")"}
+                                                        </span>
+                                                      </span>
+                                                    </td>
+                                                  </tr>
+                                                  <tr
+                                                    className="text-start"
+                                                    style={{ fontSize: "11px" }}
+                                                  >
+                                                    <td className="text-start bg-white p-0">
+                                                      BAGGAGE
+                                                      <span className="ms-5">
+                                                        {item.baggage[0]?.amount}{item.baggage[0]?.units}
+                                                      </span>{" "}
+                                                    </td>
+                                                  </tr>
+                                                  <tr
+                                                    className="text-start"
+                                                    style={{ fontSize: "11px" }}
+                                                  >
+                                                    <td className="bg-white p-0">
+                                                      AIRLINE PNR{" "}
+                                                      <span style={{ marginLeft: "31px" }}>
+                                                        {ticketingList.ticketInfo?.airlinePNRs}
+                                                      </span>
+                                                    </td>
+                                                  </tr>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+
+                                          </>
+                                        )
+                                      })
+                                      }
+
+                                    </> : <></>
+                                }
+
+                                {
+                                  ticketingList?.directions[3] !== undefined && ticketingList?.directions !== undefined ?
+                                    <>
+                                      {ticketingList?.directions[3][0].segments.map((item, index) => {
+                                        return (
+                                          <>
+                                            <tbody key={index} className="border-top">
+                                              <tr>
+                                                <td
+                                                  className="fw-bold text-start d-flex bg-white align-items-center"
+                                                  style={{ paddingTop: "8px" }}
+                                                  colSpan={1}
+                                                >
+                                                  <img
+                                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                    className=""
+                                                    alt=""
+                                                    width="40px"
+                                                    height="40px"
+                                                  ></img>
+                                                  <div>
+                                                    <h6 className="ms-2 h6-line-height" style={{ fontSize: "15px" }}>{item.airline}</h6>
+                                                    <h6
+                                                      className="ms-2 pt-2 h6-line-height"
+                                                      style={{
+                                                        fontSize: "12px",
+                                                        marginBottom: "0px",
+                                                      }}
+                                                    >
+                                                      {(item.plane[0])}
+                                                    </h6>
+                                                  </div>
+                                                </td>
+                                                <td className="bg-white align-middle"
+                                                  style={{ lineHeight: "13px", paddingTop: "8px" }}>
+                                                  <tr>
+                                                    <td
+                                                      className="text-start bg-white p-0"
+                                                      style={{ fontSize: "11px", width: "6rem" }}
+                                                    >
+                                                      DEPARTS{" "}
+                                                    </td>
+                                                    <td className="text-start p-0">
+                                                      <span>
+                                                        {item.fromAirport},{" "}
+                                                        {airports
+                                                          .filter((f) => f.iata === item.from)
+                                                          .map((item) => item.city)} {item.details[0].originTerminal !== null && item.details[0].originTerminal !==''? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                                      </span>
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td
+                                                      className="text-start bg-white p-0"
+                                                      style={{ fontSize: "11px" }}
+                                                    >
+                                                      ARRIVES{" "}
+                                                    </td>
+                                                    <td className="text-start p-0">
+                                                      <sapn>
+                                                        {item.toAirport},{" "}
+                                                        {airports
+                                                          .filter((f) => f.iata === item.to)
+                                                          .map((item) => item.city)} {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !==''? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                                      </sapn>
+                                                    </td>
+                                                  </tr>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td
+                                                  className="text-start bg-white"
+                                                  colSpan={1}
+                                                >
+                                                  <tr>
+                                                    <td style={{ width: "40%" }}>
+                                                      <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.from}</h6>
+                                                      <h6 style={{ fontSize: "12px" }}>
+                                                        {" "}
+                                                        {moment(item.departure).format(
+                                                          "hh:mm A"
+                                                        )}
+                                                      </h6>
+                                                      <h6
+                                                        className="text-secondary"
+                                                        style={{ fontSize: "12px" }}
+                                                      >
+                                                        {" "}
+                                                        {moment(
+                                                          item.departure
+                                                        ).format("DD-MMMM-yyyy ddd")}
+                                                      </h6>
+                                                    </td>
+                                                    <td className="align-middle" style={{ width: "34%" }}>
+                                                      <i class="fas fa-circle"></i>
+                                                      --------------{" "}
+                                                      <i className="fas fa-plane"></i>
+                                                    </td>
+                                                    <td>
+                                                      <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.to}</h6>
+                                                      <h6 style={{ fontSize: "12px" }}>
+                                                        {moment(item.arrival).format(
+                                                          "hh:mm A"
+                                                        )}
+                                                      </h6>
+                                                      <h6
+                                                        className="text-secondary"
+                                                        style={{ fontSize: "12px" }}
+                                                      >
+                                                        {" "}
+                                                        {moment(item.arrival).format(
+                                                          "DD-MMMM-yyyy ddd"
+                                                        )}
+                                                      </h6>
+                                                    </td>
+                                                  </tr>
+                                                </td>
+                                                <td className="bg-white align-middle"
+                                                  style={{ lineHeight: "13px" }}>
+                                                  <tr>
+                                                    <td
+                                                      className="text-start fw-bold fs-6 bg-white p-0"
+                                                      style={{ width: "20%" }}
+                                                    >
+                                                      {item.airlineCode}-{item.flightNumber}
+                                                      <span className="">
+
+                                                        <span style={{ marginLeft: "43px" }}>
+                                                          {item.serviceClass === "Y"
+                                                            ? "ECONOMY" + "(" + item.bookingClass + ")"
+                                                            : item.serviceClass === "C"
+                                                              ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
+                                                              : item.serviceClass + "(" + item.bookingClass + ")"}
+                                                        </span>
+                                                      </span>
+                                                    </td>
+                                                  </tr>
+                                                  <tr
+                                                    className="text-start"
+                                                    style={{ fontSize: "11px" }}
+                                                  >
+                                                    <td className="text-start bg-white p-0">
+                                                      BAGGAGE
+                                                      <span className="ms-5">
+                                                        {item.baggage[0]?.amount}{item.baggage[0]?.units}
+                                                      </span>{" "}
+                                                    </td>
+                                                  </tr>
+                                                  <tr
+                                                    className="text-start"
+                                                    style={{ fontSize: "11px" }}
+                                                  >
+                                                    <td className="bg-white p-0">
+                                                      AIRLINE PNR{" "}
+                                                      <span style={{ marginLeft: "31px" }}>
+                                                        {ticketingList.ticketInfo?.airlinePNRs}
+                                                      </span>
+                                                    </td>
+                                                  </tr>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+
+                                          </>
+                                        )
+                                      })
+                                      }
+
+                                    </> : <></>
+                                }
+
+                                {
+                                  ticketingList?.directions[4] !== undefined && ticketingList?.directions !== undefined ?
+                                    <>
+                                      {ticketingList?.directions[4][0].segments.map((item, index) => {
+                                        return (
+                                          <>
+                                            <tbody key={index} className="border-top">
+                                              <tr>
+                                                <td
+                                                  className="fw-bold text-start d-flex bg-white align-items-center"
+                                                  style={{ paddingTop: "8px" }}
+                                                  colSpan={1}
+                                                >
+                                                  <img
+                                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                    className=""
+                                                    alt=""
+                                                    width="40px"
+                                                    height="40px"
+                                                  ></img>
+                                                  <div>
+                                                    <h6 className="ms-2 h6-line-height" style={{ fontSize: "15px" }}>{item.airline}</h6>
+                                                    <h6
+                                                      className="ms-2 pt-2 h6-line-height"
+                                                      style={{
+                                                        fontSize: "12px",
+                                                        marginBottom: "0px",
+                                                      }}
+                                                    >
+                                                      {(item.plane[0])}
+                                                    </h6>
+                                                  </div>
+                                                </td>
+                                                <td className="bg-white align-middle"
+                                                  style={{ lineHeight: "13px", paddingTop: "8px" }}>
+                                                  <tr>
+                                                    <td
+                                                      className="text-start bg-white p-0"
+                                                      style={{ fontSize: "11px", width: "6rem" }}
+                                                    >
+                                                      DEPARTS{" "}
+                                                    </td>
+                                                    <td className="text-start p-0">
+                                                      <span>
+                                                        {item.fromAirport},{" "}
+                                                        {airports
+                                                          .filter((f) => f.iata === item.from)
+                                                          .map((item) => item.city)} {item.details[0].originTerminal !== null && item.details[0].originTerminal !==''? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                                      </span>
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td
+                                                      className="text-start bg-white p-0"
+                                                      style={{ fontSize: "11px" }}
+                                                    >
+                                                      ARRIVES{" "}
+                                                    </td>
+                                                    <td className="text-start p-0">
+                                                      <sapn>
+                                                        {item.toAirport},{" "}
+                                                        {airports
+                                                          .filter((f) => f.iata === item.to)
+                                                          .map((item) => item.city)} {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !==''? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                                      </sapn>
+                                                    </td>
+                                                  </tr>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td
+                                                  className="text-start bg-white"
+                                                  colSpan={1}
+                                                >
+                                                  <tr>
+                                                    <td style={{ width: "40%" }}>
+                                                      <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.from}</h6>
+                                                      <h6 style={{ fontSize: "12px" }}>
+                                                        {" "}
+                                                        {moment(item.departure).format(
+                                                          "hh:mm A"
+                                                        )}
+                                                      </h6>
+                                                      <h6
+                                                        className="text-secondary"
+                                                        style={{ fontSize: "12px" }}
+                                                      >
+                                                        {" "}
+                                                        {moment(
+                                                          item.departure
+                                                        ).format("DD-MMMM-yyyy ddd")}
+                                                      </h6>
+                                                    </td>
+                                                    <td className="align-middle" style={{ width: "34%" }}>
+                                                      <i class="fas fa-circle"></i>
+                                                      --------------{" "}
+                                                      <i className="fas fa-plane"></i>
+                                                    </td>
+                                                    <td>
+                                                      <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.to}</h6>
+                                                      <h6 style={{ fontSize: "12px" }}>
+                                                        {moment(item.arrival).format(
+                                                          "hh:mm A"
+                                                        )}
+                                                      </h6>
+                                                      <h6
+                                                        className="text-secondary"
+                                                        style={{ fontSize: "12px" }}
+                                                      >
+                                                        {" "}
+                                                        {moment(item.arrival).format(
+                                                          "DD-MMMM-yyyy ddd"
+                                                        )}
+                                                      </h6>
+                                                    </td>
+                                                  </tr>
+                                                </td>
+                                                <td className="bg-white align-middle"
+                                                  style={{ lineHeight: "13px" }}>
+                                                  <tr>
+                                                    <td
+                                                      className="text-start fw-bold fs-6 bg-white p-0"
+                                                      style={{ width: "20%" }}
+                                                    >
+                                                      {item.airlineCode}-{item.flightNumber}
+                                                      <span className="">
+
+                                                        <span style={{ marginLeft: "43px" }}>
+                                                          {item.serviceClass === "Y"
+                                                            ? "ECONOMY" + "(" + item.bookingClass + ")"
+                                                            : item.serviceClass === "C"
+                                                              ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
+                                                              : item.serviceClass + "(" + item.bookingClass + ")"}
+                                                        </span>
+                                                      </span>
+                                                    </td>
+                                                  </tr>
+                                                  <tr
+                                                    className="text-start"
+                                                    style={{ fontSize: "11px" }}
+                                                  >
+                                                    <td className="text-start bg-white p-0">
+                                                      BAGGAGE
+                                                      <span className="ms-5">
+                                                        {item.baggage[0]?.amount}{item.baggage[0]?.units}
+                                                      </span>{" "}
+                                                    </td>
+                                                  </tr>
+                                                  <tr
+                                                    className="text-start"
+                                                    style={{ fontSize: "11px" }}
+                                                  >
+                                                    <td className="bg-white p-0">
+                                                      AIRLINE PNR{" "}
+                                                      <span style={{ marginLeft: "31px" }}>
+                                                        {ticketingList.ticketInfo?.airlinePNRs}
+                                                      </span>
+                                                    </td>
+                                                  </tr>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+
+                                          </>
+                                        )
+                                      })
+                                      }
+
+                                    </> : <></>
+                                }
+
+                                 {
+                                  ticketingList?.directions[5] !== undefined && ticketingList?.directions !== undefined ?
+                                    <>
+                                      {ticketingList?.directions[5][0].segments.map((item, index) => {
+                                        return (
+                                          <>
+                                            <tbody key={index} className="border-top">
+                                              <tr>
+                                                <td
+                                                  className="fw-bold text-start d-flex bg-white align-items-center"
+                                                  style={{ paddingTop: "8px" }}
+                                                  colSpan={1}
+                                                >
+                                                  <img
+                                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                    className=""
+                                                    alt=""
+                                                    width="40px"
+                                                    height="40px"
+                                                  ></img>
+                                                  <div>
+                                                    <h6 className="ms-2 h6-line-height" style={{ fontSize: "15px" }}>{item.airline}</h6>
+                                                    <h6
+                                                      className="ms-2 pt-2 h6-line-height"
+                                                      style={{
+                                                        fontSize: "12px",
+                                                        marginBottom: "0px",
+                                                      }}
+                                                    >
+                                                      {(item.plane[0])}
+                                                    </h6>
+                                                  </div>
+                                                </td>
+                                                <td className="bg-white align-middle"
+                                                  style={{ lineHeight: "13px", paddingTop: "8px" }}>
+                                                  <tr>
+                                                    <td
+                                                      className="text-start bg-white p-0"
+                                                      style={{ fontSize: "11px", width: "6rem" }}
+                                                    >
+                                                      DEPARTS{" "}
+                                                    </td>
+                                                    <td className="text-start p-0">
+                                                      <span>
+                                                        {item.fromAirport},{" "}
+                                                        {airports
+                                                          .filter((f) => f.iata === item.from)
+                                                          .map((item) => item.city)} {item.details[0].originTerminal !== null && item.details[0].originTerminal !==''? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                                      </span>
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td
+                                                      className="text-start bg-white p-0"
+                                                      style={{ fontSize: "11px" }}
+                                                    >
+                                                      ARRIVES{" "}
+                                                    </td>
+                                                    <td className="text-start p-0">
+                                                      <sapn>
+                                                        {item.toAirport},{" "}
+                                                        {airports
+                                                          .filter((f) => f.iata === item.to)
+                                                          .map((item) => item.city)} {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !==''? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                                      </sapn>
+                                                    </td>
+                                                  </tr>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td
+                                                  className="text-start bg-white"
+                                                  colSpan={1}
+                                                >
+                                                  <tr>
+                                                    <td style={{ width: "40%" }}>
+                                                      <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.from}</h6>
+                                                      <h6 style={{ fontSize: "12px" }}>
+                                                        {" "}
+                                                        {moment(item.departure).format(
+                                                          "hh:mm A"
+                                                        )}
+                                                      </h6>
+                                                      <h6
+                                                        className="text-secondary"
+                                                        style={{ fontSize: "12px" }}
+                                                      >
+                                                        {" "}
+                                                        {moment(
+                                                          item.departure
+                                                        ).format("DD-MMMM-yyyy ddd")}
+                                                      </h6>
+                                                    </td>
+                                                    <td className="align-middle" style={{ width: "34%" }}>
+                                                      <i class="fas fa-circle"></i>
+                                                      --------------{" "}
+                                                      <i className="fas fa-plane"></i>
+                                                    </td>
+                                                    <td>
+                                                      <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.to}</h6>
+                                                      <h6 style={{ fontSize: "12px" }}>
+                                                        {moment(item.arrival).format(
+                                                          "hh:mm A"
+                                                        )}
+                                                      </h6>
+                                                      <h6
+                                                        className="text-secondary"
+                                                        style={{ fontSize: "12px" }}
+                                                      >
+                                                        {" "}
+                                                        {moment(item.arrival).format(
+                                                          "DD-MMMM-yyyy ddd"
+                                                        )}
+                                                      </h6>
+                                                    </td>
+                                                  </tr>
+                                                </td>
+                                                <td className="bg-white align-middle"
+                                                  style={{ lineHeight: "13px" }}>
+                                                  <tr>
+                                                    <td
+                                                      className="text-start fw-bold fs-6 bg-white p-0"
+                                                      style={{ width: "20%" }}
+                                                    >
+                                                      {item.airlineCode}-{item.flightNumber}
+                                                      <span className="">
+
+                                                        <span style={{ marginLeft: "43px" }}>
+                                                          {item.serviceClass === "Y"
+                                                            ? "ECONOMY" + "(" + item.bookingClass + ")"
+                                                            : item.serviceClass === "C"
+                                                              ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
+                                                              : item.serviceClass + "(" + item.bookingClass + ")"}
+                                                        </span>
+                                                      </span>
+                                                    </td>
+                                                  </tr>
+                                                  <tr
+                                                    className="text-start"
+                                                    style={{ fontSize: "11px" }}
+                                                  >
+                                                    <td className="text-start bg-white p-0">
+                                                      BAGGAGE
+                                                      <span className="ms-5">
+                                                        {item.baggage[0]?.amount}{item.baggage[0]?.units}
+                                                      </span>{" "}
+                                                    </td>
+                                                  </tr>
+                                                  <tr
+                                                    className="text-start"
+                                                    style={{ fontSize: "11px" }}
+                                                  >
+                                                    <td className="bg-white p-0">
+                                                      AIRLINE PNR{" "}
+                                                      <span style={{ marginLeft: "31px" }}>
+                                                        {ticketingList.ticketInfo?.airlinePNRs}
+                                                      </span>
+                                                    </td>
+                                                  </tr>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+
+                                          </>
+                                        )
+                                      })
+                                      }
+
+                                    </> : <></>
+                                }
                               </>
                           }
                         </table>

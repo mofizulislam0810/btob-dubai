@@ -1,9 +1,9 @@
- const baseURL='http://localhost:7236/';
+//  const baseURL='http://localhost:7236/';
 // const baseURL='http://52.221.202.198:83/';
 // const baseURL='http://13.212.45.180:81/';
 // const baseURL = 'http://54.169.108.46:81/';
 // const baseURL = 'http://18.142.212.139:81/';
-// const baseURL = 'https://api.triplover.ae/';
+const baseURL = 'https://api.triplover.ae/';
 const baseApiURL =baseURL+ 'api/';
 const tokenData = JSON.parse(sessionStorage.getItem('token'));
 let headerToken = { headers: { Authorization: '' } };

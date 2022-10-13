@@ -80,7 +80,7 @@ const SuccessTicketPanel = () => {
                       content={() => componentRef.current}
                     />
                   </div>
-                  <div className="card-body py-5" ref={componentRef}>
+                  <div className="card-body py-5 px-5" ref={componentRef}>
 
                     <h4 className="text-center pb-2">E-Ticket</h4>
 
@@ -130,7 +130,7 @@ const SuccessTicketPanel = () => {
                               <br />
                               <div
                                 className="mt-2"
-                                style={{ fontSize: "10px", lineHeight: "12px" }}
+                                style={{ fontSize: "12px", lineHeight: "12px" }}
                               >
                                 {agentInfo.address}
                                 <br />
@@ -143,7 +143,7 @@ const SuccessTicketPanel = () => {
                       </tbody>
                     </table>
 
-                    <table class="table table-borderless my-3 table-sm" style={{ fontSize: "10px" }}>
+                    <table class="table table-borderless my-3 table-sm" style={{ fontSize: "12px" }}>
                       <tbody>
                         <tr>
                           <td className="text-start bg-white" style={{ width: "10%" }}>
@@ -162,9 +162,9 @@ const SuccessTicketPanel = () => {
                       <div className="">
                         <table
                           class="table table-bordered table-sm"
-                          style={{ fontSize: "10px", width: "35rem" }}
+                          style={{ fontSize: "12px", width: "35rem" }}
                         >
-                          <thead>
+                          <thead className="bg-secondary text-white">
                             <tr className="text-start">
                               <th>PASSENGER NAME</th>
                               <th
@@ -203,11 +203,11 @@ const SuccessTicketPanel = () => {
                       <div className="">
                         <table
                           class="table table-bordered table-sm float-right"
-                          style={{ fontSize: "10px", width: "20rem" }}
+                          style={{ fontSize: "12px", width: "20rem" }}
                         >
                           <tbody className="text-start">
                             <tr>
-                              <td className="fw-bold">BOOKING ID</td>
+                              <td className="fw-bold bg-secondary text-white">BOOKING ID</td>
                               <td>{ticketData.item1?.uniqueTransID}</td>
                             </tr>
                             {/* <tr>
@@ -215,11 +215,11 @@ const SuccessTicketPanel = () => {
                             <td>International</td>
                           </tr> */}
                             <tr>
-                              <td className="fw-bold">JOURNEY TYPE</td>
+                              <td className="fw-bold bg-secondary text-white">JOURNEY TYPE</td>
                               <td>{ticketData.item1?.flightInfo.directions[0] !==undefined && ticketData.item1?.flightInfo.directions[1] !==undefined ? "Return" : "Oneway"}</td>
                             </tr>
                             <tr>
-                              <td className="fw-bold">STATUS</td>
+                              <td className="fw-bold bg-secondary text-white">STATUS</td>
                               <td>Ticketed</td>
                             </tr>
                           </tbody>
@@ -229,15 +229,15 @@ const SuccessTicketPanel = () => {
 
 
                     <div className="table-responsive-sm mt-2">
-                      <p className="bg-secondary ps-1 py-2 fw-bold text-start text-white"
-                        style={{ fontSize: "10px" }}>FLIGHT DETAILS</p>
+                      <p className="ps-1 py-2 fw-bold text-start text-white"
+                        style={{ fontSize: "12px", backgroundColor:"#8c8f93" }}>FLIGHT DETAILS</p>
                       {ticketData.item1?.flightInfo.directions.length > 2 ? (
                         <>
                         </>
                       ) : (
                         <>
                           <table class="table table-borderless table-sm"
-                            style={{ fontSize: "10px", lineHeight: "1px" }}>
+                            style={{ fontSize: "12px", lineHeight: "1px" }}>
                             {ticketData.item1?.flightInfo.directions[0][0].segments.map(
                               (item, index) => (
                                 <tbody>
@@ -283,8 +283,7 @@ const SuccessTicketPanel = () => {
                                             {item.fromAirport},{" "}
                                             {airports
                                               .filter((f) => f.iata === item.from)
-                                              .map((item) => item.city)}
-                                              {(item.details[0].originTerminal)}
+                                              .map((item) => item.city)} {item.details[0].originTerminal !== null && item.details[0].originTerminal !==''? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
                                           </span>
                                         </td>
                                       </tr>
@@ -300,8 +299,7 @@ const SuccessTicketPanel = () => {
                                             {item.toAirport},{" "}
                                             {airports
                                               .filter((f) => f.iata === item.to)
-                                              .map((item) => item.city)}
-                                              {(item.details[0].destinationTerminal)}
+                                              .map((item) => item.city)} {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !==''? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
                                           </sapn>
                                         </td>
                                       </tr>
@@ -428,7 +426,7 @@ const SuccessTicketPanel = () => {
                       <>
                         <hr></hr>
                         <table class="table table-borderless table-sm"
-                          style={{ fontSize: "10px", lineHeight: "1px" }}>
+                          style={{ fontSize: "12px", lineHeight: "1px" }}>
                           {ticketData.item1?.flightInfo.directions[1][0].segments.map(
                             (item, index) => (
                               <tbody>
@@ -474,8 +472,7 @@ const SuccessTicketPanel = () => {
                                           {item.fromAirport},{" "}
                                           {airports
                                             .filter((f) => f.iata === item.from)
-                                            .map((item) => item.city)}
-                                            {(item.details[0].originTerminal)}
+                                            .map((item) => item.city)} {item.details[0].originTerminal !== null && item.details[0].originTerminal !==''? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
                                         </span>
                                       </td>
                                     </tr>
@@ -491,8 +488,7 @@ const SuccessTicketPanel = () => {
                                           {item.toAirport},{" "}
                                           {airports
                                             .filter((f) => f.iata === item.to)
-                                            .map((item) => item.city)}
-                                            {(item.details[0].destinationTerminal)}
+                                            .map((item) => item.city)} {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !==''? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
                                         </sapn>
                                       </td>
                                     </tr>
@@ -618,11 +614,11 @@ const SuccessTicketPanel = () => {
                     {isFareHide === false ? (
                       <>
                         <div className="table-responsive-sm mt-2">
-                          <p className="bg-secondary ps-1 py-2 fw-bold text-start text-white"
-                            style={{ fontSize: "10px", marginBottom: "8px" }}>FARE DETAILS</p>
+                          <p className="ps-1 py-2 fw-bold text-start text-white"
+                            style={{ fontSize: "12px", marginBottom: "8px", backgroundColor:"#8c8f93" }}>FARE DETAILS</p>
 
                           <table class="table table-bordered table-sm text-end"
-                            style={{ fontSize: "10px" }}>
+                            style={{ fontSize: "12px" }}>
                             <thead>
                               <tr>
                                 <th className="text-start">Type</th>
@@ -761,6 +757,13 @@ const SuccessTicketPanel = () => {
                               ) : (
                                 <></>
                               )}
+                              <tr className="fw-bold">
+                                    <td colSpan={4} className='border-none'></td>
+                                    <td>Grand Total</td>
+                                    <td>
+                                     AED {ticketData.item1?.flightInfo.bookingComponents[0].totalPrice}
+                                    </td>
+                              </tr>
                             </tbody>
                           </table>
                         </div>
@@ -770,11 +773,11 @@ const SuccessTicketPanel = () => {
                     )}
 
                     <div className="mt-2 pb-5">
-                      <p className="bg-secondary ps-1 py-2 fw-bold text-start text-white"
-                        style={{ fontSize: "10px", marginBottom: "8px" }}>
+                      <p className="ps-1 py-2 fw-bold text-start text-white"
+                        style={{ fontSize: "12px", marginBottom: "8px", backgroundColor:"#8c8f93"  }}>
                         IMPORTANT NOTICE FOR TRAVELLERS
                       </p>
-                      <p style={{ fontSize: "10px" }} className="text-start">
+                      <p style={{ fontSize: "12px" }} className="text-start">
                         BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER
                         STATUS/ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.
                         Carriage and other services provided by the carrier are

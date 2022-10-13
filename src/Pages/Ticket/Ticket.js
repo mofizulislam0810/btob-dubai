@@ -573,7 +573,7 @@ const Ticket = () => {
                                                   {item.fromAirport},{" "}
                                                   {airports
                                                     .filter((f) => f.iata === item.from)
-                                                    .map((item) => item.city)} (Terminal-{item.details[0].originTerminal})
+                                                    .map((item) => item.city)} {item.details[0].originTerminal !== null && item.details[0].originTerminal !==''? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
                                                 </span>
                                               </td>
                                             </tr>
@@ -589,7 +589,7 @@ const Ticket = () => {
                                                   {item.toAirport},{" "}
                                                   {airports
                                                     .filter((f) => f.iata === item.to)
-                                                    .map((item) => item.city)} (Terminal-{item.details[0].destinationTerminal})
+                                                    .map((item) => item.city)} {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !==''? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
                                                 </sapn>
                                               </td>
                                             </tr>
@@ -740,7 +740,7 @@ const Ticket = () => {
                                                         {item.fromAirport},{" "}
                                                         {airports
                                                           .filter((f) => f.iata === item.from)
-                                                          .map((item) => item.city)} (Terminal-{item.details[0].originTerminal})
+                                                          .map((item) => item.city)} {item.details[0].originTerminal !== null && item.details[0].originTerminal !==''? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
                                                       </span>
                                                     </td>
                                                   </tr>
@@ -756,7 +756,7 @@ const Ticket = () => {
                                                         {item.toAirport},{" "}
                                                         {airports
                                                           .filter((f) => f.iata === item.to)
-                                                          .map((item) => item.city)} (Terminal-{item.details[0].destinationTerminal})
+                                                          .map((item) => item.city)} {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !==''? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
                                                       </sapn>
                                                     </td>
                                                   </tr>
@@ -954,7 +954,8 @@ const Ticket = () => {
                                   <tr className="fw-bold">
                                     <td colSpan={4} className='border-none'></td>
                                     <td>Grand Total</td>
-                                    <td>{ticketingList.passengerInfo[0]?.currencyName}{" "}
+                                    <td>
+                                     {ticketingList.passengerInfo !== undefined ? ticketingList.passengerInfo[0]?.currencyName : ""} {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
                                     {ticketingList.ticketInfo?.ticketingPrice}
                                     </td>
                                   </tr>

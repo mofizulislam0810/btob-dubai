@@ -32,20 +32,20 @@ const BookedView = () => {
   let [passengerListEdited, setPassengerListEdited] = useState([]);
   let [totalPriceEdited, setTotalPriceEdited] = useState(0);
   let [isFareHide, setIsFareHide] = useState(false);
-  let [lastTicketTime,setLastTicketTime] = useState('');
-  let [isLoading,setIsLoading] = useState(false);
+  let [lastTicketTime, setLastTicketTime] = useState('');
+  let [isLoading, setIsLoading] = useState(false);
 
   const location = useLocation();
   console.log(ticketingList);
   const handleGetList = () => {
     const getTicketingList = async () => {
-      let sendObj = { uniqueTransID: location.search.split("=")[1] };
-      const response = await axios.post(
-        environment.getTicketingList,
-        sendObj,
-        environment.headerToken
+      // let sendObj = { uniqueTransID: location.search.split("=")[1] };
+      let sendObj = location.search.split("=")[1];
+      const response = await axios.get(
+        environment.getTicketingDetails + '/' + sendObj, environment.headerToken
       );
-      setTicketingList(response.data.data);
+      // console.log(response);
+      setTicketingList(response.data);
       setLastTicketTime(response.data.data[0]?.lastTicketTimeNote)
       console.log(response.data.data);
       // alert(ticketingList[0].uniqueTransID)
@@ -167,7 +167,7 @@ const BookedView = () => {
     fetchOptions();
   };
 
-  const handleGetTime=(referenceLog)=>{
+  const handleGetTime = (referenceLog) => {
     setIsLoading(true);
     // alert(referenceLog);
     const getTimeReq = async () => {
@@ -180,13 +180,13 @@ const BookedView = () => {
         .then((res) => {
           console.log(res.data.item1)
           // console.log(res.data.item1?.remarks)
-          if(res.data.item1 !== undefined && res.data.item1 !== null && res.data.item1?.lastTicketTime !== null && res.data.item1?.lastTicketTime !== ""){
+          if (res.data.item1 !== undefined && res.data.item1 !== null && res.data.item1?.lastTicketTime !== null && res.data.item1?.lastTicketTime !== "") {
             // console.log('SET Ticketing Time');
             setLastTicketTime(res.data.item1?.lastTicketTime);
-          }else if(res.data.item1 !== undefined && res.data.item1 !== null && res.data.item1?.remarks !== null && res.data.item1?.remarks !== ""){
+          } else if (res.data.item1 !== undefined && res.data.item1 !== null && res.data.item1?.remarks !== null && res.data.item1?.remarks !== "") {
             setLastTicketTime(res.data.item1?.remarks);
           }
-          else{
+          else {
             toast.error("Please try again after five minutes.")
             setIsLoading(false);
           }
@@ -199,7 +199,7 @@ const BookedView = () => {
     getTimeReq();
   }
 
- console.log(ticketingList);
+  console.log(ticketingList);
 
   return (
     <div>
@@ -208,7 +208,7 @@ const BookedView = () => {
       <ToastContainer position="bottom-right" autoClose={1500} />
       {
         loading ? <>
-         <Loading flag={2} loading={loading}></Loading>
+          <Loading flag={2} loading={loading}></Loading>
           <div className="content-wrapper search-panel-bg">
             <section className="content-header"></section>
             <section className="content">
@@ -410,7 +410,7 @@ const BookedView = () => {
                                     <td>{item.passengerType}</td>
                                     <td>{item.gender}</td>
                                     <td>
-                                      {item.dateOfBirth === null? "---" : moment(item.dateOfBirth).format(
+                                      {item.dateOfBirth === null ? "---" : moment(item.dateOfBirth).format(
                                         "DD-MMMM-yyyy"
                                       )}
                                     </td>
@@ -804,13 +804,13 @@ const BookedView = () => {
                         
                       </div> */}
                       <div className="card-body" ref={componentRef}>
-                      {/* <img
+                        {/* <img
                           src={logo}
                           className="my-3"
                           alt="Triplover logo"
                           style={{ width: "100px", height: "30px" }}
                         /> */}
-                        <table class="table table-bordered my-2 mb-3 table-sm" style={{fontSize:"11px"}}>
+                        <table class="table table-bordered my-2 mb-3 table-sm" style={{ fontSize: "11px" }}>
                           <thead>
                             <tr>
                               <th colspan="4" className="fw-bold py-2 bg-light">
@@ -822,64 +822,64 @@ const BookedView = () => {
                             <tr>
                               <th>Booking Date:</th>
                               <td>
-                                {moment(ticketingList[0]?.bookingDate).format("DD-MMMM-yyyy")}
+                                {moment(ticketingList.ticketInfo?.bookingDate).format("DD-MMMM-yyyy")}
                               </td>
                               <td className="fw-bold">Booking ID:</td>
                               <td>
-                                  {ticketingList[0]?.uniqueTransID}
+                                {ticketingList.ticketInfo?.uniqueTransID}
                               </td>
                             </tr>
                             <tr>
                               <th>Issue Before:</th>
-                              <td  style={{color:'red'}}>
-                              {
-                                lastTicketTime !== '' && lastTicketTime !== null && lastTicketTime !== undefined? lastTicketTime : <>
-                                  <a href="javascript:void(0)"
-                                          title="Last Ticketing Time"
-                                          onClick={() =>
-                                            handleGetTime(
-                                              ticketingList[0]?.referenceLog,
-                                            )
-                                          }
-                                        >
-                                          <Button
-                                            isLoading = {isLoading}
-                                            border="2px solid"
-                                            colorScheme='blue'
-                                            variant="outline"
-                                            size="xsm"
-                                            borderRadius="16px"
-                                            p="1"
-                                            m="1"
-                                            // disabled = {click}
-                                          >
-                                            <span style={{fontSize:"10px"}}>Get Limit</span>
-                                          </Button>
+                              <td style={{ color: 'red' }}>
+                                {
+                                  lastTicketTime !== '' && lastTicketTime !== null && lastTicketTime !== undefined ? lastTicketTime : <>
+                                    <a href="javascript:void(0)"
+                                      title="Last Ticketing Time"
+                                      onClick={() =>
+                                        handleGetTime(
+                                          ticketingList.ticketInfo?.referenceLog,
+                                        )
+                                      }
+                                    >
+                                      <Button
+                                        isLoading={isLoading}
+                                        border="2px solid"
+                                        colorScheme='blue'
+                                        variant="outline"
+                                        size="xsm"
+                                        borderRadius="16px"
+                                        p="1"
+                                        m="1"
+                                      // disabled = {click}
+                                      >
+                                        <span style={{ fontSize: "10px" }}>Get Limit</span>
+                                      </Button>
                                     </a>
-                                </>  
+                                  </>
                                 }
-                                    
+
                               </td>
                               <td className="fw-bold">PNR</td>
                               <td>
-                                 {ticketingList[0]?.pnr}
+                                {ticketingList.ticketInfo?.pnr}
                               </td>
                             </tr>
                             <tr>
                               <th>Booking Status:</th>
                               <td>
-                                  {ticketingList[0]?.status}
+                                {ticketingList.ticketInfo?.status}
                               </td>
                               <td className="fw-bold">Booked By:</td>
                               <td>
-                                  {ticketingList[0]?.agentName}
+                                {ticketingList.ticketInfo?.agentName}
                               </td>
                             </tr>
                           </tbody>
                         </table>
 
                         <div className="table-responsive-sm">
-                          <table className="table table-bordered table-sm" style={{fontSize:"11px"}}>
+                          <table className="table table-bordered table-sm" style={{ fontSize: "11px" }}>
                             <thead>
                               <tr>
                                 <th
@@ -898,7 +898,7 @@ const BookedView = () => {
                               </tr>
                             </thead>
                             <tbody className="text-center">
-                              {passengerList.map((item, index) => {
+                              {ticketingList.passengerInfo?.map((item, index) => {
                                 return (
                                   <tr key={index}>
                                     <td>
@@ -913,7 +913,7 @@ const BookedView = () => {
                                     <td>{item.passengerType}</td>
                                     <td>{item.gender}</td>
                                     <td>
-                                      {item.dateOfBirth === null? "---" : moment(item.dateOfBirth).format(
+                                      {item.dateOfBirth === null ? "---" : moment(item.dateOfBirth).format(
                                         "DD-MMMM-yyyy"
                                       )}
                                     </td>
@@ -926,7 +926,7 @@ const BookedView = () => {
                         </div>
 
                         <div className="table-responsive-sm">
-                          <table className="table table-bordered table-sm" style={{fontSize:"11px"}}>
+                          <table className="table table-bordered table-sm" style={{ fontSize: "11px" }}>
                             <thead>
                               <tr>
                                 <th
@@ -948,36 +948,166 @@ const BookedView = () => {
                               </tr>
                             </thead>
                             <tbody className="text-center">
-                              {segmentList.map((item, index) => {
-                                return (
+                              {
+                                ticketingList?.ticketInfo?.bookingType !== 'Online' ?
                                   <>
-                                    <tr>
-                                      <td>{ticketingList[0].airlineName}</td>
-                                      <td>{item.flightNumber}</td>
-                                      <td>{item.origin}</td>
-                                      <td>
-                                        {moment(item.departure).format(
-                                          "DD-MMMM-yyyy hh:mm:ss"
-                                        )}
-                                      </td>
-                                      <td>{item.destination}</td>
-                                      <td>
-                                        {moment(item.arrival).format(
-                                          "DD-MMMM-yyyy hh:mm:ss"
-                                        )}
-                                      </td>
-                                      <td>{item.fareBasisCode}</td>
-                                      <td>{item.cabinClass} ({item.bookingCode})</td>
-                                    </tr>
+                                    {ticketingList.segmentInfo?.map((item, index) => {
+                                      return (
+                                        <>
+                                          <tr>
+                                            <td>{ticketingList[0].airlineName}</td>
+                                            <td>{item.flightNumber}</td>
+                                            <td>{item.origin}
+                                              <br></br>
+                                              <span style={{ fontSize: "12px" }}>
+                                                {airports
+                                                  .filter((f) => f.iata === item.origin)
+                                                  .map((item) => item.city)}
+                                              </span>
+                                            </td>
+                                            <td>
+                                              {moment(item.departure).format(
+                                                "DD-MMMM-yyyy hh:mm:ss"
+                                              )}
+                                            </td>
+                                            <td>{item.destination}<br></br>
+                                              <span style={{ fontSize: "12px" }}>
+                                                {airports
+                                                  .filter((f) => f.iata === item.destination)
+                                                  .map((item) => item.city)}
+                                              </span>
+                                            </td>
+                                            <td>
+                                              {moment(item.arrival).format(
+                                                "DD-MMMM-yyyy hh:mm:ss"
+                                              )}
+                                            </td>
+                                            <td>{item.fareBasisCode}</td>
+                                            <td>{item.cabinClass} ({item.bookingCode})</td>
+                                          </tr>
+                                        </>
+                                      );
+                                    })}
+                                  </> :
+                                  <>
+                                    {ticketingList?.directions[0][0].segments.map((item, index) => {
+                                      return (
+                                        <tr key={index}>
+                                          <td>
+                                            {item.airline}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {item.plane[0]}
+                                            </span>
+                                          </td>
+                                          <td>{item.flightNumber}</td>
+                                          <td>
+                                            {item.from}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {airports
+                                                .filter((f) => f.iata === item.from)
+                                                .map((item) => item.city)}
+                                              <br></br>
+                                              {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                            </span>
+                                          </td>
+                                          <td>
+                                            {moment(item.departure).format(
+                                              "DD-MMMM-yyyy hh:mm:ss"
+                                            )}
+                                          </td>
+                                          <td>
+                                            {item.to}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {airports
+                                                .filter((f) => f.iata === item.to)
+                                                .map((item) => item.city)}
+                                              <br></br>
+                                              {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                            </span>
+                                          </td>
+                                          <td>
+                                            {moment(item.arrival).format(
+                                              "DD-MMMM-yyyy hh:mm:ss"
+                                            )}
+                                          </td>
+                                          <td>{item.fareBasisCode}</td>
+                                          <td> {item.serviceClass === "Y"
+                                            ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                            : item.serviceClass === "C"
+                                              ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                              : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                        </tr>
+                                      )
+                                    })
+                                    }
+                                    {
+                                      ticketingList?.directions[1] !== undefined && ticketingList?.directions !== undefined ?
+                                        <>
+                                          {ticketingList?.directions[1][0].segments.map((item, index) => {
+                                            return (
+                                              <tr key={index}>
+                                                <td>
+                                                  {item.airline}
+                                                  <br></br>
+                                                  <span style={{ fontSize: "12px" }}>
+                                                    {item.plane[0]}
+                                                  </span>
+                                                </td>
+                                                <td>{item.flightNumber}</td>
+                                                <td>
+                                                  {item.from}
+                                                  <br></br>
+                                                  <span style={{ fontSize: "12px" }}>
+                                                    {airports
+                                                      .filter((f) => f.iata === item.from)
+                                                      .map((item) => item.city)}
+                                                    {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.departure).format(
+                                                    "DD-MMMM-yyyy hh:mm:ss"
+                                                  )}
+                                                </td>
+                                                <td>
+                                                  {item.to}
+                                                  <span style={{ fontSize: "12px" }}>
+                                                    {airports
+                                                      .filter((f) => f.iata === item.to)
+                                                      .map((item) => item.city)}
+                                                    <br></br>
+                                                    {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.arrival).format(
+                                                    "DD-MMMM-yyyy hh:mm:ss"
+                                                  )}
+                                                </td>
+                                                <td>{item.fareBasisCode}</td>
+                                                <td> {item.serviceClass === "Y"
+                                                  ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                                  : item.serviceClass === "C"
+                                                    ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                                    : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                              </tr>
+                                            )
+                                          })
+                                          }
+
+                                        </> : <></>
+                                    }
                                   </>
-                                );
-                              })}
+                              }
                             </tbody>
                           </table>
                         </div>
 
                         <div className="table-responsive-sm">
-                          <table className="table table-bordered table-sm" style={{fontSize:"11px"}}>
+                          <table className="table table-bordered table-sm" style={{ fontSize: "11px" }}>
                             <thead>
                               <tr>
                                 <th
@@ -995,10 +1125,10 @@ const BookedView = () => {
                                 {/* <th>AIT</th> */}
                                 <th>Pax</th>
                                 <th>Total Pax Fare</th>
-                             </tr>
+                              </tr>
                             </thead>
                             <tbody className="text-center">
-                              {passengerList.map((item, index) => {
+                              {ticketingList.passengerInfo?.map((item, index) => {
                                 return (
                                   <>
                                     <tr>
@@ -1007,17 +1137,24 @@ const BookedView = () => {
                                       <td>{item.tax}</td>
                                       <td>{item.discount}</td>
                                       <td>{item.passengerCount}</td>
-                                      <td>{item.totalPrice}</td>
+                                      <td>{item.currencyName} {item.totalPrice}</td>
                                     </tr>
                                   </>
                                 );
                               })}
+                              <tr className="fw-bold">
+                                <td colSpan={4} className='border-none'></td>
+                                <td>Grand Total</td>
+                                <td>{ticketingList.passengerInfo !== undefined ? ticketingList.passengerInfo[0]?.currencyName : ""} {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
+                                  {ticketingList.ticketInfo?.ticketingPrice}
+                                </td>
+                              </tr>
                             </tbody>
                           </table>
                         </div>
 
                         <div className="table-responsive-sm">
-                          <table className="table table-bordered table-sm" style={{fontSize:"11px"}}>
+                          <table className="table table-bordered table-sm" style={{ fontSize: "11px" }}>
                             <thead>
                               <tr>
                                 <th
@@ -1033,14 +1170,19 @@ const BookedView = () => {
                               </tr>
                             </thead>
                             <tbody className="text-center">
-                              {passengerList.map((item, index) => {
+                              {ticketingList.passengerInfo?.map((item, index) => {
                                 return (
                                   <>
                                     {index === 0 ? (
                                       <>
                                         <tr key={index}>
                                           <td>
-                                            {item.cityName} (Mandatory)
+                                            {airports
+                                              .filter(
+                                                (f) =>
+                                                  f.iata === ticketingList.segmentInfo[0]?.origin
+                                              )
+                                              .map((item) => item.city)} (Mandatory)
                                             {/* {bookData.data?.item1.flightInfo.dirrections[0][0].from} */}
                                           </td>
                                           <td>
@@ -1068,26 +1210,26 @@ const BookedView = () => {
                         </div>
                       </div>
 
-                      {ticketingList[0]?.status==="Booking Cancelled" ||  ticketingList[0]?.status==="Ticket Cancelled" 	?<>
-                      </>:<>
-                      <div className="container mt-3 mb-5">
-                        <div className="row">
-                          <div className="col-lg-12 text-center">
-                            <button
-                              className="btn button-color text-white w-25 fw-bold btn-sm rounded"
-                              onClick={handleGenerateTicket}
-                            >
-                              Issue Ticket
-                            </button>
+                      {ticketingList[0]?.status === "Booking Cancelled" || ticketingList[0]?.status === "Ticket Cancelled" ? <>
+                      </> : <>
+                        <div className="container mt-3 mb-5">
+                          <div className="row">
+                            <div className="col-lg-12 text-center">
+                              <button
+                                className="btn button-color text-white w-25 fw-bold btn-sm rounded"
+                                onClick={handleGenerateTicket}
+                              >
+                                Issue Ticket
+                              </button>
+                            </div>
                           </div>
                         </div>
-                      </div>
                       </>}
                     </div>
                   </div>
                 </div>
               </div>
-              <div
+              {/* <div
                 className="modal fade"
                 id="priceModal"
                 tabIndex={-1}
@@ -1250,12 +1392,10 @@ const BookedView = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </section>
           </div></>
       }
-
-
       <Footer></Footer>
     </div>
   );

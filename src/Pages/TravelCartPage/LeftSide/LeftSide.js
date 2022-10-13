@@ -853,7 +853,7 @@ const LeftSide = () => {
                             className="form-control"
                             onChange={(e) => {
                               const lastName = e.target.value;
-                              const re = /^[a-zA-Z]*$/;
+                              const re = /^[a-zA-Z ]*$/;
                               if (re.test(lastName)) {
                                 setAdult((ob) =>
                                   produce(ob, (v) => {
@@ -1569,7 +1569,7 @@ const LeftSide = () => {
                             className="form-control"
                             onChange={(e) => {
                               const lastName = e.target.value;
-                              const re = /^[a-zA-Z]*$/;
+                              const re = /^[a-zA-Z ]*$/;
                               if (re.test(lastName)) {
                                 setChild((ob) =>
                                   produce(ob, (v) => {
@@ -2236,7 +2236,7 @@ const LeftSide = () => {
                             className="form-control"
                             onChange={(e) => {
                               const lastName = e.target.value;
-                              const re = /^[a-zA-Z]*$/;
+                              const re = /^[a-zA-Z ]*$/;
                               if (re.test(lastName)) {
                                 setInfant((ob) =>
                                   produce(ob, (v) => {

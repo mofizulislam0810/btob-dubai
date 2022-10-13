@@ -209,7 +209,7 @@ const Queues = () => {
     window.open("/voucher?utid=" + utid, "_blank");
     // navigate("/voucher?utid="+utid,'_blank');
   };
-  const handleRefundReq = (utid,ticketNumber) => {
+  const handleRefundReq = (utid, ticketNumber) => {
     var result = window.confirm("Are you sure to request refund");
     if (result) {
       console.log(environment.headerToken);
@@ -263,7 +263,7 @@ const Queues = () => {
     <div>
       <Navbar></Navbar>
       <SideNavBar></SideNavBar>
-      <ToastContainer position="bottom-right" autoClose={1500}/>
+      <ToastContainer position="bottom-right" autoClose={1500} />
       <div className="content-wrapper search-panel-bg">
         <section className="content-header"></section>
         <section className="content">
@@ -295,7 +295,7 @@ const Queues = () => {
                                     : "btn btn-default rounded"
                                 }
                                 onClick={() => onStatusChange(0)}
-                                style={{fontSize:"12px"}}
+                                style={{ fontSize: "12px" }}
                               >
                                 ALL
                               </a>
@@ -309,7 +309,7 @@ const Queues = () => {
                                     : "btn btn-default rounded"
                                 }
                                 onClick={() => onStatusChange(6)}
-                                style={{fontSize:"12px"}}
+                                style={{ fontSize: "12px" }}
                               >
                                 Ticketed
                               </a>
@@ -323,7 +323,7 @@ const Queues = () => {
                                     : "btn btn-default rounded"
                                 }
                                 onClick={() => onStatusChange(3)}
-                                style={{fontSize:"12px"}}
+                                style={{ fontSize: "12px" }}
                               >
                                 Booked
                               </a>
@@ -337,7 +337,7 @@ const Queues = () => {
                                     : "btn btn-default rounded"
                                 }
                                 onClick={() => onStatusChange(5)}
-                                style={{fontSize:"12px"}}
+                                style={{ fontSize: "12px" }}
                               >
                                 Cancelled
                               </a>
@@ -351,7 +351,7 @@ const Queues = () => {
                                     : "btn btn-default rounded"
                                 }
                                 onClick={() => onStatusChange(2)}
-                                style={{fontSize:"12px"}}
+                                style={{ fontSize: "12px" }}
                               >
                                 Pending
                               </a>
@@ -365,7 +365,7 @@ const Queues = () => {
                                     : "btn btn-default rounded"
                                 }
                                 onClick={() => onStatusChange(7)}
-                                style={{fontSize:"12px"}}
+                                style={{ fontSize: "12px" }}
                               >
                                 Ticket Ordered
                               </a>
@@ -384,7 +384,7 @@ const Queues = () => {
                                 data-bs-toggle="collapse"
                                 data-bs-target="#f1Collapse"
                                 onClick={() => setIdxD(9)}
-                                style={{fontSize:"12px"}}
+                                style={{ fontSize: "12px" }}
                               >
                                 Filter
                               </a>
@@ -476,18 +476,18 @@ const Queues = () => {
                         >
                           <thead className="text-center fw-bold bg-secondary">
                             <tr>
-                                <th>Issue Date</th>
-                                <th>Booking Date</th>
-                                <th>Booking ID</th>
-                                <th className='text-start'>Passenger Name</th>
-                                {/* <th>Passenger Type</th> */}
-                                <th>Flight Date</th>
-                                <th>Route</th>
-                                <th>PNR</th>
-                                <th>Ticket Number</th>
-                                <th>Total Price</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                              <th>Issue Date</th>
+                              <th>Booking Date</th>
+                              <th>Booking ID</th>
+                              <th className='text-start'>Passenger Name</th>
+                              {/* <th>Passenger Type</th> */}
+                              <th>Flight Date</th>
+                              <th>Route</th>
+                              <th>PNR</th>
+                              <th>Ticket Number</th>
+                              <th>Total Price</th>
+                              <th>Status</th>
+                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody className="tbody">
@@ -515,14 +515,26 @@ const Queues = () => {
                                       )}
                                     </td>
                                     <td>
-                                      <a
-                                        href="javascript:void(0)"
-                                        onClick={() =>
-                                          handleViewTicket(item.uniqueTransID)
-                                        }
-                                      >
-                                        {item.uniqueTransID}
-                                      </a>
+                                      {item.status === "Booked" ? <>
+                                        <a
+                                          href="javascript:void(0)"
+                                          onClick={() =>
+                                            handleBookedView(item.uniqueTransID)
+                                          }
+                                        >
+                                          {item.uniqueTransID}
+                                        </a>
+                                      </> : <>
+                                        <a
+                                          href="javascript:void(0)"
+                                          onClick={() =>
+                                            handleViewTicket(item.uniqueTransID)
+                                          }
+                                        >
+                                          {item.uniqueTransID}
+                                        </a>
+                                      </>
+                                      }
                                     </td>
                                     <td>{item.leadPaxName}</td>
                                     {/* <td></td> */}
@@ -536,21 +548,34 @@ const Queues = () => {
                                       )}
                                     </td>
                                     <td>
-                                    {
-                                      item.origin === "null"? "": 
-                                      item.journeyType=="Round Trip"?item.origin + (item.destination === "" ? "" : "⇔" + item.destination)
-                                      :item.origin + (item.destination === "" ? "" : "→" + item.destination)
-                                    }
+                                      {
+                                        item.origin === "null" ? "" :
+                                          item.journeyType == "Round Trip" ? item.origin + (item.destination === "" ? "" : "⇔" + item.destination)
+                                            : item.origin + (item.destination === "" ? "" : "→" + item.destination)
+                                      }
                                     </td>
                                     <td>
-                                      <a
-                                        href="javascript:void(0)"
-                                        onClick={() =>
-                                          handleViewTicket(item.uniqueTransID)
-                                        }
-                                      >
-                                        {item.pnr}
-                                      </a>
+
+                                      {item.status === "Booked" ? <>
+                                        <a
+                                          href="javascript:void(0)"
+                                          onClick={() =>
+                                            handleBookedView(item.uniqueTransID)
+                                          }
+                                        >
+                                          {item.pnr}
+                                        </a>
+                                      </> : <>
+                                        <a
+                                          href="javascript:void(0)"
+                                          onClick={() =>
+                                            handleViewTicket(item.uniqueTransID)
+                                          }
+                                        >
+                                          {item.pnr}
+                                        </a>
+                                      </>
+                                      }
                                     </td>
                                     <td>{item.ticketNumber}</td>
                                     <td>{item.ticketingPrice}</td>
@@ -762,11 +787,58 @@ const Queues = () => {
                                           </a> */}
                                         </>
                                       ) : item.status === "Booking Cancelled" ? <>
-                                       <a
+                                        <a
+                                          href="javascript:void(0)"
+                                          title="View Booking"
+                                          onClick={() =>
+                                            handleBookedView(
+                                              item.uniqueTransID
+                                            )
+                                          }
+                                        >
+                                          <Button
+                                            border="2px solid"
+                                            colorScheme="messenger"
+                                            variant="outline"
+                                            size="xsm"
+                                            borderRadius="16px"
+                                            p='1'
+                                          >
+                                            <span style={{ fontSize: "10px" }}>VB</span>
+                                          </Button>
+                                        </a>
+                                      </> :
+                                        item.status === "Ticket Cancelled" &&
+                                          item.refundStatus == null ? (
+                                          <>
+                                            <a
+                                              href="javascript:void(0)"
+                                              title="Refund Request"
+                                              onClick={() =>
+                                                handleRefundReq(
+                                                  item.uniqueTransID, item.ticketNumber
+                                                )
+                                              }
+                                            >
+                                              <Button
+                                                border="2px solid"
+                                                colorScheme="messenger"
+                                                variant="outline"
+                                                size="xsm"
+                                                borderRadius="16px"
+                                                p='1'
+                                              >
+                                                <span style={{ fontSize: "10px" }}>RR</span>
+                                              </Button>
+                                            </a>
+                                          </>
+                                        ) : (
+                                          <>
+                                            <a
                                               href="javascript:void(0)"
                                               title="View Booking"
                                               onClick={() =>
-                                                handleBookedView(
+                                                handleViewTicket(
                                                   item.uniqueTransID
                                                 )
                                               }
@@ -779,58 +851,11 @@ const Queues = () => {
                                                 borderRadius="16px"
                                                 p='1'
                                               >
-                                                <span style={{ fontSize: "10px" }}>VB</span>
+                                                <span style={{ fontSize: "10px" }}>VT</span>
                                               </Button>
                                             </a>
-                                      </> :
-                                      item.status === "Ticket Cancelled" &&
-                                        item.refundStatus == null ? (
-                                        <>
-                                          <a
-                                            href="javascript:void(0)"
-                                            title="Refund Request"
-                                            onClick={() =>
-                                              handleRefundReq(
-                                                item.uniqueTransID,item.ticketNumber
-                                              )
-                                            }
-                                          >
-                                            <Button
-                                              border="2px solid"
-                                              colorScheme="messenger"
-                                              variant="outline"
-                                              size="xsm"
-                                              borderRadius="16px"
-                                              p='1'
-                                            >
-                                              <span style={{ fontSize: "10px" }}>RR</span>
-                                            </Button>
-                                          </a>
-                                        </>
-                                      ) : (
-                                        <>
-                                        <a
-                                            href="javascript:void(0)"
-                                            title="View Booking"
-                                            onClick={() =>
-                                              handleViewTicket(
-                                                item.uniqueTransID
-                                              )
-                                            }
-                                          >
-                                            <Button
-                                              border="2px solid"
-                                              colorScheme="messenger"
-                                              variant="outline"
-                                              size="xsm"
-                                              borderRadius="16px"
-                                              p='1'
-                                            >
-                                              <span style={{ fontSize: "10px" }}>VT</span>
-                                            </Button>
-                                          </a>
-                                        </>
-                                      )}
+                                          </>
+                                        )}
                                     </td>
                                   </tr>
                                 );

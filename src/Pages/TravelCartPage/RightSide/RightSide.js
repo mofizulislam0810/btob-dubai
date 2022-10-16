@@ -52,7 +52,7 @@ const RightSide = () => {
             destination: "DXB",
             journeyType: "Round Trip",
             departure: "2022-11-10T10:43:53.215Z",
-            totalPrice: 500000
+            totalPrice: 2779.24
         }
         axios.post(environment.getPartialPaymentChart, obj,environment.headerToken)
           .then((response) => 
@@ -839,15 +839,18 @@ const RightSide = () => {
                 </h6>
               </div>
             </div>
-            <div className="row border-top py-2">
-            <div className="col-lg-12">
-                <h6 className="text-start fw-bold">Partial Pay Eligible  (Minimum payable {partialAmount})</h6>
-              </div>
-
+            {
+              isPartialPaymentValid==true?<>         <div className="row border-top py-2">
               <div className="col-lg-12">
-              Remaining   {(bookingComponents[0].totalPrice-partialAmount).toFixed(2)} has to be paid by {adjustmentDate}
-              </div>
-            </div>
+                  <h6 className="text-start fw-bold">Partial Pay Eligible  (Minimum payable {partialAmount})</h6>
+                </div>
+  
+                <div className="col-lg-12">
+                Remaining   {(bookingComponents[0].totalPrice-partialAmount).toFixed(2)} has to be paid by {adjustmentDate}
+                </div>
+              </div></>:<></>
+            }
+   
           </div>
 
         </div>

@@ -1152,6 +1152,7 @@ const BookedView = () => {
                                                     {airports
                                                       .filter((f) => f.iata === item.from)
                                                       .map((item) => item.city)}
+                                                      <br></br>
                                                     {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
                                                   </span>
                                                 </td>
@@ -1162,6 +1163,7 @@ const BookedView = () => {
                                                 </td>
                                                 <td>
                                                   {item.to}
+                                                  <br></br>
                                                   <span style={{ fontSize: "12px" }}>
                                                     {airports
                                                       .filter((f) => f.iata === item.to)
@@ -1220,6 +1222,7 @@ const BookedView = () => {
                                                 </td>
                                                 <td>
                                                   {item.to}
+                                                  <br></br>
                                                   <span style={{ fontSize: "12px" }}>
                                                     {airports
                                                       .filter((f) => f.iata === item.to)
@@ -1336,6 +1339,7 @@ const BookedView = () => {
                                                 </td>
                                                 <td>
                                                   {item.to}
+                                                  <br></br>
                                                   <span style={{ fontSize: "12px" }}>
                                                     {airports
                                                       .filter((f) => f.iata === item.to)
@@ -1394,6 +1398,7 @@ const BookedView = () => {
                                                 </td>
                                                 <td>
                                                   {item.to}
+                                                  <br></br>
                                                   <span style={{ fontSize: "12px" }}>
                                                     {airports
                                                       .filter((f) => f.iata === item.to)

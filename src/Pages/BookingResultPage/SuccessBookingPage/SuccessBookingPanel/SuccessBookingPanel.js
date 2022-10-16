@@ -310,7 +310,7 @@ const SuccessBookingPanel = () => {
                                         {airports
                                           .filter((f) => f.iata === item.from)
                                           .map((item) => item.city)}
-                                        (Terminal-{(item.details[0].originTerminal)})
+                                        {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
                                       </span>
                                     </td>
                                     <td>
@@ -325,7 +325,7 @@ const SuccessBookingPanel = () => {
                                         {airports
                                           .filter((f) => f.iata === item.to)
                                           .map((item) => item.city)}
-                                        (Terminal-{(item.details[0].destinationTerminal)})
+                                        {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
                                       </span>
                                     </td>
                                     <td>
@@ -369,7 +369,7 @@ const SuccessBookingPanel = () => {
                                         {airports
                                           .filter((f) => f.iata === item.from)
                                           .map((item) => item.city)}
-                                        (Terminal-{(item.details[0].originTerminal)})
+                                        {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
                                       </span>
                                     </td>
                                     <td>
@@ -384,7 +384,7 @@ const SuccessBookingPanel = () => {
                                         {airports
                                           .filter((f) => f.iata === item.to)
                                           .map((item) => item.city)}
-                                        (Terminal-{(item.details[0].destinationTerminal)})
+                                        {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
                                       </span>
                                     </td>
                                     <td>
@@ -428,7 +428,7 @@ const SuccessBookingPanel = () => {
                                         {airports
                                           .filter((f) => f.iata === item.from)
                                           .map((item) => item.city)}
-                                        (Terminal-{(item.details[0].originTerminal)})
+                                        {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
                                       </span>
                                     </td>
                                     <td>
@@ -443,7 +443,7 @@ const SuccessBookingPanel = () => {
                                         {airports
                                           .filter((f) => f.iata === item.to)
                                           .map((item) => item.city)}
-                                        (Terminal-{(item.details[0].destinationTerminal)})
+                                        ({item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
                                       </span>
                                     </td>
                                     <td>
@@ -487,7 +487,7 @@ const SuccessBookingPanel = () => {
                                         {airports
                                           .filter((f) => f.iata === item.from)
                                           .map((item) => item.city)}
-                                        (Terminal-{(item.details[0].originTerminal)})
+                                        {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
                                       </span>
                                     </td>
                                     <td>
@@ -502,7 +502,7 @@ const SuccessBookingPanel = () => {
                                         {airports
                                           .filter((f) => f.iata === item.to)
                                           .map((item) => item.city)}
-                                        (Terminal-{(item.details[0].destinationTerminal)})
+                                        {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
                                       </span>
                                     </td>
                                     <td>
@@ -546,7 +546,7 @@ const SuccessBookingPanel = () => {
                                         {airports
                                           .filter((f) => f.iata === item.from)
                                           .map((item) => item.city)}
-                                        (Terminal-{(item.details[0].originTerminal)})
+                                        {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
                                       </span>
                                     </td>
                                     <td>
@@ -561,7 +561,7 @@ const SuccessBookingPanel = () => {
                                         {airports
                                           .filter((f) => f.iata === item.to)
                                           .map((item) => item.city)}
-                                        (Terminal-{(item.details[0].destinationTerminal)})
+                                        {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
                                       </span>
                                     </td>
                                     <td>

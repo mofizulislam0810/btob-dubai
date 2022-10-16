@@ -81,6 +81,12 @@ const SideNavBar = () => {
                     <p>Ticketed</p>
                   </Link>
                 </li>
+                <li className={currentPage === "ticketed" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("ticketed")}>
+                  <Link to="/partialticket" className="nav-link nav__link__font__size">
+                    <i className="fa fa-minus nav-icon"></i>
+                    <p>Partial Ticketed</p>
+                  </Link>
+                </li>
                 <li className={currentPage === "canceled" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("canceled")}>
                   <Link to="/canceled" className="nav-link nav__link__font__size">
                     <i className="fa fa-minus nav-icon"></i>

@@ -17,6 +17,7 @@ const RightSide = () => {
   const currency = JSON.parse(localStorage.getItem("currency"));
   const flightType = filterParam.tripTypeModify;
   const direction0 = JSON.parse(localStorage.getItem("direction0"));
+  console.log(direction0);
   const direction1 = JSON.parse(localStorage.getItem("direction1"));
   const direction2 = JSON.parse(localStorage.getItem("direction2"));
   const direction3 = JSON.parse(localStorage.getItem("direction3"));
@@ -47,12 +48,12 @@ const RightSide = () => {
       const checkPartialPayment = () => {
         const obj = {
             uniqueTransID: "",
-            platingCarrier: "BS",
-            origin: "DAC",
-            destination: "DXB",
-            journeyType: "Round Trip",
-            departure: "2022-11-10T10:43:53.215Z",
-            totalPrice: 2779.24
+            platingCarrier: direction0.platingCarrierCode,
+            origin: direction0.from,
+            destination: direction0.to,
+            journeyType: direction1 !== undefined && direction1!==null ? "Round Trip" : "One Way",
+            departure: direction0.segments[0].departure,
+            totalPrice: bookingComponents[0].totalPrice
         }
         axios.post(environment.getPartialPaymentChart, obj,environment.headerToken)
           .then((response) => 

@@ -54,6 +54,7 @@ import Booked from "./Pages/Queues/Booked";
 import Canceled from "./Pages/Queues/Canceled";
 import InvoiceView from "./Pages/InvoiceView/InvoiceView";
 import Expired from "./Pages/Queues/Expired";
+import PartialTicket from "./Pages/Queues/PartialTicket";
 function App() {
   var isLoggedIn = sessionStorage.getItem("token")??false;
   console.log(isLoggedIn);
@@ -111,6 +112,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <TravelCartConfirmPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/partialticket"
+              element={
+                <PrivateRoute>
+                  <PartialTicket />
                 </PrivateRoute>
               }
             />

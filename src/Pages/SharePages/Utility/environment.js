@@ -108,4 +108,5 @@ export const environment = {
   searchLogs : baseApiURL+"B2BReport/SearchLogsByUser",
   checkPartialPayment : baseApiURL + 'B2BPartialPayment/IsValid',
   getPartialPaymentChart : baseApiURL + 'B2BPartialPayment/ParitalPaymentInfo',
+  adjustDueAmount : baseApiURL + 'B2BReport/AdjustDueAmount'
 }

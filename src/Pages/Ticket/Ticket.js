@@ -299,6 +299,7 @@ const Ticket = () => {
                                   TYPE
                                 </th>
                                 <th style={{ width: "20%" }}>TICKET NUMBER</th>
+                                <th style={{ width: "20%" }}>PHONE NUMBER</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -318,6 +319,9 @@ const Ticket = () => {
                                     </td>
                                     <td style={{ width: "20%" }}>
                                       {item.ticketNumbers}
+                                    </td>
+                                    <td style={{ width: "20%" }}>
+                                      {item.phoneCountryCode + item.phone}
                                     </td>
                                   </tr>
                                 );

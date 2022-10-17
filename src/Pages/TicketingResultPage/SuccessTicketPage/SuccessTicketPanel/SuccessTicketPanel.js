@@ -174,6 +174,7 @@ const SuccessTicketPanel = () => {
                                 TYPE
                               </th>
                               <th style={{ width: "20%" }}>TICKET NUMBER</th>
+                              <th style={{ width: "20%" }}>PHONE NUMBER</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -193,6 +194,9 @@ const SuccessTicketPanel = () => {
                                   </td>
                                   <td style={{ width: "20%" }}>
                                     {item.ticketNumbers[0]}
+                                  </td>
+                                  <td style={{ width: "20%" }}>
+                                    {item?.passengerInfo?.contactInfo.phoneCountryCode}{item?.passengerInfo?.contactInfo.phone}
                                   </td>
                                 </tr>
                               );

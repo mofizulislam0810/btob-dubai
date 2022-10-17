@@ -2868,8 +2868,9 @@ const ShowFlight = (props) => {
                           </Tabs>
                           : <></>
                         : <>
-                          <div className="d-flex justify-content-center">
-                            <p>No fare rules found</p>
+                          <div className="">
+                            <p>* Refund Amount= Received amount from customer - Refund Charge (As per Airline Policy + Triplover Convenience Fee)</p>
+                            <p>* Date Change Amount= Date change fee as per Airline + Difference of fare if any + Triplover Convenience Fee.</p>
                           </div>
                         </>
                     }

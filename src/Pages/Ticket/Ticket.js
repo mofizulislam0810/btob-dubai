@@ -287,9 +287,9 @@ const Ticket = () => {
                         <div className="">
                           <table
                             class="table table-bordered table-sm"
-                            style={{ fontSize: "12px", width: "35rem" }}
+                            style={{ fontSize: "12px", width: "35rem"}}
                           >
-                            <thead className="bg-secondary text-white">
+                            <thead className="text-white" style={{backgroundColor:"#8c8f93" }}>
                               <tr className="text-start">
                                 <th>PASSENGER NAME</th>
                                 <th
@@ -336,7 +336,7 @@ const Ticket = () => {
                           >
                             <tbody className="text-start">
                               <tr>
-                                <td className="fw-bold bg-secondary text-white">BOOKING ID</td>
+                                <td className="fw-bold text-white" style={{backgroundColor:"#8c8f93" }}>BOOKING ID</td>
                                 <td>{ticketingList.ticketInfo?.uniqueTransID}</td>
                               </tr>
                               {/* <tr>
@@ -344,11 +344,11 @@ const Ticket = () => {
                             <td>International</td>
                           </tr> */}
                               <tr>
-                                <td className="fw-bold bg-secondary text-white">JOURNEY TYPE</td>
+                                <td className="fw-bold text-white" style={{backgroundColor:"#8c8f93" }}>JOURNEY TYPE</td>
                                 <td>{ticketingList.ticketInfo?.journeyType}</td>
                               </tr>
                               <tr>
-                                <td className="fw-bold bg-secondary text-white">STATUS</td>
+                                <td className="fw-bold text-white" style={{backgroundColor:"#8c8f93" }}>STATUS</td>
                                 <td>{ticketingList.ticketInfo?.status === 'Issued' ? "Ticketed" : ticketingList.ticketInfo?.status}</td>
                               </tr>
                             </tbody>

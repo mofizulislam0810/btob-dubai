@@ -311,7 +311,7 @@ const Invoice = () => {
                   <tbody>
                     <tr className="d-flex">
                       <td className="bg-white" style={{ width: "70%" }}>
-                        <tr>
+                        {/* <tr>
                           <td
                             className="text-start fw-bold"
                          
@@ -334,7 +334,7 @@ const Invoice = () => {
                             <span className="mx-2">:</span>
                             +8809613345345
                           </td>
-                        </tr>
+                        </tr> */}
                       </td>
                       <td className="bg-white" style={{ width: "30%" }}>
                         {/* <tr>
@@ -367,7 +367,7 @@ const Invoice = () => {
                             Invoice Date<span className="mx-2">:</span>
                           </td>
                           <td className="text-end" style={{ width: "7%" }}>
-                            {moment(ticketingList[0]?.issueDate).format("DD-MMMM-yyyy ddd")}
+                            {moment(ticketingList[0]?.issueDate).format("DD-MMM-yyyy")}
                           </td>
                         </tr>
                       </td>
@@ -434,22 +434,24 @@ const Invoice = () => {
                               {ticketingList.length > 0
                                 ? ticketingList[0].airlineName
                                 : ""}
-                              , &nbsp;{" "}
+                              , &nbsp;
                               {ticketingList.length > 0
                                 ? ticketingList[0].origin +
                                   " - " +
                                   ticketingList[0].destination
-                                : ""}
+                                : ""} 
                             </th>
                             <th className="text-end align-middle" rowSpan={3}>{item.totalPrice}</th>
                           </tr>
                           <tr>
                             <th>Ticket No</th>
+                            <th>PNR</th>
                             <th>Passenger</th>
                             {/* <th>Travel Class</th> */}
                           </tr>
                           <tr>
                             <td>{item.ticketNumbers}</td>
+                            <td>{ticketingList.length > 0 ? ticketingList[0]?.pnr : ""}</td>
                             <td>
                               {item.title +
                                 " " +

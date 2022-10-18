@@ -26,6 +26,17 @@ const Navbar = () => {
     window.location.href = "/";
   };
 
+  const tokenData = JSON.parse(sessionStorage.getItem('token'));
+  console.log(moment(tokenData.expireIn).isAfter(moment()));
+
+  // moment(tokenData.expireIn).isAfter(moment('2014-03-24T01:14:000'))
+  if(moment(tokenData.expireIn).isAfter(moment()) === false)
+  {
+    handelLogout();
+  }
+
+
+
 const handleViewTicket= async ()=>{
   let searchObj={searchText:serchText.trim()}
   await axios

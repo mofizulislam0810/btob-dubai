@@ -600,6 +600,25 @@ const Ticket = () => {
                                 )}
                               </>
                             ))}
+
+                            {/* {
+                              ticketingList!="" && ticketingList!=undefined?<><tr>
+                              <td colSpan={4}></td>
+                              <td>Total Amount</td>
+                              <th>{ticketingList.passengerInfo[0].currencyName} {ticketingList.ticketInfo.ticketingPrice}</th>
+                              </tr>
+                              <tr>
+                              <td colSpan={4}></td>
+                              <td>Paid Amount</td>
+                              <th>{ticketingList.passengerInfo[0].currencyName} {ticketingList.ticketInfo.paidAmount}</th>
+                              </tr>
+                              <tr>
+                              <td colSpan={4}></td>
+                              <td>Due Amount</td>
+                              <th>{ticketingList.passengerInfo[0].currencyName} {ticketingList.ticketInfo.ticketingPrice-ticketingList.ticketInfo.paidAmount}</th>
+                              </tr></>:<></>
+                            } */}
+                            
                           </tbody>
                         </table>
                       </div>) : (

@@ -16,7 +16,7 @@ const CreditNotes = () => {
 
   const [isTimeOut, setIsTimeOut] = useState(false);
   useEffect(() => {
-    setTimeout(() => setIsTimeOut(true), 10000);
+    setTimeout(() => setIsTimeOut(true), 4000);
   }, []);
 
   const getCreditNotes = async (currentPageNumber) => {

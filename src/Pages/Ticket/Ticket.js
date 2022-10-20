@@ -236,7 +236,7 @@ const Ticket = () => {
                               )}
                             </td>
                             <td className="text-end bg-white">
-                              <address>
+                              {/* <address>
                                 <span className="fw-bold fs-6">
                                   {agentInfo.name}
                                 </span>
@@ -248,6 +248,21 @@ const Ticket = () => {
                                   {agentInfo.address}
                                   <br />
                                   Phone: {agentInfo.mobileNo}<br></br>
+                                  Email: {agentInfo.email}
+                                </div>
+                              </address> */}
+                              <address>
+                                <span className="fw-bold fs-6">
+                                  {agentInfo.name}
+                                </span>
+                                <br />
+                                <div
+                                  className="mt-2"
+                                  style={{ fontSize: "10px", lineHeight: "12px" }}
+                                >
+                                  179 Baizid Road Nasirabad                                                                <br />
+                                  {agentInfo.address}-1216, Bangladesh<br></br>
+                                  Phone: +8801625987452<br></br>
                                   Email: {agentInfo.email}
                                 </div>
                               </address>
@@ -393,7 +408,7 @@ const Ticket = () => {
                           <thead>
                             <tr className="text-center">
                               <th className="text-start">Name</th>
-                              <th>Passenger Type</th>
+                              <th>Type</th>
                               <th>E-Ticket Number</th>
                               <th>Booking ID</th>
                               <th>Ticket Issue Date</th>
@@ -1663,7 +1678,7 @@ const Ticket = () => {
                           className="ps-1 py-2 fw-bold text-start"
                           style={{ fontSize: "12px", backgroundColor: "#ededed" }}
                         >
-                          Ticket Itinerary
+                          Flight Details
                         </p>
                         <div className="mt-1">
                           <div className="border p-1" style={{ fontSize: "12px" }}>
@@ -1722,7 +1737,17 @@ const Ticket = () => {
                                               <td className="align-middle">{item.travelTime}</td>
                                               <td className="align-middle">
                                                 {item.cabinClass}({item.bookingCode})</td>
-                                              <td className="align-middle">{baggage[0]?.Amount}{baggage[0]?.Units}</td>
+                                              <td className="align-middle">
+                                                {
+                                                  ticketingList.passengerInfo?.map((itm, idx) => {
+                                                    return (
+                                                      <>
+                                                        <span>{itm.passengerType} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {baggage[0]?.Amount}{baggage[0]?.Units}</span><br></br>
+                                                      </>
+                                                    )
+                                                  })
+                                                }
+                                              </td>
                                             </tr>
                                           </tbody>
                                         </table>
@@ -1732,279 +1757,555 @@ const Ticket = () => {
                                   }
                                 </> : <>
 
-                                {
-                                  ticketingList?.directions[0] !== undefined && ticketingList?.directions !== undefined ?
-                                    <>
                                   {
-                                  
-                                  ticketingList?.directions[0][0].segments.map((item, index) => {
-                                    return (
+                                    ticketingList?.directions[0] !== undefined && ticketingList?.directions !== undefined ?
                                       <>
-                                       <span className="fw-bold">
-                                          {airports
-                                            .filter((f) => f.iata === item.from)
-                                            .map((item) => item.city)} ({item.from})
-                                        </span>
-                                        <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
-                                        <span className="fw-bold">
-                                          {airports
-                                            .filter((f) => f.iata === item.to)
-                                            .map((item) => item.city)} ({item.to})
-                                        </span>
-                                        <span className="d-flex align-items-center fw-bold">
-                                          <img
-                                            src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
-                                            className="me-2"
-                                            alt=""
-                                            width="30px"
-                                            height="30px"
-                                          ></img>{item.airline} ({item.airlineCode}-{item.flightNumber})
-                                        </span>
-                                        <table
-                                          class="table table-borderless table-sm mt-1"
-                                          style={{ fontSize: "12px" }}
-                                        >
-                                          <thead>
-                                            <tr>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Number</p></th>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <tr>
-                                              <td>{moment(item.departure).format("ddd DD MMM,YY ")}<br></br>
-                                                {moment(item.arrival).format("ddd DD MMM,YY ")}</td>
-                                              <td>{moment(item.departure).format("hh:mm A")}<br></br>{moment(item.arrival).format("hh:mm A")}</td>
-                                              <td>
-                                                <table className="p-0" style={{ fontSize: "12px" }}>
-                                                  <tr className="p-0">
-                                                    <td className="p-0">Departs</td>
-                                                    <td className="py-0 fw-bold">{airports
-                                                .filter((f) => f.iata === item.from)
-                                                .map((item) => item.city)} ({item.from})  {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>Terminal-({item.details[0].originTerminal})</> : <></>}</td>
-                                                
-                                                  </tr>
-                                                  <tr className="p-0">
-                                                    <td className="p-0">Arrives</td>
-                                                    <td className="py-0 fw-bold">{airports
-                                                  .filter((f) => f.iata === item.to)
-                                                  .map((item) => item.city)} ({item.to})  {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>Terminal-({item.details[0].destinationTerminal})</> : <></>}</td>
-                                                  </tr>
-                                                </table>
-                                              </td>
+                                        {
 
-                                              <td className="align-middle">{item.duration[0]}</td>
-                                              <td className="align-middle">
-                                              {item.serviceClass === "Y"
-                                                      ? "ECONOMY" + "(" + item.bookingClass + ")"
-                                                      : item.serviceClass === "C"
-                                                        ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
-                                                        : item.serviceClass + "(" + item.bookingClass + ")"}</td>
-                                              <td className="align-middle">
-                                                {ticketingList.passengerInfo?.every(item=>item.passengerType === 'ADT') ? 
-                                                <>ADT <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</> 
-                                              : ticketingList.passengerInfo?.every(item=>item.passengerType === 'ADT') && ticketingList.passengerInfo?.every(item=>item.passengerType === 'CNN') ?
-                                              <>ADT <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}<br></br>
-                                              CNN <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}
-                                              </> : ticketingList.passengerInfo?.every(item=>item.passengerType === 'ADT') && ticketingList.passengerInfo?.every(item=>item.passengerType === 'CNN') && ticketingList.passengerInfo?.every(item=>item.passengerType === 'INF')?
-                                              <></> : <>ADT <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}<br></br>
-                                              CNN <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}<br></br>
-                                              INF <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}
-                                              </> }</td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                      </>
-                                    )
-                                  })
+                                          ticketingList?.directions[0][0].segments.map((item, index) => {
+                                            return (
+                                              <>
+                                                <span className="fw-bold">
+                                                  {airports
+                                                    .filter((f) => f.iata === item.from)
+                                                    .map((item) => item.city)} ({item.from})
+                                                </span>
+                                                <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
+                                                <span className="fw-bold">
+                                                  {airports
+                                                    .filter((f) => f.iata === item.to)
+                                                    .map((item) => item.city)} ({item.to})
+                                                </span>
+                                                <span className="d-flex align-items-center fw-bold">
+                                                  <img
+                                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                    className="me-2"
+                                                    alt=""
+                                                    width="30px"
+                                                    height="30px"
+                                                  ></img>{item.airline} ({item.airlineCode}-{item.flightNumber})
+                                                </span>
+                                                <table
+                                                  class="table table-borderless table-sm mt-1"
+                                                  style={{ fontSize: "12px" }}
+                                                >
+                                                  <thead>
+                                                    <tr>
+                                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
+                                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
+                                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
+                                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Number</p></th>
+                                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                    <tr>
+                                                      <td>{moment(item.departure).format("ddd DD MMM,YY ")}<br></br>
+                                                        {moment(item.arrival).format("ddd DD MMM,YY ")}</td>
+                                                      <td>{moment(item.departure).format("hh:mm A")}<br></br>{moment(item.arrival).format("hh:mm A")}</td>
+                                                      <td>
+                                                        <table className="p-0" style={{ fontSize: "12px" }}>
+                                                          <tr className="p-0">
+                                                            <td className="p-0">Departs</td>
+                                                            <td className="py-0 fw-bold">{airports
+                                                              .filter((f) => f.iata === item.from)
+                                                              .map((item) => item.city)} ({item.from})  {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>Terminal-({item.details[0].originTerminal})</> : <></>}</td>
+
+                                                          </tr>
+                                                          <tr className="p-0">
+                                                            <td className="p-0">Arrives</td>
+                                                            <td className="py-0 fw-bold">{airports
+                                                              .filter((f) => f.iata === item.to)
+                                                              .map((item) => item.city)} ({item.to})  {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>Terminal-({item.details[0].destinationTerminal})</> : <></>}</td>
+                                                          </tr>
+                                                        </table>
+                                                      </td>
+
+                                                      <td className="align-middle">{item.duration[0]}</td>
+                                                      <td className="align-middle">
+                                                        {item.serviceClass === "Y"
+                                                          ? "ECONOMY" + "(" + item.bookingClass + ")"
+                                                          : item.serviceClass === "C"
+                                                            ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
+                                                            : item.serviceClass + "(" + item.bookingClass + ")"}</td>
+                                                      <td className="align-middle">
+                                                        {
+                                                          ticketingList.passengerInfo?.map((itm, idx) => {
+                                                            return (
+                                                              <>
+                                                                <span>{itm.passengerType === 'ADT' ? 'Adult' : itm.passengerType === 'CNN' ? 'Child' : 'Infant'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
+                                                              </>
+                                                            )
+                                                          })
+                                                        }
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </>
+                                            )
+                                          })
+                                        }
+                                      </> : <></>
                                   }
-                                     </> : <></>
-                                }
                                   {
-                                  ticketingList?.directions[1] !== undefined && ticketingList?.directions !== undefined ?
-                                    <>
-                                      {ticketingList?.directions[1][0].segments.map((item, index) => {
-                                        return (
-                                          <>
-                                       <span className="fw-bold">
-                                          {airports
-                                            .filter((f) => f.iata === item.from)
-                                            .map((item) => item.city)} ({item.from})
-                                        </span>
-                                        <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
-                                        <span className="fw-bold">
-                                          {airports
-                                            .filter((f) => f.iata === item.to)
-                                            .map((item) => item.city)} ({item.to})
-                                        </span>
-                                        <span className="d-flex align-items-center fw-bold">
-                                          <img
-                                            src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
-                                            className="me-2"
-                                            alt=""
-                                            width="30px"
-                                            height="30px"
-                                          ></img>{item.airline} ({item.airlineCode}-{item.flightNumber})
-                                        </span>
-                                        <table
-                                          class="table table-borderless table-sm mt-1"
-                                          style={{ fontSize: "12px" }}
-                                        >
-                                          <thead>
-                                            <tr>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Number</p></th>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <tr>
-                                              <td>{moment(item.departure).format("ddd DD MMM,YY ")}<br></br>
-                                                {moment(item.arrival).format("ddd DD MMM,YY ")}</td>
-                                              <td>{moment(item.departure).format("hh:mm A")}<br></br>{moment(item.arrival).format("hh:mm A")}</td>
-                                              <td>
-                                                <table className="p-0" style={{ fontSize: "12px" }}>
-                                                  <tr className="p-0">
-                                                    <td className="p-0">Departs</td>
-                                                    <td className="py-0 fw-bold">{airports
-                                                .filter((f) => f.iata === item.from)
-                                                .map((item) => item.city)} ({item.from})  {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>Terminal-({item.details[0].originTerminal})</> : <></>}</td>
-                                                
-                                                  </tr>
-                                                  <tr className="p-0">
-                                                    <td className="p-0">Arrives</td>
-                                                    <td className="py-0 fw-bold">{airports
+                                    ticketingList?.directions[1] !== undefined && ticketingList?.directions !== undefined ?
+                                      <>
+                                        {ticketingList?.directions[1][0].segments.map((item, index) => {
+                                          return (
+                                            <>
+                                              <span className="fw-bold">
+                                                {airports
+                                                  .filter((f) => f.iata === item.from)
+                                                  .map((item) => item.city)} ({item.from})
+                                              </span>
+                                              <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
+                                              <span className="fw-bold">
+                                                {airports
                                                   .filter((f) => f.iata === item.to)
-                                                  .map((item) => item.city)} ({item.to})  {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>Terminal-({item.details[0].destinationTerminal})</> : <></>}</td>
+                                                  .map((item) => item.city)} ({item.to})
+                                              </span>
+                                              <span className="d-flex align-items-center fw-bold">
+                                                <img
+                                                  src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                  className="me-2"
+                                                  alt=""
+                                                  width="30px"
+                                                  height="30px"
+                                                ></img>{item.airline} ({item.airlineCode}-{item.flightNumber})
+                                              </span>
+                                              <table
+                                                class="table table-borderless table-sm mt-1"
+                                                style={{ fontSize: "12px" }}
+                                              >
+                                                <thead>
+                                                  <tr>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Number</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                                   </tr>
-                                                </table>
-                                              </td>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <td>{moment(item.departure).format("ddd DD MMM,YY ")}<br></br>
+                                                      {moment(item.arrival).format("ddd DD MMM,YY ")}</td>
+                                                    <td>{moment(item.departure).format("hh:mm A")}<br></br>{moment(item.arrival).format("hh:mm A")}</td>
+                                                    <td>
+                                                      <table className="p-0" style={{ fontSize: "12px" }}>
+                                                        <tr className="p-0">
+                                                          <td className="p-0">Departs</td>
+                                                          <td className="py-0 fw-bold">{airports
+                                                            .filter((f) => f.iata === item.from)
+                                                            .map((item) => item.city)} ({item.from})  {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>Terminal-({item.details[0].originTerminal})</> : <></>}</td>
 
-                                              <td className="align-middle">{item.duration[0]}</td>
-                                              <td className="align-middle">
-                                              {item.serviceClass === "Y"
-                                                      ? "ECONOMY" + "(" + item.bookingClass + ")"
-                                                      : item.serviceClass === "C"
-                                                        ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
-                                                        : item.serviceClass + "(" + item.bookingClass + ")"}</td>
-                                              <td className="align-middle">
-                                                {ticketingList.passengerInfo?.every(item=>item.passengerType === 'ADT') ? 
-                                                <>ADT <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</> 
-                                              : ticketingList.passengerInfo?.every(item=>item.passengerType === 'ADT') && ticketingList.passengerInfo?.every(item=>item.passengerType === 'CNN') ?
-                                              <>ADT <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}<br></br>
-                                              CNN <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}
-                                              </> : ticketingList.passengerInfo?.every(item=>item.passengerType === 'ADT') && ticketingList.passengerInfo?.every(item=>item.passengerType === 'CNN') && ticketingList.passengerInfo?.every(item=>item.passengerType === 'INF')?
-                                              <></> : <>ADT <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}<br></br>
-                                              CNN <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}<br></br>
-                                              INF <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}
-                                              </> }</td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                      </>
-                                        )
-                                      })
-                                      }
-                                    </> : <></>
+                                                        </tr>
+                                                        <tr className="p-0">
+                                                          <td className="p-0">Arrives</td>
+                                                          <td className="py-0 fw-bold">{airports
+                                                            .filter((f) => f.iata === item.to)
+                                                            .map((item) => item.city)} ({item.to})  {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>Terminal-({item.details[0].destinationTerminal})</> : <></>}</td>
+                                                        </tr>
+                                                      </table>
+                                                    </td>
+
+                                                    <td className="align-middle">{item.duration[0]}</td>
+                                                    <td className="align-middle">
+                                                      {item.serviceClass === "Y"
+                                                        ? "ECONOMY" + "(" + item.bookingClass + ")"
+                                                        : item.serviceClass === "C"
+                                                          ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
+                                                          : item.serviceClass + "(" + item.bookingClass + ")"}</td>
+                                                    <td className="align-middle">
+                                                      {
+                                                        ticketingList.passengerInfo?.map((itm, idx) => {
+                                                          return (
+                                                            <>
+                                                              <span>{itm.passengerType === 'ADT' ? 'Adult' : itm.passengerType === 'CNN' ? 'Child' : 'Infant'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
+                                                            </>
+                                                          )
+                                                        })
+                                                      }
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </>
+                                          )
+                                        })
+                                        }
+                                      </> : <></>
                                   }
 
-                                {
-                                  ticketingList?.directions[2] !== undefined && ticketingList?.directions !== undefined ?
-                                    <>
-                                      {ticketingList?.directions[2][0].segments.map((item, index) => {
-                                        return (
-                                          <>
-                                       <span className="fw-bold">
-                                          {airports
-                                            .filter((f) => f.iata === item.from)
-                                            .map((item) => item.city)} ({item.from})
-                                        </span>
-                                        <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
-                                        <span className="fw-bold">
-                                          {airports
-                                            .filter((f) => f.iata === item.to)
-                                            .map((item) => item.city)} ({item.to})
-                                        </span>
-                                        <span className="d-flex align-items-center fw-bold">
-                                          <img
-                                            src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
-                                            className="me-2"
-                                            alt=""
-                                            width="30px"
-                                            height="30px"
-                                          ></img>{item.airline} ({item.airlineCode}-{item.flightNumber})
-                                        </span>
-                                        <table
-                                          class="table table-borderless table-sm mt-1"
-                                          style={{ fontSize: "12px" }}
-                                        >
-                                          <thead>
-                                            <tr>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Number</p></th>
-                                              <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <tr>
-                                              <td>{moment(item.departure).format("ddd DD MMM,YY ")}<br></br>
-                                                {moment(item.arrival).format("ddd DD MMM,YY ")}</td>
-                                              <td>{moment(item.departure).format("hh:mm A")}<br></br>{moment(item.arrival).format("hh:mm A")}</td>
-                                              <td>
-                                                <table className="p-0" style={{ fontSize: "12px" }}>
-                                                  <tr className="p-0">
-                                                    <td className="p-0">Departs</td>
-                                                    <td className="py-0 fw-bold">{airports
-                                                .filter((f) => f.iata === item.from)
-                                                .map((item) => item.city)} ({item.from})  {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>Terminal-({item.details[0].originTerminal})</> : <></>}</td>
-                                                
-                                                  </tr>
-                                                  <tr className="p-0">
-                                                    <td className="p-0">Arrives</td>
-                                                    <td className="py-0 fw-bold">{airports
+                                  {
+                                    ticketingList?.directions[2] !== undefined && ticketingList?.directions !== undefined ?
+                                      <>
+                                        {ticketingList?.directions[2][0].segments.map((item, index) => {
+                                          return (
+                                            <>
+                                              <span className="fw-bold">
+                                                {airports
+                                                  .filter((f) => f.iata === item.from)
+                                                  .map((item) => item.city)} ({item.from})
+                                              </span>
+                                              <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
+                                              <span className="fw-bold">
+                                                {airports
                                                   .filter((f) => f.iata === item.to)
-                                                  .map((item) => item.city)} ({item.to})  {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>Terminal-({item.details[0].destinationTerminal})</> : <></>}</td>
+                                                  .map((item) => item.city)} ({item.to})
+                                              </span>
+                                              <span className="d-flex align-items-center fw-bold">
+                                                <img
+                                                  src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                  className="me-2"
+                                                  alt=""
+                                                  width="30px"
+                                                  height="30px"
+                                                ></img>{item.airline} ({item.airlineCode}-{item.flightNumber})
+                                              </span>
+                                              <table
+                                                class="table table-borderless table-sm mt-1"
+                                                style={{ fontSize: "12px" }}
+                                              >
+                                                <thead>
+                                                  <tr>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Number</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                                   </tr>
-                                                </table>
-                                              </td>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <td>{moment(item.departure).format("ddd DD MMM,YY ")}<br></br>
+                                                      {moment(item.arrival).format("ddd DD MMM,YY ")}</td>
+                                                    <td>{moment(item.departure).format("hh:mm A")}<br></br>{moment(item.arrival).format("hh:mm A")}</td>
+                                                    <td>
+                                                      <table className="p-0" style={{ fontSize: "12px" }}>
+                                                        <tr className="p-0">
+                                                          <td className="p-0">Departs</td>
+                                                          <td className="py-0 fw-bold">{airports
+                                                            .filter((f) => f.iata === item.from)
+                                                            .map((item) => item.city)} ({item.from})  {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>Terminal-({item.details[0].originTerminal})</> : <></>}</td>
 
-                                              <td className="align-middle">{item.duration[0]}</td>
-                                              <td className="align-middle">
-                                              {item.serviceClass === "Y"
-                                                      ? "ECONOMY" + "(" + item.bookingClass + ")"
-                                                      : item.serviceClass === "C"
-                                                        ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
-                                                        : item.serviceClass + "(" + item.bookingClass + ")"}</td>
-                                              <td className="align-middle">
-                                                {ticketingList.passengerInfo?.every(item=>item.passengerType === 'ADT') ? 
-                                                <>ADT <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</> 
-                                              : ticketingList.passengerInfo?.every(item=>item.passengerType === 'ADT') && ticketingList.passengerInfo?.every(item=>item.passengerType === 'CNN') ?
-                                              <>ADT <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}<br></br>
-                                              CNN <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}
-                                              </> : ticketingList.passengerInfo?.every(item=>item.passengerType === 'ADT') && ticketingList.passengerInfo?.every(item=>item.passengerType === 'CNN') && ticketingList.passengerInfo?.every(item=>item.passengerType === 'INF')?
-                                              <></> : <>ADT <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}<br></br>
-                                              CNN <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}<br></br>
-                                              INF <span style={{fontSize:"10px"}}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}
-                                              </> }</td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                      </>
-                                        )
-                                      })
-                                      }
+                                                        </tr>
+                                                        <tr className="p-0">
+                                                          <td className="p-0">Arrives</td>
+                                                          <td className="py-0 fw-bold">{airports
+                                                            .filter((f) => f.iata === item.to)
+                                                            .map((item) => item.city)} ({item.to})  {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>Terminal-({item.details[0].destinationTerminal})</> : <></>}</td>
+                                                        </tr>
+                                                      </table>
+                                                    </td>
 
-                                    </> : <></>
+                                                    <td className="align-middle">{item.duration[0]}</td>
+                                                    <td className="align-middle">
+                                                      {item.serviceClass === "Y"
+                                                        ? "ECONOMY" + "(" + item.bookingClass + ")"
+                                                        : item.serviceClass === "C"
+                                                          ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
+                                                          : item.serviceClass + "(" + item.bookingClass + ")"}</td>
+                                                    <td className="align-middle">
+                                                      {
+                                                        ticketingList.passengerInfo?.map((itm, idx) => {
+                                                          return (
+                                                            <>
+                                                              <span>{itm.passengerType === 'ADT' ? 'Adult' : itm.passengerType === 'CNN' ? 'Child' : 'Infant'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
+                                                            </>
+                                                          )
+                                                        })
+                                                      }
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </>
+                                          )
+                                        })
+                                        }
+
+                                      </> : <></>
+                                  }
+
+                                  {
+                                    ticketingList?.directions[3] !== undefined && ticketingList?.directions !== undefined ?
+                                      <>
+                                        {ticketingList?.directions[3][0].segments.map((item, index) => {
+                                          return (
+                                            <>
+                                              <span className="fw-bold">
+                                                {airports
+                                                  .filter((f) => f.iata === item.from)
+                                                  .map((item) => item.city)} ({item.from})
+                                              </span>
+                                              <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
+                                              <span className="fw-bold">
+                                                {airports
+                                                  .filter((f) => f.iata === item.to)
+                                                  .map((item) => item.city)} ({item.to})
+                                              </span>
+                                              <span className="d-flex align-items-center fw-bold">
+                                                <img
+                                                  src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                  className="me-2"
+                                                  alt=""
+                                                  width="30px"
+                                                  height="30px"
+                                                ></img>{item.airline} ({item.airlineCode}-{item.flightNumber})
+                                              </span>
+                                              <table
+                                                class="table table-borderless table-sm mt-1"
+                                                style={{ fontSize: "12px" }}
+                                              >
+                                                <thead>
+                                                  <tr>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Number</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <td>{moment(item.departure).format("ddd DD MMM,YY ")}<br></br>
+                                                      {moment(item.arrival).format("ddd DD MMM,YY ")}</td>
+                                                    <td>{moment(item.departure).format("hh:mm A")}<br></br>{moment(item.arrival).format("hh:mm A")}</td>
+                                                    <td>
+                                                      <table className="p-0" style={{ fontSize: "12px" }}>
+                                                        <tr className="p-0">
+                                                          <td className="p-0">Departs</td>
+                                                          <td className="py-0 fw-bold">{airports
+                                                            .filter((f) => f.iata === item.from)
+                                                            .map((item) => item.city)} ({item.from})  {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>Terminal-({item.details[0].originTerminal})</> : <></>}</td>
+
+                                                        </tr>
+                                                        <tr className="p-0">
+                                                          <td className="p-0">Arrives</td>
+                                                          <td className="py-0 fw-bold">{airports
+                                                            .filter((f) => f.iata === item.to)
+                                                            .map((item) => item.city)} ({item.to})  {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>Terminal-({item.details[0].destinationTerminal})</> : <></>}</td>
+                                                        </tr>
+                                                      </table>
+                                                    </td>
+
+                                                    <td className="align-middle">{item.duration[0]}</td>
+                                                    <td className="align-middle">
+                                                      {item.serviceClass === "Y"
+                                                        ? "ECONOMY" + "(" + item.bookingClass + ")"
+                                                        : item.serviceClass === "C"
+                                                          ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
+                                                          : item.serviceClass + "(" + item.bookingClass + ")"}</td>
+                                                    <td className="align-middle">
+                                                      {
+                                                        ticketingList.passengerInfo?.map((itm, idx) => {
+                                                          return (
+                                                            <>
+                                                              <span>{itm.passengerType === 'ADT' ? 'Adult' : itm.passengerType === 'CNN' ? 'Child' : 'Infant'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
+                                                            </>
+                                                          )
+                                                        })
+                                                      }
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </>
+                                          )
+                                        })
+                                        }
+
+                                      </> : <></>
+                                  }
+
+                                  {
+                                    ticketingList?.directions[4] !== undefined && ticketingList?.directions !== undefined ?
+                                      <>
+                                        {ticketingList?.directions[4][0].segments.map((item, index) => {
+                                          return (
+                                            <>
+                                              <span className="fw-bold">
+                                                {airports
+                                                  .filter((f) => f.iata === item.from)
+                                                  .map((item) => item.city)} ({item.from})
+                                              </span>
+                                              <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
+                                              <span className="fw-bold">
+                                                {airports
+                                                  .filter((f) => f.iata === item.to)
+                                                  .map((item) => item.city)} ({item.to})
+                                              </span>
+                                              <span className="d-flex align-items-center fw-bold">
+                                                <img
+                                                  src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                  className="me-2"
+                                                  alt=""
+                                                  width="30px"
+                                                  height="30px"
+                                                ></img>{item.airline} ({item.airlineCode}-{item.flightNumber})
+                                              </span>
+                                              <table
+                                                class="table table-borderless table-sm mt-1"
+                                                style={{ fontSize: "12px" }}
+                                              >
+                                                <thead>
+                                                  <tr>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Number</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <td>{moment(item.departure).format("ddd DD MMM,YY ")}<br></br>
+                                                      {moment(item.arrival).format("ddd DD MMM,YY ")}</td>
+                                                    <td>{moment(item.departure).format("hh:mm A")}<br></br>{moment(item.arrival).format("hh:mm A")}</td>
+                                                    <td>
+                                                      <table className="p-0" style={{ fontSize: "12px" }}>
+                                                        <tr className="p-0">
+                                                          <td className="p-0">Departs</td>
+                                                          <td className="py-0 fw-bold">{airports
+                                                            .filter((f) => f.iata === item.from)
+                                                            .map((item) => item.city)} ({item.from})  {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>Terminal-({item.details[0].originTerminal})</> : <></>}</td>
+
+                                                        </tr>
+                                                        <tr className="p-0">
+                                                          <td className="p-0">Arrives</td>
+                                                          <td className="py-0 fw-bold">{airports
+                                                            .filter((f) => f.iata === item.to)
+                                                            .map((item) => item.city)} ({item.to})  {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>Terminal-({item.details[0].destinationTerminal})</> : <></>}</td>
+                                                        </tr>
+                                                      </table>
+                                                    </td>
+
+                                                    <td className="align-middle">{item.duration[0]}</td>
+                                                    <td className="align-middle">
+                                                      {item.serviceClass === "Y"
+                                                        ? "ECONOMY" + "(" + item.bookingClass + ")"
+                                                        : item.serviceClass === "C"
+                                                          ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
+                                                          : item.serviceClass + "(" + item.bookingClass + ")"}</td>
+                                                    <td className="align-middle">
+                                                      {
+                                                        ticketingList.passengerInfo?.map((itm, idx) => {
+                                                          return (
+                                                            <>
+                                                              <span>{itm.passengerType === 'ADT' ? 'Adult' : itm.passengerType === 'CNN' ? 'Child' : 'Infant'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
+                                                            </>
+                                                          )
+                                                        })
+                                                      }
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </>
+                                          )
+                                        })
+                                        }
+
+                                      </> : <></>
+                                  }
+
+                                  {
+                                    ticketingList?.directions[5] !== undefined && ticketingList?.directions !== undefined ?
+                                      <>
+                                        {ticketingList?.directions[5][0].segments.map((item, index) => {
+                                          return (
+                                            <>
+                                              <span className="fw-bold">
+                                                {airports
+                                                  .filter((f) => f.iata === item.from)
+                                                  .map((item) => item.city)} ({item.from})
+                                              </span>
+                                              <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
+                                              <span className="fw-bold">
+                                                {airports
+                                                  .filter((f) => f.iata === item.to)
+                                                  .map((item) => item.city)} ({item.to})
+                                              </span>
+                                              <span className="d-flex align-items-center fw-bold">
+                                                <img
+                                                  src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                  className="me-2"
+                                                  alt=""
+                                                  width="30px"
+                                                  height="30px"
+                                                ></img>{item.airline} ({item.airlineCode}-{item.flightNumber})
+                                              </span>
+                                              <table
+                                                class="table table-borderless table-sm mt-1"
+                                                style={{ fontSize: "12px" }}
+                                              >
+                                                <thead>
+                                                  <tr>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Number</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <td>{moment(item.departure).format("ddd DD MMM,YY ")}<br></br>
+                                                      {moment(item.arrival).format("ddd DD MMM,YY ")}</td>
+                                                    <td>{moment(item.departure).format("hh:mm A")}<br></br>{moment(item.arrival).format("hh:mm A")}</td>
+                                                    <td>
+                                                      <table className="p-0" style={{ fontSize: "12px" }}>
+                                                        <tr className="p-0">
+                                                          <td className="p-0">Departs</td>
+                                                          <td className="py-0 fw-bold">{airports
+                                                            .filter((f) => f.iata === item.from)
+                                                            .map((item) => item.city)} ({item.from})  {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>Terminal-({item.details[0].originTerminal})</> : <></>}</td>
+
+                                                        </tr>
+                                                        <tr className="p-0">
+                                                          <td className="p-0">Arrives</td>
+                                                          <td className="py-0 fw-bold">{airports
+                                                            .filter((f) => f.iata === item.to)
+                                                            .map((item) => item.city)} ({item.to})  {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>Terminal-({item.details[0].destinationTerminal})</> : <></>}</td>
+                                                        </tr>
+                                                      </table>
+                                                    </td>
+
+                                                    <td className="align-middle">{item.duration[0]}</td>
+                                                    <td className="align-middle">
+                                                      {item.serviceClass === "Y"
+                                                        ? "ECONOMY" + "(" + item.bookingClass + ")"
+                                                        : item.serviceClass === "C"
+                                                          ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
+                                                          : item.serviceClass + "(" + item.bookingClass + ")"}</td>
+                                                    <td className="align-middle">
+                                                      {
+                                                        ticketingList.passengerInfo?.map((itm, idx) => {
+                                                          return (
+                                                            <>
+                                                              <span>{itm.passengerType === 'ADT' ? 'Adult' : itm.passengerType === 'CNN' ? 'Child' : 'Infant'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
+                                                            </>
+                                                          )
+                                                        })
+                                                      }
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </>
+                                          )
+                                        })
+                                        }
+
+                                      </> : <></>
                                   }
                                 </>
                             }
@@ -2015,16 +2316,16 @@ const Ticket = () => {
 
 
                       {isFareHide === false ? (
-                        <div className="table-responsive-sm mt-2">
+                        <div className="table-responsive-sm mt-3">
                           <p
                             className="ps-1 py-2 fw-bold text-start"
-                            style={{ fontSize: "12px", marginBottom: "8px", backgroundColor: "#ededed" }}
+                            style={{ fontSize: "12px", backgroundColor: "#ededed" }}
                           >
-                            FARE DETAILS
+                            Fare Details
                           </p>
 
                           <table
-                            class="table table-bordered table-sm text-end"
+                            class="table table-bordered table-sm text-end mt-1"
                             style={{ fontSize: "12px" }}
                           >
                             <thead>
@@ -2111,16 +2412,65 @@ const Ticket = () => {
                         <></>
                       )}
 
-                      <div className="mt-2 pb-5">
+                      <div className="mt-3 pb-5">
                         <p
                           className="ps-1 py-2 fw-bold text-start"
                           style={{ fontSize: "12px", marginBottom: "8px", backgroundColor: "#ededed" }}
                         >
-                          IMPORTANT NOTICE FOR TRAVELLERS
+                          Terms and Conditions
                         </p>
-                        <p style={{ fontSize: "12px" }} className="text-start">
-                          BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER
-                          STATUS/ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.
+
+                        <table
+                          class="table table-bordered table-sm text-end mt-1 mb-0"
+                          style={{ fontSize: "12px" }}
+                        >
+                          <thead>
+                            <tr>
+                              <th className="text-start">REPORTING TIME:</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="text-start">
+                              <p className="border-0">
+                                Flights open for check-in 1 hour before scheduled departure time on domestic
+                                flights and 3 hours before scheduled departure time on international flights. Passengers
+                                must check-in 1 hour before flight departure. Check-in counters close 25 min before
+                                flight departure for domestic, and 40 minutes before the scheduled departure for
+                                international flights.
+                              </p>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <table
+                          class="table table-bordered table-sm text-end mb-0"
+                          style={{ fontSize: "12px" }}
+                        >
+                          <thead>
+                            <tr>
+                              <th className="text-start">CARRY-ON BAGGAGE ALLOWANCE:</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="text-start">
+                              <p className="border-0">
+                              LIMIT: 1 Carry-On bag per passenger / SIZE LIMIT: 22in x 15in x 8in (L+W+H=45 inches) / WEIGHT LIMIT: Max weight 7 kg / 15 lb
+                              </p>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <table
+                          class="table table-bordered table-sm text-end mb-0"
+                          style={{ fontSize: "12px" }}
+                        >
+                          <thead>
+                            <tr>
+                              <th className="text-start">IMPORTANT NOTICE:</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="text-start">
+                              <p className="border-0">
+                             Baggage discounts may apply based on frequent flyer/status/online checkin/from of payment/military/etc.
                           Carriage and other services provided by the carrier are
                           subject to conditions of carriage, which are hereby
                           incorporated by reference. These conditions may be
@@ -2132,7 +2482,10 @@ const Ticket = () => {
                           amendments (the Warsaw Convention System), may apply to
                           the entire journey, including any portion thereof within a
                           country.
-                        </p>
+                              </p>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>

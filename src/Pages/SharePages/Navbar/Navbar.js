@@ -26,7 +26,7 @@ const Navbar = () => {
     window.location.href = "/";
   };
 
-  const tokenData = JSON.parse(sessionStorage.getItem('token'));
+  const tokenData = JSON.parse(localStorage.getItem('token'));
   console.log(moment(tokenData.expireIn).isAfter(moment()));
 
   // moment(tokenData.expireIn).isAfter(moment('2014-03-24T01:14:000'))

@@ -182,6 +182,8 @@ const Booked = () => {
     useEffect(() => {
         handleGetList(currentPageNumber);
       }, [currentPageNumber]);
+
+    // console.log(ticketingList);
     return (
         <div>
         <Navbar></Navbar>

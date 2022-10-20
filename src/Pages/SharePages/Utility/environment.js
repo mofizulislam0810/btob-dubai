@@ -5,7 +5,7 @@
 // const baseURL = 'http://18.142.212.139:81/';
 // const baseURL = 'https://api.triplover.ae/';
 const baseApiURL =baseURL+ 'api/';
-const tokenData = JSON.parse(sessionStorage.getItem('token'));
+const tokenData = JSON.parse(localStorage.getItem('token'));
 let headerToken = { headers: { Authorization: '' } };
 if(tokenData!=null && new Date(tokenData.expireIn)>=new Date())
 {

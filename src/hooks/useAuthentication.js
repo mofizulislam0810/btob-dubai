@@ -6,7 +6,7 @@ const useAuthentication = () => {
   const [bookData, setBookData] = useState([]);
   const [ticketData, setTicketData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const token = sessionStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const [login, setLogin] = useState(token && token.length > 0);
   let [fareRules, setFareRules] = useState({});
   const [count,setCount] = useState(0);
@@ -19,8 +19,8 @@ const useAuthentication = () => {
       .then((response) => {
         console.log(response.data.data);
         if (response.data.isSuccess==true) {
-          sessionStorage.setItem("token", JSON.stringify(response.data.data));
-          sessionStorage.setItem("LoginData", JSON.stringify(loginData));
+          localStorage.setItem("token", JSON.stringify(response.data.data));
+          localStorage.setItem("LoginData", JSON.stringify(loginData));
           setLogin(true);
           const destination = location.state?.from.pathname || "/search";
           // navigate(destination);

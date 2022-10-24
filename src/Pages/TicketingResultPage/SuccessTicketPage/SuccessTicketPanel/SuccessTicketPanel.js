@@ -139,20 +139,20 @@ const SuccessTicketPanel = () => {
                               </div>
                             </address> */}
                             <address>
-                              <span className="fw-bold fs-6">
-                                {agentInfo.name}
-                              </span>
-                              <br />
-                              <div
-                                className="mt-2"
-                                style={{ fontSize: "10px", lineHeight: "12px" }}
-                              >
-                                179 Baizid Road Nasirabad                                                                <br />
-                                {agentInfo.address}-1216, Bangladesh<br></br>
-                                Phone: +8801625987452<br></br>
-                                Email: {agentInfo.email}
-                              </div>
-                            </address>
+                                <span className="fw-bold fs-6">
+                                  {agentInfo.name}
+                                </span>
+                                <br />
+                                <div
+                                  className="mt-2"
+                                  style={{ fontSize: "10px", lineHeight: "12px" }}
+                                >
+                                  179 Baizid Road Nasirabad <br />
+                                  Dhaka-1216, Bangladesh<br></br>
+                                 <span style={{fontSize:"8px"}}><i class="fas fa-phone fa-rotate-90"></i></span> Phone: +8801625987452<br></br>
+                                 <span className="me-1"><i class="fa fa-envelope" aria-hidden="true"></i></span> Email: {agentInfo.email}
+                                </div>
+                              </address>
                           </td>
                         </tr>
                       </tbody>
@@ -503,7 +503,7 @@ const SuccessTicketPanel = () => {
                             <>
                               {ticketData.item1?.flightInfo.directions[0][0].segments.map((item, index) => {
                                 return (
-                                  <>
+                                  <div className="border p-1 my-1">
                                     <span className="fw-bold">
                                       {airports
                                         .filter((f) => f.iata === item.from)
@@ -534,7 +534,7 @@ const SuccessTicketPanel = () => {
                                           <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                           <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
                                           <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
-                                          <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Number</p></th>
+                                          <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                           <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                         </tr>
                                       </thead>
@@ -561,7 +561,7 @@ const SuccessTicketPanel = () => {
                                             </table>
                                           </td>
 
-                                          <td className="align-middle">{item.duration[0]}</td>
+                                          <td className="align-middle">{item.details[0].flightTime}</td>
                                           <td className="align-middle">
                                             {item.serviceClass === "Y"
                                               ? "ECONOMY" + "(" + item.bookingClass + ")"
@@ -582,7 +582,7 @@ const SuccessTicketPanel = () => {
                                         </tr>
                                       </tbody>
                                     </table>
-                                  </>
+                                  </div>
 
                                 )
                               }
@@ -595,7 +595,7 @@ const SuccessTicketPanel = () => {
                           {ticketData.item1?.flightInfo.directions[1][0].segments.map(
                             (item, index) => {
                               return(
-                                <>
+                                <div className="border p-1 mb-1">
                                 <span className="fw-bold">
                                   {airports
                                     .filter((f) => f.iata === item.from)
@@ -626,7 +626,7 @@ const SuccessTicketPanel = () => {
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
-                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Number</p></th>
+                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                     </tr>
                                   </thead>
@@ -653,7 +653,7 @@ const SuccessTicketPanel = () => {
                                         </table>
                                       </td>
 
-                                      <td className="align-middle">{item.duration[0]}</td>
+                                      <td className="align-middle">{item.details[0].flightTime}</td>
                                       <td className="align-middle">
                                         {item.serviceClass === "Y"
                                           ? "ECONOMY" + "(" + item.bookingClass + ")"
@@ -674,7 +674,7 @@ const SuccessTicketPanel = () => {
                                     </tr>
                                   </tbody>
                                 </table>
-                              </>
+                              </div>
                               )
                             }
                           )}
@@ -688,7 +688,7 @@ const SuccessTicketPanel = () => {
                           {ticketData.item1?.flightInfo.directions[2][0].segments.map(
                             (item, index) => {
                               return(
-                                <>
+                                <div className="border p-1 mb-1">
                                 <span className="fw-bold">
                                   {airports
                                     .filter((f) => f.iata === item.from)
@@ -719,7 +719,7 @@ const SuccessTicketPanel = () => {
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
-                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Number</p></th>
+                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                     </tr>
                                   </thead>
@@ -746,7 +746,7 @@ const SuccessTicketPanel = () => {
                                         </table>
                                       </td>
 
-                                      <td className="align-middle">{item.duration[0]}</td>
+                                      <td className="align-middle">{item.details[0].flightTime}</td>
                                       <td className="align-middle">
                                         {item.serviceClass === "Y"
                                           ? "ECONOMY" + "(" + item.bookingClass + ")"
@@ -767,7 +767,7 @@ const SuccessTicketPanel = () => {
                                     </tr>
                                   </tbody>
                                 </table>
-                              </>
+                              </div>
                               )
                             }
                           )}
@@ -781,7 +781,7 @@ const SuccessTicketPanel = () => {
                           {ticketData.item1?.flightInfo.directions[3][0].segments.map(
                             (item, index) => {
                               return(
-                                <>
+                                <div className="border p-1 mb-1">
                                 <span className="fw-bold">
                                   {airports
                                     .filter((f) => f.iata === item.from)
@@ -812,7 +812,7 @@ const SuccessTicketPanel = () => {
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
-                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Number</p></th>
+                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                     </tr>
                                   </thead>
@@ -839,7 +839,7 @@ const SuccessTicketPanel = () => {
                                         </table>
                                       </td>
 
-                                      <td className="align-middle">{item.duration[0]}</td>
+                                      <td className="align-middle">{item.details[0].flightTime}</td>
                                       <td className="align-middle">
                                         {item.serviceClass === "Y"
                                           ? "ECONOMY" + "(" + item.bookingClass + ")"
@@ -860,7 +860,7 @@ const SuccessTicketPanel = () => {
                                     </tr>
                                   </tbody>
                                 </table>
-                              </>
+                              </div>
                               )
                             }
                           )}
@@ -874,7 +874,7 @@ const SuccessTicketPanel = () => {
                           {ticketData.item1?.flightInfo.directions[4][0].segments.map(
                             (item, index) => {
                               return(
-                                <>
+                                <div className="border p-1 mb-1">
                                 <span className="fw-bold">
                                   {airports
                                     .filter((f) => f.iata === item.from)
@@ -905,7 +905,7 @@ const SuccessTicketPanel = () => {
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
-                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Number</p></th>
+                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                     </tr>
                                   </thead>
@@ -932,7 +932,7 @@ const SuccessTicketPanel = () => {
                                         </table>
                                       </td>
 
-                                      <td className="align-middle">{item.duration[0]}</td>
+                                      <td className="align-middle">{item.details[0].flightTime}</td>
                                       <td className="align-middle">
                                         {item.serviceClass === "Y"
                                           ? "ECONOMY" + "(" + item.bookingClass + ")"
@@ -953,7 +953,7 @@ const SuccessTicketPanel = () => {
                                     </tr>
                                   </tbody>
                                 </table>
-                              </>
+                              </div>
                               )
                             }
                           )}
@@ -967,7 +967,7 @@ const SuccessTicketPanel = () => {
                           {ticketData.item1?.flightInfo.directions[5][0].segments.map(
                             (item, index) => {
                               return(
-                                <>
+                                <div className="border p-1 mb-1">
                                 <span className="fw-bold">
                                   {airports
                                     .filter((f) => f.iata === item.from)
@@ -998,7 +998,7 @@ const SuccessTicketPanel = () => {
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
-                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Number</p></th>
+                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                     </tr>
                                   </thead>
@@ -1025,7 +1025,7 @@ const SuccessTicketPanel = () => {
                                         </table>
                                       </td>
 
-                                      <td className="align-middle">{item.duration[0]}</td>
+                                      <td className="align-middle">{item.details[0].flightTime}</td>
                                       <td className="align-middle">
                                         {item.serviceClass === "Y"
                                           ? "ECONOMY" + "(" + item.bookingClass + ")"
@@ -1046,7 +1046,7 @@ const SuccessTicketPanel = () => {
                                     </tr>
                                   </tbody>
                                 </table>
-                              </>
+                              </div>
                               )
                             }
                           )}
@@ -1230,28 +1230,42 @@ const SuccessTicketPanel = () => {
                       <div className="mt-3 pb-5">
                         <p
                           className="ps-1 py-2 fw-bold text-start"
-                          style={{ fontSize: "12px", backgroundColor: "#ededed" }}
+                          style={{ fontSize: "12px", marginBottom: "8px", backgroundColor: "#ededed" }}
                         >
-                          Terms and Conditions
+                          Important Notice
                         </p>
-
                         <table
                           class="table table-bordered table-sm text-end mt-1 mb-0"
                           style={{ fontSize: "12px" }}
                         >
                           <thead>
                             <tr>
-                              <th className="text-start">REPORTING TIME:</th>
+                              <th className="text-start">E-Ticket Notice:</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr className="text-start">
                               <p className="border-0">
-                                Flights open for check-in 1 hour before scheduled departure time on domestic
-                                flights and 3 hours before scheduled departure time on international flights. Passengers
-                                must check-in 1 hour before flight departure. Check-in counters close 25 min before
-                                flight departure for domestic, and 40 minutes before the scheduled departure for
-                                international flights.
+                             Carriage and other services provided by the carrier are subject to conditions of carriage which are hereby
+                             incorporated by reference. These conditions may be obtained from the issuing carrier.
+                              </p>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <table
+                          class="table table-bordered table-sm text-end  mb-0"
+                          style={{ fontSize: "12px" }}
+                        >
+                          <thead>
+                            <tr>
+                              <th className="text-start">Passport/Visa/Health:</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="text-start">
+                              <p className="border-0">
+                                Please ensure that you have all the required travel documents for your entire journey - i.e. valid passport
+                                & necessary Visas - and that you have had the recommended inoculations for your destination(s).
                               </p>
                             </tr>
                           </tbody>
@@ -1262,7 +1276,7 @@ const SuccessTicketPanel = () => {
                         >
                           <thead>
                             <tr>
-                              <th className="text-start">CARRY-ON BAGGAGE ALLOWANCE:</th>
+                              <th className="text-start">Carry-on Baggage Allowance:</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -1274,6 +1288,28 @@ const SuccessTicketPanel = () => {
                           </tbody>
                         </table>
                         <table
+                          class="table table-bordered table-sm text-end  mb-0"
+                          style={{ fontSize: "12px" }}
+                        >
+                          <thead>
+                            <tr>
+                              <th className="text-start">Reporting Time:</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="text-start">
+                              <p className="border-0">
+                                Flights open for check-in 1 hour before scheduled departure time on domestic
+                                flights and 3 hours before scheduled departure time on international flights. Passengers
+                                must check-in 1 hour before flight departure. Check-in counters close 30 minutes before
+                                flight departure for domestic, and 90 minutes before the scheduled departure for
+                                international flights.
+                              </p>
+                            </tr>
+                          </tbody>
+                        </table>
+                        
+                        {/* <table
                           class="table table-bordered table-sm text-end mb-0"
                           style={{ fontSize: "12px" }}
                         >
@@ -1300,7 +1336,7 @@ const SuccessTicketPanel = () => {
                               </p>
                             </tr>
                           </tbody>
-                        </table>
+                        </table> */}
                       </div>
                   </div>
                 </div>

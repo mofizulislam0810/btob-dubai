@@ -27,10 +27,10 @@ const Navbar = () => {
   };
 
   const tokenData = JSON.parse(localStorage.getItem('token'));
-  console.log(moment(tokenData.expireIn).isAfter(moment()));
+  console.log(moment(tokenData?.expireIn).isAfter(moment()));
 
   // moment(tokenData.expireIn).isAfter(moment('2014-03-24T01:14:000'))
-  if(moment(tokenData.expireIn).isAfter(moment()) === false)
+  if(moment(tokenData?.expireIn).isAfter(moment()) === false)
   {
     handelLogout();
   }

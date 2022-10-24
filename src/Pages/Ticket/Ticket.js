@@ -222,7 +222,7 @@ const Ticket = () => {
                                   src={
                                     s3URL + `${ticketingList.ticketInfo?.agentLogo}`
                                   }
-                                  style={{ width: "150px", height: "50px" }}
+                                  style={{ width: "150px", height: "30px" }}
                                 ></img>
                               ) : (
                                 <>
@@ -230,7 +230,7 @@ const Ticket = () => {
                                     alt="img01"
                                     className="p-2"
                                     src={tllLogo}
-                                    style={{ width: "150px", height: "50px" }}
+                                    style={{ width: "150px", height: "30px" }}
                                   ></img>
                                 </>
                               )}
@@ -243,7 +243,7 @@ const Ticket = () => {
                                 <br />
                                 <div
                                   className="mt-2"
-                                  style={{ fontSize: "12px", lineHeight: "12px" }}
+                                  style={{ fontSize: "14px", lineHeight: "12px" }}
                                 >
                                   {agentInfo.address}
                                   <br />
@@ -258,7 +258,7 @@ const Ticket = () => {
                                 <br />
                                 <div
                                   className="mt-2"
-                                  style={{ fontSize: "10px", lineHeight: "12px" }}
+                                  style={{ fontSize: "12px", lineHeight: "14px" }}
                                 >
                                   179 Baizid Road Nasirabad <br />
                                   Dhaka-1216, Bangladesh<br></br>
@@ -273,7 +273,7 @@ const Ticket = () => {
 
                       {/* <table
                         class="table table-borderless my-3 table-sm"
-                        style={{ fontSize: "12px" }}
+                        style={{ fontSize: "14px" }}
                       >
                         <tbody>
                           <tr>
@@ -299,7 +299,7 @@ const Ticket = () => {
 
                       <table
                         class="table table-borderless my-3 table-sm"
-                        style={{ fontSize: "12px" }}
+                        style={{ fontSize: "14px" }}
                       >
                         <tbody>
                           <tr>
@@ -328,7 +328,7 @@ const Ticket = () => {
                         <div className="">
                           <table
                             class="table table-bordered table-sm"
-                            style={{ fontSize: "12px", width: "35rem" }}
+                            style={{ fontSize: "14px", width: "35rem" }}
                           >
                             <thead className="text-white" style={{ backgroundColor: "#8c8f93" }}>
                               <tr className="text-start">
@@ -373,7 +373,7 @@ const Ticket = () => {
                         <div className="">
                           <table
                             class="table table-bordered table-sm float-right"
-                            style={{ fontSize: "12px", width: "20rem" }}
+                            style={{ fontSize: "14px", width: "20rem" }}
                           >
                             <tbody className="text-start">
                               <tr>
@@ -397,13 +397,13 @@ const Ticket = () => {
                       <div className="table-responsive-sm mt-2">
                         <p
                           className="ps-1 py-2 fw-bold text-start"
-                          style={{ fontSize: "12px", backgroundColor: "#ededed" }}
+                          style={{ fontSize: "14px", backgroundColor: "#c3c2c2" }}
                         >
                           Passenger Information
                         </p>
                         <table
                           class="table table-bordered table-sm mt-1"
-                          style={{ fontSize: "12px" }}
+                          style={{ fontSize: "14px" }}
                         >
                           <thead>
                             <tr className="text-center">
@@ -418,10 +418,10 @@ const Ticket = () => {
                             {ticketingList.passengerInfo?.map((item, index) => {
                               return (
                                 <tr className="text-center" style={{ lineHeight: "14px" }}>
-                                  <td className="text-start">
-                                    {item.title}{" "}
-                                    {item.first}{" "}
-                                    {item.last}
+                                  <td className="text-start" style={{fontSize:"15px"}}>
+                                    {item.title.toUpperCase()}{" "}
+                                    {item.first.toUpperCase()}{" "}
+                                    {item.last.toUpperCase()}
                                   </td>
                                   <td>
                                     {item.passengerType === 'ADT' ? "Adult" : item.passengerType === 'CNN' ? "Child" : "Infant"}
@@ -448,7 +448,7 @@ const Ticket = () => {
                       {/* <div className="">
                           <table
                             class="table table-bordered table-sm float-right"
-                            style={{ fontSize: "12px", width: "20rem" }}
+                            style={{ fontSize: "14px", width: "20rem" }}
                           >
                             <tbody className="text-start">
                               <tr>
@@ -467,7 +467,7 @@ const Ticket = () => {
                           </table>
                         </div> */}
 
-                      {/* <div className="mt-2" style={{ fontSize: "12px" }}>
+                      {/* <div className="mt-2" style={{ fontSize: "14px" }}>
                         <p>Your identity document / passport is required for all passengers on all flights both domestic and international.</p>
                         <p>Please report at check-in counter 1 hour prior flight departure for Domestic & 3 hours for international flights.</p>
                       </div> */}
@@ -477,13 +477,13 @@ const Ticket = () => {
                       {/* <div className="table-responsive-sm mt-3">
                         <p
                           className="ps-1 py-2 fw-bold text-start"
-                          style={{ fontSize: "12px", backgroundColor: "#ededed" }}
+                          style={{ fontSize: "14px", backgroundColor: "#ededed" }}
                         >
                           Ticket Itinerary
                         </p>
                         <table
                           class="table table-borderless table-sm"
-                          style={{ fontSize: "12px", lineHeight: "1px" }}
+                          style={{ fontSize: "14px", lineHeight: "1px" }}
                         >
                           {
                             ticketingList?.ticketInfo?.bookingType !== 'Online' ?
@@ -511,7 +511,7 @@ const Ticket = () => {
                                               <h6
                                                 className="ms-2 pt-2 h6-line-height"
                                                 style={{
-                                                  fontSize: "12px",
+                                                  fontSize: "14px",
                                                   marginBottom: "0px",
                                                 }}
                                               >
@@ -563,7 +563,7 @@ const Ticket = () => {
                                             <tr>
                                               <td style={{ width: "40%" }}>
                                                 <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.origin}</h6>
-                                                <h6 style={{ fontSize: "12px" }}>
+                                                <h6 style={{ fontSize: "14px" }}>
                                                   {" "}
                                                   {moment(item.departure).format(
                                                     "hh:mm A"
@@ -571,7 +571,7 @@ const Ticket = () => {
                                                 </h6>
                                                 <h6
                                                   className="text-secondary"
-                                                  style={{ fontSize: "12px" }}
+                                                  style={{ fontSize: "14px" }}
                                                 >
                                                   {" "}
                                                   {moment(
@@ -586,14 +586,14 @@ const Ticket = () => {
                                               </td>
                                               <td>
                                                 <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.destination}</h6>
-                                                <h6 style={{ fontSize: "12px" }}>
+                                                <h6 style={{ fontSize: "14px" }}>
                                                   {moment(item.arrival).format(
                                                     "hh:mm A"
                                                   )}
                                                 </h6>
                                                 <h6
                                                   className="text-secondary"
-                                                  style={{ fontSize: "12px" }}
+                                                  style={{ fontSize: "14px" }}
                                                 >
                                                   {" "}
                                                   {moment(item.arrival).format(
@@ -672,7 +672,7 @@ const Ticket = () => {
                                               <h6
                                                 className="ms-2 pt-2 h6-line-height"
                                                 style={{
-                                                  fontSize: "12px",
+                                                  fontSize: "14px",
                                                   marginBottom: "0px",
                                                 }}
                                               >
@@ -724,7 +724,7 @@ const Ticket = () => {
                                             <tr>
                                               <td style={{ width: "40%" }}>
                                                 <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.from}</h6>
-                                                <h6 style={{ fontSize: "12px" }}>
+                                                <h6 style={{ fontSize: "14px" }}>
                                                   {" "}
                                                   {moment(item.departure).format(
                                                     "hh:mm A"
@@ -732,7 +732,7 @@ const Ticket = () => {
                                                 </h6>
                                                 <h6
                                                   className="text-secondary"
-                                                  style={{ fontSize: "12px" }}
+                                                  style={{ fontSize: "14px" }}
                                                 >
                                                   {" "}
                                                   {moment(
@@ -747,14 +747,14 @@ const Ticket = () => {
                                               </td>
                                               <td>
                                                 <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.to}</h6>
-                                                <h6 style={{ fontSize: "12px" }}>
+                                                <h6 style={{ fontSize: "14px" }}>
                                                   {moment(item.arrival).format(
                                                     "hh:mm A"
                                                   )}
                                                 </h6>
                                                 <h6
                                                   className="text-secondary"
-                                                  style={{ fontSize: "12px" }}
+                                                  style={{ fontSize: "14px" }}
                                                 >
                                                   {" "}
                                                   {moment(item.arrival).format(
@@ -839,7 +839,7 @@ const Ticket = () => {
                                                     <h6
                                                       className="ms-2 pt-2 h6-line-height"
                                                       style={{
-                                                        fontSize: "12px",
+                                                        fontSize: "14px",
                                                         marginBottom: "0px",
                                                       }}
                                                     >
@@ -891,7 +891,7 @@ const Ticket = () => {
                                                   <tr>
                                                     <td style={{ width: "40%" }}>
                                                       <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.from}</h6>
-                                                      <h6 style={{ fontSize: "12px" }}>
+                                                      <h6 style={{ fontSize: "14px" }}>
                                                         {" "}
                                                         {moment(item.departure).format(
                                                           "hh:mm A"
@@ -899,7 +899,7 @@ const Ticket = () => {
                                                       </h6>
                                                       <h6
                                                         className="text-secondary"
-                                                        style={{ fontSize: "12px" }}
+                                                        style={{ fontSize: "14px" }}
                                                       >
                                                         {" "}
                                                         {moment(
@@ -914,14 +914,14 @@ const Ticket = () => {
                                                     </td>
                                                     <td>
                                                       <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.to}</h6>
-                                                      <h6 style={{ fontSize: "12px" }}>
+                                                      <h6 style={{ fontSize: "14px" }}>
                                                         {moment(item.arrival).format(
                                                           "hh:mm A"
                                                         )}
                                                       </h6>
                                                       <h6
                                                         className="text-secondary"
-                                                        style={{ fontSize: "12px" }}
+                                                        style={{ fontSize: "14px" }}
                                                       >
                                                         {" "}
                                                         {moment(item.arrival).format(
@@ -1010,7 +1010,7 @@ const Ticket = () => {
                                                     <h6
                                                       className="ms-2 pt-2 h6-line-height"
                                                       style={{
-                                                        fontSize: "12px",
+                                                        fontSize: "14px",
                                                         marginBottom: "0px",
                                                       }}
                                                     >
@@ -1062,7 +1062,7 @@ const Ticket = () => {
                                                   <tr>
                                                     <td style={{ width: "40%" }}>
                                                       <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.from}</h6>
-                                                      <h6 style={{ fontSize: "12px" }}>
+                                                      <h6 style={{ fontSize: "14px" }}>
                                                         {" "}
                                                         {moment(item.departure).format(
                                                           "hh:mm A"
@@ -1070,7 +1070,7 @@ const Ticket = () => {
                                                       </h6>
                                                       <h6
                                                         className="text-secondary"
-                                                        style={{ fontSize: "12px" }}
+                                                        style={{ fontSize: "14px" }}
                                                       >
                                                         {" "}
                                                         {moment(
@@ -1085,14 +1085,14 @@ const Ticket = () => {
                                                     </td>
                                                     <td>
                                                       <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.to}</h6>
-                                                      <h6 style={{ fontSize: "12px" }}>
+                                                      <h6 style={{ fontSize: "14px" }}>
                                                         {moment(item.arrival).format(
                                                           "hh:mm A"
                                                         )}
                                                       </h6>
                                                       <h6
                                                         className="text-secondary"
-                                                        style={{ fontSize: "12px" }}
+                                                        style={{ fontSize: "14px" }}
                                                       >
                                                         {" "}
                                                         {moment(item.arrival).format(
@@ -1181,7 +1181,7 @@ const Ticket = () => {
                                                     <h6
                                                       className="ms-2 pt-2 h6-line-height"
                                                       style={{
-                                                        fontSize: "12px",
+                                                        fontSize: "14px",
                                                         marginBottom: "0px",
                                                       }}
                                                     >
@@ -1233,7 +1233,7 @@ const Ticket = () => {
                                                   <tr>
                                                     <td style={{ width: "40%" }}>
                                                       <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.from}</h6>
-                                                      <h6 style={{ fontSize: "12px" }}>
+                                                      <h6 style={{ fontSize: "14px" }}>
                                                         {" "}
                                                         {moment(item.departure).format(
                                                           "hh:mm A"
@@ -1241,7 +1241,7 @@ const Ticket = () => {
                                                       </h6>
                                                       <h6
                                                         className="text-secondary"
-                                                        style={{ fontSize: "12px" }}
+                                                        style={{ fontSize: "14px" }}
                                                       >
                                                         {" "}
                                                         {moment(
@@ -1256,14 +1256,14 @@ const Ticket = () => {
                                                     </td>
                                                     <td>
                                                       <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.to}</h6>
-                                                      <h6 style={{ fontSize: "12px" }}>
+                                                      <h6 style={{ fontSize: "14px" }}>
                                                         {moment(item.arrival).format(
                                                           "hh:mm A"
                                                         )}
                                                       </h6>
                                                       <h6
                                                         className="text-secondary"
-                                                        style={{ fontSize: "12px" }}
+                                                        style={{ fontSize: "14px" }}
                                                       >
                                                         {" "}
                                                         {moment(item.arrival).format(
@@ -1352,7 +1352,7 @@ const Ticket = () => {
                                                     <h6
                                                       className="ms-2 pt-2 h6-line-height"
                                                       style={{
-                                                        fontSize: "12px",
+                                                        fontSize: "14px",
                                                         marginBottom: "0px",
                                                       }}
                                                     >
@@ -1404,7 +1404,7 @@ const Ticket = () => {
                                                   <tr>
                                                     <td style={{ width: "40%" }}>
                                                       <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.from}</h6>
-                                                      <h6 style={{ fontSize: "12px" }}>
+                                                      <h6 style={{ fontSize: "14px" }}>
                                                         {" "}
                                                         {moment(item.departure).format(
                                                           "hh:mm A"
@@ -1412,7 +1412,7 @@ const Ticket = () => {
                                                       </h6>
                                                       <h6
                                                         className="text-secondary"
-                                                        style={{ fontSize: "12px" }}
+                                                        style={{ fontSize: "14px" }}
                                                       >
                                                         {" "}
                                                         {moment(
@@ -1427,14 +1427,14 @@ const Ticket = () => {
                                                     </td>
                                                     <td>
                                                       <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.to}</h6>
-                                                      <h6 style={{ fontSize: "12px" }}>
+                                                      <h6 style={{ fontSize: "14px" }}>
                                                         {moment(item.arrival).format(
                                                           "hh:mm A"
                                                         )}
                                                       </h6>
                                                       <h6
                                                         className="text-secondary"
-                                                        style={{ fontSize: "12px" }}
+                                                        style={{ fontSize: "14px" }}
                                                       >
                                                         {" "}
                                                         {moment(item.arrival).format(
@@ -1523,7 +1523,7 @@ const Ticket = () => {
                                                     <h6
                                                       className="ms-2 pt-2 h6-line-height"
                                                       style={{
-                                                        fontSize: "12px",
+                                                        fontSize: "14px",
                                                         marginBottom: "0px",
                                                       }}
                                                     >
@@ -1575,7 +1575,7 @@ const Ticket = () => {
                                                   <tr>
                                                     <td style={{ width: "40%" }}>
                                                       <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.from}</h6>
-                                                      <h6 style={{ fontSize: "12px" }}>
+                                                      <h6 style={{ fontSize: "14px" }}>
                                                         {" "}
                                                         {moment(item.departure).format(
                                                           "hh:mm A"
@@ -1583,7 +1583,7 @@ const Ticket = () => {
                                                       </h6>
                                                       <h6
                                                         className="text-secondary"
-                                                        style={{ fontSize: "12px" }}
+                                                        style={{ fontSize: "14px" }}
                                                       >
                                                         {" "}
                                                         {moment(
@@ -1598,14 +1598,14 @@ const Ticket = () => {
                                                     </td>
                                                     <td>
                                                       <h6 className="fw-bold" style={{ fontSize: "15px" }}>{item.to}</h6>
-                                                      <h6 style={{ fontSize: "12px" }}>
+                                                      <h6 style={{ fontSize: "14px" }}>
                                                         {moment(item.arrival).format(
                                                           "hh:mm A"
                                                         )}
                                                       </h6>
                                                       <h6
                                                         className="text-secondary"
-                                                        style={{ fontSize: "12px" }}
+                                                        style={{ fontSize: "14px" }}
                                                       >
                                                         {" "}
                                                         {moment(item.arrival).format(
@@ -1676,12 +1676,12 @@ const Ticket = () => {
                       <div className="table-responsive-sm mt-3">
                         <p
                           className="ps-1 py-2 fw-bold text-start"
-                          style={{ fontSize: "12px", backgroundColor: "#ededed" }}
+                          style={{ fontSize: "14px", backgroundColor: "#c3c2c2" }}
                         >
                           Flight Details
                         </p>
                         <div className="mt-1">
-                          <div className="border p-1" style={{ fontSize: "12px" }}>
+                          <div className="border p-1" style={{ fontSize: "14px" }}>
                             {
                               ticketingList?.ticketInfo?.bookingType !== 'Online' ?
                                 <>
@@ -1711,7 +1711,7 @@ const Ticket = () => {
                                         </span>
                                         <table
                                           class="table table-borderless table-sm mt-1"
-                                          style={{ fontSize: "12px" }}
+                                          style={{ fontSize: "14px" }}
                                         >
                                           <thead>
                                             <tr>
@@ -1765,6 +1765,7 @@ const Ticket = () => {
                                           ticketingList?.directions[0][0].segments.map((item, index) => {
                                             return (
                                               <div className="border p-1 my-1">
+                                                <span style={{fontSize:"18px"}}>
                                                 <span className="fw-bold">
                                                   {airports
                                                     .filter((f) => f.iata === item.from)
@@ -1775,6 +1776,7 @@ const Ticket = () => {
                                                   {airports
                                                     .filter((f) => f.iata === item.to)
                                                     .map((item) => item.city)} ({item.to})
+                                                </span>
                                                 </span>
                                                 <span className="d-flex align-items-center fw-bold">
                                                   <img
@@ -1787,7 +1789,7 @@ const Ticket = () => {
                                                 </span>
                                                 <table
                                                   class="table table-borderless table-sm mt-1"
-                                                  style={{ fontSize: "12px" }}
+                                                  style={{ fontSize: "14px" }}
                                                 >
                                                   <thead>
                                                     <tr>
@@ -1805,7 +1807,7 @@ const Ticket = () => {
                                                         {moment(item.arrival).format("ddd DD MMM,YY ")}</td>
                                                       <td>{moment(item.departure).format("hh:mm A")}<br></br>{moment(item.arrival).format("hh:mm A")}</td>
                                                       <td>
-                                                        <table className="p-0" style={{ fontSize: "12px" }}>
+                                                        <table className="p-0" style={{ fontSize: "14px" }}>
                                                           <tr className="p-0">
                                                             <td className="p-0">Departs</td>
                                                             <td className="py-0 fw-bold">{airports
@@ -1855,6 +1857,7 @@ const Ticket = () => {
                                         {ticketingList?.directions[1][0].segments.map((item, index) => {
                                           return (
                                             <div className="border p-1 mb-1">
+                                              <span style={{fontSize:"18px"}}>
                                               <span className="fw-bold">
                                                 {airports
                                                   .filter((f) => f.iata === item.from)
@@ -1865,6 +1868,7 @@ const Ticket = () => {
                                                 {airports
                                                   .filter((f) => f.iata === item.to)
                                                   .map((item) => item.city)} ({item.to})
+                                              </span>
                                               </span>
                                               <span className="d-flex align-items-center fw-bold">
                                                 <img
@@ -1877,7 +1881,7 @@ const Ticket = () => {
                                               </span>
                                               <table
                                                 class="table table-borderless table-sm mt-1"
-                                                style={{ fontSize: "12px" }}
+                                                style={{ fontSize: "14px" }}
                                               >
                                                 <thead>
                                                   <tr>
@@ -1895,7 +1899,7 @@ const Ticket = () => {
                                                       {moment(item.arrival).format("ddd DD MMM,YY ")}</td>
                                                     <td>{moment(item.departure).format("hh:mm A")}<br></br>{moment(item.arrival).format("hh:mm A")}</td>
                                                     <td>
-                                                      <table className="p-0" style={{ fontSize: "12px" }}>
+                                                      <table className="p-0" style={{ fontSize: "14px" }}>
                                                         <tr className="p-0">
                                                           <td className="p-0">Departs</td>
                                                           <td className="py-0 fw-bold">{airports
@@ -1945,7 +1949,8 @@ const Ticket = () => {
                                       <>
                                         {ticketingList?.directions[2][0].segments.map((item, index) => {
                                           return (
-                                            <div className="border p-1 mb-1"> 
+                                            <div className="border p-1 mb-1">
+                                              <span style={{fontSize:"18px"}}>
                                               <span className="fw-bold">
                                                 {airports
                                                   .filter((f) => f.iata === item.from)
@@ -1957,6 +1962,7 @@ const Ticket = () => {
                                                   .filter((f) => f.iata === item.to)
                                                   .map((item) => item.city)} ({item.to})
                                               </span>
+                                              </span> 
                                               <span className="d-flex align-items-center fw-bold">
                                                 <img
                                                   src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
@@ -1968,7 +1974,7 @@ const Ticket = () => {
                                               </span>
                                               <table
                                                 class="table table-borderless table-sm mt-1"
-                                                style={{ fontSize: "12px" }}
+                                                style={{ fontSize: "14px" }}
                                               >
                                                 <thead>
                                                   <tr>
@@ -1986,7 +1992,7 @@ const Ticket = () => {
                                                       {moment(item.arrival).format("ddd DD MMM,YY ")}</td>
                                                     <td>{moment(item.departure).format("hh:mm A")}<br></br>{moment(item.arrival).format("hh:mm A")}</td>
                                                     <td>
-                                                      <table className="p-0" style={{ fontSize: "12px" }}>
+                                                      <table className="p-0" style={{ fontSize: "14px" }}>
                                                         <tr className="p-0">
                                                           <td className="p-0">Departs</td>
                                                           <td className="py-0 fw-bold">{airports
@@ -2038,6 +2044,7 @@ const Ticket = () => {
                                         {ticketingList?.directions[3][0].segments.map((item, index) => {
                                           return (
                                             <div className="border p-1 my-1">
+                                              <span style={{fontSize:"18px"}}>
                                               <span className="fw-bold">
                                                 {airports
                                                   .filter((f) => f.iata === item.from)
@@ -2048,6 +2055,7 @@ const Ticket = () => {
                                                 {airports
                                                   .filter((f) => f.iata === item.to)
                                                   .map((item) => item.city)} ({item.to})
+                                              </span>
                                               </span>
                                               <span className="d-flex align-items-center fw-bold">
                                                 <img
@@ -2060,7 +2068,7 @@ const Ticket = () => {
                                               </span>
                                               <table
                                                 class="table table-borderless table-sm mt-1"
-                                                style={{ fontSize: "12px" }}
+                                                style={{ fontSize: "14px" }}
                                               >
                                                 <thead>
                                                   <tr>
@@ -2078,7 +2086,7 @@ const Ticket = () => {
                                                       {moment(item.arrival).format("ddd DD MMM,YY ")}</td>
                                                     <td>{moment(item.departure).format("hh:mm A")}<br></br>{moment(item.arrival).format("hh:mm A")}</td>
                                                     <td>
-                                                      <table className="p-0" style={{ fontSize: "12px" }}>
+                                                      <table className="p-0" style={{ fontSize: "14px" }}>
                                                         <tr className="p-0">
                                                           <td className="p-0">Departs</td>
                                                           <td className="py-0 fw-bold">{airports
@@ -2130,6 +2138,7 @@ const Ticket = () => {
                                         {ticketingList?.directions[4][0].segments.map((item, index) => {
                                           return (
                                             <div className="border p-1 my-1">
+                                              <span style={{fontSize:"18px"}}>
                                               <span className="fw-bold">
                                                 {airports
                                                   .filter((f) => f.iata === item.from)
@@ -2140,6 +2149,7 @@ const Ticket = () => {
                                                 {airports
                                                   .filter((f) => f.iata === item.to)
                                                   .map((item) => item.city)} ({item.to})
+                                              </span>
                                               </span>
                                               <span className="d-flex align-items-center fw-bold">
                                                 <img
@@ -2152,7 +2162,7 @@ const Ticket = () => {
                                               </span>
                                               <table
                                                 class="table table-borderless table-sm mt-1"
-                                                style={{ fontSize: "12px" }}
+                                                style={{ fontSize: "14px" }}
                                               >
                                                 <thead>
                                                   <tr>
@@ -2170,7 +2180,7 @@ const Ticket = () => {
                                                       {moment(item.arrival).format("ddd DD MMM,YY ")}</td>
                                                     <td>{moment(item.departure).format("hh:mm A")}<br></br>{moment(item.arrival).format("hh:mm A")}</td>
                                                     <td>
-                                                      <table className="p-0" style={{ fontSize: "12px" }}>
+                                                      <table className="p-0" style={{ fontSize: "14px" }}>
                                                         <tr className="p-0">
                                                           <td className="p-0">Departs</td>
                                                           <td className="py-0 fw-bold">{airports
@@ -2222,6 +2232,7 @@ const Ticket = () => {
                                         {ticketingList?.directions[5][0].segments.map((item, index) => {
                                           return (
                                             <div className="border p-1 my-1">
+                                              <span style={{fontSize:"18px"}}>
                                               <span className="fw-bold">
                                                 {airports
                                                   .filter((f) => f.iata === item.from)
@@ -2232,6 +2243,7 @@ const Ticket = () => {
                                                 {airports
                                                   .filter((f) => f.iata === item.to)
                                                   .map((item) => item.city)} ({item.to})
+                                              </span>
                                               </span>
                                               <span className="d-flex align-items-center fw-bold">
                                                 <img
@@ -2244,7 +2256,7 @@ const Ticket = () => {
                                               </span>
                                               <table
                                                 class="table table-borderless table-sm mt-1"
-                                                style={{ fontSize: "12px" }}
+                                                style={{ fontSize: "14px" }}
                                               >
                                                 <thead>
                                                   <tr>
@@ -2262,7 +2274,7 @@ const Ticket = () => {
                                                       {moment(item.arrival).format("ddd DD MMM,YY ")}</td>
                                                     <td>{moment(item.departure).format("hh:mm A")}<br></br>{moment(item.arrival).format("hh:mm A")}</td>
                                                     <td>
-                                                      <table className="p-0" style={{ fontSize: "12px" }}>
+                                                      <table className="p-0" style={{ fontSize: "14px" }}>
                                                         <tr className="p-0">
                                                           <td className="p-0">Departs</td>
                                                           <td className="py-0 fw-bold">{airports
@@ -2319,14 +2331,14 @@ const Ticket = () => {
                         <div className="table-responsive-sm mt-3">
                           <p
                             className="ps-1 py-2 fw-bold text-start"
-                            style={{ fontSize: "12px", backgroundColor: "#ededed" }}
+                            style={{ fontSize: "14px", backgroundColor: "#c3c2c2" }}
                           >
                             Fare Details
                           </p>
 
                           <table
                             class="table table-bordered table-sm text-end mt-1"
-                            style={{ fontSize: "12px" }}
+                            style={{ fontSize: "14px" }}
                           >
                             <thead>
                               <tr>
@@ -2415,13 +2427,13 @@ const Ticket = () => {
                       <div className="mt-3 pb-5">
                         <p
                           className="ps-1 py-2 fw-bold text-start"
-                          style={{ fontSize: "12px", marginBottom: "8px", backgroundColor: "#ededed" }}
+                          style={{ fontSize: "13px", marginBottom: "8px", backgroundColor: "#c3c2c2" }}
                         >
                           Important Notice
                         </p>
                         <table
                           class="table table-bordered table-sm text-end mt-1 mb-0"
-                          style={{ fontSize: "12px" }}
+                          style={{ fontSize: "13px" }}
                         >
                           <thead>
                             <tr>
@@ -2439,7 +2451,7 @@ const Ticket = () => {
                         </table>
                         <table
                           class="table table-bordered table-sm text-end  mb-0"
-                          style={{ fontSize: "12px" }}
+                          style={{ fontSize: "13px" }}
                         >
                           <thead>
                             <tr>
@@ -2450,14 +2462,14 @@ const Ticket = () => {
                             <tr className="text-start">
                               <p className="border-0">
                                 Please ensure that you have all the required travel documents for your entire journey - i.e. valid passport
-                                & necessary Visas - and that you have had the recommended inoculations for your destination(s).
+                                & necessary Visas - and that you have had the recommended vaccinations/immunizations for your destination's.
                               </p>
                             </tr>
                           </tbody>
                         </table>
                         <table
                           class="table table-bordered table-sm text-end mb-0"
-                          style={{ fontSize: "12px" }}
+                          style={{ fontSize: "13px" }}
                         >
                           <thead>
                             <tr>
@@ -2474,7 +2486,7 @@ const Ticket = () => {
                         </table>
                         <table
                           class="table table-bordered table-sm text-end  mb-0"
-                          style={{ fontSize: "12px" }}
+                          style={{ fontSize: "13px" }}
                         >
                           <thead>
                             <tr>
@@ -2496,7 +2508,7 @@ const Ticket = () => {
                         
                         {/* <table
                           class="table table-bordered table-sm text-end mb-0"
-                          style={{ fontSize: "12px" }}
+                          style={{ fontSize: "14px" }}
                         >
                           <thead>
                             <tr>

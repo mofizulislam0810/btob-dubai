@@ -262,8 +262,8 @@ const Ticket = () => {
                                 >
                                   179 Baizid Road Nasirabad <br />
                                   Dhaka-1216, Bangladesh<br></br>
-                                 <span style={{fontSize:"8px"}}><i class="fas fa-phone fa-rotate-90"></i></span> Phone: +8801625987452<br></br>
-                                 <span className="me-1"><i class="fa fa-envelope" aria-hidden="true"></i></span> Email: {agentInfo.email}
+                                  <span style={{ fontSize: "8px" }}><i class="fas fa-phone fa-rotate-90"></i></span> Phone: +8801625987452<br></br>
+                                  <span className="me-1"><i class="fa fa-envelope" aria-hidden="true"></i></span> Email: {agentInfo.email}
                                 </div>
                               </address>
                             </td>
@@ -418,7 +418,7 @@ const Ticket = () => {
                             {ticketingList.passengerInfo?.map((item, index) => {
                               return (
                                 <tr className="text-center" style={{ lineHeight: "14px" }}>
-                                  <td className="text-start" style={{fontSize:"15px"}}>
+                                  <td className="text-start" style={{ fontSize: "15px" }}>
                                     {item.title.toUpperCase()}{" "}
                                     {item.first.toUpperCase()}{" "}
                                     {item.last.toUpperCase()}
@@ -1759,24 +1759,24 @@ const Ticket = () => {
 
                                   {
                                     ticketingList?.directions[0] !== undefined && ticketingList?.directions !== undefined ?
-                                      <>
+                                      <div className="border my-1">
                                         {
 
                                           ticketingList?.directions[0][0].segments.map((item, index) => {
                                             return (
-                                              <div className="border p-1 my-1">
-                                                <span style={{fontSize:"18px"}}>
-                                                <span className="fw-bold">
-                                                  {airports
-                                                    .filter((f) => f.iata === item.from)
-                                                    .map((item) => item.city)} ({item.from})
-                                                </span>
-                                                <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
-                                                <span className="fw-bold">
-                                                  {airports
-                                                    .filter((f) => f.iata === item.to)
-                                                    .map((item) => item.city)} ({item.to})
-                                                </span>
+                                              <div className="p-1">
+                                                <span style={{ fontSize: "18px" }}>
+                                                  <span className="fw-bold">
+                                                    {airports
+                                                      .filter((f) => f.iata === item.from)
+                                                      .map((item) => item.city)} ({item.from})
+                                                  </span>
+                                                  <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
+                                                  <span className="fw-bold">
+                                                    {airports
+                                                      .filter((f) => f.iata === item.to)
+                                                      .map((item) => item.city)} ({item.to})
+                                                  </span>
                                                 </span>
                                                 <span className="d-flex align-items-center fw-bold">
                                                   <img
@@ -1849,26 +1849,26 @@ const Ticket = () => {
                                             )
                                           })
                                         }
-                                      </> : <></>
+                                      </div> : <></>
                                   }
                                   {
                                     ticketingList?.directions[1] !== undefined && ticketingList?.directions !== undefined ?
-                                      <>
+                                      <div className="border mb-1">
                                         {ticketingList?.directions[1][0].segments.map((item, index) => {
                                           return (
-                                            <div className="border p-1 mb-1">
-                                              <span style={{fontSize:"18px"}}>
-                                              <span className="fw-bold">
-                                                {airports
-                                                  .filter((f) => f.iata === item.from)
-                                                  .map((item) => item.city)} ({item.from})
-                                              </span>
-                                              <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
-                                              <span className="fw-bold">
-                                                {airports
-                                                  .filter((f) => f.iata === item.to)
-                                                  .map((item) => item.city)} ({item.to})
-                                              </span>
+                                            <div className="p-1">
+                                              <span style={{ fontSize: "18px" }}>
+                                                <span className="fw-bold">
+                                                  {airports
+                                                    .filter((f) => f.iata === item.from)
+                                                    .map((item) => item.city)} ({item.from})
+                                                </span>
+                                                <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
+                                                <span className="fw-bold">
+                                                  {airports
+                                                    .filter((f) => f.iata === item.to)
+                                                    .map((item) => item.city)} ({item.to})
+                                                </span>
                                               </span>
                                               <span className="d-flex align-items-center fw-bold">
                                                 <img
@@ -1941,28 +1941,28 @@ const Ticket = () => {
                                           )
                                         })
                                         }
-                                      </> : <></>
+                                      </div> : <></>
                                   }
 
                                   {
                                     ticketingList?.directions[2] !== undefined && ticketingList?.directions !== undefined ?
-                                      <>
+                                      <div className="border mb-1">
                                         {ticketingList?.directions[2][0].segments.map((item, index) => {
                                           return (
-                                            <div className="border p-1 mb-1">
-                                              <span style={{fontSize:"18px"}}>
-                                              <span className="fw-bold">
-                                                {airports
-                                                  .filter((f) => f.iata === item.from)
-                                                  .map((item) => item.city)} ({item.from})
+                                            <div className="p-1">
+                                              <span style={{ fontSize: "18px" }}>
+                                                <span className="fw-bold">
+                                                  {airports
+                                                    .filter((f) => f.iata === item.from)
+                                                    .map((item) => item.city)} ({item.from})
+                                                </span>
+                                                <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
+                                                <span className="fw-bold">
+                                                  {airports
+                                                    .filter((f) => f.iata === item.to)
+                                                    .map((item) => item.city)} ({item.to})
+                                                </span>
                                               </span>
-                                              <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
-                                              <span className="fw-bold">
-                                                {airports
-                                                  .filter((f) => f.iata === item.to)
-                                                  .map((item) => item.city)} ({item.to})
-                                              </span>
-                                              </span> 
                                               <span className="d-flex align-items-center fw-bold">
                                                 <img
                                                   src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
@@ -2035,27 +2035,27 @@ const Ticket = () => {
                                         })
                                         }
 
-                                      </> : <></>
+                                      </div> : <></>
                                   }
 
                                   {
                                     ticketingList?.directions[3] !== undefined && ticketingList?.directions !== undefined ?
-                                      <>
+                                      <div className="border mb-1">
                                         {ticketingList?.directions[3][0].segments.map((item, index) => {
                                           return (
-                                            <div className="border p-1 my-1">
-                                              <span style={{fontSize:"18px"}}>
-                                              <span className="fw-bold">
-                                                {airports
-                                                  .filter((f) => f.iata === item.from)
-                                                  .map((item) => item.city)} ({item.from})
-                                              </span>
-                                              <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
-                                              <span className="fw-bold">
-                                                {airports
-                                                  .filter((f) => f.iata === item.to)
-                                                  .map((item) => item.city)} ({item.to})
-                                              </span>
+                                            <div className="p-1 my-1">
+                                              <span style={{ fontSize: "18px" }}>
+                                                <span className="fw-bold">
+                                                  {airports
+                                                    .filter((f) => f.iata === item.from)
+                                                    .map((item) => item.city)} ({item.from})
+                                                </span>
+                                                <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
+                                                <span className="fw-bold">
+                                                  {airports
+                                                    .filter((f) => f.iata === item.to)
+                                                    .map((item) => item.city)} ({item.to})
+                                                </span>
                                               </span>
                                               <span className="d-flex align-items-center fw-bold">
                                                 <img
@@ -2129,27 +2129,27 @@ const Ticket = () => {
                                         })
                                         }
 
-                                      </> : <></>
+                                      </div> : <></>
                                   }
 
                                   {
                                     ticketingList?.directions[4] !== undefined && ticketingList?.directions !== undefined ?
-                                      <>
+                                      <div className="border mb-1">
                                         {ticketingList?.directions[4][0].segments.map((item, index) => {
                                           return (
-                                            <div className="border p-1 my-1">
-                                              <span style={{fontSize:"18px"}}>
-                                              <span className="fw-bold">
-                                                {airports
-                                                  .filter((f) => f.iata === item.from)
-                                                  .map((item) => item.city)} ({item.from})
-                                              </span>
-                                              <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
-                                              <span className="fw-bold">
-                                                {airports
-                                                  .filter((f) => f.iata === item.to)
-                                                  .map((item) => item.city)} ({item.to})
-                                              </span>
+                                            <div className="p-1">
+                                              <span style={{ fontSize: "18px" }}>
+                                                <span className="fw-bold">
+                                                  {airports
+                                                    .filter((f) => f.iata === item.from)
+                                                    .map((item) => item.city)} ({item.from})
+                                                </span>
+                                                <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
+                                                <span className="fw-bold">
+                                                  {airports
+                                                    .filter((f) => f.iata === item.to)
+                                                    .map((item) => item.city)} ({item.to})
+                                                </span>
                                               </span>
                                               <span className="d-flex align-items-center fw-bold">
                                                 <img
@@ -2223,27 +2223,27 @@ const Ticket = () => {
                                         })
                                         }
 
-                                      </> : <></>
+                                      </div> : <></>
                                   }
 
                                   {
                                     ticketingList?.directions[5] !== undefined && ticketingList?.directions !== undefined ?
-                                      <>
+                                      <div className="border mb-1">
                                         {ticketingList?.directions[5][0].segments.map((item, index) => {
                                           return (
-                                            <div className="border p-1 my-1">
-                                              <span style={{fontSize:"18px"}}>
-                                              <span className="fw-bold">
-                                                {airports
-                                                  .filter((f) => f.iata === item.from)
-                                                  .map((item) => item.city)} ({item.from})
-                                              </span>
-                                              <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
-                                              <span className="fw-bold">
-                                                {airports
-                                                  .filter((f) => f.iata === item.to)
-                                                  .map((item) => item.city)} ({item.to})
-                                              </span>
+                                            <div className="p-1">
+                                              <span style={{ fontSize: "18px" }}>
+                                                <span className="fw-bold">
+                                                  {airports
+                                                    .filter((f) => f.iata === item.from)
+                                                    .map((item) => item.city)} ({item.from})
+                                                </span>
+                                                <span className="mx-2 fw-bold"><i class="fas fa-arrow-right"></i></span>
+                                                <span className="fw-bold">
+                                                  {airports
+                                                    .filter((f) => f.iata === item.to)
+                                                    .map((item) => item.city)} ({item.to})
+                                                </span>
                                               </span>
                                               <span className="d-flex align-items-center fw-bold">
                                                 <img
@@ -2317,7 +2317,7 @@ const Ticket = () => {
                                         })
                                         }
 
-                                      </> : <></>
+                                      </div> : <></>
                                   }
                                 </>
                             }
@@ -2443,8 +2443,8 @@ const Ticket = () => {
                           <tbody>
                             <tr className="text-start">
                               <p className="border-0">
-                             Carriage and other services provided by the carrier are subject to conditions of carriage which are hereby
-                             incorporated by reference. These conditions may be obtained from the issuing carrier.
+                                Carriage and other services provided by the carrier are subject to conditions of carriage which are hereby
+                                incorporated by reference. These conditions may be obtained from the issuing carrier.
                               </p>
                             </tr>
                           </tbody>
@@ -2479,7 +2479,7 @@ const Ticket = () => {
                           <tbody>
                             <tr className="text-start">
                               <p className="border-0">
-                              LIMIT: 1 Carry-On bag per passenger / SIZE LIMIT: 22in x 15in x 8in (L+W+H=45 inches) / WEIGHT LIMIT: Max weight 7 kg / 15 lb
+                                LIMIT: 1 Carry-On bag per passenger / SIZE LIMIT: 22in x 15in x 8in (L+W+H=45 inches) / WEIGHT LIMIT: Max weight 7 kg / 15 lb
                               </p>
                             </tr>
                           </tbody>
@@ -2505,7 +2505,7 @@ const Ticket = () => {
                             </tr>
                           </tbody>
                         </table>
-                        
+
                         {/* <table
                           class="table table-bordered table-sm text-end mb-0"
                           style={{ fontSize: "14px" }}

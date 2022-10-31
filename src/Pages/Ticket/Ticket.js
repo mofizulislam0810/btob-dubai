@@ -214,7 +214,7 @@ const Ticket = () => {
                       <table class="table table-borderless table-sm">
                         <tbody>
                           <tr>
-                            <td className="text-start bg-white">
+                            <td className="text-start">
                               {ticketingList.ticketInfo?.agentLogo !== null &&
                                 ticketingList.ticketInfo?.agentLogo !== "" ? (
                                 <img

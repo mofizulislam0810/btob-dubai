@@ -347,10 +347,16 @@ const Canceled = () => {
                                             </a>
                                           </>
                                         ) : (
-                                          <>
+                                          <></>
+                                        )
+                                        
+                                       }
+                                      </>
+                                      <>
                                           <a
                                               href="javascript:void(0)"
                                               title="View Booking"
+                                              className='ms-1'
                                               onClick={() =>
                                                 handleViewTicket(
                                                   item.uniqueTransID
@@ -369,9 +375,6 @@ const Canceled = () => {
                                               </Button>
                                             </a>
                                           </>
-                                        )
-                                       }
-                                      </>
                                   </td>
                                 </tr>
                               );

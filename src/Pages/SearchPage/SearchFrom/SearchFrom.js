@@ -221,8 +221,8 @@ const SearchFrom = () => {
         ? searchList[idx].cabinClass === 1
           ? "Economy"
           : searchList[idx].cabinClass === 3
-            ? "Business"
-            : " "
+          ? "Business"
+          : " "
         : "Economy"
     );
     setAdultCount(searchList !== undefined ? searchList[idx].adults : 1);
@@ -243,10 +243,10 @@ const SearchFrom = () => {
     $("#txtTo").val(
       searchList !== undefined
         ? destination[0].city +
-        " - " +
-        destination[0].country +
-        ", " +
-        destination[0].name
+            " - " +
+            destination[0].country +
+            ", " +
+            destination[0].name
         : destinationRef.current.value
     );
 
@@ -264,8 +264,8 @@ const SearchFrom = () => {
           $(".class_0").tDatePicker("update", [
             searchList !== undefined
               ? moment(searchList[idx].routes[0].departureDate).format(
-                "yyyy-MM-DD"
-              )
+                  "yyyy-MM-DD"
+                )
               : new Date(),
           ]);
         });
@@ -274,13 +274,13 @@ const SearchFrom = () => {
           $(".class_0").tDatePicker("update", [
             searchList !== undefined
               ? moment(searchList[idx].routes[0].departureDate).format(
-                "yyyy-MM-DD"
-              )
+                  "yyyy-MM-DD"
+                )
               : new Date(),
             searchList !== undefined
               ? moment(searchList[idx].routes[1].departureDate).format(
-                "yyyy-MM-DD"
-              )
+                  "yyyy-MM-DD"
+                )
               : new Date(),
           ]);
         });
@@ -395,10 +395,10 @@ const SearchFrom = () => {
       if (results.length >= index + 1) {
         autoinput.val(
           results[index].city +
-          " - " +
-          results[index].country +
-          ", " +
-          results[index].name
+            " - " +
+            results[index].country +
+            ", " +
+            results[index].name
         );
         clearResults();
       }
@@ -693,11 +693,11 @@ const SearchFrom = () => {
                                       title="adultminus"
                                       onClick={
                                         infantCount > 0 &&
-                                          adultCount === infantCount
+                                        adultCount === infantCount
                                           ? () => {
-                                            setAdultCount(adultCount - 1);
-                                            setInfantCount(infantCount - 1);
-                                          }
+                                              setAdultCount(adultCount - 1);
+                                              setInfantCount(infantCount - 1);
+                                            }
                                           : () => setAdultCount(adultCount - 1)
                                       }
                                       disabled={adultCount === 1 ? true : false}
@@ -824,8 +824,8 @@ const SearchFrom = () => {
                                       onClick={
                                         infantCount < adultCount
                                           ? () =>
-                                            setInfantCount(infantCount + 1)
-                                          : () => { }
+                                              setInfantCount(infantCount + 1)
+                                          : () => {}
                                       }
                                       disabled={
                                         infantCount === 9 ? true : false
@@ -1001,8 +1001,7 @@ const SearchFrom = () => {
                           htmlFor="formGroupExampleInput"
                           className="form-label text-white"
                         >
-                          Going To{" "}
-                          <span className="text-white fw-bold">*</span>
+                          Going To <span className="text-white fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1076,8 +1075,7 @@ const SearchFrom = () => {
                           htmlFor="formGroupExampleInput"
                           className="form-label text-white"
                         >
-                          Going To{" "}
-                          <span className="text-white fw-bold">*</span>
+                          Going To <span className="text-white fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1150,8 +1148,7 @@ const SearchFrom = () => {
                           htmlFor="formGroupExampleInput"
                           className="form-label text-white"
                         >
-                          Going To{" "}
-                          <span className="text-white fw-bold">*</span>
+                          Going To <span className="text-white fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1225,8 +1222,7 @@ const SearchFrom = () => {
                           htmlFor="formGroupExampleInput"
                           className="form-label text-white"
                         >
-                          Going To{" "}
-                          <span className="text-white fw-bold">*</span>
+                          Going To <span className="text-white fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1299,8 +1295,7 @@ const SearchFrom = () => {
                           htmlFor="formGroupExampleInput"
                           className="form-label text-white"
                         >
-                          Going To{" "}
-                          <span className="text-white fw-bold">*</span>
+                          Going To <span className="text-white fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1379,7 +1374,7 @@ const SearchFrom = () => {
                     <div className="d-flex justify-content-center">
                       <button
                         className="btn text-white mt-4 text-center fw-bold rounded"
-                        style={{ backgroundColor: "#EC1C1E" }}
+                        style={{ backgroundColor: "#7c04c0" }}
                       >
                         Search Flight
                       </button>

@@ -11,9 +11,16 @@ import calanderOneMonthRes from "../../../JSON/calanderOneMonthRes";
 import RevoCalendar from "revo-calendar";
 
 const DashboardPanel = () => {
+  const [date,setDate] = useState({
+      day: new Date().getDay(),
+      month: new Date().getMonth(),
+      year: new Date().getFullYear()
+  });
+  // console.log(date);
  const [eventList,setEventList] = useState([]);
+//  console.log(environment.getCalendarEventBooking+`/${date.year}/${(date.month)-1}`)
   const getEventBooking = async() => {
-    const response = await axios.get(environment.getCalendarEventBooking+`/2022/8`,environment.headerToken);
+    const response = await axios.get(environment.getCalendarEventBooking+`/${date.year}/${(date.month)-1}`,environment.headerToken);
     console.log(response);
     setEventList(await response.data.map((obj) => {
       var date = new Date(obj.date);
@@ -37,7 +44,6 @@ const DashboardPanel = () => {
     window.open("/ticket?utid=" + obj[0].id, "_blank");
     //navigate("/ticket?utid="+utid,'_blank');
   };
-
 
   console.log(eventList);
 
@@ -214,7 +220,7 @@ const DashboardPanel = () => {
   useEffect(() => {
     handleCount();
     getEventBooking();
-  }, []);
+  }, [date]);
 
   return (
     <>
@@ -339,6 +345,9 @@ const DashboardPanel = () => {
                     console.log("index of response json : " + index)
                   }
                   }
+                  dateSelected={(date)=>{
+                    setDate(date);
+                  }}
                 />
               </Box>
             </div>

@@ -44,7 +44,6 @@ const quickLinksData = [
 
 const addressData = [
   {
-
     text: `Al Muhairi 113-127, Al Dhagaya, Deira, Dubai, United Arab Emirates`,
     icon: BsFillHouseFill,
   },
@@ -65,7 +64,7 @@ const Footer = () => {
         <Box>
           <Image src={logo} alt="Triplover" w="160px" mb="24px" />
           <HStack gap="10px">
-            {socialData.map((item,idx) => (
+            {socialData.map((item, idx) => (
               <Circle bg="#E0ECFB" size="45px" key={idx}>
                 <Icon as={item.icon} h="22px" w="22px" color="inactiveText" />
               </Circle>
@@ -79,7 +78,7 @@ const Footer = () => {
           <Text fontSize="18px" fontWeight={500} mb="24px">
             Quick Links
           </Text>
-          {quickLinksData.map((item,idx) => (
+          {quickLinksData.map((item, idx) => (
             <Link to={`/${item.to}`} key={idx}>
               <Text fontSize="14px" fontWeight={400} mb="17px">
                 {item.text}
@@ -94,7 +93,7 @@ const Footer = () => {
           <Text fontSize="18px" fontWeight={500} mb="24px">
             Address
           </Text>
-          {addressData.map((item,idx) => (
+          {addressData.map((item, idx) => (
             <HStack gap="8px" mb="18px" key={idx}>
               <Icon
                 as={item.icon}

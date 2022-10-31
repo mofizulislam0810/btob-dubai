@@ -8,8 +8,12 @@ import { extendTheme, ChakraProvider } from "@chakra-ui/react";
 import "@fontsource/inter";
 
 const colors = {
-  primary: "#0083FC",
-  secondary: "#FF9900",
+  primary: "#7c04c0",
+  primaryLight: "#a34fd2",
+  secondary: "#fc2c74",
+  secondaryLight: "#fc6b9d",
+  logoGreen: "#009e70",
+  logoYellow: "#fcbc04",
   background: "#F7FBFF",
   backgroundVariant: "#FAF9FF",
   text: "#1E1E1E",
@@ -17,7 +21,7 @@ const colors = {
   inactiveIcon: "#8796A1",
   white: "#FFFFFF",
   black: "#000000",
-  gradient: "linear-gradient(100.94deg, #041339 -9.51%, #EC1C1E 115.79%)",
+  gradient: "linear-gradient(100.94deg, #7c04c0 -9.51%, #fc2c74 115.79%)",
 };
 
 const fonts = {

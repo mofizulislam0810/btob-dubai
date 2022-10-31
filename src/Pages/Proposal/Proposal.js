@@ -1665,7 +1665,7 @@ const Proposal = () => {
                                 <th style={{border: "1px solid black"}}><b>Class</b></th>
                                 <th style={{border: "1px solid black"}}><b>Trip Type</b></th>
                                 <th style={{border: "1px solid black"}}><b>Baggage Allowance</b></th>
-                                <th style={{border: "1px solid black"}}><b>Travellers</b></th>
+                                {/* <th style={{border: "1px solid black"}}><b>Travellers</b></th> */}
                             </tr>
                           </thead>
                           <tbody>
@@ -1676,7 +1676,7 @@ const Proposal = () => {
                                   <td style={{border: "1px solid black"}}>
                                     <b>
                                     {item.directions[0][0].segments[0].baggage[0].amount + " " + item.directions[0][0].segments[0].baggage[0].units}(s)</b></td>
-                                  <td style={{border: "1px solid black"}}><b>{item.directions[0][0].segments[0].duration[0]}</b></td>
+                                  {/* <td style={{border: "1px solid black"}}><b>{item.directions[0][0].segments[0].duration[0]}</b></td> */}
                               </tr>
                           </tbody>
                         </table>

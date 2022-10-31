@@ -21,8 +21,8 @@ body{
 
 
 #form-bg{
-
-    background-color: #BF953F;
+    background: linear-gradient(100.94deg, #7c04c0 -9.51%, #fc2c74 115.79%);
+    opacity: 0.8;
     padding: 30px 30px 70px 30px;
     padding-bottom: 28px;
   }

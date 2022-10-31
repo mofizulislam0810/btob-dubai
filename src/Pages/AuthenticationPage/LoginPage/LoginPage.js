@@ -98,10 +98,10 @@ const LoginPage = () => {
                 <Image
                   src={logo}
                   alt="Triplover"
-                  w="225px"
+                  w="160px"
                   h="84px"
                   mt={8}
-                  mb={6}
+                  mb={"25px"}
                 />
               </Center>
               <div className="card-body login-card-body">
@@ -198,7 +198,7 @@ const LoginPage = () => {
                       <button
                         type="submit"
                         className="btn text-white fw-bold btn-block rounded btn-sm"
-                        disabled={ loading ? true : false}
+                        disabled={loading ? true : false}
                       >
                         <Center
                           bg="gradient"
@@ -206,11 +206,17 @@ const LoginPage = () => {
                           h="55px"
                           _hover={{ opacity: 0.9 }}
                         >
-                          {
-                            loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <>
-                            <Text color="white">Sign In</Text>
+                          {loading ? (
+                            <span
+                              class="spinner-border spinner-border-sm"
+                              role="status"
+                              aria-hidden="true"
+                            ></span>
+                          ) : (
+                            <>
+                              <Text color="white">Sign In</Text>
                             </>
-                          }
+                          )}
                         </Center>
                       </button>
                     </div>

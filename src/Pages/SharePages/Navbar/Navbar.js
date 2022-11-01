@@ -40,7 +40,7 @@ const Navbar = () => {
     await axios
       .post(environment.airTicketingSearch, searchObj, environment.headerToken)
       .then((res) => {
-        // console.log(res);
+        console.log(res,"response");
         if (
           res.data.length > 0 &&
           res.data[0].isTicketed === true &&

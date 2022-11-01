@@ -587,7 +587,8 @@ const BookedView = () => {
                                       <td>{item.discount}</td>
                                       <td>{item.ait}</td>
                                       <td>{item.passengerCount}</td>
-                                      <td>{item.currencyName} {item.totalPrice}</td>
+                                      <td>{item.currencyName} {item.totalPrice *
+                                            item.passengerCount}</td>
                                     </tr>
                                   </>
                                 );
@@ -1464,7 +1465,8 @@ const BookedView = () => {
                                       <td>{item.discount}</td>
                                       <td>{item.ait}</td>
                                       <td>{item.passengerCount}</td>
-                                      <td>{item.currencyName} {item.totalPrice}</td>
+                                      <td>{item.currencyName} {item.totalPrice *
+                                            item.passengerCount}</td>
                                     </tr>
                                   </>
                                 );

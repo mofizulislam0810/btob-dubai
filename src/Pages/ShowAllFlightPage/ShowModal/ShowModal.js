@@ -1414,6 +1414,14 @@ const ShowModal = ({
                           ) : (
                             <></>
                           )}
+                           <tr className="fw-bold">
+                                <td colSpan={5} className='border-none'></td>
+                                <td>Grand Total</td>
+                                <td>
+                                  {currency !== undefined ? currency : "BDT"} {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
+                                  {(bookingComponents[0].totalPrice).toFixed(2)}
+                                </td>
+                          </tr>
                         </tbody>
                       </table>
                     </div>

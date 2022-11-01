@@ -367,7 +367,7 @@ const Canceled = () => {
                                           <>
                                             <a
                                               href="javascript:void(0)"
-                                              title="View Ticket"
+                                              title="View Booking"
                                               onClick={() =>
                                                 handleViewTicket(
                                                   item.uniqueTransID

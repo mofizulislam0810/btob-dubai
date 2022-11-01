@@ -508,7 +508,7 @@ const ShowAllFlightPage = () => {
           weight: 0.5,
         },
         {
-          name: "name",
+          name: "city",
           weight: 0.3,
         },
       ],
@@ -2147,7 +2147,7 @@ const ShowAllFlightPage = () => {
                                     <div className="d-flex justify-content-center">
                                       <button
                                         className="btn text-white mt-3 text-center fw-bold rounded-3"
-                                        id="search-flight" style={{ backgroundColor: "#390404" }}
+                                        id="search-flight" style={{ backgroundColor: "#7c04c0" }}
                                       >
                                         Search Flight
                                       </button>

@@ -349,7 +349,7 @@ const SearchFrom = () => {
           weight: 0.5,
         },
         {
-          name: "name",
+          name: "city",
           weight: 0.3,
         },
       ],

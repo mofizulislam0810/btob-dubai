@@ -187,7 +187,7 @@ const InvoiceView = () => {
                                                 </tr>
                                                 <tr>
                                                     <td className="fw-bold" colSpan={2} style={{ textAlign: "right" }}>
-                                                        Total:  AED {invoice?.amount}
+                                                        Total:  BDT {invoice?.amount}
                                                     </td>
                                                 </tr>
                                             </tbody>

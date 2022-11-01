@@ -40,6 +40,8 @@ const QuickPassenger = () => {
   let [visaFileName, setVisaFileName] = useState("");
   let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
 	let staticURL ="wwwroot/Uploads/Support/";
+
+  console.log(dobDay);
 let [loading, setLoading] = useState(false);
   const handlePassportFileUpload = (file) => {
     let fileExt = file.name.split(".").pop().toLowerCase();
@@ -246,6 +248,7 @@ let [loading, setLoading] = useState(false);
     passportCopy: passportFileName,
     visaCopy: visaFileName,
   };
+  console.log(sendObj);
   const handleSubmit = () => {
     if (firstName === "") {
       toast.error("Sorry! First Name is empty..")
@@ -338,6 +341,9 @@ let [loading, setLoading] = useState(false);
   useEffect(() => {
     handleGetPassengers(currentPageNumber);
   }, [currentPageNumber]);
+
+
+  console.log(passengerList);
   return (
     <div>
       <Navbar></Navbar>

@@ -560,7 +560,7 @@ const BookedView = () => {
                             <thead>
                               <tr>
                                 <th
-                                  colspan="6"
+                                  colspan="7"
                                   className="fw-bold py-2 bg-light"
                                 >
                                   FARE DETAILS
@@ -571,7 +571,7 @@ const BookedView = () => {
                                 <th>Base</th>
                                 <th>Tax</th>
                                 <th>Discount</th>
-                                {/* <th>AIT</th> */}
+                                <th>AIT</th>
                                 <th>Pax</th>
                                 <th>Total Pax Fare</th>
                               </tr>
@@ -585,14 +585,16 @@ const BookedView = () => {
                                       <td>{item.basePrice}</td>
                                       <td>{item.tax}</td>
                                       <td>{item.discount}</td>
+                                      <td>{item.ait}</td>
                                       <td>{item.passengerCount}</td>
-                                      <td>{item.currencyName} {item.totalPrice}</td>
+                                      <td>{item.currencyName} {item.totalPrice *
+                                            item.passengerCount}</td>
                                     </tr>
                                   </>
                                 );
                               })}
                               <tr className="fw-bold">
-                                <td colSpan={4} className='border-none'></td>
+                                <td colSpan={5} className='border-none'></td>
                                 <td>Grand Total</td>
                                 <td>{ticketingList.passengerInfo !== undefined ? ticketingList.passengerInfo[0]?.currencyName : ""} {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
                                   {ticketingList.ticketInfo?.ticketingPrice}
@@ -1001,7 +1003,7 @@ const BookedView = () => {
                                     <td>{item.passengerType}</td>
                                     <td>{item.gender}</td>
                                     <td>
-                                      {item.dateOfBirth === null ? "---" : moment(item.dateOfBirth).format(
+                                      {item.dateOfBirth === null ? "N/A" : moment(item.dateOfBirth).format(
                                         "DD-MMMM-yyyy"
                                       )}
                                     </td>
@@ -1436,7 +1438,7 @@ const BookedView = () => {
                             <thead>
                               <tr>
                                 <th
-                                  colspan="6"
+                                  colspan="7"
                                   className="fw-bold py-2 bg-light"
                                 >
                                   FARE DETAILS
@@ -1447,7 +1449,7 @@ const BookedView = () => {
                                 <th>Base</th>
                                 <th>Tax</th>
                                 <th>Discount</th>
-                                {/* <th>AIT</th> */}
+                                <th>AIT</th>
                                 <th>Pax</th>
                                 <th>Total Pax Fare</th>
                               </tr>
@@ -1461,14 +1463,16 @@ const BookedView = () => {
                                       <td>{item.basePrice}</td>
                                       <td>{item.tax}</td>
                                       <td>{item.discount}</td>
+                                      <td>{item.ait}</td>
                                       <td>{item.passengerCount}</td>
-                                      <td>{item.currencyName} {item.totalPrice}</td>
+                                      <td>{item.currencyName} {item.totalPrice *
+                                            item.passengerCount}</td>
                                     </tr>
                                   </>
                                 );
                               })}
                               <tr className="fw-bold">
-                                <td colSpan={4} className='border-none'></td>
+                                <td colSpan={5} className='border-none'></td>
                                 <td>Grand Total</td>
                                 <td>{ticketingList.passengerInfo !== undefined ? ticketingList.passengerInfo[0]?.currencyName : ""} {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
                                   {ticketingList.ticketInfo?.ticketingPrice}

@@ -58,7 +58,7 @@ const CreditNotes = () => {
                       <thead className="text-center fw-bold bg-secondary">
                         <tr>
                           <th>SL</th>
-                          <th>Reference</th>
+                          <th>Booking ID</th>
                           <th>PNR</th>
                           <th>Amount</th>
                           <th>Adjustment date</th>

@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
-import SideNavBar from "../SharePages/SideNavBar/SideNavBar";
-import Navbar from "../SharePages/Navbar/Navbar";
 import axios from "axios";
-import { environment } from "../SharePages/Utility/environment";
-import moment from "moment";
-import courtries from "../../JSON/countries.json";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import ReactPaginate from 'react-paginate';
-import Footer from "../SharePages/Footer/Footer";
+import { add, format } from "date-fns";
 import $ from 'jquery';
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import ReactPaginate from 'react-paginate';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import courtries from "../../JSON/countries.json";
+import Footer from "../SharePages/Footer/Footer";
+import Navbar from "../SharePages/Navbar/Navbar";
+import SideNavBar from "../SharePages/SideNavBar/SideNavBar";
+
+import { environment } from "../SharePages/Utility/environment";
 const QuickPassenger = () => {
   let [pageCount, setPageCount] = useState(0);
   let [pageSize, setPageSize] = useState(10);
@@ -17,13 +19,16 @@ const QuickPassenger = () => {
   let [currentItem, setCurrentItem] = useState({});
   let [passengerList, setPassengerList] = useState([]);
   let [passengerType, setPassengerType] = useState("ADT");
+  let [passportExDate, setpassportExDate] = useState();
   let [title, setTitle] = useState("");
   let [firstName, setFirstName] = useState("");
   let [middleName, setMiddleName] = useState("");
   let [lastName, setLastName] = useState("");
-  let [dobDay, setDOBDay] = useState("");
-  let [dobMonth, setDOBMonth] = useState("");
-  let [dobYear, setDOBYear] = useState("");
+  // let [dobDay, setDOBDay] = useState("");
+  // let [dobMonth, setDOBMonth] = useState("");
+  // let [dobYear, setDOBYear] = useState("");
+  let [dob, setDOB] = useState("2018-07-22")
+  let [dobMinMax, setDobMinMax] = useState({ min: "", max: "" });
   let [nationality, setNationality] = useState("BD");
   let [gender, setGender] = useState("Male");
   let [passportNo, setPassportNo] = useState("");
@@ -39,8 +44,8 @@ const QuickPassenger = () => {
   let [passportFileName, setPassportFileName] = useState("");
   let [visaFileName, setVisaFileName] = useState("");
   let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
-	let staticURL ="wwwroot/Uploads/Support/";
-let [loading, setLoading] = useState(false);
+  let staticURL = "wwwroot/Uploads/Support/";
+  let [loading, setLoading] = useState(false);
   const handlePassportFileUpload = (file) => {
     let fileExt = file.name.split(".").pop().toLowerCase();
     if (
@@ -106,27 +111,27 @@ let [loading, setLoading] = useState(false);
       toast.error("Sorry! file format not valid..");
     }
   };
-  var thisYear = new Date().getFullYear();
+  // var thisYear = new Date().getFullYear();
 
-  if (passengerType === "ADT") {
-    yearList = [];
-    for (var i = 12; i <= 100; i++) {
-      var year = thisYear - i;
-      yearList.push(year);
-    }
-  } else if (passengerType === "CNN") {
-    yearList = [];
-    for (var i = 2; i <= 12; i++) {
-      var year = thisYear - i;
-      yearList.push(year);
-    }
-  } else if (passengerType === "INF") {
-    yearList = [];
-    for (var i = 1; i <= 2; i++) {
-      var year = thisYear - i;
-      yearList.push(year);
-    }
-  }
+  // if (passengerType === "ADT") {
+  //   yearList = [];
+  //   for (var i = 12; i <= 100; i++) {
+  //     var year = thisYear - i;
+  //     yearList.push(year);
+  //   }
+  // } else if (passengerType === "CNN") {
+  //   yearList = [];
+  //   for (var i = 2; i <= 12; i++) {
+  //     var year = thisYear - i;
+  //     yearList.push(year);
+  //   }
+  // } else if (passengerType === "INF") {
+  //   yearList = [];
+  //   for (var i = 1; i <= 2; i++) {
+  //     var year = thisYear - i;
+  //     yearList.push(year);
+  //   }
+  // }
 
   const handleGetPassengers = (currentPage) => {
     const getData = async () => {
@@ -139,10 +144,10 @@ let [loading, setLoading] = useState(false);
         sendObj,
         environment.headerToken
       );
-      console.log(response.data.data)
+      // console.log(response.data.data)
       setPassengerList(response.data.data);
       setPageCount(await response.data.totalPages);
-      console.log(response.data);
+      // console.log(response.data);
     };
     getData();
   };
@@ -156,16 +161,18 @@ let [loading, setLoading] = useState(false);
     setFirstName("");
     setMiddleName("");
     setLastName("");
-    setDOBYear("");
-    setDOBMonth("");
-    setDOBDay("");
+    // setDOBYear("");
+    // setDOBMonth("");
+    // setDOBDay("");
+    setDOB("")
     setNationality("BD");
     setGender("Male");
     setPassportNo("");
     setIssuingCountry("");
-    setPEYear("");
-    setPEMonth("");
-    setPEDay("");
+    // setPEYear("");
+    // setPEMonth("");
+    // setPEDay("");
+    setpassportExDate("")
     setPhone("");
     setEmail("");
     setPhoneCountryCode("+88");
@@ -176,22 +183,24 @@ let [loading, setLoading] = useState(false);
     clearForm();
   };
   const handleEditItem = (item) => {
-    console.log(item);
+    // console.log(item);
     setCurrentItem(item);
     setTitle(item.title);
     setFirstName(item.first);
     setMiddleName(item.middle);
     setLastName(item.last);
-    setDOBYear(item.dateOfBirth.split("-")[0]);
-    setDOBMonth(Number(item.dateOfBirth.split("-")[1]));
-    setDOBDay(Number(item.dateOfBirth.split("-")[2].split("T")[0]));
+    // setDOBYear(item.dateOfBirth.split("-")[0]);
+    // setDOBMonth(Number(item.dateOfBirth.split("-")[1]));
+    // setDOBDay(Number(item.dateOfBirth.split("-")[2].split("T")[0]));
+    setDOB(item.dateOfBirth)
     setNationality(item.nationality);
     setGender(item.gender);
     setPassportNo(item.documentNumber);
+    setpassportExDate(item.expireDate)
     setIssuingCountry(item.documentIssuingCountry);
-    setPEYear(item.expireDate.split("-")[0]);
-    setPEMonth(Number(item.expireDate.split("-")[1]));
-    setPEDay(Number(item.expireDate.split("-")[2].split("T")[0]));
+    // setPEYear(item.expireDate.split("-")[0]);
+    // setPEMonth(Number(item.expireDate.split("-")[1]));
+    // setPEDay(Number(item.expireDate.split("-")[2].split("T")[0]));
     setPhone(item.phone);
     setEmail(item.email);
     setPhoneCountryCode(item.phoneCountryCode);
@@ -212,7 +221,7 @@ let [loading, setLoading] = useState(false);
           .catch((error) => {
             console.log(error);
           });
-        console.log(response);
+        // console.log(response);
         if (response !== undefined && response.data > 0) {
           handleGetPassengers(currentPageNumber)
           toast.success("Passenger deleted successfully..");
@@ -233,12 +242,12 @@ let [loading, setLoading] = useState(false);
     first: firstName,
     middle: middleName,
     last: lastName,
-    dateOfBirth: dobYear + "-" + dobMonth + "-" + dobDay,
+    dateOfBirth: dob,
     nationality: nationality,
     gender: gender,
     documentNumber: passportNo,
     documentIssuingCountry: issuingCountry,
-    expireDate: (peYear == "" || peMonth == "" || peDay == "") ? null : (peYear + "-" + peMonth + "-" + peDay),
+    expireDate: passportExDate,
     phone: phone,
     email: email,
     phoneCountryCode: phoneCountryCode,
@@ -255,7 +264,7 @@ let [loading, setLoading] = useState(false);
       toast.error("Sorry! Last Name is empty..")
       return;
     }
-    if (dobYear == "" || dobMonth == "" || dobDay == "") {
+    if (dob === "") {
       toast.error("Sorry! DOB is not selected..")
       return;
     }
@@ -276,7 +285,7 @@ let [loading, setLoading] = useState(false);
     //   toast.error("Sorry! VISA file is empty..")
     //   return;
     // }
-    console.log(sendObj);
+    // console.log(sendObj);
     if (sendObj.id > 0) {
       const putData = async () => {
         setLoading(true);
@@ -289,16 +298,16 @@ let [loading, setLoading] = useState(false);
           .catch((error) => {
             console.log(error);
           });
-        console.log(response);
+        // console.log(response);
         if (response !== undefined && response.data > 0) {
           handleGetPassengers(currentPageNumber);
           clearForm();
           toast.success("Passenger updated successfully..");
           $("#modal-close").click();
-            $(".modal-backdrop").remove();
-            $("body").removeClass("modal-open");
-            $("body").removeAttr("style");
-            setLoading(false);
+          $(".modal-backdrop").remove();
+          $("body").removeClass("modal-open");
+          $("body").removeAttr("style");
+          setLoading(false);
         } else {
           toast.error("Please try again..");
           setLoading(false);
@@ -317,7 +326,7 @@ let [loading, setLoading] = useState(false);
           .catch((error) => {
             console.log(error);
           });
-        console.log(response);
+        // console.log(response);
         if (response !== undefined && response.data > 0) {
           handleGetPassengers(1);
           clearForm();
@@ -335,9 +344,46 @@ let [loading, setLoading] = useState(false);
       postData();
     }
   };
+  const ISODateFormatter = (input) => {
+    return format(new Date(input), "yyyy-MM-dd");
+  };
+  const passengerTypeFuc = (passengerType) => {
+    switch (passengerType) {
+      case "ADT":
+        setDobMinMax({
+          min: null, max: ISODateFormatter(add(new Date(), {
+            years: -12,
+          }))
+        })
+        break;
+      case "CNN":
+        setDobMinMax({
+          min: ISODateFormatter(add(new Date(), {
+            years: -12,
+          })), max: ISODateFormatter(add(new Date(), {
+            years: -2,
+          }))
+        })
+        break;
+      case "INF":
+        setDobMinMax({
+          min: ISODateFormatter(add(new Date(), {
+            years: -2,
+          })), max: ISODateFormatter(new Date())
+        })
+        break;
+      default:
+        break;
+    }
+
+  }
+  console.log({ dobMinMax })
+
   useEffect(() => {
+    passengerTypeFuc(passengerType)
     handleGetPassengers(currentPageNumber);
-  }, [currentPageNumber]);
+
+  }, [currentPageNumber, passengerType]);
   return (
     <div>
       <Navbar></Navbar>
@@ -395,13 +441,13 @@ let [loading, setLoading] = useState(false);
                                   data-bs-toggle="modal"
                                   data-bs-target="#accountModal"
                                 > */}
-                                  {item.title +
-                                    " " +
-                                    item.first +
-                                    " " +
-                                    item.middle +
-                                    " " +
-                                    item.last}
+                                {item.title +
+                                  " " +
+                                  item.first +
+                                  " " +
+                                  item.middle +
+                                  " " +
+                                  item.last}
                                 {/* </a> */}
                               </td>
                               <td>{item.email}</td>
@@ -413,15 +459,15 @@ let [loading, setLoading] = useState(false);
                               </td>
                               <td>{item.gender}</td>
                               <td>
-                                {item.passportCopy != null &&
-                                  item.passportCopy != "" ? (
+                                {item.passportCopy !== null &&
+                                  item.passportCopy !== "" ? (
                                   <a
                                     href={
                                       environment.baseApiURL +
                                       `agentinfo/GetPassengerFile/${item.passportCopy}/1`
                                     }
                                     download
-                                    target="_blank"
+                                    target="_blank" rel="noreferrer"
                                   >
                                     Passport Copy
                                   </a>
@@ -438,7 +484,7 @@ let [loading, setLoading] = useState(false);
                                       `agentinfo/GetPassengerFile/${item.visaCopy}/2`
                                     }
                                     download
-                                    target="_blank"
+                                    target="_blank" rel="noreferrer"
                                   >
                                     Visa Copy
                                   </a>
@@ -551,7 +597,11 @@ let [loading, setLoading] = useState(false);
                                 <input
                                   name="firstName"
                                   className="form-control rounded-end"
-                                  onChange={(e) => setFirstName(e.target.value)}
+                                  onChange={(e) => {
+                                    setFirstName(e.target.value); const result = add(new Date(), {
+                                      years: -2
+                                    }); console.log({ result })
+                                  }}
                                   value={firstName}
                                   required
                                   autoComplete="off"
@@ -612,79 +662,19 @@ let [loading, setLoading] = useState(false);
                               <span className="text-danger">*</span>
                             </label>
                             <div className="input-group mb-3 d-flex">
-                              <select
-                                name="date"
-                                className="form-select rounded-start"
-                                onChange={(e) => setDOBDay(e.target.value)}
-                                value={dobDay}
+                              <input
+                                type={"date"}
+                                name="dateOfBirth"
+                                className="form-control rounded"
+                                onChange={(e) => {
+                                  setDOB(e.target.value)
+                                }}
+                                value={dob}
+                                min={dobMinMax?.min} max={dobMinMax?.max}
                                 required
-                              >
-                                <option value="">Day</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                                <option>11</option>
-                                <option>12</option>
-                                <option>13</option>
-                                <option>14</option>
-                                <option>15</option>
-                                <option>16</option>
-                                <option>17</option>
-                                <option>18</option>
-                                <option>19</option>
-                                <option>20</option>
-                                <option>21</option>
-                                <option>22</option>
-                                <option>23</option>
-                                <option>24</option>
-                                <option>25</option>
-                                <option>26</option>
-                                <option>27</option>
-                                <option>28</option>
-                                <option>29</option>
-                                <option>30</option>
-                                <option>31</option>
-                              </select>
-                              <select
-                                name="month"
-                                className="form-select"
-                                onChange={(e) => setDOBMonth(e.target.value)}
-                                value={dobMonth}
-                                required
-                              >
-                                <option value="">Mon</option>
-                                <option value="1">Jan</option>
-                                <option value="2">Feb</option>
-                                <option value="3">Mar</option>
-                                <option value="4">Apr</option>
-                                <option value="5">May</option>
-                                <option value="6">Jun</option>
-                                <option value="7">Jul</option>
-                                <option value="8">Aug</option>
-                                <option value="9">Sep</option>
-                                <option value="10">Oct</option>
-                                <option value="11">Nov</option>
-                                <option value="12">Dec</option>
-                              </select>
-                              <select
-                                name="year"
-                                className="form-select rounded-end"
-                                onChange={(e) => setDOBYear(e.target.value)}
-                                value={dobYear}
-                                required
-                              >
-                                <option value="">Year</option>
-                                {yearList.map((i, index) => {
-                                  return <option key={index}>{i}</option>;
-                                })}
-                              </select>
+                                autoComplete="off"
+                                placeholder="Date of Birth"
+                              />
                             </div>
                           </div>
                         </div>
@@ -744,7 +734,7 @@ let [loading, setLoading] = useState(false);
                               htmlFor=""
                             >
                               Passport number{" "}
-                              <span className="text-danger">*</span>
+                              {/* <span className="text-danger">*</span> */}
                             </label>
                           </div>
                           <div className="input-group mb-3">
@@ -752,7 +742,6 @@ let [loading, setLoading] = useState(false);
                               type="text"
                               className="form-control rounded"
                               name="passport-number"
-                              required
                               onChange={(e) => setPassportNo(e.target.value)}
                               value={passportNo}
                               autoComplete="off"
@@ -767,7 +756,7 @@ let [loading, setLoading] = useState(false);
                               htmlFor=""
                             >
                               Issuing country{" "}
-                              <span className="text-danger">*</span>
+                              {/* <span className="text-danger">*</span> */}
                             </label>
                           </div>
                           <div className="input-group mb-3">
@@ -777,7 +766,7 @@ let [loading, setLoading] = useState(false);
                                 setIssuingCountry(e.target.value)
                               }
                               value={issuingCountry}
-                              required
+                            // required
                             >
                               <option value="">Issuing Country</option>
                               {courtries.map((item, index) => {
@@ -797,86 +786,22 @@ let [loading, setLoading] = useState(false);
                               htmlFor=""
                             >
                               Passport Expiry Date{" "}
-                              <span className="text-danger">*</span>
+                              {/* <span className="text-danger">*</span> */}
                             </label>
                           </div>
                           <div className="input-group mb-3 d-flex">
-                            <select
-                              className="form-select rounded-start"
-                              onChange={(e) => setPEDay(e.target.value)}
-                              value={peDay}
-                              required
-                            >
-                              <option value="">Day</option>
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                              <option>6</option>
-                              <option>7</option>
-                              <option>8</option>
-                              <option>9</option>
-                              <option>10</option>
-                              <option>11</option>
-                              <option>12</option>
-                              <option>13</option>
-                              <option>14</option>
-                              <option>15</option>
-                              <option>16</option>
-                              <option>17</option>
-                              <option>18</option>
-                              <option>19</option>
-                              <option>20</option>
-                              <option>21</option>
-                              <option>22</option>
-                              <option>23</option>
-                              <option>24</option>
-                              <option>25</option>
-                              <option>26</option>
-                              <option>27</option>
-                              <option>28</option>
-                              <option>29</option>
-                              <option>30</option>
-                              <option>31</option>
-                            </select>
-                            <select
-                              className="form-select"
-                              onChange={(e) => setPEMonth(e.target.value)}
-                              value={peMonth}
-                              required
-                            >
-                              <option value="">Mon</option>
-                              <option value="1">Jan</option>
-                              <option value="2">Feb</option>
-                              <option value="3">Mar</option>
-                              <option value="4">Apr</option>
-                              <option value="5">May</option>
-                              <option value="6">Jun</option>
-                              <option value="7">Jul</option>
-                              <option value="8">Aug</option>
-                              <option value="9">Sep</option>
-                              <option value="10">Oct</option>
-                              <option value="11">Nov</option>
-                              <option value="12">Dec</option>
-                            </select>
-                            <select
-                              className="form-select rounded-end"
-                              onChange={(e) => setPEYear(e.target.value)}
-                              value={peYear}
-                              required
-                            >
-                              <option value="">Year</option>
-                              <option>2030</option>
-                              <option>2029</option>
-                              <option>2028</option>
-                              <option>2027</option>
-                              <option>2026</option>
-                              <option>2025</option>
-                              <option>2024</option>
-                              <option>2023</option>
-                              <option>2022</option>
-                            </select>
+                            <input
+                              type={"date"}
+                              name="passportExDate"
+                              className="form-control rounded"
+                              onChange={(e) => {
+                                setpassportExDate(e.target.value)
+                              }}
+                              value={passportExDate}
+                              min={ISODateFormatter(new Date())}
+                              autoComplete="off"
+                              placeholder="Passport Expaire Date"
+                            />
                           </div>
                         </div>
                       </div>
@@ -957,7 +882,7 @@ let [loading, setLoading] = useState(false);
                             </label>
                           </div>
                           <div className="input-group mb-3 d-flex">
-                            {passportNo !== "" ? (
+                            {/* {passportNo !== "" ? (
                               <input
                                 type={"file"}
                                 accept=".jpg, .jpeg, .png, .pdf"
@@ -968,7 +893,15 @@ let [loading, setLoading] = useState(false);
                               ></input>
                             ) : (
                               <></>
-                            )}
+                            )} */}
+                            <input
+                              type={"file"}
+                              accept=".jpg, .jpeg, .png, .pdf"
+                              className="form-control rounded"
+                              onChange={(e) =>
+                                handlePassportFileUpload(e.target.files[0])
+                              }
+                            />
                           </div>
                         </div>
                       </div>
@@ -986,7 +919,7 @@ let [loading, setLoading] = useState(false);
                             </label>
                           </div>
                           <div className="input-group mb-3 d-flex">
-                            {passportNo !== "" ? (
+                            {/* {passportNo !== "" ? (
                               <input
                                 type={"file"}
                                 accept=".jpg, .jpeg, .png, .pdf"
@@ -997,7 +930,15 @@ let [loading, setLoading] = useState(false);
                               ></input>
                             ) : (
                               <></>
-                            )}
+                            )} */}
+                            <input
+                              type={"file"}
+                              accept=".jpg, .jpeg, .png, .pdf"
+                              className="form-control rounded"
+                              onChange={(e) =>
+                                handleVisaFileUpload(e.target.files[0])
+                              }
+                            />
                           </div>
                         </div>
                       </div>
@@ -1017,7 +958,7 @@ let [loading, setLoading] = useState(false);
                       type="button"
                       className="btn button-color text-white rounded btn-sm"
                       onClick={() => handleSubmit()}
-                      disabled = {loading ? true : false}
+                      disabled={loading ? true : false}
                     >
                       {
                         loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>

@@ -308,6 +308,7 @@ const Support = () => {
       if (response.data > 0) {
         handleGetOngoing();
         toast.success("Thanks! Message sent successfully..");
+        document.getElementById("replyBtn").click();
       } else {
         toast.error("Sorry! Message not sent..");
       }
@@ -1145,6 +1146,7 @@ const Support = () => {
                             Reply
                           </h5>
                           <button
+                            id="replyBtn"
                             type="button"
                             className="btn-close"
                             data-bs-dismiss="modal"

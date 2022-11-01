@@ -15,6 +15,8 @@ import { ToastContainer, toast } from "react-toastify";
 import airports from "../../JSON/airports.json";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import logo from '../../images/logo/logo-combined.png'
+
 
 const Ticket = () => {
   let [ticketingList, setTicketingList] = useState([]);
@@ -133,7 +135,7 @@ const Ticket = () => {
     const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
 
     pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight, "", "FAST");
-    pdf.save("ticket_triplover.pdf");
+    pdf.save("ticket_FirstTrip.pdf");
     setIsDownloading(false);
   }
   return (

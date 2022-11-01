@@ -170,7 +170,7 @@ const Proposal = () => {
 
 
   const [singleValue, setSingleValue] = useState(defaultPriceList);
-  const [btnDisabled,setbtnDisabled] = useState(false);
+  const [btnDisabled, setbtnDisabled] = useState(false);
   const [value, setValue] = useState();
   const [adultPriceValue, setAdultPriceValue] = useState(adultPrice);
   const [childPriceValue, setChildPriceValue] = useState(childPrice);
@@ -200,7 +200,7 @@ const Proposal = () => {
     axios.post(environment.sendEmailProposal, messageData)
       .then(response => (response.status === 200 && response.data === true ? toast.success("Email send successfully.") : toast.error("Please try again.")))
       .catch(() => toast.error("Please try again."))
-      .finally(()=>{
+      .finally(() => {
         setbtnDisabled(false);
       });
     e.preventDefault();
@@ -299,7 +299,7 @@ const Proposal = () => {
     const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
 
     pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight, "", "FAST");
-    pdf.save("proposal_triplover.pdf");
+    pdf.save("proposal_FirstTrip.pdf");
 
   }
 
@@ -307,7 +307,7 @@ const Proposal = () => {
     <div>
       <Navbar></Navbar>
       <SideNavBar></SideNavBar>
-      <ToastContainer position="bottom-right" autoClose={1500}/>
+      <ToastContainer position="bottom-right" autoClose={1500} />
       <div className="content-wrapper search-panel-bg">
         <section className="content-header"></section>
         <section className="content">
@@ -1258,10 +1258,10 @@ const Proposal = () => {
                                     </h6>
                                     <hr></hr>• Refund Amount= Received amount
                                     from customer - Refund Charge (As per
-                                    Airline Policy + Triplover Convenience Fee).
+                                    Airline Policy + FirstTrip Convenience Fee).
                                     <br></br>• Date Change Amount= Date change
                                     fee as per Airline + Difference of fare if
-                                    any + Triplover Convenience Fee.
+                                    any + FirstTrip Convenience Fee.
                                   </div>
 
                                   <div id={"fare" + index}>
@@ -1476,19 +1476,19 @@ const Proposal = () => {
                   <div className="card box-shadow">
                     {
                       index === 0 ? <>
-                      <div className="card-header">
-                      <span>
-                        Flight Proposal (Please find the flight options as per
-                        your request)
-                      </span>
-                    </div>
+                        <div className="card-header">
+                          <span>
+                            Flight Proposal (Please find the flight options as per
+                            your request)
+                          </span>
+                        </div>
                       </> : <>
-                      
+
                       </>
                     }
-                    
+
                     <div className="card-body">
-                     
+
                       <div className="row">
                         <div className="col-lg-12">
                           <h5 className="mb-3 fw-bold text-color">
@@ -1496,7 +1496,7 @@ const Proposal = () => {
                           </h5>
                         </div>
                       </div>
-                        {/* {
+                      {/* {
                           item.directions[1] !== undefined ? <>
                             <div className="row my-2" style={{ fontSize: "12px" }}>
                               <div className="col-sm-3">
@@ -1532,159 +1532,159 @@ const Proposal = () => {
                           </>
                         } */}
 
-                
-                         <table class="table" style={{width:"100%",  border:"1px solid black", borderCollapse: "collapse",fontSize: "12px"}}>
-                            <tr style={{border: "1px solid black",backgroundColor:"#6c757d",color:"white"}}>
-                                <td style={{border: "1px solid black"}}>FLIGHT DETAILS</td>
-                            </tr>
-                        </table>
-                        <table class="table" style={{width:"100%",border:"1px solid black",borderCollapse: "collapse",textAlign:"center",fontSize: "12px"}}>
-                          <thead>
-                            <tr style={{border: "1px solid black"}}>
-                                <th style={{border: "1px solid black"}}><b>AirLines</b></th>
-                                <th style={{border: "1px solid black"}}><b>Departure</b></th>
-                                <th style={{border: "1px solid black"}}><b>Arrival</b></th>
-                                <th style={{border: "1px solid black"}}><b>Duration</b></th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr style={{border: "1px solid black"}}>
-                                  <td style={{border: "1px solid black"}}><b>{item.platingCarrierName}<br></br>
-                                {
-                                  item.directions[0][0].segments[0].details[0]
-                                    .equipment
-                                }</b></td>
-                                  <td style={{border: "1px solid black"}}>
-                                    <b>
-                                      {item.directions[0][0].segments[0].fromAirport}<br></br>
-                                      {moment(item.directions[0][0].segments[0].departure).format("DD-MMM-yyyy, dddd")}({item.directions[0][0].segments[0].departure.substr(11, 5)})</b></td>
-                                  <td style={{border: "1px solid black"}}>
-                                    <b>
-                                      {item.directions[0][0].segments[0].toAirport}<br></br>
-                                      {moment(item.directions[0][0].segments[0].arrival).format("DD-MMM-yyyy, dddd")}({item.directions[0][0].segments[0].arrival.substr(11, 5)})</b></td>
-                                  <td style={{border: "1px solid black"}}><b>{item.directions[0][0].segments[0].duration[0]}</b></td>
-                              </tr>
-                            {
-                              item.directions[1] !== undefined ? 
+
+                      <table class="table" style={{ width: "100%", border: "1px solid black", borderCollapse: "collapse", fontSize: "12px" }}>
+                        <tr style={{ border: "1px solid black", backgroundColor: "#6c757d", color: "white" }}>
+                          <td style={{ border: "1px solid black" }}>FLIGHT DETAILS</td>
+                        </tr>
+                      </table>
+                      <table class="table" style={{ width: "100%", border: "1px solid black", borderCollapse: "collapse", textAlign: "center", fontSize: "12px" }}>
+                        <thead>
+                          <tr style={{ border: "1px solid black" }}>
+                            <th style={{ border: "1px solid black" }}><b>AirLines</b></th>
+                            <th style={{ border: "1px solid black" }}><b>Departure</b></th>
+                            <th style={{ border: "1px solid black" }}><b>Arrival</b></th>
+                            <th style={{ border: "1px solid black" }}><b>Duration</b></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr style={{ border: "1px solid black" }}>
+                            <td style={{ border: "1px solid black" }}><b>{item.platingCarrierName}<br></br>
+                              {
+                                item.directions[0][0].segments[0].details[0]
+                                  .equipment
+                              }</b></td>
+                            <td style={{ border: "1px solid black" }}>
+                              <b>
+                                {item.directions[0][0].segments[0].fromAirport}<br></br>
+                                {moment(item.directions[0][0].segments[0].departure).format("DD-MMM-yyyy, dddd")}({item.directions[0][0].segments[0].departure.substr(11, 5)})</b></td>
+                            <td style={{ border: "1px solid black" }}>
+                              <b>
+                                {item.directions[0][0].segments[0].toAirport}<br></br>
+                                {moment(item.directions[0][0].segments[0].arrival).format("DD-MMM-yyyy, dddd")}({item.directions[0][0].segments[0].arrival.substr(11, 5)})</b></td>
+                            <td style={{ border: "1px solid black" }}><b>{item.directions[0][0].segments[0].duration[0]}</b></td>
+                          </tr>
+                          {
+                            item.directions[1] !== undefined ?
                               <>
                                 <tr>
-                                  <td style={{border: "1px solid black"}}><b>{item.platingCarrierName}<br></br>
-                                  {
-                                    item.directions[1][0].segments[0].details[0]
-                                      .equipment
-                                  }</b></td>
-                                    <td style={{border: "1px solid black"}}>
-                                      <b>
-                                        {item.directions[1][0].segments[0].fromAirport}<br></br>
-                                        {moment(item.directions[1][0].segments[0].departure).format("DD-MMM-yyyy, dddd")}({item.directions[1][0].segments[0].departure.substr(11, 5)})</b></td>
-                                    <td style={{border: "1px solid black"}}>
-                                      <b>
-                                        {item.directions[1][0].segments[0].toAirport}<br></br>
-                                        {moment(item.directions[1][0].segments[0].arrival).format("DD-MMM-yyyy, dddd")}({item.directions[1][0].segments[0].arrival.substr(11, 5)})</b></td>
-                                    <td style={{border: "1px solid black"}}><b>{item.directions[1][0].segments[0].duration[0]}</b></td>
-                                </tr>
-                              </> : 
-                              <></>
-                            }
-                          </tbody>
-                        </table>
-                       
-                        <table class="table" style={{width:"100%",  border:"1px solid black", borderCollapse: "collapse",fontSize: "12px",marginTop:"10px"}}>
-                            <tr style={{border: "1px solid black",backgroundColor:"#6c757d",color:"white"}}>
-                                <td style={{border: "1px solid black"}}>FARE DETAILS</td>
-                            </tr>
-                        </table>
-                        <table class="table" style={{width:"100%",border:"1px solid black",borderCollapse: "collapse",textAlign:"center",fontSize: "12px"}}>
-                          <thead>
-                            <tr style={{border: "1px solid black"}}>
-                                <th style={{border: "1px solid black"}}><b>Type</b></th>
-                                <th style={{border: "1px solid black"}}><b>Base</b></th>
-                                <th style={{border: "1px solid black"}}><b>Tax</b></th>
-                                <th style={{border: "1px solid black"}}><b>Discount</b></th>
-                                <th style={{border: "1px solid black"}}><b>Pax</b></th>
-                                <th style={{border: "1px solid black"}}><b>Total Pax Fare</b></th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                              {item.passengerFares.adt !== null ? (
-                                  <>
-                                    <tr style={{border: "1px solid black"}}>
-                                      <td style={{border: "1px solid black"}}>ADT</td>
-                                      <td style={{border: "1px solid black"}}>{item.passengerFares.adt.basePrice + parseInt(addBalance) - decBalance + parseInt(adultPriceValue[index])}</td>
-                                      <td style={{border: "1px solid black"}}>{item.passengerFares.adt.taxes}</td>
-                                      <td style={{border: "1px solid black"}}>{item.passengerFares.adt.discountPrice}</td>
-                                      <td style={{border: "1px solid black"}}>{item.passengerCounts.adt}</td>
-                                      <td style={{border: "1px solid black"}}>{currency !== undefined ? currency : "BDT"}  {" "}
-                                    {item.passengerFares.adt.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])}</td>
-                                  </tr>
-                                  </>
-                                ) : (
-                                  <></>
-                                )}
-                                {item.passengerFares.cnn !== null ? (
-                                  <>
-                                    <tr style={{border: "1px solid black"}}>
-                                      <td style={{border: "1px solid black"}}>CNN</td>
-                                      <td style={{border: "1px solid black"}}>{item.passengerFares.cnn.basePrice + parseInt(addBalance) - decBalance + parseInt(childPriceValue[index])}</td>
-                                      <td style={{border: "1px solid black"}}>{item.passengerFares.cnn.taxes}</td>
-                                      <td style={{border: "1px solid black"}}>{item.passengerFares.cnn.discountPrice}</td>
-                                      <td style={{border: "1px solid black"}}>{item.passengerCounts.cnn}</td>
-                                      <td style={{border: "1px solid black"}}>{currency !== undefined ? currency : "BDT"}  {" "}
-                                    {item.passengerFares.cnn.totalPrice + addBalance - decBalance + parseInt(childPriceValue[index])}</td>
-                                  </tr>
-                                  </>
-                                ) : (
-                                  <></>
-                                )}
-                                {item.passengerFares.inf !== null ? (
-                                  <>
-                                    <tr style={{border: "1px solid black"}}>
-                                      <td style={{border: "1px solid black"}}>INF</td>
-                                      <td style={{border: "1px solid black"}}>{(item.passengerFares.inf.basePrice + parseInt(addBalance) - decBalance + parseInt(infantPriceValue[index])).toFixed(2)}</td>
-                                      <td style={{border: "1px solid black"}}>{item.passengerFares.inf.taxes}</td>
-                                      <td style={{border: "1px solid black"}}>{item.passengerFares.inf.discountPrice}</td>
-                                      <td style={{border: "1px solid black"}}>{item.passengerCounts.inf}</td>
-                                      <td style={{border: "1px solid black"}}>{currency !== undefined ? currency : "BDT"}  {" "}
-                                    {item.passengerFares.inf.totalPrice + addBalance - decBalance + parseInt(infantPriceValue[index])}</td>
-                                  </tr>
-                                  </>
-                                ) : (
-                                  <></>
-                                )}
-                          </tbody>
-                        </table>
-
-                        <table class="table" style={{width:"100%",  border:"1px solid black", borderCollapse: "collapse",fontSize: "12px",marginTop:"10px"}}>
-                            <tr style={{border: "1px solid black",backgroundColor:"#6c757d",color:"white"}}>
-                                <td style={{border: "1px solid black"}}>OTHER INFORMATION</td>
-                            </tr>
-                        </table>
-                        <table class="table" style={{width:"100%",border:"1px solid black",borderCollapse: "collapse",textAlign:"center",fontSize: "12px"}}>
-                          <thead>
-                            <tr style={{border: "1px solid black"}}>
-                                <th style={{border: "1px solid black"}}><b>Class</b></th>
-                                <th style={{border: "1px solid black"}}><b>Trip Type</b></th>
-                                <th style={{border: "1px solid black"}}><b>Baggage Allowance</b></th>
-                                {/* <th style={{border: "1px solid black"}}><b>Travellers</b></th> */}
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr style={{border: "1px solid black"}}>
-                                  <td style={{border: "1px solid black"}}><b>Economy</b></td>
-                                  <td style={{border: "1px solid black"}}>
-                                    <b>{item.directions[1] !== undefined ? "Return" : "Oneway"}</b></td>
-                                  <td style={{border: "1px solid black"}}>
+                                  <td style={{ border: "1px solid black" }}><b>{item.platingCarrierName}<br></br>
+                                    {
+                                      item.directions[1][0].segments[0].details[0]
+                                        .equipment
+                                    }</b></td>
+                                  <td style={{ border: "1px solid black" }}>
                                     <b>
-                                    {item.directions[0][0].segments[0].baggage[0].amount + " " + item.directions[0][0].segments[0].baggage[0].units}(s)</b></td>
-                                  {/* <td style={{border: "1px solid black"}}><b>{item.directions[0][0].segments[0].duration[0]}</b></td> */}
-                              </tr>
-                          </tbody>
-                        </table>
+                                      {item.directions[1][0].segments[0].fromAirport}<br></br>
+                                      {moment(item.directions[1][0].segments[0].departure).format("DD-MMM-yyyy, dddd")}({item.directions[1][0].segments[0].departure.substr(11, 5)})</b></td>
+                                  <td style={{ border: "1px solid black" }}>
+                                    <b>
+                                      {item.directions[1][0].segments[0].toAirport}<br></br>
+                                      {moment(item.directions[1][0].segments[0].arrival).format("DD-MMM-yyyy, dddd")}({item.directions[1][0].segments[0].arrival.substr(11, 5)})</b></td>
+                                  <td style={{ border: "1px solid black" }}><b>{item.directions[1][0].segments[0].duration[0]}</b></td>
+                                </tr>
+                              </> :
+                              <></>
+                          }
+                        </tbody>
+                      </table>
 
-                       
-                         
-                        
-{/* 
+                      <table class="table" style={{ width: "100%", border: "1px solid black", borderCollapse: "collapse", fontSize: "12px", marginTop: "10px" }}>
+                        <tr style={{ border: "1px solid black", backgroundColor: "#6c757d", color: "white" }}>
+                          <td style={{ border: "1px solid black" }}>FARE DETAILS</td>
+                        </tr>
+                      </table>
+                      <table class="table" style={{ width: "100%", border: "1px solid black", borderCollapse: "collapse", textAlign: "center", fontSize: "12px" }}>
+                        <thead>
+                          <tr style={{ border: "1px solid black" }}>
+                            <th style={{ border: "1px solid black" }}><b>Type</b></th>
+                            <th style={{ border: "1px solid black" }}><b>Base</b></th>
+                            <th style={{ border: "1px solid black" }}><b>Tax</b></th>
+                            <th style={{ border: "1px solid black" }}><b>Discount</b></th>
+                            <th style={{ border: "1px solid black" }}><b>Pax</b></th>
+                            <th style={{ border: "1px solid black" }}><b>Total Pax Fare</b></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {item.passengerFares.adt !== null ? (
+                            <>
+                              <tr style={{ border: "1px solid black" }}>
+                                <td style={{ border: "1px solid black" }}>ADT</td>
+                                <td style={{ border: "1px solid black" }}>{item.passengerFares.adt.basePrice + parseInt(addBalance) - decBalance + parseInt(adultPriceValue[index])}</td>
+                                <td style={{ border: "1px solid black" }}>{item.passengerFares.adt.taxes}</td>
+                                <td style={{ border: "1px solid black" }}>{item.passengerFares.adt.discountPrice}</td>
+                                <td style={{ border: "1px solid black" }}>{item.passengerCounts.adt}</td>
+                                <td style={{ border: "1px solid black" }}>{currency !== undefined ? currency : "BDT"}  {" "}
+                                  {item.passengerFares.adt.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])}</td>
+                              </tr>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                          {item.passengerFares.cnn !== null ? (
+                            <>
+                              <tr style={{ border: "1px solid black" }}>
+                                <td style={{ border: "1px solid black" }}>CNN</td>
+                                <td style={{ border: "1px solid black" }}>{item.passengerFares.cnn.basePrice + parseInt(addBalance) - decBalance + parseInt(childPriceValue[index])}</td>
+                                <td style={{ border: "1px solid black" }}>{item.passengerFares.cnn.taxes}</td>
+                                <td style={{ border: "1px solid black" }}>{item.passengerFares.cnn.discountPrice}</td>
+                                <td style={{ border: "1px solid black" }}>{item.passengerCounts.cnn}</td>
+                                <td style={{ border: "1px solid black" }}>{currency !== undefined ? currency : "BDT"}  {" "}
+                                  {item.passengerFares.cnn.totalPrice + addBalance - decBalance + parseInt(childPriceValue[index])}</td>
+                              </tr>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                          {item.passengerFares.inf !== null ? (
+                            <>
+                              <tr style={{ border: "1px solid black" }}>
+                                <td style={{ border: "1px solid black" }}>INF</td>
+                                <td style={{ border: "1px solid black" }}>{(item.passengerFares.inf.basePrice + parseInt(addBalance) - decBalance + parseInt(infantPriceValue[index])).toFixed(2)}</td>
+                                <td style={{ border: "1px solid black" }}>{item.passengerFares.inf.taxes}</td>
+                                <td style={{ border: "1px solid black" }}>{item.passengerFares.inf.discountPrice}</td>
+                                <td style={{ border: "1px solid black" }}>{item.passengerCounts.inf}</td>
+                                <td style={{ border: "1px solid black" }}>{currency !== undefined ? currency : "BDT"}  {" "}
+                                  {item.passengerFares.inf.totalPrice + addBalance - decBalance + parseInt(infantPriceValue[index])}</td>
+                              </tr>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </tbody>
+                      </table>
+
+                      <table class="table" style={{ width: "100%", border: "1px solid black", borderCollapse: "collapse", fontSize: "12px", marginTop: "10px" }}>
+                        <tr style={{ border: "1px solid black", backgroundColor: "#6c757d", color: "white" }}>
+                          <td style={{ border: "1px solid black" }}>OTHER INFORMATION</td>
+                        </tr>
+                      </table>
+                      <table class="table" style={{ width: "100%", border: "1px solid black", borderCollapse: "collapse", textAlign: "center", fontSize: "12px" }}>
+                        <thead>
+                          <tr style={{ border: "1px solid black" }}>
+                            <th style={{ border: "1px solid black" }}><b>Class</b></th>
+                            <th style={{ border: "1px solid black" }}><b>Trip Type</b></th>
+                            <th style={{ border: "1px solid black" }}><b>Baggage Allowance</b></th>
+                            {/* <th style={{border: "1px solid black"}}><b>Travellers</b></th> */}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr style={{ border: "1px solid black" }}>
+                            <td style={{ border: "1px solid black" }}><b>Economy</b></td>
+                            <td style={{ border: "1px solid black" }}>
+                              <b>{item.directions[1] !== undefined ? "Return" : "Oneway"}</b></td>
+                            <td style={{ border: "1px solid black" }}>
+                              <b>
+                                {item.directions[0][0].segments[0].baggage[0].amount + " " + item.directions[0][0].segments[0].baggage[0].units}(s)</b></td>
+                            {/* <td style={{border: "1px solid black"}}><b>{item.directions[0][0].segments[0].duration[0]}</b></td> */}
+                          </tr>
+                        </tbody>
+                      </table>
+
+
+
+
+                      {/* 
                         <div className="row mb-2" style={{ fontSize: "12px" }}>
                           <table style={{margin:"5px", border: "1px solid black", textAlign:"center"}}>
                             <tr>

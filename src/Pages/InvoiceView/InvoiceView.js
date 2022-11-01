@@ -16,7 +16,7 @@ const InvoiceView = () => {
     const location = useLocation();
     const handleGetInvoiceList = () => {
         const getInvoiceList = async () => {
-            let sendObj = location.search.split("=")[1] ;
+            let sendObj = location.search.split("=")[1];
             console.log(sendObj);
             const response = await axios.get(
                 environment.getInvoice + '/' + sendObj,
@@ -119,7 +119,7 @@ const InvoiceView = () => {
                                                     <td className="text-end bg-white">
                                                         <address>
                                                             <span className="fw-bold fs-6">
-                                                                Triplover Travel Agency LLC
+                                                                FirstTrip Travel Agency LLC
                                                             </span>
                                                             <br />
                                                             <div
@@ -130,7 +130,7 @@ const InvoiceView = () => {
                                                                 <br />
                                                                 Dubai, United Arab Emirates<br></br>
                                                                 Phone: +97143375728<br></br>
-                                                                Email: support@triplover.ae
+                                                                Email: support@FirstTrip.ae
                                                             </div>
                                                         </address>
                                                     </td>
@@ -167,7 +167,7 @@ const InvoiceView = () => {
                                                                 Invoice Date<span className="mx-2">:</span>
                                                             </td>
                                                             <td className="text-end" style={{ width: "7%" }}>
-                                                                {moment(invoice?.invoiceDate).format("DD-MMM-yyyy")} 
+                                                                {moment(invoice?.invoiceDate).format("DD-MMM-yyyy")}
                                                             </td>
                                                         </tr>
                                                     </td>

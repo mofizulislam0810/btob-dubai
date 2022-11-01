@@ -165,7 +165,8 @@ const SuccessBookingPanel = () => {
                               <th>Issue Before:</th>
                               <td style={{ color: 'red' }}>
                                 {/* {console.log(bookData.data?.item1.ticketingTimeLimit)} */}
-                                {bookData.data?.item1.ticketingTimeLimit}
+                                {/* {bookData.data?.item1.ticketingTimeLimit} */}
+                                {moment(bookData.data?.item1.ticketingTimeLimit).format("ddd, DD MMM,YY")}
                               </td>
                             </tr>
                           </> : <>
@@ -259,8 +260,12 @@ const SuccessBookingPanel = () => {
                                   </td>
                                   <td>
                                     {moment(item.departure).format(
-                                      "DD-MMMM-yyyy hh:mm:ss"
+                                      "DD-MMMM-yyyy hh:mm:ss A"
                                     )}
+
+                                    {/* moment(item.issueDate).format(
+                                    "DD-MM-YYYY hh:mm:ss A"
+                                    ) */}
                                   </td>
                                   <td>
                                     {item.to}

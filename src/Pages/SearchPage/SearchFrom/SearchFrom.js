@@ -11,6 +11,7 @@ import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
 import moment from "moment";
 import { Box } from "@chakra-ui/react";
+import { getCabinClass } from "../../../common/functions";
 
 const SearchFrom = () => {
   const formCount = 0;
@@ -195,7 +196,7 @@ const SearchFrom = () => {
               returnDate: returnDate,
               tripTypeModify: tripType,
               qtyList: qtyList,
-              travelClass: travelClassType,
+              travelClass: getCabinClass(travelClassType),
               airlines: preAirlines,
               childAgeList: childAge,
             },
@@ -207,6 +208,10 @@ const SearchFrom = () => {
     }
     e.preventDefault();
   };
+
+  useEffect(() => {
+    console.log(getCabinClass(travelClassType), "CABIN CLASS");
+  }, [travelClassType]);
 
   const searchValue = (idx) => {
     if (searchList !== undefined) {
@@ -638,10 +643,10 @@ const SearchFrom = () => {
                           </li>
                           <li
                             className="dropdown-item"
-                            onClick={() => setTravelClassType("Any Cabin")}
+                            onClick={() => setTravelClassType("First")}
                             style={{ cursor: "pointer" }}
                           >
-                            Any Cabin
+                            First
                           </li>
                         </ul>
                       </div>

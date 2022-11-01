@@ -44,7 +44,7 @@ const Balance = () => {
   let [loading, setLoading] = useState(false);
 
   let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
-	let staticURL ="wwwroot/Uploads/Support/";
+  let staticURL = "wwwroot/Uploads/Support/";
   let sendObj = {
     agentId: sessionStorage.getItem("agentId") ?? 0,
     fromOfPaymentType: depositTypeId,
@@ -121,7 +121,7 @@ const Balance = () => {
         return;
       }
       if (depositInAccountId == 0) {
-        toast.error("Sorry! Triplover account is empty..");
+        toast.error("Sorry! FirstTrip account is empty..");
         return;
       }
     }
@@ -145,7 +145,7 @@ const Balance = () => {
     }
     if (depositTypeId == 3) {
       if (depositInAccountId == 0) {
-        toast.error("Sorry! Triplover bank is empty..");
+        toast.error("Sorry! FirstTrip bank is empty..");
         return;
       }
       if (depositFromAccountId == 0) {
@@ -650,6 +650,7 @@ const Balance = () => {
                                   max={new Date().toISOString().slice(0, 10)}
                                 ></input>
                               </div>
+
                               <div className="col-sm-3">
                                 <label>
                                   Reference
@@ -667,13 +668,13 @@ const Balance = () => {
                             <div className="row">
                               <div className="col-sm-6">
                                 <label>
-                                  Triplover Bank A/C
+                                  FirstTrip Bank A/C
                                   <span style={{ color: "red" }}>*</span>
                                 </label>
                                 <select
                                   className="form-select"
                                   value={depositInAccountId}
-                                  placeholder="Triplover Bank A/C"
+                                  placeholder="FirstTrip Bank A/C"
                                   onChange={(e) =>
                                     setDepositInAccount(Number(e.target.value))
                                   }
@@ -737,13 +738,13 @@ const Balance = () => {
                           <div className="row">
                             <div className="col-sm-6">
                               <label>
-                                Triplover Bank A/C
+                                FirstTrip Bank A/C
                                 <span style={{ color: "red" }}>*</span>
                               </label>
                               <select
                                 className="form-select"
                                 value={depositInAccountId}
-                                placeholder="Triplover Bank A/C"
+                                placeholder="FirstTrip Bank A/C"
                                 onChange={(e) =>
                                   setDepositInAccount(Number(e.target.value))
                                 }
@@ -827,13 +828,13 @@ const Balance = () => {
                           <div className="row">
                             <div className="col-sm-6">
                               <label>
-                                Triplover Bank A/C
+                                FirstTrip Bank A/C
                                 <span style={{ color: "red" }}>*</span>
                               </label>
                               <select
                                 className="form-select"
                                 value={depositInAccountId}
-                                placeholder="Triplover Bank A/C"
+                                placeholder="FirstTrip Bank A/C"
                                 onChange={(e) =>
                                   setDepositInAccount(Number(e.target.value))
                                 }
@@ -1257,8 +1258,8 @@ const Balance = () => {
                                       <td>{item.currencyName} {item.topupAmountAdmin}</td>
                                       {
                                         item.attachment !== null && item.attachment !== "" ? <>
-                                         <td><a href={s3URL+item.attachment} download>Download
-                                          {/* <img src="https://thumbs.dreamstime.com/b/smooth-nature-pic-full-hd-126695318.jpg" alt="W3Schools" width="50" height="15"/> */}
+                                          <td><a href={s3URL + item.attachment} download>Download
+                                            {/* <img src="https://thumbs.dreamstime.com/b/smooth-nature-pic-full-hd-126695318.jpg" alt="W3Schools" width="50" height="15"/> */}
                                           </a>
                                           </td>
                                         </> : <>

@@ -625,7 +625,7 @@ const SuccessBookingPanel = () => {
                                 </td> */}
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.adt}</td>
                                 <td className="right fw-bold">
-                                  AED {(bookData.data?.item1.flightInfo?.passengerFares.adt.totalPrice *
+                                  BDT {(bookData.data?.item1.flightInfo?.passengerFares.adt.totalPrice *
                                     bookData.data?.item1.flightInfo?.passengerCounts.adt).toFixed(2)}
                                 </td>
                               </tr>
@@ -649,7 +649,7 @@ const SuccessBookingPanel = () => {
                                 </td>
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.cnn}</td>
                                 <td className="right fw-bold">
-                                  AED {(bookData.data?.item1.flightInfo?.passengerFares.cnn.totalPrice *
+                                  BDT {(bookData.data?.item1.flightInfo?.passengerFares.cnn.totalPrice *
                                     bookData.data?.item1.flightInfo?.passengerCounts.cnn).toFixed(2)}
                                 </td>
                               </tr>
@@ -673,7 +673,7 @@ const SuccessBookingPanel = () => {
                                 </td>
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.inf}</td>
                                 <td className="right fw-bold">
-                                  AED {(bookData.data?.item1.flightInfo?.passengerFares.inf.totalPrice *
+                                  BDT {(bookData.data?.item1.flightInfo?.passengerFares.inf.totalPrice *
                                     bookData.data?.item1.flightInfo?.passengerCounts.inf).toFixed(2)}
                                 </td>
                               </tr>
@@ -684,7 +684,7 @@ const SuccessBookingPanel = () => {
                           <tr className="fw-bold">
                             <td colSpan={4} className='border-none'></td>
                             <td>Grand Total</td>
-                            <td>AED{" "}
+                            <td>BDT{" "}
                               {bookData.data?.item1.flightInfo?.bookingComponents[0].totalPrice}
                             </td>
                           </tr>

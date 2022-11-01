@@ -37,7 +37,7 @@ const Navbar = () => {
     await axios
       .post(environment.airTicketingSearch, searchObj, environment.headerToken)
       .then((res) => {
-        // console.log(res);
+        console.log(res,"response");
         if (
           res.data.length > 0 &&
           res.data[0].isTicketed === true &&
@@ -170,7 +170,7 @@ const Navbar = () => {
               className="form-control search-input rounded-start"
               type="search"
               aria-label="Search"
-              placeholder="PNR/Ticket no/Booking ID"
+              placeholder="PNR/Ticket No/Booking ID"
               onChange={(e) => setSearchText(e.target.value)}
             />
             <button

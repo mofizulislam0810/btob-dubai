@@ -57,7 +57,7 @@ import Expired from "./Pages/Queues/Expired";
 import LoanLedger from "./Pages/Ledger/LoanLedger";
 import ResetPassword from "./Pages/AuthenticationPage/ResetPassword/ResetPassword";
 function App() {
-  var isLoggedIn = sessionStorage.getItem("token") !== null ? true : false;
+  var isLoggedIn = localStorage.getItem("token") !== null ? true : false;
   console.log(isLoggedIn);
   return (
     <Box>

@@ -255,6 +255,7 @@ const QuickPassenger = () => {
     passportCopy: passportFileName,
     visaCopy: visaFileName,
   };
+  console.log(sendObj);
   const handleSubmit = () => {
     if (firstName === "") {
       toast.error("Sorry! First Name is empty..")
@@ -377,13 +378,16 @@ const QuickPassenger = () => {
     }
 
   }
-  console.log({ dobMinMax })
 
   useEffect(() => {
     passengerTypeFuc(passengerType)
     handleGetPassengers(currentPageNumber);
 
   }, [currentPageNumber, passengerType]);
+
+
+
+  console.log(passengerList);
   return (
     <div>
       <Navbar></Navbar>

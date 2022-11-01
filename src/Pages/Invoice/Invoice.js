@@ -472,7 +472,7 @@ const Invoice = () => {
                     })}
                     <tr>
                       <td className="fw-bold" colSpan={11} style={{ textAlign: "right" }}>
-                        Total:  AED {totalPrice}
+                        Total:  BDT {totalPrice}
                       </td>
                     </tr>
                   </tbody>

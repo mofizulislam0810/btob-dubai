@@ -843,6 +843,7 @@ const LeftSide = () => {
                               onBlur={handleOnChange}
                               required
                               autoComplete="off"
+                              spellcheck="false"
                             />
                           </div>
                         </div>
@@ -876,6 +877,7 @@ const LeftSide = () => {
                             onBlur={handleOnChange}
                             required
                             autoComplete="off"
+                            spellcheck="false"
                           />
                         </div>
                       </div>
@@ -1215,6 +1217,7 @@ const LeftSide = () => {
                                 }}
                                 value={p.passportNumber}
                                 autoComplete="off"
+                                spellcheck="false"
                               />
                             </div>
                           </div>
@@ -1397,6 +1400,7 @@ const LeftSide = () => {
                             }}
                             value={p.frequentFlyerNumber}
                             autoComplete="off"
+                            spellcheck="false"
                           />
                         </div>
                       </div>
@@ -1562,6 +1566,7 @@ const LeftSide = () => {
                               value={p.firstName}
                               required
                               autoComplete="off"
+                              spellcheck="false"
                             />
                           </div>
                         </div>
@@ -1591,6 +1596,7 @@ const LeftSide = () => {
                             value={p.lastName}
                             required
                             autoComplete="off"
+                            spellcheck="false"
                           />
                         </div>
                       </div>
@@ -1760,6 +1766,7 @@ const LeftSide = () => {
                             }}
                             value={p.frequentFlyerNumber}
                             autoComplete="off"
+                            spellcheck="false"
                           />
                         </div>
                       </div>
@@ -1909,6 +1916,7 @@ const LeftSide = () => {
                                 }}
                                 value={p.passportNumber}
                                 autoComplete="off"
+                                spellcheck="false"
                               />
                             </div>
                           </div>
@@ -2230,6 +2238,7 @@ const LeftSide = () => {
                               value={p.firstName}
                               required
                               autoComplete="off"
+                              spellcheck="false"
                             />
                           </div>
                         </div>
@@ -2259,6 +2268,7 @@ const LeftSide = () => {
                             value={p.lastName}
                             required
                             autoComplete="off"
+                            spellcheck="false"
                           />
                         </div>
                       </div>
@@ -2428,6 +2438,7 @@ const LeftSide = () => {
                             }}
                             value={p.frequentFlyerNumber}
                             autoComplete="off"
+                            spellcheck="false"
                           />
                         </div>
                       </div>
@@ -2524,6 +2535,7 @@ const LeftSide = () => {
                                 }}
                                 value={p.passportNumber}
                                 autoComplete="off"
+                                spellcheck="false"
                               />
                             </div>
                           </div>
@@ -2802,6 +2814,7 @@ const LeftSide = () => {
                           placeholder="Email"
                           required
                           autoComplete="off"
+                          spellcheck="false"
                         />
                       </div>
                     </div>

@@ -356,6 +356,7 @@ const Support = () => {
           handleGetOpened(1);
           clearForm();
           toast.success("Thanks! Support Info updated successfully..");
+          //document.getElementById("submitBtn").click();
         } else {
           toast.error("Sorry! Support Info not updated..");
         }
@@ -695,6 +696,7 @@ const Support = () => {
                                 Close
                               </button>
                               <button
+                                id="submitBtn"
                                 type="button"
                                 className="btn button-color fw-bold text-white rounded"
                                 onClick={() => handleSupportSubmit()}

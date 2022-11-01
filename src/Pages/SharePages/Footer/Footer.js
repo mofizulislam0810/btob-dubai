@@ -123,7 +123,7 @@ const Footer = () => {
         mt="25px"
         mb="30px"
       >
-        © Copyright Triplover Limited. All rights reserved.
+        © Copyright FirstTrip Limited. All rights reserved.
       </Text>
     </Box>
   );

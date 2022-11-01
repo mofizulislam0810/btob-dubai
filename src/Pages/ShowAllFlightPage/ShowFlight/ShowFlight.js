@@ -2870,8 +2870,8 @@ const ShowFlight = (props) => {
                           : <></>
                         : <>
                           <div className="">
-                            <p>* Refund Amount= Received amount from customer - Refund Charge (As per Airline Policy + Triplover Convenience Fee)</p>
-                            <p>* Date Change Amount= Date change fee as per Airline + Difference of fare if any + Triplover Convenience Fee.</p>
+                            <p>* Refund Amount= Received amount from customer - Refund Charge (As per Airline Policy + FirstTrip Convenience Fee)</p>
+                            <p>* Date Change Amount= Date change fee as per Airline + Difference of fare if any + FirstTrip Convenience Fee.</p>
                           </div>
                         </>
                     }

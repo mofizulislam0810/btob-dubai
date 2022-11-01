@@ -422,7 +422,9 @@ const Support = () => {
                         placeholder="Subject"
                         onChange={(e) => {
                           setSearchSubjectId(Number(e.target.value));
-                          setFilterSubjectId(Number(e.target.value));
+                          Number(e.target.value)
+                            ? setFilterSubjectId(Number(e.target.value))
+                            : setFilterSubjectId("ALL");
                         }}
                       >
                         <option key={0}>Select Type</option>
@@ -726,7 +728,6 @@ const Support = () => {
                                 : item
                             )
                             .map((item, index) => {
-                              console.log(item, "++++");
                               return (
                                 <tr key={index}>
                                   <td>

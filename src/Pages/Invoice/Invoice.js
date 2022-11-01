@@ -483,12 +483,12 @@ const Invoice = () => {
                   </tfoot> */}
                 </table>
                 <div className="container pb-5 mt-2">
-                  <div class="row text-start ms-1">
+                  <div class="row text-start">
                     <b className="p-0">Terms & Conditions :</b>
                     <ul style={{ fontSize: "10px" }}>
                       <li>
                         This is a computer generated statement, hence does not
-                        require any signature
+                        require any signature.
                       </li>
                       <li>
                         {" "}

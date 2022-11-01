@@ -99,12 +99,12 @@ const Support = () => {
   );
   const handleSetTicketNo = (isChecked, tNo) => {
     if (isChecked) {
-      let ticketNew = ticketNumbers + "," + tNo;
+      //let ticketNew = ticketNumbers + "," + tNo;
       // ticketNew=ticketNew.substring(1,ticketNew.length())
-      setTicketno(ticketNew);
+      setTicketno((oldData) => oldData + "," + tNo);
     } else {
-      let ticketNew = ticketNumbers.replace("," + tNo, "");
-      setTicketno(ticketNew);
+      //let ticketNew = ticketNumbers.replace("," + tNo, "");
+      setTicketno(ticketNumbers + "," + tNo);
     }
   };
 
@@ -308,6 +308,7 @@ const Support = () => {
       if (response.data > 0) {
         handleGetOngoing();
         toast.success("Thanks! Message sent successfully..");
+        document.getElementById("replyBtn").click();
       } else {
         toast.error("Sorry! Message not sent..");
       }
@@ -343,6 +344,10 @@ const Support = () => {
       toast.error("Sorry! Message is empty..");
       return;
     }
+    if (ticketNumbers === "") {
+      toast.error("Sorry! Ticket number not selected..");
+      return;
+    }
     console.log(supportObj);
     if ((currentItem == null ? 0 : currentItem.id) > 0) {
       const putData = async () => {
@@ -352,9 +357,10 @@ const Support = () => {
           environment.headerToken
         );
         if (response.data > 0) {
-          handleGetOpened(1);
-          clearForm();
-          toast.success("Thanks! Support Info updated successfully..");
+          document.getElementById("submitCloseBtn").click();
+          //handleGetOpened(1);
+          // clearForm();
+          //toast.success("Thanks! Support Info updated successfully..");
         } else {
           toast.error("Sorry! Support Info not updated..");
         }
@@ -503,11 +509,12 @@ const Support = () => {
                                 Support
                               </h5>
                               <button
+                                id="submitCloseBtn"
                                 type="button"
                                 className="btn-close"
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
-                              ></button>
+                              />
                             </div>
                             <div className="modal-body">
                               <div className="row">
@@ -694,6 +701,7 @@ const Support = () => {
                                 Close
                               </button>
                               <button
+                                id="submitBtn"
                                 type="button"
                                 className="btn button-color fw-bold text-white rounded"
                                 onClick={() => handleSupportSubmit()}
@@ -1145,6 +1153,7 @@ const Support = () => {
                             Reply
                           </h5>
                           <button
+                            id="replyBtn"
                             type="button"
                             className="btn-close"
                             data-bs-dismiss="modal"

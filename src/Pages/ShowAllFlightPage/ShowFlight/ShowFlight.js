@@ -1061,17 +1061,17 @@ const ShowFlight = (props) => {
 
           <div className="col-lg-2 my-auto text-center">
             <h5 className="text-end text-color fw-bold">
-           
+
               {/* {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice} */}
               {
                 amountChange === "Invoice Amount" ? <><div>
-                  <div  className="text-secondary" style={{ fontSize: "12px" }}>
-                  {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice}
+                  <div className="text-secondary" style={{ fontSize: "12px" }}>
+                    {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice}
                   </div>
                   {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
-                  
+
                 </div></> : <div>
-                {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
+                  {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
                 </div>
               }
 
@@ -1316,18 +1316,18 @@ const ShowFlight = (props) => {
                       <td className="right">{passengerFares.adt.ait}</td>
                       <td className="right">{passengerCounts.adt}</td>
                       {
-                       isTempInspector !==null && isTempInspector=='true'?<>
-                        <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ? JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
-                        return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
-                      }):""}>
-                        {currency !== undefined ? currency : "BDT"}  {" "}
-                        {(passengerFares.adt.totalPrice * passengerCounts.adt) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
-                      </td>
-                        </>:<>
-                        <td className="right fw-bold">
-                        {currency !== undefined ? currency : "BDT"}  {" "}
-                        {(passengerFares.adt.totalPrice * passengerCounts.adt) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
-                      </td></>
+                        isTempInspector !== null && isTempInspector == 'true' ? <>
+                          <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ? JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
+                            return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
+                          }) : ""}>
+                            {currency !== undefined ? currency : "BDT"}  {" "}
+                            {(passengerFares.adt.totalPrice * passengerCounts.adt) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
+                          </td>
+                        </> : <>
+                          <td className="right fw-bold">
+                            {currency !== undefined ? currency : "BDT"}  {" "}
+                            {(passengerFares.adt.totalPrice * passengerCounts.adt) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
+                          </td></>
                       }
                     </tr>
                   </>
@@ -1347,17 +1347,17 @@ const ShowFlight = (props) => {
                       <td className="right">{passengerFares.cnn.ait}</td>
                       <td className="right">{passengerCounts.cnn}</td>
                       {
-                        isTempInspector !==null && isTempInspector=='true'?<>              <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ? JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
+                        isTempInspector !== null && isTempInspector == 'true' ? <>              <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ? JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
                           return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
-                        }):""}>
+                        }) : ""}>
                           {currency !== undefined ? currency : "BDT"}  {" "}
                           {(passengerFares.cnn.totalPrice * passengerCounts.cnn) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
-                        </td></>:<>              <td className="right fw-bold" >
-                        {currency !== undefined ? currency : "BDT"}  {" "}
-                        {(passengerFares.cnn.totalPrice * passengerCounts.cnn) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
-                      </td></>
+                        </td></> : <>              <td className="right fw-bold" >
+                          {currency !== undefined ? currency : "BDT"}  {" "}
+                          {(passengerFares.cnn.totalPrice * passengerCounts.cnn) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
+                        </td></>
                       }
-        
+
                     </tr>
                   </>
                 ) : (
@@ -1376,15 +1376,15 @@ const ShowFlight = (props) => {
                       <td className="right">{passengerFares.inf.ait}</td>
                       <td className="right">{passengerCounts.inf}</td>
                       {
-                        isTempInspector !==null && isTempInspector=='true'?<> <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ?JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
+                        isTempInspector !== null && isTempInspector == 'true' ? <> <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ? JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
                           return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
-                        }):" "}>
+                        }) : " "}>
                           {currency !== undefined ? currency : "BDT"}  {" "}
                           {(passengerFares.inf.totalPrice * passengerCounts.inf) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
-                        </td></>:<> <td className="right fw-bold" onLoadedData={(e) => console.log({e})}>
-                        {currency !== undefined ? currency : "BDT"}  {" "}
-                        {(passengerFares.inf.totalPrice * passengerCounts.inf) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
-                      </td></>
+                        </td></> : <> <td className="right fw-bold" onLoadedData={(e) => console.log({ e })}>
+                          {currency !== undefined ? currency : "BDT"}  {" "}
+                          {(passengerFares.inf.totalPrice * passengerCounts.inf) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
+                        </td></>
                       }
 
                     </tr>
@@ -2780,15 +2780,15 @@ const ShowFlight = (props) => {
           </div>
           <div className="col-lg-2 my-auto text-center">
             <h5 className="text-end text-color text-end fw-bold">
-            {
+              {
                 amountChange === "Invoice Amount" ? <><div>
-                  <div  className="text-secondary" style={{ fontSize: "12px" }}>
-                  {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice}
+                  <div className="text-secondary" style={{ fontSize: "12px" }}>
+                    {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice}
                   </div>
                   {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
-                  
+
                 </div></> : <div>
-                {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
+                  {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
                 </div>
               }
             </h5>

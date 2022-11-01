@@ -13,6 +13,7 @@ const colors = {
   secondary: "#fc2c74",
   secondaryLight: "#fc6b9d",
   logoGreen: "#009e70",
+  logoGreenLight: "#7fceb7",
   logoYellow: "#fcbc04",
   background: "#F7FBFF",
   backgroundVariant: "#FAF9FF",

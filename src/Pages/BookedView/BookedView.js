@@ -263,7 +263,7 @@ const BookedView = () => {
                           <thead>
                             <tr>
                               <th colspan="4" className="fw-bold py-2 bg-light">
-                                BOOKING CONFIRMED
+                              {ticketingList.ticketInfo?.status === 'Booking Cancelled' ? ticketingList.ticketInfo?.status : "BOOKING CONFIRMED"}
                               </th>
                             </tr>
                           </thead>
@@ -904,7 +904,7 @@ const BookedView = () => {
                           <thead>
                             <tr>
                               <th colspan="4" className="fw-bold py-2 bg-light">
-                                BOOKING CONFIRMED
+                                {ticketingList.ticketInfo?.status === 'Booking Cancelled' ? ticketingList.ticketInfo?.status : "BOOKING CONFIRMED"}
                               </th>
                             </tr>
                           </thead>

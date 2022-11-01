@@ -18,11 +18,11 @@ const ViewFlightHistoryPanel = () => {
                   <div className="card-header">
                     <img
                       src={logo}
-                      alt="Triplover logo"
+                      alt="FirstTrip logo"
                       style={{ width: "100px" }}
                     />
                     <span className="ms-3">
-                      Triplover Reference :&nbsp;
+                      FirstTrip Reference :&nbsp;
                       <strong> STFLB1643699665766 (DAC - DXB)</strong>
                     </span>
                     <Link
@@ -55,7 +55,7 @@ const ViewFlightHistoryPanel = () => {
                       <div className="col-sm-5">
                         <h6 className="mb-3">Details:</h6>
                         <div>
-                          Triplover Reference :
+                          FirstTrip Reference :
                           <strong> STFLB1643699665766</strong>
                         </div>
                         <div>

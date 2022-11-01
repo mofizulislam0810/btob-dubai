@@ -1,14 +1,15 @@
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link {
-    color: #f6f7f9;
-    background-color: #aa8439;
+    color: #000000;
+    background-color:  #eff9f6;
     border-color: #dee2e6 #dee2e6 #fff;
 }
 
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-    color: #000000;
-    background-color: #e1e1e1;
-    border-color: #dee2e6 #dee2e6 #fff;
+    color:  #f6f7f9;
+    background-color: #009e70;
+    border-color: #f6f7f9 #dee2e6 #f6f7f9;
 }
+
 
 /* .modal-dialog {
     max-width: 80em;

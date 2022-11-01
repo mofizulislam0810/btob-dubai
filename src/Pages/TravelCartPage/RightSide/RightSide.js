@@ -614,7 +614,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div>
-                {/* <div className="row">
+                <div className="row" style={{ fontSize: "12px" }}>
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       AIT ({passengerCounts.adt} &#215; {passengerFares.adt.ait}
@@ -626,7 +626,7 @@ const RightSide = () => {
                       {passengerCounts.adt * passengerFares.adt.ait}
                     </h6>
                   </div>
-                </div> */}
+                </div>
                 <div className="row" style={{ fontSize: "12px" }}>
                   <div className="col-lg-6">
                     <h6 className="text-start">Discount</h6>
@@ -686,7 +686,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div>
-                {/* <div className="row">
+                <div className="row" style={{ fontSize: "12px" }}>
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       AIT ({passengerCounts.cnn} &#215; {passengerFares.cnn.ait}
@@ -699,7 +699,7 @@ const RightSide = () => {
                       {passengerCounts.cnn * passengerFares.cnn.ait}
                     </h6>
                   </div>
-                </div> */}
+                </div>
                 <div className="row" style={{ fontSize: "12px" }}>
                   <div className="col-lg-6">
                     <h6 className="text-start">Discount</h6>
@@ -759,7 +759,7 @@ const RightSide = () => {
                     </h6>
                   </div>
                 </div>
-                {/* <div className="row">
+                <div className="row" style={{ fontSize: "12px" }}>
                   <div className="col-lg-6">
                     <h6 className="text-start">
                       AIT ({passengerCounts.inf} &#215; {passengerFares.inf.ait}
@@ -771,7 +771,7 @@ const RightSide = () => {
                       {passengerCounts.inf * passengerFares.inf.ait}
                     </h6>
                   </div>
-                </div> */}
+                </div>
                 <div className="row" style={{ fontSize: "12px" }}>
                   <div className="col-lg-6">
                     <h6 className="text-start">Discount</h6>

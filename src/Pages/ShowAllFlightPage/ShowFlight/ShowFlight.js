@@ -17,6 +17,7 @@ import { decode as base64_decode, encode as base64_encode } from 'base-64';
 
 let checkList = [];
 const ShowFlight = (props) => {
+  const [grandTotal, setGrandTotal] = useState();
   const { setCount, handleFareRules, loading, fareRules, setFareRules } = useAuth();
   const navigate = useNavigate();
   // const handleClick =(direction,index) =>{
@@ -1380,7 +1381,7 @@ const ShowFlight = (props) => {
                         }) : " "}>
                           {currency !== undefined ? currency : "BDT"}  {" "}
                           {(passengerFares.inf.totalPrice * passengerCounts.inf) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
-                        </td></> : <> <td className="right fw-bold" >
+                        </td></> : <> <td className="right fw-bold" onLoadedData={(e) => console.log({ e })}>
                           {currency !== undefined ? currency : "BDT"}  {" "}
                           {(passengerFares.inf.totalPrice * passengerCounts.inf) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
                         </td></>

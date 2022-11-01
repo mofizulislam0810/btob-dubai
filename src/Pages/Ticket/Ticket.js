@@ -216,7 +216,7 @@ const Ticket = () => {
                       <table class="table table-borderless table-sm">
                         <tbody>
                           <tr>
-                            <td className="text-start bg-white">
+                            <td className="text-start">
                               {ticketingList.ticketInfo?.agentLogo !== null &&
                                 ticketingList.ticketInfo?.agentLogo !== "" ? (
                                 <img
@@ -1798,7 +1798,7 @@ const Ticket = () => {
                                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
                                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
-                                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Time</p></th>
                                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                                     </tr>
@@ -2347,7 +2347,7 @@ const Ticket = () => {
                                 <th className="text-start">Type</th>
                                 <th>Base Fare</th>
                                 <th>Tax</th>
-                                {/* <th>AIT</th> */}
+                                <th>AIT</th>
                                 <th>Discount</th>
                                 <th>Person</th>
                                 <th>Total</th>
@@ -2363,7 +2363,7 @@ const Ticket = () => {
                                         <td>{item.basePrice}</td>
                                         <td>{item.tax}</td>
 
-                                        {/* <td>{item.ait}</td> */}
+                                        <td>{item.ait}</td>
                                         <td>{item.discount}</td>
                                         <td>{item.passengerCount}</td>
                                         <td className="fw-bold">
@@ -2380,7 +2380,7 @@ const Ticket = () => {
                                         <td>{item.basePrice}</td>
                                         <td>{item.tax}</td>
 
-                                        {/* <td>{item.ait}</td> */}
+                                        <td>{item.ait}</td>
                                         <td>{item.discount}</td>
                                         <td>{item.passengerCount}</td>
                                         <td className="fw-bold">
@@ -2397,7 +2397,7 @@ const Ticket = () => {
                                         <td>{item.basePrice}</td>
                                         <td>{item.tax}</td>
 
-                                        {/* <td>{item.ait}</td> */}
+                                        <td>{item.ait}</td>
                                         <td>{item.discount}</td>
                                         <td>{item.passengerCount}</td>
                                         <td className="fw-bold">
@@ -2413,7 +2413,7 @@ const Ticket = () => {
                                 </>
                               ))}
                               <tr className="fw-bold">
-                                <td colSpan={4} className='border-none'></td>
+                                <td colSpan={5} className='border-none'></td>
                                 <td>Grand Total</td>
                                 <td>
                                   {ticketingList.passengerInfo !== undefined ? ticketingList.passengerInfo[0]?.currencyName : ""} {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
@@ -2568,7 +2568,7 @@ const Ticket = () => {
                         <th>Pax Name</th>
                         <th>Base Fare</th>
                         <th>Tax</th>
-                        {/* <th>AIT</th> */}
+                        <th>AIT</th>
                         <th>Discount</th>
                         <th>Additional Price</th>
                         <th>Total Fare</th>
@@ -2619,14 +2619,14 @@ const Ticket = () => {
                                   className="form-control"
                                 />
                               </td>
-                              {/* <td>
+                              <td>
                                 <label
                                   className="form-control"
                                   style={{ background: "#F2F3F4" }}
                                 >
                                   {item.ait}
                                 </label>
-                              </td> */}
+                              </td>
                               <td>
                                 <input
                                   value={item.discount}

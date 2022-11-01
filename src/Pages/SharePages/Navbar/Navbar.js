@@ -37,7 +37,7 @@ const Navbar = () => {
     await axios
       .post(environment.airTicketingSearch, searchObj, environment.headerToken)
       .then((res) => {
-        console.log(res,"response");
+        console.log(res, "response");
         if (
           res.data.length > 0 &&
           res.data[0].isTicketed === true &&
@@ -156,7 +156,7 @@ const Navbar = () => {
         </li>
         <li className="nav-item d-none d-sm-inline-block">
           <Link to="/search">
-            <Image src={logo} alt="Triplover" w="100px" />
+            <Image src={logo} alt="FirstTrip" w="100px" />
           </Link>
         </li>
       </ul>

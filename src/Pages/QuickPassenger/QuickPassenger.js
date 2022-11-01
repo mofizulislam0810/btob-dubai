@@ -379,8 +379,8 @@ const QuickPassenger = () => {
                           <th>Mobile</th>
                           <th>DOB</th>
                           <th>Gender</th>
-                          <th>Passport Copy</th>
-                          <th>Visa Copy</th>
+                          {/* <th>Passport Copy</th>
+                          <th>Visa Copy</th> */}
                           {/* <th>Action</th> */}
                         </tr>
                       </thead>
@@ -413,7 +413,7 @@ const QuickPassenger = () => {
                                 )}
                               </td>
                               <td>{item.gender}</td>
-                              <td>
+                              {/* <td>
                                 {item.passportCopy !== null &&
                                   item.passportCopy !== "" ? (
                                   <a
@@ -446,7 +446,7 @@ const QuickPassenger = () => {
                                 ) : (
                                   <></>
                                 )}
-                              </td>
+                              </td> */}
                               {/* <td>
                                 <span onClick={() => handleDeleteItem(item)} className="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></span>
                               </td> */}
@@ -762,7 +762,7 @@ const QuickPassenger = () => {
                       </div>
 
                       <div className="row">
-                        <div className="col-lg-4">
+                        {/* <div className="col-lg-4">
                           <div className="form-group">
                             <label
                               className="form-label float-start fw-bold"
@@ -783,8 +783,8 @@ const QuickPassenger = () => {
                               placeholder="City Name"
                             />
                           </div>
-                        </div>
-                        <div className="col-lg-4">
+                        </div> */}
+                        {/* <div className="col-lg-4">
                           <div className="form-group">
                             <label
                               className="form-label float-start fw-bold"
@@ -825,8 +825,8 @@ const QuickPassenger = () => {
                               placeholder="Phone"
                             />
                           </div>
-                        </div>
-                        <div className="col-lg-4">
+                        </div> */}
+                        {/* <div className="col-lg-4">
                           <div className="form-group">
                             <label
                               className="form-label float-start fw-bold"
@@ -837,7 +837,7 @@ const QuickPassenger = () => {
                             </label>
                           </div>
                           <div className="input-group mb-3 d-flex">
-                            {/* {passportNo !== "" ? (
+                            {passportNo !== "" ? (
                               <input
                                 type={"file"}
                                 accept=".jpg, .jpeg, .png, .pdf"
@@ -848,7 +848,7 @@ const QuickPassenger = () => {
                               ></input>
                             ) : (
                               <></>
-                            )} */}
+                            )}
                             <input
                               type={"file"}
                               accept=".jpg, .jpeg, .png, .pdf"
@@ -858,12 +858,8 @@ const QuickPassenger = () => {
                               }
                             />
                           </div>
-                        </div>
-                      </div>
-
-
-                      <div className="row">
-                        <div className="col-lg-4">
+                        </div> */}
+                        {/* <div className="col-lg-4">
                           <div className="form-group">
                             <label
                               className="form-label float-start fw-bold"
@@ -874,7 +870,7 @@ const QuickPassenger = () => {
                             </label>
                           </div>
                           <div className="input-group mb-3 d-flex">
-                            {/* {passportNo !== "" ? (
+                            {passportNo !== "" ? (
                               <input
                                 type={"file"}
                                 accept=".jpg, .jpeg, .png, .pdf"
@@ -885,7 +881,7 @@ const QuickPassenger = () => {
                               ></input>
                             ) : (
                               <></>
-                            )} */}
+                            )}
                             <input
                               type={"file"}
                               accept=".jpg, .jpeg, .png, .pdf"
@@ -895,7 +891,7 @@ const QuickPassenger = () => {
                               }
                             />
                           </div>
-                        </div>
+                        </div> */}
                       </div>
 
 

@@ -2137,7 +2137,7 @@ const LeftSide = () => {
               })}
               {/* <div>{JSON.stringify(child, null, 2)}</div> */}
               {infant.map((p, index) => {
-                console.log({ppppppp: p})
+                console.log({ ppppppp: p })
                 return (
                   <div key={index} className="border p-2 my-3">
                     <div className="row">
@@ -2984,7 +2984,7 @@ const LeftSide = () => {
                   />
                   <label class="form-check-label font-size-checkbok" for="flexCheckDefault">
                     By Booking/Issuing this Ticket I agree to{" "}
-                    <Link to="/termandcondition">Triplover Terms & Conditions</Link>
+                    <Link to="/termandcondition">FirstTrip Terms & Conditions</Link>
                   </label>
                 </div>
               </div>

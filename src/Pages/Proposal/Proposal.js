@@ -196,7 +196,7 @@ const Proposal = () => {
     //  console.log(pdfTable);
     axios.post(environment.sendEmailProposal, messageData)
       .then(response => {
-        console.log(response, "========================")
+        // console.log(response, "========================")
         if (response.status === 200 && response.data) {
           toast.success("Email send successfully.");
           setEmailSection(false);

@@ -1,15 +1,12 @@
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import logo from "../../../images/logo/image_2022_07_28T11_49_00_957Z_2-removebg-preview.png";
-import axios from "axios";
-import { environment } from "../../../../src/Pages/SharePages/Utility/environment";
-import { useState } from "react";
-import "./Navbar.css";
-import moment from "moment";
-import sessionTime from "../Utility/sessionTime";
-import $ from "jquery";
-import { toast } from "react-toastify";
 import { Image } from "@chakra-ui/react";
+import axios from "axios";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { environment } from "../../../../src/Pages/SharePages/Utility/environment";
+import logo from "../../../images/logo/image_2022_07_28T11_49_00_957Z_2-removebg-preview.png";
+import "./Navbar.css";
 
 const Navbar = () => {
   let [noticeCount, setNoticeCount] = useState(0);
@@ -98,10 +95,10 @@ const Navbar = () => {
     axios
       .get(
         environment.getSupportNoticeCountByAgent +
-          "/" +
-          (sessionStorage.getItem("agentId") ?? 0) +
-          "/" +
-          true,
+        "/" +
+        (sessionStorage.getItem("agentId") ?? 0) +
+        "/" +
+        true,
         environment.headerToken
       )
       .then((supportRes) => {
@@ -114,10 +111,10 @@ const Navbar = () => {
     axios
       .get(
         environment.getSupportNoticeByAgent +
-          "/" +
-          (sessionStorage.getItem("agentId") ?? 0) +
-          "/" +
-          true,
+        "/" +
+        (sessionStorage.getItem("agentId") ?? 0) +
+        "/" +
+        true,
         environment.headerToken
       )
       .then((noticeRes) => {
@@ -173,7 +170,7 @@ const Navbar = () => {
               className="form-control search-input rounded-start"
               type="search"
               aria-label="Search"
-              placeholder="Name/PNR/Ticket no/Booking Ref"
+              placeholder="PNR/Ticket no/Booking ID"
               onChange={(e) => setSearchText(e.target.value)}
             />
             <button
@@ -285,9 +282,9 @@ const Navbar = () => {
               {" "}
               <i className="far fa-bell"></i>
             </span>
-            <span className="badge badge-warning navbar-badge">
+            {/* <span className="badge badge-warning navbar-badge">
               {noticeCount}
-            </span>
+            </span> */}
           </a>
           <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             {/* <span className="dropdown-item dropdown-header">

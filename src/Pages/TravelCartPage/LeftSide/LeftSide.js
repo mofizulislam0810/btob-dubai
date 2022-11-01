@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import $ from "jquery";
-import courtries from "../../../JSON/countries.json";
-import { Link, useNavigate } from "react-router-dom";
-import produce from "immer";
-import "./LeftSide.css";
 import axios from "axios";
-import { environment } from "../../SharePages/Utility/environment";
-import useAuth from "../../../hooks/useAuth";
+import produce from "immer";
+import $ from "jquery";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { toast } from "react-toastify";
-import moment from "moment";
+import useAuth from "../../../hooks/useAuth";
+import courtries from "../../../JSON/countries.json";
+import { environment } from "../../SharePages/Utility/environment";
+import "./LeftSide.css";
 const LeftSide = () => {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -552,6 +552,7 @@ const LeftSide = () => {
     });
 
     infant.map((item) => {
+      console.log({ "year": item.year })
       let passengerObj = {
         nameElement: {
           title: item.title,
@@ -1443,7 +1444,7 @@ const LeftSide = () => {
                                     `agentinfo/GetPassengerFile/${p.passportCopy}/1`
                                   }
                                   download
-                                  target="_blank"
+                                  target="_blank" rel="noreferrer"
                                 >
                                   Download Passport Copy
                                 </a>
@@ -1517,7 +1518,7 @@ const LeftSide = () => {
                                   v[index].passportYear = Number(
                                     item.expireDate.split("-")[0]
                                   );
-                                  v[index].gander = item.gender;
+                                  v[index].gender = item.gender;
                                   v[index].phoneNumber = item.phone;
                                   v[index].passportCopy = item.passportCopy;
                                   v[index].visaCopy = item.visaCopy;
@@ -2111,7 +2112,7 @@ const LeftSide = () => {
                                     `agentinfo/GetPassengerFile/${p.passportCopy}/1`
                                   }
                                   download
-                                  target="_blank"
+                                  target="_blank" rel="noreferrer"
                                 >
                                   Download Passport Copy
                                 </a>
@@ -2128,6 +2129,7 @@ const LeftSide = () => {
               })}
               {/* <div>{JSON.stringify(child, null, 2)}</div> */}
               {infant.map((p, index) => {
+                console.log({ppppppp: p})
                 return (
                   <div key={index} className="border p-2 my-3">
                     <div className="row">
@@ -2184,7 +2186,7 @@ const LeftSide = () => {
                                   v[index].passportYear = Number(
                                     item.expireDate.split("-")[0]
                                   );
-                                  v[index].gander = item.gender;
+                                  v[index].gender = item.gender;
                                   v[index].phoneNumber = item.phone;
                                   v[index].passportCopy = item.passportCopy;
                                   v[index].visaCopy = item.visaCopy;
@@ -2319,6 +2321,7 @@ const LeftSide = () => {
                                   })
                                 );
                               }}
+                              value={p.date}
                               required
                             >
                               <option value="">Day</option>
@@ -2365,6 +2368,7 @@ const LeftSide = () => {
                                   })
                                 );
                               }}
+                              value={p.month}
                               required
                             >
                               <option value="01" selected>Jan</option>
@@ -2391,6 +2395,7 @@ const LeftSide = () => {
                                   })
                                 );
                               }}
+                              value={p.year}
                               required
                             >
                               <option value="">Year</option>
@@ -2723,7 +2728,7 @@ const LeftSide = () => {
                                     `agentinfo/GetPassengerFile/${p.passportCopy}/1`
                                   }
                                   download
-                                  target="_blank"
+                                  target="_blank" rel="noreferrer"
                                 >
                                   Download Passport Copy
                                 </a>

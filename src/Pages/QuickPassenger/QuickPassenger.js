@@ -33,14 +33,13 @@ const QuickPassenger = () => {
   let [gender, setGender] = useState("Male");
   let [passportNo, setPassportNo] = useState("");
   let [issuingCountry, setIssuingCountry] = useState("");
-  let [peDay, setPEDay] = useState("");
-  let [peMonth, setPEMonth] = useState("");
-  let [peYear, setPEYear] = useState("");
+  // let [peDay, setPEDay] = useState("");
+  // let [peMonth, setPEMonth] = useState("");
+  // let [peYear, setPEYear] = useState("");
   let [phone, setPhone] = useState("");
   let [email, setEmail] = useState("");
   let [phoneCountryCode, setPhoneCountryCode] = useState("+88");
   let [cityName, setCityName] = useState("");
-  let yearList = [];
   let [passportFileName, setPassportFileName] = useState("");
   let [visaFileName, setVisaFileName] = useState("");
   let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
@@ -111,27 +110,6 @@ const QuickPassenger = () => {
       toast.error("Sorry! file format not valid..");
     }
   };
-  // var thisYear = new Date().getFullYear();
-
-  // if (passengerType === "ADT") {
-  //   yearList = [];
-  //   for (var i = 12; i <= 100; i++) {
-  //     var year = thisYear - i;
-  //     yearList.push(year);
-  //   }
-  // } else if (passengerType === "CNN") {
-  //   yearList = [];
-  //   for (var i = 2; i <= 12; i++) {
-  //     var year = thisYear - i;
-  //     yearList.push(year);
-  //   }
-  // } else if (passengerType === "INF") {
-  //   yearList = [];
-  //   for (var i = 1; i <= 2; i++) {
-  //     var year = thisYear - i;
-  //     yearList.push(year);
-  //   }
-  // }
 
   const handleGetPassengers = (currentPage) => {
     const getData = async () => {
@@ -169,9 +147,6 @@ const QuickPassenger = () => {
     setGender("Male");
     setPassportNo("");
     setIssuingCountry("");
-    // setPEYear("");
-    // setPEMonth("");
-    // setPEDay("");
     setpassportExDate("")
     setPhone("");
     setEmail("");
@@ -183,24 +158,17 @@ const QuickPassenger = () => {
     clearForm();
   };
   const handleEditItem = (item) => {
-    // console.log(item);
     setCurrentItem(item);
     setTitle(item.title);
     setFirstName(item.first);
     setMiddleName(item.middle);
     setLastName(item.last);
-    // setDOBYear(item.dateOfBirth.split("-")[0]);
-    // setDOBMonth(Number(item.dateOfBirth.split("-")[1]));
-    // setDOBDay(Number(item.dateOfBirth.split("-")[2].split("T")[0]));
     setDOB(item.dateOfBirth)
     setNationality(item.nationality);
     setGender(item.gender);
     setPassportNo(item.documentNumber);
     setpassportExDate(item.expireDate)
     setIssuingCountry(item.documentIssuingCountry);
-    // setPEYear(item.expireDate.split("-")[0]);
-    // setPEMonth(Number(item.expireDate.split("-")[1]));
-    // setPEDay(Number(item.expireDate.split("-")[2].split("T")[0]));
     setPhone(item.phone);
     setEmail(item.email);
     setPhoneCountryCode(item.phoneCountryCode);
@@ -255,7 +223,7 @@ const QuickPassenger = () => {
     passportCopy: passportFileName,
     visaCopy: visaFileName,
   };
-  console.log(sendObj);
+
   const handleSubmit = () => {
     if (firstName === "") {
       toast.error("Sorry! First Name is empty..")
@@ -270,23 +238,6 @@ const QuickPassenger = () => {
       return;
     }
 
-    // if(passportNo===""){
-    //   toast.error("Sorry! Passport no is empty..")
-    //   return;
-    // }
-    // if(peYear=="" || peMonth=="" || peDay==""){
-    //   toast.error("Sorry! Passport expiry date is not selected..")
-    //   return;
-    // }
-    // if(passportFileName===""){
-    //   toast.error("Sorry! Passport file is empty..")
-    //   return;
-    // }
-    // if(visaFileName===""){
-    //   toast.error("Sorry! VISA file is empty..")
-    //   return;
-    // }
-    // console.log(sendObj);
     if (sendObj.id > 0) {
       const putData = async () => {
         setLoading(true);
@@ -299,7 +250,7 @@ const QuickPassenger = () => {
           .catch((error) => {
             console.log(error);
           });
-        // console.log(response);
+
         if (response !== undefined && response.data > 0) {
           handleGetPassengers(currentPageNumber);
           clearForm();

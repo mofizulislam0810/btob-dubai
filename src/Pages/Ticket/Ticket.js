@@ -2570,7 +2570,7 @@ const Ticket = () => {
                         <th>Tax</th>
                         <th>AIT</th>
                         <th>Discount</th>
-                        <th>Additional Price</th>
+                        {/* <th>Additional Price</th> */}
                         <th>Total Fare</th>
                       </tr>
                     </thead>
@@ -2643,7 +2643,7 @@ const Ticket = () => {
                                   className="form-control"
                                 />
                               </td>
-                              <td>
+                              {/* <td>
                                 <input
                                   value={item.agentAdditionalPrice}
                                   type={"number"}
@@ -2658,7 +2658,7 @@ const Ticket = () => {
                                   }
                                   className="form-control"
                                 />
-                              </td>
+                              </td> */}
                               <td className="text-end">
                                 {(item.basePrice +
                                   item.tax +

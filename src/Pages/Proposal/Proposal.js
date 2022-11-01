@@ -1,22 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import Navbar from "../SharePages/Navbar/Navbar";
-import SideNavBar from "../SharePages/SideNavBar/SideNavBar";
-import flightoneway from "../../JSON/flightoneway.json";
-import $ from "jquery";
-import logo from "../../images/logo/logo-combined.png";
+import axios from "axios";
+import htmlToPdfmake from "html-to-pdfmake";
 import html2canvas from "html2canvas";
+import $ from "jquery";
 import jsPDF from "jspdf";
+import moment from "moment";
 import pdfMake from "pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-import htmlToPdfmake from "html-to-pdfmake";
-import airports from "../../JSON/airports.json";
-import moment from "moment";
-import "./Proposal.css";
-import axios from "axios";
-import { environment } from "../SharePages/Utility/environment";
-import dayCount from "../SharePages/Utility/dayCount";
+import React, { useEffect, useRef, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import airports from "../../JSON/airports.json";
+import Navbar from "../SharePages/Navbar/Navbar";
+import SideNavBar from "../SharePages/SideNavBar/SideNavBar";
+import dayCount from "../SharePages/Utility/dayCount";
+import { environment } from "../SharePages/Utility/environment";
+import "./Proposal.css";
 
 const Proposal = () => {
   let defaultPriceList = [];
@@ -143,13 +140,13 @@ const Proposal = () => {
       })
     });
 
-    $("#emailSection").hide();
-    $("#preparemail").click(function () {
-      $("#emailSection").toggle("slow");
-    });
-    $("#discard").click(function () {
-      $("#emailSection").hide("slow");
-    });
+    // $("#emailSection").hide();
+    // $("#preparemail").click(function () {
+    //   $("#emailSection").toggle("slow");
+    // });
+    // $("#discard").click(function () {
+    //   $("#emailSection").hide("slow");
+    // });
   }, []);
 
   console.log(defaultPriceList);
@@ -182,7 +179,7 @@ const Proposal = () => {
   const [decBalance, setDecBalance] = useState(0);
   const [messageData, setMessageData] = useState({});
   const [selectedType, setSelectedType] = useState("Increase");
-
+  const [emailSection, setEmailSection] = useState(false);
 
   const handleOnBlur = (e) => {
     const html = document.getElementById("proposalPrint").innerHTML;
@@ -198,8 +195,16 @@ const Proposal = () => {
     setbtnDisabled(true);
     //  console.log(pdfTable);
     axios.post(environment.sendEmailProposal, messageData)
-      .then(response => (response.status === 200 && response.data === true ? toast.success("Email send successfully.") : toast.error("Please try again.")))
-      .catch(() => toast.error("Please try again."))
+      .then(response => {
+        // console.log(response, "========================")
+        if (response.status === 200 && response.data) {
+          toast.success("Email send successfully.");
+          setEmailSection(false);
+        }
+        else {
+          toast.error("Please try again.")
+        }
+      })
       .finally(() => {
         setbtnDisabled(false);
       });
@@ -311,68 +316,70 @@ const Proposal = () => {
       <div className="content-wrapper search-panel-bg">
         <section className="content-header"></section>
         <section className="content">
-          <div
-            className="container my-3"
-            style={{ maxWidth: "1265px" }}
-            id="emailSection"
-          >
-            <div className="row">
-              <div className="col-md-12">
-                <div className="card card-primary card-outline">
-                  <div className="card-header">
-                    <h3 className="card-title">Compose New Message</h3>
-                  </div>
-                  {/* <!-- /.card-header --> */}
-                  <form onSubmit={handleMessageUser}>
-                    <div className="card-body">
-                      <div className="form-group">
-                        <input className="form-control rounded" name="ToEmail" onBlur={handleOnBlur} placeholder="To:" />
-                      </div>
-                      <div className="form-group">
-                        <input className="form-control rounded" name="subject" onBlur={handleOnBlur} placeholder="Subject:" />
-                      </div>
-                      <div className="form-group">
-                        <textarea
-                          name="body"
-                          onBlur={handleOnBlur}
-                          className="form-control rounded"
-                          placeholder="Message: "
-                          style={{ height: "100px" }}
-                        ></textarea>
-                      </div>
-                      {/* <div className="form-group">
+          {emailSection && (
+            <div
+              className="container my-3"
+              style={{ maxWidth: "1265px" }}
+              id="emailSection"
+            >
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="card card-primary card-outline">
+                    <div className="card-header">
+                      <h3 className="card-title">Compose New Message</h3>
+                    </div>
+                    {/* <!-- /.card-header --> */}
+                    <form onSubmit={handleMessageUser}>
+                      <div className="card-body">
+                        <div className="form-group">
+                          <input className="form-control rounded" name="ToEmail" onBlur={handleOnBlur} placeholder="To:" />
+                        </div>
+                        <div className="form-group">
+                          <input className="form-control rounded" name="subject" onBlur={handleOnBlur} placeholder="Subject:" />
+                        </div>
+                        <div className="form-group">
+                          <textarea
+                            name="body"
+                            onBlur={handleOnBlur}
+                            className="form-control rounded"
+                            placeholder="Message: "
+                            style={{ height: "100px" }}
+                          ></textarea>
+                        </div>
+                        {/* <div className="form-group">
                         <div className="btn btn-default btn-file">
                           <i className="fas fa-paperclip"></i> Attachment
                           <input type="file" name="attachment" onBlur={handleOnBlur} disabled />
                         </div>
                         <p className="help-block">Max. 32MB</p>
                       </div> */}
-                    </div>
-                    {/* <!-- /.card-body --> */}
-                    <div className="card-footer">
-                      <div className="float-right">
-                        {/* <button type="button" className="btn btn-default">
+                      </div>
+                      {/* <!-- /.card-body --> */}
+                      <div className="card-footer">
+                        <div className="float-right">
+                          {/* <button type="button" className="btn btn-default">
                         <i className="fas fa-pencil-alt"></i> Draft
                       </button> */}
-                        <button type="submit" className="btn btn-secondary btn-sm rounded" disabled={btnDisabled === true ? true : false}>
-                          <i className="far fa-envelope"></i> Send
-                        </button>
-                      </div>
-                      {/* <button
+                          <button type="submit" className="btn btn-secondary btn-sm rounded" disabled={btnDisabled === true ? true : false}>
+                            <i className="far fa-envelope"></i> Send
+                          </button>
+                        </div>
+                        {/* <button
                       type="reset"
                       className="btn btn-default"
                       id="discard"
                     >
                       <i className="fas fa-times"></i> Discard
                     </button> */}
-                    </div>
-                  </form>
-                  {/* <!-- /.card-footer --> */}
+                      </div>
+                    </form>
+                    {/* <!-- /.card-footer --> */}
+                  </div>
+                  {/* <!-- /.card --> */}
                 </div>
-                {/* <!-- /.card --> */}
               </div>
             </div>
-          </div>
+          )}
           <div className="container my-3" style={{ maxWidth: "1265px" }}>
             <div className="row">
               <div className="col-lg-3 my-3">
@@ -401,7 +408,7 @@ const Proposal = () => {
                   <div className="d-flex pb-1">
                     <button
                       className="btn button-color fw-bold text-white w-50 mt-2 me-1 rounded"
-                      id="preparemail" style={{ fontSize: "12px" }}
+                      id="preparemail" style={{ fontSize: "12px" }} onClick={() => setEmailSection(true)}
                     >
                       Send Mail
                     </button>

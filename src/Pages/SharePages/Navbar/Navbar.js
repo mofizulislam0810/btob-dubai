@@ -170,7 +170,7 @@ const Navbar = () => {
               className="form-control search-input rounded-start"
               type="search"
               aria-label="Search"
-              placeholder="PNR/Ticket no/Booking ID"
+              placeholder="PNR/Ticket No/Booking ID"
               onChange={(e) => setSearchText(e.target.value)}
             />
             <button

@@ -1328,7 +1328,7 @@ const ShowModal = ({
                             <th>Base</th>
                             <th>Tax</th>
                             <th>Discount</th>
-                            {/* <th>AIT</th> */}
+                            <th>AIT</th>
                             <th>Pax</th>
                             <th>Total Pax Fare</th>
                           </tr>
@@ -1347,9 +1347,9 @@ const ShowModal = ({
                                 <td className="right">
                                   {passengerFares.adt.discountPrice}
                                 </td>
-                                {/* <td className="right">
+                                <td className="right">
                                   {passengerFares.adt.ait}
-                                </td> */}
+                                </td>
                                 <td className="right">{passengerCounts.adt}</td>
                                 <td className="right fw-bold">
                                 {currency !== undefined ? currency : "BDT"} {(passengerFares.adt.totalPrice *
@@ -1374,9 +1374,9 @@ const ShowModal = ({
                                 <td className="right">
                                   {passengerFares.cnn.discountPrice}
                                 </td>
-                                {/* <td className="right">
+                                <td className="right">
                                   {passengerFares.cnn.ait}
-                                </td> */}
+                                </td>
                                 <td className="right">{passengerCounts.cnn}</td>
                                 <td className="right fw-bold">
                                 {currency !== undefined ? currency : "BDT"} {(passengerFares.cnn.totalPrice *
@@ -1401,9 +1401,9 @@ const ShowModal = ({
                                 <td className="right">
                                   {passengerFares.inf.discountPrice}
                                 </td>
-                                {/* <td className="right">
+                                <td className="right">
                                   {passengerFares.inf.ait}
-                                </td> */}
+                                </td>
                                 <td className="right">{passengerCounts.inf}</td>
                                 <td className="right fw-bold">
                                 {currency !== undefined ? currency : "BDT"} {(passengerFares.inf.totalPrice *

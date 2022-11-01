@@ -1297,7 +1297,7 @@ const ShowFlight = (props) => {
                   <th>Base</th>
                   <th>Tax</th>
                   <th>Discount</th>
-                  {/* <th>AIT</th> */}
+                  <th>AIT</th>
                   <th>Pax</th>
                   <th>Total Pax Fare</th>
                 </tr>
@@ -1312,7 +1312,7 @@ const ShowFlight = (props) => {
                       <td className="right">
                         {passengerFares.adt.discountPrice}
                       </td>
-                      {/* <td className="right">{passengerFares.adt.ait}</td> */}
+                      <td className="right">{passengerFares.adt.ait}</td>
                       <td className="right">{passengerCounts.adt}</td>
                       {
                        isTempInspector !==null && isTempInspector=='true'?<>
@@ -1343,7 +1343,7 @@ const ShowFlight = (props) => {
                       <td className="right">
                         {passengerFares.cnn.discountPrice}
                       </td>
-                      {/* <td className="right">{passengerFares.cnn.ait}</td> */}
+                      <td className="right">{passengerFares.cnn.ait}</td>
                       <td className="right">{passengerCounts.cnn}</td>
                       {
                         isTempInspector !==null && isTempInspector=='true'?<>              <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ? JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
@@ -1372,7 +1372,7 @@ const ShowFlight = (props) => {
                       <td className="right">
                         {passengerFares.inf.discountPrice}
                       </td>
-                      {/* <td className="right">{passengerFares.inf.ait}</td> */}
+                      <td className="right">{passengerFares.inf.ait}</td>
                       <td className="right">{passengerCounts.inf}</td>
                       {
                         isTempInspector !==null && isTempInspector=='true'?<> <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ?JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {

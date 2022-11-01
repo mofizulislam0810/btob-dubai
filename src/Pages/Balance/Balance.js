@@ -24,7 +24,7 @@ const Balance = () => {
   let [reference, setReference] = useState("");
   let [depositInAccountId, setDepositInAccount] = useState(0);
   let [vendorAmount, setVendorAmount] = useState(0);
-  let [amount, setAmount] = useState(0);
+  let [amount, setAmount] = useState('');
   let [attachment, setAttachment] = useState("");
   let [depositFromAccountId, setDepositFromAccount] = useState(0);
   let [depositDate, setDepositDate] = useState("");
@@ -72,7 +72,7 @@ const Balance = () => {
     setCheckIssueDate("");
     setReference("");
     setDepositInAccount(0);
-    setAmount(0);
+    setAmount('');
     setAttachment("");
     setDepositFromAccount(0);
     setDepositDate("");
@@ -588,8 +588,10 @@ const Balance = () => {
                               className="form-select"
                               value={depositTypeId}
                               placeholder="Deposit Type"
-                              onChange={(e) =>
-                                setDepositType(Number(e.target.value))
+                              onChange={(e) =>{
+                                setDepositType(Number(e.target.value));
+                                setAmount('');
+                              }
                               }
                             >
                               <option key={0} value="0">
@@ -701,7 +703,7 @@ const Balance = () => {
                                   className="form-control"
                                   placeholder="Amount"
                                   onChange={(e) =>
-                                    setAmount(Number(e.target.value))
+                                    setAmount((e.target.value))
                                   }
                                   value={amount}
                                 ></input>
@@ -794,7 +796,7 @@ const Balance = () => {
                                 className="form-control"
                                 placeholder="Amount"
                                 onChange={(e) =>
-                                  setAmount(Number(e.target.value))
+                                  setAmount((e.target.value))
                                 }
                                 value={amount}
                               ></input>
@@ -920,7 +922,7 @@ const Balance = () => {
                                 className="form-control"
                                 placeholder="Amount"
                                 onChange={(e) =>
-                                  setAmount(Number(e.target.value))
+                                  setAmount((e.target.value))
                                 }
                                 value={amount}
                               ></input>
@@ -998,7 +1000,7 @@ const Balance = () => {
                                 className="form-control"
                                 placeholder="Amount"
                                 onChange={(e) =>
-                                  setAmount(Number(e.target.value))
+                                  setAmount((e.target.value))
                                 }
                                 value={amount}
                               ></input>

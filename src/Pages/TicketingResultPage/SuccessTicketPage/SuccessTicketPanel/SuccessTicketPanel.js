@@ -1079,6 +1079,7 @@ const SuccessTicketPanel = () => {
                                 <th className="text-start">Type</th>
                                 <th>Base Price</th>
                                 <th>Tax</th>
+                                <th>AIT</th>
                                 <th>Discount</th>
                                 <th>Pax</th>
                                 <th>Total</th>
@@ -1106,6 +1107,12 @@ const SuccessTicketPanel = () => {
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
+                                          .passengerFares.adt.ait
+                                      }
+                                    </td>
+                                    <td>
+                                      {
+                                        ticketData.item1?.flightInfo
                                           .passengerFares.adt.discountPrice
                                       }
                                     </td>
@@ -1116,7 +1123,7 @@ const SuccessTicketPanel = () => {
                                       }
                                     </td>
                                     <td className="fw-bold">
-                                      AED  {" "}
+                                      BDT  {" "}
                                       {ticketData.item1?.flightInfo
                                         .passengerFares.adt.totalPrice *
                                         ticketData.item1?.flightInfo
@@ -1148,6 +1155,12 @@ const SuccessTicketPanel = () => {
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
+                                          .passengerFares.adt.ait
+                                      }
+                                    </td>
+                                    <td>
+                                      {
+                                        ticketData.item1?.flightInfo
                                           .passengerFares.cnn.discountPrice
                                       }
                                     </td>
@@ -1158,7 +1171,7 @@ const SuccessTicketPanel = () => {
                                       }
                                     </td>
                                     <td className="fw-bold">
-                                      AED  {" "}
+                                      BDT  {" "}
                                       {ticketData.item1?.flightInfo
                                         .passengerFares.cnn.totalPrice *
                                         ticketData.item1?.flightInfo
@@ -1191,6 +1204,12 @@ const SuccessTicketPanel = () => {
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
+                                          .passengerFares.adt.ait
+                                      }
+                                    </td>
+                                    <td>
+                                      {
+                                        ticketData.item1?.flightInfo
                                           .passengerFares.inf.discountPrice
                                       }
                                     </td>
@@ -1201,7 +1220,7 @@ const SuccessTicketPanel = () => {
                                       }
                                     </td>
                                     <td className="fw-bold">
-                                      AED  {" "}
+                                    BDT  {" "}
                                       {ticketData.item1?.flightInfo
                                         .passengerFares.inf.totalPrice *
                                         ticketData.item1?.flightInfo
@@ -1213,10 +1232,10 @@ const SuccessTicketPanel = () => {
                                 <></>
                               )}
                               <tr className="fw-bold">
-                                <td colSpan={4} className='border-none'></td>
+                                <td colSpan={5} className='border-none'></td>
                                 <td>Grand Total</td>
                                 <td>
-                                  AED {ticketData.item1?.flightInfo.bookingComponents[0].totalPrice}
+                                BDT {ticketData.item1?.flightInfo.bookingComponents[0].totalPrice}
                                 </td>
                               </tr>
                             </tbody>

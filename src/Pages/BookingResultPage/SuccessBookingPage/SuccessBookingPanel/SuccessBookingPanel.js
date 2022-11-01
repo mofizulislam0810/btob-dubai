@@ -591,7 +591,7 @@ const SuccessBookingPanel = () => {
                       <table className="table table-bordered table-sm" style={{ fontSize: "11px" }}>
                         <thead>
                           <tr>
-                            <th colspan="6" className="fw-bold py-2 bg-light">
+                            <th colspan="7" className="fw-bold py-2 bg-light">
                               FARE DETAILS
                             </th>
                           </tr>
@@ -600,7 +600,7 @@ const SuccessBookingPanel = () => {
                             <th>Base</th>
                             <th>Tax</th>
                             <th>Discount</th>
-                            {/* <th>AIT</th> */}
+                            <th>AIT</th>
                             <th>Pax</th>
                             <th>Total Pax Fare</th>
                           </tr>
@@ -620,9 +620,9 @@ const SuccessBookingPanel = () => {
                                 <td className="right">
                                   {bookData.data?.item1.flightInfo?.passengerFares.adt.discountPrice}
                                 </td>
-                                {/* <td className="right">
-                                  {passengerFares.adt.ait}
-                                </td> */}
+                                <td className="right">
+                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.ait}
+                                </td>
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.adt}</td>
                                 <td className="right fw-bold">
                                   BDT {(bookData.data?.item1.flightInfo?.passengerFares.adt.totalPrice *
@@ -646,6 +646,9 @@ const SuccessBookingPanel = () => {
                                 </td>
                                 <td className="right">
                                   {bookData.data?.item1.flightInfo?.passengerFares.cnn.discountPrice}
+                                </td>
+                                <td className="right">
+                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.ait}
                                 </td>
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.cnn}</td>
                                 <td className="right fw-bold">
@@ -671,6 +674,9 @@ const SuccessBookingPanel = () => {
                                 <td className="right">
                                   {bookData.data?.item1.flightInfo?.passengerFares.inf.discountPrice}
                                 </td>
+                                <td className="right">
+                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.ait}
+                                </td>
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.inf}</td>
                                 <td className="right fw-bold">
                                   BDT {(bookData.data?.item1.flightInfo?.passengerFares.inf.totalPrice *
@@ -682,7 +688,7 @@ const SuccessBookingPanel = () => {
                             <></>
                           )}
                           <tr className="fw-bold">
-                            <td colSpan={4} className='border-none'></td>
+                            <td colSpan={5} className='border-none'></td>
                             <td>Grand Total</td>
                             <td>BDT{" "}
                               {bookData.data?.item1.flightInfo?.bookingComponents[0].totalPrice}

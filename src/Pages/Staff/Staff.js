@@ -14,12 +14,13 @@ const Staff = () => {
   let [userName, setUserName] = useState("");
   let [userEmail, setUserEmail] = useState("");
   let [userMobileNo, setUserMobileNo] = useState("");
-  let [balanceLimit, setBalanceLimit] = useState();
+  let [balanceLimit, setBalanceLimit] = useState('');
   let [isActive, setIsActive] = useState(true);
   let [currentItem, setCurrentItem] = useState({});
   let [staffList, setStaffList] = useState([]);
   let [settingItem, setSettingItem] = useState({});
   let [loading, setLoading] = useState(false);
+
   let sendObj = {
     id: currentItem === null ? 0 : currentItem.id,
     userId: currentItem === null ? 0 : currentItem.userId,
@@ -92,7 +93,7 @@ const Staff = () => {
             setUserName("");
             setUserEmail("");
             setUserMobileNo("");
-            setBalanceLimit();
+            setBalanceLimit('');
             setIsActive(true);
             toast.success("User added successfully..");
             // $(document).ready(function(){
@@ -154,7 +155,7 @@ const Staff = () => {
     setUserName("");
     setUserEmail("");
     setUserMobileNo("");
-    setBalanceLimit();
+    setBalanceLimit("");
     setIsActive(true);
   };
   const handleEditItem = (item) => {
@@ -338,7 +339,7 @@ const Staff = () => {
                         </label>
                         <input
                           type={"number"}
-                          value={currentItem !== null ? balanceLimit : ''}
+                          value={balanceLimit}
                           className="form-control"
                           placeholder="Balance Limit"
                           onChange={(e) => setBalanceLimit(e.target.value)}

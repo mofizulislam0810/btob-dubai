@@ -1384,6 +1384,9 @@ const ShowAllFlightPage = () => {
                                           id="dropdownMenuButton1"
                                           data-bs-toggle="dropdown"
                                           aria-expanded="false"
+                                          style={{
+                                            backgroundColor: "#f8f2fb",
+                                          }}
                                         >
                                           <span id="valWay">{tripType}</span>
                                         </button>
@@ -1425,6 +1428,9 @@ const ShowAllFlightPage = () => {
                                           id="dropdownMenuButton"
                                           data-bs-toggle="dropdown"
                                           aria-expanded="false"
+                                          style={{
+                                            backgroundColor: "#f8f2fb",
+                                          }}
                                         >
                                           <span id="valClass">
                                             {travelClassType}
@@ -1463,7 +1469,8 @@ const ShowAllFlightPage = () => {
                                               data-bs-toggle="dropdown"
                                               aria-expanded="false"
                                               data-bs-auto-close="outside"
-                                              style={{ height: "36px" }}
+                                              style={{ height: "36px",
+                                              backgroundColor: "#f8f2fb", }}
                                             >
                                               <span className="d-flex">
                                                 <svg
@@ -1757,6 +1764,9 @@ const ShowAllFlightPage = () => {
                                       placeholder="e.g. BS, BG, TK"
                                       // required
                                       autoComplete="off"
+                                      style={{
+                                        background: "#f8f2fb",
+                                      }}
                                     />
                                   </div>
                                 </div>
@@ -1781,6 +1791,9 @@ const ShowAllFlightPage = () => {
                                       required
                                       autoComplete="off"
                                       id="txtFrom"
+                                      style={{
+                                        background: "#f8f2fb",
+                                      }}
                                     />
                                   </div>
                                   <div className="col-lg-4">
@@ -1801,6 +1814,9 @@ const ShowAllFlightPage = () => {
                                       required
                                       id="txtTo"
                                       autoComplete="off"
+                                      style={{
+                                        background: "#f8f2fb",
+                                      }}
                                     />
                                   </div>
                                   <div className="col-lg-4">
@@ -1838,6 +1854,7 @@ const ShowAllFlightPage = () => {
                                         style={{
                                           minHeight: "100%",
                                           borderRight: "1px solid gray",
+                                          background: "#f8f2fb",
                                         }}
                                       ></div>
                                       <div
@@ -1869,6 +1886,9 @@ const ShowAllFlightPage = () => {
                                           autoComplete="off"
                                           id="txtFrom1"
                                           required
+                                          style={{
+                                            background: "#f8f2fb",
+                                          }}
                                         />
                                       </div>
                                       <div className="col-lg-4">
@@ -1889,6 +1909,9 @@ const ShowAllFlightPage = () => {
                                           id="txtTo1"
                                           autoComplete="off"
                                           required
+                                          style={{
+                                            background: "#f8f2fb",
+                                          }}
                                         />
                                       </div>
                                       <div className="col-lg-4">
@@ -1912,6 +1935,7 @@ const ShowAllFlightPage = () => {
                                             style={{
                                               minHeight: "100%",
                                               borderRight: "1px solid gray",
+                                              background: "#f8f2fb",
                                             }}
                                           ></div>
                                         </div>
@@ -1940,6 +1964,9 @@ const ShowAllFlightPage = () => {
                                           placeholder="From"
                                           autoComplete="off"
                                           id="txtFrom2"
+                                          style={{
+                                            background: "#f8f2fb",
+                                          }}
                                         />
                                       </div>
                                       <div className="col-lg-4">
@@ -1959,6 +1986,9 @@ const ShowAllFlightPage = () => {
                                           placeholder="To"
                                           id="txtTo2"
                                           autoComplete="off"
+                                          style={{
+                                            background: "#f8f2fb",
+                                          }}
                                         />
                                       </div>
                                       <div className="col-lg-4">
@@ -1982,6 +2012,7 @@ const ShowAllFlightPage = () => {
                                             style={{
                                               minHeight: "100%",
                                               borderRight: "1px solid gray",
+                                              background: "#f8f2fb",
                                             }}
                                           ></div>
                                         </div>
@@ -2010,6 +2041,9 @@ const ShowAllFlightPage = () => {
                                           placeholder="From"
                                           autoComplete="off"
                                           id="txtFrom3"
+                                          style={{
+                                            background: "#f8f2fb",
+                                          }}
                                         />
                                       </div>
                                       <div className="col-lg-4">
@@ -2029,6 +2063,9 @@ const ShowAllFlightPage = () => {
                                           placeholder="To"
                                           id="txtTo3"
                                           autoComplete="off"
+                                          style={{
+                                            background: "#f8f2fb",
+                                          }}
                                         />
                                       </div>
                                       <div className="col-lg-4">
@@ -2052,6 +2089,7 @@ const ShowAllFlightPage = () => {
                                             style={{
                                               minHeight: "100%",
                                               borderRight: "1px solid gray",
+                                              background: "#f8f2fb",
                                             }}
                                           ></div>
                                         </div>
@@ -2080,6 +2118,9 @@ const ShowAllFlightPage = () => {
                                           placeholder="From"
                                           autoComplete="off"
                                           id="txtFrom4"
+                                          style={{
+                                            background: "#f8f2fb",
+                                          }}
                                         />
                                       </div>
                                       <div className="col-lg-4">
@@ -2099,6 +2140,9 @@ const ShowAllFlightPage = () => {
                                           placeholder="To"
                                           id="txtTo4"
                                           autoComplete="off"
+                                          style={{
+                                            background: "#f8f2fb",
+                                          }}
                                         />
                                       </div>
                                       <div className="col-lg-4">
@@ -2122,6 +2166,7 @@ const ShowAllFlightPage = () => {
                                             style={{
                                               minHeight: "100%",
                                               borderRight: "1px solid gray",
+                                              background: "#f8f2fb",
                                             }}
                                           ></div>
                                         </div>
@@ -2150,6 +2195,9 @@ const ShowAllFlightPage = () => {
                                           placeholder="From"
                                           autoComplete="off"
                                           id="txtFrom5"
+                                          style={{
+                                            background: "#f8f2fb",
+                                          }}
                                         />
                                       </div>
                                       <div className="col-lg-4">
@@ -2169,6 +2217,9 @@ const ShowAllFlightPage = () => {
                                           placeholder="To"
                                           id="txtTo5"
                                           autoComplete="off"
+                                          style={{
+                                            background: "#f8f2fb",
+                                          }}
                                         />
                                       </div>
                                       <div className="col-lg-4">
@@ -2192,6 +2243,7 @@ const ShowAllFlightPage = () => {
                                             style={{
                                               minHeight: "100%",
                                               borderRight: "1px solid gray",
+                                              background: "#f8f2fb",
                                             }}
                                           ></div>
                                         </div>

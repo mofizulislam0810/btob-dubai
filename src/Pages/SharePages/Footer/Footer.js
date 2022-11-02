@@ -44,7 +44,7 @@ const quickLinksData = [
 
 const addressData = [
   {
-    text: `Al Muhairi 113-127, Al Dhagaya, Deira, Dubai, United Arab Emirates`,
+    text: `39 Sharif Plaza, Kemal Ataturk Avenue, Banani, Dhaka 1213`,
     icon: BsFillHouseFill,
   },
   {
@@ -52,7 +52,7 @@ const addressData = [
     icon: FaPhoneAlt,
   },
   {
-    text: "support@triplover.ae",
+    text: "support@FirstTrip.com",
     icon: GrMail,
   },
 ];
@@ -62,7 +62,7 @@ const Footer = () => {
     <Box className="container">
       <Flex w="100%" mt="80px" mb="30px" justifyContent="space-between">
         <Box>
-          <Image src={logo} alt="Triplover" w="160px" mb="24px" />
+          <Image src={logo} alt="FirstTrip" w="160px" mb="24px" />
           <HStack gap="10px">
             {socialData.map((item, idx) => (
               <Circle bg="#E0ECFB" size="45px" key={idx}>

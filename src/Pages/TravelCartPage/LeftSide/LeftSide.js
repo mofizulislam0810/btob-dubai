@@ -2983,7 +2983,7 @@ const LeftSide = () => {
                   />
                   <label class="form-check-label font-size-checkbok" for="flexCheckDefault">
                     By Booking/Issuing this Ticket I agree to{" "}
-                    <Link to="/termandcondition">Triplover Terms & Conditions</Link>
+                    <Link to="/termandcondition">FirstTrip Terms & Conditions</Link>
                   </label>
                 </div>
               </div>

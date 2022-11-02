@@ -8,7 +8,7 @@ import moment from "moment";
 import layOver from "../../SharePages/Utility/layOver";
 import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
-import { Parser } from 'html-to-react';
+import { Parser } from "html-to-react";
 import DurationFormat from "../../SharePages/Utility/DurationFormat";
 const ShowModal = ({
   flag,
@@ -27,7 +27,7 @@ const ShowModal = ({
   uniqueTransID,
   passengerCounts,
   passengerFares,
-  currency
+  currency,
 }) => {
   const ImageUrlD = `https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction0.platingCarrierCode}.png`;
   const ImageUrlR =
@@ -90,10 +90,8 @@ const ShowModal = ({
         JSON.stringify(bookingComponents)
       );
     });
- 
-  },[]);
+  }, []);
 
-  
   // const fareRulesObj = {
   //   itemCodeRef: itemCodeRef,
   //   uniqueTransID: uniqueTransID,
@@ -115,182 +113,1072 @@ const ShowModal = ({
   //     console.log(fareRules)
   // }
 
-
-  
   return (
     <>
-     <div
-      className="modal fade"
-      id={"exampleModal" + index}
-      tabIndex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-header">
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div className="modal-body">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target={"#home" + index} type="button" role="tab" aria-controls="home" aria-selected="true">Flight details</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target={"#profile" + index} type="button" role="tab" aria-controls="profile" aria-selected="false">Fare details</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target={"#contact" + index} type="button" role="tab" aria-controls="contact" aria-selected="false">Baggage info</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target={"#about" + index} type="button" role="tab" aria-controls="about" aria-selected="false">Fare Policy</button>
-              </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id={"home" + index} role="tabpanel" aria-labelledby="home-tab"><>
-                <div className="p-2">
-                  <div className="container">
-                    {flightType === "Multi City" ? (
-                      <>
-                        {direction0.segments.map((seg, index) => (
-                          <div key={index}>
-                            {index === 0 ? (
-                              <>
-                                <div
-                                  className="row mt-2 p-2 border-bottom"
-                                  style={{ backgroundColor: "	white" }}
-                                >
-                                  <div className="col-lg-4">
-                                    <i className="fas fa-plane"></i>
-                                    <span className="d-inline fs-6 fw-bold ms-1">
-                                      Departure,{" "}
-                                      {airports
-                                        .filter((f) => f.iata === seg.from)
-                                        .map((item) => item.city)}
-                                    </span>
-                                  </div>
+      <div
+        className="modal fade"
+        id={"exampleModal" + index}
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    id="home-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target={"#home" + index}
+                    type="button"
+                    role="tab"
+                    aria-controls="home"
+                    aria-selected="true"
+                  >
+                    Flight details
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="profile-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target={"#profile" + index}
+                    type="button"
+                    role="tab"
+                    aria-controls="profile"
+                    aria-selected="false"
+                  >
+                    Fare details
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="contact-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target={"#contact" + index}
+                    type="button"
+                    role="tab"
+                    aria-controls="contact"
+                    aria-selected="false"
+                  >
+                    Baggage info
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="about-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target={"#about" + index}
+                    type="button"
+                    role="tab"
+                    aria-controls="about"
+                    aria-selected="false"
+                  >
+                    Fare Policy
+                  </button>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div
+                  class="tab-pane fade show active"
+                  id={"home" + index}
+                  role="tabpanel"
+                  aria-labelledby="home-tab"
+                >
+                  <>
+                    <div className="p-2">
+                      <div className="container">
+                        {flightType === "Multi City" ? (
+                          <>
+                            {direction0.segments.map((seg, index) => (
+                              <div key={index}>
+                                {index === 0 ? (
+                                  <>
+                                    <div
+                                      className="row mt-2 p-2 border-bottom"
+                                      style={{ backgroundColor: "	white" }}
+                                    >
+                                      <div className="col-lg-4">
+                                        <i className="fas fa-plane"></i>
+                                        <span className="d-inline fs-6 fw-bold ms-1">
+                                          Departure,{" "}
+                                          {airports
+                                            .filter((f) => f.iata === seg.from)
+                                            .map((item) => item.city)}
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-1">
+                                        <i className="fas fa-arrow-right"></i>
+                                      </div>
+                                      <div className="col-lg-4">
+                                        <span className="d-inline fs-6 fw-bold">
+                                          Arrival,{" "}
+                                          {airports
+                                            .filter(
+                                              (f) =>
+                                                f.iata ===
+                                                direction0.segments[
+                                                  direction0.segments.length - 1
+                                                ].to
+                                            )
+                                            .map((item) => item.city)}
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-3 fs-6 fw-bold">
+                                        <span>
+                                          Total duration:{" "}
+                                          {DurationFormat(
+                                            seg.details[0].travelTime
+                                          )}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </>
+                                ) : (
+                                  <></>
+                                )}
+
+                                <div className="row py-4 pb-2">
                                   <div className="col-lg-1">
-                                    <i className="fas fa-arrow-right"></i>
+                                    <img
+                                      src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction0.segments[0].airlineCode}.png`}
+                                      alt=""
+                                      width="40px"
+                                      height="40px"
+                                    />
+                                  </div>
+                                  <div className="col-lg-2 d-block">
+                                    <p className="my-auto text-start">
+                                      {seg.airline}
+                                    </p>
+                                    <p className="my-auto text-start">
+                                      {seg.details[0].equipment}
+                                    </p>
+                                    <p className="my-auto text-start">
+                                      {seg.serviceClass}
+                                    </p>
                                   </div>
                                   <div className="col-lg-4">
-                                    <span className="d-inline fs-6 fw-bold">
-                                      Arrival,{" "}
-                                      {airports
-                                        .filter(
-                                          (f) =>
-                                            f.iata ===
-                                            direction0.segments[
-                                              direction0.segments.length - 1
-                                            ].to
-                                        )
-                                        .map((item) => item.city)}
+                                    <span className="float-start">
+                                      {seg.from}
+                                      <strong className="ms-1">
+                                        {seg.departure.substr(11, 5)}
+                                      </strong>
                                     </span>
+                                    <br></br>
+                                    <span className="float-start">
+                                      <strong>
+                                        <Moment format="dddd, LL">
+                                          {seg.departure.substr(0, 10)}
+                                        </Moment>
+                                      </strong>
+                                    </span>
+                                    <br></br>
+                                    <h6 className="text-start">
+                                      {seg.fromAirport}
+                                    </h6>
+                                    {/* <h6 className="float-start">Riyadh, Saudi Arabia</h6> */}
                                   </div>
-                                  <div className="col-lg-3 fs-6 fw-bold">
-                                    <span>
-                                      Total duration:{" "}
-                                      {DurationFormat(
-                                        seg.details[0].travelTime
-                                      )}
+                                  <div className="col-lg-4">
+                                    <span className="float-start">
+                                      {seg.to}
+                                      <strong className="ms-1">
+                                        {seg.arrival.substr(11, 5)}
+                                      </strong>
                                     </span>
+                                    <br />
+                                    <span className="float-start">
+                                      <strong>
+                                        <Moment format="dddd, LL">
+                                          {seg.arrival.substr(0, 10)}
+                                        </Moment>
+                                      </strong>
+                                    </span>
+                                    <br></br>
+                                    <h6 className="text-start">
+                                      {seg.toAirport}
+                                    </h6>
+                                    {/* <h6 className="float-start">
+                            Dubai, United Emirates
+                          </h6> */}
                                   </div>
                                 </div>
+                              </div>
+                            ))}
+                            {direction1.segments.map((seg, index) => (
+                              <div key={index}>
+                                {index === 0 ? (
+                                  <>
+                                    <div
+                                      className="row mt-2 p-2 border-bottom"
+                                      style={{ backgroundColor: "	white" }}
+                                    >
+                                      <div className="col-lg-4">
+                                        <i className="fas fa-plane"></i>
+                                        <span className="d-inline fs-6 fw-bold ms-1">
+                                          Departure,{" "}
+                                          {airports
+                                            .filter((f) => f.iata === seg.from)
+                                            .map((item) => item.city)}
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-1">
+                                        <i className="fas fa-arrow-right"></i>
+                                      </div>
+                                      <div className="col-lg-4">
+                                        <span className="d-inline fs-6 fw-bold">
+                                          Arrival,{" "}
+                                          {airports
+                                            .filter(
+                                              (f) =>
+                                                f.iata ===
+                                                direction1.segments[
+                                                  direction1.segments.length - 1
+                                                ].to
+                                            )
+                                            .map((item) => item.city)}
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-3 fs-6 fw-bold">
+                                        <span>
+                                          Total duration:{" "}
+                                          {DurationFormat(
+                                            seg.details[0].travelTime
+                                          )}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </>
+                                ) : (
+                                  <></>
+                                )}
+
+                                <div className="row py-4 pb-2">
+                                  <div className="col-lg-1">
+                                    <img
+                                      src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction1.segments[0].airlineCode}.png`}
+                                      alt=""
+                                      width="40px"
+                                      height="40px"
+                                    />
+                                  </div>
+                                  <div className="col-lg-2 d-block">
+                                    <p className="my-auto text-start">
+                                      {seg.airline}
+                                    </p>
+                                    <p className="my-auto text-start">
+                                      {seg.details[0].equipment}
+                                    </p>
+                                    <p className="my-auto text-start">
+                                      {seg.serviceClass}
+                                    </p>
+                                  </div>
+                                  <div className="col-lg-4">
+                                    <span className="float-start">
+                                      {seg.from}
+                                      <strong className="ms-1">
+                                        {seg.departure.substr(11, 5)}
+                                      </strong>
+                                    </span>
+                                    <br></br>
+                                    <span className="float-start">
+                                      <strong>
+                                        <Moment format="dddd, LL">
+                                          {seg.departure.substr(0, 10)}
+                                        </Moment>
+                                      </strong>
+                                    </span>
+                                    <br></br>
+                                    <h6 className="text-start">
+                                      {seg.fromAirport}
+                                    </h6>
+                                    {/* <h6 className="float-start">Riyadh, Saudi Arabia</h6> */}
+                                  </div>
+                                  <div className="col-lg-4">
+                                    <span className="float-start">
+                                      {seg.to}
+                                      <strong className="ms-1">
+                                        {seg.arrival.substr(11, 5)}
+                                      </strong>
+                                    </span>
+                                    <br />
+                                    <span className="float-start">
+                                      <strong>
+                                        <Moment format="dddd, LL">
+                                          {seg.arrival.substr(0, 10)}
+                                        </Moment>
+                                      </strong>
+                                    </span>
+                                    <br></br>
+                                    <h6 className="text-start">
+                                      {seg.toAirport}
+                                    </h6>
+                                    {/* <h6 className="float-start">
+                            Dubai, United Emirates
+                          </h6> */}
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                            {direction2.segments !== undefined ? (
+                              <>
+                                {direction2.segments.map((seg, index) => (
+                                  <div key={index}>
+                                    {index === 0 ? (
+                                      <>
+                                        <div
+                                          className="row mt-2 p-2 border-bottom"
+                                          style={{ backgroundColor: "	white" }}
+                                        >
+                                          <div className="col-lg-4">
+                                            <i className="fas fa-plane"></i>
+                                            <span className="d-inline fs-6 fw-bold ms-1">
+                                              Departure,{" "}
+                                              {airports
+                                                .filter(
+                                                  (f) => f.iata === seg.from
+                                                )
+                                                .map((item) => item.city)}
+                                            </span>
+                                          </div>
+                                          <div className="col-lg-1">
+                                            <i className="fas fa-arrow-right"></i>
+                                          </div>
+                                          <div className="col-lg-4">
+                                            <span className="d-inline fs-6 fw-bold">
+                                              Arrival,{" "}
+                                              {airports
+                                                .filter(
+                                                  (f) =>
+                                                    f.iata ===
+                                                    direction2.segments[
+                                                      direction2.segments
+                                                        .length - 1
+                                                    ].to
+                                                )
+                                                .map((item) => item.city)}
+                                            </span>
+                                          </div>
+                                          <div className="col-lg-3 fs-6 fw-bold">
+                                            <span>
+                                              Total duration:{" "}
+                                              {DurationFormat(
+                                                seg.details[0].travelTime
+                                              )}
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
+
+                                    <div className="row py-4 pb-2">
+                                      <div className="col-lg-1">
+                                        <img
+                                          src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction2.segments[0].airlineCode}.png`}
+                                          alt=""
+                                          width="40px"
+                                          height="40px"
+                                        />
+                                      </div>
+                                      <div className="col-lg-2 d-block">
+                                        <p className="my-auto text-start">
+                                          {seg.airline}
+                                        </p>
+                                        <p className="my-auto text-start">
+                                          {seg.details[0].equipment}
+                                        </p>
+                                        <p className="my-auto text-start">
+                                          {seg.serviceClass}
+                                        </p>
+                                      </div>
+                                      <div className="col-lg-4">
+                                        <span className="float-start">
+                                          {seg.from}
+                                          <strong className="ms-1">
+                                            {seg.departure.substr(11, 5)}
+                                          </strong>
+                                        </span>
+                                        <br></br>
+                                        <span className="float-start">
+                                          <strong>
+                                            <Moment format="dddd, LL">
+                                              {seg.departure.substr(0, 10)}
+                                            </Moment>
+                                          </strong>
+                                        </span>
+                                        <br></br>
+                                        <h6 className="text-start">
+                                          {seg.fromAirport}
+                                        </h6>
+                                        {/* <h6 className="float-start">Riyadh, Saudi Arabia</h6> */}
+                                      </div>
+                                      <div className="col-lg-4">
+                                        <span className="float-start">
+                                          {seg.to}
+                                          <strong className="ms-1">
+                                            {seg.arrival.substr(11, 5)}
+                                          </strong>
+                                        </span>
+                                        <br />
+                                        <span className="float-start">
+                                          <strong>
+                                            <Moment format="dddd, LL">
+                                              {seg.arrival.substr(0, 10)}
+                                            </Moment>
+                                          </strong>
+                                        </span>
+                                        <br></br>
+                                        <h6 className="text-start">
+                                          {seg.toAirport}
+                                        </h6>
+                                        {/* <h6 className="float-start">
+                              Dubai, United Emirates
+                            </h6> */}
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                            {direction3.segments !== undefined ? (
+                              <>
+                                {direction3.segments.map((seg, index) => (
+                                  <div key={index}>
+                                    {index === 0 ? (
+                                      <>
+                                        <div
+                                          className="row mt-2 p-2 border-bottom"
+                                          style={{ backgroundColor: "	white" }}
+                                        >
+                                          <div className="col-lg-4">
+                                            <i className="fas fa-plane"></i>
+                                            <span className="d-inline fs-6 fw-bold ms-1">
+                                              Departure,{" "}
+                                              {airports
+                                                .filter(
+                                                  (f) => f.iata === seg.from
+                                                )
+                                                .map((item) => item.city)}
+                                            </span>
+                                          </div>
+                                          <div className="col-lg-1">
+                                            <i className="fas fa-arrow-right"></i>
+                                          </div>
+                                          <div className="col-lg-4">
+                                            <span className="d-inline fs-6 fw-bold">
+                                              Arrival,{" "}
+                                              {airports
+                                                .filter(
+                                                  (f) =>
+                                                    f.iata ===
+                                                    direction3.segments[
+                                                      direction3.segments
+                                                        .length - 1
+                                                    ].to
+                                                )
+                                                .map((item) => item.city)}
+                                            </span>
+                                          </div>
+                                          <div className="col-lg-3 fs-6 fw-bold">
+                                            <span>
+                                              Total duration:{" "}
+                                              {DurationFormat(
+                                                seg.details[0].travelTime
+                                              )}
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
+
+                                    <div className="row py-4 pb-2">
+                                      <div className="col-lg-1">
+                                        <img
+                                          src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction3.segments[0].airlineCode}.png`}
+                                          alt=""
+                                          width="40px"
+                                          height="40px"
+                                        />
+                                      </div>
+                                      <div className="col-lg-2 d-block">
+                                        <p className="my-auto text-start">
+                                          {seg.airline}
+                                        </p>
+                                        <p className="my-auto text-start">
+                                          {seg.details[0].equipment}
+                                        </p>
+                                        <p className="my-auto text-start">
+                                          {seg.serviceClass}
+                                        </p>
+                                      </div>
+                                      <div className="col-lg-4">
+                                        <span className="float-start">
+                                          {seg.from}
+                                          <strong className="ms-1">
+                                            {seg.departure.substr(11, 5)}
+                                          </strong>
+                                        </span>
+                                        <br></br>
+                                        <span className="float-start">
+                                          <strong>
+                                            <Moment format="dddd, LL">
+                                              {seg.departure.substr(0, 10)}
+                                            </Moment>
+                                          </strong>
+                                        </span>
+                                        <br></br>
+                                        <h6 className="text-start">
+                                          {seg.fromAirport}
+                                        </h6>
+                                        {/* <h6 className="float-start">Riyadh, Saudi Arabia</h6> */}
+                                      </div>
+                                      <div className="col-lg-4">
+                                        <span className="float-start">
+                                          {seg.to}
+                                          <strong className="ms-1">
+                                            {seg.arrival.substr(11, 5)}
+                                          </strong>
+                                        </span>
+                                        <br />
+                                        <span className="float-start">
+                                          <strong>
+                                            <Moment format="dddd, LL">
+                                              {seg.arrival.substr(0, 10)}
+                                            </Moment>
+                                          </strong>
+                                        </span>
+                                        <br></br>
+                                        <h6 className="text-start">
+                                          {seg.toAirport}
+                                        </h6>
+                                        {/* <h6 className="float-start">
+                                  Dubai, United Emirates
+                                </h6> */}
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
                               </>
                             ) : (
                               <></>
                             )}
 
-                            <div className="row py-4 pb-2">
-                              <div className="col-lg-1">
-                                <img
-                                  src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction0.segments[0].airlineCode}.png`}
-                                  alt=""
-                                  width="40px"
-                                  height="40px"
-                                />
+                            {direction4.segments !== undefined ? (
+                              <>
+                                {direction4.segments.map((seg, index) => (
+                                  <div key={index}>
+                                    {index === 0 ? (
+                                      <>
+                                        <div
+                                          className="row mt-2 p-2 border-bottom"
+                                          style={{ backgroundColor: "	white" }}
+                                        >
+                                          <div className="col-lg-4">
+                                            <i className="fas fa-plane"></i>
+                                            <span className="d-inline fs-6 fw-bold ms-1">
+                                              Departure,{" "}
+                                              {airports
+                                                .filter(
+                                                  (f) => f.iata === seg.from
+                                                )
+                                                .map((item) => item.city)}
+                                            </span>
+                                          </div>
+                                          <div className="col-lg-1">
+                                            <i className="fas fa-arrow-right"></i>
+                                          </div>
+                                          <div className="col-lg-4">
+                                            <span className="d-inline fs-6 fw-bold">
+                                              Arrival,{" "}
+                                              {airports
+                                                .filter(
+                                                  (f) =>
+                                                    f.iata ===
+                                                    direction4.segments[
+                                                      direction4.segments
+                                                        .length - 1
+                                                    ].to
+                                                )
+                                                .map((item) => item.city)}
+                                            </span>
+                                          </div>
+                                          <div className="col-lg-3 fs-6 fw-bold">
+                                            <span>
+                                              Total duration:{" "}
+                                              {DurationFormat(
+                                                seg.details[0].travelTime
+                                              )}
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
+
+                                    <div className="row py-4 pb-2">
+                                      <div className="col-lg-1">
+                                        <img
+                                          src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction4.segments[0].airlineCode}.png`}
+                                          alt=""
+                                          width="40px"
+                                          height="40px"
+                                        />
+                                      </div>
+                                      <div className="col-lg-2 d-block">
+                                        <p className="my-auto text-start">
+                                          {seg.airline}
+                                        </p>
+                                        <p className="my-auto text-start">
+                                          {seg.details[0].equipment}
+                                        </p>
+                                        <p className="my-auto text-start">
+                                          {seg.serviceClass}
+                                        </p>
+                                      </div>
+                                      <div className="col-lg-4">
+                                        <span className="float-start">
+                                          {seg.from}
+                                          <strong className="ms-1">
+                                            {seg.departure.substr(11, 5)}
+                                          </strong>
+                                        </span>
+                                        <br></br>
+                                        <span className="float-start">
+                                          <strong>
+                                            <Moment format="dddd, LL">
+                                              {seg.departure.substr(0, 10)}
+                                            </Moment>
+                                          </strong>
+                                        </span>
+                                        <br></br>
+                                        <h6 className="text-start">
+                                          {airports
+                                            .filter((f) => f.iata === seg.from)
+                                            .map(
+                                              (item) =>
+                                                item.name + ", " + item.city
+                                            )}
+                                        </h6>
+                                        {/* <h6 className="float-start">Riyadh, Saudi Arabia</h6> */}
+                                      </div>
+                                      <div className="col-lg-4">
+                                        <span className="float-start">
+                                          {seg.to}
+                                          <strong className="ms-1">
+                                            {seg.arrival.substr(11, 5)}
+                                          </strong>
+                                        </span>
+                                        <br />
+                                        <span className="float-start">
+                                          <strong>
+                                            <Moment format="dddd, LL">
+                                              {seg.arrival.substr(0, 10)}
+                                            </Moment>
+                                          </strong>
+                                        </span>
+                                        <br></br>
+                                        <h6 className="text-start">
+                                          {airports
+                                            .filter((f) => f.iata === seg.to)
+                                            .map(
+                                              (item) =>
+                                                item.name + ", " + item.city
+                                            )}
+                                        </h6>
+                                        {/* <h6 className="float-start">
+                              Dubai, United Emirates
+                            </h6> */}
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                            {direction5.segments !== undefined ? (
+                              <>
+                                {direction5.segments.map((seg, index) => (
+                                  <div key={index}>
+                                    {index === 0 ? (
+                                      <>
+                                        <div
+                                          className="row mt-2 p-2 border-bottom"
+                                          style={{ backgroundColor: "	white" }}
+                                        >
+                                          <div className="col-lg-4">
+                                            <i className="fas fa-plane"></i>
+                                            <span className="d-inline fs-6 fw-bold ms-1">
+                                              Departure,{" "}
+                                              {airports
+                                                .filter(
+                                                  (f) => f.iata === seg.from
+                                                )
+                                                .map((item) => item.city)}
+                                            </span>
+                                          </div>
+                                          <div className="col-lg-1">
+                                            <i className="fas fa-arrow-right"></i>
+                                          </div>
+                                          <div className="col-lg-4">
+                                            <span className="d-inline fs-6 fw-bold">
+                                              Arrival,{" "}
+                                              {airports
+                                                .filter(
+                                                  (f) =>
+                                                    f.iata ===
+                                                    direction5.segments[
+                                                      direction5.segments
+                                                        .length - 1
+                                                    ].to
+                                                )
+                                                .map((item) => item.city)}
+                                            </span>
+                                          </div>
+                                          <div className="col-lg-3 fs-6 fw-bold">
+                                            <span>
+                                              Total duration:{" "}
+                                              {DurationFormat(
+                                                seg.details[0].travelTime
+                                              )}
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
+
+                                    <div className="row py-4 pb-2">
+                                      <div className="col-lg-1">
+                                        <img
+                                          src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction5.segments[0].airlineCode}.png`}
+                                          alt=""
+                                          width="40px"
+                                          height="40px"
+                                        />
+                                      </div>
+                                      <div className="col-lg-2 d-block">
+                                        <p className="my-auto text-start">
+                                          {seg.airline}
+                                        </p>
+                                        <p className="my-auto text-start">
+                                          {seg.details[0].equipment}
+                                        </p>
+                                        <p className="my-auto text-start">
+                                          {seg.serviceClass}
+                                        </p>
+                                      </div>
+                                      <div className="col-lg-4">
+                                        <span className="float-start">
+                                          {seg.from}
+                                          <strong className="ms-1">
+                                            {seg.departure.substr(11, 5)}
+                                          </strong>
+                                        </span>
+                                        <br></br>
+                                        <span className="float-start">
+                                          <strong>
+                                            <Moment format="dddd, LL">
+                                              {seg.departure.substr(0, 10)}
+                                            </Moment>
+                                          </strong>
+                                        </span>
+                                        <br></br>
+                                        <h6 className="text-start">
+                                          {seg.fromAirport}
+                                        </h6>
+                                        {/* <h6 className="float-start">Riyadh, Saudi Arabia</h6> */}
+                                      </div>
+                                      <div className="col-lg-4">
+                                        <span className="float-start">
+                                          {seg.to}
+                                          <strong className="ms-1">
+                                            {seg.arrival.substr(11, 5)}
+                                          </strong>
+                                        </span>
+                                        <br />
+                                        <span className="float-start">
+                                          <strong>
+                                            <Moment format="dddd, LL">
+                                              {seg.arrival.substr(0, 10)}
+                                            </Moment>
+                                          </strong>
+                                        </span>
+                                        <br></br>
+                                        <h6 className="text-start">
+                                          {seg.toAirport}
+                                        </h6>
+                                        {/* <h6 className="float-start">
+                              Dubai, United Emirates
+                            </h6> */}
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            {direction0.segments.map((seg, index) => (
+                              <div key={index}>
+                                {index === 0 ? (
+                                  <div
+                                    className="row pt-2 p-2 border-bottom"
+                                    style={{ backgroundColor: "	white" }}
+                                  >
+                                    <div className="col-lg-3 text-start">
+                                      <span className="d-inline fs-6 fw-bold ms-1">
+                                        Departure,{" "}
+                                        {airports
+                                          .filter((f) => f.iata === seg.from)
+                                          .map((item) => item.city)}
+                                      </span>
+                                    </div>
+                                    <div className="col-lg-3">
+                                      <i className="fas fa-plane fa-sm"></i>
+                                    </div>
+                                    <div className="col-lg-3">
+                                      <span className="d-inline fs-6 fw-bold">
+                                        Arrival,{" "}
+                                        {airports
+                                          .filter(
+                                            (f) =>
+                                              f.iata ===
+                                              direction0.segments[
+                                                direction0.segments.length - 1
+                                              ].to
+                                          )
+                                          .map((item) => item.city)}
+                                      </span>
+                                    </div>
+                                    <div className="col-lg-3 fs-6 fw-bold">
+                                      <span>Duration: {seg.duration[0]}</span>
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <></>
+                                )}
+                                {seg.details.length > 1 ? (
+                                  seg.details.map((item, index) => (
+                                    <>
+                                      {index === seg.details.length - 1 ? (
+                                        <></>
+                                      ) : seg.details.length > 1 ? (
+                                        <div className="text-center fw-bold">
+                                          {" "}
+                                          Layover :&nbsp;{" "}
+                                          {layOver(
+                                            seg.details[index]?.departure,
+                                            direction0.segments[index]?.arrival
+                                          )}
+                                        </div>
+                                      ) : (
+                                        <></>
+                                      )}
+                                      {index === 0 ? (
+                                        <></>
+                                      ) : (
+                                        <div className="text-center fw-bold">
+                                          {" "}
+                                          Layover :&nbsp;
+                                          {layOver(
+                                            seg.details[index]?.departure,
+                                            seg.details[index - 1]?.arrival
+                                          )}
+                                        </div>
+                                      )}
+                                      <div className="row py-4 p-2 border">
+                                        <div className="col-lg-1">
+                                          <img
+                                            src={ImageUrlD}
+                                            alt=""
+                                            width="40px"
+                                            height="40px"
+                                          />
+                                        </div>
+                                        <div className="col-lg-3 d-block">
+                                          <p className="my-auto text-start">
+                                            {seg.airline}
+                                          </p>
+                                          <p className="my-auto text-start">
+                                            {item.equipment}
+                                          </p>
+                                          <p className="my-auto text-start">
+                                            Class {seg.serviceClass} (
+                                            {seg.bookingClass})
+                                          </p>
+                                        </div>
+                                        <div className="col-lg-4">
+                                          <span className="float-start fw-bold">
+                                            {item.origin}
+                                            <strong className="ms-1">
+                                              {item.departure.substr(11, 5)}
+                                            </strong>
+                                          </span>
+                                          <br></br>
+                                          <span className="float-start">
+                                            {moment(item.departure).format(
+                                              "DD MMMM,yyyy, dddd"
+                                            )}
+                                          </span>
+                                          <br></br>
+                                          <h6 className="text-start">
+                                            {item.originName}
+                                          </h6>
+                                        </div>
+                                        <div className="col-lg-4">
+                                          <span className="float-start fw-bold">
+                                            {item.destination}
+                                            <strong className="ms-1">
+                                              {item.arrival.substr(11, 5)}
+                                            </strong>
+                                          </span>
+                                          <br />
+                                          <span className="float-start">
+                                            {moment(item.arrival).format(
+                                              "DD MMMM,yyyy, dddd"
+                                            )}
+                                          </span>
+                                          <br></br>
+                                          <h6 className="text-start">
+                                            {item.destinationName}
+                                          </h6>
+                                        </div>
+                                      </div>
+                                    </>
+                                  ))
+                                ) : (
+                                  <>
+                                    {/* <span>Segments</span> */}
+                                    {index !== 0 ? (
+                                      <div className="text-center fw-bold">
+                                        {" "}
+                                        Layover :&nbsp;
+                                        {layOver(
+                                          direction0.segments[index]?.departure,
+                                          direction0.segments[index - 1]
+                                            ?.arrival
+                                        )}
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    <div className="row py-4 p-2 border">
+                                      <div className="col-lg-1">
+                                        <img
+                                          src={ImageUrlD}
+                                          alt=""
+                                          width="40px"
+                                          height="40px"
+                                        />
+                                      </div>
+                                      <div className="col-lg-3 d-block">
+                                        <p className="my-auto text-start">
+                                          {seg.airline}
+                                        </p>
+                                        <p className="my-auto text-start">
+                                          {seg.details[0].equipment}
+                                        </p>
+                                        <p className="my-auto text-start">
+                                          Class {seg.serviceClass} (
+                                          {seg.bookingClass})
+                                        </p>
+                                      </div>
+                                      <div className="col-lg-4">
+                                        <span className="float-start fw-bold">
+                                          {seg.from}
+                                          <strong className="ms-1">
+                                            {seg.departure.substr(11, 5)}
+                                          </strong>
+                                        </span>
+                                        <br></br>
+                                        <span className="float-start">
+                                          {moment(seg.departure).format(
+                                            "DD MMMM,yyyy, dddd"
+                                          )}
+                                        </span>
+                                        <br></br>
+                                        <h6 className="text-start">
+                                          {seg.fromAirport}
+                                        </h6>
+                                      </div>
+                                      <div className="col-lg-4">
+                                        <span className="float-start fw-bold">
+                                          {seg.to}
+                                          <strong className="ms-1">
+                                            {seg.arrival.substr(11, 5)}
+                                          </strong>
+                                        </span>
+                                        <br />
+                                        <span className="float-start">
+                                          {moment(seg.arrival).format(
+                                            "DD MMMM,yyyy, dddd"
+                                          )}
+                                        </span>
+                                        <br></br>
+                                        <h6 className="text-start">
+                                          {seg.toAirport}
+                                        </h6>
+                                      </div>
+                                    </div>
+                                  </>
+                                )}
                               </div>
-                              <div className="col-lg-2 d-block">
-                                <p className="my-auto text-start">
-                                  {seg.airline}
-                                </p>
-                                <p className="my-auto text-start">
-                                  {seg.details[0].equipment}
-                                </p>
-                                <p className="my-auto text-start">
-                                  {seg.serviceClass}
-                                </p>
-                              </div>
-                              <div className="col-lg-4">
-                                <span className="float-start">
-                                  {seg.from}
-                                  <strong className="ms-1">
-                                    {seg.departure.substr(11, 5)}
-                                  </strong>
-                                </span>
-                                <br></br>
-                                <span className="float-start">
-                                  <strong>
-                                    <Moment format="dddd, LL">
-                                      {seg.departure.substr(0, 10)}
-                                    </Moment>
-                                  </strong>
-                                </span>
-                                <br></br>
-                                <h6 className="text-start">
-                                  {seg.fromAirport}
-                                </h6>
-                                {/* <h6 className="float-start">Riyadh, Saudi Arabia</h6> */}
-                              </div>
-                              <div className="col-lg-4">
-                                <span className="float-start">
-                                  {seg.to}
-                                  <strong className="ms-1">
-                                    {seg.arrival.substr(11, 5)}
-                                  </strong>
-                                </span>
-                                <br />
-                                <span className="float-start">
-                                  <strong>
-                                    <Moment format="dddd, LL">
-                                      {seg.arrival.substr(0, 10)}
-                                    </Moment>
-                                  </strong>
-                                </span>
-                                <br></br>
-                                <h6 className="text-start">{seg.toAirport}</h6>
-                                {/* <h6 className="float-start">
-                            Dubai, United Emirates
-                          </h6> */}
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                        {direction1.segments.map((seg, index) => (
-                          <div key={index}>
-                            {index === 0 ? (
+                            ))}
+                          </>
+                        )}
+                      </div>
+                      <div className="container my-1">
+                        {flightType === "Multi City" ? (
+                          <></>
+                        ) : (
+                          <>
+                            {Object.keys(direction1).length > 0 ? (
                               <>
                                 <div
-                                  className="row mt-2 p-2 border-bottom"
+                                  className="row border-bottom p-2"
                                   style={{ backgroundColor: "	white" }}
                                 >
-                                  <div className="col-lg-4">
-                                    <i className="fas fa-plane"></i>
+                                  <div className="col-lg-3 text-start">
                                     <span className="d-inline fs-6 fw-bold ms-1">
                                       Departure,{" "}
                                       {airports
-                                        .filter((f) => f.iata === seg.from)
+                                        .filter(
+                                          (f) =>
+                                            f.iata ===
+                                            direction1.segments[0].from
+                                        )
                                         .map((item) => item.city)}
                                     </span>
                                   </div>
-                                  <div className="col-lg-1">
-                                    <i className="fas fa-arrow-right"></i>
+                                  <div className="col-lg-3">
+                                    <i className="fas fa-plane"></i>
                                   </div>
-                                  <div className="col-lg-4">
+                                  <div className="col-lg-3">
                                     <span className="d-inline fs-6 fw-bold">
                                       Arrival,{" "}
                                       {airports
@@ -306,10 +1194,8 @@ const ShowModal = ({
                                   </div>
                                   <div className="col-lg-3 fs-6 fw-bold">
                                     <span>
-                                      Total duration:{" "}
-                                      {DurationFormat(
-                                        seg.details[0].travelTime
-                                      )}
+                                      Duration:{" "}
+                                      {direction1.segments[0].duration[0]}
                                     </span>
                                   </div>
                                 </div>
@@ -318,94 +1204,528 @@ const ShowModal = ({
                               <></>
                             )}
 
-                            <div className="row py-4 pb-2">
-                              <div className="col-lg-1">
-                                <img
-                                  src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction1.segments[0].airlineCode}.png`}
-                                  alt=""
-                                  width="40px"
-                                  height="40px"
-                                />
-                              </div>
-                              <div className="col-lg-2 d-block">
-                                <p className="my-auto text-start">
-                                  {seg.airline}
-                                </p>
-                                <p className="my-auto text-start">
-                                  {seg.details[0].equipment}
-                                </p>
-                                <p className="my-auto text-start">
-                                  {seg.serviceClass}
-                                </p>
-                              </div>
-                              <div className="col-lg-4">
-                                <span className="float-start">
-                                  {seg.from}
-                                  <strong className="ms-1">
-                                    {seg.departure.substr(11, 5)}
-                                  </strong>
-                                </span>
-                                <br></br>
-                                <span className="float-start">
-                                  <strong>
-                                    <Moment format="dddd, LL">
-                                      {seg.departure.substr(0, 10)}
-                                    </Moment>
-                                  </strong>
-                                </span>
-                                <br></br>
-                                <h6 className="text-start">
-                                  {seg.fromAirport}
-                                </h6>
-                                {/* <h6 className="float-start">Riyadh, Saudi Arabia</h6> */}
-                              </div>
-                              <div className="col-lg-4">
-                                <span className="float-start">
-                                  {seg.to}
-                                  <strong className="ms-1">
-                                    {seg.arrival.substr(11, 5)}
-                                  </strong>
-                                </span>
-                                <br />
-                                <span className="float-start">
-                                  <strong>
-                                    <Moment format="dddd, LL">
-                                      {seg.arrival.substr(0, 10)}
-                                    </Moment>
-                                  </strong>
-                                </span>
-                                <br></br>
-                                <h6 className="text-start">{seg.toAirport}</h6>
-                                {/* <h6 className="float-start">
-                            Dubai, United Emirates
-                          </h6> */}
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                        {direction2.segments !== undefined ? (
+                            {Object.keys(direction1).length > 0 ? (
+                              direction1.segments.map((seg, index) => (
+                                <>
+                                  {seg.details.length > 1 ? (
+                                    seg.details.map((item) => {
+                                      <>
+                                        {index === seg.details.length - 1 ? (
+                                          <></>
+                                        ) : seg.details.length > 1 ? (
+                                          <div className="text-center fw-bold">
+                                            {" "}
+                                            Layover : &nbsp;
+                                            {layOver(
+                                              seg.details[index]?.departure,
+                                              direction1.segments[index]
+                                                ?.arrival
+                                            )}
+                                          </div>
+                                        ) : (
+                                          <></>
+                                        )}
+                                        {index === 0 ? (
+                                          <></>
+                                        ) : (
+                                          <div className="text-center fw-bold">
+                                            {" "}
+                                            Layover : &nbsp;
+                                            {layOver(
+                                              seg.details[index]?.departure,
+                                              seg.details[index - 1]?.arrival
+                                            )}
+                                          </div>
+                                        )}
+                                        <div className="row py-4 p-2 border mb-2">
+                                          <div className="col-lg-1">
+                                            <img
+                                              src={ImageUrlD}
+                                              alt=""
+                                              width="40px"
+                                              height="40px"
+                                            />
+                                          </div>
+                                          <div className="col-lg-3 d-block">
+                                            <p className="my-auto text-start">
+                                              {seg.airline}
+                                            </p>
+                                            <p className="my-auto text-start">
+                                              {item.equipment}
+                                            </p>
+                                            <p className="my-auto text-start">
+                                              Class {seg.serviceClass} (
+                                              {seg.bookingClass})
+                                            </p>
+                                          </div>
+                                          <div className="col-lg-4">
+                                            <span className="float-start fw-bold">
+                                              {item.origin}
+                                              <strong className="ms-1">
+                                                {item.departure.substr(11, 5)}
+                                              </strong>
+                                            </span>
+                                            <br></br>
+                                            <span className="float-start">
+                                              {moment(item.departure).format(
+                                                "DD MMMM,yyyy, dddd"
+                                              )}
+                                            </span>
+                                            <br></br>
+                                            <h6 className="text-start">
+                                              {item.originName}
+                                            </h6>
+                                          </div>
+                                          <div className="col-lg-4">
+                                            <span className="float-start fw-bold">
+                                              {item.destination}
+                                              <strong className="ms-1">
+                                                {item.arrival.substr(11, 5)}
+                                              </strong>
+                                            </span>
+                                            <br />
+                                            <span className="float-start">
+                                              {moment(item.arrival).format(
+                                                "DD MMMM,yyyy, dddd"
+                                              )}
+                                            </span>
+                                            <br></br>
+                                            <h6 className="text-start">
+                                              {item.destinationName}
+                                            </h6>
+                                          </div>
+                                        </div>
+                                      </>;
+                                    })
+                                  ) : (
+                                    <>
+                                      {index !== 0 ? (
+                                        <div className="text-center fw-bold">
+                                          {" "}
+                                          Layover : &nbsp;
+                                          {layOver(
+                                            direction1.segments[index]
+                                              ?.departure,
+                                            direction1.segments[index - 1]
+                                              ?.arrival
+                                          )}
+                                        </div>
+                                      ) : (
+                                        <></>
+                                      )}
+                                      <div className="row py-4 p-2 border mb-2">
+                                        <div className="col-lg-1">
+                                          <img
+                                            src={ImageUrlR}
+                                            alt=""
+                                            width="40px"
+                                            height="40px"
+                                          />
+                                        </div>
+                                        <div className="col-lg-3 d-block">
+                                          <p className="my-auto text-start">
+                                            {seg.airline}
+                                          </p>
+                                          <p className="my-auto text-start">
+                                            {seg.details[0].equipment}
+                                          </p>
+                                          <p className="my-auto text-start">
+                                            Class {seg.serviceClass} (
+                                            {seg.bookingClass})
+                                          </p>
+                                        </div>
+                                        <div className="col-lg-4">
+                                          <span className="float-start fw-bold">
+                                            {seg.from}{" "}
+                                            <strong>
+                                              {seg.departure.substr(11, 5)}
+                                            </strong>
+                                          </span>
+                                          <br></br>
+                                          <span className="float-start">
+                                            {moment(seg.departure).format(
+                                              "DD MMMM,yyyy, ddd"
+                                            )}
+                                          </span>
+                                          <br></br>
+                                          <h6 className="text-start">
+                                            {seg.fromAirport}
+                                          </h6>
+                                        </div>
+                                        <div className="col-lg-4">
+                                          <span className="float-start fw-bold">
+                                            {seg.to}{" "}
+                                            <strong>
+                                              {seg.arrival.substr(11, 5)}
+                                            </strong>
+                                          </span>
+                                          <br />
+                                          <span className="float-start">
+                                            {moment(seg.arrival).format(
+                                              "DD MMMM,yyyy, ddd"
+                                            )}
+                                          </span>
+                                          <br></br>
+                                          <h6 className="text-start">
+                                            {seg.toAirport}
+                                          </h6>
+                                        </div>
+                                      </div>
+                                    </>
+                                  )}
+                                </>
+                              ))
+                            ) : (
+                              <></>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id={"profile" + index}
+                  role="tabpanel"
+                  aria-labelledby="profile-tab"
+                >
+                  <>
+                    <div className="">
+                      <div className="container p-2 pb-5">
+                        {/* <div className="fw-bold px-3">
+                      <p className="fw-bold text-start">
+                        <u>Fare details</u>
+                      </p>
+                    </div> */}
+                        <div className="table-responsive-sm mt-1">
+                          <table
+                            className="table table-bordered border-dark p-2 table-sm bg-white rounded "
+                            style={{ fontSize: "12px" }}
+                          >
+                            <thead className="text-center thead fw-bold text-white">
+                              <tr>
+                                <th>Type</th>
+                                <th>Base</th>
+                                <th>Tax</th>
+                                <th>Discount</th>
+                                <th>AIT</th>
+                                <th>Pax</th>
+                                <th>Total Pax Fare</th>
+                              </tr>
+                            </thead>
+                            <tbody className="text-center">
+                              {passengerFares.adt !== null ? (
+                                <>
+                                  <tr>
+                                    <td className="left">ADT</td>
+                                    <td className="left">
+                                      {passengerFares.adt.basePrice}
+                                    </td>
+                                    <td className="center">
+                                      {passengerFares.adt.taxes}
+                                    </td>
+                                    <td className="right">
+                                      {passengerFares.adt.discountPrice}
+                                    </td>
+                                    <td className="right">
+                                      {passengerFares.adt.ait}
+                                    </td>
+                                    <td className="right">
+                                      {passengerCounts.adt}
+                                    </td>
+                                    <td className="right fw-bold">
+                                      {currency !== undefined
+                                        ? currency
+                                        : "BDT"}{" "}
+                                      {(
+                                        passengerFares.adt.totalPrice *
+                                        passengerCounts.adt
+                                      ).toFixed(2)}
+                                    </td>
+                                  </tr>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+
+                              {passengerFares.cnn !== null ? (
+                                <>
+                                  <tr>
+                                    <td className="left">CNN</td>
+                                    <td className="left">
+                                      {passengerFares.cnn.basePrice}
+                                    </td>
+                                    <td className="center">
+                                      {passengerFares.cnn.taxes}
+                                    </td>
+                                    <td className="right">
+                                      {passengerFares.cnn.discountPrice}
+                                    </td>
+                                    <td className="right">
+                                      {passengerFares.cnn.ait}
+                                    </td>
+                                    <td className="right">
+                                      {passengerCounts.cnn}
+                                    </td>
+                                    <td className="right fw-bold">
+                                      {currency !== undefined
+                                        ? currency
+                                        : "BDT"}{" "}
+                                      {(
+                                        passengerFares.cnn.totalPrice *
+                                        passengerCounts.cnn
+                                      ).toFixed(2)}
+                                    </td>
+                                  </tr>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+
+                              {passengerFares.inf !== null ? (
+                                <>
+                                  <tr>
+                                    <td className="left">INF</td>
+                                    <td className="left">
+                                      {passengerFares.inf.basePrice}
+                                    </td>
+                                    <td className="center">
+                                      {passengerFares.inf.taxes}
+                                    </td>
+                                    <td className="right">
+                                      {passengerFares.inf.discountPrice}
+                                    </td>
+                                    <td className="right">
+                                      {passengerFares.inf.ait}
+                                    </td>
+                                    <td className="right">
+                                      {passengerCounts.inf}
+                                    </td>
+                                    <td className="right fw-bold">
+                                      {currency !== undefined
+                                        ? currency
+                                        : "BDT"}{" "}
+                                      {(
+                                        passengerFares.inf.totalPrice *
+                                        passengerCounts.inf
+                                      ).toFixed(2)}
+                                    </td>
+                                  </tr>
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                              <tr className="fw-bold">
+                                <td colSpan={5} className="border-none"></td>
+                                <td>Grand Total</td>
+                                <td>
+                                  {currency !== undefined ? currency : "BDT"}{" "}
+                                  {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
+                                  {bookingComponents[0].totalPrice.toFixed(2)}
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id={"contact" + index}
+                  role="tabpanel"
+                  aria-labelledby="contact-tab"
+                >
+                  <>
+                    <div className="">
+                      <div className="container p-2">
+                        {flightType === "Multi City" ? (
                           <>
-                            {direction2.segments.map((seg, index) => (
-                              <div key={index}>
-                                {index === 0 ? (
-                                  <>
-                                    <div
-                                      className="row mt-2 p-2 border-bottom"
-                                      style={{ backgroundColor: "	white" }}
-                                    >
-                                      <div className="col-lg-4">
+                            <>
+                              <div className="row px-2 pb-2">
+                                <div
+                                  className="col-lg-8 p-2 border-bottom"
+                                  style={{ backgroundColor: "	white" }}
+                                >
+                                  <div className="row">
+                                    <div className="col-lg-5">
+                                      <i className="fas fa-plane"></i>
+                                      <span className="d-inline fs-6 fw-bold ms-1">
+                                        Departure,{" "}
+                                        {airports
+                                          .filter(
+                                            (f) =>
+                                              f.iata ===
+                                              direction0.segments[0].from
+                                          )
+                                          .map((item) => item.city)}
+                                      </span>
+                                    </div>
+                                    <div className="col-lg-1">
+                                      <i className="fas fa-arrow-right"></i>
+                                    </div>
+                                    <div className="col-lg-5">
+                                      <span className="d-inline fs-6 fw-bold">
+                                        Arrival,{" "}
+                                        {airports
+                                          .filter(
+                                            (f) =>
+                                              f.iata ===
+                                              direction0.segments[
+                                                direction0.segments.length - 1
+                                              ].to
+                                          )
+                                          .map((item) => item.city)}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="row px-2 pb-2">
+                                <div className="col-lg-8">
+                                  <div className="row my-2">
+                                    <div className="col-lg-6">
+                                      <span className="float-start">
+                                        <i className="fas fa-briefcase fa-sm"></i>
+                                      </span>
+                                      <span className="d-inline fs-6 float-start ms-1">
+                                        Cabin baggage
+                                      </span>
+                                    </div>
+                                    <div className="col-lg-6">
+                                      <span className="d-inline fs-6 float-end">
+                                        7KG (max 1 Bag)
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <div className="row my-2">
+                                    <div className="col-lg-6">
+                                      <span className="float-start">
+                                        <i className="fas fa-briefcase fa-sm"></i>
+                                      </span>
+                                      <span className="d-inline fs-6 float-start ms-1">
+                                        Checked baggage
+                                      </span>
+                                    </div>
+                                    <div className="col-lg-6">
+                                      <span className="d-inline fs-6 float-end">
+                                        {direction0.segments[0].baggage[0]
+                                          .amount +
+                                          " " +
+                                          direction0.segments[0].baggage[0]
+                                            .units}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </>
+                            <>
+                              <div className="row pt-4 pb-2">
+                                <div
+                                  className="col-lg-8 p-2 border-bottom"
+                                  style={{ backgroundColor: "	white" }}
+                                >
+                                  <div className="row">
+                                    <div className="col-lg-5">
+                                      <i className="fas fa-plane"></i>
+                                      <span className="d-inline fs-6 fw-bold ms-1">
+                                        Departure,{" "}
+                                        {airports
+                                          .filter(
+                                            (f) =>
+                                              f.iata ===
+                                              direction1.segments[0].from
+                                          )
+                                          .map((item) => item.city)}
+                                      </span>
+                                    </div>
+                                    <div className="col-lg-1">
+                                      <i className="fas fa-arrow-right"></i>
+                                    </div>
+                                    <div className="col-lg-5">
+                                      <span className="d-inline fs-6 fw-bold">
+                                        Arrival,{" "}
+                                        {airports
+                                          .filter(
+                                            (f) =>
+                                              f.iata ===
+                                              direction1.segments[
+                                                direction1.segments.length - 1
+                                              ].to
+                                          )
+                                          .map((item) => item.city)}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="row pb-2">
+                                <div className="col-lg-8">
+                                  <div className="row my-2">
+                                    <div className="col-lg-6">
+                                      <span className="float-start">
+                                        <i className="fas fa-briefcase fa-sm"></i>
+                                      </span>
+                                      <span className="d-inline fs-6 float-start ms-1">
+                                        Cabin baggage
+                                      </span>
+                                    </div>
+                                    <div className="col-lg-6">
+                                      <span className="d-inline fs-6 float-end">
+                                        7KG (max 1 Bag)
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <div className="row my-2">
+                                    <div className="col-lg-6">
+                                      <span className="float-start">
+                                        <i className="fas fa-briefcase fa-sm"></i>
+                                      </span>
+                                      <span className="d-inline fs-6 float-start ms-1">
+                                        Checked baggage
+                                      </span>
+                                    </div>
+                                    <div className="col-lg-6">
+                                      <span className="d-inline fs-6 float-end">
+                                        {direction1.segments[0].baggage[0]
+                                          .amount +
+                                          " " +
+                                          direction1.segments[0].baggage[0]
+                                            .units}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </>
+                            {direction2.segments !== undefined ? (
+                              <>
+                                <div className="row pt-4 pb-2">
+                                  <div
+                                    className="col-lg-8 p-2 border-bottom"
+                                    style={{ backgroundColor: "	white" }}
+                                  >
+                                    <div className="row">
+                                      <div className="col-lg-5">
                                         <i className="fas fa-plane"></i>
                                         <span className="d-inline fs-6 fw-bold ms-1">
                                           Departure,{" "}
                                           {airports
-                                            .filter((f) => f.iata === seg.from)
+                                            .filter(
+                                              (f) =>
+                                                f.iata ===
+                                                direction2.segments[0].from
+                                            )
                                             .map((item) => item.city)}
                                         </span>
                                       </div>
                                       <div className="col-lg-1">
                                         <i className="fas fa-arrow-right"></i>
                                       </div>
-                                      <div className="col-lg-4">
+                                      <div className="col-lg-5">
                                         <span className="d-inline fs-6 fw-bold">
                                           Arrival,{" "}
                                           {airports
@@ -419,114 +1739,76 @@ const ShowModal = ({
                                             .map((item) => item.city)}
                                         </span>
                                       </div>
-                                      <div className="col-lg-3 fs-6 fw-bold">
-                                        <span>
-                                          Total duration:{" "}
-                                          {DurationFormat(
-                                            seg.details[0].travelTime
-                                          )}
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row pb-2">
+                                  <div className="col-lg-8">
+                                    <div className="row my-2">
+                                      <div className="col-lg-6">
+                                        <span className="float-start">
+                                          <i className="fas fa-briefcase fa-sm"></i>
+                                        </span>
+                                        <span className="d-inline fs-6 float-start ms-1">
+                                          Cabin baggage
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-6">
+                                        <span className="d-inline fs-6 float-end">
+                                          7KG (max 1 Bag)
                                         </span>
                                       </div>
                                     </div>
-                                  </>
-                                ) : (
-                                  <></>
-                                )}
-
-                                <div className="row py-4 pb-2">
-                                  <div className="col-lg-1">
-                                    <img
-                                      src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction2.segments[0].airlineCode}.png`}
-                                      alt=""
-                                      width="40px"
-                                      height="40px"
-                                    />
-                                  </div>
-                                  <div className="col-lg-2 d-block">
-                                    <p className="my-auto text-start">
-                                      {seg.airline}
-                                    </p>
-                                    <p className="my-auto text-start">
-                                      {seg.details[0].equipment}
-                                    </p>
-                                    <p className="my-auto text-start">
-                                      {seg.serviceClass}
-                                    </p>
-                                  </div>
-                                  <div className="col-lg-4">
-                                    <span className="float-start">
-                                      {seg.from}
-                                      <strong className="ms-1">
-                                        {seg.departure.substr(11, 5)}
-                                      </strong>
-                                    </span>
-                                    <br></br>
-                                    <span className="float-start">
-                                      <strong>
-                                        <Moment format="dddd, LL">
-                                          {seg.departure.substr(0, 10)}
-                                        </Moment>
-                                      </strong>
-                                    </span>
-                                    <br></br>
-                                    <h6 className="text-start">
-                                      {seg.fromAirport}
-                                    </h6>
-                                    {/* <h6 className="float-start">Riyadh, Saudi Arabia</h6> */}
-                                  </div>
-                                  <div className="col-lg-4">
-                                    <span className="float-start">
-                                      {seg.to}
-                                      <strong className="ms-1">
-                                        {seg.arrival.substr(11, 5)}
-                                      </strong>
-                                    </span>
-                                    <br />
-                                    <span className="float-start">
-                                      <strong>
-                                        <Moment format="dddd, LL">
-                                          {seg.arrival.substr(0, 10)}
-                                        </Moment>
-                                      </strong>
-                                    </span>
-                                    <br></br>
-                                    <h6 className="text-start">
-                                      {seg.toAirport}
-                                    </h6>
-                                    {/* <h6 className="float-start">
-                              Dubai, United Emirates
-                            </h6> */}
+                                    <div className="row my-2">
+                                      <div className="col-lg-6">
+                                        <span className="float-start">
+                                          <i className="fas fa-briefcase fa-sm"></i>
+                                        </span>
+                                        <span className="d-inline fs-6 float-start ms-1">
+                                          Checked baggage
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-6">
+                                        <span className="d-inline fs-6 float-end">
+                                          {direction2.segments[0].baggage[0]
+                                            .amount +
+                                            " " +
+                                            direction2.segments[0].baggage[0]
+                                              .units}
+                                        </span>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            ))}
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                        {direction3.segments !== undefined ? (
-                          <>
-                            {direction3.segments.map((seg, index) => (
-                              <div key={index}>
-                                {index === 0 ? (
-                                  <>
-                                    <div
-                                      className="row mt-2 p-2 border-bottom"
-                                      style={{ backgroundColor: "	white" }}
-                                    >
-                                      <div className="col-lg-4">
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                            {direction3.segments !== undefined ? (
+                              <>
+                                <div className="row pt-4 pb-2">
+                                  <div
+                                    className="col-lg-8 p-2 border-bottom"
+                                    style={{ backgroundColor: "	white" }}
+                                  >
+                                    <div className="row">
+                                      <div className="col-lg-5">
                                         <i className="fas fa-plane"></i>
                                         <span className="d-inline fs-6 fw-bold ms-1">
                                           Departure,{" "}
                                           {airports
-                                            .filter((f) => f.iata === seg.from)
+                                            .filter(
+                                              (f) =>
+                                                f.iata ===
+                                                direction3.segments[0].from
+                                            )
                                             .map((item) => item.city)}
                                         </span>
                                       </div>
                                       <div className="col-lg-1">
                                         <i className="fas fa-arrow-right"></i>
                                       </div>
-                                      <div className="col-lg-4">
+                                      <div className="col-lg-5">
                                         <span className="d-inline fs-6 fw-bold">
                                           Arrival,{" "}
                                           {airports
@@ -540,115 +1822,74 @@ const ShowModal = ({
                                             .map((item) => item.city)}
                                         </span>
                                       </div>
-                                      <div className="col-lg-3 fs-6 fw-bold">
-                                        <span>
-                                          Total duration:{" "}
-                                          {DurationFormat(
-                                            seg.details[0].travelTime
-                                          )}
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row pb-2">
+                                  <div className="col-lg-8">
+                                    <div className="row my-2">
+                                      <div className="col-lg-6">
+                                        <span className="float-start">
+                                          <i className="fas fa-briefcase fa-sm"></i>
+                                        </span>
+                                        <span className="d-inline fs-6 float-start ms-1">
+                                          Cabin baggage
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-6">
+                                        <span className="d-inline fs-6 float-end">
+                                          7KG (max 1 Bag)
                                         </span>
                                       </div>
                                     </div>
-                                  </>
-                                ) : (
-                                  <></>
-                                )}
-
-                                <div className="row py-4 pb-2">
-                                  <div className="col-lg-1">
-                                    <img
-                                      src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction3.segments[0].airlineCode}.png`}
-                                      alt=""
-                                      width="40px"
-                                      height="40px"
-                                    />
-                                  </div>
-                                  <div className="col-lg-2 d-block">
-                                    <p className="my-auto text-start">
-                                      {seg.airline}
-                                    </p>
-                                    <p className="my-auto text-start">
-                                      {seg.details[0].equipment}
-                                    </p>
-                                    <p className="my-auto text-start">
-                                      {seg.serviceClass}
-                                    </p>
-                                  </div>
-                                  <div className="col-lg-4">
-                                    <span className="float-start">
-                                      {seg.from}
-                                      <strong className="ms-1">
-                                        {seg.departure.substr(11, 5)}
-                                      </strong>
-                                    </span>
-                                    <br></br>
-                                    <span className="float-start">
-                                      <strong>
-                                        <Moment format="dddd, LL">
-                                          {seg.departure.substr(0, 10)}
-                                        </Moment>
-                                      </strong>
-                                    </span>
-                                    <br></br>
-                                    <h6 className="text-start">
-                                      {seg.fromAirport}
-                                    </h6>
-                                    {/* <h6 className="float-start">Riyadh, Saudi Arabia</h6> */}
-                                  </div>
-                                  <div className="col-lg-4">
-                                    <span className="float-start">
-                                      {seg.to}
-                                      <strong className="ms-1">
-                                        {seg.arrival.substr(11, 5)}
-                                      </strong>
-                                    </span>
-                                    <br />
-                                    <span className="float-start">
-                                      <strong>
-                                        <Moment format="dddd, LL">
-                                          {seg.arrival.substr(0, 10)}
-                                        </Moment>
-                                      </strong>
-                                    </span>
-                                    <br></br>
-                                    <h6 className="text-start">
-                                      {seg.toAirport}
-                                    </h6>
-                                    {/* <h6 className="float-start">
-                                  Dubai, United Emirates
-                                </h6> */}
+                                    <div className="row my-2">
+                                      <div className="col-lg-6">
+                                        <span className="float-start">
+                                          <i className="fas fa-briefcase fa-sm"></i>
+                                        </span>
+                                        <span className="d-inline fs-6 float-start ms-1">
+                                          Checked baggage
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-6">
+                                        <span className="d-inline fs-6 float-end">
+                                          {direction3.segments[0].baggage[0]
+                                            .amount +
+                                            " " +
+                                            direction3.segments[0].baggage[0]
+                                              .units}
+                                        </span>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            ))}
-                          </>
-                        ) : (
-                          <></>
-                        )}
+                              </>
+                            ) : (
+                              <></>
+                            )}
 
-                        {direction4.segments !== undefined ? (
-                          <>
-                            {direction4.segments.map((seg, index) => (
-                              <div key={index}>
-                                {index === 0 ? (
-                                  <>
-                                    <div
-                                      className="row mt-2 p-2 border-bottom"
-                                      style={{ backgroundColor: "	white" }}
-                                    >
-                                      <div className="col-lg-4">
+                            {direction4.segments !== undefined ? (
+                              <>
+                                <div className="row pt-4 pb-2">
+                                  <div className="col-lg-8 border-bottom">
+                                    <div className="row">
+                                      <div className="col-lg-5">
                                         <i className="fas fa-plane"></i>
                                         <span className="d-inline fs-6 fw-bold ms-1">
                                           Departure,{" "}
                                           {airports
-                                            .filter((f) => f.iata === seg.from)
+                                            .filter(
+                                              (f) =>
+                                                f.iata ===
+                                                direction4.segments[0].from
+                                            )
                                             .map((item) => item.city)}
                                         </span>
                                       </div>
                                       <div className="col-lg-1">
                                         <i className="fas fa-arrow-right"></i>
                                       </div>
-                                      <div className="col-lg-4">
+                                      <div className="col-lg-5">
                                         <span className="d-inline fs-6 fw-bold">
                                           Arrival,{" "}
                                           {airports
@@ -662,122 +1903,73 @@ const ShowModal = ({
                                             .map((item) => item.city)}
                                         </span>
                                       </div>
-                                      <div className="col-lg-3 fs-6 fw-bold">
-                                        <span>
-                                          Total duration:{" "}
-                                          {DurationFormat(
-                                            seg.details[0].travelTime
-                                          )}
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row pb-2">
+                                  <div className="col-lg-8">
+                                    <div className="row my-2">
+                                      <div className="col-lg-6">
+                                        <span className="float-start">
+                                          <i className="fas fa-briefcase fa-sm"></i>
+                                        </span>
+                                        <span className="d-inline fs-6 float-start ms-1">
+                                          Cabin baggage
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-6">
+                                        <span className="d-inline fs-6 float-end">
+                                          7KG (max 1 Bag)
                                         </span>
                                       </div>
                                     </div>
-                                  </>
-                                ) : (
-                                  <></>
-                                )}
-
-                                <div className="row py-4 pb-2">
-                                  <div className="col-lg-1">
-                                    <img
-                                      src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction4.segments[0].airlineCode}.png`}
-                                      alt=""
-                                      width="40px"
-                                      height="40px"
-                                    />
-                                  </div>
-                                  <div className="col-lg-2 d-block">
-                                    <p className="my-auto text-start">
-                                      {seg.airline}
-                                    </p>
-                                    <p className="my-auto text-start">
-                                      {seg.details[0].equipment}
-                                    </p>
-                                    <p className="my-auto text-start">
-                                      {seg.serviceClass}
-                                    </p>
-                                  </div>
-                                  <div className="col-lg-4">
-                                    <span className="float-start">
-                                      {seg.from}
-                                      <strong className="ms-1">
-                                        {seg.departure.substr(11, 5)}
-                                      </strong>
-                                    </span>
-                                    <br></br>
-                                    <span className="float-start">
-                                      <strong>
-                                        <Moment format="dddd, LL">
-                                          {seg.departure.substr(0, 10)}
-                                        </Moment>
-                                      </strong>
-                                    </span>
-                                    <br></br>
-                                    <h6 className="text-start">
-                                      {airports
-                                        .filter((f) => f.iata === seg.from)
-                                        .map(
-                                          (item) => item.name + ", " + item.city
-                                        )}
-                                    </h6>
-                                    {/* <h6 className="float-start">Riyadh, Saudi Arabia</h6> */}
-                                  </div>
-                                  <div className="col-lg-4">
-                                    <span className="float-start">
-                                      {seg.to}
-                                      <strong className="ms-1">
-                                        {seg.arrival.substr(11, 5)}
-                                      </strong>
-                                    </span>
-                                    <br />
-                                    <span className="float-start">
-                                      <strong>
-                                        <Moment format="dddd, LL">
-                                          {seg.arrival.substr(0, 10)}
-                                        </Moment>
-                                      </strong>
-                                    </span>
-                                    <br></br>
-                                    <h6 className="text-start">
-                                      {airports
-                                        .filter((f) => f.iata === seg.to)
-                                        .map(
-                                          (item) => item.name + ", " + item.city
-                                        )}
-                                    </h6>
-                                    {/* <h6 className="float-start">
-                              Dubai, United Emirates
-                            </h6> */}
+                                    <div className="row my-2">
+                                      <div className="col-lg-6">
+                                        <span className="float-start">
+                                          <i className="fas fa-briefcase fa-sm"></i>
+                                        </span>
+                                        <span className="d-inline fs-6 float-start ms-1">
+                                          Checked baggage
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-6">
+                                        <span className="d-inline fs-6 float-end">
+                                          {direction4.segments[0].baggage[0]
+                                            .amount +
+                                            " " +
+                                            direction4.segments[0].baggage[0]
+                                              .units}
+                                        </span>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            ))}
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                        {direction5.segments !== undefined ? (
-                          <>
-                            {direction5.segments.map((seg, index) => (
-                              <div key={index}>
-                                {index === 0 ? (
-                                  <>
-                                    <div
-                                      className="row mt-2 p-2 border-bottom"
-                                      style={{ backgroundColor: "	white" }}
-                                    >
-                                      <div className="col-lg-4">
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                            {direction5.segments !== undefined ? (
+                              <>
+                                <div className="row pt-4 pb-2">
+                                  <div className="col-lg-8 border-bottom">
+                                    <div className="row">
+                                      <div className="col-lg-5">
                                         <i className="fas fa-plane"></i>
                                         <span className="d-inline fs-6 fw-bold ms-1">
                                           Departure,{" "}
                                           {airports
-                                            .filter((f) => f.iata === seg.from)
+                                            .filter(
+                                              (f) =>
+                                                f.iata ===
+                                                direction5.segments[0].from
+                                            )
                                             .map((item) => item.city)}
                                         </span>
                                       </div>
                                       <div className="col-lg-1">
                                         <i className="fas fa-arrow-right"></i>
                                       </div>
-                                      <div className="col-lg-4">
+                                      <div className="col-lg-5">
                                         <span className="d-inline fs-6 fw-bold">
                                           Arrival,{" "}
                                           {airports
@@ -791,1210 +1983,60 @@ const ShowModal = ({
                                             .map((item) => item.city)}
                                         </span>
                                       </div>
-                                      <div className="col-lg-3 fs-6 fw-bold">
-                                        <span>
-                                          Total duration:{" "}
-                                          {DurationFormat(
-                                            seg.details[0].travelTime
-                                          )}
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row pb-2">
+                                  <div className="col-lg-8">
+                                    <div className="row my-2">
+                                      <div className="col-lg-6">
+                                        <span className="float-start">
+                                          <i className="fas fa-briefcase fa-sm"></i>
+                                        </span>
+                                        <span className="d-inline fs-6 float-start ms-1">
+                                          Cabin baggage
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-6">
+                                        <span className="d-inline fs-6 float-end">
+                                          7KG (max 1 Bag)
                                         </span>
                                       </div>
                                     </div>
-                                  </>
-                                ) : (
-                                  <></>
-                                )}
-
-                                <div className="row py-4 pb-2">
-                                  <div className="col-lg-1">
-                                    <img
-                                      src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction5.segments[0].airlineCode}.png`}
-                                      alt=""
-                                      width="40px"
-                                      height="40px"
-                                    />
-                                  </div>
-                                  <div className="col-lg-2 d-block">
-                                    <p className="my-auto text-start">
-                                      {seg.airline}
-                                    </p>
-                                    <p className="my-auto text-start">
-                                      {seg.details[0].equipment}
-                                    </p>
-                                    <p className="my-auto text-start">
-                                      {seg.serviceClass}
-                                    </p>
-                                  </div>
-                                  <div className="col-lg-4">
-                                    <span className="float-start">
-                                      {seg.from}
-                                      <strong className="ms-1">
-                                        {seg.departure.substr(11, 5)}
-                                      </strong>
-                                    </span>
-                                    <br></br>
-                                    <span className="float-start">
-                                      <strong>
-                                        <Moment format="dddd, LL">
-                                          {seg.departure.substr(0, 10)}
-                                        </Moment>
-                                      </strong>
-                                    </span>
-                                    <br></br>
-                                    <h6 className="text-start">
-                                      {seg.fromAirport}
-                                    </h6>
-                                    {/* <h6 className="float-start">Riyadh, Saudi Arabia</h6> */}
-                                  </div>
-                                  <div className="col-lg-4">
-                                    <span className="float-start">
-                                      {seg.to}
-                                      <strong className="ms-1">
-                                        {seg.arrival.substr(11, 5)}
-                                      </strong>
-                                    </span>
-                                    <br />
-                                    <span className="float-start">
-                                      <strong>
-                                        <Moment format="dddd, LL">
-                                          {seg.arrival.substr(0, 10)}
-                                        </Moment>
-                                      </strong>
-                                    </span>
-                                    <br></br>
-                                    <h6 className="text-start">
-                                      {seg.toAirport}
-                                    </h6>
-                                    {/* <h6 className="float-start">
-                              Dubai, United Emirates
-                            </h6> */}
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        {direction0.segments.map((seg, index) => (
-                          <div key={index}>
-                            {index === 0 ? (
-                              <div
-                                className="row pt-2 p-2 border-bottom"
-                                style={{ backgroundColor: "	white" }}
-                              >
-                                <div className="col-lg-3 text-start">
-                                  <span className="d-inline fs-6 fw-bold ms-1">
-                                    Departure,{" "}
-                                    {airports
-                                      .filter((f) => f.iata === seg.from)
-                                      .map((item) => item.city)}
-                                  </span>
-                                </div>
-                                <div className="col-lg-3">
-                                  <i className="fas fa-plane fa-sm"></i>
-                                </div>
-                                <div className="col-lg-3">
-                                  <span className="d-inline fs-6 fw-bold">
-                                    Arrival,{" "}
-                                    {airports
-                                      .filter(
-                                        (f) =>
-                                          f.iata ===
-                                          direction0.segments[
-                                            direction0.segments.length - 1
-                                          ].to
-                                      )
-                                      .map((item) => item.city)}
-                                  </span>
-                                </div>
-                                <div className="col-lg-3 fs-6 fw-bold">
-                                  <span>Duration: {seg.duration[0]}</span>
-                                </div>
-                              </div>
-                            ) : (
-                              <></>
-                            )}
-                            {seg.details.length > 1 ? (
-                              seg.details.map((item, index) => (
-                                <>
-                                  {index === seg.details.length - 1 ? (
-                                    <></>
-                                  ) : seg.details.length > 1 ? (
-                                    <div className="text-center fw-bold">
-                                      {" "}
-                                      Layover :&nbsp;{" "}
-                                      {layOver(
-                                        seg.details[index]?.departure,
-                                        direction0.segments[index]?.arrival
-                                      )}
+                                    <div className="row my-2">
+                                      <div className="col-lg-6">
+                                        <span className="float-start">
+                                          <i className="fas fa-briefcase fa-sm"></i>
+                                        </span>
+                                        <span className="d-inline fs-6 float-start ms-1">
+                                          Checked baggage
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-6">
+                                        <span className="d-inline fs-6 float-end">
+                                          {direction5.segments[0].baggage[0]
+                                            .amount +
+                                            " " +
+                                            direction5.segments[0].baggage[0]
+                                              .units}
+                                        </span>
+                                      </div>
                                     </div>
-                                  ) : (
-                                    <></>
-                                  )}
-                                  {index === 0 ? (
-                                    <></>
-                                  ) : (
-                                    <div className="text-center fw-bold">
-                                      {" "}
-                                      Layover :&nbsp;
-                                      {layOver(
-                                        seg.details[index]?.departure,
-                                        seg.details[index - 1]?.arrival
-                                      )}
-                                    </div>
-                                  )}
-                                  <div className="row py-4 p-2 border">
-                                    <div className="col-lg-1">
-                                      <img
-                                        src={ImageUrlD}
-                                        alt=""
-                                        width="40px"
-                                        height="40px"
-                                      />
-                                    </div>
-                                    <div className="col-lg-3 d-block">
-                                      <p className="my-auto text-start">
-                                        {seg.airline}
-                                      </p>
-                                      <p className="my-auto text-start">
-                                        {item.equipment}
-                                      </p>
-                                      <p className="my-auto text-start">
-                                        Class {seg.serviceClass} ({seg.bookingClass})
-                                      </p>
-                                    </div>
-                                    <div className="col-lg-4">
-                                      <span className="float-start fw-bold">
-                                        {item.origin}
-                                        <strong className="ms-1">
-                                          {item.departure.substr(11, 5)}
-                                        </strong>
-                                      </span>
-                                      <br></br>
-                                      <span className="float-start">
-                                        {moment(item.departure).format(
-                                          "DD MMMM,yyyy, dddd"
-                                        )}
-                                      </span>
-                                      <br></br>
-                                      <h6 className="text-start">
-                                        {item.originName}
-                                      </h6>
-                                    </div>
-                                    <div className="col-lg-4">
-                                      <span className="float-start fw-bold">
-                                        {item.destination}
-                                        <strong className="ms-1">
-                                          {item.arrival.substr(11, 5)}
-                                        </strong>
-                                      </span>
-                                      <br />
-                                      <span className="float-start">
-                                        {moment(item.arrival).format(
-                                          "DD MMMM,yyyy, dddd"
-                                        )}
-                                      </span>
-                                      <br></br>
-                                      <h6 className="text-start">
-                                        {item.destinationName}
-                                      </h6>
-                                    </div>
-                                  </div>
-                                </>
-                              ))
-                            ) : (
-                              <>
-                                {/* <span>Segments</span> */}
-                                {index !== 0 ? (
-                                  <div className="text-center fw-bold">
-                                    {" "}
-                                    Layover :&nbsp;
-                                    {layOver(
-                                      direction0.segments[index]?.departure,
-                                      direction0.segments[index - 1]?.arrival
-                                    )}
-                                  </div>
-                                ) : (
-                                  <></>
-                                )}
-                                <div className="row py-4 p-2 border">
-                                  <div className="col-lg-1">
-                                    <img
-                                      src={ImageUrlD}
-                                      alt=""
-                                      width="40px"
-                                      height="40px"
-                                    />
-                                  </div>
-                                  <div className="col-lg-3 d-block">
-                                    <p className="my-auto text-start">
-                                      {seg.airline}
-                                    </p>
-                                    <p className="my-auto text-start">
-                                      {seg.details[0].equipment}
-                                    </p>
-                                    <p className="my-auto text-start">
-                                      Class {seg.serviceClass} ({seg.bookingClass})
-                                    </p>
-                                  </div>
-                                  <div className="col-lg-4">
-                                    <span className="float-start fw-bold">
-                                      {seg.from}
-                                      <strong className="ms-1">
-                                        {seg.departure.substr(11, 5)}
-                                      </strong>
-                                    </span>
-                                    <br></br>
-                                    <span className="float-start">
-                                      {moment(seg.departure).format(
-                                        "DD MMMM,yyyy, dddd"
-                                      )}
-                                    </span>
-                                    <br></br>
-                                    <h6 className="text-start">
-                                      {seg.fromAirport}
-                                    </h6>
-                                  </div>
-                                  <div className="col-lg-4">
-                                    <span className="float-start fw-bold">
-                                      {seg.to}
-                                      <strong className="ms-1">
-                                        {seg.arrival.substr(11, 5)}
-                                      </strong>
-                                    </span>
-                                    <br />
-                                    <span className="float-start">
-                                      {moment(seg.arrival).format(
-                                        "DD MMMM,yyyy, dddd"
-                                      )}
-                                    </span>
-                                    <br></br>
-                                    <h6 className="text-start">
-                                      {seg.toAirport}
-                                    </h6>
                                   </div>
                                 </div>
                               </>
+                            ) : (
+                              <></>
                             )}
-                          </div>
-                        ))}
-                      </>
-                    )}
-                  </div>
-                  <div className="container my-1">
-                    {flightType === "Multi City" ? (
-                      <></>
-                    ) : (
-                      <>
-                        {Object.keys(direction1).length > 0 ? (
-                          <>
-                            <div
-                              className="row border-bottom p-2"
-                              style={{ backgroundColor: "	white" }}
-                            >
-                              <div className="col-lg-3 text-start">
-                                <span className="d-inline fs-6 fw-bold ms-1">
-                                  Departure,{" "}
-                                  {airports
-                                    .filter(
-                                      (f) =>
-                                        f.iata === direction1.segments[0].from
-                                    )
-                                    .map((item) => item.city)}
-                                </span>
-                              </div>
-                              <div className="col-lg-3">
-                                <i className="fas fa-plane"></i>
-                              </div>
-                              <div className="col-lg-3">
-                                <span className="d-inline fs-6 fw-bold">
-                                  Arrival,{" "}
-                                  {airports
-                                    .filter(
-                                      (f) =>
-                                        f.iata ===
-                                        direction1.segments[
-                                          direction1.segments.length - 1
-                                        ].to
-                                    )
-                                    .map((item) => item.city)}
-                                </span>
-                              </div>
-                              <div className="col-lg-3 fs-6 fw-bold">
-                                <span>
-                                  Duration: {direction1.segments[0].duration[0]}
-                                </span>
-                              </div>
-                            </div>
                           </>
                         ) : (
-                          <></>
-                        )}
-
-                        {Object.keys(direction1).length > 0 ? (
-                          direction1.segments.map((seg, index) => (
-                            <>
-                              {seg.details.length > 1 ? (
-                                seg.details.map((item) => {
-                                  <>
-                                    {index === seg.details.length - 1 ? (
-                                      <></>
-                                    ) : seg.details.length > 1 ? (
-                                      <div className="text-center fw-bold">
-                                        {" "}
-                                        Layover : &nbsp;
-                                        {layOver(
-                                          seg.details[index]?.departure,
-                                          direction1.segments[index]?.arrival
-                                        )}
-                                      </div>
-                                    ) : (
-                                      <></>
-                                    )}
-                                    {index === 0 ? (
-                                      <></>
-                                    ) : (
-                                      <div className="text-center fw-bold">
-                                        {" "}
-                                        Layover : &nbsp;
-                                        {layOver(
-                                          seg.details[index]?.departure,
-                                          seg.details[index - 1]?.arrival
-                                        )}
-                                      </div>
-                                    )}
-                                    <div className="row py-4 p-2 border mb-2">
-                                      <div className="col-lg-1">
-                                        <img
-                                          src={ImageUrlD}
-                                          alt=""
-                                          width="40px"
-                                          height="40px"
-                                        />
-                                      </div>
-                                      <div className="col-lg-3 d-block">
-                                        <p className="my-auto text-start">
-                                          {seg.airline}
-                                        </p>
-                                        <p className="my-auto text-start">
-                                          {item.equipment}
-                                        </p>
-                                        <p className="my-auto text-start">
-                                          Class {seg.serviceClass} ({seg.bookingClass})
-                                        </p>
-                                      </div>
-                                      <div className="col-lg-4">
-                                        <span className="float-start fw-bold">
-                                          {item.origin}
-                                          <strong className="ms-1">
-                                            {item.departure.substr(11, 5)}
-                                          </strong>
-                                        </span>
-                                        <br></br>
-                                        <span className="float-start">
-                                          {moment(item.departure).format(
-                                            "DD MMMM,yyyy, dddd"
-                                          )}
-                                        </span>
-                                        <br></br>
-                                        <h6 className="text-start">
-                                          {item.originName}
-                                        </h6>
-                                      </div>
-                                      <div className="col-lg-4">
-                                        <span className="float-start fw-bold">
-                                          {item.destination}
-                                          <strong className="ms-1">
-                                            {item.arrival.substr(11, 5)}
-                                          </strong>
-                                        </span>
-                                        <br />
-                                        <span className="float-start">
-                                          {moment(item.arrival).format(
-                                            "DD MMMM,yyyy, dddd"
-                                          )}
-                                        </span>
-                                        <br></br>
-                                        <h6 className="text-start">
-                                          {item.destinationName}
-                                        </h6>
-                                      </div>
-                                    </div>
-                                  </>;
-                                })
-                              ) : (
-                                <>
-                                  {index !== 0 ? (
-                                    <div className="text-center fw-bold">
-                                      {" "}
-                                      Layover : &nbsp;
-                                      {layOver(
-                                        direction1.segments[index]?.departure,
-                                        direction1.segments[index - 1]?.arrival
-                                      )}
-                                    </div>
-                                  ) : (
-                                    <></>
-                                  )}
-                                  <div className="row py-4 p-2 border mb-2">
-                                    <div className="col-lg-1">
-                                      <img
-                                        src={ImageUrlR}
-                                        alt=""
-                                        width="40px"
-                                        height="40px"
-                                      />
-                                    </div>
-                                    <div className="col-lg-3 d-block">
-                                      <p className="my-auto text-start">
-                                        {seg.airline}
-                                      </p>
-                                      <p className="my-auto text-start">
-                                        {seg.details[0].equipment}
-                                      </p>
-                                      <p className="my-auto text-start">
-                                        Class {seg.serviceClass} ({seg.bookingClass})
-                                      </p>
-                                    </div>
-                                    <div className="col-lg-4">
-                                      <span className="float-start fw-bold">
-                                        {seg.from}{" "}
-                                        <strong>
-                                          {seg.departure.substr(11, 5)}
-                                        </strong>
-                                      </span>
-                                      <br></br>
-                                      <span className="float-start">
-                                        {moment(seg.departure).format(
-                                          "DD MMMM,yyyy, ddd"
-                                        )}
-                                      </span>
-                                      <br></br>
-                                      <h6 className="text-start">
-                                        {seg.fromAirport}
-                                      </h6>
-                                    </div>
-                                    <div className="col-lg-4">
-                                      <span className="float-start fw-bold">
-                                        {seg.to}{" "}
-                                        <strong>
-                                          {seg.arrival.substr(11, 5)}
-                                        </strong>
-                                      </span>
-                                      <br />
-                                      <span className="float-start">
-                                        {moment(seg.arrival).format(
-                                          "DD MMMM,yyyy, ddd"
-                                        )}
-                                      </span>
-                                      <br></br>
-                                      <h6 className="text-start">
-                                        {seg.toAirport}
-                                      </h6>
-                                    </div>
-                                  </div>
-                                </>
-                              )}
-                            </>
-                          ))
-                        ) : (
-                          <></>
-                        )}
-                      </>
-                    )}
-                  </div>
-                </div>
-              </></div>
-              <div class="tab-pane fade" id={"profile" + index} role="tabpanel" aria-labelledby="profile-tab"><>
-                <div className="">
-                  <div className="container p-2 pb-5">
-                    {/* <div className="fw-bold px-3">
-                      <p className="fw-bold text-start">
-                        <u>Fare details</u>
-                      </p>
-                    </div> */}
-                    <div className="table-responsive-sm mt-1">
-                      <table
-                        className="table table-bordered border-dark p-2 table-sm bg-white rounded "
-                        style={{ fontSize: "12px" }}
-                      >
-                        <thead className="text-center thead fw-bold text-white">
-                          <tr>
-                            <th>Type</th>
-                            <th>Base</th>
-                            <th>Tax</th>
-                            <th>Discount</th>
-                            <th>AIT</th>
-                            <th>Pax</th>
-                            <th>Total Pax Fare</th>
-                          </tr>
-                        </thead>
-                        <tbody className="text-center">
-                          {passengerFares.adt !== null ? (
-                            <>
-                              <tr>
-                                <td className="left">ADT</td>
-                                <td className="left">
-                                  {passengerFares.adt.basePrice}
-                                </td>
-                                <td className="center">
-                                  {passengerFares.adt.taxes}
-                                </td>
-                                <td className="right">
-                                  {passengerFares.adt.discountPrice}
-                                </td>
-                                <td className="right">
-                                  {passengerFares.adt.ait}
-                                </td>
-                                <td className="right">{passengerCounts.adt}</td>
-                                <td className="right fw-bold">
-                                {currency !== undefined ? currency : "BDT"} {(passengerFares.adt.totalPrice *
-                                    passengerCounts.adt).toFixed(2)}
-                                </td>
-                              </tr>
-                            </>
-                          ) : (
-                            <></>
-                          )}
-
-                          {passengerFares.cnn !== null ? (
-                            <>
-                              <tr>
-                                <td className="left">CNN</td>
-                                <td className="left">
-                                  {passengerFares.cnn.basePrice}
-                                </td>
-                                <td className="center">
-                                  {passengerFares.cnn.taxes}
-                                </td>
-                                <td className="right">
-                                  {passengerFares.cnn.discountPrice}
-                                </td>
-                                <td className="right">
-                                  {passengerFares.cnn.ait}
-                                </td>
-                                <td className="right">{passengerCounts.cnn}</td>
-                                <td className="right fw-bold">
-                                {currency !== undefined ? currency : "BDT"} {(passengerFares.cnn.totalPrice *
-                                    passengerCounts.cnn).toFixed(2)}
-                                </td>
-                              </tr>
-                            </>
-                          ) : (
-                            <></>
-                          )}
-
-                          {passengerFares.inf !== null ? (
-                            <>
-                              <tr>
-                                <td className="left">INF</td>
-                                <td className="left">
-                                  {passengerFares.inf.basePrice}
-                                </td>
-                                <td className="center">
-                                  {passengerFares.inf.taxes}
-                                </td>
-                                <td className="right">
-                                  {passengerFares.inf.discountPrice}
-                                </td>
-                                <td className="right">
-                                  {passengerFares.inf.ait}
-                                </td>
-                                <td className="right">{passengerCounts.inf}</td>
-                                <td className="right fw-bold">
-                                {currency !== undefined ? currency : "BDT"} {(passengerFares.inf.totalPrice *
-                                    passengerCounts.inf).toFixed(2)}
-                                </td>
-                              </tr>
-                            </>
-                          ) : (
-                            <></>
-                          )}
-                           <tr className="fw-bold">
-                                <td colSpan={5} className='border-none'></td>
-                                <td>Grand Total</td>
-                                <td>
-                                  {currency !== undefined ? currency : "BDT"} {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
-                                  {(bookingComponents[0].totalPrice).toFixed(2)}
-                                </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </></div>
-              <div class="tab-pane fade" id={"contact" + index} role="tabpanel" aria-labelledby="contact-tab"><>
-                <div className="">
-                  <div className="container p-2">
-                    {flightType === "Multi City" ? (
-                      <>
-                        <>
-                          <div className="row px-2 pb-2">
-                            <div
-                              className="col-lg-8 p-2 border-bottom"
-                              style={{ backgroundColor: "	white" }}
-                            >
-                              <div className="row">
-                                <div className="col-lg-5">
-                                  <i className="fas fa-plane"></i>
-                                  <span className="d-inline fs-6 fw-bold ms-1">
-                                    Departure,{" "}
-                                    {airports
-                                      .filter(
-                                        (f) =>
-                                          f.iata === direction0.segments[0].from
-                                      )
-                                      .map((item) => item.city)}
-                                  </span>
-                                </div>
-                                <div className="col-lg-1">
-                                  <i className="fas fa-arrow-right"></i>
-                                </div>
-                                <div className="col-lg-5">
-                                  <span className="d-inline fs-6 fw-bold">
-                                    Arrival,{" "}
-                                    {airports
-                                      .filter(
-                                        (f) =>
-                                          f.iata ===
-                                          direction0.segments[
-                                            direction0.segments.length - 1
-                                          ].to
-                                      )
-                                      .map((item) => item.city)}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row px-2 pb-2">
-                            <div className="col-lg-8">
-                              <div className="row my-2">
-                                <div className="col-lg-6">
-                                  <span className="float-start">
-                                    <i className="fas fa-briefcase fa-sm"></i>
-                                  </span>
-                                  <span className="d-inline fs-6 float-start ms-1">
-                                    Cabin baggage
-                                  </span>
-                                </div>
-                                <div className="col-lg-6">
-                                  <span className="d-inline fs-6 float-end">
-                                    7KG (max 1 Bag)
-                                  </span>
-                                </div>
-                              </div>
-                              <div className="row my-2">
-                                <div className="col-lg-6">
-                                  <span className="float-start">
-                                    <i className="fas fa-briefcase fa-sm"></i>
-                                  </span>
-                                  <span className="d-inline fs-6 float-start ms-1">
-                                    Checked baggage
-                                  </span>
-                                </div>
-                                <div className="col-lg-6">
-                                  <span className="d-inline fs-6 float-end">
-                                    {direction0.segments[0].baggage[0].amount +
-                                      " " +
-                                      direction0.segments[0].baggage[0].units}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                        <>
-                          <div className="row pt-4 pb-2">
-                            <div
-                              className="col-lg-8 p-2 border-bottom"
-                              style={{ backgroundColor: "	white" }}
-                            >
-                              <div className="row">
-                                <div className="col-lg-5">
-                                  <i className="fas fa-plane"></i>
-                                  <span className="d-inline fs-6 fw-bold ms-1">
-                                    Departure,{" "}
-                                    {airports
-                                      .filter(
-                                        (f) =>
-                                          f.iata === direction1.segments[0].from
-                                      )
-                                      .map((item) => item.city)}
-                                  </span>
-                                </div>
-                                <div className="col-lg-1">
-                                  <i className="fas fa-arrow-right"></i>
-                                </div>
-                                <div className="col-lg-5">
-                                  <span className="d-inline fs-6 fw-bold">
-                                    Arrival,{" "}
-                                    {airports
-                                      .filter(
-                                        (f) =>
-                                          f.iata ===
-                                          direction1.segments[
-                                            direction1.segments.length - 1
-                                          ].to
-                                      )
-                                      .map((item) => item.city)}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row pb-2">
-                            <div className="col-lg-8">
-                              <div className="row my-2">
-                                <div className="col-lg-6">
-                                  <span className="float-start">
-                                    <i className="fas fa-briefcase fa-sm"></i>
-                                  </span>
-                                  <span className="d-inline fs-6 float-start ms-1">
-                                    Cabin baggage
-                                  </span>
-                                </div>
-                                <div className="col-lg-6">
-                                  <span className="d-inline fs-6 float-end">
-                                    7KG (max 1 Bag)
-                                  </span>
-                                </div>
-                              </div>
-                              <div className="row my-2">
-                                <div className="col-lg-6">
-                                  <span className="float-start">
-                                    <i className="fas fa-briefcase fa-sm"></i>
-                                  </span>
-                                  <span className="d-inline fs-6 float-start ms-1">
-                                    Checked baggage
-                                  </span>
-                                </div>
-                                <div className="col-lg-6">
-                                  <span className="d-inline fs-6 float-end">
-                                    {direction1.segments[0].baggage[0].amount +
-                                      " " +
-                                      direction1.segments[0].baggage[0].units}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                        {direction2.segments !== undefined ? (
                           <>
-                            <div className="row pt-4 pb-2">
-                              <div
-                                className="col-lg-8 p-2 border-bottom"
-                                style={{ backgroundColor: "	white" }}
-                              >
-                                <div className="row">
-                                  <div className="col-lg-5">
-                                    <i className="fas fa-plane"></i>
-                                    <span className="d-inline fs-6 fw-bold ms-1">
-                                      Departure,{" "}
-                                      {airports
-                                        .filter(
-                                          (f) =>
-                                            f.iata ===
-                                            direction2.segments[0].from
-                                        )
-                                        .map((item) => item.city)}
-                                    </span>
-                                  </div>
-                                  <div className="col-lg-1">
-                                    <i className="fas fa-arrow-right"></i>
-                                  </div>
-                                  <div className="col-lg-5">
-                                    <span className="d-inline fs-6 fw-bold">
-                                      Arrival,{" "}
-                                      {airports
-                                        .filter(
-                                          (f) =>
-                                            f.iata ===
-                                            direction2.segments[
-                                              direction2.segments.length - 1
-                                            ].to
-                                        )
-                                        .map((item) => item.city)}
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="row pb-2">
-                              <div className="col-lg-8">
-                                <div className="row my-2">
-                                  <div className="col-lg-6">
-                                    <span className="float-start">
-                                      <i className="fas fa-briefcase fa-sm"></i>
-                                    </span>
-                                    <span className="d-inline fs-6 float-start ms-1">
-                                      Cabin baggage
-                                    </span>
-                                  </div>
-                                  <div className="col-lg-6">
-                                    <span className="d-inline fs-6 float-end">
-                                      7KG (max 1 Bag)
-                                    </span>
-                                  </div>
-                                </div>
-                                <div className="row my-2">
-                                  <div className="col-lg-6">
-                                    <span className="float-start">
-                                      <i className="fas fa-briefcase fa-sm"></i>
-                                    </span>
-                                    <span className="d-inline fs-6 float-start ms-1">
-                                      Checked baggage
-                                    </span>
-                                  </div>
-                                  <div className="col-lg-6">
-                                    <span className="d-inline fs-6 float-end">
-                                      {direction2.segments[0].baggage[0]
-                                        .amount +
-                                        " " +
-                                        direction2.segments[0].baggage[0].units}
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                        {direction3.segments !== undefined ? (
-                          <>
-                            <div className="row pt-4 pb-2">
-                              <div
-                                className="col-lg-8 p-2 border-bottom"
-                                style={{ backgroundColor: "	white" }}
-                              >
-                                <div className="row">
-                                  <div className="col-lg-5">
-                                    <i className="fas fa-plane"></i>
-                                    <span className="d-inline fs-6 fw-bold ms-1">
-                                      Departure,{" "}
-                                      {airports
-                                        .filter(
-                                          (f) =>
-                                            f.iata ===
-                                            direction3.segments[0].from
-                                        )
-                                        .map((item) => item.city)}
-                                    </span>
-                                  </div>
-                                  <div className="col-lg-1">
-                                    <i className="fas fa-arrow-right"></i>
-                                  </div>
-                                  <div className="col-lg-5">
-                                    <span className="d-inline fs-6 fw-bold">
-                                      Arrival,{" "}
-                                      {airports
-                                        .filter(
-                                          (f) =>
-                                            f.iata ===
-                                            direction3.segments[
-                                              direction3.segments.length - 1
-                                            ].to
-                                        )
-                                        .map((item) => item.city)}
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="row pb-2">
-                              <div className="col-lg-8">
-                                <div className="row my-2">
-                                  <div className="col-lg-6">
-                                    <span className="float-start">
-                                      <i className="fas fa-briefcase fa-sm"></i>
-                                    </span>
-                                    <span className="d-inline fs-6 float-start ms-1">
-                                      Cabin baggage
-                                    </span>
-                                  </div>
-                                  <div className="col-lg-6">
-                                    <span className="d-inline fs-6 float-end">
-                                      7KG (max 1 Bag)
-                                    </span>
-                                  </div>
-                                </div>
-                                <div className="row my-2">
-                                  <div className="col-lg-6">
-                                    <span className="float-start">
-                                      <i className="fas fa-briefcase fa-sm"></i>
-                                    </span>
-                                    <span className="d-inline fs-6 float-start ms-1">
-                                      Checked baggage
-                                    </span>
-                                  </div>
-                                  <div className="col-lg-6">
-                                    <span className="d-inline fs-6 float-end">
-                                      {direction3.segments[0].baggage[0]
-                                        .amount +
-                                        " " +
-                                        direction3.segments[0].baggage[0].units}
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-
-                        {direction4.segments !== undefined ? (
-                          <>
-                            <div className="row pt-4 pb-2">
-                              <div className="col-lg-8 border-bottom">
-                                <div className="row">
-                                  <div className="col-lg-5">
-                                    <i className="fas fa-plane"></i>
-                                    <span className="d-inline fs-6 fw-bold ms-1">
-                                      Departure,{" "}
-                                      {airports
-                                        .filter(
-                                          (f) =>
-                                            f.iata ===
-                                            direction4.segments[0].from
-                                        )
-                                        .map((item) => item.city)}
-                                    </span>
-                                  </div>
-                                  <div className="col-lg-1">
-                                    <i className="fas fa-arrow-right"></i>
-                                  </div>
-                                  <div className="col-lg-5">
-                                    <span className="d-inline fs-6 fw-bold">
-                                      Arrival,{" "}
-                                      {airports
-                                        .filter(
-                                          (f) =>
-                                            f.iata ===
-                                            direction4.segments[
-                                              direction4.segments.length - 1
-                                            ].to
-                                        )
-                                        .map((item) => item.city)}
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="row pb-2">
-                              <div className="col-lg-8">
-                                <div className="row my-2">
-                                  <div className="col-lg-6">
-                                    <span className="float-start">
-                                      <i className="fas fa-briefcase fa-sm"></i>
-                                    </span>
-                                    <span className="d-inline fs-6 float-start ms-1">
-                                      Cabin baggage
-                                    </span>
-                                  </div>
-                                  <div className="col-lg-6">
-                                    <span className="d-inline fs-6 float-end">
-                                      7KG (max 1 Bag)
-                                    </span>
-                                  </div>
-                                </div>
-                                <div className="row my-2">
-                                  <div className="col-lg-6">
-                                    <span className="float-start">
-                                      <i className="fas fa-briefcase fa-sm"></i>
-                                    </span>
-                                    <span className="d-inline fs-6 float-start ms-1">
-                                      Checked baggage
-                                    </span>
-                                  </div>
-                                  <div className="col-lg-6">
-                                    <span className="d-inline fs-6 float-end">
-                                      {direction4.segments[0].baggage[0]
-                                        .amount +
-                                        " " +
-                                        direction4.segments[0].baggage[0].units}
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                        {direction5.segments !== undefined ? (
-                          <>
-                            <div className="row pt-4 pb-2">
-                              <div className="col-lg-8 border-bottom">
-                                <div className="row">
-                                  <div className="col-lg-5">
-                                    <i className="fas fa-plane"></i>
-                                    <span className="d-inline fs-6 fw-bold ms-1">
-                                      Departure,{" "}
-                                      {airports
-                                        .filter(
-                                          (f) =>
-                                            f.iata ===
-                                            direction5.segments[0].from
-                                        )
-                                        .map((item) => item.city)}
-                                    </span>
-                                  </div>
-                                  <div className="col-lg-1">
-                                    <i className="fas fa-arrow-right"></i>
-                                  </div>
-                                  <div className="col-lg-5">
-                                    <span className="d-inline fs-6 fw-bold">
-                                      Arrival,{" "}
-                                      {airports
-                                        .filter(
-                                          (f) =>
-                                            f.iata ===
-                                            direction5.segments[
-                                              direction5.segments.length - 1
-                                            ].to
-                                        )
-                                        .map((item) => item.city)}
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="row pb-2">
-                              <div className="col-lg-8">
-                                <div className="row my-2">
-                                  <div className="col-lg-6">
-                                    <span className="float-start">
-                                      <i className="fas fa-briefcase fa-sm"></i>
-                                    </span>
-                                    <span className="d-inline fs-6 float-start ms-1">
-                                      Cabin baggage
-                                    </span>
-                                  </div>
-                                  <div className="col-lg-6">
-                                    <span className="d-inline fs-6 float-end">
-                                      7KG (max 1 Bag)
-                                    </span>
-                                  </div>
-                                </div>
-                                <div className="row my-2">
-                                  <div className="col-lg-6">
-                                    <span className="float-start">
-                                      <i className="fas fa-briefcase fa-sm"></i>
-                                    </span>
-                                    <span className="d-inline fs-6 float-start ms-1">
-                                      Checked baggage
-                                    </span>
-                                  </div>
-                                  <div className="col-lg-6">
-                                    <span className="d-inline fs-6 float-end">
-                                      {direction5.segments[0].baggage[0]
-                                        .amount +
-                                        " " +
-                                        direction5.segments[0].baggage[0].units}
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        <div className="row px-2 pb-2">
-                          <div className="col-lg-8 border-bottom">
-                            <div className="row p-1" style={{ backgroundColor: "	white" }}>
-                              <div className="col-lg-5 text-start">
-                                <span className="d-inline fs-6 fw-bold ms-1">
-                                  Departure,{" "}
-                                  {airports
-                                    .filter(
-                                      (f) =>
-                                        f.iata === direction0.segments[0].from
-                                    )
-                                    .map((item) => item.city)}
-                                </span>
-                              </div>
-                              <div className="col-lg-2">
-                                <i className="fas fa-plane"></i>
-                              </div>
-                              <div className="col-lg-5 text-end">
-                                <span className="d-inline fs-6 fw-bold">
-                                  Arrival,{" "}
-                                  {airports
-                                    .filter(
-                                      (f) =>
-                                        f.iata ===
-                                        direction0.segments[
-                                          direction0.segments.length - 1
-                                        ].to
-                                    )
-                                    .map((item) => item.city)}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row px-2 pb-2">
-                          <div className="col-lg-8">
-                            <div className="row my-2">
-                              <div className="col-lg-6">
-                                <span className="float-start">
-                                  <i className="fas fa-briefcase fa-sm"></i>
-                                </span>
-                                <span className="d-inline fs-6 float-start ms-1">
-                                  Cabin baggage
-                                </span>
-                              </div>
-                              <div className="col-lg-6">
-                                <span className="d-inline fs-6 float-end">
-                                  7KG (max 1 Bag)
-                                </span>
-                              </div>
-                            </div>
-                            <div className="row my-2">
-                              <div className="col-lg-6">
-                                <span className="float-start">
-                                  <i className="fas fa-briefcase fa-sm"></i>
-                                </span>
-                                <span className="d-inline fs-6 float-start ms-1">
-                                  Checked baggage
-                                </span>
-                              </div>
-                              <div className="col-lg-6">
-                                <span className="d-inline fs-6 float-end">
-                                  {direction0.segments[0].baggage[0]?.amount +
-                                    " " +
-                                    direction0.segments[0].baggage[0]?.units}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </>
-                    )}
-                  </div>
-
-                  {flightType === "Multi City" ? (
-                    <></>
-                  ) : (
-                    <>
-                      {Object.keys(direction1).length > 0 ? (
-                        <>
-                          <div className="container">
                             <div className="row px-2 pb-2">
                               <div className="col-lg-8 border-bottom">
-                                <div className="row p-1" style={{ backgroundColor: "	white" }}>
+                                <div
+                                  className="row p-1"
+                                  style={{ backgroundColor: "	white" }}
+                                >
                                   <div className="col-lg-5 text-start">
                                     <span className="d-inline fs-6 fw-bold ms-1">
                                       Departure,{" "}
@@ -2002,7 +2044,7 @@ const ShowModal = ({
                                         .filter(
                                           (f) =>
                                             f.iata ===
-                                            direction1.segments[0].from
+                                            direction0.segments[0].from
                                         )
                                         .map((item) => item.city)}
                                     </span>
@@ -2017,8 +2059,8 @@ const ShowModal = ({
                                         .filter(
                                           (f) =>
                                             f.iata ===
-                                            direction1.segments[
-                                              direction1.segments.length - 1
+                                            direction0.segments[
+                                              direction0.segments.length - 1
                                             ].to
                                         )
                                         .map((item) => item.city)}
@@ -2050,49 +2092,144 @@ const ShowModal = ({
                                       <i className="fas fa-briefcase fa-sm"></i>
                                     </span>
                                     <span className="d-inline fs-6 float-start ms-1">
-                                      Cabin baggage
+                                      Checked baggage
                                     </span>
                                   </div>
                                   <div className="col-lg-6">
                                     <span className="d-inline fs-6 float-end">
-                                      {direction1.segments[0].baggage[0]
+                                      {direction0.segments[0].baggage[0]
                                         ?.amount +
                                         " " +
-                                        direction1.segments[0].baggage[0]
+                                        direction0.segments[0].baggage[0]
                                           ?.units}
                                     </span>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </>
-                      ) : (
+                          </>
+                        )}
+                      </div>
+
+                      {flightType === "Multi City" ? (
                         <></>
+                      ) : (
+                        <>
+                          {Object.keys(direction1).length > 0 ? (
+                            <>
+                              <div className="container">
+                                <div className="row px-2 pb-2">
+                                  <div className="col-lg-8 border-bottom">
+                                    <div
+                                      className="row p-1"
+                                      style={{ backgroundColor: "	white" }}
+                                    >
+                                      <div className="col-lg-5 text-start">
+                                        <span className="d-inline fs-6 fw-bold ms-1">
+                                          Departure,{" "}
+                                          {airports
+                                            .filter(
+                                              (f) =>
+                                                f.iata ===
+                                                direction1.segments[0].from
+                                            )
+                                            .map((item) => item.city)}
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-2">
+                                        <i className="fas fa-plane"></i>
+                                      </div>
+                                      <div className="col-lg-5 text-end">
+                                        <span className="d-inline fs-6 fw-bold">
+                                          Arrival,{" "}
+                                          {airports
+                                            .filter(
+                                              (f) =>
+                                                f.iata ===
+                                                direction1.segments[
+                                                  direction1.segments.length - 1
+                                                ].to
+                                            )
+                                            .map((item) => item.city)}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row px-2 pb-2">
+                                  <div className="col-lg-8">
+                                    <div className="row my-2">
+                                      <div className="col-lg-6">
+                                        <span className="float-start">
+                                          <i className="fas fa-briefcase fa-sm"></i>
+                                        </span>
+                                        <span className="d-inline fs-6 float-start ms-1">
+                                          Cabin baggage
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-6">
+                                        <span className="d-inline fs-6 float-end">
+                                          7KG (max 1 Bag)
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div className="row my-2">
+                                      <div className="col-lg-6">
+                                        <span className="float-start">
+                                          <i className="fas fa-briefcase fa-sm"></i>
+                                        </span>
+                                        <span className="d-inline fs-6 float-start ms-1">
+                                          Cabin baggage
+                                        </span>
+                                      </div>
+                                      <div className="col-lg-6">
+                                        <span className="d-inline fs-6 float-end">
+                                          {direction1.segments[0].baggage[0]
+                                            ?.amount +
+                                            " " +
+                                            direction1.segments[0].baggage[0]
+                                              ?.units}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </>
                       )}
-                    </>
-                  )}
+                    </div>
+                  </>
                 </div>
-              </></div>
-              <div class="tab-pane fade" id={"about" + index} role="tabpanel" aria-labelledby="about-tab"><>
-                <div className="text-start p-4">
-                  <h6 className="fw-bold">
-                    Refund or Date Change can be done as per the following
-                    policies:
-                  </h6>
-                  <hr></hr>• Refund Amount= Received amount from customer -
-                  Refund Charge (As per Airline Policy + Triplover Convenience
-                  Fee).<br></br>• Date Change Amount= Date change fee as per
-                  Airline + Difference of fare if any + Triplover Convenience
-                  Fee.
+                <div
+                  class="tab-pane fade"
+                  id={"about" + index}
+                  role="tabpanel"
+                  aria-labelledby="about-tab"
+                >
+                  <>
+                    <div className="text-start p-4">
+                      <h6 className="fw-bold">
+                        Refund or Date Change can be done as per the following
+                        policies:
+                      </h6>
+                      <hr></hr>• Refund Amount= Received amount from customer -
+                      Refund Charge (As per Airline Policy + FirstTrip
+                      Convenience Fee).<br></br>• Date Change Amount= Date
+                      change fee as per Airline + Difference of fare if any +
+                      FirstTrip Convenience Fee.
+                    </div>
+                  </>
                 </div>
-              </></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    {/* <div className="modal fade" id={"farerulesModal"+ index} tabIndex="-1" aria-labelledby="farerulesModalLabel"
+      {/* <div className="modal fade" id={"farerulesModal"+ index} tabIndex="-1" aria-labelledby="farerulesModalLabel"
     aria-hidden="true">
     <div className="modal-dialog">
         <div className="modal-content">
@@ -2135,7 +2272,6 @@ const ShowModal = ({
     </div>
 </div> */}
     </>
-   
   );
 };
 

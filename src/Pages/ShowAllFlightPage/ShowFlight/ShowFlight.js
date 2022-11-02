@@ -13,12 +13,13 @@ import dayCount from "../../SharePages/Utility/dayCount";
 import { environment } from "../../SharePages/Utility/environment";
 import axios from "axios";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import { decode as base64_decode, encode as base64_encode } from 'base-64';
+import { decode as base64_decode, encode as base64_encode } from "base-64";
 
 let checkList = [];
 const ShowFlight = (props) => {
   const [grandTotal, setGrandTotal] = useState();
-  const { setCount, handleFareRules, loading, fareRules, setFareRules } = useAuth();
+  const { setCount, handleFareRules, loading, fareRules, setFareRules } =
+    useAuth();
   const navigate = useNavigate();
   // const handleClick =(direction,index) =>{
   //   console.log(index);
@@ -39,11 +40,9 @@ const ShowFlight = (props) => {
   const amountChange = props.amountChange;
   let currency = props.currency;
 
-
-
   const getFareRules = (uId, dir, itemCode) => {
     handleFareRules(uId, dir, itemCode);
-  }
+  };
 
   // const handleFareRules = (uId, dir, itemCode) => {
   //   const fareRulesObj = {
@@ -55,7 +54,6 @@ const ShowFlight = (props) => {
   //   dir[0][0].segments.map((i) =>
   //     fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
   //   );
-
 
   //   // if (Object.keys(dir[0][0]).length > 0) {
   //   //   dir[0][0].segments.map((i) =>
@@ -209,7 +207,7 @@ const ShowFlight = (props) => {
       localStorage.setItem("refundable", JSON.stringify(refundable));
     });
 
-    $("#select-flight-t-click" + props.index).click(function () { });
+    $("#select-flight-t-click" + props.index).click(function () {});
 
     $(document).ready(function () {
       $("#show-option" + props.index).show();
@@ -407,11 +405,13 @@ const ShowFlight = (props) => {
                       <sup>
                         &nbsp;
                         {dayCount(
-                          item[0].segments[item[0].segments.length - 1]
-                            .arrival,
+                          item[0].segments[item[0].segments.length - 1].arrival,
                           item[0].segments[0]?.departure
                         ) !== 0 ? (
-                          <span className="text-danger" style={{ fontSize: "8px" }}>
+                          <span
+                            className="text-danger"
+                            style={{ fontSize: "8px" }}
+                          >
                             +
                             {dayCount(
                               item[0].segments[item[0].segments.length - 1]
@@ -427,7 +427,8 @@ const ShowFlight = (props) => {
                     <h6 className="flighttime">
                       {moment(
                         item[0].segments[item[0].segments.length - 1].arrival
-                      ).format("DD MMMM,yyyy, ddd")}
+                      ).format("DD MMMM,yyyy, ddd")}{" "}
+                      HELLO
                     </h6>
                     <h6 className="flighttime">
                       {airports
@@ -486,15 +487,14 @@ const ShowFlight = (props) => {
                         ) : (
                           <>
                             {directions[0][0].segments.length === 1 &&
-                              directions[0][0].segments[0].details.length ===
+                            directions[0][0].segments[0].details.length ===
                               1 ? (
                               "Direct"
                             ) : (
                               <>
                                 {directions[0][0].segments.length > 1 ? (
                                   <>
-                                    {directions[0][0].segments.length ===
-                                      2 ? (
+                                    {directions[0][0].segments.length === 2 ? (
                                       <span
                                         data-tip={
                                           directions[0][0].segments[0]
@@ -575,8 +575,7 @@ const ShowFlight = (props) => {
                                         <>
                                           <span
                                             data-tip={
-                                              item.details[0]
-                                                .destinationName +
+                                              item.details[0].destinationName +
                                               " (" +
                                               item.details[0].destination +
                                               ")" +
@@ -586,8 +585,7 @@ const ShowFlight = (props) => {
                                                 item.details[0]?.arrival
                                               ) +
                                               "<br /> <hr/>" +
-                                              item.details[1]
-                                                .destinationName +
+                                              item.details[1].destinationName +
                                               " (" +
                                               item.details[1].destination +
                                               ")" +
@@ -652,7 +650,10 @@ const ShowFlight = (props) => {
                         ].arrival,
                         directions[0][0].segments[0]?.departure
                       ) !== 0 ? (
-                        <span className="text-danger" style={{ fontSize: "8px" }}>
+                        <span
+                          className="text-danger"
+                          style={{ fontSize: "8px" }}
+                        >
                           +
                           {dayCount(
                             directions[0][0].segments[
@@ -739,15 +740,14 @@ const ShowFlight = (props) => {
                         ) : (
                           <>
                             {directions[0][0].segments.length === 1 &&
-                              directions[0][0].segments[0].details.length ===
+                            directions[0][0].segments[0].details.length ===
                               1 ? (
                               "Direct"
                             ) : (
                               <>
                                 {directions[1][0].segments.length > 1 ? (
                                   <>
-                                    {directions[1][0].segments.length ===
-                                      2 ? (
+                                    {directions[1][0].segments.length === 2 ? (
                                       <span
                                         data-tip={
                                           directions[1][0].segments[0]
@@ -828,8 +828,7 @@ const ShowFlight = (props) => {
                                         <>
                                           <span
                                             data-tip={
-                                              item.details[0]
-                                                .destinationName +
+                                              item.details[0].destinationName +
                                               " (" +
                                               item.details[0].destination +
                                               ")" +
@@ -839,8 +838,7 @@ const ShowFlight = (props) => {
                                                 item.details[0]?.arrival
                                               ) +
                                               "<br /> <hr/>" +
-                                              item.details[1]
-                                                .destinationName +
+                                              item.details[1].destinationName +
                                               " (" +
                                               item.details[1].destination +
                                               ")" +
@@ -904,7 +902,10 @@ const ShowFlight = (props) => {
                         ].arrival,
                         directions[1][0].segments[0]?.departure
                       ) !== 0 ? (
-                        <span className="text-danger" style={{ fontSize: "8px" }}>
+                        <span
+                          className="text-danger"
+                          style={{ fontSize: "8px" }}
+                        >
                           +
                           {dayCount(
                             directions[1][0].segments[
@@ -1005,9 +1006,11 @@ const ShowFlight = (props) => {
                             <td className="left">
                               ADT :{" "}
                               <span className="ms-1 font-size">
-                                {directions[1][0].segments[0].baggage[0]?.amount +
+                                {directions[1][0].segments[0].baggage[0]
+                                  ?.amount +
                                   " " +
-                                  directions[1][0].segments[0].baggage[0]?.units}
+                                  directions[1][0].segments[0].baggage[0]
+                                    ?.units}
                               </span>
                             </td>
                           </tr>
@@ -1028,13 +1031,14 @@ const ShowFlight = (props) => {
                   className="text-color font-size"
                   data-bs-toggle="modal"
                   data-bs-target={"#farerulesModal"}
-                  onClick={() => getFareRules(uniqueTransID, directions, itemCodeRef)}
+                  onClick={() =>
+                    getFareRules(uniqueTransID, directions, itemCodeRef)
+                  }
                 >
                   Fare Rules
                 </Link>
               </span>
               <span className="text-color float-end">
-
                 {refundable === true ? (
                   <>
                     <span className="font-size">
@@ -1055,26 +1059,44 @@ const ShowFlight = (props) => {
                   </>
                 )}
               </span>
-
             </div>
           </div>
 
           <div className="col-lg-2 my-auto text-center">
             <h5 className="text-end text-color fw-bold">
-
               {/* {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice} */}
-              {
-                amountChange === "Invoice Amount" ? <><div>
-                  <div className="text-secondary" style={{ fontSize: "12px" }}>
-                    {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice}
+              {amountChange === "Invoice Amount" ? (
+                <>
+                  <div>
+                    <div
+                      className="text-secondary"
+                      style={{ fontSize: "12px" }}
+                    >
+                      {currency !== undefined ? currency : "BDT"}{" "}
+                      {totalPrice + bookingComponents[0].agentAdditionalPrice}
+                    </div>
+                    {currency !== undefined ? currency : "BDT"}{" "}
+                    {parseFloat(
+                      totalPrice -
+                        bookingComponents[0].discountPrice +
+                        (bookingComponents[0].agentAdditionalPrice < 0
+                          ? 0
+                          : bookingComponents[0].agentAdditionalPrice)
+                    ).toFixed(2)}
                   </div>
-                  {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
-
-                </div></> : <div>
-                  {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
+                </>
+              ) : (
+                <div>
+                  {currency !== undefined ? currency : "BDT"}{" "}
+                  {parseFloat(
+                    totalPrice -
+                      bookingComponents[0].discountPrice +
+                      (bookingComponents[0].agentAdditionalPrice < 0
+                        ? 0
+                        : bookingComponents[0].agentAdditionalPrice)
+                  ).toFixed(2)}
                 </div>
-              }
-
+              )}
             </h5>
             <Link
               to="/travellcart"
@@ -1127,7 +1149,7 @@ const ShowFlight = (props) => {
                     </div>
                     <div className="col-lg-6">
                       <h6 className="text-color fw-bold text-end">
-                        {currency !== undefined ? currency : "BDT"}  9,000
+                        {currency !== undefined ? currency : "BDT"} 9,000
                       </h6>
                     </div>
                   </div>
@@ -1167,9 +1189,7 @@ const ShowFlight = (props) => {
                   </div>
                   <div className="row pb-3">
                     <div className="col-lg-12">
-                      <button className="btn btn-success w-100">
-                        Select
-                      </button>
+                      <button className="btn btn-success w-100">Select</button>
                     </div>
                   </div>
                 </div>
@@ -1180,7 +1200,7 @@ const ShowFlight = (props) => {
                     </div>
                     <div className="col-lg-6">
                       <h6 className="text-color fw-bold text-end">
-                        {currency !== undefined ? currency : "BDT"}  10,000
+                        {currency !== undefined ? currency : "BDT"} 10,000
                       </h6>
                     </div>
                   </div>
@@ -1220,9 +1240,7 @@ const ShowFlight = (props) => {
                   </div>
                   <div className="row pb-3">
                     <div className="col-lg-12">
-                      <button className="btn btn-success w-100">
-                        Select
-                      </button>
+                      <button className="btn btn-success w-100">Select</button>
                     </div>
                   </div>
                 </div>
@@ -1233,7 +1251,7 @@ const ShowFlight = (props) => {
                     </div>
                     <div className="col-lg-6">
                       <h6 className="text-color fw-bold text-end">
-                        {currency !== undefined ? currency : "BDT"}  12,000
+                        {currency !== undefined ? currency : "BDT"} 12,000
                       </h6>
                     </div>
                   </div>
@@ -1273,9 +1291,7 @@ const ShowFlight = (props) => {
                   </div>
                   <div className="row pb-3">
                     <div className="col-lg-12">
-                      <button className="btn btn-success w-100">
-                        Select
-                      </button>
+                      <button className="btn btn-success w-100">Select</button>
                     </div>
                   </div>
                 </div>
@@ -1308,27 +1324,90 @@ const ShowFlight = (props) => {
                   <>
                     <tr>
                       <td className="left">ADT</td>
-                      <td className="left">{passengerFares.adt.basePrice + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}</td>
+                      <td className="left">
+                        {passengerFares.adt.basePrice +
+                          bookingComponents[0].agentAdditionalPrice /
+                            (passengerCounts.adt +
+                              (passengerCounts.cnn !== null
+                                ? passengerCounts.cnn
+                                : 0) +
+                              (passengerCounts.inf !== null
+                                ? passengerCounts.inf
+                                : 0))}
+                      </td>
                       <td className="center">{passengerFares.adt.taxes}</td>
                       <td className="right">
                         {passengerFares.adt.discountPrice}
                       </td>
                       <td className="right">{passengerFares.adt.ait}</td>
                       <td className="right">{passengerCounts.adt}</td>
-                      {
-                        isTempInspector !== null && isTempInspector == 'true' ? <>
-                          <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ? JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
-                            return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
-                          }) : ""}>
-                            {currency !== undefined ? currency : "BDT"}  {" "}
-                            {(passengerFares.adt.totalPrice * passengerCounts.adt) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
+                      {isTempInspector !== null && isTempInspector == "true" ? (
+                        <>
+                          <td
+                            className="right fw-bold"
+                            title={
+                              bookingComponents[0]?.fareReference !== ""
+                                ? JSON.parse(
+                                    base64_decode(
+                                      bookingComponents[0]?.fareReference
+                                    )
+                                  ).map((item) => {
+                                    return (
+                                      item.Id +
+                                      "(" +
+                                      (item.IsDefault == true &&
+                                      item.IsAgent == false
+                                        ? "Default"
+                                        : item.IsDefault == false &&
+                                          item.IsAgent == false
+                                        ? "Dynamic"
+                                        : item.IsDefault == false &&
+                                          item.IsAgent == true
+                                        ? "Agent"
+                                        : "") +
+                                      ") " +
+                                      (item.DiscountType == 1
+                                        ? "Markup"
+                                        : "Discount") +
+                                      " " +
+                                      item.Value +
+                                      (item.Type == 1 ? "%" : "") +
+                                      "\n"
+                                    );
+                                  })
+                                : ""
+                            }
+                          >
+                            {currency !== undefined ? currency : "BDT"}{" "}
+                            {passengerFares.adt.totalPrice *
+                              passengerCounts.adt +
+                              bookingComponents[0].agentAdditionalPrice /
+                                (passengerCounts.adt +
+                                  (passengerCounts.cnn !== null
+                                    ? passengerCounts.cnn
+                                    : 0) +
+                                  (passengerCounts.inf !== null
+                                    ? passengerCounts.inf
+                                    : 0))}
                           </td>
-                        </> : <>
+                        </>
+                      ) : (
+                        <>
                           <td className="right fw-bold">
-                            {currency !== undefined ? currency : "BDT"}  {" "}
-                            {(passengerFares.adt.totalPrice * passengerCounts.adt) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
-                          </td></>
-                      }
+                            {currency !== undefined ? currency : "BDT"}{" "}
+                            {passengerFares.adt.totalPrice *
+                              passengerCounts.adt +
+                              bookingComponents[0].agentAdditionalPrice /
+                                (passengerCounts.adt +
+                                  (passengerCounts.cnn !== null
+                                    ? passengerCounts.cnn
+                                    : 0) +
+                                  (passengerCounts.inf !== null
+                                    ? passengerCounts.inf
+                                    : 0))}
+                          </td>
+                        </>
+                      )}
                     </tr>
                   </>
                 ) : (
@@ -1339,25 +1418,92 @@ const ShowFlight = (props) => {
                   <>
                     <tr>
                       <td className="left">CNN</td>
-                      <td className="left">{passengerFares.cnn.basePrice + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}</td>
+                      <td className="left">
+                        {passengerFares.cnn.basePrice +
+                          bookingComponents[0].agentAdditionalPrice /
+                            (passengerCounts.adt +
+                              (passengerCounts.cnn !== null
+                                ? passengerCounts.cnn
+                                : 0) +
+                              (passengerCounts.inf !== null
+                                ? passengerCounts.inf
+                                : 0))}
+                      </td>
                       <td className="center">{passengerFares.cnn.taxes}</td>
                       <td className="right">
                         {passengerFares.cnn.discountPrice}
                       </td>
                       <td className="right">{passengerFares.cnn.ait}</td>
                       <td className="right">{passengerCounts.cnn}</td>
-                      {
-                        isTempInspector !== null && isTempInspector == 'true' ? <>              <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ? JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
-                          return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
-                        }) : ""}>
-                          {currency !== undefined ? currency : "BDT"}  {" "}
-                          {(passengerFares.cnn.totalPrice * passengerCounts.cnn) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
-                        </td></> : <>              <td className="right fw-bold" >
-                          {currency !== undefined ? currency : "BDT"}  {" "}
-                          {(passengerFares.cnn.totalPrice * passengerCounts.cnn) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
-                        </td></>
-                      }
-
+                      {isTempInspector !== null && isTempInspector == "true" ? (
+                        <>
+                          {" "}
+                          <td
+                            className="right fw-bold"
+                            title={
+                              bookingComponents[0]?.fareReference !== ""
+                                ? JSON.parse(
+                                    base64_decode(
+                                      bookingComponents[0]?.fareReference
+                                    )
+                                  ).map((item) => {
+                                    return (
+                                      item.Id +
+                                      "(" +
+                                      (item.IsDefault == true &&
+                                      item.IsAgent == false
+                                        ? "Default"
+                                        : item.IsDefault == false &&
+                                          item.IsAgent == false
+                                        ? "Dynamic"
+                                        : item.IsDefault == false &&
+                                          item.IsAgent == true
+                                        ? "Agent"
+                                        : "") +
+                                      ") " +
+                                      (item.DiscountType == 1
+                                        ? "Markup"
+                                        : "Discount") +
+                                      " " +
+                                      item.Value +
+                                      (item.Type == 1 ? "%" : "") +
+                                      "\n"
+                                    );
+                                  })
+                                : ""
+                            }
+                          >
+                            {currency !== undefined ? currency : "BDT"}{" "}
+                            {passengerFares.cnn.totalPrice *
+                              passengerCounts.cnn +
+                              bookingComponents[0].agentAdditionalPrice /
+                                (passengerCounts.adt +
+                                  (passengerCounts.cnn !== null
+                                    ? passengerCounts.cnn
+                                    : 0) +
+                                  (passengerCounts.inf !== null
+                                    ? passengerCounts.inf
+                                    : 0))}
+                          </td>
+                        </>
+                      ) : (
+                        <>
+                          {" "}
+                          <td className="right fw-bold">
+                            {currency !== undefined ? currency : "BDT"}{" "}
+                            {passengerFares.cnn.totalPrice *
+                              passengerCounts.cnn +
+                              bookingComponents[0].agentAdditionalPrice /
+                                (passengerCounts.adt +
+                                  (passengerCounts.cnn !== null
+                                    ? passengerCounts.cnn
+                                    : 0) +
+                                  (passengerCounts.inf !== null
+                                    ? passengerCounts.inf
+                                    : 0))}
+                          </td>
+                        </>
+                      )}
                     </tr>
                   </>
                 ) : (
@@ -1368,25 +1514,95 @@ const ShowFlight = (props) => {
                   <>
                     <tr>
                       <td className="left">INF</td>
-                      <td className="left">{passengerFares.inf.basePrice + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}</td>
+                      <td className="left">
+                        {passengerFares.inf.basePrice +
+                          bookingComponents[0].agentAdditionalPrice /
+                            (passengerCounts.adt +
+                              (passengerCounts.cnn !== null
+                                ? passengerCounts.cnn
+                                : 0) +
+                              (passengerCounts.inf !== null
+                                ? passengerCounts.inf
+                                : 0))}
+                      </td>
                       <td className="center">{passengerFares.inf.taxes}</td>
                       <td className="right">
                         {passengerFares.inf.discountPrice}
                       </td>
                       <td className="right">{passengerFares.inf.ait}</td>
                       <td className="right">{passengerCounts.inf}</td>
-                      {
-                        isTempInspector !== null && isTempInspector == 'true' ? <> <td className="right fw-bold" title={bookingComponents[0]?.fareReference !== "" ? JSON.parse(base64_decode(bookingComponents[0]?.fareReference)).map((item) => {
-                          return item.Id + "(" + (item.IsDefault == true && item.IsAgent == false ? "Default" : item.IsDefault == false && item.IsAgent == false ? "Dynamic" : item.IsDefault == false && item.IsAgent == true ? "Agent" : "") + ") " + (item.DiscountType == 1 ? "Markup" : "Discount") + " " + item.Value + (item.Type == 1 ? "%" : "") + "\n"
-                        }) : " "}>
-                          {currency !== undefined ? currency : "BDT"}  {" "}
-                          {(passengerFares.inf.totalPrice * passengerCounts.inf) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
-                        </td></> : <> <td className="right fw-bold" onLoadedData={(e) => console.log({ e })}>
-                          {currency !== undefined ? currency : "BDT"}  {" "}
-                          {(passengerFares.inf.totalPrice * passengerCounts.inf) + bookingComponents[0].agentAdditionalPrice / (passengerCounts.adt + (passengerCounts.cnn !== null ? passengerCounts.cnn : 0) + (passengerCounts.inf !== null ? passengerCounts.inf : 0))}
-                        </td></>
-                      }
-
+                      {isTempInspector !== null && isTempInspector == "true" ? (
+                        <>
+                          {" "}
+                          <td
+                            className="right fw-bold"
+                            title={
+                              bookingComponents[0]?.fareReference !== ""
+                                ? JSON.parse(
+                                    base64_decode(
+                                      bookingComponents[0]?.fareReference
+                                    )
+                                  ).map((item) => {
+                                    return (
+                                      item.Id +
+                                      "(" +
+                                      (item.IsDefault == true &&
+                                      item.IsAgent == false
+                                        ? "Default"
+                                        : item.IsDefault == false &&
+                                          item.IsAgent == false
+                                        ? "Dynamic"
+                                        : item.IsDefault == false &&
+                                          item.IsAgent == true
+                                        ? "Agent"
+                                        : "") +
+                                      ") " +
+                                      (item.DiscountType == 1
+                                        ? "Markup"
+                                        : "Discount") +
+                                      " " +
+                                      item.Value +
+                                      (item.Type == 1 ? "%" : "") +
+                                      "\n"
+                                    );
+                                  })
+                                : " "
+                            }
+                          >
+                            {currency !== undefined ? currency : "BDT"}{" "}
+                            {passengerFares.inf.totalPrice *
+                              passengerCounts.inf +
+                              bookingComponents[0].agentAdditionalPrice /
+                                (passengerCounts.adt +
+                                  (passengerCounts.cnn !== null
+                                    ? passengerCounts.cnn
+                                    : 0) +
+                                  (passengerCounts.inf !== null
+                                    ? passengerCounts.inf
+                                    : 0))}
+                          </td>
+                        </>
+                      ) : (
+                        <>
+                          {" "}
+                          <td
+                            className="right fw-bold"
+                            onLoadedData={(e) => console.log({ e })}
+                          >
+                            {currency !== undefined ? currency : "BDT"}{" "}
+                            {passengerFares.inf.totalPrice *
+                              passengerCounts.inf +
+                              bookingComponents[0].agentAdditionalPrice /
+                                (passengerCounts.adt +
+                                  (passengerCounts.cnn !== null
+                                    ? passengerCounts.cnn
+                                    : 0) +
+                                  (passengerCounts.inf !== null
+                                    ? passengerCounts.inf
+                                    : 0))}
+                          </td>
+                        </>
+                      )}
                     </tr>
                   </>
                 ) : (
@@ -1422,16 +1638,13 @@ const ShowFlight = (props) => {
         {/* show more section  */}
 
         {(directions[0] !== undefined && directions[0].length > 1) ||
-          (directions[1] !== undefined && directions[1].length > 1) ||
-          (directions[2] !== undefined && directions[2].length > 1) ||
-          (directions[3] !== undefined && directions[3].length > 1) ||
-          (directions[4] !== undefined && directions[4].length > 1) ||
-          (directions[5] !== undefined && directions[5].length > 1) ? (
+        (directions[1] !== undefined && directions[1].length > 1) ||
+        (directions[2] !== undefined && directions[2].length > 1) ||
+        (directions[3] !== undefined && directions[3].length > 1) ||
+        (directions[4] !== undefined && directions[4].length > 1) ||
+        (directions[5] !== undefined && directions[5].length > 1) ? (
           <>
-            <div
-              className="position-relative"
-              id={"show-option" + props.index}
-            >
+            <div className="position-relative" id={"show-option" + props.index}>
               <div className="position-absolute top-100 start-50 translate-middle">
                 <p className="show-hide">
                   Show{" "}
@@ -1542,8 +1755,8 @@ const ShowFlight = (props) => {
                                 {directions[0][0].segments.length === 1
                                   ? "Direct"
                                   : directions[0][0].segments.length -
-                                  1 +
-                                  " Stop"}
+                                    1 +
+                                    " Stop"}
                               </span>
                             </div>
                             <div className="col-lg-12 text-center">
@@ -1582,11 +1795,13 @@ const ShowFlight = (props) => {
                             <sup>
                               &nbsp;
                               {dayCount(
-                                item.segments[item.segments.length - 1]
-                                  .arrival,
+                                item.segments[item.segments.length - 1].arrival,
                                 item.segments[0]?.departure
                               ) !== 0 ? (
-                                <span className="text-danger" style={{ fontSize: "8px" }}>
+                                <span
+                                  className="text-danger"
+                                  style={{ fontSize: "8px" }}
+                                >
                                   +
                                   {dayCount(
                                     item.segments[item.segments.length - 1]
@@ -1619,7 +1834,7 @@ const ShowFlight = (props) => {
                               name={"chooseoption0" + props.index}
                               onChange={() => selectDirectionOption0(index)}
                               defaultChecked={index === 0 ? true : false}
-                            // onChange={handleChange}
+                              // onChange={handleChange}
                             />
                             <label
                               className="form-check-label"
@@ -1698,8 +1913,8 @@ const ShowFlight = (props) => {
                                     {directions[0][0].segments.length === 1
                                       ? "Direct"
                                       : directions[0][0].segments.length -
-                                      1 +
-                                      " Stop"}
+                                        1 +
+                                        " Stop"}
                                   </span>
                                 </div>
                                 <div className="col-lg-12 text-center">
@@ -1742,12 +1957,14 @@ const ShowFlight = (props) => {
                                       .arrival,
                                     item.segments[0]?.departure
                                   ) !== 0 ? (
-                                    <span className="text-danger" style={{ fontSize: "8px" }}>
+                                    <span
+                                      className="text-danger"
+                                      style={{ fontSize: "8px" }}
+                                    >
                                       +
                                       {dayCount(
-                                        item.segments[
-                                          item.segments.length - 1
-                                        ].arrival,
+                                        item.segments[item.segments.length - 1]
+                                          .arrival,
                                         item.segments[0]?.departure
                                       )}
                                     </span>
@@ -1775,11 +1992,9 @@ const ShowFlight = (props) => {
                                   type="radio"
                                   value={index}
                                   name={"chooseoption1" + props.index}
-                                  onChange={() =>
-                                    selectDirectionOption1(index)
-                                  }
+                                  onChange={() => selectDirectionOption1(index)}
                                   defaultChecked={index === 0 ? true : false}
-                                // onChange={handleChange}
+                                  // onChange={handleChange}
                                 />
                                 <label
                                   className="form-check-label"
@@ -1862,8 +2077,8 @@ const ShowFlight = (props) => {
                                     {directions[0][0].segments.length === 1
                                       ? "Direct"
                                       : directions[0][0].segments.length -
-                                      1 +
-                                      " Stop"}
+                                        1 +
+                                        " Stop"}
                                   </span>
                                 </div>
                                 <div className="col-lg-12 text-center">
@@ -1906,12 +2121,14 @@ const ShowFlight = (props) => {
                                       .arrival,
                                     item.segments[0]?.departure
                                   ) !== 0 ? (
-                                    <span className="text-danger" style={{ fontSize: "8px" }}>
+                                    <span
+                                      className="text-danger"
+                                      style={{ fontSize: "8px" }}
+                                    >
                                       +
                                       {dayCount(
-                                        item.segments[
-                                          item.segments.length - 1
-                                        ].arrival,
+                                        item.segments[item.segments.length - 1]
+                                          .arrival,
                                         item.segments[0]?.departure
                                       )}
                                     </span>
@@ -1939,11 +2156,9 @@ const ShowFlight = (props) => {
                                   type="radio"
                                   value={index}
                                   name={"chooseoption2" + props.index}
-                                  onChange={() =>
-                                    selectDirectionOption2(index)
-                                  }
+                                  onChange={() => selectDirectionOption2(index)}
                                   defaultChecked={index === 0 ? true : false}
-                                // onChange={handleChange}
+                                  // onChange={handleChange}
                                 />
                                 <label
                                   className="form-check-label"
@@ -2027,8 +2242,8 @@ const ShowFlight = (props) => {
                                     {directions[0][0].segments.length === 1
                                       ? "Direct"
                                       : directions[0][0].segments.length -
-                                      1 +
-                                      " Stop"}
+                                        1 +
+                                        " Stop"}
                                   </span>
                                 </div>
                                 <div className="col-lg-12 text-center">
@@ -2071,12 +2286,14 @@ const ShowFlight = (props) => {
                                       .arrival,
                                     item.segments[0]?.departure
                                   ) !== 0 ? (
-                                    <span className="text-danger" style={{ fontSize: "8px" }}>
+                                    <span
+                                      className="text-danger"
+                                      style={{ fontSize: "8px" }}
+                                    >
                                       +
                                       {dayCount(
-                                        item.segments[
-                                          item.segments.length - 1
-                                        ].arrival,
+                                        item.segments[item.segments.length - 1]
+                                          .arrival,
                                         item.segments[0]?.departure
                                       )}
                                     </span>
@@ -2104,11 +2321,9 @@ const ShowFlight = (props) => {
                                   type="radio"
                                   value={index}
                                   name={"chooseoption3" + props.index}
-                                  onChange={() =>
-                                    selectDirectionOption3(index)
-                                  }
+                                  onChange={() => selectDirectionOption3(index)}
                                   defaultChecked={index === 0 ? true : false}
-                                // onChange={handleChange}
+                                  // onChange={handleChange}
                                 />
                                 <label
                                   className="form-check-label"
@@ -2191,8 +2406,8 @@ const ShowFlight = (props) => {
                                     {directions[0][0].segments.length === 1
                                       ? "Direct"
                                       : directions[0][0].segments.length -
-                                      1 +
-                                      " Stop"}
+                                        1 +
+                                        " Stop"}
                                   </span>
                                 </div>
                                 <div className="col-lg-12 text-center">
@@ -2235,12 +2450,14 @@ const ShowFlight = (props) => {
                                       .arrival,
                                     item.segments[0]?.departure
                                   ) !== 0 ? (
-                                    <span className="text-danger" style={{ fontSize: "8px" }}>
+                                    <span
+                                      className="text-danger"
+                                      style={{ fontSize: "8px" }}
+                                    >
                                       +
                                       {dayCount(
-                                        item.segments[
-                                          item.segments.length - 1
-                                        ].arrival,
+                                        item.segments[item.segments.length - 1]
+                                          .arrival,
                                         item.segments[0]?.departure
                                       )}
                                     </span>
@@ -2268,11 +2485,9 @@ const ShowFlight = (props) => {
                                   type="radio"
                                   value={index}
                                   name={"chooseoption4" + props.index}
-                                  onChange={() =>
-                                    selectDirectionOption4(index)
-                                  }
+                                  onChange={() => selectDirectionOption4(index)}
                                   defaultChecked={index === 0 ? true : false}
-                                // onChange={handleChange}
+                                  // onChange={handleChange}
                                 />
                                 <label
                                   className="form-check-label"
@@ -2356,8 +2571,8 @@ const ShowFlight = (props) => {
                                     {directions[0][0].segments.length === 1
                                       ? "Direct"
                                       : directions[0][0].segments.length -
-                                      1 +
-                                      " Stop"}
+                                        1 +
+                                        " Stop"}
                                   </span>
                                 </div>
                                 <div className="col-lg-12 text-center">
@@ -2400,12 +2615,14 @@ const ShowFlight = (props) => {
                                       .arrival,
                                     item.segments[0]?.departure
                                   ) !== 0 ? (
-                                    <span className="text-danger" style={{ fontSize: "8px" }}>
+                                    <span
+                                      className="text-danger"
+                                      style={{ fontSize: "8px" }}
+                                    >
                                       +
                                       {dayCount(
-                                        item.segments[
-                                          item.segments.length - 1
-                                        ].arrival,
+                                        item.segments[item.segments.length - 1]
+                                          .arrival,
                                         item.segments[0]?.departure
                                       )}
                                     </span>
@@ -2433,11 +2650,9 @@ const ShowFlight = (props) => {
                                   type="radio"
                                   value={index}
                                   name={"chooseoption5" + props.index}
-                                  onChange={() =>
-                                    selectDirectionOption5(index)
-                                  }
+                                  onChange={() => selectDirectionOption5(index)}
                                   defaultChecked={index === 0 ? true : false}
-                                // onChange={handleChange}
+                                  // onChange={handleChange}
                                 />
                                 <label
                                   className="form-check-label"
@@ -2517,8 +2732,8 @@ const ShowFlight = (props) => {
                               {directions[0][0].segments.length === 1
                                 ? "Direct"
                                 : directions[0][0].segments.length -
-                                1 +
-                                " Stop"}
+                                  1 +
+                                  " Stop"}
                             </span>
                           </div>
                           <div className="col-lg-12 text-center">
@@ -2560,7 +2775,10 @@ const ShowFlight = (props) => {
                               item.segments[item.segments.length - 1].arrival,
                               item.segments[0]?.departure
                             ) !== 0 ? (
-                              <span className="text-danger" style={{ fontSize: "8px" }}>
+                              <span
+                                className="text-danger"
+                                style={{ fontSize: "8px" }}
+                              >
                                 +
                                 {dayCount(
                                   item.segments[item.segments.length - 1]
@@ -2593,7 +2811,7 @@ const ShowFlight = (props) => {
                             name={"chooseDeparture" + props.index}
                             onChange={() => selectDirectionOption0(index)}
                             defaultChecked={index === 0 ? true : false}
-                          // onChange={handleChange}
+                            // onChange={handleChange}
                           />
                           <label
                             className="form-check-label"
@@ -2680,8 +2898,8 @@ const ShowFlight = (props) => {
                                   {directions[1][0].segments.length === 1
                                     ? "Direct"
                                     : directions[1][0].segments.length -
-                                    1 +
-                                    " Stop"}
+                                      1 +
+                                      " Stop"}
                                 </span>
                               </div>
                               <div className="col-lg-12 text-center">
@@ -2724,7 +2942,10 @@ const ShowFlight = (props) => {
                                     .arrival,
                                   item.segments[0]?.departure
                                 ) !== 0 ? (
-                                  <span className="text-danger" style={{ fontSize: "8px" }}>
+                                  <span
+                                    className="text-danger"
+                                    style={{ fontSize: "8px" }}
+                                  >
                                     +
                                     {dayCount(
                                       item.segments[item.segments.length - 1]
@@ -2739,8 +2960,7 @@ const ShowFlight = (props) => {
                             </h6>
                             <h6 className="flighttime">
                               {moment(
-                                item.segments[item.segments.length - 1]
-                                  .arrival
+                                item.segments[item.segments.length - 1].arrival
                               ).format("DD MMM,yyyy, ddd")}
                             </h6>
                             <h6 className="flighttime">
@@ -2780,17 +3000,38 @@ const ShowFlight = (props) => {
           </div>
           <div className="col-lg-2 my-auto text-center">
             <h5 className="text-end text-color text-end fw-bold">
-              {
-                amountChange === "Invoice Amount" ? <><div>
-                  <div className="text-secondary" style={{ fontSize: "12px" }}>
-                    {currency !== undefined ? currency : "BDT"}  {totalPrice + bookingComponents[0].agentAdditionalPrice}
+              {amountChange === "Invoice Amount" ? (
+                <>
+                  <div>
+                    <div
+                      className="text-secondary"
+                      style={{ fontSize: "12px" }}
+                    >
+                      {currency !== undefined ? currency : "BDT"}{" "}
+                      {totalPrice + bookingComponents[0].agentAdditionalPrice}
+                    </div>
+                    {currency !== undefined ? currency : "BDT"}{" "}
+                    {parseFloat(
+                      totalPrice -
+                        bookingComponents[0].discountPrice +
+                        (bookingComponents[0].agentAdditionalPrice < 0
+                          ? 0
+                          : bookingComponents[0].agentAdditionalPrice)
+                    ).toFixed(2)}
                   </div>
-                  {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
-
-                </div></> : <div>
-                  {currency !== undefined ? currency : "BDT"}  {parseFloat(totalPrice - bookingComponents[0].discountPrice + (bookingComponents[0].agentAdditionalPrice < 0 ? 0 : bookingComponents[0].agentAdditionalPrice)).toFixed(2)}
+                </>
+              ) : (
+                <div>
+                  {currency !== undefined ? currency : "BDT"}{" "}
+                  {parseFloat(
+                    totalPrice -
+                      bookingComponents[0].discountPrice +
+                      (bookingComponents[0].agentAdditionalPrice < 0
+                        ? 0
+                        : bookingComponents[0].agentAdditionalPrice)
+                  ).toFixed(2)}
                 </div>
-              }
+              )}
             </h5>
 
             <button
@@ -2814,7 +3055,6 @@ const ShowFlight = (props) => {
               {refundable === true ? "Refundable" : "Non-Refundable"}
             </p>
           </div>
-
         </div>
         {/* end of toggle option for hide */}
         {/* hide more section  */}
@@ -2824,59 +3064,92 @@ const ShowFlight = (props) => {
           </div>
         </div>
       </>
-      <div className="modal fade" id={"farerulesModal"} tabIndex="-1" aria-labelledby="farerulesModalLabel"
-        aria-hidden="true">
+      <div
+        className="modal fade"
+        id={"farerulesModal"}
+        tabIndex="-1"
+        aria-labelledby="farerulesModalLabel"
+        aria-hidden="true"
+      >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
               <h3>Fare Rules</h3>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => setFareRules()}></button>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                onClick={() => setFareRules()}
+              ></button>
             </div>
-            <div className="modal-body" style={{ fontSize: '10px' }}>
-              {
-                loading ?
-                  <div className="d-flex justify-content-center">
-                    <div class="spinner-border" role="status">
-                      <span class="visually-hidden">Loading...</span>
-                    </div>
-                  </div> : <>
-                    {
-                      fareRules !== undefined && fareRules.item2 != undefined && fareRules !== '' && fareRules.item1 != null ?
-                        fareRules.item2.isSuccess == true ?
-                          <Tabs>
-                            <TabList>
-                              {
-                                fareRules.item1.fareRuleDetails.map((item, index) => {
-                                  return <>
-                                    <Tab>
-                                      <p>{item.type}</p>
-                                    </Tab>
-                                  </>
-                                })
-                              }
-                            </TabList>
-                            {
-                              fareRules.item1.fareRuleDetails.map((item, index) => {
-                                return <>
-                                  <TabPanel>
-                                    <div className="panel-content">
-                                      <div dangerouslySetInnerHTML={{ __html: item.fareRuleDetail.replace(/(?:\r\n|\r|\n)/g, '<br />') }}></div>
-                                    </div>
-                                  </TabPanel>
+            <div className="modal-body" style={{ fontSize: "10px" }}>
+              {loading ? (
+                <div className="d-flex justify-content-center">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  {fareRules !== undefined &&
+                  fareRules.item2 != undefined &&
+                  fareRules !== "" &&
+                  fareRules.item1 != null ? (
+                    fareRules.item2.isSuccess == true ? (
+                      <Tabs>
+                        <TabList>
+                          {fareRules.item1.fareRuleDetails.map(
+                            (item, index) => {
+                              return (
+                                <>
+                                  <Tab>
+                                    <p>{item.type}</p>
+                                  </Tab>
                                 </>
-                              })
+                              );
                             }
-                          </Tabs>
-                          : <></>
-                        : <>
-                          <div className="">
-                            <p>* Refund Amount= Received amount from customer - Refund Charge (As per Airline Policy + Triplover Convenience Fee)</p>
-                            <p>* Date Change Amount= Date change fee as per Airline + Difference of fare if any + Triplover Convenience Fee.</p>
-                          </div>
-                        </>
-                    }
-                  </>
-              }
+                          )}
+                        </TabList>
+                        {fareRules.item1.fareRuleDetails.map((item, index) => {
+                          return (
+                            <>
+                              <TabPanel>
+                                <div className="panel-content">
+                                  <div
+                                    dangerouslySetInnerHTML={{
+                                      __html: item.fareRuleDetail.replace(
+                                        /(?:\r\n|\r|\n)/g,
+                                        "<br />"
+                                      ),
+                                    }}
+                                  ></div>
+                                </div>
+                              </TabPanel>
+                            </>
+                          );
+                        })}
+                      </Tabs>
+                    ) : (
+                      <></>
+                    )
+                  ) : (
+                    <>
+                      <div className="">
+                        <p>
+                          * Refund Amount= Received amount from customer -
+                          Refund Charge (As per Airline Policy + FirstTrip
+                          Convenience Fee)
+                        </p>
+                        <p>
+                          * Date Change Amount= Date change fee as per Airline +
+                          Difference of fare if any + FirstTrip Convenience Fee.
+                        </p>
+                      </div>
+                    </>
+                  )}
+                </>
+              )}
             </div>
           </div>
         </div>

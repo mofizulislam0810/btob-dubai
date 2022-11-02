@@ -42,12 +42,12 @@ const Balance = () => {
   let [branchList, setBranchList] = useState([]);
   let [branchNameCash, setBranchNameCash] = useState("");
   let [loading, setLoading] = useState(false);
-  let [bdCityList,setBdCityList] = useState([]);
+  let [bdCityList, setBdCityList] = useState([]);
   // console.log(bdCityList);
-  useEffect(()=>{
+  useEffect(() => {
     setBdCityList(cityList.filter(item => item.name.split(",")[0] === 'Bangladesh'));
-  },[cityList])
-  
+  }, [cityList])
+
   let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
   let sendObj = {
@@ -593,7 +593,7 @@ const Balance = () => {
                               className="form-select"
                               value={depositTypeId}
                               placeholder="Deposit Type"
-                              onChange={(e) =>{
+                              onChange={(e) => {
                                 setDepositType(Number(e.target.value));
                                 setAmount('');
                               }

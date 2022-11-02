@@ -1212,7 +1212,7 @@ const Balance = () => {
                             <tr>
                               <th>Submitted Date</th>
                               <th>Deposit Type</th>
-                              <th>TnxNumber</th>
+                              <th>Tnx Number</th>
                               <th>Reference</th>
                               <th>Status</th>
                               <th>Amount</th>

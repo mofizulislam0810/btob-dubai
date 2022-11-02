@@ -167,13 +167,6 @@ const SuccessBookingPanel = () => {
                                 {/* {console.log(bookData.data?.item1.ticketingTimeLimit)} */}
                                 {/* {bookData.data?.item1.ticketingTimeLimit} */}
                                 {bookData.data?.item1.ticketingTimeLimit}
-<<<<<<< .mine
-
-
-=======
-
-
->>>>>>> .theirs
                               </td>
                             </tr>
                           </> : <>
@@ -267,11 +260,7 @@ const SuccessBookingPanel = () => {
                                   </td>
                                   <td>
                                     {moment(item.departure).format(
-<<<<<<< .mine
-                                      "DD-MMM-yyyy hh:mm:ss A"
-=======
                                       "DD-MM-YYYY hh:mm:ss A"
->>>>>>> .theirs
                                     )}
 
                                     {/* moment(item.issueDate).format(
@@ -290,11 +279,7 @@ const SuccessBookingPanel = () => {
                                   </td>
                                   <td>
                                     {moment(item.arrival).format(
-<<<<<<< .mine
-                                      "DD-MMM-yyyy hh:mm:ss"
-=======
                                       "DD-MM-YYYY hh:mm:ss A"
->>>>>>> .theirs
                                     )}
                                   </td>
                                   <td>{item.fareBasisCode}</td>

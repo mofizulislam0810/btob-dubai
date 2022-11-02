@@ -196,7 +196,7 @@ const SearchFrom = () => {
               returnDate: returnDate,
               tripTypeModify: tripType,
               qtyList: qtyList,
-              travelClass: getCabinClass(travelClassType),
+              travelClass: travelClassType,
               airlines: preAirlines,
               childAgeList: childAge,
             },

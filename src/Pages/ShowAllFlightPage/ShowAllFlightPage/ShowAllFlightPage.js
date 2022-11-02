@@ -17,6 +17,7 @@ import roundtrip from "../../../JSON/roundtrip.json";
 import flightmulticity from "../../../JSON/flightmulticity.json";
 import currentYear from "../../SharePages/Utility/currentYear";
 import ReactTooltip from "react-tooltip";
+import { getCabinClass } from "../../../common/functions";
 let cIndex = 1;
 const ShowAllFlightPage = () => {
   window.scrollTo(0, 0);
@@ -326,7 +327,7 @@ const ShowAllFlightPage = () => {
     adults: qtyList.Adult,
     childs: qtyList.Children,
     infants: qtyList.Infant,
-    cabinClass: 4,
+    cabinClass: getCabinClass(travelClassType),
     preferredCarriers: airlines !== undefined ? airlines.split(",") : [],
     prohibitedCarriers: [],
     childrenAges: [],
@@ -354,7 +355,7 @@ const ShowAllFlightPage = () => {
     adults: qtyList.Adult,
     childs: qtyList.Children,
     infants: qtyList.Infant,
-    cabinClass: 1,
+    cabinClass: getCabinClass(travelClassType),
     preferredCarriers: [],
     prohibitedCarriers: [],
     childrenAges: [],
@@ -378,7 +379,7 @@ const ShowAllFlightPage = () => {
     childs: qtyList.Children,
     infants: qtyList.Infant,
     isOpenCombination: false,
-    cabinClass: 1,
+    cabinClass: getCabinClass(travelClassType),
     preferredCarriers: [],
     prohibitedCarriers: [],
     taxRedemptions: [],
@@ -847,7 +848,7 @@ const ShowAllFlightPage = () => {
         childs: qtyList.Children,
         infants: qtyList.Infant,
         isOpenCombination: false,
-        cabinClass: 1,
+        cabinClass: getCabinClass(travelClassType),
         preferredCarriers: [],
         prohibitedCarriers: [],
         taxRedemptions: [],
@@ -983,7 +984,7 @@ const ShowAllFlightPage = () => {
         childs: qtyList.Children,
         infants: qtyList.Infant,
         isOpenCombination: false,
-        cabinClass: 1,
+        cabinClass: getCabinClass(travelClassType),
         preferredCarriers: [],
         prohibitedCarriers: [],
         taxRedemptions: [],
@@ -1052,7 +1053,7 @@ const ShowAllFlightPage = () => {
         childs: qtyList.Children,
         infants: qtyList.Infant,
         isOpenCombination: false,
-        cabinClass: 1,
+        cabinClass: getCabinClass(travelClassType),
         preferredCarriers: [],
         prohibitedCarriers: [],
         taxRedemptions: [],

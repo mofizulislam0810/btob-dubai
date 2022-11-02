@@ -31,7 +31,8 @@ const useAuthentication = () => {
         }
       })
       .catch((err) => {
-        console.log("Please try again");
+        //console.log("Please try again");
+        toast.error("Please try again");
       })
       .finally(() => {
         setLoading(false);

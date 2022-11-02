@@ -319,6 +319,9 @@ const ShowFlight = (props) => {
             <span className="text-start">
               <input
                 type="checkbox"
+                // cursor='pointer'
+                style={{ cursor: 'pointer' }}
+
                 className="show-flight-checkbox"
                 onClick={(e) => handleCheckBox(e)}
               />

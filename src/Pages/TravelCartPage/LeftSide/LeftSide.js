@@ -27,8 +27,8 @@ const LeftSide = () => {
   const itemCodeRef = JSON.parse(localStorage.getItem("itemCodeRef"));
   const origin = searchData.origin;
   const destination = searchData.destination;
-  // console.log(origin.match("Bangladesh")!==null?origin.match("Bangladesh")[0]:"");
-  // console.log(destination.match("Bangladesh")!==null?destination.match("Bangladesh")[0]:"");
+  console.log(origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "");
+  console.log(destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "");
   const qtyList = searchData.qtyList;
   const adultNumber = searchData.qtyList.Adult;
   const childrenNumber = searchData.qtyList.Children;
@@ -584,7 +584,7 @@ const LeftSide = () => {
         passengerType: "INF",
         gender: item.gender,
         dateOfBirth:
-          item.year + "-" + item.month.split("-")[0].trim() + "-" + item.date,
+          item.year + "-" + item.month + "-" + item.date,
         passengerKey: "0",
         isLeadPassenger: true,
         isQuickPassenger: isChecked
@@ -2762,6 +2762,7 @@ const LeftSide = () => {
                     <input
                       class="form-check-input"
                       type="checkbox"
+                      style={{ cursor: 'pointer' }}
                       value={isChecked}
                       id="flexCheckDefault100"
                       onChange={handleChange}

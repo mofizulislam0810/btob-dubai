@@ -14,6 +14,7 @@ import { environment } from "../../SharePages/Utility/environment";
 import axios from "axios";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { decode as base64_decode, encode as base64_encode } from "base-64";
+import { totalFlightDuration } from "../../../common/functions";
 
 let checkList = [];
 const ShowFlight = (props) => {
@@ -627,7 +628,8 @@ const ShowFlight = (props) => {
                       <span className="text-color">
                         <i className="fas fa-clock fa-sm"></i>
                         <span className="ms-1 font-size">
-                          {directions[0][0].segments[0].duration[0]}
+                          {/* {directions[0][0].segments[0].duration[0]} */}
+                          {totalFlightDuration(directions[0][0].segments)}
                         </span>
                       </span>
                     </div>
@@ -880,7 +882,8 @@ const ShowFlight = (props) => {
                       <span className="text-color">
                         <i className="fas fa-clock fa-sm"></i>
                         <span className="ms-1 font-size">
-                          {directions[1][0].segments[0].duration[0]}
+                          {/* {directions[1][0].segments[0].duration[0]} */}
+                          {totalFlightDuration(directions[1][0].segments)}
                         </span>
                       </span>
                     </div>

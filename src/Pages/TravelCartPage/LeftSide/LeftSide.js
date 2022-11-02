@@ -584,14 +584,13 @@ const LeftSide = () => {
         passengerType: "INF",
         gender: item.gender,
         dateOfBirth:
-          item.year + "-" + item.month.split("-")[0].trim() + "-" + item.date,
+          item.year + "-" + item.month + "-" + item.date,
         passengerKey: "0",
         isLeadPassenger: true,
         isQuickPassenger: isChecked
       };
       sendObj.passengerInfoes.push(passengerObj);
     });
-
     localStorage.setItem("passengerPack", JSON.stringify(sendObj));
     const priceCheck = {
       itemCodeRef: itemCodeRef,
@@ -705,7 +704,7 @@ const LeftSide = () => {
     }
   };
 
-  console.log(isChecked);
+  // console.log(isChecked);
   return (
     <form onSubmit={bookingData}>
       <div className="col-lg-12">
@@ -1519,7 +1518,7 @@ const LeftSide = () => {
                                   v[index].passportMonth = Number(
                                     item.expireDate.split("-")[1]
                                   );
-                                  v[index].passportYear = Number(
+                                  v[index].passportYear = Number(item.expireDate == null ? "" :
                                     item.expireDate.split("-")[0]
                                   );
                                   v[index].gender = item.gender;
@@ -2137,7 +2136,7 @@ const LeftSide = () => {
               })}
               {/* <div>{JSON.stringify(child, null, 2)}</div> */}
               {infant.map((p, index) => {
-                console.log({ppppppp: p})
+                // console.log({ppppppp: p})
                 return (
                   <div key={index} className="border p-2 my-3">
                     <div className="row">
@@ -2185,7 +2184,7 @@ const LeftSide = () => {
                                   v[index].passportNumber = item.documentNumber;
                                   v[index].issuingCountry =
                                     item.documentIssuingCountry;
-                                  v[index].passportDate = Number(
+                                  v[index].passportDate = Number(item.expireDate == null ? "" :
                                     item.expireDate.split("-")[2].split("T")[0]
                                   );
                                   v[index].passportMonth = Number(

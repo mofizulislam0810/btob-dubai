@@ -402,7 +402,7 @@ const QuickPassenger = () => {
                                   " " +
                                   item.middle +
                                   " " +
-                                  item.last}
+                                  item.last} ({item.passengerType})
                                 {/* </a> */}
                               </td>
                               <td>{item.email}</td>

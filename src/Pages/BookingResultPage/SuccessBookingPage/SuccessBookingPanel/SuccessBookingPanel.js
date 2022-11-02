@@ -166,9 +166,7 @@ const SuccessBookingPanel = () => {
                               <td style={{ color: 'red' }}>
                                 {/* {console.log(bookData.data?.item1.ticketingTimeLimit)} */}
                                 {/* {bookData.data?.item1.ticketingTimeLimit} */}
-                                {moment(bookData.data?.item1.ticketingTimeLimit).format("DD-MM-YYYY hh:mm:ss A")}
-
-
+                                {bookData.data?.item1.ticketingTimeLimit}
                               </td>
                             </tr>
                           </> : <>

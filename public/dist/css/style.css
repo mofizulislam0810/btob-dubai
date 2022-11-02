@@ -21,7 +21,7 @@ body{
 
 
 #form-bg{
-    background: linear-gradient(100.94deg, #a34fd2 -9.51%, #fc6b9d 115.79%);
+    background: #FFFFFF;
     padding: 30px 30px 70px 30px;
     padding-bottom: 28px;
   }
@@ -48,8 +48,10 @@ body{
     height: 50px;
     padding:10px;
     border:0;
+    background-color: #f8f2fb;
     /* box-shadow:0 0 15px 4px rgb(255, 255, 255); */
 }
+
 
 /* .traveler-class{
     height: 50px;
@@ -147,7 +149,7 @@ hr{
 }
 
   .myinput {
-    background: #aa8439;
+    background: #f8f2fb;
     border-radius: 8px;
     height: 7px;
     width: 400px;
@@ -155,7 +157,7 @@ hr{
     transition: background 450ms ease-in;
     -webkit-appearance: none;
   }
-  
+
   .myinput::-webkit-slider-thumb {
     width: 20px;
     height: 20px;

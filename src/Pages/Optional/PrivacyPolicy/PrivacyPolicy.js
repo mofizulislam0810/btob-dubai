@@ -23,7 +23,7 @@ const PrivacyPolicy = () => {
                 personal information that we may obtain from you. By using our
                 website{" "}
                 <u>
-                  <a className="text-white fw-bold" href="http://www.FirstTrip.com/">www.FirstTrip.com</a>
+                  <a className="fw-bold" href="http://www.FirstTrip.com/">www.FirstTrip.com</a>
                 </u>{" "}
                 (henceforth referred to as FirstTrip) which also comprises of the
                 mobile site, smartphone app platforms such as iOS, Android,

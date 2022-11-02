@@ -339,10 +339,10 @@ const ShowAllFlight = ({
                   </div>
                   <div>
                     <span className="float-start fw-bold" style={{ fontSize: "13px" }}>
-                      MIN {currency !== undefined ? currency : "BDT"}   {mainJson?.minMaxPrice?.minPrice}
+                      MIN {currency !== undefined ? currency : "BDT"}   {filterPrice[0]}
                     </span>
                     <span className="float-end fw-bold" style={{ fontSize: "13px" }}>
-                      MAX {currency !== undefined ? currency : "BDT"}   {mainJson?.minMaxPrice?.maxPrice}
+                      MAX {currency !== undefined ? currency : "BDT"}   {filterPrice[1]}
                     </span>
                   </div>
                   {/* <RangeSlider defaultValue={[mainJson?.minMaxPrice?.minPrice, mainJson?.minMaxPrice?.maxPrice]} min={mainJson?.minMaxPrice?.minPrice} max={mainJson?.minMaxPrice?.maxPrice} step={0.01}>

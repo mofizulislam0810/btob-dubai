@@ -603,7 +603,6 @@ const LeftSide = () => {
       };
       sendObj.passengerInfoes.push(passengerObj);
     });
-
     localStorage.setItem("passengerPack", JSON.stringify(sendObj));
     const priceCheck = {
       itemCodeRef: itemCodeRef,
@@ -668,6 +667,10 @@ const LeftSide = () => {
             toast.error(response.data.item2.message);
             navigate("/failedbooking");
           }
+        })
+        .catch((err) => {
+          setLoading(false);
+          navigate("/failedbooking");
         });
     }
     fetchOptions();
@@ -696,6 +699,10 @@ const LeftSide = () => {
             toast.error("Booking Failed! please try again.");
             navigate("/failedbooking");
           }
+        })
+        .catch((err) => {
+          setLoading(false);
+          navigate("/failedbooking");
         });
     }
     e.preventDefault();
@@ -3143,7 +3150,7 @@ const LeftSide = () => {
                   />
                   <label class="form-check-label font-size-checkbok" for="flexCheckDefault">
                     By Booking/Issuing this Ticket I agree to{" "}
-                    <Link to="/termandcondition">Triplover Terms & Conditions</Link>
+                    <Link to="/termandcondition">FirstTrip Terms & Conditions</Link>
                   </label>
                 </div>
               </div>

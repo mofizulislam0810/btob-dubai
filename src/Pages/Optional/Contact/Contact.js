@@ -22,7 +22,7 @@ const Contact = () => {
                 <span className="">
                   <i className="la la-home la-lg"></i>
                 </span>{" "}
-                Al Muhairi 113-127, Al Dhagaya, Deira, Dubai, United Arab Emirates
+                39 Sharif Plaza, Kemal Ataturk Avenue, Banani, Dhaka 1213
               </p>
               <p>
                 <span className="">
@@ -34,7 +34,7 @@ const Contact = () => {
                 <span className="">
                   <i className="la la-envelope la-lg"></i>
                 </span>{" "}
-                <a href="mailto:info@triplover.com" className="text-dark fw-bold">info@triplover.ae</a>
+                <a href="mailto:info@triplover.com" className="text-dark fw-bold">info@FirstTrip.com</a>
               </p>
             </div>
             {/* <div className="col-lg-12">

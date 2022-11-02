@@ -9,8 +9,8 @@ const useAuthentication = () => {
   const token = localStorage.getItem("token");
   const [login, setLogin] = useState(token && token.length > 0);
   let [fareRules, setFareRules] = useState({});
-  const [count,setCount] = useState(0);
-  const [id,setId] = useState();
+  const [count, setCount] = useState(0);
+  const [id, setId] = useState();
 
   const onClickLoginButton = (loginData, navigate, location, toast) => {
     setLoading(true);
@@ -18,7 +18,7 @@ const useAuthentication = () => {
       .post(environment.login, loginData)
       .then((response) => {
         console.log(response.data.data);
-        if (response.data.isSuccess==true) {
+        if (response.data.isSuccess == true) {
           localStorage.setItem("token", JSON.stringify(response.data.data));
           localStorage.setItem("LoginData", JSON.stringify(loginData));
           setLogin(true);
@@ -26,13 +26,14 @@ const useAuthentication = () => {
           // navigate(destination);
           window.location.href = destination;
         } else {
-          toast.error("Email or password is wrong!");
+          toast.error(response.data.message);
         }
       })
       .catch((err) => {
-        toast.error("Email or password is wrong!");
+        //console.log("Please try again");
+        toast.error("Please try again");
       })
-      .finally(()=>{
+      .finally(() => {
         setLoading(false);
       });
     // const onClickLoginButton = (loginData, navigate, location, toast) => {
@@ -61,13 +62,12 @@ const useAuthentication = () => {
     const fareRulesObj = {
       itemCodeRef: itemCode,
       uniqueTransID: uId,
-      segmentCodeRefs: []
+      segmentCodeRefs: [],
     };
 
     dir[0][0].segments.map((i) =>
       fareRulesObj.segmentCodeRefs.push(i.segmentCodeRef)
     );
-
 
     // if (Object.keys(dir[0][0]).length > 0) {
     //   dir[0][0].segments.map((i) =>
@@ -97,8 +97,7 @@ const useAuthentication = () => {
         });
     }
     fetchOptions();
-  }
-
+  };
 
   return {
     onClickLoginButton,
@@ -115,7 +114,7 @@ const useAuthentication = () => {
     id,
     handleFareRules,
     fareRules,
-    setFareRules
+    setFareRules,
   };
 };
 

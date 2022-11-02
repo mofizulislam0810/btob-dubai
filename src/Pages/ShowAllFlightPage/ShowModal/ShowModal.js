@@ -10,6 +10,7 @@ import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
 import { Parser } from "html-to-react";
 import DurationFormat from "../../SharePages/Utility/DurationFormat";
+import { totalFlightDuration } from "../../../common/functions";
 const ShowModal = ({
   flag,
   index,
@@ -976,7 +977,13 @@ const ShowModal = ({
                                       </span>
                                     </div>
                                     <div className="col-lg-3 fs-6 fw-bold">
-                                      <span>Duration: {seg.duration[0]}</span>
+                                      {/* <span>Duration: {seg.duration[0]}</span> */}
+                                      <span>
+                                        Duration:{" "}
+                                        {totalFlightDuration(
+                                          direction0.segments
+                                        )}
+                                      </span>
                                     </div>
                                   </div>
                                 ) : (
@@ -1195,7 +1202,8 @@ const ShowModal = ({
                                   <div className="col-lg-3 fs-6 fw-bold">
                                     <span>
                                       Duration:{" "}
-                                      {direction1.segments[0].duration[0]}
+                                      {/* {direction1.segments[0].duration[0]} */}
+                                      {totalFlightDuration(direction1.segments)}
                                     </span>
                                   </div>
                                 </div>

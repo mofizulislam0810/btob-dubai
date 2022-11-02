@@ -17,6 +17,7 @@
     "datatables.net": "^1.11.5",
     "datatables.net-dt": "^1.11.5",
     "date-fns": "^2.29.3",
+    "file-saver": "^2.0.5",
     "framer-motion": "^6.5.1",
     "fuse.js": "^6.5.3",
     "html-to-pdfmake": "^2.3.11",

@@ -599,9 +599,6 @@ const Balance = () => {
                               }
                               }
                             >
-                              <option key={0} value="0">
-                                Select One
-                              </option>
                               {deposittypeList.map((item, index) => {
                                 return (
                                   <option key={index} value={item.id}>

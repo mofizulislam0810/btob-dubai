@@ -52,7 +52,7 @@ const ForgotPassword = () => {
                 Please check your email.
               </p> :
                 <p className="login-box-msg">
-                  Provide your registered email with Triplover to reset your
+                  Provide your registered email with FirstTrip to reset your
                   password.
                 </p>
             }

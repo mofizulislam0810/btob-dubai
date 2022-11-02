@@ -39,15 +39,15 @@ import { nanoid } from "nanoid";
 
 const Registration = () => {
   const navigate = useNavigate();
-  let [countryName, setCountryName] = useState("United Arab Emirates");
+  let [countryName, setCountryName] = useState("Bangladesh");
   let [zoneList, setZoneList] = useState([]);
-  let [agentDialCode, setAgentDialCode] = useState("+971");
+  let [agentDialCode, setAgentDialCode] = useState("+88");
   let [agentName, setAgentName] = useState("");
   let [agentPhoneNo, setAgentPhoneNo] = useState("");
   let [agentEmail, setAgentEmail] = useState("");
   let [agentAddress, setAgentAddress] = useState("");
   let [agentContactPerson, setAgentContactPerson] = useState("");
-  let [userDialCode, setUserDialCode] = useState("+971");
+  let [userDialCode, setUserDialCode] = useState("+88");
   let [userFullName, setUserFullName] = useState("");
   let [userPhoneNo, setUserPhoneNo] = useState("");
   let [userEmail, setUserEmail] = useState("");
@@ -81,7 +81,7 @@ const Registration = () => {
   };
   useEffect(() => {
     getZoneData("Bangladesh");
-    getCityData("United Arab Emirates");
+    getCityData("Bangladesh");
   }, []);
   const handleCountryChange = (e) => {
     setCountryName(e.target.value);
@@ -137,10 +137,10 @@ const Registration = () => {
       toast.error("Sorry! Password does not same");
       return;
     }
-    if (captchaValue === "") {
-      toast.error("Please selecte captcha");
-      return;
-    }
+    // if (captchaValue === "") {
+    //   toast.error("Please selecte captcha");
+    //   return;
+    // }
     let registerObj = {
       CountryName: countryName,
       ZoneId: zoneId,
@@ -176,9 +176,9 @@ const Registration = () => {
     postData();
   };
 
-  function onChange(value) {
-    setCaptchaValue(value);
-  }
+  // function onChange(value) {
+  //   setCaptchaValue(value);
+  // }
 
   const ourServiceData = [
     { text: "Flights", img: flightsImg },
@@ -541,7 +541,7 @@ const Registration = () => {
                               </div>
                             </div>
 
-                            <div className="row">
+                            {/* <div className="row">
                               <div className="col-lg-12">
                                 <div
                                   className="input-group"
@@ -553,7 +553,7 @@ const Registration = () => {
                                   />
                                 </div>
                               </div>
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       </div>

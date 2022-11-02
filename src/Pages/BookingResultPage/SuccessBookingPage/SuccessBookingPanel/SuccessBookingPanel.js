@@ -166,7 +166,9 @@ const SuccessBookingPanel = () => {
                               <td style={{ color: 'red' }}>
                                 {/* {console.log(bookData.data?.item1.ticketingTimeLimit)} */}
                                 {/* {bookData.data?.item1.ticketingTimeLimit} */}
-                                {moment(bookData.data?.item1.ticketingTimeLimit).format("ddd, DD MMM,YY")}
+                                {moment(bookData.data?.item1.ticketingTimeLimit).format("DD-MM-YYYY hh:mm:ss A")}
+
+
                               </td>
                             </tr>
                           </> : <>
@@ -260,7 +262,7 @@ const SuccessBookingPanel = () => {
                                   </td>
                                   <td>
                                     {moment(item.departure).format(
-                                      "DD-MMMM-yyyy hh:mm:ss A"
+                                      "DD-MM-YYYY hh:mm:ss A"
                                     )}
 
                                     {/* moment(item.issueDate).format(
@@ -279,7 +281,7 @@ const SuccessBookingPanel = () => {
                                   </td>
                                   <td>
                                     {moment(item.arrival).format(
-                                      "DD-MMMM-yyyy hh:mm:ss"
+                                      "DD-MM-YYYY hh:mm:ss A"
                                     )}
                                   </td>
                                   <td>{item.fareBasisCode}</td>
@@ -320,7 +322,7 @@ const SuccessBookingPanel = () => {
                                     </td>
                                     <td>
                                       {moment(item.departure).format(
-                                        "DD-MMMM-yyyy hh:mm:ss"
+                                        "DD-MM-YYYY hh:mm:ss A"
                                       )}
                                     </td>
                                     <td>
@@ -335,7 +337,7 @@ const SuccessBookingPanel = () => {
                                     </td>
                                     <td>
                                       {moment(item.arrival).format(
-                                        "DD-MMMM-yyyy hh:mm:ss"
+                                        "DD-MM-YYYY hh:mm:ss A"
                                       )}
                                     </td>
                                     <td>{item.fareBasisCode}</td>
@@ -379,7 +381,7 @@ const SuccessBookingPanel = () => {
                                     </td>
                                     <td>
                                       {moment(item.departure).format(
-                                        "DD-MMMM-yyyy hh:mm:ss"
+                                        "DD-MM-YYYY hh:mm:ss A"
                                       )}
                                     </td>
                                     <td>
@@ -394,7 +396,7 @@ const SuccessBookingPanel = () => {
                                     </td>
                                     <td>
                                       {moment(item.arrival).format(
-                                        "DD-MMMM-yyyy hh:mm:ss"
+                                        "DD-MM-YYYY hh:mm:ss A"
                                       )}
                                     </td>
                                     <td>{item.fareBasisCode}</td>
@@ -438,7 +440,7 @@ const SuccessBookingPanel = () => {
                                     </td>
                                     <td>
                                       {moment(item.departure).format(
-                                        "DD-MMMM-yyyy hh:mm:ss"
+                                        "DD-MM-YYYY hh:mm:ss A"
                                       )}
                                     </td>
                                     <td>
@@ -453,7 +455,7 @@ const SuccessBookingPanel = () => {
                                     </td>
                                     <td>
                                       {moment(item.arrival).format(
-                                        "DD-MMMM-yyyy hh:mm:ss"
+                                        "DD-MM-YYYY hh:mm:ss A"
                                       )}
                                     </td>
                                     <td>{item.fareBasisCode}</td>
@@ -497,7 +499,7 @@ const SuccessBookingPanel = () => {
                                     </td>
                                     <td>
                                       {moment(item.departure).format(
-                                        "DD-MMMM-yyyy hh:mm:ss"
+                                        "DD-MM-YYYY hh:mm:ss A"
                                       )}
                                     </td>
                                     <td>
@@ -512,7 +514,7 @@ const SuccessBookingPanel = () => {
                                     </td>
                                     <td>
                                       {moment(item.arrival).format(
-                                        "DD-MMMM-yyyy hh:mm:ss"
+                                        "DD-MM-YYYY hh:mm:ss A"
                                       )}
                                     </td>
                                     <td>{item.fareBasisCode}</td>
@@ -556,7 +558,7 @@ const SuccessBookingPanel = () => {
                                     </td>
                                     <td>
                                       {moment(item.departure).format(
-                                        "DD-MMMM-yyyy hh:mm:ss"
+                                        "DD-MM-YYYY hh:mm:ss A"
                                       )}
                                     </td>
                                     <td>
@@ -571,7 +573,7 @@ const SuccessBookingPanel = () => {
                                     </td>
                                     <td>
                                       {moment(item.arrival).format(
-                                        "DD-MMMM-yyyy hh:mm:ss"
+                                        "DD-MM-YYYY hh:mm:ss A"
                                       )}
                                     </td>
                                     <td>{item.fareBasisCode}</td>

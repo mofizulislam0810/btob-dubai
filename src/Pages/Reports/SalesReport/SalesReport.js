@@ -157,8 +157,8 @@ const SalesReport = () => {
                                 <th>Booking ID</th>
                                 <th>PNR</th>
                                 <th>Ticket Number</th>
-                                <th className="text-start">Passanger Name</th>
-                                <th>Passanger Type</th>
+                                <th className="text-start">Passenger Name</th>
+                                <th>Passenger Type</th>
                                 {/* <th colSpan={3}>Buying</th> */}
                                 {/* <th colSpan={3}>Selling</th> */}
                                 <th className="text-end">Base Fare</th>

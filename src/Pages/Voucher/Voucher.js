@@ -84,7 +84,7 @@ const Voucher = () => {
               <div>
                 <div className="card box-shadow">
                   <div className="card-header">
-                    
+
                     <ul id="menu-standard">
                       <li id="menu-item">
                         <ReactToPrint
@@ -117,7 +117,7 @@ const Voucher = () => {
                             {ticketingList.length > 0 ? (
                               <>
                                 {ticketingList[0].agentLogo !== null &&
-                                ticketingList[0].agentLogo !== "" ? (
+                                  ticketingList[0].agentLogo !== "" ? (
                                   <img
                                     alt="img01"
                                     src={
@@ -142,134 +142,134 @@ const Voucher = () => {
                             )}
                           </td>
                           <td className="text-end bg-white">
-                          <address>
-                            <span className="fw-bold fs-6">
-                              {agentInfo.name} Travel Agrncy
-                            </span>
-                            <br />
-                            <div
-                              className="mt-2"
-                              style={{ fontSize: "10px", lineHeight: "12px" }}
-                            >
-                              {agentInfo.address}
+                            <address>
+                              <span className="fw-bold fs-6">
+                                {agentInfo.name} Travel Agrncy
+                              </span>
                               <br />
-                              {agentInfo.mobileNo}<br></br>
-                              Email: support@triplover.ae
-                            </div>
-                          </address>
-                        </td>
+                              <div
+                                className="mt-2"
+                                style={{ fontSize: "10px", lineHeight: "12px" }}
+                              >
+                                {agentInfo.address}
+                                <br />
+                                {agentInfo.mobileNo}<br></br>
+                                Email: support@FirstTrip.com
+                              </div>
+                            </address>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    
-                  <table
-                    class="table table-borderless my-1 table-sm"
-                    style={{ fontSize: "10px" }}
-                  >
-                    <tbody>
-                      <tr>
-                        <td
-                          className="text-start bg-white"
-                          style={{ width: "10%" }}
-                        >
-                          Booking Reference :{" "}
-                          <span className="fw-bold fs-6">
-                            {ticketingList[0]?.pnr}
-                          </span>
-                        </td>
-                        <td
-                          className="text-end bg-white"
-                          style={{ width: "10%" }}
-                        >
-                          Issue Date :{" "}
-                          <span className="fw-bold">{moment(ticketingList[0]?.issueDate).format("DD-MMMM-yyyy ddd")}</span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
 
-                  <div className="d-flex gap-3 justify-content-between">
-                    <div className="">
-                      <table
-                        class="table table-bordered table-sm"
-                        style={{ fontSize: "10px",width:"35rem" }}
-                      >
-                        <thead>
-                          <tr className="text-start">
-                            <th>PASSENGER NAME</th>
-                            <th
-                              className="text-center"
-                              style={{ width: "10%" }}
-                            >
-                              TYPE
-                            </th>
-                            <th style={{ width: "20%" }}>TICKET NUMBER</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {passengerList.map((item, index) => {
-                            return (
-                              <tr className="text-start">
-                                <td>
-                                  {item.title}{" "}
-                                  {item.first}{" "}
-                                  {item.last}
-                                </td>
-                                <td
-                                  className="text-center"
-                                  style={{ width: "10%" }}
-                                >
-                                  {item.passengerType}
-                                </td>
-                                <td style={{ width: "20%" }}>
-                                  {item.ticketNumbers}
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
-                    <div className="">
-                      <table
-                        class="table table-bordered table-sm float-right"
-                        style={{ fontSize: "10px", width: "20rem" }}
-                      >
-                        <tbody className="text-start">
-                          <tr>
-                            <td className="fw-bold">TLL REFERENCE</td>
-                            <td>{ticketingList[0]?.uniqueTransID}</td>
-                          </tr>
-                          <tr>
-                            <td className="fw-bold">FLIGHT TYPE</td>
-                            <td>International</td>
-                          </tr>
-                          <tr>
-                            <td className="fw-bold">JOURNEY TYPE</td>
-                            <td>{ticketingList[0]?.journeyType}</td>
-                          </tr>
-                          <tr>
-                            <td className="fw-bold">STATUS</td>
-                            <td>{ticketingList[0]?.status}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-
-                  <div className="table-responsive-sm mt-2">
-                    <p
-                      className="bg-secondary p-1 fw-bold text-start text-white"
+                    <table
+                      class="table table-borderless my-1 table-sm"
                       style={{ fontSize: "10px" }}
                     >
-                      FLIGHT DETAILS
-                    </p>
-                    <table
-                      class="table table-borderless table-sm"
-                      style={{ fontSize: "10px"}}
-                    >
-                      {ticketingList.length > 0 ? (
+                      <tbody>
+                        <tr>
+                          <td
+                            className="text-start bg-white"
+                            style={{ width: "10%" }}
+                          >
+                            Booking Reference :{" "}
+                            <span className="fw-bold fs-6">
+                              {ticketingList[0]?.pnr}
+                            </span>
+                          </td>
+                          <td
+                            className="text-end bg-white"
+                            style={{ width: "10%" }}
+                          >
+                            Issue Date :{" "}
+                            <span className="fw-bold">{moment(ticketingList[0]?.issueDate).format("DD-MMMM-yyyy ddd")}</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <div className="d-flex gap-3 justify-content-between">
+                      <div className="">
+                        <table
+                          class="table table-bordered table-sm"
+                          style={{ fontSize: "10px", width: "35rem" }}
+                        >
+                          <thead>
+                            <tr className="text-start">
+                              <th>PASSENGER NAME</th>
+                              <th
+                                className="text-center"
+                                style={{ width: "10%" }}
+                              >
+                                TYPE
+                              </th>
+                              <th style={{ width: "20%" }}>TICKET NUMBER</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {passengerList.map((item, index) => {
+                              return (
+                                <tr className="text-start">
+                                  <td>
+                                    {item.title}{" "}
+                                    {item.first}{" "}
+                                    {item.last}
+                                  </td>
+                                  <td
+                                    className="text-center"
+                                    style={{ width: "10%" }}
+                                  >
+                                    {item.passengerType}
+                                  </td>
+                                  <td style={{ width: "20%" }}>
+                                    {item.ticketNumbers}
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="">
+                        <table
+                          class="table table-bordered table-sm float-right"
+                          style={{ fontSize: "10px", width: "20rem" }}
+                        >
+                          <tbody className="text-start">
+                            <tr>
+                              <td className="fw-bold">TLL REFERENCE</td>
+                              <td>{ticketingList[0]?.uniqueTransID}</td>
+                            </tr>
+                            <tr>
+                              <td className="fw-bold">FLIGHT TYPE</td>
+                              <td>International</td>
+                            </tr>
+                            <tr>
+                              <td className="fw-bold">JOURNEY TYPE</td>
+                              <td>{ticketingList[0]?.journeyType}</td>
+                            </tr>
+                            <tr>
+                              <td className="fw-bold">STATUS</td>
+                              <td>{ticketingList[0]?.status}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div className="table-responsive-sm mt-2">
+                      <p
+                        className="bg-secondary p-1 fw-bold text-start text-white"
+                        style={{ fontSize: "10px" }}
+                      >
+                        FLIGHT DETAILS
+                      </p>
+                      <table
+                        class="table table-borderless table-sm"
+                        style={{ fontSize: "10px" }}
+                      >
+                        {ticketingList.length > 0 ? (
                           <tbody>
                             <tr>
                               <td
@@ -302,7 +302,7 @@ const Voucher = () => {
                                   >
                                     DEPARTS{" "}
                                     <span className="ms-5">
-                                    {ticketingList[0].origin},{" "}
+                                      {ticketingList[0].origin},{" "}
                                       {airports
                                         .filter((f) => f.iata === ticketingList[0].origin)
                                         .map((item) => item.city)}
@@ -316,7 +316,7 @@ const Voucher = () => {
                                   >
                                     ARRIVES{" "}
                                     <sapn className="ms-5">
-                                    {ticketingList[0].destination},
+                                      {ticketingList[0].destination},
                                       {airports
                                         .filter((f) => f.iata === ticketingList[0].destination)
                                         .map((item) => item.city)}
@@ -338,8 +338,8 @@ const Voucher = () => {
                                     <h6>
                                       {" "}
                                       {moment(ticketingList[0].departure).format(
-                                      "hh:mm:ss"
-                                    )}
+                                        "hh:mm:ss"
+                                      )}
                                     </h6>
                                     <h6
                                       className="text-secondary"
@@ -359,9 +359,9 @@ const Voucher = () => {
                                   <td className="" style={{ fontSize: "18px" }}>
                                     <h6 className="fw-bold">{ticketingList[0].destination}</h6>
                                     <h6>
-                                    {moment(ticketingList[0].arrival).format(
-                                      "hh:mm:ss"
-                                    )}
+                                      {moment(ticketingList[0].arrival).format(
+                                        "hh:mm:ss"
+                                      )}
                                     </h6>
                                     <h6
                                       className="text-secondary"
@@ -384,7 +384,7 @@ const Voucher = () => {
                                     <span className="fw-bold fs-6">
                                       BS-101
                                       <span style={{ marginLeft: "45px" }}>
-                                       ECONOMY   
+                                        ECONOMY
                                       </span>
                                     </span>
                                   </td>
@@ -414,35 +414,35 @@ const Voucher = () => {
                               </td>
                             </tr>
                           </tbody>
-                        ) :(<></>)
-                      }
-                    </table>
-                  </div>
+                        ) : (<></>)
+                        }
+                      </table>
+                    </div>
 
 
-                  <div className="mt-2 mb-5">
-                    <p
-                      className="bg-secondary p-1 fw-bold text-start text-white"
-                      style={{ fontSize: "10px" }}
-                    >
-                      IMPORTANT NOTICE FOR TRAVELLERS
-                    </p>
-                    <p style={{ fontSize: "10px" }} className="text-start my-2">
-                      BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER
-                      STATUS/ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.
-                      Carriage and other services provided by the carrier are
-                      subject to conditions of carriage, which are hereby
-                      incorporated by reference. These conditions may be
-                      obtained from the issuing carrier. Passengers on a journey
-                      involving an ultimate destination or a stop in a country
-                      other than the country of departure are advised that
-                      international treaties known as the Montreal Convention,
-                      or its predecessor, the Warsaw Convention, including its
-                      amendments (the Warsaw Convention System), may apply to
-                      the entire journey, including any portion thereof within a
-                      country.
-                    </p>
-                  </div>
+                    <div className="mt-2 mb-5">
+                      <p
+                        className="bg-secondary p-1 fw-bold text-start text-white"
+                        style={{ fontSize: "10px" }}
+                      >
+                        IMPORTANT NOTICE FOR TRAVELLERS
+                      </p>
+                      <p style={{ fontSize: "10px" }} className="text-start my-2">
+                        BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER
+                        STATUS/ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.
+                        Carriage and other services provided by the carrier are
+                        subject to conditions of carriage, which are hereby
+                        incorporated by reference. These conditions may be
+                        obtained from the issuing carrier. Passengers on a journey
+                        involving an ultimate destination or a stop in a country
+                        other than the country of departure are advised that
+                        international treaties known as the Montreal Convention,
+                        or its predecessor, the Warsaw Convention, including its
+                        amendments (the Warsaw Convention System), may apply to
+                        the entire journey, including any portion thereof within a
+                        country.
+                      </p>
+                    </div>
                   </div>
                   {/* <div className="card-body">
                     
@@ -453,7 +453,7 @@ const Voucher = () => {
           </div>
         </section>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

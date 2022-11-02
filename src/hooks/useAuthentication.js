@@ -24,7 +24,6 @@ const useAuthentication = () => {
           setLogin(true);
           const destination = location.state?.from.pathname || "/search";
           // navigate(destination);
-          toast.sucess(response.data.message);
           window.location.href = destination;
         } else {
           toast.error(response.data.message);

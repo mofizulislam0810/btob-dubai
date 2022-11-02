@@ -567,6 +567,9 @@ const SearchFrom = () => {
                 boxShadow="lg"
                 borderRadius="8px"
                 border="1px solid lightgray"
+                style={{
+                  backgroundColor: "rgba(255, 255, 255, 0.9)",
+                }}
               >
                 <div className="row">
                   <div

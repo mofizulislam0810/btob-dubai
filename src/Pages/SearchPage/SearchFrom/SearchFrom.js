@@ -1001,6 +1001,9 @@ const SearchFrom = () => {
                             autoComplete="off"
                             id="txtFrom1"
                             required
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1027,6 +1030,9 @@ const SearchFrom = () => {
                             id="txtTo1"
                             autoComplete="off"
                             required
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1076,6 +1082,9 @@ const SearchFrom = () => {
                             placeholder="From"
                             autoComplete="off"
                             id="txtFrom2"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1101,6 +1110,9 @@ const SearchFrom = () => {
                             placeholder="To"
                             id="txtTo2"
                             autoComplete="off"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1123,6 +1135,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               borderRight: "1px solid gray",
+                              background: "#f8f2fb"
                             }}
                           ></div>
                         </div>
@@ -1149,6 +1162,9 @@ const SearchFrom = () => {
                             placeholder="From"
                             autoComplete="off"
                             id="txtFrom3"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1174,6 +1190,9 @@ const SearchFrom = () => {
                             placeholder="To"
                             id="txtTo3"
                             autoComplete="off"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1197,6 +1216,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               borderRight: "1px solid gray",
+                              background: "#f8f2fb"
                             }}
                           ></div>
                         </div>
@@ -1223,6 +1243,9 @@ const SearchFrom = () => {
                             placeholder="From"
                             autoComplete="off"
                             id="txtFrom4"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1248,6 +1271,9 @@ const SearchFrom = () => {
                             placeholder="To"
                             id="txtTo4"
                             autoComplete="off"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1270,6 +1296,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               borderRight: "1px solid gray",
+                              background: "#f8f2fb"
                             }}
                           ></div>
                         </div>
@@ -1296,6 +1323,9 @@ const SearchFrom = () => {
                             placeholder="From"
                             autoComplete="off"
                             id="txtFrom5"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1321,6 +1351,9 @@ const SearchFrom = () => {
                             placeholder="To"
                             id="txtTo5"
                             autoComplete="off"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1343,6 +1376,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               borderRight: "1px solid gray",
+                              background: "#f8f2fb"
                             }}
                           ></div>
                         </div>

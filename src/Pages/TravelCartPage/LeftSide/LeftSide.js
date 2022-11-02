@@ -655,6 +655,10 @@ const LeftSide = () => {
             toast.error(response.data.item2.message);
             navigate("/failedbooking");
           }
+        })
+        .catch((err) => {
+          setLoading(false);
+          navigate("/failedbooking");
         });
     }
     fetchOptions();
@@ -683,6 +687,10 @@ const LeftSide = () => {
             toast.error("Booking Failed! please try again.");
             navigate("/failedbooking");
           }
+        })
+        .catch((err) => {
+          setLoading(false);
+          navigate("/failedbooking");
         });
     }
     e.preventDefault();

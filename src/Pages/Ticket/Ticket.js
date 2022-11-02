@@ -9,14 +9,14 @@ import { environment } from "../SharePages/Utility/environment";
 import moment from "moment";
 import { useLocation } from "react-router-dom";
 import produce from "immer";
+import {saveAs} from 'file-saver'
 import tllLogo from "../../../src/images/logo/logo-combined.png";
 import ReactToPrint from "react-to-print";
 import { ToastContainer, toast } from "react-toastify";
 import airports from "../../JSON/airports.json";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import logo from '../../images/logo/logo-combined.png'
-
+// import {Image} from "../../../src/images/logo";
 
 const Ticket = () => {
   let [ticketingList, setTicketingList] = useState([]);
@@ -31,7 +31,45 @@ const Ticket = () => {
   let [passengerListEdited, setPassengerListEdited] = useState([]);
   let [totalPriceEdited, setTotalPriceEdited] = useState(0);
   let [agentInfo, setAgentInfo] = useState([]);
-  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+  const [updateImage, setUpdateImage] = useState({})
+  const [updateImage2, setUpdateImage2] = useState({})
+
+  useEffect( () => {
+// src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
+
+    Img();
+    Img2();
+  }, [ticketingList])
+
+  const Img = async () => {
+    if(ticketingList.ticketInfo?.agentLogo != undefined){
+      let s3URL = await fetch(`https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/${ticketingList.ticketInfo?.agentLogo}`, {
+        mode: 'cors',
+        credentials: 'include'
+      }).then((data) => { setUpdateImage(data) })
+  
+      
+    } else {
+      Img();
+    }
+
+    
+  };
+  const Img2 = async () => {
+    if(ticketingList.ticketInfo?.agentLogo != undefined){
+      let s3URL = await fetch(`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`, {
+        mode: 'cors',
+        credentials: 'include'
+      }).then((data) => { setUpdateImage2(data) })
+  
+      
+    } else {
+      Img2();
+    }
+
+    
+  };
+console.log(updateImage,"updateImage")
   let staticURL = "wwwroot/Uploads/Support/";
   const [isDownloading, setIsDownloading] = useState(false);
   const componentRef = useRef();
@@ -122,6 +160,8 @@ const Ticket = () => {
     setIsDownloading(true);
     const element = donwloadRef.current;
     const canvas = await html2canvas(element, {
+      allowTaint : false,
+      useCORS: true,
       scrollX: 0,
       scrollY: 0,
       quality: 4,
@@ -138,6 +178,7 @@ const Ticket = () => {
     pdf.save("ticket_FirstTrip.pdf");
     setIsDownloading(false);
   }
+  console.log(ticketingList.ticketInfo?.agentLogo,'-----')
   return (
     <div>
       <Navbar></Navbar>
@@ -197,7 +238,8 @@ const Ticket = () => {
                         <button
                           href="javascript:void(0)"
                           className="btn btn-sm btn-secondary float-right mr-1 d-print-none rounded"
-                          onClick={handleDownloadPdf}
+                          // onClick={handleDownloadPdf}
+                          onClick = {handleDownloadPdf}
                           disabled={isDownloading ? true : false}
                         >
                           {
@@ -221,10 +263,9 @@ const Ticket = () => {
                                 ticketingList.ticketInfo?.agentLogo !== "" ? (
                                 <img
                                   alt="img01"
-                                  src={
-                                    s3URL + `${ticketingList.ticketInfo?.agentLogo}`
-                                  }
-                                  style={{ width: "150px", height: "30px" }}
+                                  // src={`https://cors-anywhere.herokuapp.com/${s3URL+ticketingList.ticketInfo?.agentLogo}} `}
+                                  src={updateImage?.url}
+                                  style={{ width: "160px" }}
                                 ></img>
                               ) : (
                                 <>
@@ -232,7 +273,7 @@ const Ticket = () => {
                                     alt="img01"
                                     className="p-2"
                                     src={tllLogo}
-                                    style={{ width: "150px", height: "30px" }}
+                                    style={{ width: "160px" }}
                                   ></img>
                                 </>
                               )}
@@ -1704,7 +1745,7 @@ const Ticket = () => {
                                         </span>
                                         <span className="d-flex align-items-center fw-bold">
                                           <img
-                                            src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                            src={updateImage2.url}
                                             className="me-2"
                                             alt=""
                                             width="30px"

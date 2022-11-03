@@ -1,20 +1,16 @@
+import { Button } from "@chakra-ui/react";
 import axios from "axios";
+import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
+import airports from "../../JSON/airports.json";
+import Loading from "../Loading/Loading";
+import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
 import SideNavBar from "../SharePages/SideNavBar/SideNavBar";
 import { environment } from "../SharePages/Utility/environment";
-import tllLogo from "../../../src/images/logo/logo-combined.png";
-import moment from "moment";
-import produce from "immer";
-import useAuth from "../../hooks/useAuth";
-import Loading from "../Loading/Loading";
-import logo from "../../images/logo/logo-combined.png";
-import ReactToPrint from "react-to-print";
-import airports from "../../JSON/airports.json";
-import Footer from "../SharePages/Footer/Footer";
-import { Button } from "@chakra-ui/react";
-import { toast, ToastContainer } from "react-toastify";
 
 const BookedView = () => {
   const { setLoading, setTicketData, loading } = useAuth();
@@ -152,7 +148,7 @@ const BookedView = () => {
           if (response.data.item2?.isSuccess === true) {
             console.log(response);
             setTicketData(response.data);
-            sessionStorage.setItem("ticketData",JSON.stringify(response.data));
+            sessionStorage.setItem("ticketData", JSON.stringify(response.data));
             setLoading(false);
             navigate("/successticket");
           } else {
@@ -263,7 +259,7 @@ const BookedView = () => {
                           <thead>
                             <tr>
                               <th colspan="4" className="fw-bold py-2 bg-light">
-                              {ticketingList.ticketInfo?.status === 'Booking Cancelled' ? ticketingList.ticketInfo?.status : "BOOKING CONFIRMED"}
+                                {ticketingList.ticketInfo?.status === 'Booking Cancelled' ? ticketingList.ticketInfo?.status : "BOOKING CONFIRMED"}
                               </th>
                             </tr>
                           </thead>
@@ -366,7 +362,7 @@ const BookedView = () => {
                                         "DD-MMMM-yyyy"
                                       )}
                                     </td>
-                                    <td>{item.documentNumber}</td>
+                                    <td>{item.documentNumber !== '' ? item.documentNumber : "N/A"}</td>
                                   </tr>
                                 );
                               })}
@@ -588,7 +584,7 @@ const BookedView = () => {
                                       <td>{item.ait}</td>
                                       <td>{item.passengerCount}</td>
                                       <td>{item.currencyName} {item.totalPrice *
-                                            item.passengerCount}</td>
+                                        item.passengerCount}</td>
                                     </tr>
                                   </>
                                 );
@@ -846,7 +842,7 @@ const BookedView = () => {
               </div> */}
             </section>
           </div>
-          </> : <>
+        </> : <>
           <div className="content-wrapper search-panel-bg">
             <section className="content-header"></section>
             <section className="content">
@@ -1007,7 +1003,7 @@ const BookedView = () => {
                                         "DD-MMMM-yyyy"
                                       )}
                                     </td>
-                                    <td>{item.documentNumber}</td>
+                                    <td>{item.documentNumber !== ''  ? item.documentNumber : "N/A"}</td>
                                   </tr>
                                 );
                               })}
@@ -1154,7 +1150,7 @@ const BookedView = () => {
                                                     {airports
                                                       .filter((f) => f.iata === item.from)
                                                       .map((item) => item.city)}
-                                                      <br></br>
+                                                    <br></br>
                                                     {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
                                                   </span>
                                                 </td>
@@ -1466,7 +1462,7 @@ const BookedView = () => {
                                       <td>{item.ait}</td>
                                       <td>{item.passengerCount}</td>
                                       <td>{item.currencyName} {item.totalPrice *
-                                            item.passengerCount}</td>
+                                        item.passengerCount}</td>
                                     </tr>
                                   </>
                                 );
@@ -1724,7 +1720,7 @@ const BookedView = () => {
               </div> */}
             </section>
           </div>
-          </>
+        </>
       }
       <Footer></Footer>
     </div>

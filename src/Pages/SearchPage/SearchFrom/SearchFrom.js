@@ -10,8 +10,10 @@ import "./SearchFrom.css";
 import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
 import moment from "moment";
-import { Box } from "@chakra-ui/react";
+import { Box, VStack, Text } from "@chakra-ui/react";
 import { getCabinClass } from "../../../common/functions";
+
+const childrenAges = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const SearchFrom = () => {
   const formCount = 0;
@@ -567,20 +569,26 @@ const SearchFrom = () => {
                 boxShadow="lg"
                 borderRadius="8px"
                 border="1px solid lightgray"
+                style={{
+                  backgroundColor: "rgba(255, 255, 255, 0.9)",
+                }}
               >
-                <div className="row ">
+                <div className="row">
                   <div
                     className="col-lg-4 pb-4 text-center"
                     style={{ paddingTop: "3%" }}
                   >
                     <div className="flex-container">
-                      <div className="left-border ">
+                      <div className="left-border">
                         <button
                           className="form-select inputgroup rounded-left"
                           type="button"
                           id="dropdownMenuButton1"
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
+                          style={{
+                            backgroundColor: "#f8f2fb",
+                          }}
                         >
                           <span id="valWay">{tripType}</span>
                         </button>
@@ -619,6 +627,9 @@ const SearchFrom = () => {
                           id="dropdownMenuButton"
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
+                          style={{
+                            backgroundColor: "#f8f2fb",
+                          }}
                         >
                           <span id="valClass">{travelClassType}</span>
                         </button>
@@ -660,7 +671,10 @@ const SearchFrom = () => {
                               data-bs-toggle="dropdown"
                               aria-expanded="false"
                               data-bs-auto-close="outside"
-                              style={{ height: "38px" }}
+                              style={{
+                                height: "38px",
+                                backgroundColor: "#f8f2fb",
+                              }}
                             >
                               <span className="d-flex">
                                 <svg
@@ -854,13 +868,40 @@ const SearchFrom = () => {
                       let agenum = `age-${index}`;
                       return (
                         <span>
-                          <label
-                            htmlFor="formGroupExampleInput"
-                            className="form-label text-white"
-                          >
-                            Child {index + 1}
-                          </label>
-                          <input
+                          <VStack mr="10px">
+                            <Text fontSize="sm" mt="2px">
+                              Child {index + 1}
+                            </Text>
+
+                            <select
+                              name="age"
+                              value={val.agenum}
+                              style={{
+                                width: "60px",
+                                backgroundColor: "#f8f2fb",
+                                borderRadius: "2px",
+                                height: "36px",
+                                paddingLeft: "8px",
+                                border: "1px solid #ced4da",
+                              }}
+                              min="2"
+                              max="12"
+                              onChange={(e) =>
+                                handleChildAge(e.target.value, index)
+                              }
+                              required
+                            >
+                              {childrenAges.map((item) => (
+                                <option value={item}>{item}</option>
+                              ))}
+                            </select>
+
+                            <Text fontSize="xs" mt="2px">
+                              (Age)
+                            </Text>
+                          </VStack>
+
+                          {/* <input
                             type="number"
                             value={val.agenum}
                             name="age"
@@ -870,16 +911,13 @@ const SearchFrom = () => {
                             max="12"
                             onChange={(e) => handleChildAge(e, index)}
                             required
-                          />
+                          /> */}
                         </span>
                       );
                     })}
                   </div>
                   <div className="col-lg-2">
-                    <label
-                      htmlFor="formGroupExampleInput"
-                      className="form-label text-white"
-                    >
+                    <label htmlFor="formGroupExampleInput" className="">
                       Preferred Airline
                     </label>
                     <input
@@ -888,15 +926,15 @@ const SearchFrom = () => {
                       placeholder="e.g. BS, BG, TK"
                       onChange={handleChange}
                       autoComplete="off"
+                      style={{
+                        background: "#f8f2fb",
+                      }}
                     />
                   </div>
                 </div>
                 <div className="row pt-1 position-relative">
                   <div className="col-lg-4 forms">
-                    <label
-                      htmlFor="formGroupExampleInput"
-                      className="form-label text-white"
-                    >
+                    <label htmlFor="formGroupExampleInput" className="">
                       Depart From <span className="text-white fw-bold">*</span>
                     </label>
                     <span className="address">
@@ -908,6 +946,9 @@ const SearchFrom = () => {
                         required
                         autoComplete="off"
                         id="txtFrom"
+                        style={{
+                          background: "#f8f2fb",
+                        }}
                       />
                     </span>
                   </div>
@@ -919,10 +960,7 @@ const SearchFrom = () => {
                     </label>
                   </div>
                   <div className="col-lg-4 forms">
-                    <label
-                      htmlFor="formGroupExampleInput"
-                      className="form-label text-white"
-                    >
+                    <label htmlFor="formGroupExampleInput" className=" ">
                       Going To <span className="text-white fw-bold">*</span>
                     </label>
                     <span className="address">
@@ -934,27 +972,22 @@ const SearchFrom = () => {
                         required
                         id="txtTo"
                         autoComplete="off"
+                        style={{
+                          background: "#f8f2fb",
+                        }}
                       />
                     </span>
                   </div>
                   <div className="col-lg-4">
                     <div className="row">
                       <div className="col-lg-6">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className="form-label text-white"
-                        >
-                          Departing{" "}
-                          <span className="text-white fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput">
+                          Departing <span className="fw-bold">*</span>
                         </label>
                       </div>
                       <div className="col-lg-6" id="returnLavel">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className="form-label text-white"
-                        >
-                          Returning{" "}
-                          <span className="text-white fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput">
+                          Returning <span className="fw-bold">*</span>
                         </label>
                       </div>
                     </div>
@@ -965,9 +998,18 @@ const SearchFrom = () => {
                         style={{
                           minHeight: "100%",
                           borderRight: "1px solid gray",
+                          background: "#f8f2fb",
                         }}
                       ></div>
-                      <div className="t-check-out" id="returnDate"></div>
+                      <div
+                        className="t-check-out"
+                        style={{
+                          minHeight: "100%",
+                          borderRight: "1px solid gray",
+                          background: "#f8f2fb",
+                        }}
+                        id="returnDate"
+                      ></div>
                     </div>
                   </div>
                 </div>
@@ -977,7 +1019,7 @@ const SearchFrom = () => {
                       <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
-                          className="form-label text-white"
+                          className=" text-white"
                         >
                           Depart From{" "}
                           <span className="text-white fw-bold">*</span>
@@ -991,6 +1033,9 @@ const SearchFrom = () => {
                             autoComplete="off"
                             id="txtFrom1"
                             required
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1004,7 +1049,7 @@ const SearchFrom = () => {
                       <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
-                          className="form-label text-white"
+                          className=" text-white"
                         >
                           Going To <span className="text-white fw-bold">*</span>
                         </label>
@@ -1017,6 +1062,9 @@ const SearchFrom = () => {
                             id="txtTo1"
                             autoComplete="off"
                             required
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1025,7 +1073,7 @@ const SearchFrom = () => {
                           <div className="col-lg-12 ">
                             <label
                               htmlFor="formGroupExampleInput"
-                              className="form-label text-white"
+                              className=" text-white"
                             >
                               Departing{" "}
                               <span className="text-white fw-bold">*</span>
@@ -1039,6 +1087,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               borderRight: "1px solid gray",
+                              background: "#f8f2fb",
                             }}
                           ></div>
                         </div>
@@ -1052,7 +1101,7 @@ const SearchFrom = () => {
                       <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
-                          className="form-label text-white"
+                          className=" text-white"
                         >
                           Depart From{" "}
                           <span className="text-white fw-bold">*</span>
@@ -1065,6 +1114,9 @@ const SearchFrom = () => {
                             placeholder="From"
                             autoComplete="off"
                             id="txtFrom2"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1078,7 +1130,7 @@ const SearchFrom = () => {
                       <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
-                          className="form-label text-white"
+                          className=" text-white"
                         >
                           Going To <span className="text-white fw-bold">*</span>
                         </label>
@@ -1090,6 +1142,9 @@ const SearchFrom = () => {
                             placeholder="To"
                             id="txtTo2"
                             autoComplete="off"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1098,7 +1153,7 @@ const SearchFrom = () => {
                           <div className="col-lg-12">
                             <label
                               htmlFor="formGroupExampleInput"
-                              className="form-label text-white"
+                              className=" text-white"
                             >
                               Departing{" "}
                               <span className="text-white fw-bold">*</span>
@@ -1112,6 +1167,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               borderRight: "1px solid gray",
+                              background: "#f8f2fb"
                             }}
                           ></div>
                         </div>
@@ -1125,7 +1181,7 @@ const SearchFrom = () => {
                       <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
-                          className="form-label text-white"
+                          className=" text-white"
                         >
                           Depart From{" "}
                           <span className="text-white fw-bold">*</span>
@@ -1138,6 +1194,9 @@ const SearchFrom = () => {
                             placeholder="From"
                             autoComplete="off"
                             id="txtFrom3"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1151,7 +1210,7 @@ const SearchFrom = () => {
                       <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
-                          className="form-label text-white"
+                          className=" text-white"
                         >
                           Going To <span className="text-white fw-bold">*</span>
                         </label>
@@ -1163,6 +1222,9 @@ const SearchFrom = () => {
                             placeholder="To"
                             id="txtTo3"
                             autoComplete="off"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1172,7 +1234,7 @@ const SearchFrom = () => {
                           <div className="col-lg-12">
                             <label
                               htmlFor="formGroupExampleInput"
-                              className="form-label text-white"
+                              className=" text-white"
                             >
                               Departing{" "}
                               <span className="text-white fw-bold">*</span>
@@ -1186,6 +1248,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               borderRight: "1px solid gray",
+                              background: "#f8f2fb"
                             }}
                           ></div>
                         </div>
@@ -1199,7 +1262,7 @@ const SearchFrom = () => {
                       <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
-                          className="form-label text-white"
+                          className=" text-white"
                         >
                           Depart From{" "}
                           <span className="text-white fw-bold">*</span>
@@ -1212,6 +1275,9 @@ const SearchFrom = () => {
                             placeholder="From"
                             autoComplete="off"
                             id="txtFrom4"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1225,7 +1291,7 @@ const SearchFrom = () => {
                       <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
-                          className="form-label text-white"
+                          className=" text-white"
                         >
                           Going To <span className="text-white fw-bold">*</span>
                         </label>
@@ -1237,6 +1303,9 @@ const SearchFrom = () => {
                             placeholder="To"
                             id="txtTo4"
                             autoComplete="off"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1245,7 +1314,7 @@ const SearchFrom = () => {
                           <div className="col-lg-12">
                             <label
                               htmlFor="formGroupExampleInput"
-                              className="form-label text-white"
+                              className=" text-white"
                             >
                               Departing{" "}
                               <span className="text-white fw-bold">*</span>
@@ -1259,6 +1328,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               borderRight: "1px solid gray",
+                              background: "#f8f2fb"
                             }}
                           ></div>
                         </div>
@@ -1272,7 +1342,7 @@ const SearchFrom = () => {
                       <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
-                          className="form-label text-white"
+                          className=" text-white"
                         >
                           Depart From{" "}
                           <span className="text-white fw-bold">*</span>
@@ -1285,6 +1355,9 @@ const SearchFrom = () => {
                             placeholder="From"
                             autoComplete="off"
                             id="txtFrom5"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1298,7 +1371,7 @@ const SearchFrom = () => {
                       <div className="col-lg-4 forms">
                         <label
                           htmlFor="formGroupExampleInput"
-                          className="form-label text-white"
+                          className=" text-white"
                         >
                           Going To <span className="text-white fw-bold">*</span>
                         </label>
@@ -1310,6 +1383,9 @@ const SearchFrom = () => {
                             placeholder="To"
                             id="txtTo5"
                             autoComplete="off"
+                            style={{
+                              background: "#f8f2fb",
+                            }}
                           />
                         </span>
                       </div>
@@ -1318,7 +1394,7 @@ const SearchFrom = () => {
                           <div className="col-lg-12">
                             <label
                               htmlFor="formGroupExampleInput"
-                              className="form-label text-white"
+                              className=" text-white"
                             >
                               Departing{" "}
                               <span className="text-white fw-bold">*</span>
@@ -1332,6 +1408,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               borderRight: "1px solid gray",
+                              background: "#f8f2fb"
                             }}
                           ></div>
                         </div>

@@ -599,9 +599,6 @@ const Balance = () => {
                               }
                               }
                             >
-                              <option key={0} value="0">
-                                Select One
-                              </option>
                               {deposittypeList.map((item, index) => {
                                 return (
                                   <option key={index} value={item.id}>
@@ -1218,7 +1215,7 @@ const Balance = () => {
                             <tr>
                               <th>Submitted Date</th>
                               <th>Deposit Type</th>
-                              <th>TnxNumber</th>
+                              <th>Tnx Number</th>
                               <th>Reference</th>
                               <th>Status</th>
                               <th>Amount</th>

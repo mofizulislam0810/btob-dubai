@@ -623,7 +623,7 @@ const RightSide = () => {
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end">
-                      {passengerCounts.adt * passengerFares.adt.ait}
+                      {(passengerCounts.adt * passengerFares.adt.ait).toFixed(2)}
                     </h6>
                   </div>
                 </div>
@@ -696,7 +696,7 @@ const RightSide = () => {
                   <div className="col-lg-6">
                     <h6 className="text-end">
                       {" "}
-                      {passengerCounts.cnn * passengerFares.cnn.ait}
+                      {(passengerCounts.cnn * passengerFares.cnn.ait).toFixed(2)}
                     </h6>
                   </div>
                 </div>
@@ -768,7 +768,7 @@ const RightSide = () => {
                   </div>
                   <div className="col-lg-6">
                     <h6 className="text-end">
-                      {passengerCounts.inf * passengerFares.inf.ait}
+                      {(passengerCounts.inf * passengerFares.inf.ait).toFixed(2)}
                     </h6>
                   </div>
                 </div>

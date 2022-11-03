@@ -9,14 +9,14 @@ import { environment } from "../SharePages/Utility/environment";
 import moment from "moment";
 import { useLocation } from "react-router-dom";
 import produce from "immer";
-// import {saveAs} from 'file-saver'
 import tllLogo from "../../../src/images/logo/logo-combined.png";
 import ReactToPrint from "react-to-print";
 import { ToastContainer, toast } from "react-toastify";
 import airports from "../../JSON/airports.json";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-// import {Image} from "../../../src/images/logo";
+import logo from '../../images/logo/logo-combined.png'
+
 
 const Ticket = () => {
   let [ticketingList, setTicketingList] = useState([]);
@@ -31,45 +31,7 @@ const Ticket = () => {
   let [passengerListEdited, setPassengerListEdited] = useState([]);
   let [totalPriceEdited, setTotalPriceEdited] = useState(0);
   let [agentInfo, setAgentInfo] = useState([]);
-  const [updateImage, setUpdateImage] = useState({})
-  const [updateImage2, setUpdateImage2] = useState({})
-
-  useEffect( () => {
-// src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
-
-    Img();
-    Img2();
-  }, [ticketingList])
-
-  const Img = async () => {
-    if(ticketingList.ticketInfo?.agentLogo != undefined){
-      let s3URL = await fetch(`https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/${ticketingList.ticketInfo?.agentLogo}`, {
-        mode: 'cors',
-        credentials: 'include'
-      }).then((data) => { setUpdateImage(data) })
-  
-      
-    } else {
-      Img();
-    }
-
-    
-  };
-  const Img2 = async () => {
-    if(ticketingList.ticketInfo?.agentLogo != undefined){
-      let s3URL = await fetch(`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`, {
-        mode: 'cors',
-        credentials: 'include'
-      }).then((data) => { setUpdateImage2(data) })
-  
-      
-    } else {
-      Img2();
-    }
-
-    
-  };
-console.log(updateImage,"updateImage")
+  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
   const [isDownloading, setIsDownloading] = useState(false);
   const componentRef = useRef();
@@ -160,7 +122,8 @@ console.log(updateImage,"updateImage")
     setIsDownloading(true);
     const element = donwloadRef.current;
     const canvas = await html2canvas(element, {
-      allowTaint : false,
+      logging: true,
+      allowTaint: false,
       useCORS: true,
       scrollX: 0,
       scrollY: 0,
@@ -178,7 +141,6 @@ console.log(updateImage,"updateImage")
     pdf.save("ticket_FirstTrip.pdf");
     setIsDownloading(false);
   }
-  console.log(ticketingList.ticketInfo?.agentLogo,'-----')
   return (
     <div>
       <Navbar></Navbar>
@@ -238,8 +200,7 @@ console.log(updateImage,"updateImage")
                         <button
                           href="javascript:void(0)"
                           className="btn btn-sm btn-secondary float-right mr-1 d-print-none rounded"
-                          // onClick={handleDownloadPdf}
-                          onClick = {handleDownloadPdf}
+                          onClick={handleDownloadPdf}
                           disabled={isDownloading ? true : false}
                         >
                           {
@@ -263,9 +224,10 @@ console.log(updateImage,"updateImage")
                                 ticketingList.ticketInfo?.agentLogo !== "" ? (
                                 <img
                                   alt="img01"
-                                  // src={`https://cors-anywhere.herokuapp.com/${s3URL+ticketingList.ticketInfo?.agentLogo}} `}
-                                  src={updateImage?.url}
-                                  style={{ width: "160px" }}
+                                  src={
+                                    s3URL + `${ticketingList.ticketInfo?.agentLogo}`
+                                  }
+                                  style={{ width: "150px", height: "30px" }}
                                 ></img>
                               ) : (
                                 <>
@@ -273,7 +235,7 @@ console.log(updateImage,"updateImage")
                                     alt="img01"
                                     className="p-2"
                                     src={tllLogo}
-                                    style={{ width: "160px" }}
+                                    style={{ width: "150px", height: "30px" }}
                                   ></img>
                                 </>
                               )}
@@ -307,7 +269,6 @@ console.log(updateImage,"updateImage")
                                   Dhaka-1216, Bangladesh<br></br>
                                   <span style={{ fontSize: "8px" }}><i class="fas fa-phone fa-rotate-90"></i></span> Phone: +8801625987452<br></br>
                                   <span className="me-1"><i class="fa fa-envelope" aria-hidden="true"></i></span> Email: {agentInfo.email}
-                               
                                 </div>
                               </address>
                             </td>
@@ -1746,7 +1707,7 @@ console.log(updateImage,"updateImage")
                                         </span>
                                         <span className="d-flex align-items-center fw-bold">
                                           <img
-                                            src={updateImage2.url}
+                                            src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
                                             className="me-2"
                                             alt=""
                                             width="30px"
@@ -1932,7 +1893,7 @@ console.log(updateImage,"updateImage")
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
-                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Time</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                                   </tr>
@@ -2025,7 +1986,7 @@ console.log(updateImage,"updateImage")
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
-                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Time</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                                   </tr>
@@ -2119,7 +2080,7 @@ console.log(updateImage,"updateImage")
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
-                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Time</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                                   </tr>
@@ -2213,7 +2174,7 @@ console.log(updateImage,"updateImage")
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
-                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Time</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                                   </tr>
@@ -2307,7 +2268,7 @@ console.log(updateImage,"updateImage")
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
-                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                                    <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Time</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                                     <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                                   </tr>

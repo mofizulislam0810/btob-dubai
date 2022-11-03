@@ -625,7 +625,7 @@ const SuccessTicketPanel = () => {
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
-                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Time</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                     </tr>
@@ -718,7 +718,7 @@ const SuccessTicketPanel = () => {
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
-                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Time</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                     </tr>
@@ -811,7 +811,7 @@ const SuccessTicketPanel = () => {
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
-                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Time</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                     </tr>
@@ -904,7 +904,7 @@ const SuccessTicketPanel = () => {
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
-                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Time</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                     </tr>
@@ -997,7 +997,7 @@ const SuccessTicketPanel = () => {
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Date</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Time</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Info</p></th>
-                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Fight Time</p></th>
+                                      <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Flight Time</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Cabin</p></th>
                                       <th className="p-0"><p className="py-1 ps-1" style={{ backgroundColor: "#ededed" }}>Baggage</p></th>
                                     </tr>

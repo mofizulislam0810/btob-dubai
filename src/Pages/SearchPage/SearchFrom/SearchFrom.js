@@ -10,10 +10,8 @@ import "./SearchFrom.css";
 import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
 import moment from "moment";
-import { Box, VStack, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { getCabinClass } from "../../../common/functions";
-
-const childrenAges = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const SearchFrom = () => {
   const formCount = 0;
@@ -171,7 +169,7 @@ const SearchFrom = () => {
       const returnDate = $("#returnDate").children("input").val();
       console.log(journeyDate);
       if (origin === destination) {
-        toast.error("Origin and Destination must be diffarent");
+        toast.error("Depart From and Going To must be diffarent");
       } else {
         if (String(journeyDate) !== String(null)) {
           const qtyList = {
@@ -872,40 +870,10 @@ const SearchFrom = () => {
                       let agenum = `age-${index}`;
                       return (
                         <span>
-                          <VStack mr="10px">
-                            <Text fontSize="sm" mt="2px">
-                              Child {index + 1}
-                            </Text>
-
-                            <select
-                              name="age"
-                              value={val.agenum}
-                              style={{
-                                width: "60px",
-                                backgroundColor: "#f8f2fb",
-                                borderRadius: "2px",
-                                height: "36px",
-                                paddingLeft: "8px",
-                                border: "1px solid #ced4da",
-                              }}
-                              min="2"
-                              max="12"
-                              onChange={(e) =>
-                                handleChildAge(e.target.value, index)
-                              }
-                              required
-                            >
-                              {childrenAges.map((item) => (
-                                <option value={item}>{item}</option>
-                              ))}
-                            </select>
-
-                            <Text fontSize="xs" mt="2px">
-                              (Age)
-                            </Text>
-                          </VStack>
-
-                          {/* <input
+                          <label htmlFor="formGroupExampleInput" className="">
+                            Child {index + 1}
+                          </label>
+                          <input
                             type="number"
                             value={val.agenum}
                             name="age"
@@ -915,7 +883,7 @@ const SearchFrom = () => {
                             max="12"
                             onChange={(e) => handleChildAge(e, index)}
                             required
-                          /> */}
+                          />
                         </span>
                       );
                     })}

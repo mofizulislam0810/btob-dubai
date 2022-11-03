@@ -319,6 +319,7 @@ const Staff = () => {
                           className="form-control"
                           placeholder="Email"
                           onChange={(e) => setUserEmail(e.target.value)}
+                          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                         ></input>
                       </div>
                       <div className="col-sm-3">

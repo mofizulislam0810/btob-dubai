@@ -1446,6 +1446,7 @@ const ShowAllFlightPage = () => {
                                             onClick={() =>
                                               setTravelClassType("Economy")
                                             }
+                                            style={{ cursor: "pointer" }}
                                           >
                                             Economy
                                           </li>
@@ -1454,8 +1455,16 @@ const ShowAllFlightPage = () => {
                                             onClick={() =>
                                               setTravelClassType("Business")
                                             }
+                                            style={{ cursor: "pointer" }}
                                           >
                                             Business
+                                          </li>
+                                          <li
+                                            className="dropdown-item"
+                                            onClick={() => setTravelClassType("First")}
+                                            style={{ cursor: "pointer" }}
+                                          >
+                                            First
                                           </li>
                                         </ul>
                                       </div>

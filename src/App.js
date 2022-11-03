@@ -71,8 +71,8 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={isLoggedIn?<SearchPage /> : <LoginPage />} />
-            <Route path="/registration" element={isLoggedIn?<SearchPage /> :<Registration />} />
+            <Route path="/" element={isLoggedIn ? <SearchPage /> : <LoginPage />} />
+            <Route path="/registration" element={isLoggedIn ? <SearchPage /> : <Registration />} />
             <Route path="/loading" element={<Loading />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/bankdetail" element={<BankDetails />} />
@@ -82,7 +82,7 @@ function App() {
             <Route
               path="/resetpassword"
               element={
-                  <ResetPassword />
+                <ResetPassword />
               }
             />
             <Route
@@ -371,15 +371,15 @@ function App() {
               path="/ticketed"
               element={
                 <PrivateRoute>
-                  <Issued/>
+                  <Issued />
                 </PrivateRoute>
               }
             />
-             <Route
+            <Route
               path="/booked"
               element={
                 <PrivateRoute>
-                  <Booked/>
+                  <Booked />
                 </PrivateRoute>
               }
             />
@@ -387,7 +387,7 @@ function App() {
               path="/canceled"
               element={
                 <PrivateRoute>
-                  <Canceled/>
+                  <Canceled />
                 </PrivateRoute>
               }
             />
@@ -399,7 +399,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-              <Route
+            <Route
               path="/expired"
               element={
                 <PrivateRoute>

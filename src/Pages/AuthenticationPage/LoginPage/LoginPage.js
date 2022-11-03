@@ -40,6 +40,8 @@ import { MdOutlineEmail } from "react-icons/md";
 import { BsEyeSlash } from "react-icons/bs";
 import { nanoid } from "nanoid";
 import Footer from "../../SharePages/Footer/Footer";
+import Service from "../../SharePages/Footer/Service";
+import { Partners } from "../../SharePages/Footer/Partners";
 
 const LoginPage = () => {
   const { onClickLoginButton, loading } = useAuth();
@@ -307,6 +309,8 @@ const LoginPage = () => {
           </Center>
         ))}
       </Flex>
+      <Partners />
+      <Service />
 
       <Footer />
     </VStack>

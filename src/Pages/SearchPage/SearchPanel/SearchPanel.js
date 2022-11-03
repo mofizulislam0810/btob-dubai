@@ -114,7 +114,7 @@ const SearchPanel = () => {
                   className="col-lg-12 d-flex justify-content-center"
                   style={{ backgroundColor: "#fc2c74" }}
                 >
-                  <div className="bottom-border py-2 px-3" id="flight-panal">
+                  <div className="py-2 px-3">
                     <span className="text-white">
                       <i className="fas fa-plane"></i>
                     </span>

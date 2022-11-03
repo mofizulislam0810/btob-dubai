@@ -236,18 +236,18 @@ const Invoice = () => {
                                                     <td className="text-end bg-white">
                                                         <address>
                                                             <span className="fw-bold fs-6">
-                                                                Triplover Travel Agency LLC
+                                                            FirstTrip Travel Agency LLC
                                                             </span>
                                                             <br />
                                                             <div
                                                                 className="mt-2"
                                                                 style={{ fontSize: "10px", lineHeight: "12px" }}
                                                             >
-                                                                Al Muhairi 113-127, Al Dhagaya
+                                                                39 Sharif Plaza, Kemal Ataturk
                                                                 <br />
-                                                                Dubai, United Arab Emirates<br></br>
-                                                                Phone: +97143375728<br></br>
-                                                                Email: support@triplover.ae
+                                                                Avenue, Banani, Dhaka 1213<br></br>
+                                                                Phone: 09613123123<br></br>
+                                                                Email: support@FirstTrip.com
                                                             </div>
                                                         </address>
                                                     </td>

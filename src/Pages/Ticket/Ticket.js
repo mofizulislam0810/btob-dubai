@@ -224,9 +224,9 @@ const Ticket = () => {
                                 ticketingList.ticketInfo?.agentLogo !== "" ? (
                                 <img
                                   alt="img01"
-                                  src={
-                                    s3URL + `${ticketingList.ticketInfo?.agentLogo}`
+                                  src={ `${s3URL + ticketingList.ticketInfo?.agentLogo}`
                                   }
+                                  
                                   style={{ width: "150px", height: "30px" }}
                                 ></img>
                               ) : (
@@ -1707,7 +1707,8 @@ const Ticket = () => {
                                         </span>
                                         <span className="d-flex align-items-center fw-bold">
                                           <img
-                                            src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                          
+                                            src={`/${ticketingList.ticketInfo?.airlineCode}.png`}
                                             className="me-2"
                                             alt=""
                                             width="30px"
@@ -2634,6 +2635,7 @@ const Ticket = () => {
                                 <input
                                   value={item.discount}
                                   type={"number"}
+                                  disabled
                                   onChange={(e) =>
                                     setPassengerListEdited((ob) =>
                                       produce(ob, (v) => {

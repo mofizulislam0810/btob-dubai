@@ -458,6 +458,7 @@ const LeftSide = () => {
 
 
   const bookingData = (e) => {
+    e.preventDefault();
     // infant.map((item,index)=>{
     //   const ageInYears = moment().diff(moment(item.date+'/'+item.month+'/'+item.year, "DD/MM/YYYY"), 'months'); 
     //   console.log(ageInYears);      
@@ -708,6 +709,8 @@ const LeftSide = () => {
     e.preventDefault();
   };
 
+  const dateControl = document.querySelector('input[type="date"]');
+  console.log({dateControl})
   // console.log(adult);
   // console.log(child);
   // console.log(infant);
@@ -1442,7 +1445,7 @@ const LeftSide = () => {
                               />
                             </div>
                           </div>
-                        </div>
+                        </div>invalid
                       </>
                     )}
 

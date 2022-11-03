@@ -65,7 +65,7 @@ const Footer = () => {
         <Box className="container">
 
           <Flex w="100%" pt={'20px'} pb='10px' justifyContent="space-between" color={'white'}>
-            <Box>
+            <Box >
               <Image src={logo} alt="FirstTrip" w="160px" mb="24px" />
               <HStack gap="10px">
                 {socialData.map((item, idx) => (

@@ -53,6 +53,7 @@ export const Partners = () => {
 
 
                 </Flex>
+                <Divider orientation='horizontal' color={'gray'} w='100%' />
             </Box>
 
         </>

@@ -307,6 +307,7 @@ console.log(updateImage,"updateImage")
                                   Dhaka-1216, Bangladesh<br></br>
                                   <span style={{ fontSize: "8px" }}><i class="fas fa-phone fa-rotate-90"></i></span> Phone: +8801625987452<br></br>
                                   <span className="me-1"><i class="fa fa-envelope" aria-hidden="true"></i></span> Email: {agentInfo.email}
+                               
                                 </div>
                               </address>
                             </td>

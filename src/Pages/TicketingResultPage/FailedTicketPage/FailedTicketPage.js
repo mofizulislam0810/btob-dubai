@@ -7,6 +7,7 @@ import Navbar from "../../SharePages/Navbar/Navbar";
 import SideNavBar from "../../SharePages/SideNavBar/SideNavBar";
 import axios from "axios";
 import { environment } from '../../../Pages/SharePages/Utility/environment';
+import { toast, ToastContainer } from "react-toastify";
 const FailedTicketPage = () => {
   const { loading, ticketData } = useAuth();
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const FailedTicketPage = () => {
                 navigate('/successorderticket');
             }
             else{
-                alert('Sorry! try again..');
+                toast.error('Sorry! try again..');
             }
 		};
 		orderTicket();
@@ -30,6 +31,7 @@ const FailedTicketPage = () => {
       <Navbar></Navbar>
       <SideNavBar></SideNavBar>
       <Loading loading={loading}></Loading>
+      <ToastContainer position="bottom-right" autoClose={1500} />
       <div className="content-wrapper search-panel-bg">
         <section className="content-header"></section>
         <section className="content content-panel">

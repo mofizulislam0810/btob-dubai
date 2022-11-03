@@ -1,7 +1,7 @@
 {
   "name": "btobportal",
   "version": "0.1.0",
-  "proxy" : "https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/",
+  "proxy": "https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^2.2.6",
@@ -23,6 +23,7 @@
     "html-to-pdfmake": "^2.3.11",
     "html-to-react": "^1.4.8",
     "html2canvas": "^1.0.0-alpha.12",
+    "http-proxy-middleware": "^2.0.6",
     "immer": "^9.0.12",
     "jquery": "^3.6.0",
     "jspdf": "^2.5.1",

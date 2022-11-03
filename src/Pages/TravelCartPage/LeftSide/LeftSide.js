@@ -11,6 +11,7 @@ import courtries from "../../../JSON/countries.json";
 import { environment } from "../../SharePages/Utility/environment";
 import "./LeftSide.css";
 const LeftSide = () => {
+  const [validityError, setValidityError] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
   const { setBookData, setLoading } = useAuth();
@@ -306,21 +307,13 @@ const LeftSide = () => {
 
   // if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
   //   adult.map((i) =>
-  //     i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
-  //       ? Math.floor(
-  //         Math.abs(
-  //           new Date(
-  //             i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
-  //           ) - new Date()
-  //         ) /
-  //         (1000 * 60 * 60 * 24 * 30)
-  //       )
-  //         > 6
-  //         ? ""
-  //         : toast.error("Passport expiry date does not valid")
-  //       : ""
+  //     i.dateOfBirth <= ISODateFormatter(add(new Date(), {
+  //       years: -12,
+  //     })) ? ""
+  //       : toast.error("Passport expiry date does not valid")
   //   );
   // }
+
 
 
 
@@ -408,19 +401,12 @@ const LeftSide = () => {
 
   // if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
   //   child.map((i) =>
-  //     i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
-  //       ? Math.floor(
-  //         Math.abs(
-  //           new Date(
-  //             i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
-  //           ) - new Date()
-  //         ) /
-  //         (1000 * 60 * 60 * 24 * 30)
-  //       )
-  //         > 6
-  //         ? ""
-  //         : toast.error("Passport expiry date does not valid")
-  //       : ""
+  //     i.dateOfBirth >= ISODateFormatter(add(new Date(), {
+  //       years: -12,
+  //     })) && i.dateOfBirth <= ISODateFormatter(add(new Date(), {
+  //       years: -2,
+  //     })) ? ""
+  //       : toast.error("Passport expiry date does not valid")
   //   );
   // }
 
@@ -444,20 +430,20 @@ const LeftSide = () => {
   //   );
   // }
 
+  // if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
+  //   infant.map((i) =>
+  //     i.dateOfBirth >= ISODateFormatter(add(new Date(), {
+  //       years: -2,
+  //     })) && i.dateOfBirth <= ISODateFormatter(new Date()) ? ""
+  //       : toast.error("Passport expiry date does not valid")
+  //   );
+  // }
 
-  // infant.map((item, index) => {
-  //   const ageInYears = moment().diff(moment(item.date + '/' + item.month + '/' + item.year, "DD/MM/YYYY"), 'months');
-  //   console.log(ageInYears);
-  //   if (ageInYears > 24) {
-  //     toast.error(`Infant ${index + 1} age is more than 2 years!`);
-  //     return;
-  //   }
-  // })
 
-  // console.log(contact);
 
 
   const bookingData = (e) => {
+    e.preventDefault();
     // infant.map((item,index)=>{
     //   const ageInYears = moment().diff(moment(item.date+'/'+item.month+'/'+item.year, "DD/MM/YYYY"), 'months'); 
     //   console.log(ageInYears);      
@@ -708,10 +694,7 @@ const LeftSide = () => {
     e.preventDefault();
   };
 
-  // console.log(adult);
-  // console.log(child);
-  // console.log(infant);
-  // console.log(contact);
+
 
   // let phoneCode = courtries.filter((item) => item.code === contact[0].nationality);
   // console.log(courtries.filter((item) => item.code === contact[0].nationality)[0].dial_code);
@@ -862,11 +845,12 @@ const LeftSide = () => {
                                 }
                               }}
                               value={p.firstName}
-                              onBlur={handleOnChange}
+                              // onBlur={handleOnChange}
                               required
                               autoComplete="off"
                               spellcheck="false"
                             />
+                            {validityError && (<div className="validation"></div>)}
                           </div>
                         </div>
                       </div>
@@ -896,11 +880,12 @@ const LeftSide = () => {
                               }
                             }}
                             value={p.lastName}
-                            onBlur={handleOnChange}
+                            // onBlur={handleOnChange}
                             required
                             autoComplete="off"
                             spellcheck="false"
                           />
+                          {validityError && (<div className="validation"></div>)}
                         </div>
                       </div>
                       <div className="col-lg-4">
@@ -1015,7 +1000,7 @@ const LeftSide = () => {
                                 Date of birth
                                 <span className="text-danger">*</span>
                               </label>
-                              <div className="input-group mb-3 d-flex">
+                              <div className="input-group mb-3">
                                 <input
                                   type={"date"}
                                   name="dateOfBirth"
@@ -1038,7 +1023,9 @@ const LeftSide = () => {
                                   required
                                   autoComplete="off"
                                   placeholder="Date of Birth"
+                                  pattern="\d{4}-\d{2}-\d{2}"
                                 />
+                                {validityError && (<div className="validation"></div>)}
                               </div>
                               {/* <div className="input-group mb-3 d-flex">
                                 <select
@@ -1266,6 +1253,8 @@ const LeftSide = () => {
                                 autoComplete="off"
                                 spellcheck="false"
                               />
+                              {validityError && (<div className="validation"></div>)}
+
                             </div>
                           </div>
                           <div className="col-lg-4">
@@ -1421,10 +1410,11 @@ const LeftSide = () => {
                                 <option>2022</option>
                               </select>
                             </div> */}
-                            <div className="input-group mb-3 d-flex">
+                            <div className="mb-3">
                               <input
                                 type={"date"}
-                                name="passportExDate"
+                                id={`passportExDate_${p.id}`}
+                                name={`passportExDate_${p.id}`}
                                 className="form-control rounded"
                                 onChange={(e) => {
                                   const passportDate = e.target.value;
@@ -1439,7 +1429,10 @@ const LeftSide = () => {
                                 min={ISODateFormatter(new Date())}
                                 autoComplete="off"
                                 placeholder="Passport Expaire Date"
+                                pattern="\d{4}-\d{2}-\d{2}"
+                                required
                               />
+                              {validityError && (<div className="validation"></div>)}
                             </div>
                           </div>
                         </div>
@@ -1641,6 +1634,7 @@ const LeftSide = () => {
                               autoComplete="off"
                               spellcheck="false"
                             />
+                            {validityError && (<div className="validation"></div>)}
                           </div>
                         </div>
                       </div>
@@ -1671,6 +1665,7 @@ const LeftSide = () => {
                             autoComplete="off"
                             spellcheck="false"
                           />
+                          {validityError && (<div className="validation"></div>)}
                         </div>
                       </div>
                       <div className="col-lg-4">
@@ -1720,12 +1715,12 @@ const LeftSide = () => {
                             Date of birth
                             <span className="text-danger">*</span>
                           </label>
-                          <div className="input-group mb-3 d-flex">
+                          <div className="input-group mb-3">
                             <input
                               type={"date"}
-                              name="dateOfBirth"
+                              id={`dateOfBirth_${p.id}`}
+                              name={`dateOfBirth_${p.id}`}
                               className="form-control rounded"
-                              id="dateOfBirth"
                               onChange={(e) => {
                                 const date = e.target.value;
                                 setChild((ob) =>
@@ -1745,7 +1740,9 @@ const LeftSide = () => {
                               required
                               autoComplete="off"
                               placeholder="Date of Birth"
+                              pattern="\d{4}-\d{2}-\d{2}"
                             />
+                            {validityError && (<div className="validation"></div>)}
                           </div>
                           {/* <div className="input-group mb-3 d-flex">
                             <select
@@ -2018,6 +2015,7 @@ const LeftSide = () => {
                                 autoComplete="off"
                                 spellcheck="false"
                               />
+                              {validityError && (<div className="validation"></div>)}
                             </div>
                           </div>
                           <div className="col-lg-4">
@@ -2068,7 +2066,7 @@ const LeftSide = () => {
                                 <span className="text-danger">*</span>
                               </label>
                             </div>
-                            <div className="input-group mb-3 d-flex">
+                            <div className="input-group mb-3">
                               <input
                                 type={"date"}
                                 name="passportExDate"
@@ -2086,7 +2084,10 @@ const LeftSide = () => {
                                 min={ISODateFormatter(new Date())}
                                 autoComplete="off"
                                 placeholder="Passport Expaire Date"
+                                pattern="\d{4}-\d{2}-\d{2}"
+                                required
                               />
+                              {validityError && (<div className="validation"></div>)}
                             </div>
                             {/* <div className="input-group mb-3 d-flex">
                               <select
@@ -2361,6 +2362,7 @@ const LeftSide = () => {
                               autoComplete="off"
                               spellcheck="false"
                             />
+                            {validityError && (<div className="validation"></div>)}
                           </div>
                         </div>
                       </div>
@@ -2391,6 +2393,7 @@ const LeftSide = () => {
                             autoComplete="off"
                             spellcheck="false"
                           />
+                          {validityError && (<div className="validation"></div>)}
                         </div>
                       </div>
                       <div className="col-lg-4">
@@ -2463,7 +2466,9 @@ const LeftSide = () => {
                               required
                               autoComplete="off"
                               placeholder="Date of Birth"
+                              pattern="\d{4}-\d{2}-\d{2}"
                             />
+                            {validityError && (<div className="validation"></div>)}
                           </div>
                           {/* <div className="input-group mb-3 d-flex">
                             <select
@@ -2683,6 +2688,7 @@ const LeftSide = () => {
                                 autoComplete="off"
                                 spellcheck="false"
                               />
+                              {validityError && (<div className="validation"></div>)}
                             </div>
                           </div>
                           <div className="col-lg-4">
@@ -2733,7 +2739,7 @@ const LeftSide = () => {
                                 <span className="text-danger">*</span>
                               </label>
                             </div>
-                            <div className="input-group mb-3 d-flex">
+                            <div className="input-group mb-3">
                               <input
                                 type={"date"}
                                 name="passportExDate"
@@ -2751,7 +2757,10 @@ const LeftSide = () => {
                                 min={ISODateFormatter(new Date())}
                                 autoComplete="off"
                                 placeholder="Passport Expaire Date"
+                                pattern="\d{4}-\d{2}-\d{2}"
+                                required
                               />
+                              {validityError && (<div className="validation"></div>)}
                             </div>
                             {/* <div className="input-group mb-3 d-flex">
                               <select
@@ -2982,6 +2991,7 @@ const LeftSide = () => {
                           required
                           autoComplete="off"
                           spellcheck="false"
+                          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                         />
                       </div>
                     </div>
@@ -3163,6 +3173,7 @@ const LeftSide = () => {
                     <button
                       type="submit"
                       className="btn button-color text-white fw-bold w-25 mt-2 rounded btn-sm"
+                      onClick={() => setValidityError(true)}
                     >
                       Book Now
                     </button>

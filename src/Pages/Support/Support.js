@@ -11,6 +11,7 @@ import $ from "jquery";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactPaginate from "react-paginate";
+import { Box, Center, HStack, Text } from "@chakra-ui/react";
 const Support = () => {
   const [filterSubjectId, setFilterSubjectId] = useState("ALL");
   const location = useLocation();
@@ -123,6 +124,13 @@ const Support = () => {
   let [pageSizeH, setPageSizeH] = useState(10);
   let [pageCountH, setPageCountH] = useState(0);
   let [pageNumberH, setPageNumberH] = useState(1);
+
+  const [isBookingIdInputed, setIsBookingIdInputed] = useState(false);
+  useEffect(() => {
+    uniqueTransID === ""
+      ? setIsBookingIdInputed(false)
+      : setIsBookingIdInputed(true);
+  }, [uniqueTransID]);
 
   const getSupportHistory = async (item, pageNumberH) => {
     setCurrentItem(item);
@@ -357,10 +365,11 @@ const Support = () => {
           environment.headerToken
         );
         if (response.data > 0) {
-          document.getElementById("submitCloseBtn").click();
+          // document.getElementById("submitCloseBtn").click();
           //handleGetOpened(1);
           // clearForm();
-          //toast.success("Thanks! Support Info updated successfully..");
+
+          toast.success("Thanks! Support Info updated successfully..");
         } else {
           toast.error("Sorry! Support Info not updated..");
         }
@@ -378,6 +387,7 @@ const Support = () => {
           handleGetOpened(1);
           clearForm();
           toast.success("Thanks! Support Info created successfully..");
+          document.getElementById("submitCloseBtn").click();
         } else {
           toast.error("Sorry! Support Info not created..");
         }
@@ -514,6 +524,7 @@ const Support = () => {
                                 className="btn-close"
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
+                                onClick={() => clearForm()}
                               />
                             </div>
                             <div className="modal-body">
@@ -546,32 +557,49 @@ const Support = () => {
                                       })}
                                     </select>
                                   </div>
-                                  <div className="col-sm-4">
-                                    <label class="form-label">Booking ID</label>
-                                    <input
-                                      class="form-control"
-                                      type={"text"}
-                                      placeholder={"Booking ID"}
-                                      value={uniqueTransID}
-                                      className="form-control"
-                                      onChange={(e) =>
-                                        handleSetUniqueTransID(e.target.value)
-                                      }
-                                    ></input>
-                                  </div>
-                                  <div className="col-sm-4">
-                                    <label class="form-label">PNR</label>
-                                    <input
-                                      class="form-control"
-                                      type={"text"}
-                                      placeholder={"PNR"}
-                                      value={pnr}
-                                      className="form-control"
-                                      onChange={(e) =>
-                                        handleSetPNR(e.target.value)
-                                      }
-                                    ></input>
-                                  </div>
+                                  <HStack w="400px">
+                                    <div className="col-sm-8">
+                                      <label class="form-label">
+                                        Booking ID
+                                      </label>
+                                      <input
+                                        class="form-control"
+                                        type={"text"}
+                                        placeholder={"Booking ID"}
+                                        value={uniqueTransID}
+                                        className="form-control"
+                                        onChange={(e) =>
+                                          handleSetUniqueTransID(e.target.value)
+                                        }
+                                        disabled={
+                                          !isBookingIdInputed && pnr !== ""
+                                        }
+                                      ></input>
+                                    </div>
+                                    <Text
+                                      fontWeight={600}
+                                      fontSize="md"
+                                      pt="27px"
+                                      color="gray"
+                                    >
+                                      Or
+                                    </Text>
+                                    <div className="col-sm-8">
+                                      <label class="form-label">PNR</label>
+                                      <input
+                                        class="form-control"
+                                        type={"text"}
+                                        placeholder={"PNR"}
+                                        value={pnr}
+                                        className="form-control"
+                                        onChange={(e) =>
+                                          handleSetPNR(e.target.value)
+                                        }
+                                        disabled={isBookingIdInputed}
+                                      ></input>
+                                    </div>
+                                  </HStack>
+
                                   <div className="col-sm-12">
                                     <table
                                       className="table table-boardered table-sm mt-3"
@@ -584,9 +612,15 @@ const Support = () => {
                                         <tr>
                                           <th>Pax Name</th>
                                           <th>Type</th>
-                                          <th>Ticket Number</th>
+                                          <th>
+                                            Ticket Number{" "}
+                                            <span style={{ color: "red" }}>
+                                              *
+                                            </span>
+                                          </th>
                                         </tr>
                                       </thead>
+
                                       <tbody className="lh-1 tbody text-center">
                                         {passengerList.length > 0
                                           ? passengerList.map((item, index) => {
@@ -636,6 +670,16 @@ const Support = () => {
                                           : ""}
                                       </tbody>
                                     </table>
+                                    <Text
+                                      fontSize="xs"
+                                      textAlign="center"
+                                      w="100%"
+                                    >
+                                      Plase make sure to select Ticket Number{" "}
+                                      <br />
+                                      (You can seach for your ticket number with
+                                      Booking ID or PNR)
+                                    </Text>
                                     <br />
                                     {/* <label>{ticketNumbers}</label> */}
                                     {/* <input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumber === "null" ? "" : ticketNumber} className="form-control" onChange={(e) => setTicketno()}></input> */}

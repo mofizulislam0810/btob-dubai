@@ -379,6 +379,7 @@ const QuickPassenger = () => {
                           <th>Mobile</th>
                           <th>DOB</th>
                           <th>Gender</th>
+                          <th>Passport Number</th>
                           {/* <th>Passport Copy</th>
                           <th>Visa Copy</th> */}
                           {/* <th>Action</th> */}
@@ -413,6 +414,8 @@ const QuickPassenger = () => {
                                 )}
                               </td>
                               <td>{item.gender}</td>
+                              <td>{item.documentNumber === "" ? "N/A" : item.documentNumber}</td>
+
                               {/* <td>
                                 {item.passportCopy !== null &&
                                   item.passportCopy !== "" ? (
@@ -676,6 +679,7 @@ const QuickPassenger = () => {
                               required
                               autoComplete="off"
                               placeholder="Email"
+                              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                             />
                           </div>
                         </div>

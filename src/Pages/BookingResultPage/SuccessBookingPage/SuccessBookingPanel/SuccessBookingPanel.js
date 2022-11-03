@@ -1,12 +1,15 @@
 import axios from "axios";
-import moment from "moment";
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import ReactToPrint from 'react-to-print';
-import useAuth from "../../../../hooks/useAuth";
-import airports from "../../../../JSON/airports.json";
-import Loading from "../../../Loading/Loading";
 import { environment } from "../../../SharePages/Utility/environment";
+import { Link } from "react-router-dom";
+import logo from "../../../../images/logo/logo-combined.png";
+import useAuth from "../../../../hooks/useAuth";
+import moment from "moment";
+import Loading from "../../../Loading/Loading";
+import airports from "../../../../JSON/airports.json";
+import ReactToPrint from 'react-to-print';
+import { getDefaultNormalizer } from "@testing-library/react";
 
 const SuccessBookingPanel = () => {
   const { setTicketData, setLoading, loading } = useAuth();
@@ -205,7 +208,7 @@ const SuccessBookingPanel = () => {
                                     "DD-MMMM-yyyy"
                                   )}
                                 </td>
-                                <td>{item?.documentInfo?.documentNumber ? item?.documentInfo?.documentNumber : "N/A"}</td>
+                                <td>{item.documentInfo.documentNumber === '' ? "N/A" : item.documentInfo.documentNumber}</td>
                               </tr>
                             )
                           )}

@@ -10,10 +10,8 @@ import "./SearchFrom.css";
 import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
 import moment from "moment";
-import { Box, VStack, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { getCabinClass } from "../../../common/functions";
-
-const childrenAges = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const SearchFrom = () => {
   const formCount = 0;
@@ -171,7 +169,7 @@ const SearchFrom = () => {
       const returnDate = $("#returnDate").children("input").val();
       console.log(journeyDate);
       if (origin === destination) {
-        toast.error("Origin and Destination must be diffarent");
+        toast.error("Depart From and Going To must be diffarent");
       } else {
         if (String(journeyDate) !== String(null)) {
           const qtyList = {
@@ -228,8 +226,8 @@ const SearchFrom = () => {
         ? searchList[idx].cabinClass === 1
           ? "Economy"
           : searchList[idx].cabinClass === 3
-            ? "Business"
-            : " "
+          ? "Business"
+          : " "
         : "Economy"
     );
     setAdultCount(searchList !== undefined ? searchList[idx].adults : 1);
@@ -250,10 +248,10 @@ const SearchFrom = () => {
     $("#txtTo").val(
       searchList !== undefined
         ? destination[0].city +
-        " - " +
-        destination[0].country +
-        ", " +
-        destination[0].name
+            " - " +
+            destination[0].country +
+            ", " +
+            destination[0].name
         : destinationRef.current.value
     );
 
@@ -271,8 +269,8 @@ const SearchFrom = () => {
           $(".class_0").tDatePicker("update", [
             searchList !== undefined
               ? moment(searchList[idx].routes[0].departureDate).format(
-                "yyyy-MM-DD"
-              )
+                  "yyyy-MM-DD"
+                )
               : new Date(),
           ]);
         });
@@ -281,13 +279,13 @@ const SearchFrom = () => {
           $(".class_0").tDatePicker("update", [
             searchList !== undefined
               ? moment(searchList[idx].routes[0].departureDate).format(
-                "yyyy-MM-DD"
-              )
+                  "yyyy-MM-DD"
+                )
               : new Date(),
             searchList !== undefined
               ? moment(searchList[idx].routes[1].departureDate).format(
-                "yyyy-MM-DD"
-              )
+                  "yyyy-MM-DD"
+                )
               : new Date(),
           ]);
         });
@@ -402,10 +400,10 @@ const SearchFrom = () => {
       if (results.length >= index + 1) {
         autoinput.val(
           results[index].city +
-          " - " +
-          results[index].country +
-          ", " +
-          results[index].name
+            " - " +
+            results[index].country +
+            ", " +
+            results[index].name
         );
         clearResults();
       }
@@ -571,6 +569,8 @@ const SearchFrom = () => {
                 border="1px solid lightgray"
                 style={{
                   backgroundColor: "rgba(255, 255, 255, 0.9)",
+                  // background:
+                  //   "linear-gradient(to right, #fef0f5, #f5edfa ,#f2faed)",
                 }}
               >
                 <div className="row">
@@ -712,11 +712,11 @@ const SearchFrom = () => {
                                       title="adultminus"
                                       onClick={
                                         infantCount > 0 &&
-                                          adultCount === infantCount
+                                        adultCount === infantCount
                                           ? () => {
-                                            setAdultCount(adultCount - 1);
-                                            setInfantCount(infantCount - 1);
-                                          }
+                                              setAdultCount(adultCount - 1);
+                                              setInfantCount(infantCount - 1);
+                                            }
                                           : () => setAdultCount(adultCount - 1)
                                       }
                                       disabled={adultCount === 1 ? true : false}
@@ -843,8 +843,8 @@ const SearchFrom = () => {
                                       onClick={
                                         infantCount < adultCount
                                           ? () =>
-                                            setInfantCount(infantCount + 1)
-                                          : () => { }
+                                              setInfantCount(infantCount + 1)
+                                          : () => {}
                                       }
                                       disabled={
                                         infantCount === 9 ? true : false
@@ -868,40 +868,10 @@ const SearchFrom = () => {
                       let agenum = `age-${index}`;
                       return (
                         <span>
-                          <VStack mr="10px">
-                            <Text fontSize="sm" mt="2px">
-                              Child {index + 1}
-                            </Text>
-
-                            <select
-                              name="age"
-                              value={val.agenum}
-                              style={{
-                                width: "60px",
-                                backgroundColor: "#f8f2fb",
-                                borderRadius: "2px",
-                                height: "36px",
-                                paddingLeft: "8px",
-                                border: "1px solid #ced4da",
-                              }}
-                              min="2"
-                              max="12"
-                              onChange={(e) =>
-                                handleChildAge(e.target.value, index)
-                              }
-                              required
-                            >
-                              {childrenAges.map((item) => (
-                                <option value={item}>{item}</option>
-                              ))}
-                            </select>
-
-                            <Text fontSize="xs" mt="2px">
-                              (Age)
-                            </Text>
-                          </VStack>
-
-                          {/* <input
+                          <label htmlFor="formGroupExampleInput" className="">
+                            Child {index + 1}
+                          </label>
+                          <input
                             type="number"
                             value={val.agenum}
                             name="age"
@@ -911,7 +881,7 @@ const SearchFrom = () => {
                             max="12"
                             onChange={(e) => handleChildAge(e, index)}
                             required
-                          /> */}
+                          />
                         </span>
                       );
                     })}
@@ -935,7 +905,7 @@ const SearchFrom = () => {
                 <div className="row pt-1 position-relative">
                   <div className="col-lg-4 forms">
                     <label htmlFor="formGroupExampleInput" className="">
-                      Depart From <span className="text-white fw-bold">*</span>
+                      Depart From <span className="fw-bold">*</span>
                     </label>
                     <span className="address">
                       <input
@@ -961,7 +931,7 @@ const SearchFrom = () => {
                   </div>
                   <div className="col-lg-4 forms">
                     <label htmlFor="formGroupExampleInput" className=" ">
-                      Going To <span className="text-white fw-bold">*</span>
+                      Going To <span className="fw-bold">*</span>
                     </label>
                     <span className="address">
                       <input
@@ -997,16 +967,18 @@ const SearchFrom = () => {
                         id="departureDate"
                         style={{
                           minHeight: "100%",
-                          borderRight: "1px solid gray",
+                          //borderRight: "1px solid gray",
                           background: "#f8f2fb",
+                          border: "1px solid #ced4da",
                         }}
                       ></div>
                       <div
                         className="t-check-out"
                         style={{
                           minHeight: "100%",
-                          borderRight: "1px solid gray",
+                          //borderRight: "1px solid gray",
                           background: "#f8f2fb",
+                          border: "1px solid #ced4da",
                         }}
                         id="returnDate"
                       ></div>
@@ -1017,12 +989,8 @@ const SearchFrom = () => {
                   <>
                     <div className="row pt-1 position-relative" id="multiCity1">
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=" text-white"
-                        >
-                          Depart From{" "}
-                          <span className="text-white fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput" className="">
+                          Depart From <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1047,11 +1015,8 @@ const SearchFrom = () => {
                         </label>
                       </div>
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=" text-white"
-                        >
-                          Going To <span className="text-white fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput" className="">
+                          Going To <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1071,12 +1036,8 @@ const SearchFrom = () => {
                       <div className="col-lg-4">
                         <div className="row">
                           <div className="col-lg-12 ">
-                            <label
-                              htmlFor="formGroupExampleInput"
-                              className=" text-white"
-                            >
-                              Departing{" "}
-                              <span className="text-white fw-bold">*</span>
+                            <label htmlFor="formGroupExampleInput" className="">
+                              Departing <span className="fw-bold">*</span>
                             </label>
                           </div>
                         </div>
@@ -1086,7 +1047,7 @@ const SearchFrom = () => {
                             id="departureDate1"
                             style={{
                               minHeight: "100%",
-                              borderRight: "1px solid gray",
+                              border: "1px solid #ced4da",
                               background: "#f8f2fb",
                             }}
                           ></div>
@@ -1099,12 +1060,8 @@ const SearchFrom = () => {
                       style={{ display: "none" }}
                     >
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=" text-white"
-                        >
-                          Depart From{" "}
-                          <span className="text-white fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput" className="">
+                          Depart From <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1128,11 +1085,8 @@ const SearchFrom = () => {
                         </label>
                       </div>
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=" text-white"
-                        >
-                          Going To <span className="text-white fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput" className="">
+                          Going To <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1151,12 +1105,8 @@ const SearchFrom = () => {
                       <div className="col-lg-4">
                         <div className="row">
                           <div className="col-lg-12">
-                            <label
-                              htmlFor="formGroupExampleInput"
-                              className=" text-white"
-                            >
-                              Departing{" "}
-                              <span className="text-white fw-bold">*</span>
+                            <label htmlFor="formGroupExampleInput" className="">
+                              Departing <span className="fw-bold">*</span>
                             </label>
                           </div>
                         </div>
@@ -1166,8 +1116,8 @@ const SearchFrom = () => {
                             id="departureDate2"
                             style={{
                               minHeight: "100%",
-                              borderRight: "1px solid gray",
-                              background: "#f8f2fb"
+                              border: "1px solid #ced4da",
+                              background: "#f8f2fb",
                             }}
                           ></div>
                         </div>
@@ -1179,12 +1129,8 @@ const SearchFrom = () => {
                       style={{ display: "none" }}
                     >
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=" text-white"
-                        >
-                          Depart From{" "}
-                          <span className="text-white fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput" className="">
+                          Depart From <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1208,11 +1154,8 @@ const SearchFrom = () => {
                         </label>
                       </div>
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=" text-white"
-                        >
-                          Going To <span className="text-white fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput" className="">
+                          Going To <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1232,12 +1175,8 @@ const SearchFrom = () => {
                       <div className="col-lg-4">
                         <div className="row">
                           <div className="col-lg-12">
-                            <label
-                              htmlFor="formGroupExampleInput"
-                              className=" text-white"
-                            >
-                              Departing{" "}
-                              <span className="text-white fw-bold">*</span>
+                            <label htmlFor="formGroupExampleInput" className="">
+                              Departing <span className="fw-bold">*</span>
                             </label>
                           </div>
                         </div>
@@ -1247,8 +1186,8 @@ const SearchFrom = () => {
                             id="departureDate3"
                             style={{
                               minHeight: "100%",
-                              borderRight: "1px solid gray",
-                              background: "#f8f2fb"
+                              border: "1px solid #ced4da",
+                              background: "#f8f2fb",
                             }}
                           ></div>
                         </div>
@@ -1260,12 +1199,8 @@ const SearchFrom = () => {
                       style={{ display: "none" }}
                     >
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=" text-white"
-                        >
-                          Depart From{" "}
-                          <span className="text-white fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput" className="">
+                          Depart From <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1289,11 +1224,8 @@ const SearchFrom = () => {
                         </label>
                       </div>
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=" text-white"
-                        >
-                          Going To <span className="text-white fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput" className="">
+                          Going To <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1312,12 +1244,8 @@ const SearchFrom = () => {
                       <div className="col-lg-4">
                         <div className="row">
                           <div className="col-lg-12">
-                            <label
-                              htmlFor="formGroupExampleInput"
-                              className=" text-white"
-                            >
-                              Departing{" "}
-                              <span className="text-white fw-bold">*</span>
+                            <label htmlFor="formGroupExampleInput" className="">
+                              Departing <span className="fw-bold">*</span>
                             </label>
                           </div>
                         </div>
@@ -1327,8 +1255,8 @@ const SearchFrom = () => {
                             id="departureDate4"
                             style={{
                               minHeight: "100%",
-                              borderRight: "1px solid gray",
-                              background: "#f8f2fb"
+                              border: "1px solid #ced4da",
+                              background: "#f8f2fb",
                             }}
                           ></div>
                         </div>
@@ -1340,12 +1268,8 @@ const SearchFrom = () => {
                       style={{ display: "none" }}
                     >
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=" text-white"
-                        >
-                          Depart From{" "}
-                          <span className="text-white fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput" className="">
+                          Depart From <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1369,11 +1293,8 @@ const SearchFrom = () => {
                         </label>
                       </div>
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=" text-white"
-                        >
-                          Going To <span className="text-white fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput" className="">
+                          Going To <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1392,12 +1313,8 @@ const SearchFrom = () => {
                       <div className="col-lg-4">
                         <div className="row rounded-3">
                           <div className="col-lg-12">
-                            <label
-                              htmlFor="formGroupExampleInput"
-                              className=" text-white"
-                            >
-                              Departing{" "}
-                              <span className="text-white fw-bold">*</span>
+                            <label htmlFor="formGroupExampleInput" className="">
+                              Departing <span className="fw-bold">*</span>
                             </label>
                           </div>
                         </div>
@@ -1407,8 +1324,8 @@ const SearchFrom = () => {
                             id="departureDate5"
                             style={{
                               minHeight: "100%",
-                              borderRight: "1px solid gray",
-                              background: "#f8f2fb"
+                              border: "1px solid #ced4da",
+                              background: "#f8f2fb",
                             }}
                           ></div>
                         </div>

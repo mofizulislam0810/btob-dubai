@@ -321,6 +321,7 @@ const Registration = () => {
                                       setAgentEmail(e.target.value)
                                     }
                                     required
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                   />
                                   <div className="input-group-append">
                                     <div className="input-group-text">
@@ -582,7 +583,7 @@ const Registration = () => {
                               aria-hidden="true"
                             ></span>
                           ) : (
-                            <Text color="white">Sing Up</Text>
+                            <Text color="white">Sign Up</Text>
                           )}
                         </Center>
                       </button>

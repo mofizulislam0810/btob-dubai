@@ -43,7 +43,7 @@ const ForgotPassword = () => {
         <div className="card">
           <div className="card-header text-center">
             <Link to="/">
-              <img src={logo} alt="Triplover" />
+              <img src={logo} alt="FirstTrip" />
             </Link>
           </div>
           <div className="card-body login-card-body">
@@ -67,6 +67,7 @@ const ForgotPassword = () => {
                      placeholder="Email"
                      onChange={(e) => setEmail(e.target.value)}
                      required
+                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                    />
                    <div className="input-group-append">
                      <div className="input-group-text">

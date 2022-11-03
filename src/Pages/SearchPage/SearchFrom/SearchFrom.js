@@ -568,11 +568,9 @@ const SearchFrom = () => {
                 borderRadius="8px"
                 border="1px solid lightgray"
                 style={{
-                  //backgroundColor: "rgba(255, 255, 255, 0.9)",
-                  background:
-                    "linear-gradient(to right, #fef0f5, #f5edfa ,#f2faed)",
-
-                  backgroundOpacity: 0.5,
+                  backgroundColor: "rgba(255, 255, 255, 0.9)",
+                  // background:
+                  //   "linear-gradient(to right, #fef0f5, #f5edfa ,#f2faed)",
                 }}
               >
                 <div className="row">
@@ -991,12 +989,8 @@ const SearchFrom = () => {
                   <>
                     <div className="row pt-1 position-relative" id="multiCity1">
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=""
-                        >
-                          Depart From{" "}
-                          <span className="fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput" className="">
+                          Depart From <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1021,10 +1015,7 @@ const SearchFrom = () => {
                         </label>
                       </div>
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=""
-                        >
+                        <label htmlFor="formGroupExampleInput" className="">
                           Going To <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
@@ -1045,12 +1036,8 @@ const SearchFrom = () => {
                       <div className="col-lg-4">
                         <div className="row">
                           <div className="col-lg-12 ">
-                            <label
-                              htmlFor="formGroupExampleInput"
-                              className=""
-                            >
-                              Departing{" "}
-                              <span className="fw-bold">*</span>
+                            <label htmlFor="formGroupExampleInput" className="">
+                              Departing <span className="fw-bold">*</span>
                             </label>
                           </div>
                         </div>
@@ -1073,12 +1060,8 @@ const SearchFrom = () => {
                       style={{ display: "none" }}
                     >
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=""
-                        >
-                          Depart From{" "}
-                          <span className="fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput" className="">
+                          Depart From <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1102,10 +1085,7 @@ const SearchFrom = () => {
                         </label>
                       </div>
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=""
-                        >
+                        <label htmlFor="formGroupExampleInput" className="">
                           Going To <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
@@ -1125,12 +1105,8 @@ const SearchFrom = () => {
                       <div className="col-lg-4">
                         <div className="row">
                           <div className="col-lg-12">
-                            <label
-                              htmlFor="formGroupExampleInput"
-                              className=""
-                            >
-                              Departing{" "}
-                              <span className="fw-bold">*</span>
+                            <label htmlFor="formGroupExampleInput" className="">
+                              Departing <span className="fw-bold">*</span>
                             </label>
                           </div>
                         </div>
@@ -1153,12 +1129,8 @@ const SearchFrom = () => {
                       style={{ display: "none" }}
                     >
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=""
-                        >
-                          Depart From{" "}
-                          <span className="fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput" className="">
+                          Depart From <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1182,10 +1154,7 @@ const SearchFrom = () => {
                         </label>
                       </div>
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=""
-                        >
+                        <label htmlFor="formGroupExampleInput" className="">
                           Going To <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
@@ -1206,12 +1175,8 @@ const SearchFrom = () => {
                       <div className="col-lg-4">
                         <div className="row">
                           <div className="col-lg-12">
-                            <label
-                              htmlFor="formGroupExampleInput"
-                              className=""
-                            >
-                              Departing{" "}
-                              <span className="fw-bold">*</span>
+                            <label htmlFor="formGroupExampleInput" className="">
+                              Departing <span className="fw-bold">*</span>
                             </label>
                           </div>
                         </div>
@@ -1234,12 +1199,8 @@ const SearchFrom = () => {
                       style={{ display: "none" }}
                     >
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=""
-                        >
-                          Depart From{" "}
-                          <span className="fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput" className="">
+                          Depart From <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1263,10 +1224,7 @@ const SearchFrom = () => {
                         </label>
                       </div>
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=""
-                        >
+                        <label htmlFor="formGroupExampleInput" className="">
                           Going To <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
@@ -1286,12 +1244,8 @@ const SearchFrom = () => {
                       <div className="col-lg-4">
                         <div className="row">
                           <div className="col-lg-12">
-                            <label
-                              htmlFor="formGroupExampleInput"
-                              className=""
-                            >
-                              Departing{" "}
-                              <span className="fw-bold">*</span>
+                            <label htmlFor="formGroupExampleInput" className="">
+                              Departing <span className="fw-bold">*</span>
                             </label>
                           </div>
                         </div>
@@ -1314,12 +1268,8 @@ const SearchFrom = () => {
                       style={{ display: "none" }}
                     >
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=""
-                        >
-                          Depart From{" "}
-                          <span className="fw-bold">*</span>
+                        <label htmlFor="formGroupExampleInput" className="">
+                          Depart From <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1343,10 +1293,7 @@ const SearchFrom = () => {
                         </label>
                       </div>
                       <div className="col-lg-4 forms">
-                        <label
-                          htmlFor="formGroupExampleInput"
-                          className=""
-                        >
+                        <label htmlFor="formGroupExampleInput" className="">
                           Going To <span className="fw-bold">*</span>
                         </label>
                         <span className="address">
@@ -1366,12 +1313,8 @@ const SearchFrom = () => {
                       <div className="col-lg-4">
                         <div className="row rounded-3">
                           <div className="col-lg-12">
-                            <label
-                              htmlFor="formGroupExampleInput"
-                              className=""
-                            >
-                              Departing{" "}
-                              <span className="fw-bold">*</span>
+                            <label htmlFor="formGroupExampleInput" className="">
+                              Departing <span className="fw-bold">*</span>
                             </label>
                           </div>
                         </div>

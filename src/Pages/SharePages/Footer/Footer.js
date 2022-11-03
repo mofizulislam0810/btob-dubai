@@ -64,7 +64,7 @@ const Footer = () => {
       <Box className="container-fluid" bg="#591b7d" >
         <Box className="container">
 
-          <Flex w="100%" mt="80px" mb="30px" justifyContent="space-between" color={'white'}>
+          <Flex w="100%" pt={'20px'} pb='10px' justifyContent="space-between" color={'white'}>
             <Box>
               <Image src={logo} alt="FirstTrip" w="160px" mb="24px" />
               <HStack gap="10px">
@@ -76,7 +76,7 @@ const Footer = () => {
               </HStack>
             </Box>
 
-            <Box borderRight="1px" color="#ECECEC" my={2} />
+            {/* <Box borderRight="1px" color="#ECECEC" my={2} /> */}
 
             <Box>
               <Text fontSize="18px" fontWeight={500} mb="24px">
@@ -91,7 +91,7 @@ const Footer = () => {
               ))}
             </Box>
 
-            <Box borderRight="1px" color="#ECECEC" my={2} />
+            {/* <Box borderRight="1px" color="#ECECEC" my={2} /> */}
 
             <Box>
               <Text fontSize="18px" fontWeight={500} mb="24px">
@@ -120,7 +120,7 @@ const Footer = () => {
 
 
 
-      <Box borderTop="1px solid #E2E2E2" mx={4} />
+      {/* <Box borderTop="1px solid #E2E2E2" mx={4} /> */}
       <Box display={'flex'} justifyContent='center'>
         <Box >
           <img src={logo} alt="" width='100px' height={"10px"} />
@@ -130,8 +130,8 @@ const Footer = () => {
             fontWeight={400}
             color="#908DAB"
             textAlign="center"
-            mt="25px"
-            mb="25px"
+            mt="20px"
+            mb="20px"
           >© Copyright FirstTrip Limited. All rights reserved.</Text>
         </Box>
       </Box>

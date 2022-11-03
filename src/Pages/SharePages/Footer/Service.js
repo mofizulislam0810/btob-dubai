@@ -23,32 +23,32 @@ const Service = () => {
 
 
                     <Flex mt={'10px'} mb="30px" key={nanoid()}>
-                        <Box borderRadius='5px' w={'400px'} height='80px' bg='#7800be' mx='4px' key={nanoid()}>
-                            <VStack pt={'3px'} key={nanoid()}>
+                        <Box borderRadius='5px' w={'400px'} height='100px' bg='#7800be' mx='4px' key={nanoid()}>
+                            <VStack pt={'8px'} key={nanoid()}>
                                 <Icon as={HiOutlineColorSwatch} height='40px' w={'40px'} color='white'></Icon>
                                 <Text color='white' fontSize={'18px'} fontWeight={700} >
                                     Easy Booking
                                 </Text>
                             </VStack>
                         </Box>
-                        <Box borderRadius='5px' w={'400px'} height='80px' bg='#009f70' mx='4px' key={nanoid()}>
-                            <VStack pt={'3px'} key={nanoid()}>
+                        <Box borderRadius='5px' w={'400px'} height='100px' bg='#009f70' mx='4px' key={nanoid()}>
+                            <VStack pt={'8px'} key={nanoid()}>
                                 <Icon as={HiOutlineChatAlt2} height='40px' w={'40px'} color='white'></Icon>
                                 <Text color='white' fontSize={'18px'} fontWeight={700} >
                                     24/7 Support
                                 </Text>
                             </VStack>
                         </Box>
-                        <Box borderRadius='5px' w={'400px'} height='80px' bg='#fbbc05' mx='4px' key={nanoid()}>
-                            <VStack mt={'3px'}>
+                        <Box borderRadius='5px' w={'400px'} height='100px' bg='#fbbc05' mx='4px' key={nanoid()}>
+                            <VStack mt={'8px'}>
                                 <Icon as={AiFillGift} height='40px' w={'40px'} color='white'></Icon>
                                 <Text color='white' fontSize={'18px'} fontWeight={700} >
                                     Great Rewards
                                 </Text>
                             </VStack>
                         </Box>
-                        <Box borderRadius='5px' w={'400px'} height='80px' bg='#ff2e74' mx='4px' key={nanoid()}>
-                            <VStack pt='3px' key={nanoid()}>
+                        <Box borderRadius='5px' w={'400px'} height='100px' bg='#ff2e74' mx='4px' key={nanoid()}>
+                            <VStack pt='8px' key={nanoid()}>
                                 <Icon as={MdOutlineFavoriteBorder} height='40px' w={'40px'} color='white'></Icon>
                                 <Text color='white' fontSize={'18px'} fontWeight={700}  >
                                     We Care

@@ -37,7 +37,7 @@ export const Partners = () => {
             <Box key={nanoid()}>
                 <Flex justifyContent={'center'} alignItems='center' gap={5} key={nanoid()}>
                     <Divider orientation='horizontal' color={'gray'} w='500px' />
-                    <Text fontSize={'18px'} fontWeight='700px' >Key Airline Partner</Text>
+                    <Text fontSize={'18px'} fontWeight={700} >Key Airline Partner</Text>
                     <Divider orientation='horizontal' color={'gray'} w='500px' />
                 </Flex>
                 <Flex mb={'60px'} justifyContent="space-between" key={nanoid()}>

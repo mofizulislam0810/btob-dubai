@@ -320,6 +320,7 @@ const Registration = () => {
                                       setAgentEmail(e.target.value)
                                     }
                                     required
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                   />
                                   <div className="input-group-append">
                                     <div className="input-group-text">

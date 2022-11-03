@@ -2990,6 +2990,7 @@ const LeftSide = () => {
                           required
                           autoComplete="off"
                           spellcheck="false"
+                          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                         />
                       </div>
                     </div>

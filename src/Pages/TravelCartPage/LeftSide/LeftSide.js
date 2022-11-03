@@ -26,8 +26,8 @@ const LeftSide = () => {
   const itemCodeRef = JSON.parse(localStorage.getItem("itemCodeRef"));
   const origin = searchData.origin;
   const destination = searchData.destination;
-  // console.log(origin.match("Bangladesh")!==null?origin.match("Bangladesh")[0]:"");
-  // console.log(destination.match("Bangladesh")!==null?destination.match("Bangladesh")[0]:"");
+  console.log(origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "");
+  console.log(destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "");
   const qtyList = searchData.qtyList;
   const adultNumber = searchData.qtyList.Adult;
   const childrenNumber = searchData.qtyList.Children;
@@ -1460,7 +1460,7 @@ const LeftSide = () => {
                             name="frequentFlyerNumber"
                             className="form-control"
                             onInvalid={e => e.target.setCustomValidity('Enter User Name Here')}
-                            onInput={e => {e.target.setCustomValidity(''); console.log("eeeeeeeeee", e)}}
+                            onInput={e => { e.target.setCustomValidity(''); console.log("eeeeeeeeee", e) }}
                             onChange={(e) => {
                               const frequentFlyerNumber = e.target.value;
                               setAdult((ob) =>
@@ -2928,6 +2928,7 @@ const LeftSide = () => {
                     <input
                       class="form-check-input"
                       type="checkbox"
+                      style={{ cursor: 'pointer' }}
                       value={isChecked}
                       id="flexCheckDefault100"
                       onChange={handleChange}

@@ -28,7 +28,7 @@ const Contact = () => {
                 <span className="">
                   <i className="la la-phone la-lg"></i>
                 </span>{" "}
-                +97143375728
+                09613123123
               </p>
               <p>
                 <span className="">

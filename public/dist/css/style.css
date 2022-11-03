@@ -20,8 +20,8 @@ body{
 }
 
 
-#form-bg{
-    background: #FFFFFF;
+#form-bg {
+    /* background: linear-gradient(100.94deg, #a34fd2 -9.51%, #fc6b9d 115.79%); */
     padding: 30px 30px 70px 30px;
     padding-bottom: 28px;
   }
@@ -46,9 +46,8 @@ body{
 /* input field style */
 .input-field{
     height: 50px;
-    padding:10px;
-    border:0;
-    background-color: #f8f2fb;
+    padding: 10px;
+    border: "1px solid black"
     /* box-shadow:0 0 15px 4px rgb(255, 255, 255); */
 }
 
@@ -114,7 +113,7 @@ body{
     height: 30px; 
     width: 30px;  
     border-radius: 50%;
-    background-color: rgb(218, 49, 49);
+    background-color: #fc2c74;
     color: rgb(0, 0, 0);
     text-align: center;
     cursor: pointer;

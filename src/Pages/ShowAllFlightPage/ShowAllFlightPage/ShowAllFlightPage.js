@@ -1478,8 +1478,10 @@ const ShowAllFlightPage = () => {
                                               data-bs-toggle="dropdown"
                                               aria-expanded="false"
                                               data-bs-auto-close="outside"
-                                              style={{ height: "36px",
-                                              backgroundColor: "#f8f2fb", }}
+                                              style={{
+                                                height: "36px",
+                                                backgroundColor: "#f8f2fb",
+                                              }}
                                             >
                                               <span className="d-flex">
                                                 <svg

@@ -568,7 +568,11 @@ const SearchFrom = () => {
                 borderRadius="8px"
                 border="1px solid lightgray"
                 style={{
-                  backgroundColor: "rgba(255, 255, 255, 0.9)",
+                  //backgroundColor: "rgba(255, 255, 255, 0.9)",
+                  background:
+                    "linear-gradient(to right, #fef0f5, #f5edfa ,#f2faed)",
+
+                  backgroundOpacity: 0.5,
                 }}
               >
                 <div className="row">
@@ -965,16 +969,18 @@ const SearchFrom = () => {
                         id="departureDate"
                         style={{
                           minHeight: "100%",
-                          borderRight: "1px solid gray",
+                          //borderRight: "1px solid gray",
                           background: "#f8f2fb",
+                          border: "1px solid #ced4da",
                         }}
                       ></div>
                       <div
                         className="t-check-out"
                         style={{
                           minHeight: "100%",
-                          borderRight: "1px solid gray",
+                          //borderRight: "1px solid gray",
                           background: "#f8f2fb",
+                          border: "1px solid #ced4da",
                         }}
                         id="returnDate"
                       ></div>
@@ -1135,7 +1141,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               borderRight: "1px solid gray",
-                              background: "#f8f2fb"
+                              background: "#f8f2fb",
                             }}
                           ></div>
                         </div>
@@ -1216,7 +1222,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               borderRight: "1px solid gray",
-                              background: "#f8f2fb"
+                              background: "#f8f2fb",
                             }}
                           ></div>
                         </div>
@@ -1296,7 +1302,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               borderRight: "1px solid gray",
-                              background: "#f8f2fb"
+                              background: "#f8f2fb",
                             }}
                           ></div>
                         </div>
@@ -1376,7 +1382,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               borderRight: "1px solid gray",
-                              background: "#f8f2fb"
+                              background: "#f8f2fb",
                             }}
                           ></div>
                         </div>

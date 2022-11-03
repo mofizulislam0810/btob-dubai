@@ -11,6 +11,7 @@ import courtries from "../../../JSON/countries.json";
 import { environment } from "../../SharePages/Utility/environment";
 import "./LeftSide.css";
 const LeftSide = () => {
+  const [validityError, setValidityError] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
   const { setBookData, setLoading } = useAuth();
@@ -849,7 +850,7 @@ const LeftSide = () => {
                               autoComplete="off"
                               spellcheck="false"
                             />
-                            <div className="validation"></div>
+                            {validityError && (<div className="validation"></div>)}
                           </div>
                         </div>
                       </div>
@@ -884,7 +885,7 @@ const LeftSide = () => {
                             autoComplete="off"
                             spellcheck="false"
                           />
-                          <div className="validation"></div>
+                          {validityError && (<div className="validation"></div>)}
                         </div>
                       </div>
                       <div className="col-lg-4">
@@ -1024,7 +1025,7 @@ const LeftSide = () => {
                                   placeholder="Date of Birth"
                                   pattern="\d{4}-\d{2}-\d{2}"
                                 />
-                                <div className="validation"></div>
+                                {validityError && (<div className="validation"></div>)}
                               </div>
                               {/* <div className="input-group mb-3 d-flex">
                                 <select
@@ -1252,7 +1253,7 @@ const LeftSide = () => {
                                 autoComplete="off"
                                 spellcheck="false"
                               />
-                              <div className="validation"></div>
+                              {validityError && (<div className="validation"></div>)}
 
                             </div>
                           </div>
@@ -1431,7 +1432,7 @@ const LeftSide = () => {
                                 pattern="\d{4}-\d{2}-\d{2}"
                                 required
                               />
-                              <div className="validation"></div>
+                              {validityError && (<div className="validation"></div>)}
                             </div>
                           </div>
                         </div>
@@ -1633,7 +1634,7 @@ const LeftSide = () => {
                               autoComplete="off"
                               spellcheck="false"
                             />
-                            <div className="validation"></div>
+                            {validityError && (<div className="validation"></div>)}
                           </div>
                         </div>
                       </div>
@@ -1664,7 +1665,7 @@ const LeftSide = () => {
                             autoComplete="off"
                             spellcheck="false"
                           />
-                          <div className="validation"></div>
+                          {validityError && (<div className="validation"></div>)}
                         </div>
                       </div>
                       <div className="col-lg-4">
@@ -1741,7 +1742,7 @@ const LeftSide = () => {
                               placeholder="Date of Birth"
                               pattern="\d{4}-\d{2}-\d{2}"
                             />
-                            <div className="validation"></div>
+                            {validityError && (<div className="validation"></div>)}
                           </div>
                           {/* <div className="input-group mb-3 d-flex">
                             <select
@@ -2014,7 +2015,7 @@ const LeftSide = () => {
                                 autoComplete="off"
                                 spellcheck="false"
                               />
-                              <div className="validation"></div>
+                              {validityError && (<div className="validation"></div>)}
                             </div>
                           </div>
                           <div className="col-lg-4">
@@ -2086,7 +2087,7 @@ const LeftSide = () => {
                                 pattern="\d{4}-\d{2}-\d{2}"
                                 required
                               />
-                              <div className="validation"></div>
+                              {validityError && (<div className="validation"></div>)}
                             </div>
                             {/* <div className="input-group mb-3 d-flex">
                               <select
@@ -2361,7 +2362,7 @@ const LeftSide = () => {
                               autoComplete="off"
                               spellcheck="false"
                             />
-                            <div className="validation"></div>
+                            {validityError && (<div className="validation"></div>)}
                           </div>
                         </div>
                       </div>
@@ -2392,7 +2393,7 @@ const LeftSide = () => {
                             autoComplete="off"
                             spellcheck="false"
                           />
-                          <div className="validation"></div>
+                          {validityError && (<div className="validation"></div>)}
                         </div>
                       </div>
                       <div className="col-lg-4">
@@ -2467,7 +2468,7 @@ const LeftSide = () => {
                               placeholder="Date of Birth"
                               pattern="\d{4}-\d{2}-\d{2}"
                             />
-                            <div className="validation"></div>
+                            {validityError && (<div className="validation"></div>)}
                           </div>
                           {/* <div className="input-group mb-3 d-flex">
                             <select
@@ -2687,7 +2688,7 @@ const LeftSide = () => {
                                 autoComplete="off"
                                 spellcheck="false"
                               />
-                              <div className="validation"></div>
+                              {validityError && (<div className="validation"></div>)}
                             </div>
                           </div>
                           <div className="col-lg-4">
@@ -2759,7 +2760,7 @@ const LeftSide = () => {
                                 pattern="\d{4}-\d{2}-\d{2}"
                                 required
                               />
-                              <div className="validation"></div>
+                              {validityError && (<div className="validation"></div>)}
                             </div>
                             {/* <div className="input-group mb-3 d-flex">
                               <select
@@ -3172,6 +3173,7 @@ const LeftSide = () => {
                     <button
                       type="submit"
                       className="btn button-color text-white fw-bold w-25 mt-2 rounded btn-sm"
+                      onClick={() => setValidityError(true)}
                     >
                       Book Now
                     </button>

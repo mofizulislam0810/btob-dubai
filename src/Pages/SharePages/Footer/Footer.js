@@ -48,7 +48,7 @@ const addressData = [
     icon: BsFillHouseFill,
   },
   {
-    text: "+97143375728",
+    text: "09613123123",
     icon: FaPhoneAlt,
   },
   {

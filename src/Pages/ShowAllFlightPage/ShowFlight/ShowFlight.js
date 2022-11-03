@@ -295,15 +295,15 @@ const ShowFlight = (props) => {
     const checked = e.target.checked;
     if (checked) {
       checkList.push(props.data);
+      sessionStorage.setItem("checkList", JSON.stringify(checkList));
       setCount(checkList.length);
     } else {
-      // checkList = checkList.filter(
-      //   (item) => item.itemCodeRef !== props.data.itemCodeRef
-      // );
-      // sessionStorage.setItem("checkList", JSON.stringify(checkList));
-      // setCount(checkList.length);
+      checkList = checkList.filter(
+        (item) => item.itemCodeRef !== props.data.itemCodeRef
+      );
+      sessionStorage.setItem("checkList", JSON.stringify(checkList));
+      setCount(checkList.length);
     }
-    sessionStorage.setItem("checkList", JSON.stringify(checkList));
   };
   // console.log(currency);
   const isTempInspector = sessionStorage.getItem("isTempInspector");

@@ -20,7 +20,6 @@ import ReactTooltip from "react-tooltip";
 import { getCabinClass } from "../../../common/functions";
 let cIndex = 1;
 const ShowAllFlightPage = () => {
-  sessionStorage.removeItem("checkList")
   window.scrollTo(0, 0);
   const { state } = useLocation();
   const {

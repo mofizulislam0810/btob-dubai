@@ -35,6 +35,7 @@ const ShowFlight = (props) => {
     itemCodeRef,
     passengerCounts,
     totalPrice,
+    avlSrc
   } = props.data;
   // console.log(directions);
   const flightType = props.flightType;
@@ -294,15 +295,15 @@ const ShowFlight = (props) => {
     const checked = e.target.checked;
     if (checked) {
       checkList.push(props.data);
-      sessionStorage.setItem("checkList", JSON.stringify(checkList));
       setCount(checkList.length);
     } else {
-      checkList = checkList.filter(
-        (item) => item.itemCodeRef !== props.data.itemCodeRef
-      );
-      sessionStorage.setItem("checkList", JSON.stringify(checkList));
-      setCount(checkList.length);
+      // checkList = checkList.filter(
+      //   (item) => item.itemCodeRef !== props.data.itemCodeRef
+      // );
+      // sessionStorage.setItem("checkList", JSON.stringify(checkList));
+      // setCount(checkList.length);
     }
+    sessionStorage.setItem("checkList", JSON.stringify(checkList));
   };
   // console.log(currency);
   const isTempInspector = sessionStorage.getItem("isTempInspector");
@@ -1045,6 +1046,9 @@ const ShowFlight = (props) => {
                 {refundable === true ? (
                   <>
                     <span className="font-size">
+                     <span style={{avlSrc}}>
+                        <i class="fas fa-circle fa-sm me-1"></i>
+                      </span>
                       <span className="text-success">
                         <i class="fas fa-circle fa-sm me-1"></i>
                       </span>
@@ -1054,6 +1058,9 @@ const ShowFlight = (props) => {
                 ) : (
                   <>
                     <span className="font-size">
+                    <span style={{avlSrc}}>
+                        <i class="fas fa-circle fa-sm me-1"></i>
+                      </span>
                       <span className="text-danger">
                         <i class="fas fa-circle fa-sm me-1"></i>
                       </span>
@@ -3101,7 +3108,7 @@ const ShowFlight = (props) => {
                   fareRules.item1 != null ? (
                     fareRules.item2.isSuccess == true ? (
                       <Tabs>
-                        <TabList>
+                        <TabList style={{overflowY: "scroll"}}>
                           {fareRules.item1.fareRuleDetails.map(
                             (item, index) => {
                               return (

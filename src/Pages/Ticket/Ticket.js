@@ -227,7 +227,7 @@ const Ticket = () => {
                                   src={
                                     s3URL + `${ticketingList.ticketInfo?.agentLogo}`
                                   }
-                                  style={{ width: "150px", height: "30px" }}
+                                  style={{ width: "150px", height: "70px" }}
                                 ></img>
                               ) : (
                                 <>
@@ -235,7 +235,7 @@ const Ticket = () => {
                                     alt="img01"
                                     className="p-2"
                                     src={tllLogo}
-                                    style={{ width: "150px", height: "30px" }}
+                                    style={{ width: "150px", height: "70px" }}
                                   ></img>
                                 </>
                               )}

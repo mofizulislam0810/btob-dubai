@@ -653,7 +653,7 @@ const SuccessBookingPanel = () => {
                                   {bookData.data?.item1.flightInfo?.passengerFares.cnn.discountPrice}
                                 </td>
                                 <td className="right">
-                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.ait}
+                                  {bookData.data?.item1.flightInfo?.passengerFares.cnn.ait}
                                 </td>
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.cnn}</td>
                                 <td className="right fw-bold">
@@ -680,7 +680,7 @@ const SuccessBookingPanel = () => {
                                   {bookData.data?.item1.flightInfo?.passengerFares.inf.discountPrice}
                                 </td>
                                 <td className="right">
-                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.ait}
+                                  {bookData.data?.item1.flightInfo?.passengerFares.inf.ait}
                                 </td>
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.inf}</td>
                                 <td className="right fw-bold">

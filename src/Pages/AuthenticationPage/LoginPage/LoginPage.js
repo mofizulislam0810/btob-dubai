@@ -272,7 +272,7 @@ const LoginPage = () => {
         </svg>
       </Box>
 
-      <Text fontSize="21px" fontWeight={500} pt="30px">
+      {/* <Text fontSize="21px" fontWeight={500} pt="30px">
         Our Services
       </Text>
 
@@ -308,7 +308,7 @@ const LoginPage = () => {
             <Image src={item.img} alt="airlines1" w="150px" />
           </Center>
         ))}
-      </Flex>
+      </Flex> */}
       <Partners />
       <Service />
 

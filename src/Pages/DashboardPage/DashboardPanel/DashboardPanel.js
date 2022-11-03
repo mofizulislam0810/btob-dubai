@@ -281,9 +281,9 @@ const DashboardPanel = () => {
                 <div className="small-box bg-danger">
                   <div className="inner">
                     <h3>
-                      {highestTicktedAirlines[0]?.ticketCount}{" "}
+                      {highestTicktedAirlines[0]?.ticketCount > 0 ? highestTicktedAirlines[0]?.ticketCount : 0 }{" "}
                       <span style={{ fontSize: "15px" }}>
-                        ({highestTicktedAirlines[0]?.airLineName})
+                        {highestTicktedAirlines[0]?.airLineName}
                       </span>
                     </h3>
                     <p>Highest Tickted Airline</p>

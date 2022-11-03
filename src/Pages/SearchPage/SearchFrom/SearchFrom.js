@@ -1353,22 +1353,7 @@ const SearchFrom = () => {
                 ) : (
                   <></>
                 )}
-                {/* <div className="row mt-3">
-                  <div className="col-lg-12 mx-start">
-                    <div className="d-flex float-end">
-                      <p className="text-white me-1 p-1">Trending Searches:</p>
-                      <span className="bg-light bg-gradient text-white fw-bold p-1 me-1 rounded" style={{height:"100%",fontSize:"13px"}}>DAC - CGP</span>
-                      <span className="bg-light bg-gradient text-white fw-bold p-1 rounded" style={{height:"100%",fontSize:"13px"}}>DAC - DXB</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="row position-absolute top-100 start-50 translate-middle">
-                  <button className="btn button-color text-white text-center fw-bold">
-                    Search Flight
-                  </button>
-                </div> */}
-
-                <div className="row">
+              <div className="row">
                   <div className="col-lg-12">
                     <div className="d-flex justify-content-center">
                       <button
@@ -1380,76 +1365,11 @@ const SearchFrom = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* <div className="row mt-3">
-                  <div className="col-lg-12"></div>
-                </div> */}
               </Box>
             </div>
           </div>
         </div>
       </form>
-
-      {/* <div className="container my-3">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="d-flex justify-content-center">
-              {searchList !== undefined ? (
-                searchList.map((item, index) => {
-                  return (
-                    <>
-                      {index === 0 ? (
-                        <>
-                          <p
-                            className="py-2 pe-2 mb-0"
-                            style={{ fontSize: "12px",color:"#8796A1" }}
-                          >
-                            Recent searches
-                          </p>
-                        </>
-                      ) : (
-                        <> </>
-                      )}
-                      <div
-                        className="text-center  text-dark p-2 me-2"
-                        style={{ fontSize: "12px", cursor: "pointer" ,backgroundColor:"#FAF9FF"}}
-                        onClick={() => searchValue(index)}
-                      >
-                        <span>{item.routes[0].origin}</span>
-                        <span className="mx-1">-</span>
-                        <span>
-                          {item.routes[0].destination}{" "}
-                          <span className="me-1">({item.journeyType})</span>
-                        </span>
-                        <span className="">
-                          (
-                          {moment(item.routes[0].departureDate).format(
-                            "yyyy-MM-DD"
-                          )}
-                          )
-                          {item.routes[1] !== undefined ? (
-                            <>
-                              -(
-                              {moment(item.routes[1].departureDate).format(
-                                "yyyy-MM-DD"
-                              )}
-                              ){" "}
-                            </>
-                          ) : (
-                            <></>
-                          )}
-                        </span>
-                      </div>
-                    </>
-                  );
-                })
-              ) : (
-                <></>
-              )}
-            </div>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };

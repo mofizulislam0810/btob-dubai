@@ -1139,7 +1139,7 @@ const ShowFlight = (props) => {
           {/* end of check price click section */}
 
           {/* check price section  */}
-          <div className="border-top" id={"check-price" + props.index}>
+          {/* <div className="border-top" id={"check-price" + props.index}>
             <div className="container-fluid">
               <div className="row">
                 <div className="col-lg-12">
@@ -1307,7 +1307,7 @@ const ShowFlight = (props) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           {/* end of check price section */}
           <div
             className="table-responsive-sm mt-1"

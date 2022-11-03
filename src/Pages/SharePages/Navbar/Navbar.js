@@ -224,7 +224,7 @@ const Navbar = () => {
             <span className="text-white fw-bold">
               {agentInfo?.currencyName !== undefined
                 ? agentInfo?.currencyName
-                : ""}{" "}
+                : ""}
               {agentInfo?.currentBalance ?? 0}
             </span>
           </a>

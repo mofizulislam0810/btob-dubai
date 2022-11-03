@@ -366,7 +366,7 @@ const BookedView = () => {
                                         "DD-MMMM-yyyy"
                                       )}
                                     </td>
-                                    <td>{item.documentNumber}</td>
+                                    <td>{item.documentNumber === '' ? "N/A" :item.documentNumber }</td>
                                   </tr>
                                 );
                               })}
@@ -1007,7 +1007,7 @@ const BookedView = () => {
                                         "DD-MMMM-yyyy"
                                       )}
                                     </td>
-                                    <td>{item.documentNumber}</td>
+                                    <td>{item.documentNumber === '' ? "N/A" :item.documentNumber }</td>
                                   </tr>
                                 );
                               })}

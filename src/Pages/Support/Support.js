@@ -11,7 +11,7 @@ import $ from "jquery";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactPaginate from "react-paginate";
-import { Box, Center, Text } from "@chakra-ui/react";
+import { Box, Center, HStack, Text } from "@chakra-ui/react";
 const Support = () => {
   const [filterSubjectId, setFilterSubjectId] = useState("ALL");
   const location = useLocation();
@@ -124,6 +124,13 @@ const Support = () => {
   let [pageSizeH, setPageSizeH] = useState(10);
   let [pageCountH, setPageCountH] = useState(0);
   let [pageNumberH, setPageNumberH] = useState(1);
+
+  const [isBookingIdInputed, setIsBookingIdInputed] = useState(false);
+  useEffect(() => {
+    uniqueTransID === ""
+      ? setIsBookingIdInputed(false)
+      : setIsBookingIdInputed(true);
+  }, [uniqueTransID]);
 
   const getSupportHistory = async (item, pageNumberH) => {
     setCurrentItem(item);
@@ -550,32 +557,48 @@ const Support = () => {
                                       })}
                                     </select>
                                   </div>
-                                  <div className="col-sm-4">
-                                    <label class="form-label">Booking ID</label>
-                                    <input
-                                      class="form-control"
-                                      type={"text"}
-                                      placeholder={"Booking ID"}
-                                      value={uniqueTransID}
-                                      className="form-control"
-                                      onChange={(e) =>
-                                        handleSetUniqueTransID(e.target.value)
-                                      }
-                                    ></input>
-                                  </div>
-                                  <div className="col-sm-4">
-                                    <label class="form-label">PNR</label>
-                                    <input
-                                      class="form-control"
-                                      type={"text"}
-                                      placeholder={"PNR"}
-                                      value={pnr}
-                                      className="form-control"
-                                      onChange={(e) =>
-                                        handleSetPNR(e.target.value)
-                                      }
-                                    ></input>
-                                  </div>
+                                  <HStack w="400px">
+                                    <div className="col-sm-8">
+                                      <label class="form-label">
+                                        Booking ID
+                                      </label>
+                                      <input
+                                        class="form-control"
+                                        type={"text"}
+                                        placeholder={"Booking ID"}
+                                        value={uniqueTransID}
+                                        className="form-control"
+                                        onChange={(e) =>
+                                          handleSetUniqueTransID(e.target.value)
+                                        }
+                                        disabled={
+                                          !isBookingIdInputed && pnr !== ""
+                                        }
+                                      ></input>
+                                    </div>
+                                    <Text
+                                      fontWeight={600}
+                                      fontSize="md"
+                                      pt="27px"
+                                      color="gray"
+                                    >
+                                      Or
+                                    </Text>
+                                    <div className="col-sm-8">
+                                      <label class="form-label">PNR</label>
+                                      <input
+                                        class="form-control"
+                                        type={"text"}
+                                        placeholder={"PNR"}
+                                        value={pnr}
+                                        className="form-control"
+                                        onChange={(e) =>
+                                          handleSetPNR(e.target.value)
+                                        }
+                                        disabled={isBookingIdInputed}
+                                      ></input>
+                                    </div>
+                                  </HStack>
 
                                   <div className="col-sm-12">
                                     <table

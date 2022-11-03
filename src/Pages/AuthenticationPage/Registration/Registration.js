@@ -37,6 +37,7 @@ import airlines3 from "../../../images/landing/airlines-7.png";
 import airlines4 from "../../../images/landing/airlines-8.png";
 import { nanoid } from "nanoid";
 
+
 const Registration = () => {
   const navigate = useNavigate();
   let [countryName, setCountryName] = useState("Bangladesh");
@@ -607,49 +608,8 @@ const Registration = () => {
         <FooterLR></FooterLR>
       </div> */}
         </div>
-        <Text fontSize="21px" fontWeight={500}>
-          Our Services
-        </Text>
 
-        <Flex gap="60px" py="50px">
-          {ourServiceData.map((item) => (
-            <VStack gap={"22px"} key={nanoid()}>
-              <Circle
-                bg="white"
-                boxShadow=" 0px 11px 20px rgba(224, 239, 255, 0.32)"
-              >
-                <Image
-                  src={item.img}
-                  alt="flights"
-                  w="60px"
-                  h="60px"
-                  m="45px"
-                />
-              </Circle>
-              <Text fontWeight={400} fontSize="16px" color="text">
-                {item.text}
-              </Text>
-            </VStack>
-          ))}
-        </Flex>
 
-        <Text fontSize="21px" fontWeight={500} pt="100px">
-          Top Airlines Are With Us
-        </Text>
-        <Flex gap="60px" py="50px">
-          {topAirlinesData.map((item) => (
-            <Center
-              key={nanoid()}
-              bg="rgba(255, 255, 255, 0.3)"
-              border="1px solid #E8E8E8"
-              borderRadius="5px"
-              px="45px"
-              py="57px"
-            >
-              <Image src={item.img} alt="airlines1" w="150px" />
-            </Center>
-          ))}
-        </Flex>
         <Footer></Footer>
       </VStack>
     </>

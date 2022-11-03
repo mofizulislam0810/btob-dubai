@@ -59,73 +59,87 @@ const addressData = [
 
 const Footer = () => {
   return (
-    <Box className="container">
-      <Flex w="100%" mt="80px" mb="30px" justifyContent="space-between">
-        <Box>
-          <Image src={logo} alt="FirstTrip" w="160px" mb="24px" />
-          <HStack gap="10px">
-            {socialData.map((item, idx) => (
-              <Circle bg="#E0ECFB" size="45px" key={idx}>
-                <Icon as={item.icon} h="22px" w="22px" color="inactiveText" />
-              </Circle>
-            ))}
-          </HStack>
-        </Box>
+    <>
 
-        <Box borderRight="1px" color="#ECECEC" my={2} />
+      <Box className="container-fluid" bg="#591b7d" >
+        <Box className="container">
 
-        <Box>
-          <Text fontSize="18px" fontWeight={500} mb="24px">
-            Quick Links
-          </Text>
-          {quickLinksData.map((item, idx) => (
-            <Link to={`/${item.to}`} key={idx}>
-              <Text fontSize="14px" fontWeight={400} mb="17px">
-                {item.text}
+          <Flex w="100%" mt="80px" mb="30px" justifyContent="space-between" color={'white'}>
+            <Box>
+              <Image src={logo} alt="FirstTrip" w="160px" mb="24px" />
+              <HStack gap="10px">
+                {socialData.map((item, idx) => (
+                  <Circle bg="#E0ECFB" size="45px" key={idx}>
+                    <Icon as={item.icon} h="22px" w="22px" color='black' />
+                  </Circle>
+                ))}
+              </HStack>
+            </Box>
+
+            <Box borderRight="1px" color="#ECECEC" my={2} />
+
+            <Box>
+              <Text fontSize="18px" fontWeight={500} mb="24px">
+                Quick Links
               </Text>
-            </Link>
-          ))}
-        </Box>
+              {quickLinksData.map((item, idx) => (
+                <Link to={`/${item.to}`} key={idx}>
+                  <Text fontSize="14px" fontWeight={400} mb="17px">
+                    {item.text}
+                  </Text>
+                </Link>
+              ))}
+            </Box>
 
-        <Box borderRight="1px" color="#ECECEC" my={2} />
+            <Box borderRight="1px" color="#ECECEC" my={2} />
 
-        <Box>
-          <Text fontSize="18px" fontWeight={500} mb="24px">
-            Address
-          </Text>
-          {addressData.map((item, idx) => (
-            <HStack gap="8px" mb="18px" key={idx}>
-              <Icon
-                as={item.icon}
-                h="26px"
-                w="24px"
-                color="rgba(28, 25, 55, 0.72)"
-              />
-              <Text fontSize="14px" fontWeight={400} maxW="240px">
-                {item.text}
+            <Box>
+              <Text fontSize="18px" fontWeight={500} mb="24px">
+                Address
               </Text>
-            </HStack>
-          ))}
+              {addressData.map((item, idx) => (
+                <HStack gap="8px" mb="18px" key={idx}>
+                  <Icon
+                    as={item.icon}
+                    h="26px"
+                    w="24px"
+                    // color="rgba(28, 25, 55, 0.72)"
+                    color={'white'}
+                  />
+                  <Text fontSize="14px" fontWeight={400} maxW="240px">
+                    {item.text}
+                  </Text>
+                </HStack>
+              ))}
+            </Box>
+          </Flex>
         </Box>
-      </Flex>
+      </Box>
 
-      {/* <Center className="text-center">
-        <Image src={paymentOptions} alt="payment options" w="650px" my="30px" />
-      </Center> */}
+
+
+
 
       <Box borderTop="1px solid #E2E2E2" mx={4} />
+      <Box display={'flex'} justifyContent='center'>
+        <Box >
+          <img src={logo} alt="" width='100px' height={"10px"} />
+        </Box>
+        <Box>
+          <Text fontSize="14px"
+            fontWeight={400}
+            color="#908DAB"
+            textAlign="center"
+            mt="25px"
+            mb="25px"
+          >© Copyright FirstTrip Limited. All rights reserved.</Text>
+        </Box>
+      </Box>
 
-      <Text
-        fontSize="14px"
-        fontWeight={400}
-        color="#908DAB"
-        textAlign="center"
-        mt="25px"
-        mb="30px"
-      >
-        © Copyright FirstTrip Limited. All rights reserved.
-      </Text>
-    </Box>
+
+    </>
+
+
   );
 };
 

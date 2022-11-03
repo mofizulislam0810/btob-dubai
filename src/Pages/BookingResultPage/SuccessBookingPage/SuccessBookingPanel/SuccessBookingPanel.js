@@ -208,7 +208,7 @@ const SuccessBookingPanel = () => {
                                     "DD-MMMM-yyyy"
                                   )}
                                 </td>
-                                <td>{item.documentInfo.documentNumber}</td>
+                                <td>{item.documentInfo.documentNumber === '' ? "N/A" : item.documentInfo.documentNumber}</td>
                               </tr>
                             )
                           )}

@@ -224,7 +224,7 @@ const Navbar = () => {
             <span className="text-white fw-bold">
               {agentInfo?.currencyName !== undefined
                 ? agentInfo?.currencyName
-                : ""}
+                : "AED"}{" "}
               {agentInfo?.currentBalance ?? 0}
             </span>
           </a>
@@ -238,7 +238,7 @@ const Navbar = () => {
                 Your Account Balance (
                 {agentInfo?.currencyName !== undefined
                   ? agentInfo?.currencyName
-                  : ""}{" "}
+                  : "AED"}{" "}
                 {agentInfo?.currentBalance ?? 0})
               </p>
             </div>

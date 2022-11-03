@@ -10,10 +10,8 @@ import "./SearchFrom.css";
 import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
 import moment from "moment";
-import { Box, VStack, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { getCabinClass } from "../../../common/functions";
-
-const childrenAges = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const SearchFrom = () => {
   const formCount = 0;
@@ -171,7 +169,7 @@ const SearchFrom = () => {
       const returnDate = $("#returnDate").children("input").val();
       console.log(journeyDate);
       if (origin === destination) {
-        toast.error("Origin and Destination must be diffarent");
+        toast.error("Depart From and Going To must be diffarent");
       } else {
         if (String(journeyDate) !== String(null)) {
           const qtyList = {
@@ -228,8 +226,8 @@ const SearchFrom = () => {
         ? searchList[idx].cabinClass === 1
           ? "Economy"
           : searchList[idx].cabinClass === 3
-            ? "Business"
-            : " "
+          ? "Business"
+          : " "
         : "Economy"
     );
     setAdultCount(searchList !== undefined ? searchList[idx].adults : 1);
@@ -250,10 +248,10 @@ const SearchFrom = () => {
     $("#txtTo").val(
       searchList !== undefined
         ? destination[0].city +
-        " - " +
-        destination[0].country +
-        ", " +
-        destination[0].name
+            " - " +
+            destination[0].country +
+            ", " +
+            destination[0].name
         : destinationRef.current.value
     );
 
@@ -271,8 +269,8 @@ const SearchFrom = () => {
           $(".class_0").tDatePicker("update", [
             searchList !== undefined
               ? moment(searchList[idx].routes[0].departureDate).format(
-                "yyyy-MM-DD"
-              )
+                  "yyyy-MM-DD"
+                )
               : new Date(),
           ]);
         });
@@ -281,13 +279,13 @@ const SearchFrom = () => {
           $(".class_0").tDatePicker("update", [
             searchList !== undefined
               ? moment(searchList[idx].routes[0].departureDate).format(
-                "yyyy-MM-DD"
-              )
+                  "yyyy-MM-DD"
+                )
               : new Date(),
             searchList !== undefined
               ? moment(searchList[idx].routes[1].departureDate).format(
-                "yyyy-MM-DD"
-              )
+                  "yyyy-MM-DD"
+                )
               : new Date(),
           ]);
         });
@@ -402,10 +400,10 @@ const SearchFrom = () => {
       if (results.length >= index + 1) {
         autoinput.val(
           results[index].city +
-          " - " +
-          results[index].country +
-          ", " +
-          results[index].name
+            " - " +
+            results[index].country +
+            ", " +
+            results[index].name
         );
         clearResults();
       }
@@ -712,11 +710,11 @@ const SearchFrom = () => {
                                       title="adultminus"
                                       onClick={
                                         infantCount > 0 &&
-                                          adultCount === infantCount
+                                        adultCount === infantCount
                                           ? () => {
-                                            setAdultCount(adultCount - 1);
-                                            setInfantCount(infantCount - 1);
-                                          }
+                                              setAdultCount(adultCount - 1);
+                                              setInfantCount(infantCount - 1);
+                                            }
                                           : () => setAdultCount(adultCount - 1)
                                       }
                                       disabled={adultCount === 1 ? true : false}
@@ -843,8 +841,8 @@ const SearchFrom = () => {
                                       onClick={
                                         infantCount < adultCount
                                           ? () =>
-                                            setInfantCount(infantCount + 1)
-                                          : () => { }
+                                              setInfantCount(infantCount + 1)
+                                          : () => {}
                                       }
                                       disabled={
                                         infantCount === 9 ? true : false
@@ -868,40 +866,10 @@ const SearchFrom = () => {
                       let agenum = `age-${index}`;
                       return (
                         <span>
-                          <VStack mr="10px">
-                            <Text fontSize="sm" mt="2px">
-                              Child {index + 1}
-                            </Text>
-
-                            <select
-                              name="age"
-                              value={val.agenum}
-                              style={{
-                                width: "60px",
-                                backgroundColor: "#f8f2fb",
-                                borderRadius: "2px",
-                                height: "36px",
-                                paddingLeft: "8px",
-                                border: "1px solid #ced4da",
-                              }}
-                              min="2"
-                              max="12"
-                              onChange={(e) =>
-                                handleChildAge(e.target.value, index)
-                              }
-                              required
-                            >
-                              {childrenAges.map((item) => (
-                                <option value={item}>{item}</option>
-                              ))}
-                            </select>
-
-                            <Text fontSize="xs" mt="2px">
-                              (Age)
-                            </Text>
-                          </VStack>
-
-                          {/* <input
+                          <label htmlFor="formGroupExampleInput" className="">
+                            Child {index + 1}
+                          </label>
+                          <input
                             type="number"
                             value={val.agenum}
                             name="age"
@@ -911,7 +879,7 @@ const SearchFrom = () => {
                             max="12"
                             onChange={(e) => handleChildAge(e, index)}
                             required
-                          /> */}
+                          />
                         </span>
                       );
                     })}

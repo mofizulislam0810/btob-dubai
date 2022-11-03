@@ -581,7 +581,7 @@ const Registration = () => {
                               aria-hidden="true"
                             ></span>
                           ) : (
-                            <Text color="white">Sing Up</Text>
+                            <Text color="white">Sign Up</Text>
                           )}
                         </Center>
                       </button>

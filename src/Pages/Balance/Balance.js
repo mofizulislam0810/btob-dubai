@@ -16,7 +16,7 @@ const Balance = () => {
   let [pageSize, setPageSize] = useState(50);
   let [currentPageNumber, setCurrentPageNumber] = useState(1);
   let [currentPageNumberBank, setCurrentPageNumberBank] = useState(1);
-  let [depositTypeId, setDepositType] = useState(0);
+  let [depositTypeId, setDepositType] = useState(1);
   let [paymentTypeId, setPaymentType] = useState(1);
   let [checkNo, setCheckNo] = useState("");
   let [checkBank, setCheckBank] = useState("");
@@ -607,12 +607,6 @@ const Balance = () => {
                                 );
                               })}
                             </select>
-
-
-
-
-
-
                           </div>
                         </div>
 

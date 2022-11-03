@@ -1,7 +1,7 @@
 import axios from "axios";
-import { add, format } from "date-fns";
 import produce from "immer";
 import $ from "jquery";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Select from "react-select";
@@ -11,6 +11,7 @@ import courtries from "../../../JSON/countries.json";
 import { environment } from "../../SharePages/Utility/environment";
 import "./LeftSide.css";
 const LeftSide = () => {
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
   const { setBookData, setLoading } = useAuth();
@@ -26,8 +27,8 @@ const LeftSide = () => {
   const itemCodeRef = JSON.parse(localStorage.getItem("itemCodeRef"));
   const origin = searchData.origin;
   const destination = searchData.destination;
-  console.log(origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "");
-  console.log(destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "");
+  // console.log(origin.match("Bangladesh")!==null?origin.match("Bangladesh")[0]:"");
+  // console.log(destination.match("Bangladesh")!==null?destination.match("Bangladesh")[0]:"");
   const qtyList = searchData.qtyList;
   const adultNumber = searchData.qtyList.Adult;
   const childrenNumber = searchData.qtyList.Children;
@@ -38,7 +39,6 @@ const LeftSide = () => {
   let [passengerCNNList, setPassengerCNNList] = useState([]);
   let [passengerINFList, setPassengerINFList] = useState([]);
   const [click, setClick] = useState(false);
-
   const handlePassportFileUpload = (flag, index, file, passportNo) => {
     let fileExt = file.name.split(".").pop().toLowerCase();
     if (
@@ -197,11 +197,8 @@ const LeftSide = () => {
     };
     getData();
   };
-  const ISODateFormatter = (input) => {
-    return format(new Date(input), "yyyy-MM-dd");
-  };
-  useEffect(() => {
 
+  useEffect(() => {
     handleGetPassengers();
     $(document).ready(function () { });
   }, []);
@@ -282,18 +279,16 @@ const LeftSide = () => {
       firstName: "",
       middleName: "",
       lastName: "",
-      // date: "",
-      // month: "01",
-      // year: "",
-      dateOfBirth: "",
+      date: "",
+      month: "01",
+      year: "",
       nationality: "BD",
       document: "",
       passportNumber: "",
       issuingCountry: "BD",
-      // passportDate: "",
-      // passportMonth: "01",
-      // passportYear: "",
-      passportExDate: "",
+      passportDate: "",
+      passportMonth: "01",
+      passportYear: "",
       gender: "Male",
       countryCode: "BD",
       frequentFlyerNumber: ""
@@ -304,25 +299,23 @@ const LeftSide = () => {
   const [adult, setAdult] = useState(adultList);
 
 
-  // if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
-  //   adult.map((i) =>
-  //     i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
-  //       ? Math.floor(
-  //         Math.abs(
-  //           new Date(
-  //             i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
-  //           ) - new Date()
-  //         ) /
-  //         (1000 * 60 * 60 * 24 * 30)
-  //       )
-  //         > 6
-  //         ? ""
-  //         : toast.error("Passport expiry date does not valid")
-  //       : ""
-  //   );
-  // }
-
-
+  if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
+    adult.map((i) =>
+      i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
+        ? Math.floor(
+          Math.abs(
+            new Date(
+              i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
+            ) - new Date()
+          ) /
+          (1000 * 60 * 60 * 24 * 30)
+        )
+          > 6
+          ? ""
+          : toast.error("Passport expiry date does not valid")
+        : ""
+    );
+  }
 
 
 
@@ -337,18 +330,16 @@ const LeftSide = () => {
       firstName: "",
       middleName: "",
       lastName: "",
-      // date: "",
-      // month: "01",
-      // year: "",
-      dateOfBirth: "",
+      date: "",
+      month: "01",
+      year: "",
       nationality: "BD",
       document: "",
       passportNumber: "",
       issuingCountry: "BD",
-      // passportDate: "",
-      // passportMonth: "01",
-      // passportYear: "",
-      passportExDate: "",
+      passportDate: "",
+      passportMonth: "01",
+      passportYear: "",
       gender: "Male",
       countryCode: "BD",
       frequentFlyerNumber: ""
@@ -366,18 +357,16 @@ const LeftSide = () => {
       firstName: "",
       middleName: "",
       lastName: "",
-      // date: "",
-      // month: "01",
-      // year: "",
-      dateOfBirth: "",
+      date: "",
+      month: "01",
+      year: "",
       nationality: "BD",
       document: "",
       passportNumber: "",
       issuingCountry: "BD",
-      // passportDate: "",
-      // passportMonth: "01",
-      // passportYear: "",
-      passportExDate: "",
+      passportDate: "",
+      passportMonth: "01",
+      passportYear: "",
       gender: "Male",
       countryCode: "BD",
       frequentFlyerNumber: ""
@@ -406,55 +395,55 @@ const LeftSide = () => {
   localStorage.setItem("infant", JSON.stringify(infant));
   localStorage.setItem("contact", JSON.stringify(contact));
 
-  // if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
-  //   child.map((i) =>
-  //     i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
-  //       ? Math.floor(
-  //         Math.abs(
-  //           new Date(
-  //             i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
-  //           ) - new Date()
-  //         ) /
-  //         (1000 * 60 * 60 * 24 * 30)
-  //       )
-  //         > 6
-  //         ? ""
-  //         : toast.error("Passport expiry date does not valid")
-  //       : ""
-  //   );
-  // }
+  if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
+    child.map((i) =>
+      i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
+        ? Math.floor(
+          Math.abs(
+            new Date(
+              i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
+            ) - new Date()
+          ) /
+          (1000 * 60 * 60 * 24 * 30)
+        )
+          > 6
+          ? ""
+          : toast.error("Passport expiry date does not valid")
+        : ""
+    );
+  }
 
 
 
-  // if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
-  //   infant.map((i) =>
-  //     i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
-  //       ? Math.floor(
-  //         Math.abs(
-  //           new Date(
-  //             i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
-  //           ) - new Date()
-  //         ) /
-  //         (1000 * 60 * 60 * 24 * 30)
-  //       )
-  //         > 6
-  //         ? ""
-  //         : toast.error("Passport expiry date does not valid")
-  //       : ""
-  //   );
-  // }
+  if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
+    infant.map((i) =>
+      i.passportYear !== "" && i.passportMonth !== "" && i.passportDate !== ""
+        ? Math.floor(
+          Math.abs(
+            new Date(
+              i.passportYear + "-" + i.passportMonth + "-" + i.passportDate
+            ) - new Date()
+          ) /
+          (1000 * 60 * 60 * 24 * 30)
+        )
+          > 6
+          ? ""
+          : toast.error("Passport expiry date does not valid")
+        : ""
+    );
+  }
 
 
-  // infant.map((item, index) => {
-  //   const ageInYears = moment().diff(moment(item.date + '/' + item.month + '/' + item.year, "DD/MM/YYYY"), 'months');
-  //   console.log(ageInYears);
-  //   if (ageInYears > 24) {
-  //     toast.error(`Infant ${index + 1} age is more than 2 years!`);
-  //     return;
-  //   }
-  // })
+  infant.map((item, index) => {
+    const ageInYears = moment().diff(moment(item.date + '/' + item.month + '/' + item.year, "DD/MM/YYYY"), 'months');
+    console.log(ageInYears);
+    if (ageInYears > 24) {
+      toast.error(`Infant ${index + 1} age is more than 2 years!`);
+      return;
+    }
+  })
 
-  // console.log(contact);
+  console.log(contact);
 
 
   const bookingData = (e) => {
@@ -466,6 +455,7 @@ const LeftSide = () => {
     //     return;
     //   }
     // })
+
     setLoading(true);
     let sendObj = {
       passengerInfoes: [],
@@ -494,14 +484,13 @@ const LeftSide = () => {
         documentInfo: {
           documentType: item.document,
           documentNumber: item.passportNumber,
-          // expireDate:
-          //   item.passportYear > 0 ?
-          //     item.passportYear +
-          //     "-" +
-          //     item.passportMonth +
-          //     "-" +
-          //     item.passportDate : "",
-          expireDate: item?.passportExDate,
+          expireDate:
+            item.passportYear > 0 ?
+              item.passportYear +
+              "-" +
+              item.passportMonth +
+              "-" +
+              item.passportDate : "",
           frequentFlyerNumber: item.frequentFlyerNumber,
           issuingCountry: item.issuingCountry,
           nationality: item.nationality,
@@ -515,7 +504,7 @@ const LeftSide = () => {
             ? destination.match("Bangladesh")[0]
             : "") === "Bangladesh"
           ? ""
-          : item.dateOfBirth,
+          : item.year + "-" + item.month + "-" + item.date,
         passengerKey: idObj !== undefined ? String(idObj.id) : "0",
         isLeadPassenger: true,
         isQuickPassenger: isChecked
@@ -541,21 +530,20 @@ const LeftSide = () => {
         documentInfo: {
           documentType: item.document,
           documentNumber: item.passportNumber,
-          // expireDate:
-          //   item.passportYear > 0 ?
-          //     item.passportYear +
-          //     "-" +
-          //     item.passportMonth +
-          //     "-" +
-          //     item.passportDate : "",
-          expireDate: item?.passportExDate,
+          expireDate:
+            item.passportYear > 0 ?
+              item.passportYear +
+              "-" +
+              item.passportMonth +
+              "-" +
+              item.passportDate : "",
           frequentFlyerNumber: item.frequentFlyerNumber,
           issuingCountry: item.issuingCountry,
           nationality: item.nationality,
         },
         passengerType: "CNN",
         gender: item.gender,
-        dateOfBirth: item.dateOfBirth,
+        dateOfBirth: item.year + "-" + item.month + "-" + item.date,
         passengerKey: "0",
         isLeadPassenger: true,
         isQuickPassenger: isChecked
@@ -582,21 +570,21 @@ const LeftSide = () => {
         documentInfo: {
           documentType: item.document,
           documentNumber: item.passportNumber,
-          // expireDate:
-          //   item.passportYear > 0 ?
-          //     item.passportYear +
-          //     "-" +
-          //     item.passportMonth +
-          //     "-" +
-          //     item.passportDate : "",
-          expireDate: item?.passportExDate,
+          expireDate:
+            item.passportYear > 0 ?
+              item.passportYear +
+              "-" +
+              item.passportMonth +
+              "-" +
+              item.passportDate : "",
           frequentFlyerNumber: item.frequentFlyerNumber,
           issuingCountry: item.issuingCountry,
           nationality: item.nationality,
         },
         passengerType: "INF",
         gender: item.gender,
-        dateOfBirth: item.dateOfBirth,
+        dateOfBirth:
+          item.year + "-" + item.month + "-" + item.date,
         passengerKey: "0",
         isLeadPassenger: true,
         isQuickPassenger: isChecked
@@ -641,7 +629,7 @@ const LeftSide = () => {
       );
     }
 
-    // console.log(priceCheck);
+    console.log(priceCheck);
     async function fetchOptions() {
       await axios
         .post(environment.priceCheck, priceCheck, environment.headerToken)
@@ -767,34 +755,33 @@ const LeftSide = () => {
                             if (item !== undefined) {
                               setAdult((ob) =>
                                 produce(ob, (v) => {
-                                  // console.log(item.expireDate)
+                                  console.log(item.expireDate)
                                   v[index].title = item.title;
                                   v[index].firstName = item.first;
                                   v[index].middleName = item.middle;
                                   v[index].lastName = item.last;
-                                  // v[index].date = Number(item.dateOfBirth == null ? "" :
-                                  //   item.dateOfBirth.split("-")[2].split("T")[0]
-                                  // );
-                                  // v[index].month = Number(item.dateOfBirth == null ? "" :
-                                  //   item.dateOfBirth.split("-")[1]
-                                  // );
-                                  // v[index].year = Number(item.dateOfBirth == null ? "" :
-                                  //   item.dateOfBirth.split("-")[0]
-                                  // );
-                                  v[index].dateOfBirth = ISODateFormatter(item?.dateOfBirth);
+                                  v[index].date = Number(item.dateOfBirth == null ? "" :
+                                    item.dateOfBirth.split("-")[2].split("T")[0]
+                                  );
+                                  v[index].month = Number(item.dateOfBirth == null ? "" :
+                                    item.dateOfBirth.split("-")[1]
+                                  );
+                                  v[index].year = Number(item.dateOfBirth == null ? "" :
+                                    item.dateOfBirth.split("-")[0]
+                                  );
                                   v[index].nationality = item.nationality;
                                   v[index].passportNumber = item.documentNumber;
-                                  v[index].issuingCountry = item.documentIssuingCountry;
-                                  // v[index].passportDate = Number(
-                                  //   item.expireDate == null ? "" : item.expireDate.split("-")[2].split("T")[0]
-                                  // );
-                                  // v[index].passportMonth = Number(
-                                  //   item.expireDate == null ? "" : item.expireDate.split("-")[1]
-                                  // );
-                                  // v[index].passportYear = Number(
-                                  //   item.expireDate == null ? "" : item.expireDate.split("-")[0]
-                                  // );
-                                  v[index].passportExDate = ISODateFormatter(item?.expireDate);
+                                  v[index].issuingCountry =
+                                    item.documentIssuingCountry;
+                                  v[index].passportDate = Number(
+                                    item.expireDate == null ? "" : item.expireDate.split("-")[2].split("T")[0]
+                                  );
+                                  v[index].passportMonth = Number(
+                                    item.expireDate == null ? "" : item.expireDate.split("-")[1]
+                                  );
+                                  v[index].passportYear = Number(
+                                    item.expireDate == null ? "" : item.expireDate.split("-")[0]
+                                  );
                                   v[index].gender = item.gender;
                                   v[index].phoneNumber = item.phone;
                                   v[index].passportCopy = item.passportCopy;
@@ -808,17 +795,15 @@ const LeftSide = () => {
                                   v[index].firstName = "";
                                   v[index].middleName = "";
                                   v[index].lastName = "";
-                                  // v[index].date = "";
-                                  // v[index].month = "";
-                                  // v[index].year = "";
-                                  v[index].dateOfBirth = "";
+                                  v[index].date = "";
+                                  v[index].month = "";
+                                  v[index].year = "";
                                   v[index].nationality = "Bangladesh";
                                   v[index].passportNumber = "";
                                   v[index].issuingCountry = "";
-                                  // v[index].passportDate = "";
-                                  // v[index].passportMonth = "";
-                                  // v[index].passportYear = "";
-                                  v[index].passportExDate = "";
+                                  v[index].passportDate = "";
+                                  v[index].passportMonth = "";
+                                  v[index].passportYear = "";
                                   v[index].gender = "Male";
                                   v[index].phoneNumber = "";
                                   v[index].passportCopy = "";
@@ -1010,37 +995,12 @@ const LeftSide = () => {
                             <div className="form-group">
                               <label
                                 className="form-label float-start fw-bold"
-                                htmlFor="dateOfBirth"
+                                type=""
                               >
                                 Date of birth
                                 <span className="text-danger">*</span>
                               </label>
                               <div className="input-group mb-3 d-flex">
-                                <input
-                                  type={"date"}
-                                  name="dateOfBirth"
-                                  className="form-control rounded"
-                                  id="dateOfBirth"
-                                  onChange={(e) => {
-                                    const date = e.target.value;
-                                    setAdult((ob) =>
-                                      produce(ob, (v) => {
-                                        console.log({ v })
-                                        v[index].dateOfBirth = date;
-                                      })
-                                    );
-                                  }}
-
-                                  value={p?.dateOfBirth}
-                                  max={ISODateFormatter(add(new Date(), {
-                                    years: -12,
-                                  }))}
-                                  required
-                                  autoComplete="off"
-                                  placeholder="Date of Birth"
-                                />
-                              </div>
-                              {/* <div className="input-group mb-3 d-flex">
                                 <select
                                   name="date"
                                   className="form-select"
@@ -1136,7 +1096,7 @@ const LeftSide = () => {
                                     );
                                   })}
                                 </select>
-                              </div> */}
+                              </div>
                             </div>
                           </div>
                           <div className="col-lg-4">
@@ -1310,16 +1270,14 @@ const LeftSide = () => {
                             <div className="form-group">
                               <label
                                 className="form-label float-start fw-bold"
-                                htmlFor="pasDate"
+                                htmlFor=""
                               >
                                 Passport Expiry Date{" "}
                                 <span className="text-danger">*</span>
                               </label>
                             </div>
-                            {/* <div className="input-group mb-3 d-flex">
+                            <div className="input-group mb-3 d-flex">
                               <select
-                                name="passDate"
-                                required
                                 className="form-select"
                                 onChange={(e) => {
                                   const passportDate = e.target.value;
@@ -1331,7 +1289,7 @@ const LeftSide = () => {
                                   );
                                 }}
                                 value={p.passportDate}
-
+                                required
                               >
                                 <option value="">Day</option>
                                 <option>1</option>
@@ -1420,26 +1378,6 @@ const LeftSide = () => {
                                 <option>2023</option>
                                 <option>2022</option>
                               </select>
-                            </div> */}
-                            <div className="input-group mb-3 d-flex">
-                              <input
-                                type={"date"}
-                                name="passportExDate"
-                                className="form-control rounded"
-                                onChange={(e) => {
-                                  const passportDate = e.target.value;
-                                  setAdult((ob) =>
-                                    produce(ob, (v) => {
-                                      v[index].passportExDate =
-                                        passportDate;
-                                    })
-                                  );
-                                }}
-                                value={(p.passportExDate)}
-                                min={ISODateFormatter(new Date())}
-                                autoComplete="off"
-                                placeholder="Passport Expaire Date"
-                              />
                             </div>
                           </div>
                         </div>
@@ -1459,8 +1397,6 @@ const LeftSide = () => {
                             type="text"
                             name="frequentFlyerNumber"
                             className="form-control"
-                            onInvalid={e => e.target.setCustomValidity('Enter User Name Here')}
-                            onInput={e => { e.target.setCustomValidity(''); console.log("eeeeeeeeee", e) }}
                             onChange={(e) => {
                               const frequentFlyerNumber = e.target.value;
                               setAdult((ob) =>
@@ -1571,30 +1507,28 @@ const LeftSide = () => {
                                   v[index].firstName = item.first;
                                   v[index].middleName = item.middle;
                                   v[index].lastName = item.last;
-                                  // v[index].date = Number(item.dateOfBirth == null ? "" :
-                                  //   item.dateOfBirth.split("-")[2].split("T")[0]
-                                  // );
-                                  // v[index].month = Number(item.dateOfBirth == null ? "" :
-                                  //   item.dateOfBirth.split("-")[1]
-                                  // );
-                                  // v[index].year = Number(item.dateOfBirth == null ? "" :
-                                  //   item.dateOfBirth.split("-")[0]
-                                  // );
-                                  v[index].dateOfBirth = ISODateFormatter(item?.dateOfBirth);
+                                  v[index].date = Number(item.dateOfBirth == null ? "" :
+                                    item.dateOfBirth.split("-")[2].split("T")[0]
+                                  );
+                                  v[index].month = Number(item.dateOfBirth == null ? "" :
+                                    item.dateOfBirth.split("-")[1]
+                                  );
+                                  v[index].year = Number(item.dateOfBirth == null ? "" :
+                                    item.dateOfBirth.split("-")[0]
+                                  );
                                   v[index].nationality = item.nationality;
                                   v[index].passportNumber = item.documentNumber;
                                   v[index].issuingCountry =
                                     item.documentIssuingCountry;
-                                  // v[index].passportDate = Number(
-                                  //   item.expireDate.split("-")[2].split("T")[0]
-                                  // );
-                                  // v[index].passportMonth = Number(
-                                  //   item.expireDate.split("-")[1]
-                                  // );
-                                  // v[index].passportYear = Number(
-                                  //   item.expireDate.split("-")[0]
-                                  // );
-                                  v[index].passportExDate = ISODateFormatter(item?.expireDate);
+                                  v[index].passportDate = Number(
+                                    item.expireDate.split("-")[2].split("T")[0]
+                                  );
+                                  v[index].passportMonth = Number(
+                                    item.expireDate.split("-")[1]
+                                  );
+                                  v[index].passportYear = Number(item.expireDate == null ? "" :
+                                    item.expireDate.split("-")[0]
+                                  );
                                   v[index].gender = item.gender;
                                   v[index].phoneNumber = item.phone;
                                   v[index].passportCopy = item.passportCopy;
@@ -1721,33 +1655,6 @@ const LeftSide = () => {
                             <span className="text-danger">*</span>
                           </label>
                           <div className="input-group mb-3 d-flex">
-                            <input
-                              type={"date"}
-                              name="dateOfBirth"
-                              className="form-control rounded"
-                              id="dateOfBirth"
-                              onChange={(e) => {
-                                const date = e.target.value;
-                                setChild((ob) =>
-                                  produce(ob, (v) => {
-                                    console.log({ v })
-                                    v[index].dateOfBirth = date;
-                                  })
-                                );
-                              }}
-                              value={p?.dateOfBirth}
-                              min={ISODateFormatter(add(new Date(), {
-                                years: -12,
-                              }))}
-                              max={ISODateFormatter(add(new Date(), {
-                                years: -2,
-                              }))}
-                              required
-                              autoComplete="off"
-                              placeholder="Date of Birth"
-                            />
-                          </div>
-                          {/* <div className="input-group mb-3 d-flex">
                             <select
                               name="date"
                               className="form-select"
@@ -1755,11 +1662,11 @@ const LeftSide = () => {
                                 const date = e.target.value;
                                 setChild((ob) =>
                                   produce(ob, (v) => {
-                                    v[index].dateOfBirth = date;
+                                    v[index].date = date;
                                   })
                                 );
                               }}
-                              value={p?.date}
+                              value={p.date}
                               required
                             >
                               <option value="">Day</option>
@@ -1841,7 +1748,7 @@ const LeftSide = () => {
                                 return <option key={index}>{i}</option>;
                               })}
                             </select>
-                          </div> */}
+                          </div>
                         </div>
                       </div>
                       <div className="col-md-4">
@@ -2069,26 +1976,6 @@ const LeftSide = () => {
                               </label>
                             </div>
                             <div className="input-group mb-3 d-flex">
-                              <input
-                                type={"date"}
-                                name="passportExDate"
-                                className="form-control rounded"
-                                onChange={(e) => {
-                                  const passportDate = e.target.value;
-                                  setChild((ob) =>
-                                    produce(ob, (v) => {
-                                      v[index].passportExDate =
-                                        passportDate;
-                                    })
-                                  );
-                                }}
-                                value={(p.passportExDate)}
-                                min={ISODateFormatter(new Date())}
-                                autoComplete="off"
-                                placeholder="Passport Expaire Date"
-                              />
-                            </div>
-                            {/* <div className="input-group mb-3 d-flex">
                               <select
                                 className="form-select"
                                 onChange={(e) => {
@@ -2190,7 +2077,7 @@ const LeftSide = () => {
                                 <option>2023</option>
                                 <option>2022</option>
                               </select>
-                            </div> */}
+                            </div>
                           </div>
                         </div>
                       </>
@@ -2257,6 +2144,7 @@ const LeftSide = () => {
               })}
               {/* <div>{JSON.stringify(child, null, 2)}</div> */}
               {infant.map((p, index) => {
+                // console.log({ppppppp: p})
                 return (
                   <div key={index} className="border p-2 my-3">
                     <div className="row">
@@ -2278,12 +2166,12 @@ const LeftSide = () => {
                           }))}
                           onChange={(e) => {
                             const id = Number(e.value);
-                            // console.log(id);
-                            // console.log(passengerINFList);
+                            console.log(id);
+                            console.log(passengerINFList);
                             const item = passengerINFList.find(
                               (f) => f.id === id
                             );
-                            // console.log(item);
+                            console.log(item);
                             if (item !== undefined) {
                               setInfant((ob) =>
                                 produce(ob, (v) => {
@@ -2291,30 +2179,28 @@ const LeftSide = () => {
                                   v[index].firstName = item.first;
                                   v[index].middleName = item.middle;
                                   v[index].lastName = item.last;
-                                  // v[index].date = Number(item.dateOfBirth == null ? "" :
-                                  //   item.dateOfBirth.split("-")[2].split("T")[0]
-                                  // );
-                                  // v[index].month = Number(item.dateOfBirth == null ? "" :
-                                  //   item.dateOfBirth.split("-")[1]
-                                  // );
-                                  // v[index].year = Number(item.dateOfBirth == null ? "" :
-                                  //   item.dateOfBirth.split("-")[0]
-                                  // );
-                                  v[index].dateOfBirth = ISODateFormatter(item?.dateOfBirth);
+                                  v[index].date = Number(item.dateOfBirth == null ? "" :
+                                    item.dateOfBirth.split("-")[2].split("T")[0]
+                                  );
+                                  v[index].month = Number(item.dateOfBirth == null ? "" :
+                                    item.dateOfBirth.split("-")[1]
+                                  );
+                                  v[index].year = Number(item.dateOfBirth == null ? "" :
+                                    item.dateOfBirth.split("-")[0]
+                                  );
                                   v[index].nationality = item.nationality;
                                   v[index].passportNumber = item.documentNumber;
                                   v[index].issuingCountry =
                                     item.documentIssuingCountry;
-                                  // v[index].passportDate = Number(
-                                  //   item.expireDate.split("-")[2].split("T")[0]
-                                  // );
-                                  // v[index].passportMonth = Number(
-                                  //   item.expireDate.split("-")[1]
-                                  // );
-                                  // v[index].passportYear = Number(
-                                  //   item.expireDate.split("-")[0]
-                                  // );
-                                  v[index].passportExDate = ISODateFormatter(item?.expireDate);
+                                  v[index].passportDate = Number(item.expireDate == null ? "" :
+                                    item.expireDate.split("-")[2].split("T")[0]
+                                  );
+                                  v[index].passportMonth = Number(
+                                    item.expireDate.split("-")[1]
+                                  );
+                                  v[index].passportYear = Number(
+                                    item.expireDate.split("-")[0]
+                                  );
                                   v[index].gender = item.gender;
                                   v[index].phoneNumber = item.phone;
                                   v[index].passportCopy = item.passportCopy;
@@ -2441,31 +2327,6 @@ const LeftSide = () => {
                             <span className="text-danger">*</span>
                           </label>
                           <div className="input-group mb-3 d-flex">
-                            <input
-                              type={"date"}
-                              name="dateOfBirth"
-                              className="form-control rounded"
-                              id="dateOfBirth"
-                              onChange={(e) => {
-                                const date = e.target.value;
-                                setInfant((ob) =>
-                                  produce(ob, (v) => {
-                                    console.log({ v })
-                                    v[index].dateOfBirth = date;
-                                  })
-                                );
-                              }}
-                              value={p?.dateOfBirth}
-                              min={ISODateFormatter(add(new Date(), {
-                                years: -2,
-                              }))}
-                              max={ISODateFormatter(new Date())}
-                              required
-                              autoComplete="off"
-                              placeholder="Date of Birth"
-                            />
-                          </div>
-                          {/* <div className="input-group mb-3 d-flex">
                             <select
                               name="date"
                               className="form-select"
@@ -2559,7 +2420,7 @@ const LeftSide = () => {
                                 return <option key={index}>{i}</option>;
                               })}
                             </select>
-                          </div> */}
+                          </div>
                         </div>
                       </div>
                       <div className="col-md-4">
@@ -2734,26 +2595,6 @@ const LeftSide = () => {
                               </label>
                             </div>
                             <div className="input-group mb-3 d-flex">
-                              <input
-                                type={"date"}
-                                name="passportExDate"
-                                className="form-control rounded"
-                                onChange={(e) => {
-                                  const passportDate = e.target.value;
-                                  setInfant((ob) =>
-                                    produce(ob, (v) => {
-                                      v[index].passportExDate =
-                                        passportDate;
-                                    })
-                                  );
-                                }}
-                                value={(p.passportExDate)}
-                                min={ISODateFormatter(new Date())}
-                                autoComplete="off"
-                                placeholder="Passport Expaire Date"
-                              />
-                            </div>
-                            {/* <div className="input-group mb-3 d-flex">
                               <select
                                 className="form-select"
                                 onChange={(e) => {
@@ -2855,7 +2696,7 @@ const LeftSide = () => {
                                 <option>2023</option>
                                 <option>2022</option>
                               </select>
-                            </div> */}
+                            </div>
                           </div>
                         </div>
                       </>
@@ -2928,7 +2769,6 @@ const LeftSide = () => {
                     <input
                       class="form-check-input"
                       type="checkbox"
-                      style={{ cursor: 'pointer' }}
                       value={isChecked}
                       id="flexCheckDefault100"
                       onChange={handleChange}

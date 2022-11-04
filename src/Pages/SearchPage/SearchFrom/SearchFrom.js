@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import Fuse from "fuse.js";
 import $ from "jquery";

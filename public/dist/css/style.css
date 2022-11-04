@@ -22,6 +22,7 @@ body{
 
 #form-bg {
     /* background: linear-gradient(100.94deg, #a34fd2 -9.51%, #fc6b9d 115.79%); */
+    background: #FFFFFF;
     padding: 30px 30px 70px 30px;
     padding-bottom: 28px;
   }
@@ -47,7 +48,8 @@ body{
 .input-field{
     height: 50px;
     padding: 10px;
-    border: "1px solid black"
+    border: 0;
+    background-color: #f8f2fb;
     /* box-shadow:0 0 15px 4px rgb(255, 255, 255); */
 }
 

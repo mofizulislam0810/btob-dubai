@@ -35,6 +35,7 @@ const ShowFlight = (props) => {
     itemCodeRef,
     passengerCounts,
     totalPrice,
+    avlSrc
   } = props.data;
   // console.log(directions);
   const flightType = props.flightType;
@@ -1045,6 +1046,9 @@ const ShowFlight = (props) => {
                 {refundable === true ? (
                   <>
                     <span className="font-size">
+                     <span style={{avlSrc}}>
+                        <i class="fas fa-circle fa-sm me-1"></i>
+                      </span>
                       <span className="text-success">
                         <i class="fas fa-circle fa-sm me-1"></i>
                       </span>
@@ -1054,6 +1058,9 @@ const ShowFlight = (props) => {
                 ) : (
                   <>
                     <span className="font-size">
+                    <span style={{avlSrc}}>
+                        <i class="fas fa-circle fa-sm me-1"></i>
+                      </span>
                       <span className="text-danger">
                         <i class="fas fa-circle fa-sm me-1"></i>
                       </span>
@@ -1132,7 +1139,7 @@ const ShowFlight = (props) => {
           {/* end of check price click section */}
 
           {/* check price section  */}
-          <div className="border-top" id={"check-price" + props.index}>
+          {/* <div className="border-top" id={"check-price" + props.index}>
             <div className="container-fluid">
               <div className="row">
                 <div className="col-lg-12">
@@ -1300,7 +1307,7 @@ const ShowFlight = (props) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           {/* end of check price section */}
           <div
             className="table-responsive-sm mt-1"
@@ -3101,7 +3108,7 @@ const ShowFlight = (props) => {
                   fareRules.item1 != null ? (
                     fareRules.item2.isSuccess == true ? (
                       <Tabs>
-                        <TabList>
+                        <TabList style={{overflowY: "scroll"}}>
                           {fareRules.item1.fareRuleDetails.map(
                             (item, index) => {
                               return (

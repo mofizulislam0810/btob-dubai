@@ -15,15 +15,15 @@ export const getPassengerType = (input) => {
 };
 
 export const totalFlightDuration = (input) => {
-  console.log(input[0].departure, "================");
-  console.log(input[input.length - 1].arrival, "++++++++=====");
+  // console.log(input[0].departure, "================");
+  // console.log(input[input.length - 1].arrival, "++++++++=====");
 
   const res = intervalToDuration({
     start: parse(input[0].departure, "yyyy-MM-dd H:m:s", new Date()),
     end: parse(input[input.length - 1].arrival, "yyyy-MM-dd H:m:s", new Date()),
   });
 
-  console.log(res, "============");
+  // console.log(res, "============");
   return res.days === 0
     ? res.hours === 0
       ? `${res.minutes}m`

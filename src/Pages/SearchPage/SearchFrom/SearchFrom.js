@@ -10,8 +10,10 @@ import "./SearchFrom.css";
 import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
 import moment from "moment";
-import { Box } from "@chakra-ui/react";
+import { Box, VStack, Text } from "@chakra-ui/react";
 import { getCabinClass } from "../../../common/functions";
+
+const childrenAges = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const SearchFrom = () => {
   const formCount = 0;
@@ -596,6 +598,9 @@ const SearchFrom = () => {
                           id="tripList"
                           className="dropdown-menu"
                           aria-labelledby="dropdownMenuButton1"
+                          style={{
+                            backgroundColor: "#f8f2fb",
+                          }}
                         >
                           <li
                             className="dropdown-item dropdown-item-selected"
@@ -637,6 +642,9 @@ const SearchFrom = () => {
                           id="classList"
                           className="dropdown-menu"
                           aria-labelledby="dropdownMenuButton"
+                          style={{
+                            backgroundColor: "#f8f2fb",
+                          }}
                         >
                           <li
                             className="dropdown-item dropdown-item-selected"
@@ -695,6 +703,9 @@ const SearchFrom = () => {
                               id="passengerBlock"
                               className="dropdown-menu passenger-pack"
                               aria-labelledby="dropdownMenuButtonpassenger"
+                              style={{
+                                backgroundColor: "#f8f2fb",
+                              }}
                             >
                               <div>
                                 <div className="d-flex justify-content-between mb-3">
@@ -732,6 +743,7 @@ const SearchFrom = () => {
                                       style={{
                                         width: "30px",
                                         height: "30px",
+                                        backgroundColor: "#f8f2fb",
                                       }}
                                     />
                                     <button
@@ -783,6 +795,7 @@ const SearchFrom = () => {
                                       style={{
                                         width: "30px",
                                         height: "30px",
+                                        backgroundColor: "#f8f2fb",
                                       }}
                                     />
                                     <button
@@ -835,6 +848,7 @@ const SearchFrom = () => {
                                       style={{
                                         width: "30px",
                                         height: "30px",
+                                        backgroundColor: "#f8f2fb",
                                       }}
                                     />
                                     <button
@@ -868,10 +882,39 @@ const SearchFrom = () => {
                       let agenum = `age-${index}`;
                       return (
                         <span>
-                          <label htmlFor="formGroupExampleInput" className="">
-                            Child {index + 1}
-                          </label>
-                          <input
+                          <VStack mr="10px">
+                            <Text fontSize="sm" mt="2px">
+                              Child {index + 1}
+                            </Text>
+
+                            <select
+                              name="age"
+                              value={val.agenum}
+                              style={{
+                                width: "60px",
+                                backgroundColor: "#f8f2fb",
+                                borderRadius: "2px",
+                                height: "36px",
+                                paddingLeft: "8px",
+                                border: "1px solid #ced4da",
+                              }}
+                              min="2"
+                              max="12"
+                              onChange={(e) =>
+                                handleChildAge(e.target.value, index)
+                              }
+                              required
+                            >
+                              {childrenAges.map((item) => (
+                                <option value={item}>{item}</option>
+                              ))}
+                            </select>
+
+                            <Text fontSize="xs" mt="2px">
+                              (Age)
+                            </Text>
+                          </VStack>
+                          {/* <input
                             type="number"
                             value={val.agenum}
                             name="age"
@@ -881,7 +924,7 @@ const SearchFrom = () => {
                             max="12"
                             onChange={(e) => handleChildAge(e, index)}
                             required
-                          />
+                          /> */}
                         </span>
                       );
                     })}
@@ -1353,7 +1396,7 @@ const SearchFrom = () => {
                 ) : (
                   <></>
                 )}
-              <div className="row">
+                <div className="row">
                   <div className="col-lg-12">
                     <div className="d-flex justify-content-center">
                       <button

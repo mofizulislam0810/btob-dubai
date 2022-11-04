@@ -715,7 +715,7 @@ const LeftSide = () => {
           <div className="card-body border">
             <div style={{ fontSize: "small" }}>
               <h5 className="text-color fw-bold text-start">
-                Enter passsanger details
+                Enter passenger details
               </h5>
 
               {adult.map((p, index) => {

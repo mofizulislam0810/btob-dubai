@@ -430,7 +430,6 @@ const ShowFlight = (props) => {
                       {moment(
                         item[0].segments[item[0].segments.length - 1].arrival
                       ).format("DD MMMM,yyyy, ddd")}{" "}
-                      HELLO
                     </h6>
                     <h6 className="flighttime">
                       {airports

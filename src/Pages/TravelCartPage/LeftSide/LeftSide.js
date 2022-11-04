@@ -39,7 +39,9 @@ const LeftSide = () => {
   let [passengerCNNList, setPassengerCNNList] = useState([]);
   let [passengerINFList, setPassengerINFList] = useState([]);
   const [click, setClick] = useState(false);
-
+  const Database = JSON.parse(localStorage.getItem("Database"))
+  console.log({ "object": Database })
+  console.log(Database?.journeyDate)
   const handlePassportFileUpload = (flag, index, file, passportNo) => {
     let fileExt = file.name.split(".").pop().toLowerCase();
     if (
@@ -1017,7 +1019,7 @@ const LeftSide = () => {
                                   }}
 
                                   value={p?.dateOfBirth}
-                                  max={ISODateFormatter(add(new Date(), {
+                                  max={ISODateFormatter(add(new Date(Database?.journeyDate), {
                                     years: -12,
                                   }))}
                                   required
@@ -1731,10 +1733,10 @@ const LeftSide = () => {
                                 );
                               }}
                               value={p?.dateOfBirth}
-                              min={ISODateFormatter(add(new Date(), {
+                              min={ISODateFormatter(add(new Date(Database?.journeyDate), {
                                 years: -12,
                               }))}
-                              max={ISODateFormatter(add(new Date(), {
+                              max={ISODateFormatter(add(new Date(Database?.journeyDate), {
                                 years: -2,
                               }))}
                               required
@@ -2459,10 +2461,10 @@ const LeftSide = () => {
                                 );
                               }}
                               value={p?.dateOfBirth}
-                              min={ISODateFormatter(add(new Date(), {
+                              min={ISODateFormatter(add(new Date(Database?.journeyDate), {
                                 years: -2,
                               }))}
-                              max={ISODateFormatter(new Date())}
+                              max={ISODateFormatter(new Date(Database?.journeyDate))}
                               required
                               autoComplete="off"
                               placeholder="Date of Birth"

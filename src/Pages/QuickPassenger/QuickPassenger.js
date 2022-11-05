@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import ReactPaginate from 'react-paginate';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { isValidEmail } from "../../common/functions";
 import courtries from "../../JSON/countries.json";
 import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
@@ -45,6 +46,7 @@ const QuickPassenger = () => {
   let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
   let [loading, setLoading] = useState(false);
+  
   const handlePassportFileUpload = (file) => {
     let fileExt = file.name.split(".").pop().toLowerCase();
     if (
@@ -225,12 +227,24 @@ const QuickPassenger = () => {
   };
 
   const handleSubmit = () => {
+    if (title === "") {
+      toast.error("Sorry! Title is empty..")
+      return;
+    }
     if (firstName === "") {
       toast.error("Sorry! First Name is empty..")
       return;
     }
     if (lastName === "") {
       toast.error("Sorry! Last Name is empty..")
+      return;
+    }
+    if (email === "") {
+      toast.error("Sorry! Email is empty..")
+      return;
+    }
+    if (!isValidEmail(email)){
+      toast.error("You have entered an invalid email address!")
       return;
     }
     if (dob === "") {
@@ -667,9 +681,10 @@ const QuickPassenger = () => {
                               htmlFor=""
                             >
                               Email
+                              <span className="text-danger">*</span>
                             </label>
                           </div>
-                          <div className="input-group mb-3">
+                          <div className=" mb-3">
                             <input
                               type="email"
                               className="form-control rounded"

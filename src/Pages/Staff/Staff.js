@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactPaginate from 'react-paginate';
 import $ from 'jquery';
+import { isValidEmail } from "../../common/functions";
 const Staff = () => {
   let [userName, setUserName] = useState("");
   let [userEmail, setUserEmail] = useState("");
@@ -38,6 +39,10 @@ const Staff = () => {
     }
     if (userEmail === "") {
       toast.error("Sorry! Email is empty..");
+      return;
+    }
+    if (!isValidEmail(userEmail)){
+      toast.error("You have entered an invalid email address!")
       return;
     }
 

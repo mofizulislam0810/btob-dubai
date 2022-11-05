@@ -323,6 +323,7 @@ const Support = () => {
         handleGetOngoing();
         toast.success("Thanks! Message sent successfully..");
         document.getElementById("replyBtn").click();
+        setHistoryMessage("");
       } else {
         toast.error("Sorry! Message not sent..");
       }
@@ -1356,6 +1357,7 @@ const Support = () => {
                                         />
                                       </span>
                                       <input
+                                        value={historyMessage}
                                         className="form-control border no-shadow no-rounded"
                                         placeholder="Type your message here"
                                         onChange={(e) =>

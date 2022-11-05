@@ -352,7 +352,7 @@ const Support = () => {
       toast.error("Sorry! Message is empty..");
       return;
     }
-    if (ticketNumbers === "") {
+    if (subjectId !== 10 && ticketNumbers === "") {
       toast.error("Sorry! Ticket number not selected..");
       return;
     }

@@ -13,7 +13,7 @@ import "../../../plugins/t-datepicker/t-datepicker.min";
 import { environment } from "../../SharePages/Utility/environment";
 import "./SearchFrom.css";
 
-const childrenAges = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const childrenAges = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const SearchFrom = () => {
   const formCount = 0;

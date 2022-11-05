@@ -2393,18 +2393,18 @@ const Ticket = () => {
                               </tr>
                             </thead>
                             <tbody>
-                              {ticketingList.passengerInfo?.map(
+                              {ticketingList.fareBreakdown?.map(
                                 (item, index) => (
                                   <>
                                     {item.passengerType === "ADT" ? (
                                       <>
                                         <tr>
                                           <td className="text-start">Adult</td>
-                                          <td>{item.basePrice}</td>
-                                          <td>{item.tax}</td>
+                                          <td>{ item.basePriceEdited > 0 ? item.basePriceEdited : item.basePrice}</td>
+                                          <td>{item.taxEdited > 0 ? item.taxEdited : item.tax}</td>
 
                                           <td>{item.ait}</td>
-                                          <td>{item.discount}</td>
+                                          <td>{item.discountEdited > 0 ? item.discountEdited : item.discount}</td>
                                           <td>{item.passengerCount}</td>
                                           <td className="fw-bold">
                                             {item.currencyName}{" "}
@@ -2417,11 +2417,11 @@ const Ticket = () => {
                                       <>
                                         <tr>
                                           <td className="text-start">Child</td>
-                                          <td>{item.basePrice}</td>
-                                          <td>{item.tax}</td>
+                                          <td>{ item.basePriceEdited > 0 ? item.basePriceEdited : item.basePrice}</td>
+                                          <td>{item.taxEdited > 0 ? item.taxEdited : item.tax}</td>
 
                                           <td>{item.ait}</td>
-                                          <td>{item.discount}</td>
+                                          <td>{item.discountEdited > 0 ? item.discountEdited : item.discount}</td>
                                           <td>{item.passengerCount}</td>
                                           <td className="fw-bold">
                                             {item.currencyName}{" "}
@@ -2434,11 +2434,11 @@ const Ticket = () => {
                                       <>
                                         <tr>
                                           <td className="text-start">Infant</td>
-                                          <td>{item.basePrice}</td>
-                                          <td>{item.tax}</td>
+                                          <td>{ item.basePriceEdited > 0 ? item.basePriceEdited : item.basePrice}</td>
+                                          <td>{item.taxEdited > 0 ? item.taxEdited : item.tax}</td>
 
                                           <td>{item.ait}</td>
-                                          <td>{item.discount}</td>
+                                          <td>{item.discountEdited > 0 ? item.discountEdited : item.discount}</td>
                                           <td>{item.passengerCount}</td>
                                           <td className="fw-bold">
                                             {item.currencyName}{" "}

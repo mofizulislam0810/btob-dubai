@@ -158,23 +158,7 @@ const Invoice = () => {
                       Print
                     </a>
                   </li>
-                  {/* <li id="menu-item">
-                    <a
-                      href="javascript:void(0)"
-                      className="btn btn-sm btn-secondary float-right mr-1 d-print-none"
-                      data-bs-toggle="modal"
-                      data-bs-target="#priceModal"
-                    >
-                      Edit Price
-                    </a>
-                  </li>
-                  <li id="menu-item">
-                    <a href="javascript:void(0)" className="btn btn-sm btn-secondary float-right mr-1 d-print-none"
-                    onClick={handleDownloadPdf}
-                    >
-                      Download
-                    </a>
-                  </li> */}
+                  
                 </ul>
               </div>
               <div className="card-body pt-5"  ref={donwloadRef}>

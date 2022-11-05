@@ -5,6 +5,7 @@ import $ from "jquery";
 import React, { useEffect, useRef, useState } from "react";
 import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from "react-icons/md";
 import { useLocation } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import ReactTooltip from "react-tooltip";
 import { getCabinClass } from "../../../common/functions";
 import airports from "../../../JSON/airports.json";
@@ -49,7 +50,9 @@ const ShowAllFlightPage = () => {
   } = state;
   // let { formCount } = state;
   console.log(String(airlines), childAgeList);
-  const [modifySearch, setModifySearch] = useState(false)
+  const [modifySearch, setModifySearch] = useState(false);
+  const [sameMatchError, setSameMatchError] = useState(true);
+  const [journeyDateError, setJourneyDateError] = useState(true);
   const [tripType, setTripType] = useState(tripTypeModify); //"One Way"
   const [travelClassType, setTravelClassType] = useState(travelClass); //:"Economy"
   const [adultCount, setAdultCount] = useState(qtyList.Adult); //1
@@ -789,153 +792,213 @@ const ShowAllFlightPage = () => {
       const inputDateMulti3 = $("#departureDate3").children("input").val();
       const inputDateMulti4 = $("#departureDate4").children("input").val();
       const inputDateMulti5 = $("#departureDate5").children("input").val();
-      const qtyList = {
-        Adult: adultCount,
-        Children: childCount,
-        Infant: infantCount,
-      };
-      const originCode = airports
-        .filter((f) => f.city + " - " + f.country + ", " + f.name === origin)
-        .map((item) => item.iata);
-      const destinationCode = airports
-        .filter(
-          (f) => f.city + " - " + f.country + ", " + f.name === destination
-        )
-        .map((item) => item.iata);
-      const originCode1 = airports
-        .filter((f) => f.city + " - " + f.country + ", " + f.name === origin1)
-        .map((item) => item.iata);
-      const destinationCode1 = airports
-        .filter(
-          (f) => f.city + " - " + f.country + ", " + f.name === destination1
-        )
-        .map((item) => item.iata);
-      const originCode2 = airports
-        .filter((f) => f.city + " - " + f.country + ", " + f.name === origin2)
-        .map((item) => item.iata);
-      const destinationCode2 = airports
-        .filter(
-          (f) => f.city + " - " + f.country + ", " + f.name === destination2
-        )
-        .map((item) => item.iata);
-      const originCode3 = airports
-        .filter((f) => f.city + " - " + f.country + ", " + f.name === origin3)
-        .map((item) => item.iata);
-      const destinationCode3 = airports
-        .filter(
-          (f) => f.city + " - " + f.country + ", " + f.name === destination3
-        )
-        .map((item) => item.iata);
-      const originCode4 = airports
-        .filter((f) => f.city + " - " + f.country + ", " + f.name === origin4)
-        .map((item) => item.iata);
-      const destinationCode4 = airports
-        .filter(
-          (f) => f.city + " - " + f.country + ", " + f.name === destination4
-        )
-        .map((item) => item.iata);
-      const originCode5 = airports
-        .filter((f) => f.city + " - " + f.country + ", " + f.name === origin5)
-        .map((item) => item.iata);
-      const destinationCode5 = airports
-        .filter(
-          (f) => f.city + " - " + f.country + ", " + f.name === destination5
-        )
-        .map((item) => item.iata);
-      let searchParamMulti = {
-        routes: [
-          {
-            origin: originCode[0],
-            destination: destinationCode[0],
-            departureDate: journeyDate,
-          },
-          {
-            origin: originCode1[0],
-            destination: destinationCode1[0],
-            departureDate: inputDateMulti1,
-          },
-        ],
-        adults: qtyList.Adult,
-        childs: qtyList.Children,
-        infants: qtyList.Infant,
-        isOpenCombination: false,
-        cabinClass: getCabinClass(travelClassType),
-        preferredCarriers: [],
-        prohibitedCarriers: [],
-        taxRedemptions: [],
-        childrenAges: [],
-      };
-      if (originCode2[0] !== undefined) {
-        let mc2 = {
-          origin: originCode2[0],
-          destination: destinationCode2[0],
-          departureDate: inputDateMulti2,
-        };
-        searchParamMulti.routes.push(mc2);
+      if (origin === destination && origin !== "" && destination !== "") {
+        toast.error("Depart From and Going To must be difference No.1");
+        setSameMatchError(true)
       }
-      if (originCode3[0] !== undefined) {
-        let mc2 = {
-          origin: originCode3[0],
-          destination: destinationCode3[0],
-          departureDate: inputDateMulti3,
-        };
-        searchParamMulti.routes.push(mc2);
+      else if (origin1 === destination1 && origin1 !== "" && destination1 !== "") {
+        toast.error("Depart From and Going To must be difference No.2");
+        setSameMatchError(true)
       }
-      if (originCode4[0] !== undefined) {
-        let mc2 = {
-          origin: originCode4[0],
-          destination: destinationCode4[0],
-          departureDate: inputDateMulti4,
-        };
-        searchParamMulti.routes.push(mc2);
+      else if (origin2 === destination2 && origin2 !== "" && destination2 !== "") {
+        toast.error("Depart From and Going To must be difference No.3");
+        setSameMatchError(true)
       }
-      if (originCode5[0] !== undefined) {
-        let mc2 = {
-          origin: originCode5[0],
-          destination: destinationCode5[0],
-          departureDate: inputDateMulti5,
-        };
-        searchParamMulti.routes.push(mc2);
+      else if (origin3 === destination3 && origin3 !== "" && destination3 !== "") {
+        toast.error("Depart From and Going To must be difference No.4");
+        setSameMatchError(true)
       }
-      const searchData = {
-        origin: origin,
-        destination: destination,
-        origin1: origin1,
-        destination1: destination1,
-        origin2: origin2,
-        destination2: destination2,
-        origin3: origin3,
-        destination3: destination3,
-        origin4: origin4,
-        destination4: destination4,
-        origin5: origin5,
-        destination5: destination5,
-        journeyDate: journeyDate,
-        returnDate: returnDate,
-        inputDateMulti1: inputDateMulti1,
-        inputDateMulti2: inputDateMulti2,
-        inputDateMulti3: inputDateMulti3,
-        inputDateMulti4: inputDateMulti4,
-        inputDateMulti5: inputDateMulti5,
-        tripTypeModify: tripType,
-        qtyList: qtyList,
-        travelClass: travelClassType,
-      };
-      localStorage.setItem("Database", JSON.stringify(searchData));
+      else if (origin4 === destination4 && origin4 !== "" && destination4 !== "") {
+        toast.error("Depart From and Going To must be difference No.5");
+        setSameMatchError(true)
+      }
+      else if (origin5 === destination5 && origin5 !== "" && destination5 !== "") {
+        toast.error("Depart From and Going To must be difference No.5");
+        setSameMatchError(true)
+      }
+      else setSameMatchError(false)
 
-      const getData = async () => {
-        setLoading(true);
-        const response = await axios.post(
-          environment.searchFlight,
-          searchParamMulti,
-          environment.headerToken
-        );
-        setFetchFlighData(await response.data.item1);
-        setLoading(false);
-      };
-      console.log(searchParamMulti);
-      console.log(origin, origin1, origin2, origin3, origin4, origin5);
-      getData();
+      if (String(journeyDate) === String(null) && origin !== destination) {
+        toast.error("Please select all departing date no.1");
+        setJourneyDateError(true)
+      }
+
+      else if (String(inputDateMulti1) === String(null) && origin1 !== destination1) {
+        toast.error("Please select all departing date no.2");
+        setJourneyDateError(true)
+      }
+      else if (String(inputDateMulti2) === String(null) && origin2 !== destination2) {
+        toast.error("Please select all departing date no.3");
+        setJourneyDateError(true)
+      }
+
+      else if (String(inputDateMulti3) === String(null) && origin3 !== destination3) {
+        toast.error("Please select all departing date no.3");
+        setJourneyDateError(true)
+      }
+      else if (String(inputDateMulti4) === String(null) && origin4 !== destination4) {
+        toast.error("Please select all departing date no.4");
+        setJourneyDateError(true)
+      }
+      else if (String(inputDateMulti5) === String(null) && origin5 !== destination5) {
+        toast.error("Please select all departing date no.5");
+        setJourneyDateError(true)
+      }
+      else setJourneyDateError(false)
+
+      console.log("String(inputDateMulti3)", inputDateMulti1, String(null))
+      if (!sameMatchError) {
+        if (!journeyDateError){
+          const qtyList = {
+            Adult: adultCount,
+            Children: childCount,
+            Infant: infantCount,
+          };
+          const originCode = airports
+            .filter((f) => f.city + " - " + f.country + ", " + f.name === origin)
+            .map((item) => item.iata);
+          const destinationCode = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === destination
+            )
+            .map((item) => item.iata);
+          const originCode1 = airports
+            .filter((f) => f.city + " - " + f.country + ", " + f.name === origin1)
+            .map((item) => item.iata);
+          const destinationCode1 = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === destination1
+            )
+            .map((item) => item.iata);
+          const originCode2 = airports
+            .filter((f) => f.city + " - " + f.country + ", " + f.name === origin2)
+            .map((item) => item.iata);
+          const destinationCode2 = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === destination2
+            )
+            .map((item) => item.iata);
+          const originCode3 = airports
+            .filter((f) => f.city + " - " + f.country + ", " + f.name === origin3)
+            .map((item) => item.iata);
+          const destinationCode3 = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === destination3
+            )
+            .map((item) => item.iata);
+          const originCode4 = airports
+            .filter((f) => f.city + " - " + f.country + ", " + f.name === origin4)
+            .map((item) => item.iata);
+          const destinationCode4 = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === destination4
+            )
+            .map((item) => item.iata);
+          const originCode5 = airports
+            .filter((f) => f.city + " - " + f.country + ", " + f.name === origin5)
+            .map((item) => item.iata);
+          const destinationCode5 = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === destination5
+            )
+            .map((item) => item.iata);
+          let searchParamMulti = {
+            routes: [
+              {
+                origin: originCode[0],
+                destination: destinationCode[0],
+                departureDate: journeyDate,
+              },
+              {
+                origin: originCode1[0],
+                destination: destinationCode1[0],
+                departureDate: inputDateMulti1,
+              },
+            ],
+            adults: qtyList.Adult,
+            childs: qtyList.Children,
+            infants: qtyList.Infant,
+            isOpenCombination: false,
+            cabinClass: getCabinClass(travelClassType),
+            preferredCarriers: [],
+            prohibitedCarriers: [],
+            taxRedemptions: [],
+            childrenAges: [],
+          };
+          if (originCode2[0] !== undefined) {
+            let mc2 = {
+              origin: originCode2[0],
+              destination: destinationCode2[0],
+              departureDate: inputDateMulti2,
+            };
+            searchParamMulti.routes.push(mc2);
+          }
+          if (originCode3[0] !== undefined) {
+            let mc2 = {
+              origin: originCode3[0],
+              destination: destinationCode3[0],
+              departureDate: inputDateMulti3,
+            };
+            searchParamMulti.routes.push(mc2);
+          }
+          if (originCode4[0] !== undefined) {
+            let mc2 = {
+              origin: originCode4[0],
+              destination: destinationCode4[0],
+              departureDate: inputDateMulti4,
+            };
+            searchParamMulti.routes.push(mc2);
+          }
+          if (originCode5[0] !== undefined) {
+            let mc2 = {
+              origin: originCode5[0],
+              destination: destinationCode5[0],
+              departureDate: inputDateMulti5,
+            };
+            searchParamMulti.routes.push(mc2);
+          }
+          const searchData = {
+            origin: origin,
+            destination: destination,
+            origin1: origin1,
+            destination1: destination1,
+            origin2: origin2,
+            destination2: destination2,
+            origin3: origin3,
+            destination3: destination3,
+            origin4: origin4,
+            destination4: destination4,
+            origin5: origin5,
+            destination5: destination5,
+            journeyDate: journeyDate,
+            returnDate: returnDate,
+            inputDateMulti1: inputDateMulti1,
+            inputDateMulti2: inputDateMulti2,
+            inputDateMulti3: inputDateMulti3,
+            inputDateMulti4: inputDateMulti4,
+            inputDateMulti5: inputDateMulti5,
+            tripTypeModify: tripType,
+            qtyList: qtyList,
+            travelClass: travelClassType,
+          };
+          localStorage.setItem("Database", JSON.stringify(searchData));
+    
+          const getData = async () => {
+            setLoading(true);
+            const response = await axios.post(
+              environment.searchFlight,
+              searchParamMulti,
+              environment.headerToken
+            );
+            setFetchFlighData(await response.data.item1);
+            setLoading(false);
+          };
+          console.log(searchParamMulti);
+          console.log(origin, origin1, origin2, origin3, origin4, origin5);
+          getData();
+        }
+      }
+      
     } else if (String(tripType) === "Round Trip") {
       const origin =
         originRef.current.value === undefined
@@ -947,68 +1010,75 @@ const ShowAllFlightPage = () => {
           : destinationRef.current.value;
       const journeyDate = $("#departureDate").children("input").val();
       const returnDate = $("#returnDate").children("input").val();
-      const qtyList = {
-        Adult: adultCount,
-        Children: childCount,
-        Infant: infantCount,
-      };
-      const originCode = airports
-        .filter((f) => f.city + " - " + f.country + ", " + f.name === origin)
-        .map((item) => item.iata);
-      const destinationCode = airports
-        .filter(
-          (f) => f.city + " - " + f.country + ", " + f.name === destination
-        )
-        .map((item) => item.iata);
-
-      const searchData = {
-        origin: origin,
-        destination: destination,
-        journeyDate: journeyDate,
-        returnDate: returnDate,
-        tripTypeModify: tripType,
-        qtyList: qtyList,
-        travelClass: travelClassType,
-      };
-
-      localStorage.setItem("Database", JSON.stringify(searchData));
-
-      let searchParamRoundWay = {
-        routes: [
-          {
-            origin: originCode[0],
-            destination: destinationCode[0],
-            departureDate: journeyDate,
-          },
-          {
-            origin: destinationCode[0],
-            destination: originCode[0],
-            departureDate: returnDate,
-          },
-        ],
-        adults: qtyList.Adult,
-        childs: qtyList.Children,
-        infants: qtyList.Infant,
-        isOpenCombination: false,
-        cabinClass: getCabinClass(travelClassType),
-        preferredCarriers: [],
-        prohibitedCarriers: [],
-        taxRedemptions: [],
-        childrenAges: [],
-      };
-
-      console.log(searchParamRoundWay);
-      const getData = async () => {
-        setLoading(true);
-        const response = await axios.post(
-          environment.searchFlight,
-          searchParamRoundWay,
-          environment.headerToken
-        );
-        setFetchFlighData(await response.data.item1);
-        setLoading(false);
-      };
-      getData();
+      if (origin === destination && origin !== "" & destination !== "") {
+        toast.error("Depart From and Going To must be difference");
+      }
+      else if ((String(journeyDate) !== String(null) && String(journeyDate) !== "" && String(returnDate) !== String(null) && String(returnDate) !== "")){
+        const qtyList = {
+          Adult: adultCount,
+          Children: childCount,
+          Infant: infantCount,
+        };
+        const originCode = airports
+          .filter((f) => f.city + " - " + f.country + ", " + f.name === origin)
+          .map((item) => item.iata);
+        const destinationCode = airports
+          .filter(
+            (f) => f.city + " - " + f.country + ", " + f.name === destination
+          )
+          .map((item) => item.iata);
+  
+        const searchData = {
+          origin: origin,
+          destination: destination,
+          journeyDate: journeyDate,
+          returnDate: returnDate,
+          tripTypeModify: tripType,
+          qtyList: qtyList,
+          travelClass: travelClassType,
+        };
+  
+        localStorage.setItem("Database", JSON.stringify(searchData));
+  
+        let searchParamRoundWay = {
+          routes: [
+            {
+              origin: originCode[0],
+              destination: destinationCode[0],
+              departureDate: journeyDate,
+            },
+            {
+              origin: destinationCode[0],
+              destination: originCode[0],
+              departureDate: returnDate,
+            },
+          ],
+          adults: qtyList.Adult,
+          childs: qtyList.Children,
+          infants: qtyList.Infant,
+          isOpenCombination: false,
+          cabinClass: getCabinClass(travelClassType),
+          preferredCarriers: [],
+          prohibitedCarriers: [],
+          taxRedemptions: [],
+          childrenAges: [],
+        };
+  
+        console.log(searchParamRoundWay);
+        const getData = async () => {
+          setLoading(true);
+          const response = await axios.post(
+            environment.searchFlight,
+            searchParamRoundWay,
+            environment.headerToken
+          );
+          setFetchFlighData(await response.data.item1);
+          setLoading(false);
+        };
+        getData();
+      } else {
+        toast.error("Please select date");
+      }
     } else if (String(tripType) === "One Way") {
       const origin =
         originRef.current.value === ""
@@ -1019,65 +1089,73 @@ const ShowAllFlightPage = () => {
           ? destinationRefValue
           : destinationRef.current.value;
       const journeyDate = $("#departureDate").children("input").val();
-      const qtyList = {
-        Adult: adultCount,
-        Children: childCount,
-        Infant: infantCount,
-      };
-      const originCode = airports
-        .filter((f) => f.city + " - " + f.country + ", " + f.name === origin)
-        .map((item) => item.iata);
-      const destinationCode = airports
-        .filter(
-          (f) => f.city + " - " + f.country + ", " + f.name === destination
-        )
-        .map((item) => item.iata);
 
-      const searchData = {
-        origin: origin,
-        destination: destination,
-        journeyDate: journeyDate,
-        returnDate: "null",
-        tripTypeModify: tripType,
-        qtyList: qtyList,
-        travelClass: travelClassType,
-      };
+      if (origin === destination && origin !== "" & destination !== "") {
+        toast.error("Depart From and Going To must be difference");
+      }
+      else if (String(journeyDate) !== String(null) && String(journeyDate) !== "") {
+        const qtyList = {
+          Adult: adultCount,
+          Children: childCount,
+          Infant: infantCount,
+        };
+        const originCode = airports
+          .filter((f) => f.city + " - " + f.country + ", " + f.name === origin)
+          .map((item) => item.iata);
+        const destinationCode = airports
+          .filter(
+            (f) => f.city + " - " + f.country + ", " + f.name === destination
+          )
+          .map((item) => item.iata);
 
-      localStorage.setItem("Database", JSON.stringify(searchData));
+        const searchData = {
+          origin: origin,
+          destination: destination,
+          journeyDate: journeyDate,
+          returnDate: "null",
+          tripTypeModify: tripType,
+          qtyList: qtyList,
+          travelClass: travelClassType,
+        };
 
-      let searchParamOnedWay = {
-        routes: [
-          {
-            origin: originCode[0],
-            destination: destinationCode[0],
-            departureDate: journeyDate,
-          },
-        ],
-        adults: qtyList.Adult,
-        childs: qtyList.Children,
-        infants: qtyList.Infant,
-        isOpenCombination: false,
-        cabinClass: getCabinClass(travelClassType),
-        preferredCarriers: [],
-        prohibitedCarriers: [],
-        taxRedemptions: [],
-        childrenAges: [],
-      };
+        localStorage.setItem("Database", JSON.stringify(searchData));
 
-      console.log(searchParamOnedWay);
+        let searchParamOnedWay = {
+          routes: [
+            {
+              origin: originCode[0],
+              destination: destinationCode[0],
+              departureDate: journeyDate,
+            },
+          ],
+          adults: qtyList.Adult,
+          childs: qtyList.Children,
+          infants: qtyList.Infant,
+          isOpenCombination: false,
+          cabinClass: getCabinClass(travelClassType),
+          preferredCarriers: [],
+          prohibitedCarriers: [],
+          taxRedemptions: [],
+          childrenAges: [],
+        };
 
-      const getData = async () => {
-        setLoading(true);
-        const response = await axios.post(
-          environment.searchFlight,
-          searchParamOnedWay,
-          environment.headerToken
-        );
-        setFetchFlighData(await response.data.item1);
-        setLoading(false);
-      };
-      console.log(flightoneway);
-      getData();
+        console.log(searchParamOnedWay);
+
+        const getData = async () => {
+          setLoading(true);
+          const response = await axios.post(
+            environment.searchFlight,
+            searchParamOnedWay,
+            environment.headerToken
+          );
+          setFetchFlighData(await response.data.item1);
+          setLoading(false);
+        };
+        console.log(flightoneway);
+        getData();
+      } else {
+        toast.error("Please select date");
+      }
     }
     e.preventDefault();
   };
@@ -1101,6 +1179,7 @@ const ShowAllFlightPage = () => {
     <div>
       <Navbar></Navbar>
       <SideNavBar></SideNavBar>
+      <ToastContainer position="bottom-right" autoClose={1500} />
       <div className="content-wrapper">
         <section className="content-header"></section>
         <section className="content">
@@ -1358,7 +1437,7 @@ const ShowAllFlightPage = () => {
                 </span>
               </div>
               <div className="col-lg-2 my-auto d-flex justify-content-center bg-white">
-                <button className="btn button-color btn-sm text-white float-start fw-bold search-again rounded-3 d-flex align-items-center" onClick={()=> setModifySearch(!modifySearch)}>
+                <button className="btn button-color btn-sm text-white float-start fw-bold search-again rounded-3 d-flex align-items-center" onClick={() => setModifySearch(!modifySearch)}>
                   Modify search {modifySearch ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
                 </button>
               </div>

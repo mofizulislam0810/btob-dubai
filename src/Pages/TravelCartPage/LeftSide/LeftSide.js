@@ -1,5 +1,5 @@
 import axios from "axios";
-import { add, format } from "date-fns";
+import { add, differenceInYears, format, intervalToDuration, parse } from "date-fns";
 import produce from "immer";
 import $ from "jquery";
 import React, { useEffect, useState } from "react";
@@ -41,7 +41,30 @@ const LeftSide = () => {
   const [click, setClick] = useState(false);
   const Database = JSON.parse(localStorage.getItem("Database"))
   console.log({ "object": Database })
-  console.log(Database?.journeyDate)
+  // console.log(Database?.journeyDate)
+  function calculateMonth(from, to) {
+    console.log({ from, to })
+    const dateFrom = parse(from, "dd/MM/yyyy", new Date());
+    const dateTo = parse(to, "dd/MM/yyyy", new Date());
+
+    const age = differenceInYears(dateFrom, dateTo);
+    console.log("dateFrom", dateFrom, "dateTo", dateTo, "age", age)
+
+    return age;
+  }
+  function calculateFullAge(dobFrom, dobTo) {
+    const dob1 = format(new Date(dobFrom), 'dd/MM/yyyy');
+    const dob2 = format(new Date(dobTo), 'dd/MM/yyyy')
+    const birthDateStart = parse(dob1, "dd/MM/yyyy", new Date());
+    const birthDateEnd = parse(dob2, "dd/MM/yyyy", new Date());
+
+    const { years, months, days } = intervalToDuration({ start: birthDateStart, end: birthDateEnd });
+    if (years < 1 && months < 6 && days <= 31) {
+      return true
+    } else return false
+  }
+  // console.log('- using intervalToDuration: ', calculateFullAge(Database?.journeyDate, Database?.returnDate));
+
   const handlePassportFileUpload = (flag, index, file, passportNo) => {
     let fileExt = file.name.split(".").pop().toLowerCase();
     if (
@@ -1019,7 +1042,8 @@ const LeftSide = () => {
                                   }}
 
                                   value={p?.dateOfBirth}
-                                  max={ISODateFormatter(add(new Date(Database?.journeyDate), {
+                                  max={ISODateFormatter(add(new Date(Database?.tripTypeModify ===
+                                    "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), {
                                     years: -12,
                                   }))}
                                   required
@@ -1428,7 +1452,8 @@ const LeftSide = () => {
                                   );
                                 }}
                                 value={(p.passportExDate)}
-                                min={ISODateFormatter(new Date())}
+                                min={ISODateFormatter(new Date(Database?.tripTypeModify ===
+                                  "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate))}
                                 autoComplete="off"
                                 placeholder="Passport Expaire Date"
                                 pattern="\d{4}-\d{2}-\d{2}"
@@ -1454,8 +1479,6 @@ const LeftSide = () => {
                             type="text"
                             name="frequentFlyerNumber"
                             className="form-control"
-                            onInvalid={e => e.target.setCustomValidity('Enter User Name Here')}
-                            onInput={e => { e.target.setCustomValidity(''); console.log("eeeeeeeeee", e) }}
                             onChange={(e) => {
                               const frequentFlyerNumber = e.target.value;
                               setAdult((ob) =>
@@ -1733,10 +1756,12 @@ const LeftSide = () => {
                                 );
                               }}
                               value={p?.dateOfBirth}
-                              min={ISODateFormatter(add(new Date(Database?.journeyDate), {
+                              min={ISODateFormatter(add(new Date(Database?.tripTypeModify ===
+                                "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), {
                                 years: -12,
                               }))}
-                              max={ISODateFormatter(add(new Date(Database?.journeyDate), {
+                              max={ISODateFormatter(add(new Date(Database?.tripTypeModify ===
+                                "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), {
                                 years: -2,
                               }))}
                               required
@@ -2083,7 +2108,8 @@ const LeftSide = () => {
                                   );
                                 }}
                                 value={(p.passportExDate)}
-                                min={ISODateFormatter(new Date())}
+                                min={ISODateFormatter(new Date(Database?.tripTypeModify ===
+                                  "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate))}
                                 autoComplete="off"
                                 placeholder="Passport Expaire Date"
                                 pattern="\d{4}-\d{2}-\d{2}"
@@ -2756,13 +2782,15 @@ const LeftSide = () => {
                                   );
                                 }}
                                 value={(p.passportExDate)}
-                                min={ISODateFormatter(new Date())}
+                                min={ISODateFormatter(new Date(Database?.tripTypeModify ===
+                                  "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate))}
                                 autoComplete="off"
                                 placeholder="Passport Expaire Date"
                                 pattern="\d{4}-\d{2}-\d{2}"
                                 required
                               />
                               {validityError && (<div className="validation"></div>)}
+
                             </div>
                             {/* <div className="input-group mb-3 d-flex">
                               <select

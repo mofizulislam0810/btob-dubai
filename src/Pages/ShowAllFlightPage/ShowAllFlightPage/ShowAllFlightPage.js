@@ -1345,7 +1345,7 @@ const ShowAllFlightPage = () => {
                 <span
                   className="fw-bold border p-2 mx-1"
                   style={{ fontSize: "14px" }}
-                >Modify search
+                >
                   {searchData.qtyList.Adult > 0
                     ? " Adult : " + searchData.qtyList.Adult
                     : " "}{" "}

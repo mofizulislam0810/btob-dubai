@@ -7,7 +7,7 @@ import SideNavBar from "../../SharePages/SideNavBar/SideNavBar";
 import TravelCartPanel from "../TravelCartPanel/TravelCartPanel";
 
 const TravelCartPage = () => {
-  // window.scrollTo(0,0);
+  window.scrollTo(0,0);
   const {loading} = useAuth();
   console.log(loading);
   return (

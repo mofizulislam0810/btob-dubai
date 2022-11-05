@@ -1620,6 +1620,7 @@ const Proposal = () => {
                             <th style={{ border: "1px solid black" }}><b>Base</b></th>
                             <th style={{ border: "1px solid black" }}><b>Tax</b></th>
                             <th style={{ border: "1px solid black" }}><b>Discount</b></th>
+                            <th style={{ border: "1px solid black" }}><b>AIT</b></th>
                             <th style={{ border: "1px solid black" }}><b>Pax</b></th>
                             <th style={{ border: "1px solid black" }}><b>Total Pax Fare</b></th>
                           </tr>
@@ -1632,6 +1633,7 @@ const Proposal = () => {
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.adt.basePrice + parseInt(addBalance) - decBalance + parseInt(adultPriceValue[index])}</td>
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.adt.taxes}</td>
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.adt.discountPrice}</td>
+                                <td style={{ border: "1px solid black" }}>{item.passengerFares.adt.ait}</td>  
                                 <td style={{ border: "1px solid black" }}>{item.passengerCounts.adt}</td>
                                 <td style={{ border: "1px solid black" }}>{currency !== undefined ? currency : "BDT"}  {" "}
                                   {item.passengerFares.adt.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])}</td>

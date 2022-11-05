@@ -118,6 +118,7 @@ const Invoice = () => {
 
   }
 
+  console.log(ticketingList);
   // console.log(passengerList);
   return (
     <div>
@@ -231,7 +232,7 @@ const Invoice = () => {
                                                                 <br />
                                                                 Avenue, Banani, Dhaka 1213<br></br>
                                                                 Phone: 09613123123<br></br>
-                                                                Email: support@FirstTrip.com
+                                                                Email: support@frinttrip.com
                                                             </div>
                                                         </address>
                                                     </td>
@@ -241,53 +242,7 @@ const Invoice = () => {
 
 
 
-                {/* <div className="row">
-                  <div className="col-md-8">
-                    {ticketingList.length > 0 ? (
-                      <>
-                        {ticketingList[0].agentLogo !== null &&
-                        ticketingList[0].agentLogo !== "" ? (
-                          <img
-                            alt="img01"
-                            src={
-                              environment.baseApiURL +
-                              `agentinfo/GetLogo/${ticketingList[0].agentLogo}`
-                            }
-                            style={{ width: "300px", height: "100px" }}
-                          ></img>
-                        ) : (
-                          <>
-                            <img
-                              alt="img01"
-                              className="p-2"
-                              src={tllLogo}
-                              style={{ width: "150px", height: "50px" }}
-                            ></img>
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                  <div className="col-md-4 text-right">
-                    {ticketingList.length > 0 ? (
-                      <>
-                        <strong>{ticketingList[0].agentName}</strong>
-                        <br />
-                        <span>{ticketingList[0].agentAddress}</span>
-                        <br />
-                        <span>{ticketingList[0].agentMobileNo}</span>
-                        <br />
-                        <span>{ticketingList[0].agentEmail}</span>
-                        <br />
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                </div> */}
-
+                
                 <table
                   class="table table-borderless table-sm"
                   style={{ fontSize: "10px", lineHeight: "8px"}}
@@ -295,43 +250,9 @@ const Invoice = () => {
                   <tbody>
                     <tr className="d-flex">
                       <td className="bg-white" style={{ width: "70%" }}>
-                        {/* <tr>
-                          <td
-                            className="text-start fw-bold"
-                         
-                          >
-                            Customer Name
-                          </td>
-                          <td className="w-50 text-start">
-                            <span className="mx-2">:</span>
-                            Md. Ratul Islam
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            className="text-start fw-bold"
-                          >
-                            {" "}
-                            Phone Number
-                          </td>
-                          <td className="w-50 text-start">
-                            <span className="mx-2">:</span>
-                            +8809613345345
-                          </td>
-                        </tr> */}
+                      
                       </td>
                       <td className="bg-white" style={{ width: "30%" }}>
-                        {/* <tr>
-                          <td
-                            className="text-end fw-bold"
-                            
-                          >
-                            Date<span className="mx-2">:</span>
-                          </td>
-                          <td className="text-end" style={{ width: "7%" }}>
-                           22-04-2022
-                          </td>
-                        </tr> */}
                         <tr>
                           <td
                             className="text-end fw-bold"
@@ -340,7 +261,7 @@ const Invoice = () => {
                             Invoice Number<span className="mx-2">:</span>
                           </td>
                           <td className="text-end" style={{ width: "7%" }}>
-                          22042022
+                          {ticketingList[0]?.tnxNumber}
                           </td>
                         </tr>
                         <tr>
@@ -425,7 +346,7 @@ const Invoice = () => {
                                   ticketingList[0].destination
                                 : ""} 
                             </th>
-                            <th className="text-end align-middle" rowSpan={3}>{item.totalPrice}</th>
+                            <th className="text-end align-middle" rowSpan={3}>{item.totalPrice.toLocaleString("en-US")}</th>
                           </tr>
                           <tr>
                             <th>Ticket No</th>

@@ -1,24 +1,22 @@
+import { Box } from "@chakra-ui/react";
+import axios from "axios";
+import Fuse from "fuse.js";
+import $ from "jquery";
 import React, { useEffect, useRef, useState } from "react";
+import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from "react-icons/md";
 import { useLocation } from "react-router-dom";
+import ReactTooltip from "react-tooltip";
+import { getCabinClass } from "../../../common/functions";
+import airports from "../../../JSON/airports.json";
+import flightoneway from "../../../JSON/flightoneway.json";
+import "../../../plugins/t-datepicker/t-datepicker.min";
+import Loading from "../../Loading/Loading";
+import NoDataFoundPage from "../../NoDataFoundPage/NoDataFoundPage/NoDataFoundPage";
 import Footer from "../../SharePages/Footer/Footer";
 import Navbar from "../../SharePages/Navbar/Navbar";
 import SideNavBar from "../../SharePages/SideNavBar/SideNavBar";
-import ShowAllFlight from "../ShowAllFlight/ShowAllFlight";
-import airports from "../../../JSON/airports.json";
-import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
-import NoDataFoundPage from "../../NoDataFoundPage/NoDataFoundPage/NoDataFoundPage";
-import "../../../plugins/t-datepicker/t-datepicker.min";
-import $ from "jquery";
-import Fuse from "fuse.js";
-import Loading from "../../Loading/Loading";
-import flightoneway from "../../../JSON/flightoneway.json";
-import roundtrip from "../../../JSON/roundtrip.json";
-import flightmulticity from "../../../JSON/flightmulticity.json";
-import currentYear from "../../SharePages/Utility/currentYear";
-import ReactTooltip from "react-tooltip";
-import { getCabinClass } from "../../../common/functions";
-import { Box } from "@chakra-ui/react";
+import ShowAllFlight from "../ShowAllFlight/ShowAllFlight";
 let cIndex = 1;
 const ShowAllFlightPage = () => {
   window.scrollTo(0, 0);
@@ -51,6 +49,7 @@ const ShowAllFlightPage = () => {
   } = state;
   // let { formCount } = state;
   console.log(String(airlines), childAgeList);
+  const [modifySearch, setModifySearch] = useState(false)
   const [tripType, setTripType] = useState(tripTypeModify); //"One Way"
   const [travelClassType, setTravelClassType] = useState(travelClass); //:"Economy"
   const [adultCount, setAdultCount] = useState(qtyList.Adult); //1
@@ -703,6 +702,7 @@ const ShowAllFlightPage = () => {
   };
   console.log(tripType);
   const handleSearchFlight = (e) => {
+    e.preventDefault()
     console.log(tripType);
     if (String(tripType) === "Multi City") {
       // document.getElementById("multiCity" + (cIndex + 1)).style.display = "none";
@@ -1357,7 +1357,7 @@ const ShowAllFlightPage = () => {
                 <span
                   className="fw-bold border p-2 mx-1"
                   style={{ fontSize: "14px" }}
-                >
+                >Modify search
                   {searchData.qtyList.Adult > 0
                     ? " Adult : " + searchData.qtyList.Adult
                     : " "}{" "}
@@ -1370,8 +1370,8 @@ const ShowAllFlightPage = () => {
                 </span>
               </div>
               <div className="col-lg-2 my-auto d-flex justify-content-center bg-white">
-                <button className="btn button-color btn-sm text-white float-start fw-bold search-again rounded-3">
-                  Modify search
+                <button className="btn button-color btn-sm text-white float-start fw-bold search-again rounded-3 d-flex align-items-center" onClick={()=> setModifySearch(!modifySearch)}>
+                  Modify search {modifySearch ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
                 </button>
               </div>
             </div>
@@ -2396,7 +2396,6 @@ const ShowAllFlightPage = () => {
                                     <div className="d-flex justify-content-center">
                                       <button
                                         className="btn text-white mt-3 text-center fw-bold rounded-3"
-                                        id="search-flight"
                                         style={{ backgroundColor: "#7c04c0" }}
                                       >
                                         Search Flight

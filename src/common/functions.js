@@ -1,5 +1,13 @@
 import { intervalToDuration, parse } from "date-fns";
-
+export const isValidEmail = (input) => {
+  return input
+    ?.toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    )
+    ? true
+    : false;
+};
 export const getCabinClass = (input) => {
   if (input === "Economy") return 1;
   else if (input === "Business") return 3;

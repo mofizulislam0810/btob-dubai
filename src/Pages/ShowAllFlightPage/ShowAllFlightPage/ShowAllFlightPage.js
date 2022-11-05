@@ -705,7 +705,6 @@ const ShowAllFlightPage = () => {
     e.preventDefault()
     console.log(tripType);
     if (String(tripType) === "Multi City") {
-      // document.getElementById("multiCity" + (cIndex + 1)).style.display = "none";
       const origin =
         originRef.current.value === undefined
           ? originRefValue
@@ -898,9 +897,6 @@ const ShowAllFlightPage = () => {
         };
         searchParamMulti.routes.push(mc2);
       }
-      // document.getElementById("multiCity" + (cIndex + 1)).style.display =
-      //   "none";
-
       const searchData = {
         origin: origin,
         destination: destination,
@@ -935,8 +931,6 @@ const ShowAllFlightPage = () => {
           environment.headerToken
         );
         setFetchFlighData(await response.data.item1);
-        // setFetchFlighData(flightmulticity.item1);
-        // alert(response.data.item2[1].message);
         setLoading(false);
       };
       console.log(searchParamMulti);
@@ -1012,9 +1006,7 @@ const ShowAllFlightPage = () => {
           environment.headerToken
         );
         setFetchFlighData(await response.data.item1);
-        // setFetchFlighData(roundtrip.item1);
         setLoading(false);
-        // alert(response.data.item2[1].message);
       };
       getData();
     } else if (String(tripType) === "One Way") {
@@ -1082,9 +1074,7 @@ const ShowAllFlightPage = () => {
           environment.headerToken
         );
         setFetchFlighData(await response.data.item1);
-        // setFetchFlighData(flightoneway.item1);
         setLoading(false);
-        // alert(response.data.item2[1].message);
       };
       console.log(flightoneway);
       getData();
@@ -1096,8 +1086,6 @@ const ShowAllFlightPage = () => {
   const addNewChild = (child) => {
     setChildCount(child + 1);
     setChildAge([...childAge, { age: "" }]);
-    // if(childAge.length < 9){
-    // }
   };
 
   const clickOnDelete = (child) => {
@@ -1346,7 +1334,7 @@ const ShowAllFlightPage = () => {
                   className="fw-bold mx-1 border p-2"
                   style={{ fontSize: "14px" }}
                 >
-                  {travelClass}
+                  {searchData.travelClass}
                 </span>
                 {/* <span className="fw-bold mx-1" style={{ fontSize: "14px" }}>
                   | Depart : {searchData.journeyDate}{" "}

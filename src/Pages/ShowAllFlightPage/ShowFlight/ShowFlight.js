@@ -430,7 +430,6 @@ const ShowFlight = (props) => {
                       {moment(
                         item[0].segments[item[0].segments.length - 1].arrival
                       ).format("DD MMMM,yyyy, ddd")}{" "}
-                      HELLO
                     </h6>
                     <h6 className="flighttime">
                       {airports
@@ -992,7 +991,7 @@ const ShowFlight = (props) => {
                           {directions[0][0].from}-{directions[0][0].to}
                         </td>
                         <td className="left">
-                          ADT :{" "}
+                        Adult :{" "}
                           <span className="ms-1 font-size">
                             {directions[0][0].segments[0].baggage[0]?.amount +
                               " " +
@@ -1008,7 +1007,7 @@ const ShowFlight = (props) => {
                               {directions[1][0].from}-{directions[1][0].to}
                             </td>
                             <td className="left">
-                              ADT :{" "}
+                            Adult :{" "}
                               <span className="ms-1 font-size">
                                 {directions[1][0].segments[0].baggage[0]
                                   ?.amount +
@@ -1046,7 +1045,7 @@ const ShowFlight = (props) => {
                 {refundable === true ? (
                   <>
                     <span className="font-size">
-                     <span style={{avlSrc}}>
+                     <span style={{color:avlSrc}}>
                         <i class="fas fa-circle fa-sm me-1"></i>
                       </span>
                       <span className="text-success">
@@ -1058,7 +1057,7 @@ const ShowFlight = (props) => {
                 ) : (
                   <>
                     <span className="font-size">
-                    <span style={{avlSrc}}>
+                    <span style={{color:avlSrc}}>
                         <i class="fas fa-circle fa-sm me-1"></i>
                       </span>
                       <span className="text-danger">
@@ -1333,7 +1332,7 @@ const ShowFlight = (props) => {
                 {passengerFares.adt !== null ? (
                   <>
                     <tr>
-                      <td className="left">ADT</td>
+                      <td className="left">Adult</td>
                       <td className="left">
                         {passengerFares.adt.basePrice +
                           bookingComponents[0].agentAdditionalPrice /
@@ -1427,7 +1426,7 @@ const ShowFlight = (props) => {
                 {passengerFares.cnn !== null ? (
                   <>
                     <tr>
-                      <td className="left">CNN</td>
+                      <td className="left">Child</td>
                       <td className="left">
                         {passengerFares.cnn.basePrice +
                           bookingComponents[0].agentAdditionalPrice /
@@ -1523,7 +1522,7 @@ const ShowFlight = (props) => {
                 {passengerFares.inf !== null ? (
                   <>
                     <tr>
-                      <td className="left">INF</td>
+                      <td className="left">Infant</td>
                       <td className="left">
                         {passengerFares.inf.basePrice +
                           bookingComponents[0].agentAdditionalPrice /

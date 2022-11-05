@@ -124,12 +124,12 @@ const SuccessBookingPanel = () => {
                     </span>
                   </div>
                   <div className="card-body" ref={componentRef} id="sendEmailDiv">
-                    {/* <img
+                    <img
                       src={logo}
                       className="my-3"
-                      alt="Triplover logo"
-                      style={{ width: "100px", height: "30px" }}
-                    /> */}
+                      alt="FirstTrip logo"
+                      style={{ width: "160px" }}
+                    />
                     <table class="table table-bordered my-2 mb-3 table-sm" style={{ fontSize: "11px" }}>
                       <thead>
                         <tr>

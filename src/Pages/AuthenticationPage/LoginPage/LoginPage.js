@@ -89,7 +89,13 @@ const LoginPage = () => {
 
   return (
     <VStack>
-      <Center w="100%" h="640px" mb="-40px" backgroundImage={`url(${bg})`}>
+      <Center
+        w="100%"
+        h="640px"
+        mb="-40px"
+        backgroundImage={{ base: "", xl: `url(${bg})` }}
+        backgroundSize="contain"
+      >
         <Flex
           borderRadius="5px"
           overflow="hidden"

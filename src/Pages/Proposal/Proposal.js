@@ -1406,7 +1406,7 @@ const Proposal = () => {
                               {item.passengerFares.adt !== null ? (
                                 <>
                                   <tr>
-                                    <td className="left">ADT</td>
+                                    <td className="left">Adult</td>
                                     <td className="left">{item.passengerFares.adt.basePrice + parseInt(addBalance) - decBalance + parseInt(adultPriceValue[index])}</td>
                                     <td className="center">{item.passengerFares.adt.taxes}</td>
                                     <td className="right">
@@ -1416,7 +1416,7 @@ const Proposal = () => {
                                     <td className="right">{item.passengerCounts.adt}</td>
                                     <td className="right fw-bold">
                                       {currency !== undefined ? currency : "BDT"}  {" "}
-                                      {item.passengerFares.adt.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])}{" "}
+                                      {(item.passengerFares.adt.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])).toLocaleString("en-US")}{" "}
                                     </td>
                                     {/* <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "70px" }} value={adultPriceValue[index]} name="value" onChange={(e) => handleValue(e.target.value,index)}/><button className="btn-secondary btn-sm rounded py-0" style={{fontSize:'10px', height:"20px"}} onClick={()=>handleSingleValue(index,"adt")} disabled={adultPriceValue[index] !==0 ? false : true}>Save</button></td> */}
                                     <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "90px" }} name="value" onChange={(e) => handleValue(e.target.value, index, 'adt')} /></td>
@@ -1429,7 +1429,7 @@ const Proposal = () => {
                               {item.passengerFares.cnn !== null ? (
                                 <>
                                   <tr>
-                                    <td className="left">CNN</td>
+                                    <td className="left">Child</td>
                                     <td className="left">{item.passengerFares.cnn.basePrice + parseInt(addBalance) - decBalance + parseInt(childPriceValue[index])}</td>
                                     <td className="center">{item.passengerFares.cnn.taxes}</td>
                                     <td className="right">
@@ -1439,7 +1439,7 @@ const Proposal = () => {
                                     <td className="right">{item.passengerCounts.cnn}</td>
                                     <td className="right fw-bold">
                                       {currency !== undefined ? currency : "BDT"}  {" "}
-                                      {item.passengerFares.cnn.totalPrice + addBalance - decBalance + parseInt(childPriceValue[index])}{" "}
+                                      {(item.passengerFares.cnn.totalPrice + addBalance - decBalance + parseInt(childPriceValue[index])).toLocaleString("en-US")}{" "}
                                     </td>
                                     {/* <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "70px" }} value={childPriceValue[index]} name="value" onChange={(e) => handleValueChild(e.target.value,index)}/><button className="btn-secondary btn-sm rounded py-0" style={{fontSize:'10px', height:"20px"}} onClick={()=>handleSingleValue(index,"cnn")} disabled={childPriceValue[index] !==0 ? false : true}>Save</button></td> */}
                                     <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "90px" }} name="value" onChange={(e) => handleValue(e.target.value, index, 'cnn')} /></td>
@@ -1452,8 +1452,8 @@ const Proposal = () => {
                               {item.passengerFares.inf !== null ? (
                                 <>
                                   <tr>
-                                    <td className="left">INF</td>
-                                    <td className="left">{(item.passengerFares.inf.basePrice + parseInt(addBalance) - decBalance + parseInt(infantPriceValue[index])).toFixed(2)}</td>
+                                    <td className="left">Infant</td>
+                                    <td className="left">{(item.passengerFares.inf.basePrice + parseInt(addBalance) - decBalance + parseInt(infantPriceValue[index])).toLocaleString("en-US")}</td>
                                     <td className="center">{item.passengerFares.inf.taxes}</td>
                                     <td className="right">
                                       {item.passengerFares.inf.discountPrice}
@@ -1462,7 +1462,7 @@ const Proposal = () => {
                                     <td className="right">{item.passengerCounts.inf}</td>
                                     <td className="right fw-bold">
                                       {currency !== undefined ? currency : "BDT"}  {" "}
-                                      {item.passengerFares.inf.totalPrice + addBalance - decBalance + parseInt(infantPriceValue[index])}{" "}
+                                      {(item.passengerFares.inf.totalPrice + addBalance - decBalance + parseInt(infantPriceValue[index])).toLocaleString("en-US")}{" "}
                                     </td>
                                     {/* <td> <input type="number" name={"value" + index} value={singleValue[index] ?? 0} onChange={(e) => handleSingleValue(e.target.value, index)} style={{ height: "25px", width: "70px" }} /></td> */}
                                     <td className="d-flex justify-content-center"> <input type="number" className="form-control me-2" style={{ height: "20px", width: "90px" }} name="value" onChange={(e) => handleValue(e.target.value, index, 'inf')} /></td>
@@ -1636,7 +1636,7 @@ const Proposal = () => {
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.adt.ait}</td>  
                                 <td style={{ border: "1px solid black" }}>{item.passengerCounts.adt}</td>
                                 <td style={{ border: "1px solid black" }}>{currency !== undefined ? currency : "BDT"}  {" "}
-                                  {item.passengerFares.adt.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])}</td>
+                                  {(item.passengerFares.adt.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])).toLocaleString("en-US")}</td>
                               </tr>
                             </>
                           ) : (
@@ -1652,7 +1652,7 @@ const Proposal = () => {
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.cnn.ait}</td>  
                                 <td style={{ border: "1px solid black" }}>{item.passengerCounts.cnn}</td>
                                 <td style={{ border: "1px solid black" }}>{currency !== undefined ? currency : "BDT"}  {" "}
-                                  {item.passengerFares.cnn.totalPrice + addBalance - decBalance + parseInt(childPriceValue[index])}</td>
+                                  {(item.passengerFares.cnn.totalPrice + addBalance - decBalance + parseInt(childPriceValue[index])).toLocaleString("en-US")}</td>
                               </tr>
                             </>
                           ) : (
@@ -1662,13 +1662,13 @@ const Proposal = () => {
                             <>
                               <tr style={{ border: "1px solid black" }}>
                                 <td style={{ border: "1px solid black" }}>Infant</td>
-                                <td style={{ border: "1px solid black" }}>{(item.passengerFares.inf.basePrice + parseInt(addBalance) - decBalance + parseInt(infantPriceValue[index])).toFixed(2)}</td>
+                                <td style={{ border: "1px solid black" }}>{(item.passengerFares.inf.basePrice + parseInt(addBalance) - decBalance + parseInt(infantPriceValue[index])).toLocaleString("en-US")}</td>
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.inf.taxes}</td>
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.inf.discountPrice}</td>
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.inf.ait}</td>  
                                 <td style={{ border: "1px solid black" }}>{item.passengerCounts.inf}</td>
                                 <td style={{ border: "1px solid black" }}>{currency !== undefined ? currency : "BDT"}  {" "}
-                                  {item.passengerFares.inf.totalPrice + addBalance - decBalance + parseInt(infantPriceValue[index])}</td>
+                                  {(item.passengerFares.inf.totalPrice + addBalance - decBalance + parseInt(infantPriceValue[index])).toLocaleString("en-US")}</td>
                               </tr>
                             </>
                           ) : (

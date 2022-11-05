@@ -578,7 +578,7 @@ const BookedView = () => {
                               </tr>
                             </thead>
                             <tbody className="text-center">
-                              {ticketingList.passengerInfo?.map((item, index) => {
+                              {ticketingList.fareBreakdown?.map((item, index) => {
                                 return (
                                   <>
                                     <tr>
@@ -1460,7 +1460,7 @@ const BookedView = () => {
                               </tr>
                             </thead>
                             <tbody className="text-center">
-                              {ticketingList.passengerInfo?.map((item, index) => {
+                              {ticketingList.fareBreakdown?.map((item, index) => {
                                 return (
                                   <>
                                     <tr>

@@ -1435,7 +1435,7 @@ const Proposal = () => {
                                     <td className="right">
                                       {item.passengerFares.cnn.discountPrice}
                                     </td>
-                                    <td className="right">{item.passengerFares.adt.ait}</td>
+                                    <td className="right">{item.passengerFares.cnn.ait}</td>
                                     <td className="right">{item.passengerCounts.cnn}</td>
                                     <td className="right fw-bold">
                                       {currency !== undefined ? currency : "BDT"}  {" "}
@@ -1458,7 +1458,7 @@ const Proposal = () => {
                                     <td className="right">
                                       {item.passengerFares.inf.discountPrice}
                                     </td>
-                                    <td className="right">{item.passengerFares.adt.ait}</td>
+                                    <td className="right">{item.passengerFares.inf.ait}</td>
                                     <td className="right">{item.passengerCounts.inf}</td>
                                     <td className="right fw-bold">
                                       {currency !== undefined ? currency : "BDT"}  {" "}
@@ -1620,6 +1620,7 @@ const Proposal = () => {
                             <th style={{ border: "1px solid black" }}><b>Base</b></th>
                             <th style={{ border: "1px solid black" }}><b>Tax</b></th>
                             <th style={{ border: "1px solid black" }}><b>Discount</b></th>
+                            <th style={{ border: "1px solid black" }}><b>AIT</b></th>
                             <th style={{ border: "1px solid black" }}><b>Pax</b></th>
                             <th style={{ border: "1px solid black" }}><b>Total Pax Fare</b></th>
                           </tr>
@@ -1628,10 +1629,11 @@ const Proposal = () => {
                           {item.passengerFares.adt !== null ? (
                             <>
                               <tr style={{ border: "1px solid black" }}>
-                                <td style={{ border: "1px solid black" }}>ADT</td>
+                                <td style={{ border: "1px solid black" }}>Adult</td>
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.adt.basePrice + parseInt(addBalance) - decBalance + parseInt(adultPriceValue[index])}</td>
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.adt.taxes}</td>
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.adt.discountPrice}</td>
+                                <td style={{ border: "1px solid black" }}>{item.passengerFares.adt.ait}</td>  
                                 <td style={{ border: "1px solid black" }}>{item.passengerCounts.adt}</td>
                                 <td style={{ border: "1px solid black" }}>{currency !== undefined ? currency : "BDT"}  {" "}
                                   {item.passengerFares.adt.totalPrice + addBalance - decBalance + parseInt(adultPriceValue[index])}</td>
@@ -1643,10 +1645,11 @@ const Proposal = () => {
                           {item.passengerFares.cnn !== null ? (
                             <>
                               <tr style={{ border: "1px solid black" }}>
-                                <td style={{ border: "1px solid black" }}>CNN</td>
+                                <td style={{ border: "1px solid black" }}>Child</td>
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.cnn.basePrice + parseInt(addBalance) - decBalance + parseInt(childPriceValue[index])}</td>
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.cnn.taxes}</td>
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.cnn.discountPrice}</td>
+                                <td style={{ border: "1px solid black" }}>{item.passengerFares.cnn.ait}</td>  
                                 <td style={{ border: "1px solid black" }}>{item.passengerCounts.cnn}</td>
                                 <td style={{ border: "1px solid black" }}>{currency !== undefined ? currency : "BDT"}  {" "}
                                   {item.passengerFares.cnn.totalPrice + addBalance - decBalance + parseInt(childPriceValue[index])}</td>
@@ -1658,10 +1661,11 @@ const Proposal = () => {
                           {item.passengerFares.inf !== null ? (
                             <>
                               <tr style={{ border: "1px solid black" }}>
-                                <td style={{ border: "1px solid black" }}>INF</td>
+                                <td style={{ border: "1px solid black" }}>Infant</td>
                                 <td style={{ border: "1px solid black" }}>{(item.passengerFares.inf.basePrice + parseInt(addBalance) - decBalance + parseInt(infantPriceValue[index])).toFixed(2)}</td>
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.inf.taxes}</td>
                                 <td style={{ border: "1px solid black" }}>{item.passengerFares.inf.discountPrice}</td>
+                                <td style={{ border: "1px solid black" }}>{item.passengerFares.inf.ait}</td>  
                                 <td style={{ border: "1px solid black" }}>{item.passengerCounts.inf}</td>
                                 <td style={{ border: "1px solid black" }}>{currency !== undefined ? currency : "BDT"}  {" "}
                                   {item.passengerFares.inf.totalPrice + addBalance - decBalance + parseInt(infantPriceValue[index])}</td>

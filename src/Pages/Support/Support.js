@@ -233,18 +233,18 @@ const Support = () => {
     handleGetOngoing(currentPage);
     handleGetClosed(currentPage);
   };
-  const handleEditItem = (item) => {
-    setCurrentItem(item);
-    setSupportTypeId(item.supportTypeId);
-    setSubjectId(item.subjectId);
-    setMessage(item.message);
-    setFileName(item.fileName);
-    setStatus(item.status);
-    setRefundType(item.refundType);
-    setUniqueTransID(item.uniqueTransID);
-    setPNR(item.pnr);
-    setTicketno(item.ticketNumber);
-  };
+  // const handleEditItem = (item) => {
+  //   setCurrentItem(item);
+  //   setSupportTypeId(item.supportTypeId);
+  //   setSubjectId(item.subjectId);
+  //   setMessage(item.message);
+  //   setFileName(item.fileName);
+  //   setStatus(item.status);
+  //   setRefundType(item.refundType);
+  //   setUniqueTransID(item.uniqueTransID);
+  //   setPNR(item.pnr);
+  //   setTicketno(item.ticketNumber);
+  // };
   const clearForm = (item) => {
     setCurrentItem(null);
     setSupportTypeId(0);
@@ -331,16 +331,17 @@ const Support = () => {
     let supportObj = {
       id: currentItem == null ? 0 : currentItem.id,
       agentId: sessionStorage.getItem("agentId") ?? 0,
-      supportTypeId: supportTypeId,
+      supportTypeId: 2,
       subjectId: subjectId,
       message: message,
       fileName: fileName,
-      status: status,
+      status: 0,
       uniqueTransID: uniqueTransID,
       pnr: pnr,
       ticketNumber: ticketNumbersN,
     };
-    if (supportTypeId === 0) {
+    console.log(supportObj, "====");
+    if (supportObj.fileNamesupportTypeId === 0) {
       toast.error("Sorry! Support type not selected..");
       return;
     }
@@ -352,7 +353,7 @@ const Support = () => {
       toast.error("Sorry! Message is empty..");
       return;
     }
-    if (ticketNumbers === "") {
+    if (subjectId !== 10 && ticketNumbers === "") {
       toast.error("Sorry! Ticket number not selected..");
       return;
     }
@@ -377,12 +378,14 @@ const Support = () => {
       putData();
     } else {
       const postData = async () => {
+        //alert("ok");
         const response = await axios.post(
           environment.supportInfo,
           supportObj,
           environment.headerToken
         );
 
+        console.log(response.data, "===+++");
         if (response.data > 0) {
           handleGetOpened(1);
           clearForm();

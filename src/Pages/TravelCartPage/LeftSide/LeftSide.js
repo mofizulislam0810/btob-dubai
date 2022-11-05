@@ -1470,7 +1470,7 @@ const LeftSide = () => {
                           />
                         </div>
                       </div>
-                      {(origin.match("Bangladesh") !== null
+                      {/* {(origin.match("Bangladesh") !== null
                         ? origin.match("Bangladesh")[0]
                         : "") &&
                         (destination.match("Bangladesh") !== null
@@ -1524,7 +1524,7 @@ const LeftSide = () => {
                             </div>
                           </div>
                         </>
-                      )}
+                      )} */}
                     </div>
                   </div>
                 );
@@ -2198,7 +2198,7 @@ const LeftSide = () => {
                         </div>
                       </>
                     )}
-                    <div className="row">
+                    {/* <div className="row">
                       {(origin.match("Bangladesh") !== null
                         ? origin.match("Bangladesh")[0]
                         : "") &&
@@ -2254,7 +2254,7 @@ const LeftSide = () => {
                           </div>
                         </>
                       )}
-                    </div>
+                    </div> */}
                   </div>
                 );
               })}
@@ -2872,7 +2872,7 @@ const LeftSide = () => {
                       </>
                     )}
 
-                    <div className="row">
+                    {/* <div className="row">
                       {(origin.match("Bangladesh") !== null
                         ? origin.match("Bangladesh")[0]
                         : "") &&
@@ -2928,7 +2928,7 @@ const LeftSide = () => {
                           </div>
                         </>
                       )}
-                    </div>
+                    </div> */}
                   </div>
                 );
               })}

@@ -615,7 +615,7 @@ const SuccessBookingPanel = () => {
                           {bookData.data?.item1.flightInfo?.passengerFares.adt !== null ? (
                             <>
                               <tr>
-                                <td className="left">ADT</td>
+                                <td className="left">Adult</td>
                                 <td className="left">
                                   {bookData.data?.item1.flightInfo?.passengerFares.adt.basePrice}
                                 </td>
@@ -631,7 +631,7 @@ const SuccessBookingPanel = () => {
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.adt}</td>
                                 <td className="right fw-bold">
                                   BDT {(bookData.data?.item1.flightInfo?.passengerFares.adt.totalPrice *
-                                    bookData.data?.item1.flightInfo?.passengerCounts.adt).toFixed(2)}
+                                    bookData.data?.item1.flightInfo?.passengerCounts.adt).toLocaleString("en-US")}
                                 </td>
                               </tr>
                             </>
@@ -642,7 +642,7 @@ const SuccessBookingPanel = () => {
                           {bookData.data?.item1.flightInfo?.passengerFares.cnn !== null ? (
                             <>
                               <tr>
-                                <td className="left">CNN</td>
+                                <td className="left">Child</td>
                                 <td className="left">
                                   {bookData.data?.item1.flightInfo?.passengerFares.cnn.basePrice}
                                 </td>
@@ -658,7 +658,7 @@ const SuccessBookingPanel = () => {
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.cnn}</td>
                                 <td className="right fw-bold">
                                   BDT {(bookData.data?.item1.flightInfo?.passengerFares.cnn.totalPrice *
-                                    bookData.data?.item1.flightInfo?.passengerCounts.cnn).toFixed(2)}
+                                    bookData.data?.item1.flightInfo?.passengerCounts.cnn).toLocaleString("en-US")}
                                 </td>
                               </tr>
                             </>
@@ -669,7 +669,7 @@ const SuccessBookingPanel = () => {
                           {bookData.data?.item1.flightInfo?.passengerFares.inf !== null ? (
                             <>
                               <tr>
-                                <td className="left">INF</td>
+                                <td className="left">Infant</td>
                                 <td className="left">
                                   {bookData.data?.item1.flightInfo?.passengerFares.inf.basePrice}
                                 </td>
@@ -685,7 +685,7 @@ const SuccessBookingPanel = () => {
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.inf}</td>
                                 <td className="right fw-bold">
                                   BDT {(bookData.data?.item1.flightInfo?.passengerFares.inf.totalPrice *
-                                    bookData.data?.item1.flightInfo?.passengerCounts.inf).toFixed(2)}
+                                    bookData.data?.item1.flightInfo?.passengerCounts.inf).toLocaleString("en-US")}
                                 </td>
                               </tr>
                             </>
@@ -696,7 +696,7 @@ const SuccessBookingPanel = () => {
                             <td colSpan={5} className='border-none'></td>
                             <td>Grand Total</td>
                             <td>BDT{" "}
-                              {bookData.data?.item1.flightInfo?.bookingComponents[0].totalPrice}
+                              {(bookData.data?.item1.flightInfo?.bookingComponents[0].totalPrice).toLocaleString("en-US")}
                             </td>
                           </tr>
                         </tbody>

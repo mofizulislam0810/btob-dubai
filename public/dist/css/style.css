@@ -188,3 +188,13 @@ hr{
 .content-width{
     max-width: 95%;
 }
+
+input[type=checkbox] {
+
+    cursor: pointer;
+}
+
+input[type=button] {
+
+    cursor: pointer;
+}

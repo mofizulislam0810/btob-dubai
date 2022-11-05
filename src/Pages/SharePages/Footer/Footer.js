@@ -52,7 +52,7 @@ const addressData = [
     icon: FaPhoneAlt,
   },
   {
-    text: "support@FirstTrip.com",
+    text: "support@firsttrip.com",
     icon: GrMail,
   },
 ];
@@ -63,17 +63,16 @@ const Footer = () => {
 
       <Box className="container-fluid" bg="#591b7d" >
         <Box className="container">
-
           <Flex w="100%" pt={'20px'} pb='10px' justifyContent="space-between" color={'white'}>
-            <Box >
-              <Image src={logo} alt="FirstTrip" w="160px" mb="24px" />
-              <HStack gap="10px">
+            <Box className="d-flex align-items-center">
+              {/* <div  w="160px" h="103px" /> */}
+            
                 {socialData.map((item, idx) => (
-                  <Circle bg="#E0ECFB" size="45px" key={idx}>
+                  <Circle bg="#E0ECFB" size="45px" key={idx} className="mx-1">
                     <Icon as={item.icon} h="22px" w="22px" color='black' />
                   </Circle>
                 ))}
-              </HStack>
+         
             </Box>
 
             {/* <Box borderRight="1px" color="#ECECEC" my={2} /> */}
@@ -132,7 +131,7 @@ const Footer = () => {
             textAlign="center"
             mt="20px"
             mb="20px"
-          >© Copyright FirstTrip Limited. All rights reserved.</Text>
+          >© Copyright First Trip Limited. All rights reserved.</Text>
         </Box>
       </Box>
 

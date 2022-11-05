@@ -1091,7 +1091,7 @@ const ShowFlight = (props) => {
                         (bookingComponents[0].agentAdditionalPrice < 0
                           ? 0
                           : bookingComponents[0].agentAdditionalPrice)
-                    ).toFixed(2)}
+                    ).toLocaleString("en-US")}
                   </div>
                 </>
               ) : (
@@ -1103,7 +1103,7 @@ const ShowFlight = (props) => {
                       (bookingComponents[0].agentAdditionalPrice < 0
                         ? 0
                         : bookingComponents[0].agentAdditionalPrice)
-                  ).toFixed(2)}
+                  ).toLocaleString("en-US")}
                 </div>
               )}
             </h5>
@@ -1388,7 +1388,7 @@ const ShowFlight = (props) => {
                             }
                           >
                             {currency !== undefined ? currency : "BDT"}{" "}
-                            {passengerFares.adt.totalPrice *
+                            {(passengerFares.adt.totalPrice *
                               passengerCounts.adt +
                               bookingComponents[0].agentAdditionalPrice /
                                 (passengerCounts.adt +
@@ -1397,14 +1397,14 @@ const ShowFlight = (props) => {
                                     : 0) +
                                   (passengerCounts.inf !== null
                                     ? passengerCounts.inf
-                                    : 0))}
+                                    : 0))).toLocaleString("en-US")}
                           </td>
                         </>
                       ) : (
                         <>
                           <td className="right fw-bold">
                             {currency !== undefined ? currency : "BDT"}{" "}
-                            {passengerFares.adt.totalPrice *
+                            {(passengerFares.adt.totalPrice *
                               passengerCounts.adt +
                               bookingComponents[0].agentAdditionalPrice /
                                 (passengerCounts.adt +
@@ -1413,7 +1413,7 @@ const ShowFlight = (props) => {
                                     : 0) +
                                   (passengerCounts.inf !== null
                                     ? passengerCounts.inf
-                                    : 0))}
+                                    : 0))).toLocaleString("en-US")}
                           </td>
                         </>
                       )}
@@ -1483,7 +1483,7 @@ const ShowFlight = (props) => {
                             }
                           >
                             {currency !== undefined ? currency : "BDT"}{" "}
-                            {passengerFares.cnn.totalPrice *
+                            {(passengerFares.cnn.totalPrice *
                               passengerCounts.cnn +
                               bookingComponents[0].agentAdditionalPrice /
                                 (passengerCounts.adt +
@@ -1492,7 +1492,7 @@ const ShowFlight = (props) => {
                                     : 0) +
                                   (passengerCounts.inf !== null
                                     ? passengerCounts.inf
-                                    : 0))}
+                                    : 0))).toLocaleString("en-US")}
                           </td>
                         </>
                       ) : (
@@ -1500,7 +1500,7 @@ const ShowFlight = (props) => {
                           {" "}
                           <td className="right fw-bold">
                             {currency !== undefined ? currency : "BDT"}{" "}
-                            {passengerFares.cnn.totalPrice *
+                            {(passengerFares.cnn.totalPrice *
                               passengerCounts.cnn +
                               bookingComponents[0].agentAdditionalPrice /
                                 (passengerCounts.adt +
@@ -1509,7 +1509,7 @@ const ShowFlight = (props) => {
                                     : 0) +
                                   (passengerCounts.inf !== null
                                     ? passengerCounts.inf
-                                    : 0))}
+                                    : 0))).toLocaleString("en-US")}
                           </td>
                         </>
                       )}
@@ -1579,7 +1579,7 @@ const ShowFlight = (props) => {
                             }
                           >
                             {currency !== undefined ? currency : "BDT"}{" "}
-                            {passengerFares.inf.totalPrice *
+                            {(passengerFares.inf.totalPrice *
                               passengerCounts.inf +
                               bookingComponents[0].agentAdditionalPrice /
                                 (passengerCounts.adt +
@@ -1588,7 +1588,7 @@ const ShowFlight = (props) => {
                                     : 0) +
                                   (passengerCounts.inf !== null
                                     ? passengerCounts.inf
-                                    : 0))}
+                                    : 0))).toLocaleString("en-US")}
                           </td>
                         </>
                       ) : (
@@ -1599,7 +1599,7 @@ const ShowFlight = (props) => {
                             onLoadedData={(e) => console.log({ e })}
                           >
                             {currency !== undefined ? currency : "BDT"}{" "}
-                            {passengerFares.inf.totalPrice *
+                            {(passengerFares.inf.totalPrice *
                               passengerCounts.inf +
                               bookingComponents[0].agentAdditionalPrice /
                                 (passengerCounts.adt +
@@ -1608,7 +1608,7 @@ const ShowFlight = (props) => {
                                     : 0) +
                                   (passengerCounts.inf !== null
                                     ? passengerCounts.inf
-                                    : 0))}
+                                    : 0))).toLocaleString("en-US")}
                           </td>
                         </>
                       )}
@@ -3026,7 +3026,7 @@ const ShowFlight = (props) => {
                         (bookingComponents[0].agentAdditionalPrice < 0
                           ? 0
                           : bookingComponents[0].agentAdditionalPrice)
-                    ).toFixed(2)}
+                    ).toLocaleString("en-US")}
                   </div>
                 </>
               ) : (
@@ -3038,7 +3038,7 @@ const ShowFlight = (props) => {
                       (bookingComponents[0].agentAdditionalPrice < 0
                         ? 0
                         : bookingComponents[0].agentAdditionalPrice)
-                  ).toFixed(2)}
+                  ).toLocaleString("en-US")}
                 </div>
               )}
             </h5>

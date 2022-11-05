@@ -15,6 +15,7 @@ import airports from "../../JSON/airports.json";
 import Footer from "../SharePages/Footer/Footer";
 import { Button } from "@chakra-ui/react";
 import { toast, ToastContainer } from "react-toastify";
+import { getPassengerType } from "../../common/functions";
 
 const BookedView = () => {
   const { setLoading, setTicketData, loading } = useAuth();
@@ -581,7 +582,7 @@ const BookedView = () => {
                                 return (
                                   <>
                                     <tr>
-                                      <td>{item.passengerType}</td>
+                                      <td>{getPassengerType(item.passengerType)}</td>
                                       <td>{item.basePrice}</td>
                                       <td>{item.tax}</td>
                                       <td>{item.discount}</td>
@@ -1000,7 +1001,11 @@ const BookedView = () => {
                                         " " +
                                         item.last}
                                     </td>
-                                    <td>{item.passengerType}</td>
+                                    <td>{item.passengerType === "ADT"
+                                      ? "Adult"
+                                      : item.passengerType === "CNN"
+                                      ? "Child"
+                                      : "Infant"}</td>
                                     <td>{item.gender}</td>
                                     <td>
                                       {item.dateOfBirth === null ? "N/A" : moment(item.dateOfBirth).format(
@@ -1459,14 +1464,14 @@ const BookedView = () => {
                                 return (
                                   <>
                                     <tr>
-                                      <td>{item.passengerType}</td>
+                                      <td>{getPassengerType(item.passengerType)}</td>
                                       <td>{item.basePrice}</td>
                                       <td>{item.tax}</td>
                                       <td>{item.discount}</td>
                                       <td>{item.ait}</td>
                                       <td>{item.passengerCount}</td>
-                                      <td>{item.currencyName} {item.totalPrice *
-                                            item.passengerCount}</td>
+                                      <td>{item.currencyName} {(item.totalPrice *
+                                            item.passengerCount).toLocaleString("en-US")}</td>
                                     </tr>
                                   </>
                                 );
@@ -1475,7 +1480,7 @@ const BookedView = () => {
                                 <td colSpan={5} className='border-none'></td>
                                 <td>Grand Total</td>
                                 <td>{ticketingList.passengerInfo !== undefined ? ticketingList.passengerInfo[0]?.currencyName : ""} {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
-                                  {ticketingList.ticketInfo?.ticketingPrice}
+                                  {ticketingList.ticketInfo?.ticketingPrice.toLocaleString("en-US")}
                                 </td>
                               </tr>
                             </tbody>

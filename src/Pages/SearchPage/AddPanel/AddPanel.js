@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import imgOne from "../../../images/bgImage/SL01.jpg";
+import imgOne from "../../../images/bgImage/SL02.png";
 import imgTwo from "../../../images/bgImage/SL03.jpg";
 import "./AddPanel.css";
 

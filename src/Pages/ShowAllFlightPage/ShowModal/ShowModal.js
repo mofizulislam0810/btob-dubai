@@ -1445,7 +1445,7 @@ const ShowModal = ({
                                       {(
                                         passengerFares.adt.totalPrice *
                                         passengerCounts.adt
-                                      ).toFixed(2)}
+                                      ).toLocaleString("en-US")}
                                     </td>
                                   </tr>
                                 </>
@@ -1479,7 +1479,7 @@ const ShowModal = ({
                                       {(
                                         passengerFares.cnn.totalPrice *
                                         passengerCounts.cnn
-                                      ).toFixed(2)}
+                                      ).toLocaleString("en-US")}
                                     </td>
                                   </tr>
                                 </>
@@ -1513,7 +1513,7 @@ const ShowModal = ({
                                       {(
                                         passengerFares.inf.totalPrice *
                                         passengerCounts.inf
-                                      ).toFixed(2)}
+                                      ).toLocaleString("en-US")}
                                     </td>
                                   </tr>
                                 </>
@@ -1526,7 +1526,7 @@ const ShowModal = ({
                                 <td>
                                   {currency !== undefined ? currency : "BDT"}{" "}
                                   {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
-                                  {bookingComponents[0].totalPrice.toFixed(2)}
+                                  {bookingComponents[0].totalPrice.toLocaleString("en-US")}
                                 </td>
                               </tr>
                             </tbody>

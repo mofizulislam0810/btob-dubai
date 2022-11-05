@@ -38,6 +38,8 @@ const Support = () => {
   let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
 
+  const [isTicketNumRequired, setIsTicketNumRequired] = useState(true);
+
   const handleGetPassengerList = (trid) => {
     const getPassengerList = async () => {
       const response = await axios.get(
@@ -361,6 +363,7 @@ const Support = () => {
       return;
     }
     if (
+      !isTicketNumRequired &&
       location.search.split("ticketno=")[1] !== "null" &&
       subjectId !== 10 &&
       ticketNumbers === ""
@@ -544,39 +547,36 @@ const Support = () => {
                               <div className="row">
                                 <input type={"hidden"}></input>
                                 <div className="row my-3">
-                                  <div className="col-sm-4">
-                                    <label class="form-label">
-                                      Support Type
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <select
-                                      disabled={
-                                        location.search.split(
-                                          "ticketno="
-                                        )[1] === "null"
-                                          ? true
-                                          : false
-                                      }
-                                      className="form-select"
-                                      value={subjectId}
-                                      placeholder="Subject"
-                                      onChange={(e) =>
-                                        setSubjectId(Number(e.target.value))
-                                      }
-                                    >
-                                      <option key={0}>Select Type</option>
-                                      {subjectList.map((item, index) => {
-                                        return (
-                                          <option
-                                            key={index + 1}
-                                            value={item.id}
-                                          >
-                                            {item.name}
-                                          </option>
-                                        );
-                                      })}
-                                    </select>
-                                  </div>
+                                  {location.search.split("ticketno=")[1] !==
+                                    "null" && (
+                                    <div className="col-sm-4">
+                                      <label class="form-label">
+                                        Support Type
+                                        <span style={{ color: "red" }}>*</span>
+                                      </label>
+                                      <select
+                                        className="form-select"
+                                        value={subjectId}
+                                        placeholder="Subject"
+                                        onChange={(e) =>
+                                          setSubjectId(Number(e.target.value))
+                                        }
+                                      >
+                                        <option key={0}>Select Type</option>
+                                        {subjectList.map((item, index) => {
+                                          return (
+                                            <option
+                                              key={index + 1}
+                                              value={item.id}
+                                            >
+                                              {item.name}
+                                            </option>
+                                          );
+                                        })}
+                                      </select>
+                                    </div>
+                                  )}
+
                                   <HStack w="400px">
                                     <div className="col-sm-8">
                                       <label class="form-label">
@@ -647,50 +647,69 @@ const Support = () => {
                                           {passengerList.length > 0
                                             ? passengerList.map(
                                                 (item, index) => {
+                                                  // console.log(
+                                                  //   item.ticketNumbers === null
+                                                  //     ? "TRUE"
+                                                  //     : "FALSE",
+                                                  //   "++++"
+                                                  // );
+                                                  item.ticketNumbers === null &&
+                                                    setIsTicketNumRequired(
+                                                      false
+                                                    );
+
                                                   return (
                                                     <>
-                                                      <tr>
-                                                        <td>
-                                                          {item.title +
-                                                            " " +
-                                                            item.first +
-                                                            " " +
-                                                            item.middle +
-                                                            " " +
-                                                            item.last}
-                                                        </td>
-                                                        <td>
-                                                          {item.passengerType}
-                                                        </td>
-                                                        <td>
-                                                          {
-                                                            <>
-                                                              <input
-                                                                type={
-                                                                  "checkbox"
-                                                                }
-                                                                defaultChecked={
-                                                                  item.ticketNumbers ===
-                                                                  defaultTicketNumber
-                                                                    ? true
-                                                                    : false
-                                                                }
-                                                                onChange={(e) =>
-                                                                  handleSetTicketNo(
-                                                                    e.target
-                                                                      .checked,
-                                                                    item.ticketNumbers
-                                                                  )
-                                                                }
-                                                              ></input>
-                                                              &nbsp;{" "}
+                                                      {item.ticketNumbers &&
+                                                        item.ticketNumbers !==
+                                                          null && (
+                                                          <tr>
+                                                            <td>
+                                                              {item.title +
+                                                                " " +
+                                                                item.first +
+                                                                " " +
+                                                                item.middle +
+                                                                " " +
+                                                                item.last}
+                                                            </td>
+                                                            <td>
                                                               {
-                                                                item.ticketNumbers
+                                                                item.passengerType
                                                               }
-                                                            </>
-                                                          }
-                                                        </td>
-                                                      </tr>
+                                                            </td>
+                                                            <td>
+                                                              {
+                                                                <>
+                                                                  <input
+                                                                    type={
+                                                                      "checkbox"
+                                                                    }
+                                                                    defaultChecked={
+                                                                      item.ticketNumbers ===
+                                                                      defaultTicketNumber
+                                                                        ? true
+                                                                        : false
+                                                                    }
+                                                                    onChange={(
+                                                                      e
+                                                                    ) =>
+                                                                      handleSetTicketNo(
+                                                                        e.target
+                                                                          .checked,
+                                                                        item.ticketNumbers
+                                                                      )
+                                                                    }
+                                                                  ></input>
+                                                                  &nbsp;{" "}
+                                                                  {
+                                                                    item.ticketNumbers
+                                                                  }
+                                                                </>
+                                                              }
+                                                            </td>
+                                                          </tr>
+                                                        )}
                                                     </>
                                                   );
                                                 }

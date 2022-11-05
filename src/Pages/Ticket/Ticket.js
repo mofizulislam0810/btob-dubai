@@ -139,6 +139,8 @@ const Ticket = () => {
     pdf.save("ticket_FirstTrip.pdf");
     setIsDownloading(false);
   };
+
+  console.log(ticketingList.ticketInfo?.airlineCode, "============");
   return (
     <div>
       <Navbar></Navbar>
@@ -231,13 +233,11 @@ const Ticket = () => {
                               ticketingList.ticketInfo?.agentLogo !== "" ? (
                                 <img
                                   alt="img01"
-                                  src={ `/${ticketingList.ticketInfo?.agentLogo}`
-                                  }
-                                  
+                                  src={`/${ticketingList.ticketInfo?.agentLogo}`}
                                   style={{ width: "160px" }}
                                 ></img>
                               ) : (
-                               <>
+                                <>
                                   <img
                                     alt="img01"
                                     className="p-2"
@@ -347,7 +347,6 @@ const Ticket = () => {
                         </tbody>
                       </table>
 
-                      
                       <div className="table-responsive-sm mt-2">
                         <p
                           className="ps-1 py-2 fw-bold text-start"
@@ -426,7 +425,7 @@ const Ticket = () => {
                           </tbody>
                         </table>
                       </div>
-                      
+
                       <div className="table-responsive-sm mt-3">
                         <p
                           className="ps-1 py-2 fw-bold text-start"
@@ -472,7 +471,7 @@ const Ticket = () => {
                                         <span className="d-flex align-items-center fw-bold">
                                           <img
                                             // src={`/airlines-logo${ticketingList.ticketInfo?.airlineCode}.png`}
-                                            src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                            src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
                                             className="me-2"
                                             alt=""
                                             width="30px"
@@ -668,7 +667,7 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src="/AirlineLogos/1T.jpg"
+                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -955,7 +954,7 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -1243,7 +1242,7 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                               src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -1531,7 +1530,7 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -1819,7 +1818,7 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -2107,7 +2106,7 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src="https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/AirlineLogos/BS.jpg"
+                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -2409,8 +2408,10 @@ const Ticket = () => {
                                           <td>{item.passengerCount}</td>
                                           <td className="fw-bold">
                                             {item.currencyName}{" "}
-                                            {(item.totalPrice *
-                                              item.passengerCount).toLocaleString("en-US")}
+                                            {(
+                                              item.totalPrice *
+                                              item.passengerCount
+                                            ).toLocaleString("en-US")}
                                           </td>
                                         </tr>
                                       </>
@@ -2426,8 +2427,10 @@ const Ticket = () => {
                                           <td>{item.passengerCount}</td>
                                           <td className="fw-bold">
                                             {item.currencyName}{" "}
-                                            {(item.totalPrice *
-                                              item.passengerCount).toLocaleString("en-US")}
+                                            {(
+                                              item.totalPrice *
+                                              item.passengerCount
+                                            ).toLocaleString("en-US")}
                                           </td>
                                         </tr>
                                       </>
@@ -2443,8 +2446,10 @@ const Ticket = () => {
                                           <td>{item.passengerCount}</td>
                                           <td className="fw-bold">
                                             {item.currencyName}{" "}
-                                            {(item.totalPrice *
-                                              item.passengerCount).toLocaleString("en-US")}
+                                            {(
+                                              item.totalPrice *
+                                              item.passengerCount
+                                            ).toLocaleString("en-US")}
                                           </td>
                                         </tr>
                                       </>
@@ -2463,7 +2468,9 @@ const Ticket = () => {
                                         ?.currencyName
                                     : ""}{" "}
                                   {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
-                                  {ticketingList.ticketInfo?.ticketingPrice.toLocaleString("en-US")}
+                                  {ticketingList.ticketInfo?.ticketingPrice.toLocaleString(
+                                    "en-US"
+                                  )}
                                 </td>
                               </tr>
                             </tbody>

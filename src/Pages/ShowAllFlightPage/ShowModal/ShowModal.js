@@ -1035,8 +1035,7 @@ const ShowModal = ({
                                             {item.equipment}
                                           </p>
                                           <p className="my-auto text-start">
-                                            Class {seg.serviceClass} (
-                                            {seg.bookingClass})
+                                            Class {seg.bookingClass}
                                           </p>
                                         </div>
                                         <div className="col-lg-4">
@@ -1111,8 +1110,7 @@ const ShowModal = ({
                                           {seg.details[0].equipment}
                                         </p>
                                         <p className="my-auto text-start">
-                                          Class {seg.serviceClass} (
-                                          {seg.bookingClass})
+                                          Class {seg.bookingClass}
                                         </p>
                                       </div>
                                       <div className="col-lg-4">
@@ -1262,8 +1260,7 @@ const ShowModal = ({
                                               {item.equipment}
                                             </p>
                                             <p className="my-auto text-start">
-                                              Class {seg.serviceClass} (
-                                              {seg.bookingClass})
+                                              Class {seg.bookingClass}
                                             </p>
                                           </div>
                                           <div className="col-lg-4">
@@ -1338,8 +1335,7 @@ const ShowModal = ({
                                             {seg.details[0].equipment}
                                           </p>
                                           <p className="my-auto text-start">
-                                            Class {seg.serviceClass} (
-                                            {seg.bookingClass})
+                                            Class {seg.bookingClass}
                                           </p>
                                         </div>
                                         <div className="col-lg-4">
@@ -1426,7 +1422,7 @@ const ShowModal = ({
                               {passengerFares.adt !== null ? (
                                 <>
                                   <tr>
-                                    <td className="left">ADT</td>
+                                    <td className="left">Adult</td>
                                     <td className="left">
                                       {passengerFares.adt.basePrice}
                                     </td>
@@ -1460,7 +1456,7 @@ const ShowModal = ({
                               {passengerFares.cnn !== null ? (
                                 <>
                                   <tr>
-                                    <td className="left">CNN</td>
+                                    <td className="left">Child</td>
                                     <td className="left">
                                       {passengerFares.cnn.basePrice}
                                     </td>
@@ -1494,7 +1490,7 @@ const ShowModal = ({
                               {passengerFares.inf !== null ? (
                                 <>
                                   <tr>
-                                    <td className="left">INF</td>
+                                    <td className="left">Infant</td>
                                     <td className="left">
                                       {passengerFares.inf.basePrice}
                                     </td>

@@ -40,7 +40,7 @@ const Service = () => {
           >
             FirstTrip is the country's one of the leading online travel
             aggregator. We dream of making travel easier for people of all
-            ages.ShareTrip is revolutionising the way you book travel services.
+            ages. FirstTrip is revolutionising the way you book travel services.
           </Text>
         </Box>
 

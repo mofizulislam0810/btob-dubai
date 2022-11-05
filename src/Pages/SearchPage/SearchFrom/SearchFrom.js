@@ -1,23 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
+import { Box, Text, VStack } from "@chakra-ui/react";
+import axios from "axios";
+import Fuse from "fuse.js";
 import $ from "jquery";
+import moment from "moment";
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { getCabinClass } from "../../../common/functions";
 import airports from "../../../JSON/airports.json";
 import "../../../plugins/t-datepicker/t-datepicker.min";
-import Fuse from "fuse.js";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "./SearchFrom.css";
-import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
-import moment from "moment";
-import { Box } from "@chakra-ui/react";
-import { getCabinClass } from "../../../common/functions";
+import "./SearchFrom.css";
+
+const childrenAges = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const SearchFrom = () => {
   const formCount = 0;
   const navigate = useNavigate();
   const [tripType, setTripType] = useState("Round Trip"); //"One Way"
   const [travelClassType, setTravelClassType] = useState("Economy"); //:"Economy"
+  const [sameMatchError, setSameMatchError] = useState(true);
+  const [journeyDateError, setJourneyDateError] = useState(true);
   const [adultCount, setAdultCount] = useState(1); //1
   const [childCount, setChildCount] = useState(0); //0
   let [infantCount, setInfantCount] = useState(0); //0
@@ -81,6 +85,9 @@ const SearchFrom = () => {
       });
     }
   };
+  // const ISODateFormatter = (input) => {
+  //   return format(new Date(input), "yyyy-MM-dd");
+  // };
   const handleSearchFlight = (e) => {
     if (String(tripType) === "Multi City") {
       const origin = originRef.current.value;
@@ -102,76 +109,139 @@ const SearchFrom = () => {
       const inputDateMulti3 = $("#departureDate3").children("input").val();
       const inputDateMulti4 = $("#departureDate4").children("input").val();
       const inputDateMulti5 = $("#departureDate5").children("input").val();
-      console.log(journeyDate);
-      const qtyList = {
-        Adult: adultCount,
-        Children: childCount,
-        Infant: infantCount,
-      };
-      const searchData = {
-        origin: origin,
-        destination: destination,
-        origin1: origin1,
-        destination1: destination1,
-        origin2: origin2,
-        destination2: destination2,
-        origin3: origin3,
-        destination3: destination3,
-        origin4: origin4,
-        destination4: destination4,
-        origin5: origin5,
-        destination5: destination5,
-        journeyDate: journeyDate,
-        returnDate: returnDate,
-        inputDateMulti1: inputDateMulti1,
-        inputDateMulti2: inputDateMulti2,
-        inputDateMulti3: inputDateMulti3,
-        inputDateMulti4: inputDateMulti4,
-        inputDateMulti5: inputDateMulti5,
-        tripTypeModify: tripType,
-        qtyList: qtyList,
-        travelClass: travelClassType,
-      };
-      localStorage.setItem("Database", JSON.stringify(searchData));
-      navigate("/showallflight", {
-        state: {
-          origin: origin,
-          destination: destination,
-          origin1: origin1,
-          destination1: destination1,
-          origin2: origin2,
-          destination2: destination2,
-          origin3: origin3,
-          destination3: destination3,
-          origin4: origin4,
-          destination4: destination4,
-          origin5: origin5,
-          destination5: destination5,
-          journeyDate: journeyDate,
-          returnDate: returnDate,
-          inputDateMulti1: inputDateMulti1,
-          inputDateMulti2: inputDateMulti2,
-          inputDateMulti3: inputDateMulti3,
-          inputDateMulti4: inputDateMulti4,
-          inputDateMulti5: inputDateMulti5,
-          tripTypeModify: tripType,
-          qtyList: qtyList,
-          travelClass: travelClassType,
-          formCount: formCount,
-          childAgeList: childAge,
-        },
-      });
+
+      console.log("origin1, destination1, inputDateMulti1", origin2.length, destination2.length, inputDateMulti1, inputDateMulti1.length)
+
+      if (origin === destination && origin !== "" && destination !== "") {
+        toast.error("Depart From and Going To must be difference No.1");
+        setSameMatchError(true)
+      }
+      else if (origin1 === destination1 && origin1 !== "" && destination1 !== "") {
+        toast.error("Depart From and Going To must be difference No.2");
+        setSameMatchError(true)
+      }
+      else if (origin2 === destination2 && origin2 !== "" && destination2 !== "") {
+        toast.error("Depart From and Going To must be difference No.3");
+        setSameMatchError(true)
+      }
+      else if (origin3 === destination3 && origin3 !== "" && destination3 !== "") {
+        toast.error("Depart From and Going To must be difference No.4");
+        setSameMatchError(true)
+      }
+      else if (origin4 === destination4 && origin4 !== "" && destination4 !== "") {
+        toast.error("Depart From and Going To must be difference No.5");
+        setSameMatchError(true)
+      }
+      else if (origin5 === destination5 && origin5 !== "" && destination5 !== "") {
+        toast.error("Depart From and Going To must be difference No.5");
+        setSameMatchError(true)
+      }
+      else setSameMatchError(false)
+
+      if (String(journeyDate) === String(null) && origin !== destination) {
+        toast.error("Please select all departing date no.1");
+        setJourneyDateError(true)
+      }
+
+      else if (String(inputDateMulti1) === String(null) && origin1 !== destination1) {
+        toast.error("Please select all departing date no.2");
+        setJourneyDateError(true)
+      }
+      else if (String(inputDateMulti2) === String(null) && origin2 !== destination2) {
+        toast.error("Please select all departing date no.3");
+        setJourneyDateError(true)
+      }
+
+      else if (String(inputDateMulti3) === String(null) && origin3 !== destination3) {
+        toast.error("Please select all departing date no.3");
+        setJourneyDateError(true)
+      }
+      else if (String(inputDateMulti4) === String(null) && origin4 !== destination4) {
+        toast.error("Please select all departing date no.4");
+        setJourneyDateError(true)
+      }
+      else if (String(inputDateMulti5) === String(null) && origin5 !== destination5) {
+        toast.error("Please select all departing date no.5");
+        setJourneyDateError(true)
+      }
+      else setJourneyDateError(false)
+
+      console.log("String(inputDateMulti3)", inputDateMulti1, String(null))
+      if (!sameMatchError) {
+        if (!journeyDateError) {
+          const qtyList = {
+            Adult: adultCount,
+            Children: childCount,
+            Infant: infantCount,
+          };
+          const searchData = {
+            origin: origin,
+            destination: destination,
+            origin1: origin1,
+            destination1: destination1,
+            origin2: origin2,
+            destination2: destination2,
+            origin3: origin3,
+            destination3: destination3,
+            origin4: origin4,
+            destination4: destination4,
+            origin5: origin5,
+            destination5: destination5,
+            journeyDate: journeyDate,
+            returnDate: returnDate,
+            inputDateMulti1: inputDateMulti1,
+            inputDateMulti2: inputDateMulti2,
+            inputDateMulti3: inputDateMulti3,
+            inputDateMulti4: inputDateMulti4,
+            inputDateMulti5: inputDateMulti5,
+            tripTypeModify: tripType,
+            qtyList: qtyList,
+            travelClass: travelClassType,
+          };
+          localStorage.setItem("Database", JSON.stringify(searchData));
+          navigate("/showallflight", {
+            state: {
+              origin: origin,
+              destination: destination,
+              origin1: origin1,
+              destination1: destination1,
+              origin2: origin2,
+              destination2: destination2,
+              origin3: origin3,
+              destination3: destination3,
+              origin4: origin4,
+              destination4: destination4,
+              origin5: origin5,
+              destination5: destination5,
+              journeyDate: journeyDate,
+              returnDate: returnDate,
+              inputDateMulti1: inputDateMulti1,
+              inputDateMulti2: inputDateMulti2,
+              inputDateMulti3: inputDateMulti3,
+              inputDateMulti4: inputDateMulti4,
+              inputDateMulti5: inputDateMulti5,
+              tripTypeModify: tripType,
+              qtyList: qtyList,
+              travelClass: travelClassType,
+              formCount: formCount,
+              childAgeList: childAge,
+            },
+          });
+        }
+      }
+
+
     } else {
       const origin = originRef.current.value;
       const destination = destinationRef.current.value;
       // const airlines  = preAirlineRef.current.value;
       const journeyDate = $("#departureDate").children("input").val();
       const returnDate = $("#returnDate").children("input").val();
-      console.log(journeyDate);
-      if (origin === destination) {
-        toast.error("Depart From and Going To must be diffarent");
+
+      if (origin === destination && origin !== "" & destination !== "") {
+        toast.error("Depart From and Going To must be difference");
       } else {
-        if (String(journeyDate) !== String(null)) {
+        if ((String(tripType) === "One Way" && String(journeyDate) !== String(null)) || ((String(journeyDate) !== String(null) && String(returnDate) !== String(null)))) {
           const qtyList = {
             Adult: adultCount,
             Children: childCount,
@@ -226,8 +296,8 @@ const SearchFrom = () => {
         ? searchList[idx].cabinClass === 1
           ? "Economy"
           : searchList[idx].cabinClass === 3
-          ? "Business"
-          : " "
+            ? "Business"
+            : " "
         : "Economy"
     );
     setAdultCount(searchList !== undefined ? searchList[idx].adults : 1);
@@ -248,10 +318,10 @@ const SearchFrom = () => {
     $("#txtTo").val(
       searchList !== undefined
         ? destination[0].city +
-            " - " +
-            destination[0].country +
-            ", " +
-            destination[0].name
+        " - " +
+        destination[0].country +
+        ", " +
+        destination[0].name
         : destinationRef.current.value
     );
 
@@ -269,8 +339,8 @@ const SearchFrom = () => {
           $(".class_0").tDatePicker("update", [
             searchList !== undefined
               ? moment(searchList[idx].routes[0].departureDate).format(
-                  "yyyy-MM-DD"
-                )
+                "yyyy-MM-DD"
+              )
               : new Date(),
           ]);
         });
@@ -279,13 +349,13 @@ const SearchFrom = () => {
           $(".class_0").tDatePicker("update", [
             searchList !== undefined
               ? moment(searchList[idx].routes[0].departureDate).format(
-                  "yyyy-MM-DD"
-                )
+                "yyyy-MM-DD"
+              )
               : new Date(),
             searchList !== undefined
               ? moment(searchList[idx].routes[1].departureDate).format(
-                  "yyyy-MM-DD"
-                )
+                "yyyy-MM-DD"
+              )
               : new Date(),
           ]);
         });
@@ -400,10 +470,10 @@ const SearchFrom = () => {
       if (results.length >= index + 1) {
         autoinput.val(
           results[index].city +
-            " - " +
-            results[index].country +
-            ", " +
-            results[index].name
+          " - " +
+          results[index].country +
+          ", " +
+          results[index].name
         );
         clearResults();
       }
@@ -596,6 +666,9 @@ const SearchFrom = () => {
                           id="tripList"
                           className="dropdown-menu"
                           aria-labelledby="dropdownMenuButton1"
+                          style={{
+                            backgroundColor: "#f8f2fb",
+                          }}
                         >
                           <li
                             className="dropdown-item dropdown-item-selected"
@@ -637,6 +710,9 @@ const SearchFrom = () => {
                           id="classList"
                           className="dropdown-menu"
                           aria-labelledby="dropdownMenuButton"
+                          style={{
+                            backgroundColor: "#f8f2fb",
+                          }}
                         >
                           <li
                             className="dropdown-item dropdown-item-selected"
@@ -695,6 +771,9 @@ const SearchFrom = () => {
                               id="passengerBlock"
                               className="dropdown-menu passenger-pack"
                               aria-labelledby="dropdownMenuButtonpassenger"
+                              style={{
+                                backgroundColor: "#f8f2fb",
+                              }}
                             >
                               <div>
                                 <div className="d-flex justify-content-between mb-3">
@@ -712,11 +791,11 @@ const SearchFrom = () => {
                                       title="adultminus"
                                       onClick={
                                         infantCount > 0 &&
-                                        adultCount === infantCount
+                                          adultCount === infantCount
                                           ? () => {
-                                              setAdultCount(adultCount - 1);
-                                              setInfantCount(infantCount - 1);
-                                            }
+                                            setAdultCount(adultCount - 1);
+                                            setInfantCount(infantCount - 1);
+                                          }
                                           : () => setAdultCount(adultCount - 1)
                                       }
                                       disabled={adultCount === 1 ? true : false}
@@ -732,6 +811,7 @@ const SearchFrom = () => {
                                       style={{
                                         width: "30px",
                                         height: "30px",
+                                        backgroundColor: "#f8f2fb",
                                       }}
                                     />
                                     <button
@@ -783,6 +863,7 @@ const SearchFrom = () => {
                                       style={{
                                         width: "30px",
                                         height: "30px",
+                                        backgroundColor: "#f8f2fb",
                                       }}
                                     />
                                     <button
@@ -835,6 +916,7 @@ const SearchFrom = () => {
                                       style={{
                                         width: "30px",
                                         height: "30px",
+                                        backgroundColor: "#f8f2fb",
                                       }}
                                     />
                                     <button
@@ -843,8 +925,8 @@ const SearchFrom = () => {
                                       onClick={
                                         infantCount < adultCount
                                           ? () =>
-                                              setInfantCount(infantCount + 1)
-                                          : () => {}
+                                            setInfantCount(infantCount + 1)
+                                          : () => { }
                                       }
                                       disabled={
                                         infantCount === 9 ? true : false
@@ -868,10 +950,39 @@ const SearchFrom = () => {
                       let agenum = `age-${index}`;
                       return (
                         <span>
-                          <label htmlFor="formGroupExampleInput" className="">
-                            Child {index + 1}
-                          </label>
-                          <input
+                          <VStack mr="10px">
+                            <Text fontSize="sm" mt="2px">
+                              Child {index + 1}
+                            </Text>
+
+                            <select
+                              name="age"
+                              value={val.agenum}
+                              style={{
+                                width: "60px",
+                                backgroundColor: "#f8f2fb",
+                                borderRadius: "2px",
+                                height: "36px",
+                                paddingLeft: "8px",
+                                border: "1px solid #ced4da",
+                              }}
+                              min="2"
+                              max="12"
+                              onChange={(e) =>
+                                handleChildAge(e.target.value, index)
+                              }
+                              required
+                            >
+                              {childrenAges.map((item) => (
+                                <option value={item}>{item}</option>
+                              ))}
+                            </select>
+
+                            <Text fontSize="xs" mt="2px">
+                              (Age)
+                            </Text>
+                          </VStack>
+                          {/* <input
                             type="number"
                             value={val.agenum}
                             name="age"
@@ -881,7 +992,7 @@ const SearchFrom = () => {
                             max="12"
                             onChange={(e) => handleChildAge(e, index)}
                             required
-                          />
+                          /> */}
                         </span>
                       );
                     })}
@@ -1353,21 +1464,6 @@ const SearchFrom = () => {
                 ) : (
                   <></>
                 )}
-                {/* <div className="row mt-3">
-                  <div className="col-lg-12 mx-start">
-                    <div className="d-flex float-end">
-                      <p className="text-white me-1 p-1">Trending Searches:</p>
-                      <span className="bg-light bg-gradient text-white fw-bold p-1 me-1 rounded" style={{height:"100%",fontSize:"13px"}}>DAC - CGP</span>
-                      <span className="bg-light bg-gradient text-white fw-bold p-1 rounded" style={{height:"100%",fontSize:"13px"}}>DAC - DXB</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="row position-absolute top-100 start-50 translate-middle">
-                  <button className="btn button-color text-white text-center fw-bold">
-                    Search Flight
-                  </button>
-                </div> */}
-
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="d-flex justify-content-center">
@@ -1380,76 +1476,11 @@ const SearchFrom = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* <div className="row mt-3">
-                  <div className="col-lg-12"></div>
-                </div> */}
               </Box>
             </div>
           </div>
         </div>
       </form>
-
-      {/* <div className="container my-3">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="d-flex justify-content-center">
-              {searchList !== undefined ? (
-                searchList.map((item, index) => {
-                  return (
-                    <>
-                      {index === 0 ? (
-                        <>
-                          <p
-                            className="py-2 pe-2 mb-0"
-                            style={{ fontSize: "12px",color:"#8796A1" }}
-                          >
-                            Recent searches
-                          </p>
-                        </>
-                      ) : (
-                        <> </>
-                      )}
-                      <div
-                        className="text-center  text-dark p-2 me-2"
-                        style={{ fontSize: "12px", cursor: "pointer" ,backgroundColor:"#FAF9FF"}}
-                        onClick={() => searchValue(index)}
-                      >
-                        <span>{item.routes[0].origin}</span>
-                        <span className="mx-1">-</span>
-                        <span>
-                          {item.routes[0].destination}{" "}
-                          <span className="me-1">({item.journeyType})</span>
-                        </span>
-                        <span className="">
-                          (
-                          {moment(item.routes[0].departureDate).format(
-                            "yyyy-MM-DD"
-                          )}
-                          )
-                          {item.routes[1] !== undefined ? (
-                            <>
-                              -(
-                              {moment(item.routes[1].departureDate).format(
-                                "yyyy-MM-DD"
-                              )}
-                              ){" "}
-                            </>
-                          ) : (
-                            <></>
-                          )}
-                        </span>
-                      </div>
-                    </>
-                  );
-                })
-              ) : (
-                <></>
-              )}
-            </div>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };

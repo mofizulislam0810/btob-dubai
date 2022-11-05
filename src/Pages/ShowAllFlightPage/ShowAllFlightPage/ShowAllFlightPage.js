@@ -18,6 +18,7 @@ import flightmulticity from "../../../JSON/flightmulticity.json";
 import currentYear from "../../SharePages/Utility/currentYear";
 import ReactTooltip from "react-tooltip";
 import { getCabinClass } from "../../../common/functions";
+import { Box } from "@chakra-ui/react";
 let cIndex = 1;
 const ShowAllFlightPage = () => {
   window.scrollTo(0, 0);
@@ -421,6 +422,17 @@ const ShowAllFlightPage = () => {
 
   const [fetchFlighData, setFetchFlighData] = useState([]);
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    $(".swap").click(function () {
+      //Swaps previous and next address values
+      var prevAddress = $(this).parent().prev(".forms").find(".address input");
+      var nextAddress = $(this).parent().next(".forms").find(".address input");
+
+      var tmp = prevAddress.val();
+      prevAddress.val(nextAddress.val());
+      nextAddress.val(tmp);
+    });
+  }, []);
 
   useEffect(() => {
     if (tripTypeModify === "One Way") {
@@ -587,10 +599,10 @@ const ShowAllFlightPage = () => {
       if (results.length >= index + 1) {
         autoinput.val(
           results[index].city +
-            " - " +
-            results[index].country +
-            ", " +
-            results[index].name
+          " - " +
+          results[index].country +
+          ", " +
+          results[index].name
         );
         clearResults();
       }
@@ -693,7 +705,6 @@ const ShowAllFlightPage = () => {
   const handleSearchFlight = (e) => {
     console.log(tripType);
     if (String(tripType) === "Multi City") {
-      // document.getElementById("multiCity" + (cIndex + 1)).style.display = "none";
       const origin =
         originRef.current.value === undefined
           ? originRefValue
@@ -886,9 +897,6 @@ const ShowAllFlightPage = () => {
         };
         searchParamMulti.routes.push(mc2);
       }
-      // document.getElementById("multiCity" + (cIndex + 1)).style.display =
-      //   "none";
-
       const searchData = {
         origin: origin,
         destination: destination,
@@ -923,8 +931,6 @@ const ShowAllFlightPage = () => {
           environment.headerToken
         );
         setFetchFlighData(await response.data.item1);
-        // setFetchFlighData(flightmulticity.item1);
-        // alert(response.data.item2[1].message);
         setLoading(false);
       };
       console.log(searchParamMulti);
@@ -1000,9 +1006,7 @@ const ShowAllFlightPage = () => {
           environment.headerToken
         );
         setFetchFlighData(await response.data.item1);
-        // setFetchFlighData(roundtrip.item1);
         setLoading(false);
-        // alert(response.data.item2[1].message);
       };
       getData();
     } else if (String(tripType) === "One Way") {
@@ -1070,9 +1074,7 @@ const ShowAllFlightPage = () => {
           environment.headerToken
         );
         setFetchFlighData(await response.data.item1);
-        // setFetchFlighData(flightoneway.item1);
         setLoading(false);
-        // alert(response.data.item2[1].message);
       };
       console.log(flightoneway);
       getData();
@@ -1084,8 +1086,6 @@ const ShowAllFlightPage = () => {
   const addNewChild = (child) => {
     setChildCount(child + 1);
     setChildAge([...childAge, { age: "" }]);
-    // if(childAge.length < 9){
-    // }
   };
 
   const clickOnDelete = (child) => {
@@ -1114,12 +1114,12 @@ const ShowAllFlightPage = () => {
                     </span>{" "}
                     <span
                       data-tip={
-                        searchData.origin.split(",")[1] +
-                        "<br>" +
-                        searchData.journeyDate
+                        searchData.origin.split(",")[1]
                       }
                     >
-                      {originCode[0]}
+                      {originCode[0]}({airports
+                        .filter((f) => f.iata === originCode[0])
+                        .map((item) => item.city)}: {searchData.journeyDate})
                     </span>
                     <ReactTooltip effect="solid" html={true}></ReactTooltip>
                   </span>
@@ -1130,17 +1130,19 @@ const ShowAllFlightPage = () => {
                     </span>
                     {searchData.returnDate === "null" ? (
                       <span data-tip={searchData.destination.split(",")[1]}>
-                        {destinationCode[0]}
+                        {destinationCode[0]}({airports
+                          .filter((f) => f.iata === destinationCode[0])
+                          .map((item) => item.city)})
                       </span>
                     ) : (
                       <span
                         data-tip={
-                          searchData.destination.split(",")[1] +
-                          "<br>" +
-                          searchData.returnDate
+                          searchData.destination.split(",")[1]
                         }
                       >
-                        {destinationCode[0]}
+                        {destinationCode[0]}({airports
+                          .filter((f) => f.iata === destinationCode[0])
+                          .map((item) => item.city)}: {searchData.returnDate})
                       </span>
                     )}
 
@@ -1148,7 +1150,7 @@ const ShowAllFlightPage = () => {
                   </span>
                 </span>
                 {searchData.origin1 !== "" &&
-                searchData.origin1 !== undefined ? (
+                  searchData.origin1 !== undefined ? (
                   <>
                     <span className="p-2 border ms-1">
                       <span className="fw-bold" style={{ fontSize: "14px" }}>
@@ -1184,7 +1186,7 @@ const ShowAllFlightPage = () => {
                   <></>
                 )}
                 {searchData.origin2 !== "" &&
-                searchData.origin2 !== undefined ? (
+                  searchData.origin2 !== undefined ? (
                   <>
                     <span className="p-2 border ms-1">
                       <span className="fw-bold" style={{ fontSize: "14px" }}>
@@ -1220,7 +1222,7 @@ const ShowAllFlightPage = () => {
                 )}
 
                 {searchData.origin3 !== "" &&
-                searchData.origin3 !== undefined ? (
+                  searchData.origin3 !== undefined ? (
                   <>
                     <span className="p-2 border ms-1">
                       <span className="fw-bold" style={{ fontSize: "14px" }}>
@@ -1256,7 +1258,7 @@ const ShowAllFlightPage = () => {
                 )}
 
                 {searchData.origin4 !== "" &&
-                searchData.origin4 !== undefined ? (
+                  searchData.origin4 !== undefined ? (
                   <>
                     <span className="p-2 border ms-1">
                       <span className="fw-bold" style={{ fontSize: "14px" }}>
@@ -1292,7 +1294,7 @@ const ShowAllFlightPage = () => {
                 )}
 
                 {searchData.origin5 !== "" &&
-                searchData.origin5 !== undefined ? (
+                  searchData.origin5 !== undefined ? (
                   <>
                     <span className="p-2 border">
                       <span className="fw-bold" style={{ fontSize: "14px" }}>
@@ -1332,7 +1334,7 @@ const ShowAllFlightPage = () => {
                   className="fw-bold mx-1 border p-2"
                   style={{ fontSize: "14px" }}
                 >
-                  {travelClass}
+                  {searchData.travelClass}
                 </span>
                 {/* <span className="fw-bold mx-1" style={{ fontSize: "14px" }}>
                   | Depart : {searchData.journeyDate}{" "}
@@ -1345,13 +1347,13 @@ const ShowAllFlightPage = () => {
                   style={{ fontSize: "14px" }}
                 >
                   {searchData.qtyList.Adult > 0
-                    ? " ADT: " + searchData.qtyList.Adult
+                    ? " Adult : " + searchData.qtyList.Adult
                     : " "}{" "}
                   {searchData.qtyList.Children > 0
-                    ? "CHD: " + searchData.qtyList.Children
+                    ? "Child : " + searchData.qtyList.Children
                     : " "}{" "}
                   {searchData.qtyList.Infant > 0
-                    ? "INF: " + searchData.qtyList.Infant
+                    ? "Infant : " + searchData.qtyList.Infant
                     : " "}
                 </span>
               </div>
@@ -1370,7 +1372,15 @@ const ShowAllFlightPage = () => {
                         <div className="container-fluid">
                           <div className="row">
                             <div className="col-lg-12 col-sm-12 col-md-12 banner-text shadow-for-search">
-                              <div id="form-bg">
+                              <Box id="form-bg"
+                                boxShadow="lg"
+                                borderRadius="8px"
+                                border="1px solid lightgray"
+                                style={{
+                                  backgroundColor: "rgba(255, 255, 255, 0.9)",
+                                  // background:
+                                  //   "linear-gradient(to right, #fef0f5, #f5edfa ,#f2faed)",
+                                }}>
                                 <div className="row">
                                   <div
                                     className="col-lg-4 pb-4 text-center"
@@ -1400,6 +1410,7 @@ const ShowAllFlightPage = () => {
                                             onClick={() =>
                                               handleTripType("One Way")
                                             }
+                                            style={{ cursor: "pointer" }}
                                           >
                                             One Way
                                           </li>
@@ -1408,6 +1419,7 @@ const ShowAllFlightPage = () => {
                                             onClick={() =>
                                               handleTripType("Round Trip")
                                             }
+                                            style={{ cursor: "pointer" }}
                                           >
                                             Round Trip
                                           </li>
@@ -1416,6 +1428,7 @@ const ShowAllFlightPage = () => {
                                             onClick={() =>
                                               handleTripType("Multi City")
                                             }
+                                            style={{ cursor: "pointer" }}
                                           >
                                             Multi City
                                           </li>
@@ -1526,20 +1539,20 @@ const ShowAllFlightPage = () => {
                                                       title="adultminus"
                                                       onClick={
                                                         infantCount > 0 &&
-                                                        adultCount ===
+                                                          adultCount ===
                                                           infantCount
                                                           ? () => {
-                                                              setAdultCount(
-                                                                adultCount - 1
-                                                              );
-                                                              setInfantCount(
-                                                                infantCount - 1
-                                                              );
-                                                            }
+                                                            setAdultCount(
+                                                              adultCount - 1
+                                                            );
+                                                            setInfantCount(
+                                                              infantCount - 1
+                                                            );
+                                                          }
                                                           : () =>
-                                                              setAdultCount(
-                                                                adultCount - 1
-                                                              )
+                                                            setAdultCount(
+                                                              adultCount - 1
+                                                            )
                                                       }
                                                       disabled={
                                                         adultCount === 1
@@ -1707,10 +1720,10 @@ const ShowAllFlightPage = () => {
                                                       onClick={
                                                         infantCount < adultCount
                                                           ? () =>
-                                                              setInfantCount(
-                                                                infantCount + 1
-                                                              )
-                                                          : () => {}
+                                                            setInfantCount(
+                                                              infantCount + 1
+                                                            )
+                                                          : () => { }
                                                       }
                                                       disabled={
                                                         infantCount === 9
@@ -1782,63 +1795,75 @@ const ShowAllFlightPage = () => {
                                   </div>
                                 </div>
 
-                                <div className="row pt-1">
-                                  <div className="col-lg-4">
+                                <div className="row pt-1 position-relative">
+                                  <div className="col-lg-4 forms">
                                     <label
                                       htmlFor="formGroupExampleInput"
-                                      className="form-label text-white"
+                                      className="form-label"
                                     >
                                       Depart From{" "}
-                                      <span className="text-white fw-bold">
+                                      <span className="fw-bold">
                                         *
                                       </span>
                                     </label>
+                                    <span className="address">
+                                      <input
+                                        type="text"
+                                        className="form-control input-field autocomplete rounded-3"
+                                        ref={originRef}
+                                        placeholder="From"
+                                        required
+                                        autoComplete="off"
+                                        id="txtFrom"
+                                        style={{
+                                          background: "#f8f2fb",
+                                        }}
+                                      />
+                                    </span>
 
-                                    <input
-                                      type="text"
-                                      className="form-control input-field autocomplete rounded-3"
-                                      ref={originRef}
-                                      placeholder="From"
-                                      required
-                                      autoComplete="off"
-                                      id="txtFrom"
-                                      style={{
-                                        background: "#f8f2fb",
-                                      }}
-                                    />
                                   </div>
-                                  <div className="col-lg-4">
+                                  <div className="swap" style={{ marginRight: "-18px" }}>
+                                    <label className="swap">
+                                      <span className="text-danger fw-bold icon">
+                                        <i className="fas fa-exchange-alt fa-1x"></i>
+                                      </span>
+                                    </label>
+                                  </div>
+                                  <div className="col-lg-4 forms">
                                     <label
                                       htmlFor="formGroupExampleInput"
-                                      className="form-label text-white"
+                                      className="form-label"
                                     >
                                       Going To{" "}
-                                      <span className="text-white fw-bold">
+                                      <span className="fw-bold">
                                         *
                                       </span>
                                     </label>
-                                    <input
-                                      type="text"
-                                      className="form-control input-field autocomplete rounded-3"
-                                      ref={destinationRef}
-                                      placeholder="To"
-                                      required
-                                      id="txtTo"
-                                      autoComplete="off"
-                                      style={{
-                                        background: "#f8f2fb",
-                                      }}
-                                    />
+                                    <span className="address">
+                                      <input
+                                        type="text"
+                                        className="form-control input-field autocomplete rounded-3"
+                                        ref={destinationRef}
+                                        placeholder="To"
+                                        required
+                                        id="txtTo"
+                                        autoComplete="off"
+                                        style={{
+                                          background: "#f8f2fb",
+                                        }}
+                                      />
+                                    </span>
+
                                   </div>
                                   <div className="col-lg-4">
                                     <div className="row">
                                       <div className="col-lg-6">
                                         <label
                                           htmlFor="formGroupExampleInput"
-                                          className="form-label text-white"
+                                          className="form-label"
                                         >
                                           Departing{" "}
-                                          <span className="text-white fw-bold">
+                                          <span className="fw-bold">
                                             *
                                           </span>
                                         </label>
@@ -1849,10 +1874,10 @@ const ShowAllFlightPage = () => {
                                       >
                                         <label
                                           htmlFor="formGroupExampleInput"
-                                          className="form-label text-white"
+                                          className="form-label"
                                         >
                                           Returning{" "}
-                                          <span className="text-white fw-bold">
+                                          <span className="fw-bold">
                                             *
                                           </span>
                                         </label>
@@ -1864,12 +1889,19 @@ const ShowAllFlightPage = () => {
                                         id="departureDate"
                                         style={{
                                           minHeight: "100%",
-                                          borderRight: "1px solid gray",
+                                          //borderRight: "1px solid gray",
                                           background: "#f8f2fb",
+                                          border: "1px solid #ced4da",
                                         }}
                                       ></div>
                                       <div
                                         className="t-check-out"
+                                        style={{
+                                          minHeight: "100%",
+                                          //borderRight: "1px solid gray",
+                                          background: "#f8f2fb",
+                                          border: "1px solid #ced4da",
+                                        }}
                                         id="returnDate"
                                       ></div>
                                     </div>
@@ -1877,63 +1909,76 @@ const ShowAllFlightPage = () => {
                                 </div>
                                 {tripType === "Multi City" ? (
                                   <>
-                                    <div className="row pt-1" id="multiCity1">
-                                      <div className="col-lg-4">
+                                    <div className="row pt-1 position-relative" id="multiCity1">
+                                      <div className="col-lg-4 forms">
                                         <label
                                           htmlFor="formGroupExampleInput"
-                                          className="form-label text-white"
+                                          className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="text-white fw-bold">
+                                          <span className="fw-bold">
                                             *
                                           </span>
                                         </label>
+                                        <span className="address">
+                                          <input
+                                            type="text"
+                                            className="form-control input-field autocomplete rounded-3"
+                                            ref={originRef1}
+                                            placeholder="From"
+                                            autoComplete="off"
+                                            id="txtFrom1"
+                                            required
+                                            style={{
+                                              background: "#f8f2fb",
+                                            }}
+                                          />
 
-                                        <input
-                                          type="text"
-                                          className="form-control input-field autocomplete rounded-3"
-                                          ref={originRef1}
-                                          placeholder="From"
-                                          autoComplete="off"
-                                          id="txtFrom1"
-                                          required
-                                          style={{
-                                            background: "#f8f2fb",
-                                          }}
-                                        />
+                                        </span>
+
                                       </div>
-                                      <div className="col-lg-4">
+                                      <div className="swap" style={{ marginRight: "-18px" }}>
+                                        <label className="swap">
+                                          <span className="text-danger fw-bold icon">
+                                            <i className="fas fa-exchange-alt fa-1x"></i>
+                                          </span>
+                                        </label>
+                                      </div>
+                                      <div className="col-lg-4 forms">
                                         <label
                                           htmlFor="formGroupExampleInput"
-                                          className="form-label text-white"
+                                          className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="text-white fw-bold">
+                                          <span className="fw-bold">
                                             *
                                           </span>
                                         </label>
-                                        <input
-                                          type="text"
-                                          className="form-control input-field autocomplete rounded-3"
-                                          ref={destinationRef1}
-                                          placeholder="To"
-                                          id="txtTo1"
-                                          autoComplete="off"
-                                          required
-                                          style={{
-                                            background: "#f8f2fb",
-                                          }}
-                                        />
+                                        <span className="address">
+                                          <input
+                                            type="text"
+                                            className="form-control input-field autocomplete rounded-3"
+                                            ref={destinationRef1}
+                                            placeholder="To"
+                                            id="txtTo1"
+                                            autoComplete="off"
+                                            required
+                                            style={{
+                                              background: "#f8f2fb",
+                                            }}
+                                          />
+                                        </span>
+
                                       </div>
                                       <div className="col-lg-4">
                                         <div className="row">
                                           <div className="col-lg-12">
                                             <label
                                               htmlFor="formGroupExampleInput"
-                                              className="form-label text-white"
+                                              className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="text-white fw-bold">
+                                              <span className="fw-bold">
                                                 *
                                               </span>
                                             </label>
@@ -1945,7 +1990,7 @@ const ShowAllFlightPage = () => {
                                             id="departureDate1"
                                             style={{
                                               minHeight: "100%",
-                                              borderRight: "1px solid gray",
+                                              border: "1px solid #ced4da",
                                               background: "#f8f2fb",
                                             }}
                                           ></div>
@@ -1953,64 +1998,77 @@ const ShowAllFlightPage = () => {
                                       </div>
                                     </div>
                                     <div
-                                      className="row pt-1"
+                                      className="row pt-1 position-relative"
                                       id="multiCity2"
                                       style={{ display: "none" }}
                                     >
                                       <div className="col-lg-4">
                                         <label
                                           htmlFor="formGroupExampleInput"
-                                          className="form-label text-white"
+                                          className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="text-white fw-bold">
+                                          <span className="fw-bold">
                                             *
                                           </span>
                                         </label>
+                                        <span className="address">
+                                          <input
+                                            type="text"
+                                            className="form-control input-field autocomplete rounded-3"
+                                            ref={originRef2}
+                                            placeholder="From"
+                                            autoComplete="off"
+                                            id="txtFrom2"
+                                            style={{
+                                              background: "#f8f2fb",
+                                            }}
+                                          />
 
-                                        <input
-                                          type="text"
-                                          className="form-control input-field autocomplete rounded-3"
-                                          ref={originRef2}
-                                          placeholder="From"
-                                          autoComplete="off"
-                                          id="txtFrom2"
-                                          style={{
-                                            background: "#f8f2fb",
-                                          }}
-                                        />
+                                        </span>
+
                                       </div>
-                                      <div className="col-lg-4">
+                                      <div className="swap" style={{ marginRight: "-18px" }}>
+                                        <label className="swap">
+                                          <span className="text-danger fw-bold icon">
+                                            <i className="fas fa-exchange-alt fa-1x"></i>
+                                          </span>
+                                        </label>
+                                      </div>
+                                      <div className="col-lg-4 forms">
                                         <label
                                           htmlFor="formGroupExampleInput"
-                                          className="form-label text-white"
+                                          className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="text-white fw-bold">
+                                          <span className="fw-bold">
                                             *
                                           </span>
                                         </label>
-                                        <input
-                                          type="text"
-                                          className="form-control input-field autocomplete rounded-3"
-                                          ref={destinationRef2}
-                                          placeholder="To"
-                                          id="txtTo2"
-                                          autoComplete="off"
-                                          style={{
-                                            background: "#f8f2fb",
-                                          }}
-                                        />
+                                        <span className="address">
+                                          <input
+                                            type="text"
+                                            className="form-control input-field autocomplete rounded-3"
+                                            ref={destinationRef2}
+                                            placeholder="To"
+                                            id="txtTo2"
+                                            autoComplete="off"
+                                            style={{
+                                              background: "#f8f2fb",
+                                            }}
+                                          />
+                                        </span>
+
                                       </div>
                                       <div className="col-lg-4">
                                         <div className="row">
                                           <div className="col-lg-12">
                                             <label
                                               htmlFor="formGroupExampleInput"
-                                              className="form-label text-white"
+                                              className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="text-white fw-bold">
+                                              <span className="fw-bold">
                                                 *
                                               </span>
                                             </label>
@@ -2022,7 +2080,7 @@ const ShowAllFlightPage = () => {
                                             id="departureDate2"
                                             style={{
                                               minHeight: "100%",
-                                              borderRight: "1px solid gray",
+                                              border: "1px solid #ced4da",
                                               background: "#f8f2fb",
                                             }}
                                           ></div>
@@ -2030,54 +2088,66 @@ const ShowAllFlightPage = () => {
                                       </div>
                                     </div>
                                     <div
-                                      className="row pt-1"
+                                      className="row pt-1 position-relative"
                                       id="multiCity3"
                                       style={{ display: "none" }}
                                     >
-                                      <div className="col-lg-4">
+                                      <div className="col-lg-4 forms">
                                         <label
                                           htmlFor="formGroupExampleInput"
-                                          className="form-label text-white"
+                                          className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="text-white fw-bold">
+                                          <span className="fw-bold">
                                             *
                                           </span>
                                         </label>
+                                        <span className="address">
+                                          <input
+                                            type="text"
+                                            className="form-control input-field autocomplete rounded-3"
+                                            ref={originRef3}
+                                            placeholder="From"
+                                            autoComplete="off"
+                                            id="txtFrom3"
+                                            style={{
+                                              background: "#f8f2fb",
+                                            }}
+                                          />
+                                        </span>
 
-                                        <input
-                                          type="text"
-                                          className="form-control input-field autocomplete rounded-3"
-                                          ref={originRef3}
-                                          placeholder="From"
-                                          autoComplete="off"
-                                          id="txtFrom3"
-                                          style={{
-                                            background: "#f8f2fb",
-                                          }}
-                                        />
                                       </div>
-                                      <div className="col-lg-4">
+                                      <div className="swap" style={{ marginRight: "-18px" }}>
+                                        <label className="swap">
+                                          <span className="text-danger fw-bold icon">
+                                            <i className="fas fa-exchange-alt fa-1x"></i>
+                                          </span>
+                                        </label>
+                                      </div>
+                                      <div className="col-lg-4 forms">
                                         <label
                                           htmlFor="formGroupExampleInput"
-                                          className="form-label text-white"
+                                          className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="text-white fw-bold">
+                                          <span className="fw-bold">
                                             *
                                           </span>
                                         </label>
-                                        <input
-                                          type="text"
-                                          className="form-control input-field autocomplete rounded-3"
-                                          ref={destinationRef3}
-                                          placeholder="To"
-                                          id="txtTo3"
-                                          autoComplete="off"
-                                          style={{
-                                            background: "#f8f2fb",
-                                          }}
-                                        />
+                                        <span className="address">
+                                          <input
+                                            type="text"
+                                            className="form-control input-field autocomplete rounded-3"
+                                            ref={destinationRef3}
+                                            placeholder="To"
+                                            id="txtTo3"
+                                            autoComplete="off"
+                                            style={{
+                                              background: "#f8f2fb",
+                                            }}
+                                          />
+                                        </span>
+
                                       </div>
                                       <div className="col-lg-4">
                                         <div className="row">
@@ -2099,7 +2169,7 @@ const ShowAllFlightPage = () => {
                                             id="departureDate3"
                                             style={{
                                               minHeight: "100%",
-                                              borderRight: "1px solid gray",
+                                              border: "1px solid #ced4da",
                                               background: "#f8f2fb",
                                             }}
                                           ></div>
@@ -2107,64 +2177,76 @@ const ShowAllFlightPage = () => {
                                       </div>
                                     </div>
                                     <div
-                                      className="row pt-1"
+                                      className="row pt-1 position-relative"
                                       id="multiCity4"
                                       style={{ display: "none" }}
                                     >
                                       <div className="col-lg-4">
                                         <label
                                           htmlFor="formGroupExampleInput"
-                                          className="form-label text-white"
+                                          className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="text-white fw-bold">
+                                          <span className="fw-bold">
                                             *
                                           </span>
                                         </label>
+                                        <span className="address">
+                                          <input
+                                            type="text"
+                                            className="form-control input-field autocomplete rounded-3"
+                                            ref={originRef4}
+                                            placeholder="From"
+                                            autoComplete="off"
+                                            id="txtFrom4"
+                                            style={{
+                                              background: "#f8f2fb",
+                                            }}
+                                          />
+                                        </span>
 
-                                        <input
-                                          type="text"
-                                          className="form-control input-field autocomplete rounded-3"
-                                          ref={originRef4}
-                                          placeholder="From"
-                                          autoComplete="off"
-                                          id="txtFrom4"
-                                          style={{
-                                            background: "#f8f2fb",
-                                          }}
-                                        />
                                       </div>
-                                      <div className="col-lg-4">
+                                      <div className="swap" style={{ marginRight: "-18px" }}>
+                                        <label className="swap">
+                                          <span className="text-danger fw-bold icon">
+                                            <i className="fas fa-exchange-alt fa-1x"></i>
+                                          </span>
+                                        </label>
+                                      </div>
+                                      <div className="col-lg-4 forms">
                                         <label
                                           htmlFor="formGroupExampleInput"
-                                          className="form-label text-white"
+                                          className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="text-white fw-bold">
+                                          <span className="fw-bold">
                                             *
                                           </span>
                                         </label>
-                                        <input
-                                          type="text"
-                                          className="form-control input-field autocomplete rounded-3"
-                                          ref={destinationRef4}
-                                          placeholder="To"
-                                          id="txtTo4"
-                                          autoComplete="off"
-                                          style={{
-                                            background: "#f8f2fb",
-                                          }}
-                                        />
+                                        <span className="address">
+                                          <input
+                                            type="text"
+                                            className="form-control input-field autocomplete rounded-3"
+                                            ref={destinationRef4}
+                                            placeholder="To"
+                                            id="txtTo4"
+                                            autoComplete="off"
+                                            style={{
+                                              background: "#f8f2fb",
+                                            }}
+                                          />
+                                        </span>
+
                                       </div>
                                       <div className="col-lg-4">
                                         <div className="row">
                                           <div className="col-lg-12">
                                             <label
                                               htmlFor="formGroupExampleInput"
-                                              className="form-label text-white"
+                                              className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="text-white fw-bold">
+                                              <span className="fw-bold">
                                                 *
                                               </span>
                                             </label>
@@ -2176,7 +2258,7 @@ const ShowAllFlightPage = () => {
                                             id="departureDate4"
                                             style={{
                                               minHeight: "100%",
-                                              borderRight: "1px solid gray",
+                                              border: "1px solid #ced4da",
                                               background: "#f8f2fb",
                                             }}
                                           ></div>
@@ -2184,64 +2266,76 @@ const ShowAllFlightPage = () => {
                                       </div>
                                     </div>
                                     <div
-                                      className="row pt-1"
+                                      className="row pt-1 position-relative"
                                       id="multiCity5"
                                       style={{ display: "none" }}
                                     >
-                                      <div className="col-lg-4">
+                                      <div className="col-lg-4 forms">
                                         <label
                                           htmlFor="formGroupExampleInput"
-                                          className="form-label text-white"
+                                          className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="text-white fw-bold">
+                                          <span className="fw-bold">
                                             *
                                           </span>
                                         </label>
+                                        <span className="address">
+                                          <input
+                                            type="text"
+                                            className="form-control input-field autocomplete rounded-3"
+                                            ref={originRef5}
+                                            placeholder="From"
+                                            autoComplete="off"
+                                            id="txtFrom5"
+                                            style={{
+                                              background: "#f8f2fb",
+                                            }}
+                                          />
+                                        </span>
 
-                                        <input
-                                          type="text"
-                                          className="form-control input-field autocomplete rounded-3"
-                                          ref={originRef5}
-                                          placeholder="From"
-                                          autoComplete="off"
-                                          id="txtFrom5"
-                                          style={{
-                                            background: "#f8f2fb",
-                                          }}
-                                        />
                                       </div>
-                                      <div className="col-lg-4">
+                                      <div className="swap" style={{ marginRight: "-18px" }}>
+                                        <label className="swap">
+                                          <span className="text-danger fw-bold icon">
+                                            <i className="fas fa-exchange-alt fa-1x"></i>
+                                          </span>
+                                        </label>
+                                      </div>
+                                      <div className="col-lg-4 forms">
                                         <label
                                           htmlFor="formGroupExampleInput"
-                                          className="form-label text-white"
+                                          className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="text-white fw-bold">
+                                          <span className="fw-bold">
                                             *
                                           </span>
                                         </label>
-                                        <input
-                                          type="text"
-                                          className="form-control input-field autocomplete rounded-3"
-                                          ref={destinationRef5}
-                                          placeholder="To"
-                                          id="txtTo5"
-                                          autoComplete="off"
-                                          style={{
-                                            background: "#f8f2fb",
-                                          }}
-                                        />
+                                        <span className="address">
+                                          <input
+                                            type="text"
+                                            className="form-control input-field autocomplete rounded-3"
+                                            ref={destinationRef5}
+                                            placeholder="To"
+                                            id="txtTo5"
+                                            autoComplete="off"
+                                            style={{
+                                              background: "#f8f2fb",
+                                            }}
+                                          />
+                                        </span>
+
                                       </div>
                                       <div className="col-lg-4">
                                         <div className="row">
                                           <div className="col-lg-12">
                                             <label
                                               htmlFor="formGroupExampleInput"
-                                              className="form-label text-white"
+                                              className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="text-white fw-bold">
+                                              <span className="fw-bold">
                                                 *
                                               </span>
                                             </label>
@@ -2253,7 +2347,7 @@ const ShowAllFlightPage = () => {
                                             id="departureDate5"
                                             style={{
                                               minHeight: "100%",
-                                              borderRight: "1px solid gray",
+                                              border: "1px solid #ced4da",
                                               background: "#f8f2fb",
                                             }}
                                           ></div>
@@ -2298,7 +2392,7 @@ const ShowAllFlightPage = () => {
                                     </div>
                                   </div>
                                 </div>
-                              </div>
+                              </Box>
                             </div>
                           </div>
                         </div>

@@ -13,7 +13,7 @@ import moment from "moment";
 import { Box, VStack, Text } from "@chakra-ui/react";
 import { getCabinClass } from "../../../common/functions";
 
-const childrenAges = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const childrenAges = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const SearchFrom = () => {
   const formCount = 0;

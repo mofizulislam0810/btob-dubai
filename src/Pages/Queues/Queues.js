@@ -730,7 +730,7 @@ const Queues = () => {
                                             </Button>
                                           </a>
                                           &nbsp;
-                                          {moment(
+                                          {/* {moment(
                                             moment(item.issueDate).format(
                                               "YYYY-MM-DD"
                                             ) + " 12:00:00 PM"
@@ -760,7 +760,7 @@ const Queues = () => {
                                             </a>
                                           ) : (
                                             <></>
-                                          )}
+                                          )} */}
                                           {/* &nbsp;{" "}
                                           <a
                                             href="javascript:void(0)"

@@ -615,7 +615,7 @@ const SuccessBookingPanel = () => {
                           {bookData.data?.item1.flightInfo?.passengerFares.adt !== null ? (
                             <>
                               <tr>
-                                <td className="left">ADT</td>
+                                <td className="left">Adult</td>
                                 <td className="left">
                                   {bookData.data?.item1.flightInfo?.passengerFares.adt.basePrice}
                                 </td>
@@ -642,7 +642,7 @@ const SuccessBookingPanel = () => {
                           {bookData.data?.item1.flightInfo?.passengerFares.cnn !== null ? (
                             <>
                               <tr>
-                                <td className="left">CNN</td>
+                                <td className="left">Child</td>
                                 <td className="left">
                                   {bookData.data?.item1.flightInfo?.passengerFares.cnn.basePrice}
                                 </td>
@@ -669,7 +669,7 @@ const SuccessBookingPanel = () => {
                           {bookData.data?.item1.flightInfo?.passengerFares.inf !== null ? (
                             <>
                               <tr>
-                                <td className="left">INF</td>
+                                <td className="left">Infant</td>
                                 <td className="left">
                                   {bookData.data?.item1.flightInfo?.passengerFares.inf.basePrice}
                                 </td>

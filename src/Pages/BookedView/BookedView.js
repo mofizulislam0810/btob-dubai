@@ -1000,7 +1000,11 @@ const BookedView = () => {
                                         " " +
                                         item.last}
                                     </td>
-                                    <td>{item.passengerType}</td>
+                                    <td>{item.passengerType === "ADT"
+                                      ? "Adult"
+                                      : item.passengerType === "CNN"
+                                      ? "Child"
+                                      : "Infant"}</td>
                                     <td>{item.gender}</td>
                                     <td>
                                       {item.dateOfBirth === null ? "N/A" : moment(item.dateOfBirth).format(

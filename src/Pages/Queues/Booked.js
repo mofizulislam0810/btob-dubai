@@ -292,7 +292,7 @@ const Booked = () => {
                                     </a>
                                   </td>
                                   {/* <td>{item.ticketNumber}</td> */}
-                                  <td>{item.ticketingPrice}</td>
+                                  <td>{item.ticketingPrice.toLocaleString("en-US")}</td>
                                   <td>
                                     {item.status === "Booked" ? "On Hold" : " "} <br />{" "}
                                     {item.refundStatus != null

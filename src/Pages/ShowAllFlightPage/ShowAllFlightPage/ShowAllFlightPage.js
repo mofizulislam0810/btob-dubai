@@ -20,6 +20,7 @@ import { environment } from "../../SharePages/Utility/environment";
 import ShowAllFlight from "../ShowAllFlight/ShowAllFlight";
 let cIndex = 1;
 const ShowAllFlightPage = () => {
+  const searchData = JSON.parse(localStorage.getItem("Database"));
   window.scrollTo(0, 0);
   const { state } = useLocation();
   const {
@@ -54,7 +55,8 @@ const ShowAllFlightPage = () => {
   const [sameMatchError, setSameMatchError] = useState(true);
   const [journeyDateError, setJourneyDateError] = useState(true);
   const [tripType, setTripType] = useState(tripTypeModify); //"One Way"
-  const [travelClassType, setTravelClassType] = useState(travelClass); //:"Economy"
+  const [travelClassType, setTravelClassType] = useState(searchData.travelClass); //:"Economy"
+  console.log(travelClassType);
   const [adultCount, setAdultCount] = useState(qtyList.Adult); //1
   const [childCount, setChildCount] = useState(qtyList.Children); //0
   let [infantCount, setInfantCount] = useState(qtyList.Infant); //0
@@ -253,7 +255,7 @@ const ShowAllFlightPage = () => {
     });
   }, []);
 
-  const searchData = JSON.parse(localStorage.getItem("Database"));
+
   const originCode = airports
     .filter(
       (f) => f.city + " - " + f.country + ", " + f.name === searchData.origin
@@ -338,11 +340,11 @@ const ShowAllFlightPage = () => {
     childrenAges: [],
   };
 
-  childAgeList.map((item) =>
-    searchParamOnedWay.childrenAges.push(parseInt(item.age))
-  );
+  // childAgeList.map((item) =>
+  //   searchParamOnedWay.childrenAges.push(parseInt(item.age))
+  // );
 
-  // console.log(searchParamOnedWay);
+  console.log(searchParamOnedWay);
 
   let searchParamRoundWay = {
     routes: [

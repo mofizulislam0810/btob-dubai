@@ -379,31 +379,31 @@ const SearchFrom = () => {
     $(".class_4").tDatePicker({});
     $(".class_5").tDatePicker({});
 
-    // $(".t-date-check-in").html(
-    //   "<label class='t-date-info-title'><span class='me-1 text-danger'><i class='fa fa-calendar'></i></span><span>Depart</span></label>"
-    // );
-    // $(".t-date-check-out").html(
-    //   "<label class='t-date-info-title'><span class='me-1 text-danger'><i class='fa fa-calendar'></i></span><span>Return</span></label>"
-    // );
+    $(".t-date-check-in").html(
+      "<label class='t-date-info-title'><span class='me-1 text-danger'><i class='fa fa-calendar'></i></span><span>Depart</span></label>"
+    );
+    $(".t-date-check-out").html(
+      "<label class='t-date-info-title'><span class='me-1 text-danger'><i class='fa fa-calendar'></i></span><span>Return</span></label>"
+    );
 
     $("#departureDate").attr("class", "t-check-in");
     $("#returnDate").hide();
     $("#returnLavel").hide();
 
-    if (tripType === "Round Trip") {
-      $(document).ready(function () {
-        $(".class_0").tDatePicker("update", [
-          new Date(),
-           new Date(),
-        ]);
-      });
-    } else {
-      $(document).ready(function () {
-        $(".class_0").tDatePicker("update", [
-          new Date(),
-        ]);
-      });
-    }
+    // if (tripType === "Round Trip") {
+    //   $(document).ready(function () {
+    //     $(".class_0").tDatePicker("update", [
+    //       new Date(),
+    //        new Date(),
+    //     ]);
+    //   });
+    // } else {
+    //   $(document).ready(function () {
+    //     $(".class_0").tDatePicker("update", [
+    //       new Date(),
+    //     ]);
+    //   });
+    // }
 
     // for passenger count
     $("#passengerBlock").on({

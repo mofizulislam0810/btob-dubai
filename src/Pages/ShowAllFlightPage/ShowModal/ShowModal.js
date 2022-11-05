@@ -1424,16 +1424,16 @@ const ShowModal = ({
                                   <tr>
                                     <td className="left">Adult</td>
                                     <td className="left">
-                                      {passengerFares.adt.basePrice}
+                                      {passengerFares.adt.basePrice.toLocaleString("en-US")}
                                     </td>
                                     <td className="center">
-                                      {passengerFares.adt.taxes}
+                                      {passengerFares.adt.taxes.toLocaleString("en-US")}
                                     </td>
                                     <td className="right">
-                                      {passengerFares.adt.discountPrice}
+                                      {passengerFares.adt.discountPrice.toLocaleString("en-US")}
                                     </td>
                                     <td className="right">
-                                      {passengerFares.adt.ait}
+                                      {passengerFares.adt.ait.toLocaleString("en-US")}
                                     </td>
                                     <td className="right">
                                       {passengerCounts.adt}
@@ -1458,16 +1458,16 @@ const ShowModal = ({
                                   <tr>
                                     <td className="left">Child</td>
                                     <td className="left">
-                                      {passengerFares.cnn.basePrice}
+                                      {passengerFares.cnn.basePrice.toLocaleString("en-US")}
                                     </td>
                                     <td className="center">
-                                      {passengerFares.cnn.taxes}
+                                      {passengerFares.cnn.taxes.toLocaleString("en-US")}
                                     </td>
                                     <td className="right">
-                                      {passengerFares.cnn.discountPrice}
+                                      {passengerFares.cnn.discountPrice.toLocaleString("en-US")}
                                     </td>
                                     <td className="right">
-                                      {passengerFares.cnn.ait}
+                                      {passengerFares.cnn.ait.toLocaleString("en-US")}
                                     </td>
                                     <td className="right">
                                       {passengerCounts.cnn}
@@ -1492,16 +1492,16 @@ const ShowModal = ({
                                   <tr>
                                     <td className="left">Infant</td>
                                     <td className="left">
-                                      {passengerFares.inf.basePrice}
+                                      {passengerFares.inf.basePrice.toLocaleString("en-US")}
                                     </td>
                                     <td className="center">
-                                      {passengerFares.inf.taxes}
+                                      {passengerFares.inf.taxes.toLocaleString("en-US")}
                                     </td>
                                     <td className="right">
-                                      {passengerFares.inf.discountPrice}
+                                      {passengerFares.inf.discountPrice.toLocaleString("en-US")}
                                     </td>
                                     <td className="right">
-                                      {passengerFares.inf.ait}
+                                      {passengerFares.inf.ait.toLocaleString("en-US")}
                                     </td>
                                     <td className="right">
                                       {passengerCounts.inf}

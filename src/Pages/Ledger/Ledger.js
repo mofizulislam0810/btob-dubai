@@ -252,13 +252,13 @@ const Ledger = () => {
                                        {item.transactionType}
                                       </td>
                                       <td className="fw-bold text-end">
-                                        {item.debitAmount}
+                                        {item.debitAmount.toLocaleString("en-US")}
                                       </td>
                                       <td className="fw-bold text-end">
-                                        {item.creditAmount}
+                                        {item.creditAmount.toLocaleString("en-US")}
                                       </td>
                                       <td className="fw-bold text-end">
-                                        {item.balanceAmount}
+                                        {item.balanceAmount.toLocaleString("en-US")}
                                       </td>
                                       <td className="text-center">{item.createdByName}</td>
                                     </tr>

@@ -345,10 +345,10 @@ const ShowAllFlight = ({
                     /> */}
                     <RangeSlider
                       defaultValue={[
-                        Math.floor(mainJson?.minMaxPrice?.minPrice),
+                        Math.ceil(mainJson?.minMaxPrice?.minPrice),
                         Math.ceil(mainJson?.minMaxPrice?.maxPrice),
                       ]}
-                      min={Math.floor(mainJson?.minMaxPrice?.minPrice)}
+                      min={Math.ceil(mainJson?.minMaxPrice?.minPrice)}
                       max={Math.ceil(mainJson?.minMaxPrice?.maxPrice)}
                       step={100}
                       minStepsBetweenThumbs={1}

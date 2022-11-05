@@ -1334,7 +1334,7 @@ const ShowFlight = (props) => {
                     <tr>
                       <td className="left">Adult</td>
                       <td className="left">
-                        {passengerFares.adt.basePrice +
+                        {(passengerFares.adt.basePrice +
                           bookingComponents[0].agentAdditionalPrice /
                             (passengerCounts.adt +
                               (passengerCounts.cnn !== null
@@ -1342,13 +1342,13 @@ const ShowFlight = (props) => {
                                 : 0) +
                               (passengerCounts.inf !== null
                                 ? passengerCounts.inf
-                                : 0))}
+                                : 0))).toLocaleString("en-US")}
                       </td>
-                      <td className="center">{passengerFares.adt.taxes}</td>
+                      <td className="center">{passengerFares.adt.taxes.toLocaleString("en-US")}</td>
                       <td className="right">
-                        {passengerFares.adt.discountPrice}
+                        {passengerFares.adt.discountPrice.toLocaleString("en-US")}
                       </td>
-                      <td className="right">{passengerFares.adt.ait}</td>
+                      <td className="right">{passengerFares.adt.ait.toLocaleString("en-US")}</td>
                       <td className="right">{passengerCounts.adt}</td>
                       {isTempInspector !== null && isTempInspector == "true" ? (
                         <>
@@ -1428,7 +1428,7 @@ const ShowFlight = (props) => {
                     <tr>
                       <td className="left">Child</td>
                       <td className="left">
-                        {passengerFares.cnn.basePrice +
+                        {(passengerFares.cnn.basePrice +
                           bookingComponents[0].agentAdditionalPrice /
                             (passengerCounts.adt +
                               (passengerCounts.cnn !== null
@@ -1436,13 +1436,13 @@ const ShowFlight = (props) => {
                                 : 0) +
                               (passengerCounts.inf !== null
                                 ? passengerCounts.inf
-                                : 0))}
+                                : 0))).toLocaleString("en-US")}
                       </td>
-                      <td className="center">{passengerFares.cnn.taxes}</td>
+                      <td className="center">{passengerFares.cnn.taxes.toLocaleString("en-US")}</td>
                       <td className="right">
-                        {passengerFares.cnn.discountPrice}
+                        {passengerFares.cnn.discountPrice.toLocaleString("en-US")}
                       </td>
-                      <td className="right">{passengerFares.cnn.ait}</td>
+                      <td className="right">{passengerFares.cnn.ait.toLocaleString("en-US")}</td>
                       <td className="right">{passengerCounts.cnn}</td>
                       {isTempInspector !== null && isTempInspector == "true" ? (
                         <>
@@ -1524,7 +1524,7 @@ const ShowFlight = (props) => {
                     <tr>
                       <td className="left">Infant</td>
                       <td className="left">
-                        {passengerFares.inf.basePrice +
+                        {(passengerFares.inf.basePrice +
                           bookingComponents[0].agentAdditionalPrice /
                             (passengerCounts.adt +
                               (passengerCounts.cnn !== null
@@ -1532,13 +1532,13 @@ const ShowFlight = (props) => {
                                 : 0) +
                               (passengerCounts.inf !== null
                                 ? passengerCounts.inf
-                                : 0))}
+                                : 0))).toLocaleString("en-US")}
                       </td>
-                      <td className="center">{passengerFares.inf.taxes}</td>
+                      <td className="center">{passengerFares.inf.taxes.toLocaleString("en-US")}</td>
                       <td className="right">
-                        {passengerFares.inf.discountPrice}
+                        {passengerFares.inf.discountPrice.toLocaleString("en-US")}
                       </td>
-                      <td className="right">{passengerFares.inf.ait}</td>
+                      <td className="right">{passengerFares.inf.ait.toLocaleString("en-US")}</td>
                       <td className="right">{passengerCounts.inf}</td>
                       {isTempInspector !== null && isTempInspector == "true" ? (
                         <>

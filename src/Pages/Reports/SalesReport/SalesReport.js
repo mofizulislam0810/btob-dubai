@@ -10,6 +10,7 @@ import Loading from "../../Loading/Loading";
 import ReactPaginate from "react-paginate";
 import Footer from "../../SharePages/Footer/Footer";
 import { Center, Spinner } from "@chakra-ui/react";
+import { getPassengerType } from "../../../common/functions";
 const SalesReport = () => {
   const { setLoading, loading } = useAuth();
   const [reportData, setReportData] = useState([]);
@@ -259,15 +260,15 @@ const SalesReport = () => {
                                         <td style={{ textAlign: "right" }}>
                                           {item.priceBuying}
                                         </td> */}
-                                        <td className="text-center">{item.passengerType}</td>
+                                        <td className="text-center">{getPassengerType(item.passengerType)}</td>
                                         <td style={{ textAlign: "right" }}>
-                                          {item.basePriceSelling}
+                                          {item.basePriceSelling.toLocaleString("en-US")}
                                         </td>
                                         <td style={{ textAlign: "right" }}>
-                                          {item.taxesSelling}
+                                          {item.taxesSelling.toLocaleString("en-US")}
                                         </td>
                                         <td style={{ textAlign: "right" }}>
-                                          {item.priceSelling}
+                                          {item.priceSelling.toLocaleString("en-US")}
                                         </td>
                                         {/* <td style={{ textAlign: "right" }}>
                                           {item.profit}
@@ -304,13 +305,13 @@ const SalesReport = () => {
                                       <strong>{totalBuyingPrice}</strong>
                                     </td> */}
                                     <td style={{ textAlign: "right" }}>
-                                      <strong>{(totalSellingBasePrice).toFixed(2)}</strong>
+                                      <strong>{totalSellingBasePrice.toLocaleString("en-US")}</strong>
                                     </td>
                                     <td style={{ textAlign: "right" }}>
-                                      <strong>{(totalSellingTax).toFixed(2)}</strong>
+                                      <strong>{totalSellingTax.toLocaleString("en-US")}</strong>
                                     </td>
                                     <td style={{ textAlign: "right" }}>
-                                      <strong>{(totalSellingPrice).toFixed(2)}</strong>
+                                      <strong>{totalSellingPrice.toLocaleString("en-US")}</strong>
                                     </td>
                                     {/* <td style={{ textAlign: "right" }}>
                                       <strong>{totalProfit}</strong>

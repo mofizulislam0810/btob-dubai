@@ -360,7 +360,7 @@ const BookedView = () => {
                                         " " +
                                         item.last}
                                     </td>
-                                    <td>{item.passengerType}</td>
+                                    <td>{getPassengerType(item.passengerType)}</td>
                                     <td>{item.gender}</td>
                                     <td>
                                       {item.dateOfBirth === null ? "---" : moment(item.dateOfBirth).format(
@@ -583,13 +583,13 @@ const BookedView = () => {
                                   <>
                                     <tr>
                                       <td>{getPassengerType(item.passengerType)}</td>
-                                      <td>{item.basePrice}</td>
-                                      <td>{item.tax}</td>
-                                      <td>{item.discount}</td>
-                                      <td>{item.ait}</td>
+                                      <td>{item.basePrice.toLocaleString("en-US")}</td>
+                                      <td>{item.tax.toLocaleString("en-US")}</td>
+                                      <td>{item.discount.toLocaleString("en-US")}</td>
+                                      <td>{item.ait.toLocaleString("en-US")}</td>
                                       <td>{item.passengerCount}</td>
-                                      <td>{item.currencyName} {item.totalPrice *
-                                            item.passengerCount}</td>
+                                      <td>{item.currencyName} {(item.totalPrice *
+                                            item.passengerCount).toLocaleString("en-US")}</td>
                                     </tr>
                                   </>
                                 );
@@ -1062,7 +1062,10 @@ const BookedView = () => {
                                             </td>
                                             <td>
                                               {moment(item.departure).format(
-                                                "DD-MMMM-yyyy hh:mm:ss"
+                                                "DD-MMMM-yyyy"
+                                              )}<br></br>
+                                              {moment(item.departure).format(
+                                                "hh:mm:ss"
                                               )}
                                             </td>
                                             <td>{item.destination}<br></br>
@@ -1074,7 +1077,11 @@ const BookedView = () => {
                                             </td>
                                             <td>
                                               {moment(item.arrival).format(
-                                                "DD-MMMM-yyyy hh:mm:ss"
+                                                "DD-MMMM-yyyy"
+                                              )}
+                                              <br></br>
+                                              {moment(item.arrival).format(
+                                                "hh:mm:ss"
                                               )}
                                             </td>
                                             <td>{item.fareBasisCode}</td>
@@ -1103,13 +1110,16 @@ const BookedView = () => {
                                               {airports
                                                 .filter((f) => f.iata === item.from)
                                                 .map((item) => item.city)}
-                                              <br></br>
+                                              {" "}
                                               {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
                                             </span>
                                           </td>
                                           <td>
                                             {moment(item.departure).format(
-                                              "DD-MMMM-yyyy hh:mm:ss"
+                                              "DD-MMMM-yyyy"
+                                            )}<br></br>
+                                            {moment(item.departure).format(
+                                              "hh:mm:ss A"
                                             )}
                                           </td>
                                           <td>
@@ -1119,13 +1129,16 @@ const BookedView = () => {
                                               {airports
                                                 .filter((f) => f.iata === item.to)
                                                 .map((item) => item.city)}
-                                              <br></br>
+                                              {" "}
                                               {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
                                             </span>
                                           </td>
                                           <td>
                                             {moment(item.arrival).format(
-                                              "DD-MMMM-yyyy hh:mm:ss"
+                                              "DD-MMMM-yyyy"
+                                            )}<br></br>
+                                            {moment(item.arrival).format(
+                                              "hh:mm:ss A"
                                             )}
                                           </td>
                                           <td>{item.fareBasisCode}</td>
@@ -1144,53 +1157,59 @@ const BookedView = () => {
                                           {ticketingList?.directions[1][0].segments.map((item, index) => {
                                             return (
                                               <tr key={index}>
-                                                <td>
-                                                  {item.airline}
-                                                  <br></br>
-                                                  <span style={{ fontSize: "12px" }}>
-                                                    {item.plane[0]}
-                                                  </span>
-                                                </td>
-                                                <td>{item.flightNumber}</td>
-                                                <td>
-                                                  {item.from}
-                                                  <br></br>
-                                                  <span style={{ fontSize: "12px" }}>
-                                                    {airports
-                                                      .filter((f) => f.iata === item.from)
-                                                      .map((item) => item.city)}
-                                                      <br></br>
-                                                    {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
-                                                  </span>
-                                                </td>
-                                                <td>
-                                                  {moment(item.departure).format(
-                                                    "DD-MMMM-yyyy hh:mm:ss"
-                                                  )}
-                                                </td>
-                                                <td>
-                                                  {item.to}
-                                                  <br></br>
-                                                  <span style={{ fontSize: "12px" }}>
-                                                    {airports
-                                                      .filter((f) => f.iata === item.to)
-                                                      .map((item) => item.city)}
-                                                    <br></br>
-                                                    {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
-                                                  </span>
-                                                </td>
-                                                <td>
-                                                  {moment(item.arrival).format(
-                                                    "DD-MMMM-yyyy hh:mm:ss"
-                                                  )}
-                                                </td>
-                                                <td>{item.fareBasisCode}</td>
-                                                <td> {item.serviceClass === "Y"
-                                                  ? "ECONOMY" + " (" + item.bookingClass + ")"
-                                                  : item.serviceClass === "C"
-                                                    ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
-                                                    : item.serviceClass + " (" + item.bookingClass + ")"}</td>
-                                              </tr>
+                                          <td>
+                                            {item.airline}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {item.plane[0]}
+                                            </span>
+                                          </td>
+                                          <td>{item.flightNumber}</td>
+                                          <td>
+                                            {item.from}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {airports
+                                                .filter((f) => f.iata === item.from)
+                                                .map((item) => item.city)}
+                                              {" "}
+                                              {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                            </span>
+                                          </td>
+                                          <td>
+                                            {moment(item.departure).format(
+                                              "DD-MMMM-yyyy"
+                                            )}<br></br>
+                                            {moment(item.departure).format(
+                                              "hh:mm:ss A"
+                                            )}
+                                          </td>
+                                          <td>
+                                            {item.to}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {airports
+                                                .filter((f) => f.iata === item.to)
+                                                .map((item) => item.city)}
+                                              {" "}
+                                              {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                            </span>
+                                          </td>
+                                          <td>
+                                            {moment(item.arrival).format(
+                                              "DD-MMMM-yyyy"
+                                            )}<br></br>
+                                            {moment(item.arrival).format(
+                                              "hh:mm:ss A"
+                                            )}
+                                          </td>
+                                          <td>{item.fareBasisCode}</td>
+                                          <td> {item.serviceClass === "Y"
+                                            ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                            : item.serviceClass === "C"
+                                              ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                              : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                        </tr>
                                             )
                                           })
                                           }
@@ -1204,52 +1223,59 @@ const BookedView = () => {
                                           {ticketingList?.directions[2][0].segments.map((item, index) => {
                                             return (
                                               <tr key={index}>
-                                                <td>
-                                                  {item.airline}
-                                                  <br></br>
-                                                  <span style={{ fontSize: "12px" }}>
-                                                    {item.plane[0]}
-                                                  </span>
-                                                </td>
-                                                <td>{item.flightNumber}</td>
-                                                <td>
-                                                  {item.from}
-                                                  <br></br>
-                                                  <span style={{ fontSize: "12px" }}>
-                                                    {airports
-                                                      .filter((f) => f.iata === item.from)
-                                                      .map((item) => item.city)}
-                                                    {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
-                                                  </span>
-                                                </td>
-                                                <td>
-                                                  {moment(item.departure).format(
-                                                    "DD-MMMM-yyyy hh:mm:ss"
-                                                  )}
-                                                </td>
-                                                <td>
-                                                  {item.to}
-                                                  <br></br>
-                                                  <span style={{ fontSize: "12px" }}>
-                                                    {airports
-                                                      .filter((f) => f.iata === item.to)
-                                                      .map((item) => item.city)}
-                                                    <br></br>
-                                                    {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
-                                                  </span>
-                                                </td>
-                                                <td>
-                                                  {moment(item.arrival).format(
-                                                    "DD-MMMM-yyyy hh:mm:ss"
-                                                  )}
-                                                </td>
-                                                <td>{item.fareBasisCode}</td>
-                                                <td> {item.serviceClass === "Y"
-                                                  ? "ECONOMY" + " (" + item.bookingClass + ")"
-                                                  : item.serviceClass === "C"
-                                                    ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
-                                                    : item.serviceClass + " (" + item.bookingClass + ")"}</td>
-                                              </tr>
+                                          <td>
+                                            {item.airline}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {item.plane[0]}
+                                            </span>
+                                          </td>
+                                          <td>{item.flightNumber}</td>
+                                          <td>
+                                            {item.from}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {airports
+                                                .filter((f) => f.iata === item.from)
+                                                .map((item) => item.city)}
+                                              {" "}
+                                              {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                            </span>
+                                          </td>
+                                          <td>
+                                            {moment(item.departure).format(
+                                              "DD-MMMM-yyyy"
+                                            )}<br></br>
+                                            {moment(item.departure).format(
+                                              "hh:mm:ss A"
+                                            )}
+                                          </td>
+                                          <td>
+                                            {item.to}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {airports
+                                                .filter((f) => f.iata === item.to)
+                                                .map((item) => item.city)}
+                                              {" "}
+                                              {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                            </span>
+                                          </td>
+                                          <td>
+                                            {moment(item.arrival).format(
+                                              "DD-MMMM-yyyy"
+                                            )}<br></br>
+                                            {moment(item.arrival).format(
+                                              "hh:mm:ss A"
+                                            )}
+                                          </td>
+                                          <td>{item.fareBasisCode}</td>
+                                          <td> {item.serviceClass === "Y"
+                                            ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                            : item.serviceClass === "C"
+                                              ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                              : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                        </tr>
                                             )
                                           })
                                           }
@@ -1263,51 +1289,59 @@ const BookedView = () => {
                                           {ticketingList?.directions[3][0].segments.map((item, index) => {
                                             return (
                                               <tr key={index}>
-                                                <td>
-                                                  {item.airline}
-                                                  <br></br>
-                                                  <span style={{ fontSize: "12px" }}>
-                                                    {item.plane[0]}
-                                                  </span>
-                                                </td>
-                                                <td>{item.flightNumber}</td>
-                                                <td>
-                                                  {item.from}
-                                                  <br></br>
-                                                  <span style={{ fontSize: "12px" }}>
-                                                    {airports
-                                                      .filter((f) => f.iata === item.from)
-                                                      .map((item) => item.city)}
-                                                    {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
-                                                  </span>
-                                                </td>
-                                                <td>
-                                                  {moment(item.departure).format(
-                                                    "DD-MMMM-yyyy hh:mm:ss"
-                                                  )}
-                                                </td>
-                                                <td>
-                                                  {item.to}
-                                                  <span style={{ fontSize: "12px" }}>
-                                                    {airports
-                                                      .filter((f) => f.iata === item.to)
-                                                      .map((item) => item.city)}
-                                                    <br></br>
-                                                    {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
-                                                  </span>
-                                                </td>
-                                                <td>
-                                                  {moment(item.arrival).format(
-                                                    "DD-MMMM-yyyy hh:mm:ss"
-                                                  )}
-                                                </td>
-                                                <td>{item.fareBasisCode}</td>
-                                                <td> {item.serviceClass === "Y"
-                                                  ? "ECONOMY" + " (" + item.bookingClass + ")"
-                                                  : item.serviceClass === "C"
-                                                    ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
-                                                    : item.serviceClass + " (" + item.bookingClass + ")"}</td>
-                                              </tr>
+                                          <td>
+                                            {item.airline}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {item.plane[0]}
+                                            </span>
+                                          </td>
+                                          <td>{item.flightNumber}</td>
+                                          <td>
+                                            {item.from}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {airports
+                                                .filter((f) => f.iata === item.from)
+                                                .map((item) => item.city)}
+                                              {" "}
+                                              {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                            </span>
+                                          </td>
+                                          <td>
+                                            {moment(item.departure).format(
+                                              "DD-MMMM-yyyy"
+                                            )}<br></br>
+                                            {moment(item.departure).format(
+                                              "hh:mm:ss A"
+                                            )}
+                                          </td>
+                                          <td>
+                                            {item.to}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {airports
+                                                .filter((f) => f.iata === item.to)
+                                                .map((item) => item.city)}
+                                              {" "}
+                                              {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                            </span>
+                                          </td>
+                                          <td>
+                                            {moment(item.arrival).format(
+                                              "DD-MMMM-yyyy"
+                                            )}<br></br>
+                                            {moment(item.arrival).format(
+                                              "hh:mm:ss A"
+                                            )}
+                                          </td>
+                                          <td>{item.fareBasisCode}</td>
+                                          <td> {item.serviceClass === "Y"
+                                            ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                            : item.serviceClass === "C"
+                                              ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                              : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                        </tr>
                                             )
                                           })
                                           }
@@ -1321,52 +1355,59 @@ const BookedView = () => {
                                           {ticketingList?.directions[4][0].segments.map((item, index) => {
                                             return (
                                               <tr key={index}>
-                                                <td>
-                                                  {item.airline}
-                                                  <br></br>
-                                                  <span style={{ fontSize: "12px" }}>
-                                                    {item.plane[0]}
-                                                  </span>
-                                                </td>
-                                                <td>{item.flightNumber}</td>
-                                                <td>
-                                                  {item.from}
-                                                  <br></br>
-                                                  <span style={{ fontSize: "12px" }}>
-                                                    {airports
-                                                      .filter((f) => f.iata === item.from)
-                                                      .map((item) => item.city)}
-                                                    {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
-                                                  </span>
-                                                </td>
-                                                <td>
-                                                  {moment(item.departure).format(
-                                                    "DD-MMMM-yyyy hh:mm:ss"
-                                                  )}
-                                                </td>
-                                                <td>
-                                                  {item.to}
-                                                  <br></br>
-                                                  <span style={{ fontSize: "12px" }}>
-                                                    {airports
-                                                      .filter((f) => f.iata === item.to)
-                                                      .map((item) => item.city)}
-                                                    <br></br>
-                                                    {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
-                                                  </span>
-                                                </td>
-                                                <td>
-                                                  {moment(item.arrival).format(
-                                                    "DD-MMMM-yyyy hh:mm:ss"
-                                                  )}
-                                                </td>
-                                                <td>{item.fareBasisCode}</td>
-                                                <td> {item.serviceClass === "Y"
-                                                  ? "ECONOMY" + " (" + item.bookingClass + ")"
-                                                  : item.serviceClass === "C"
-                                                    ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
-                                                    : item.serviceClass + " (" + item.bookingClass + ")"}</td>
-                                              </tr>
+                                          <td>
+                                            {item.airline}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {item.plane[0]}
+                                            </span>
+                                          </td>
+                                          <td>{item.flightNumber}</td>
+                                          <td>
+                                            {item.from}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {airports
+                                                .filter((f) => f.iata === item.from)
+                                                .map((item) => item.city)}
+                                              {" "}
+                                              {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                            </span>
+                                          </td>
+                                          <td>
+                                            {moment(item.departure).format(
+                                              "DD-MMMM-yyyy"
+                                            )}<br></br>
+                                            {moment(item.departure).format(
+                                              "hh:mm:ss A"
+                                            )}
+                                          </td>
+                                          <td>
+                                            {item.to}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {airports
+                                                .filter((f) => f.iata === item.to)
+                                                .map((item) => item.city)}
+                                              {" "}
+                                              {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                            </span>
+                                          </td>
+                                          <td>
+                                            {moment(item.arrival).format(
+                                              "DD-MMMM-yyyy"
+                                            )}<br></br>
+                                            {moment(item.arrival).format(
+                                              "hh:mm:ss A"
+                                            )}
+                                          </td>
+                                          <td>{item.fareBasisCode}</td>
+                                          <td> {item.serviceClass === "Y"
+                                            ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                            : item.serviceClass === "C"
+                                              ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                              : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                        </tr>
                                             )
                                           })
                                           }
@@ -1380,52 +1421,59 @@ const BookedView = () => {
                                           {ticketingList?.directions[5][0].segments.map((item, index) => {
                                             return (
                                               <tr key={index}>
-                                                <td>
-                                                  {item.airline}
-                                                  <br></br>
-                                                  <span style={{ fontSize: "12px" }}>
-                                                    {item.plane[0]}
-                                                  </span>
-                                                </td>
-                                                <td>{item.flightNumber}</td>
-                                                <td>
-                                                  {item.from}
-                                                  <br></br>
-                                                  <span style={{ fontSize: "12px" }}>
-                                                    {airports
-                                                      .filter((f) => f.iata === item.from)
-                                                      .map((item) => item.city)}
-                                                    {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
-                                                  </span>
-                                                </td>
-                                                <td>
-                                                  {moment(item.departure).format(
-                                                    "DD-MMMM-yyyy hh:mm:ss"
-                                                  )}
-                                                </td>
-                                                <td>
-                                                  {item.to}
-                                                  <br></br>
-                                                  <span style={{ fontSize: "12px" }}>
-                                                    {airports
-                                                      .filter((f) => f.iata === item.to)
-                                                      .map((item) => item.city)}
-                                                    <br></br>
-                                                    {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
-                                                  </span>
-                                                </td>
-                                                <td>
-                                                  {moment(item.arrival).format(
-                                                    "DD-MMMM-yyyy hh:mm:ss"
-                                                  )}
-                                                </td>
-                                                <td>{item.fareBasisCode}</td>
-                                                <td> {item.serviceClass === "Y"
-                                                  ? "ECONOMY" + " (" + item.bookingClass + ")"
-                                                  : item.serviceClass === "C"
-                                                    ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
-                                                    : item.serviceClass + " (" + item.bookingClass + ")"}</td>
-                                              </tr>
+                                          <td>
+                                            {item.airline}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {item.plane[0]}
+                                            </span>
+                                          </td>
+                                          <td>{item.flightNumber}</td>
+                                          <td>
+                                            {item.from}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {airports
+                                                .filter((f) => f.iata === item.from)
+                                                .map((item) => item.city)}
+                                              {" "}
+                                              {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                            </span>
+                                          </td>
+                                          <td>
+                                            {moment(item.departure).format(
+                                              "DD-MMMM-yyyy"
+                                            )}<br></br>
+                                            {moment(item.departure).format(
+                                              "hh:mm:ss A"
+                                            )}
+                                          </td>
+                                          <td>
+                                            {item.to}
+                                            <br></br>
+                                            <span style={{ fontSize: "12px" }}>
+                                              {airports
+                                                .filter((f) => f.iata === item.to)
+                                                .map((item) => item.city)}
+                                              {" "}
+                                              {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                            </span>
+                                          </td>
+                                          <td>
+                                            {moment(item.arrival).format(
+                                              "DD-MMMM-yyyy"
+                                            )}<br></br>
+                                            {moment(item.arrival).format(
+                                              "hh:mm:ss A"
+                                            )}
+                                          </td>
+                                          <td>{item.fareBasisCode}</td>
+                                          <td> {item.serviceClass === "Y"
+                                            ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                            : item.serviceClass === "C"
+                                              ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                              : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                        </tr>
                                             )
                                           })
                                           }
@@ -1465,10 +1513,10 @@ const BookedView = () => {
                                   <>
                                     <tr>
                                       <td>{getPassengerType(item.passengerType)}</td>
-                                      <td>{item.basePrice}</td>
-                                      <td>{item.tax}</td>
-                                      <td>{item.discount}</td>
-                                      <td>{item.ait}</td>
+                                      <td>{item.basePrice.toLocaleString("en-US")}</td>
+                                      <td>{item.tax.toLocaleString("en-US")}</td>
+                                      <td>{item.discount.toLocaleString("en-US")}</td>
+                                      <td>{item.ait.toLocaleString("en-US")}</td>
                                       <td>{item.passengerCount}</td>
                                       <td>{item.currencyName} {(item.totalPrice *
                                             item.passengerCount).toLocaleString("en-US")}</td>

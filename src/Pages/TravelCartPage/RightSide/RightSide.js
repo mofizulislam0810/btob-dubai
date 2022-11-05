@@ -7,6 +7,7 @@ import { environment } from "../../SharePages/Utility/environment";
 import axios from "axios";
 import { useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import { totalFlightDuration } from "../../../common/functions";
 
 const RightSide = () => {
   let [fareRules, setFareRules] = useState({});
@@ -211,7 +212,7 @@ const RightSide = () => {
                           <span className="text-color me-5">
                             <i className="fas fa-clock fa-sm"></i>
                             <span className="ms-1 font-size">
-                              {direction1.segments[0].duration[0]}
+                              {totalFlightDuration(direction1.segments)}
                             </span>
                           </span>
                         </div>
@@ -259,7 +260,7 @@ const RightSide = () => {
                             <span className="text-color me-5">
                               <i className="fas fa-clock fa-sm"></i>
                               <span className="ms-1 font-size">
-                                {direction2.segments[0].duration[0]}
+                                {totalFlightDuration(direction2.segments)}
                               </span>
                             </span>
                           </div>
@@ -311,7 +312,7 @@ const RightSide = () => {
                             <span className="text-color me-5">
                               <i className="fas fa-clock fa-sm"></i>
                               <span className="ms-1 font-size">
-                                {direction3.segments[0].duration[0]}
+                                {totalFlightDuration(direction3.segments)}
                               </span>
                             </span>
                           </div>
@@ -363,7 +364,7 @@ const RightSide = () => {
                             <span className="text-color me-5">
                               <i className="fas fa-clock fa-sm"></i>
                               <span className="ms-1 font-size">
-                                {direction4.segments[0].duration[0]}
+                                {totalFlightDuration(direction4.segments)}
                               </span>
                             </span>
                           </div>
@@ -415,7 +416,7 @@ const RightSide = () => {
                             <span className="text-color me-5">
                               <i className="fas fa-clock fa-sm"></i>
                               <span className="ms-1 font-size">
-                                {direction5.segments[0].duration[0]}
+                                {totalFlightDuration(direction5.segments)}
                               </span>
                             </span>
                           </div>
@@ -467,7 +468,7 @@ const RightSide = () => {
                         <span className="text-color me-5">
                           <i className="fas fa-clock fa-sm"></i>
                           <span className="ms-1 font-size">
-                            {direction0.segments[0].duration[0]}
+                            {totalFlightDuration(direction0.segments)}
                           </span>
                         </span>
                       </div>
@@ -526,7 +527,7 @@ const RightSide = () => {
                             <span className="text-color me-5">
                               <i className="fas fa-clock fa-sm"></i>
                               <span className="ms-1 font-size">
-                                {direction1.segments[0].duration[0]}
+                                {totalFlightDuration(direction1.segments)}
                               </span>
                             </span>
                           </div>

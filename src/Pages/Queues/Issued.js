@@ -296,7 +296,7 @@ const Issued = () => {
                                                                             </a>
                                                                         </td>
                                                                         <td>{item.ticketNumber}</td>
-                                                                        <td>{item.ticketingPrice}</td>
+                                                                        <td>{item.ticketingPrice.toLocaleString("en-US")}</td>
                                                                         <td>
                                                                             {item.status === "Issued" ? "Ticketed" :" "} <br />{" "}
                                                                             {item.refundStatus != null

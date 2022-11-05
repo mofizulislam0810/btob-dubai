@@ -1396,6 +1396,7 @@ const Proposal = () => {
                                 <th>Base</th>
                                 <th>Tax</th>
                                 <th>Discount</th>
+                                <th>AIT </th>
                                 <th>Pax</th>
                                 <th>Total Pax Fare</th>
                                 <th>Action</th>
@@ -1411,7 +1412,7 @@ const Proposal = () => {
                                     <td className="right">
                                       {item.passengerFares.adt.discountPrice}
                                     </td>
-                                    {/* <td className="right">{passengerFares.adt.ait}</td> */}
+                                    <td className="right">{item.passengerFares.adt.ait}</td>
                                     <td className="right">{item.passengerCounts.adt}</td>
                                     <td className="right fw-bold">
                                       {currency !== undefined ? currency : "BDT"}  {" "}
@@ -1434,7 +1435,7 @@ const Proposal = () => {
                                     <td className="right">
                                       {item.passengerFares.cnn.discountPrice}
                                     </td>
-                                    {/* <td className="right">{passengerFares.adt.ait}</td> */}
+                                    <td className="right">{item.passengerFares.adt.ait}</td>
                                     <td className="right">{item.passengerCounts.cnn}</td>
                                     <td className="right fw-bold">
                                       {currency !== undefined ? currency : "BDT"}  {" "}
@@ -1457,7 +1458,7 @@ const Proposal = () => {
                                     <td className="right">
                                       {item.passengerFares.inf.discountPrice}
                                     </td>
-                                    {/* <td className="right">{passengerFares.adt.ait}</td> */}
+                                    <td className="right">{item.passengerFares.adt.ait}</td>
                                     <td className="right">{item.passengerCounts.inf}</td>
                                     <td className="right fw-bold">
                                       {currency !== undefined ? currency : "BDT"}  {" "}

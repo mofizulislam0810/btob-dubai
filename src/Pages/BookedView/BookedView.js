@@ -1469,8 +1469,8 @@ const BookedView = () => {
                                       <td>{item.discount}</td>
                                       <td>{item.ait}</td>
                                       <td>{item.passengerCount}</td>
-                                      <td>{item.currencyName} {item.totalPrice *
-                                            item.passengerCount}</td>
+                                      <td>{item.currencyName} {(item.totalPrice *
+                                            item.passengerCount).toLocaleString("en-US")}</td>
                                     </tr>
                                   </>
                                 );
@@ -1479,7 +1479,7 @@ const BookedView = () => {
                                 <td colSpan={5} className='border-none'></td>
                                 <td>Grand Total</td>
                                 <td>{ticketingList.passengerInfo !== undefined ? ticketingList.passengerInfo[0]?.currencyName : ""} {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
-                                  {ticketingList.ticketInfo?.ticketingPrice}
+                                  {(ticketingList.ticketInfo?.ticketingPrice).toLocaleString("en-US")}
                                 </td>
                               </tr>
                             </tbody>

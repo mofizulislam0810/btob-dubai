@@ -347,75 +347,7 @@ const Ticket = () => {
                         </tbody>
                       </table>
 
-                      {/* <div className="d-flex gap-3 justify-content-between">
-                        <div className="">
-                          <table
-                            class="table table-bordered table-sm"
-                            style={{ fontSize: "14px", width: "35rem" }}
-                          >
-                            <thead className="text-white" style={{ backgroundColor: "#8c8f93" }}>
-                              <tr className="text-start">
-                                <th>PASSENGER NAME</th>
-                                <th
-                                  className="text-center"
-                                  style={{ width: "10%" }}
-                                >
-                                  TYPE
-                                </th>
-                                <th style={{ width: "20%" }}>TICKET NUMBER</th>
-                                <th style={{ width: "20%" }}>PHONE NUMBER</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {ticketingList.passengerInfo?.map((item, index) => {
-                                return (
-                                  <tr className="text-start">
-                                    <td>
-                                      {item.title}{" "}
-                                      {item.first}{" "}
-                                      {item.last}
-                                    </td>
-                                    <td
-                                      className="text-center"
-                                      style={{ width: "10%" }}
-                                    >
-                                      {item.passengerType}
-                                    </td>
-                                    <td style={{ width: "20%" }}>
-                                      {item.ticketNumbers}
-                                    </td>
-                                    <td style={{ width: "20%" }}>
-                                      {item.phoneCountryCode + item.phone}
-                                    </td>
-                                  </tr>
-                                );
-                              })}
-                            </tbody>
-                          </table>
-                        </div>
-                        <div className="">
-                          <table
-                            class="table table-bordered table-sm float-right"
-                            style={{ fontSize: "14px", width: "20rem" }}
-                          >
-                            <tbody className="text-start">
-                              <tr>
-                                <td className="fw-bold text-white" style={{ backgroundColor: "#8c8f93" }}>BOOKING ID</td>
-                                <td>{ticketingList.ticketInfo?.uniqueTransID}</td>
-                              </tr>
-                              <tr>
-                                <td className="fw-bold text-white" style={{ backgroundColor: "#8c8f93" }}>JOURNEY TYPE</td>
-                                <td>{ticketingList.ticketInfo?.journeyType}</td>
-                              </tr>
-                              <tr>
-                                <td className="fw-bold text-white" style={{ backgroundColor: "#8c8f93" }}>STATUS</td>
-                                <td>{ticketingList.ticketInfo?.status === 'Issued' ? "Ticketed" : ticketingList.ticketInfo?.status}</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div> */}
-
+                      
                       <div className="table-responsive-sm mt-2">
                         <p
                           className="ps-1 py-2 fw-bold text-start"
@@ -2476,8 +2408,8 @@ const Ticket = () => {
                                           <td>{item.passengerCount}</td>
                                           <td className="fw-bold">
                                             {item.currencyName}{" "}
-                                            {item.totalPrice *
-                                              item.passengerCount}
+                                            {(item.totalPrice *
+                                              item.passengerCount).toLocaleString("en-US")}
                                           </td>
                                         </tr>
                                       </>
@@ -2493,8 +2425,8 @@ const Ticket = () => {
                                           <td>{item.passengerCount}</td>
                                           <td className="fw-bold">
                                             {item.currencyName}{" "}
-                                            {item.totalPrice *
-                                              item.passengerCount}
+                                            {(item.totalPrice *
+                                              item.passengerCount).toLocaleString("en-US")}
                                           </td>
                                         </tr>
                                       </>
@@ -2510,8 +2442,8 @@ const Ticket = () => {
                                           <td>{item.passengerCount}</td>
                                           <td className="fw-bold">
                                             {item.currencyName}{" "}
-                                            {item.totalPrice *
-                                              item.passengerCount}
+                                            {(item.totalPrice *
+                                              item.passengerCount).toLocaleString("en-US")}
                                           </td>
                                         </tr>
                                       </>
@@ -2530,7 +2462,7 @@ const Ticket = () => {
                                         ?.currencyName
                                     : ""}{" "}
                                   {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
-                                  {ticketingList.ticketInfo?.ticketingPrice}
+                                  {ticketingList.ticketInfo?.ticketingPrice.toLocaleString("en-US")}
                                 </td>
                               </tr>
                             </tbody>

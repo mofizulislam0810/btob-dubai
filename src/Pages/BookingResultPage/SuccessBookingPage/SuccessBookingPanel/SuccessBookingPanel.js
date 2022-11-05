@@ -631,7 +631,7 @@ const SuccessBookingPanel = () => {
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.adt}</td>
                                 <td className="right fw-bold">
                                   BDT {(bookData.data?.item1.flightInfo?.passengerFares.adt.totalPrice *
-                                    bookData.data?.item1.flightInfo?.passengerCounts.adt).toFixed(2)}
+                                    bookData.data?.item1.flightInfo?.passengerCounts.adt).toLocaleString("en-US")}
                                 </td>
                               </tr>
                             </>
@@ -658,7 +658,7 @@ const SuccessBookingPanel = () => {
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.cnn}</td>
                                 <td className="right fw-bold">
                                   BDT {(bookData.data?.item1.flightInfo?.passengerFares.cnn.totalPrice *
-                                    bookData.data?.item1.flightInfo?.passengerCounts.cnn).toFixed(2)}
+                                    bookData.data?.item1.flightInfo?.passengerCounts.cnn).toLocaleString("en-US")}
                                 </td>
                               </tr>
                             </>
@@ -685,7 +685,7 @@ const SuccessBookingPanel = () => {
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.inf}</td>
                                 <td className="right fw-bold">
                                   BDT {(bookData.data?.item1.flightInfo?.passengerFares.inf.totalPrice *
-                                    bookData.data?.item1.flightInfo?.passengerCounts.inf).toFixed(2)}
+                                    bookData.data?.item1.flightInfo?.passengerCounts.inf).toLocaleString("en-US")}
                                 </td>
                               </tr>
                             </>
@@ -696,7 +696,7 @@ const SuccessBookingPanel = () => {
                             <td colSpan={5} className='border-none'></td>
                             <td>Grand Total</td>
                             <td>BDT{" "}
-                              {bookData.data?.item1.flightInfo?.bookingComponents[0].totalPrice}
+                              {(bookData.data?.item1.flightInfo?.bookingComponents[0].totalPrice).toLocaleString("en-US")}
                             </td>
                           </tr>
                         </tbody>

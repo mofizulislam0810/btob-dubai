@@ -64,15 +64,15 @@ const Footer = () => {
       <Box className="container-fluid" bg="#591b7d" >
         <Box className="container">
           <Flex w="100%" pt={'20px'} pb='10px' justifyContent="space-between" color={'white'}>
-            <Box >
+            <Box className="d-flex align-items-center">
               {/* <div  w="160px" h="103px" /> */}
-              <HStack gap="10px">
+            
                 {socialData.map((item, idx) => (
-                  <Circle bg="#E0ECFB" size="45px" key={idx}>
+                  <Circle bg="#E0ECFB" size="45px" key={idx} className="mx-1">
                     <Icon as={item.icon} h="22px" w="22px" color='black' />
                   </Circle>
                 ))}
-              </HStack>
+         
             </Box>
 
             {/* <Box borderRight="1px" color="#ECECEC" my={2} /> */}

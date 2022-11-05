@@ -8,6 +8,7 @@ import ReactPaginate from "react-paginate";
 import { Box, Button, Center, Spinner, Text } from "@chakra-ui/react";
 import { ToastContainer, toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
+import Footer from '../SharePages/Footer/Footer';
 
 const Issued = () => {
     let [pageCount, setPageCount] = useState(0);
@@ -514,6 +515,7 @@ const Issued = () => {
                     </form>
                 </section>
             </div>
+            <Footer />
         </div>
     );
 };

@@ -268,7 +268,7 @@ const DashboardPanel = () => {
               <div className="col-lg-3 col-6">
                 <div className="small-box bg-warning">
                   <div className="inner">
-                    <h3>BDT {totalSales}</h3>
+                    <h3>BDT {totalSales.toLocaleString("en-US")}</h3>
                     <p>Total Sales</p>
                   </div>
                   <div className="icon">

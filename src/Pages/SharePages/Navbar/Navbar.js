@@ -225,7 +225,7 @@ const Navbar = () => {
               {agentInfo?.currencyName !== undefined
                 ? agentInfo?.currencyName
                 : ""}{" "}
-              {agentInfo?.currentBalance ?? 0}
+              {agentInfo?.currentBalance?.toLocaleString("en-US") ?? 0}
             </span>
           </a>
           <div

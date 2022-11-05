@@ -237,7 +237,7 @@ const Staff = () => {
                               </td>
                               <td>{item.userEmail}</td>
                               <td>{item.userMobileNo}</td>
-                              <td>{item.balanceLimit}</td>
+                              <td>{item.balanceLimit.toLocaleString("en-US")}</td>
                               <td>{item.password}</td>
                               <td>
                                 {moment(item.createdDate).format(

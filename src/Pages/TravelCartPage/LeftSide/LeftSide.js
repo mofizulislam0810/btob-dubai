@@ -39,7 +39,9 @@ const LeftSide = () => {
   let [passengerCNNList, setPassengerCNNList] = useState([]);
   let [passengerINFList, setPassengerINFList] = useState([]);
   const [click, setClick] = useState(false);
-
+  const Database = JSON.parse(localStorage.getItem("Database"))
+  console.log({ "object": Database })
+  console.log(Database?.journeyDate)
   const handlePassportFileUpload = (flag, index, file, passportNo) => {
     let fileExt = file.name.split(".").pop().toLowerCase();
     if (
@@ -715,7 +717,7 @@ const LeftSide = () => {
           <div className="card-body border">
             <div style={{ fontSize: "small" }}>
               <h5 className="text-color fw-bold text-start">
-                Enter passsanger details
+                Enter passenger details
               </h5>
 
               {adult.map((p, index) => {
@@ -1017,7 +1019,7 @@ const LeftSide = () => {
                                   }}
 
                                   value={p?.dateOfBirth}
-                                  max={ISODateFormatter(add(new Date(), {
+                                  max={ISODateFormatter(add(new Date(Database?.journeyDate), {
                                     years: -12,
                                   }))}
                                   required
@@ -1468,7 +1470,7 @@ const LeftSide = () => {
                           />
                         </div>
                       </div>
-                      {(origin.match("Bangladesh") !== null
+                      {/* {(origin.match("Bangladesh") !== null
                         ? origin.match("Bangladesh")[0]
                         : "") &&
                         (destination.match("Bangladesh") !== null
@@ -1522,7 +1524,7 @@ const LeftSide = () => {
                             </div>
                           </div>
                         </>
-                      )}
+                      )} */}
                     </div>
                   </div>
                 );
@@ -1731,10 +1733,10 @@ const LeftSide = () => {
                                 );
                               }}
                               value={p?.dateOfBirth}
-                              min={ISODateFormatter(add(new Date(), {
+                              min={ISODateFormatter(add(new Date(Database?.journeyDate), {
                                 years: -12,
                               }))}
-                              max={ISODateFormatter(add(new Date(), {
+                              max={ISODateFormatter(add(new Date(Database?.journeyDate), {
                                 years: -2,
                               }))}
                               required
@@ -2196,7 +2198,7 @@ const LeftSide = () => {
                         </div>
                       </>
                     )}
-                    <div className="row">
+                    {/* <div className="row">
                       {(origin.match("Bangladesh") !== null
                         ? origin.match("Bangladesh")[0]
                         : "") &&
@@ -2252,7 +2254,7 @@ const LeftSide = () => {
                           </div>
                         </>
                       )}
-                    </div>
+                    </div> */}
                   </div>
                 );
               })}
@@ -2459,10 +2461,10 @@ const LeftSide = () => {
                                 );
                               }}
                               value={p?.dateOfBirth}
-                              min={ISODateFormatter(add(new Date(), {
+                              min={ISODateFormatter(add(new Date(Database?.journeyDate), {
                                 years: -2,
                               }))}
-                              max={ISODateFormatter(new Date())}
+                              max={ISODateFormatter(new Date(Database?.journeyDate))}
                               required
                               autoComplete="off"
                               placeholder="Date of Birth"
@@ -2870,7 +2872,7 @@ const LeftSide = () => {
                       </>
                     )}
 
-                    <div className="row">
+                    {/* <div className="row">
                       {(origin.match("Bangladesh") !== null
                         ? origin.match("Bangladesh")[0]
                         : "") &&
@@ -2926,7 +2928,7 @@ const LeftSide = () => {
                           </div>
                         </>
                       )}
-                    </div>
+                    </div> */}
                   </div>
                 );
               })}

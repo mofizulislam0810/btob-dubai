@@ -228,10 +228,10 @@ const Ticket = () => {
                             {/* CHANGE THIS LATER */}
                             <td className="text-start">
                               {ticketingList.ticketInfo?.agentLogo !== null &&
-                              ticketingList.ticketInfo?.agentLogo === "" ? (
+                              ticketingList.ticketInfo?.agentLogo !== "" ? (
                                 <img
                                   alt="img01"
-                                  src={ `/${s3URL + ticketingList.ticketInfo?.agentLogo}`
+                                  src={ `/${ticketingList.ticketInfo?.agentLogo}`
                                   }
                                   
                                   style={{ width: "160px" }}
@@ -471,7 +471,8 @@ const Ticket = () => {
                                         </span>
                                         <span className="d-flex align-items-center fw-bold">
                                           <img
-                                            src={`/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                            // src={`/airlines-logo${ticketingList.ticketInfo?.airlineCode}.png`}
+                                            src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.png`}
                                             className="me-2"
                                             alt=""
                                             width="30px"
@@ -667,7 +668,7 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src={`/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                src="/AirlineLogos/1T.jpg"
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -954,7 +955,7 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src={`/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.png`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -1242,7 +1243,7 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src={`/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                               src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.png`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -1530,7 +1531,7 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src={`/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.png`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -1818,7 +1819,7 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src={`/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.png`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -2106,7 +2107,7 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src={`/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                                src="https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/AirlineLogos/BS.jpg"
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"

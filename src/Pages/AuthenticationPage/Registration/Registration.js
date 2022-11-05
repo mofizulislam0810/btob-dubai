@@ -36,7 +36,8 @@ import airlines2 from "../../../images/landing/airlines-6.png";
 import airlines3 from "../../../images/landing/airlines-7.png";
 import airlines4 from "../../../images/landing/airlines-8.png";
 import { nanoid } from "nanoid";
-
+import { Partners } from "../../SharePages/Footer/Partners";
+import Service from "../../SharePages/Footer/Service";
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -610,6 +611,8 @@ const Registration = () => {
       </div> */}
         </div>
 
+        <Partners />
+        <Service />
 
         <Footer></Footer>
       </VStack>

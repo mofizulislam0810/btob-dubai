@@ -7,7 +7,9 @@ import moment from "moment";
 import pdfMake from "pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
 import airports from "../../JSON/airports.json";
 import Navbar from "../SharePages/Navbar/Navbar";
 import SideNavBar from "../SharePages/SideNavBar/SideNavBar";
@@ -16,6 +18,9 @@ import { environment } from "../SharePages/Utility/environment";
 import "./Proposal.css";
 
 const Proposal = () => {
+  const {setCount} = useAuth();
+  setCount(0);
+  const navigate = useNavigate();
   let defaultPriceList = [];
   let flightList = JSON.parse(sessionStorage.getItem("checkList"));
   const currency = JSON.parse(localStorage.getItem("currency"));
@@ -200,6 +205,9 @@ const Proposal = () => {
         if (response.status === 200 && response.data) {
           toast.success("Email send successfully.");
           setEmailSection(false);
+          // navigate('/search')
+          // setTimeout(() =>navigate('/search'), 20000);
+          setCount(0);
         }
         else {
           toast.error("Please try again.")
@@ -207,6 +215,8 @@ const Proposal = () => {
       })
       .finally(() => {
         setbtnDisabled(false);
+        setTimeout(() =>navigate('/search'), 2000)
+        sessionStorage.removeItem("checkList")
       });
     e.preventDefault();
   }
@@ -332,10 +342,10 @@ const Proposal = () => {
                     <form onSubmit={handleMessageUser}>
                       <div className="card-body">
                         <div className="form-group">
-                          <input className="form-control rounded" name="ToEmail" onBlur={handleOnBlur} placeholder="To:" />
+                          <input type="email" className="form-control rounded" name="ToEmail" onBlur={handleOnBlur} placeholder="To:" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
                         </div>
                         <div className="form-group">
-                          <input className="form-control rounded" name="subject" onBlur={handleOnBlur} placeholder="Subject:" />
+                          <input type="text" className="form-control rounded" name="subject" onBlur={handleOnBlur} placeholder="Subject:" required/>
                         </div>
                         <div className="form-group">
                           <textarea
@@ -344,6 +354,7 @@ const Proposal = () => {
                             className="form-control rounded"
                             placeholder="Message: "
                             style={{ height: "100px" }}
+                            required
                           ></textarea>
                         </div>
                         {/* <div className="form-group">

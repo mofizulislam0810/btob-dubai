@@ -97,7 +97,7 @@ const SuccessTicketPanel = () => {
                                     src={
                                       s3URL + `${agentInfo?.logoName}`
                                     }
-                                    style={{ width: "150px", height: "50px" }}
+                                    style={{ width: "150px", height: "70px" }}
                                   ></img>
                                 ) : (
                                   <>
@@ -105,7 +105,7 @@ const SuccessTicketPanel = () => {
                                       alt="img02"
                                       className="p-2"
                                       src={logo}
-                                      style={{ width: "150px", height: "50px" }}
+                                      style={{ width: "150px", height: "70px" }}
                                     ></img>
                                   </>
                                 )}

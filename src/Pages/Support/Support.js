@@ -430,7 +430,7 @@ const Support = () => {
                 <div className="mx-4">
                   <div className="row">
                     <div className="col-sm-3">
-                      <label>
+                      {/* <label>
                         Support Type<span style={{ color: "red" }}>*</span>
                       </label>
                       <select
@@ -451,7 +451,7 @@ const Support = () => {
                             </option>
                           );
                         })}
-                      </select>
+                      </select> */}
                     </div>
                   </div>
                   <br />

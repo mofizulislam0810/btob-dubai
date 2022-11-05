@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 import imgOne from "../../../images/bgImage/SL01.jpg";
 import imgTwo from "../../../images/bgImage/SL03.jpg";
+import imgThree from '../../../images/bgImage/SL02.png'
 import "./AddPanel.css";
 
 const AddPanel = () => {
@@ -17,7 +18,7 @@ const AddPanel = () => {
               border="1px solid lightgray"
             >
               <img
-                src={imgOne}
+                src={imgThree}
                 className="img-fluid add-banner"
                 alt="..."
                 style={{ height: "200px", width: "100%" }}

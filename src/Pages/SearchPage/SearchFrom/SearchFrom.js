@@ -110,7 +110,6 @@ const SearchFrom = () => {
       const inputDateMulti4 = $("#departureDate4").children("input").val();
       const inputDateMulti5 = $("#departureDate5").children("input").val();
 
-      console.log("origin1, destination1, inputDateMulti1", origin2.length, destination2.length, inputDateMulti1, inputDateMulti1.length)
 
       if (origin === destination && origin !== "" && destination !== "") {
         toast.error("Depart From and Going To must be difference No.1");

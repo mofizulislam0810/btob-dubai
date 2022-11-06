@@ -58,12 +58,12 @@ const Ticket = () => {
       //   response.data.data[0].passengerIds,
       //   response.data.data[0].uniqueTransID
       // );
-      setBasePrice(response.data[0].basePrice);
-      setTax(response.data[0].tax);
-      setAIT(Number(response.data[0].basePrice) * 0.003);
-      setTotalPrice(response.data[0].ticketingPrice);
-      setDiscount(response.data[0].discount);
-      setAdditionalPrice(response.data[0].agentAdditionalPrice);
+      setBasePrice(response?.data[0]?.basePrice);
+      setTax(response?.data[0]?.tax);
+      setAIT(Number(response?.data[0]?.basePrice) * 0.003);
+      setTotalPrice(response?.data[0]?.ticketingPrice);
+      setDiscount(response?.data[0]?.discount);
+      setAdditionalPrice(response?.data[0]?.agentAdditionalPrice);
     };
     getTicketingList();
   };
@@ -228,16 +228,16 @@ const Ticket = () => {
                             {/* CHANGE THIS LATER */}
                             <td className="text-start">
                               {ticketingList.ticketInfo?.agentLogo !== null &&
-                              ticketingList.ticketInfo?.agentLogo === "" ? (
+                                ticketingList.ticketInfo?.agentLogo === "" ? (
                                 <img
                                   alt="img01"
-                                  src={ `/${s3URL + ticketingList.ticketInfo?.agentLogo}`
+                                  src={`/${s3URL + ticketingList.ticketInfo?.agentLogo}`
                                   }
-                                  
+
                                   style={{ width: "160px" }}
                                 ></img>
                               ) : (
-                               <>
+                                <>
                                   <img
                                     alt="img01"
                                     className="p-2"
@@ -458,8 +458,8 @@ const Ticket = () => {
                                     {item.passengerType === "ADT"
                                       ? "Adult"
                                       : item.passengerType === "CNN"
-                                      ? "Child"
-                                      : "Infant"}
+                                        ? "Child"
+                                        : "Infant"}
                                   </td>
                                   <td>{item.ticketNumbers}</td>
                                   {index === 0 ? (
@@ -494,7 +494,7 @@ const Ticket = () => {
                           </tbody>
                         </table>
                       </div>
-                      
+
                       <div className="table-responsive-sm mt-3">
                         <p
                           className="ps-1 py-2 fw-bold text-start"
@@ -511,7 +511,7 @@ const Ticket = () => {
                             style={{ fontSize: "14px" }}
                           >
                             {ticketingList?.ticketInfo?.bookingType !==
-                            "Online" ? (
+                              "Online" ? (
                               <>
                                 {ticketingList.segmentInfo?.map(
                                   (item, index) => {
@@ -702,7 +702,7 @@ const Ticket = () => {
                             ) : (
                               <>
                                 {ticketingList?.directions[0] !== undefined &&
-                                ticketingList?.directions !== undefined ? (
+                                  ticketingList?.directions !== undefined ? (
                                   <div className="border my-1">
                                     {ticketingList?.directions[0][0].segments.map(
                                       (item, index) => {
@@ -864,8 +864,8 @@ const Ticket = () => {
                                                           {item.details[0]
                                                             .originTerminal !==
                                                             null &&
-                                                          item.details[0]
-                                                            .originTerminal !==
+                                                            item.details[0]
+                                                              .originTerminal !==
                                                             "" ? (
                                                             <>
                                                               Terminal-(
@@ -899,8 +899,8 @@ const Ticket = () => {
                                                           {item.details[0]
                                                             .destinationTerminal !==
                                                             null &&
-                                                          item.details[0]
-                                                            .destinationTerminal !==
+                                                            item.details[0]
+                                                              .destinationTerminal !==
                                                             "" ? (
                                                             <>
                                                               Terminal-(
@@ -924,16 +924,16 @@ const Ticket = () => {
                                                   <td className="align-middle">
                                                     {item.serviceClass === "Y"
                                                       ? "ECONOMY" +
-                                                        "(" +
-                                                        item.bookingClass +
-                                                        ")"
+                                                      "(" +
+                                                      item.bookingClass +
+                                                      ")"
                                                       : item.serviceClass ===
                                                         "C"
-                                                      ? "BUSINESS CLASS" +
+                                                        ? "BUSINESS CLASS" +
                                                         "(" +
                                                         item.bookingClass +
                                                         ")"
-                                                      : item.serviceClass +
+                                                        : item.serviceClass +
                                                         "(" +
                                                         item.bookingClass +
                                                         ")"}
@@ -945,12 +945,12 @@ const Ticket = () => {
                                                           <>
                                                             <span>
                                                               {itm.passengerType ===
-                                                              "ADT"
+                                                                "ADT"
                                                                 ? "Adult"
                                                                 : itm.passengerType ===
                                                                   "CNN"
-                                                                ? "Child"
-                                                                : "Infant"}{" "}
+                                                                  ? "Child"
+                                                                  : "Infant"}{" "}
                                                               <span
                                                                 style={{
                                                                   fontSize:
@@ -961,11 +961,11 @@ const Ticket = () => {
                                                               </span>{" "}
                                                               Check in :{" "}
                                                               {itm.passengerType ===
-                                                              "INF"
+                                                                "INF"
                                                                 ? "10"
                                                                 : item
-                                                                    .baggage[0]
-                                                                    ?.amount}
+                                                                  .baggage[0]
+                                                                  ?.amount}
                                                               {
                                                                 item.baggage[0]
                                                                   ?.units
@@ -989,7 +989,7 @@ const Ticket = () => {
                                   <></>
                                 )}
                                 {ticketingList?.directions[1] !== undefined &&
-                                ticketingList?.directions !== undefined ? (
+                                  ticketingList?.directions !== undefined ? (
                                   <div className="border mb-1">
                                     {ticketingList?.directions[1][0].segments.map(
                                       (item, index) => {
@@ -1151,8 +1151,8 @@ const Ticket = () => {
                                                           {item.details[0]
                                                             .originTerminal !==
                                                             null &&
-                                                          item.details[0]
-                                                            .originTerminal !==
+                                                            item.details[0]
+                                                              .originTerminal !==
                                                             "" ? (
                                                             <>
                                                               Terminal-(
@@ -1186,8 +1186,8 @@ const Ticket = () => {
                                                           {item.details[0]
                                                             .destinationTerminal !==
                                                             null &&
-                                                          item.details[0]
-                                                            .destinationTerminal !==
+                                                            item.details[0]
+                                                              .destinationTerminal !==
                                                             "" ? (
                                                             <>
                                                               Terminal-(
@@ -1211,16 +1211,16 @@ const Ticket = () => {
                                                   <td className="align-middle">
                                                     {item.serviceClass === "Y"
                                                       ? "ECONOMY" +
-                                                        "(" +
-                                                        item.bookingClass +
-                                                        ")"
+                                                      "(" +
+                                                      item.bookingClass +
+                                                      ")"
                                                       : item.serviceClass ===
                                                         "C"
-                                                      ? "BUSINESS CLASS" +
+                                                        ? "BUSINESS CLASS" +
                                                         "(" +
                                                         item.bookingClass +
                                                         ")"
-                                                      : item.serviceClass +
+                                                        : item.serviceClass +
                                                         "(" +
                                                         item.bookingClass +
                                                         ")"}
@@ -1232,12 +1232,12 @@ const Ticket = () => {
                                                           <>
                                                             <span>
                                                               {itm.passengerType ===
-                                                              "ADT"
+                                                                "ADT"
                                                                 ? "Adult"
                                                                 : itm.passengerType ===
                                                                   "CNN"
-                                                                ? "Child"
-                                                                : "Infant"}{" "}
+                                                                  ? "Child"
+                                                                  : "Infant"}{" "}
                                                               <span
                                                                 style={{
                                                                   fontSize:
@@ -1248,11 +1248,11 @@ const Ticket = () => {
                                                               </span>{" "}
                                                               Check in :{" "}
                                                               {itm.passengerType ===
-                                                              "INF"
+                                                                "INF"
                                                                 ? "10"
                                                                 : item
-                                                                    .baggage[0]
-                                                                    ?.amount}
+                                                                  .baggage[0]
+                                                                  ?.amount}
                                                               {
                                                                 item.baggage[0]
                                                                   ?.units
@@ -1277,7 +1277,7 @@ const Ticket = () => {
                                 )}
 
                                 {ticketingList?.directions[2] !== undefined &&
-                                ticketingList?.directions !== undefined ? (
+                                  ticketingList?.directions !== undefined ? (
                                   <div className="border mb-1">
                                     {ticketingList?.directions[2][0].segments.map(
                                       (item, index) => {
@@ -1439,8 +1439,8 @@ const Ticket = () => {
                                                           {item.details[0]
                                                             .originTerminal !==
                                                             null &&
-                                                          item.details[0]
-                                                            .originTerminal !==
+                                                            item.details[0]
+                                                              .originTerminal !==
                                                             "" ? (
                                                             <>
                                                               Terminal-(
@@ -1474,8 +1474,8 @@ const Ticket = () => {
                                                           {item.details[0]
                                                             .destinationTerminal !==
                                                             null &&
-                                                          item.details[0]
-                                                            .destinationTerminal !==
+                                                            item.details[0]
+                                                              .destinationTerminal !==
                                                             "" ? (
                                                             <>
                                                               Terminal-(
@@ -1499,16 +1499,16 @@ const Ticket = () => {
                                                   <td className="align-middle">
                                                     {item.serviceClass === "Y"
                                                       ? "ECONOMY" +
-                                                        "(" +
-                                                        item.bookingClass +
-                                                        ")"
+                                                      "(" +
+                                                      item.bookingClass +
+                                                      ")"
                                                       : item.serviceClass ===
                                                         "C"
-                                                      ? "BUSINESS CLASS" +
+                                                        ? "BUSINESS CLASS" +
                                                         "(" +
                                                         item.bookingClass +
                                                         ")"
-                                                      : item.serviceClass +
+                                                        : item.serviceClass +
                                                         "(" +
                                                         item.bookingClass +
                                                         ")"}
@@ -1520,12 +1520,12 @@ const Ticket = () => {
                                                           <>
                                                             <span>
                                                               {itm.passengerType ===
-                                                              "ADT"
+                                                                "ADT"
                                                                 ? "Adult"
                                                                 : itm.passengerType ===
                                                                   "CNN"
-                                                                ? "Child"
-                                                                : "Infant"}{" "}
+                                                                  ? "Child"
+                                                                  : "Infant"}{" "}
                                                               <span
                                                                 style={{
                                                                   fontSize:
@@ -1536,11 +1536,11 @@ const Ticket = () => {
                                                               </span>{" "}
                                                               Check in :{" "}
                                                               {itm.passengerType ===
-                                                              "INF"
+                                                                "INF"
                                                                 ? "10"
                                                                 : item
-                                                                    .baggage[0]
-                                                                    ?.amount}
+                                                                  .baggage[0]
+                                                                  ?.amount}
                                                               {
                                                                 item.baggage[0]
                                                                   ?.units
@@ -1565,7 +1565,7 @@ const Ticket = () => {
                                 )}
 
                                 {ticketingList?.directions[3] !== undefined &&
-                                ticketingList?.directions !== undefined ? (
+                                  ticketingList?.directions !== undefined ? (
                                   <div className="border mb-1">
                                     {ticketingList?.directions[3][0].segments.map(
                                       (item, index) => {
@@ -1727,8 +1727,8 @@ const Ticket = () => {
                                                           {item.details[0]
                                                             .originTerminal !==
                                                             null &&
-                                                          item.details[0]
-                                                            .originTerminal !==
+                                                            item.details[0]
+                                                              .originTerminal !==
                                                             "" ? (
                                                             <>
                                                               Terminal-(
@@ -1762,8 +1762,8 @@ const Ticket = () => {
                                                           {item.details[0]
                                                             .destinationTerminal !==
                                                             null &&
-                                                          item.details[0]
-                                                            .destinationTerminal !==
+                                                            item.details[0]
+                                                              .destinationTerminal !==
                                                             "" ? (
                                                             <>
                                                               Terminal-(
@@ -1787,16 +1787,16 @@ const Ticket = () => {
                                                   <td className="align-middle">
                                                     {item.serviceClass === "Y"
                                                       ? "ECONOMY" +
-                                                        "(" +
-                                                        item.bookingClass +
-                                                        ")"
+                                                      "(" +
+                                                      item.bookingClass +
+                                                      ")"
                                                       : item.serviceClass ===
                                                         "C"
-                                                      ? "BUSINESS CLASS" +
+                                                        ? "BUSINESS CLASS" +
                                                         "(" +
                                                         item.bookingClass +
                                                         ")"
-                                                      : item.serviceClass +
+                                                        : item.serviceClass +
                                                         "(" +
                                                         item.bookingClass +
                                                         ")"}
@@ -1808,12 +1808,12 @@ const Ticket = () => {
                                                           <>
                                                             <span>
                                                               {itm.passengerType ===
-                                                              "ADT"
+                                                                "ADT"
                                                                 ? "Adult"
                                                                 : itm.passengerType ===
                                                                   "CNN"
-                                                                ? "Child"
-                                                                : "Infant"}{" "}
+                                                                  ? "Child"
+                                                                  : "Infant"}{" "}
                                                               <span
                                                                 style={{
                                                                   fontSize:
@@ -1824,11 +1824,11 @@ const Ticket = () => {
                                                               </span>{" "}
                                                               Check in :{" "}
                                                               {itm.passengerType ===
-                                                              "INF"
+                                                                "INF"
                                                                 ? "10"
                                                                 : item
-                                                                    .baggage[0]
-                                                                    ?.amount}
+                                                                  .baggage[0]
+                                                                  ?.amount}
                                                               {
                                                                 item.baggage[0]
                                                                   ?.units
@@ -1853,7 +1853,7 @@ const Ticket = () => {
                                 )}
 
                                 {ticketingList?.directions[4] !== undefined &&
-                                ticketingList?.directions !== undefined ? (
+                                  ticketingList?.directions !== undefined ? (
                                   <div className="border mb-1">
                                     {ticketingList?.directions[4][0].segments.map(
                                       (item, index) => {
@@ -2015,8 +2015,8 @@ const Ticket = () => {
                                                           {item.details[0]
                                                             .originTerminal !==
                                                             null &&
-                                                          item.details[0]
-                                                            .originTerminal !==
+                                                            item.details[0]
+                                                              .originTerminal !==
                                                             "" ? (
                                                             <>
                                                               Terminal-(
@@ -2050,8 +2050,8 @@ const Ticket = () => {
                                                           {item.details[0]
                                                             .destinationTerminal !==
                                                             null &&
-                                                          item.details[0]
-                                                            .destinationTerminal !==
+                                                            item.details[0]
+                                                              .destinationTerminal !==
                                                             "" ? (
                                                             <>
                                                               Terminal-(
@@ -2075,16 +2075,16 @@ const Ticket = () => {
                                                   <td className="align-middle">
                                                     {item.serviceClass === "Y"
                                                       ? "ECONOMY" +
-                                                        "(" +
-                                                        item.bookingClass +
-                                                        ")"
+                                                      "(" +
+                                                      item.bookingClass +
+                                                      ")"
                                                       : item.serviceClass ===
                                                         "C"
-                                                      ? "BUSINESS CLASS" +
+                                                        ? "BUSINESS CLASS" +
                                                         "(" +
                                                         item.bookingClass +
                                                         ")"
-                                                      : item.serviceClass +
+                                                        : item.serviceClass +
                                                         "(" +
                                                         item.bookingClass +
                                                         ")"}
@@ -2096,12 +2096,12 @@ const Ticket = () => {
                                                           <>
                                                             <span>
                                                               {itm.passengerType ===
-                                                              "ADT"
+                                                                "ADT"
                                                                 ? "Adult"
                                                                 : itm.passengerType ===
                                                                   "CNN"
-                                                                ? "Child"
-                                                                : "Infant"}{" "}
+                                                                  ? "Child"
+                                                                  : "Infant"}{" "}
                                                               <span
                                                                 style={{
                                                                   fontSize:
@@ -2112,11 +2112,11 @@ const Ticket = () => {
                                                               </span>{" "}
                                                               Check in :{" "}
                                                               {itm.passengerType ===
-                                                              "INF"
+                                                                "INF"
                                                                 ? "10"
                                                                 : item
-                                                                    .baggage[0]
-                                                                    ?.amount}
+                                                                  .baggage[0]
+                                                                  ?.amount}
                                                               {
                                                                 item.baggage[0]
                                                                   ?.units
@@ -2141,7 +2141,7 @@ const Ticket = () => {
                                 )}
 
                                 {ticketingList?.directions[5] !== undefined &&
-                                ticketingList?.directions !== undefined ? (
+                                  ticketingList?.directions !== undefined ? (
                                   <div className="border mb-1">
                                     {ticketingList?.directions[5][0].segments.map(
                                       (item, index) => {
@@ -2303,8 +2303,8 @@ const Ticket = () => {
                                                           {item.details[0]
                                                             .originTerminal !==
                                                             null &&
-                                                          item.details[0]
-                                                            .originTerminal !==
+                                                            item.details[0]
+                                                              .originTerminal !==
                                                             "" ? (
                                                             <>
                                                               Terminal-(
@@ -2338,8 +2338,8 @@ const Ticket = () => {
                                                           {item.details[0]
                                                             .destinationTerminal !==
                                                             null &&
-                                                          item.details[0]
-                                                            .destinationTerminal !==
+                                                            item.details[0]
+                                                              .destinationTerminal !==
                                                             "" ? (
                                                             <>
                                                               Terminal-(
@@ -2363,16 +2363,16 @@ const Ticket = () => {
                                                   <td className="align-middle">
                                                     {item.serviceClass === "Y"
                                                       ? "ECONOMY" +
-                                                        "(" +
-                                                        item.bookingClass +
-                                                        ")"
+                                                      "(" +
+                                                      item.bookingClass +
+                                                      ")"
                                                       : item.serviceClass ===
                                                         "C"
-                                                      ? "BUSINESS CLASS" +
+                                                        ? "BUSINESS CLASS" +
                                                         "(" +
                                                         item.bookingClass +
                                                         ")"
-                                                      : item.serviceClass +
+                                                        : item.serviceClass +
                                                         "(" +
                                                         item.bookingClass +
                                                         ")"}
@@ -2384,12 +2384,12 @@ const Ticket = () => {
                                                           <>
                                                             <span>
                                                               {itm.passengerType ===
-                                                              "ADT"
+                                                                "ADT"
                                                                 ? "Adult"
                                                                 : itm.passengerType ===
                                                                   "CNN"
-                                                                ? "Child"
-                                                                : "Infant"}{" "}
+                                                                  ? "Child"
+                                                                  : "Infant"}{" "}
                                                               <span
                                                                 style={{
                                                                   fontSize:
@@ -2400,11 +2400,11 @@ const Ticket = () => {
                                                               </span>{" "}
                                                               Check in :{" "}
                                                               {itm.passengerType ===
-                                                              "INF"
+                                                                "INF"
                                                                 ? "10"
                                                                 : item
-                                                                    .baggage[0]
-                                                                    ?.amount}
+                                                                  .baggage[0]
+                                                                  ?.amount}
                                                               {
                                                                 item.baggage[0]
                                                                   ?.units
@@ -2527,7 +2527,7 @@ const Ticket = () => {
                                 <td>
                                   {ticketingList.passengerInfo !== undefined
                                     ? ticketingList.passengerInfo[0]
-                                        ?.currencyName
+                                      ?.currencyName
                                     : ""}{" "}
                                   {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
                                   {ticketingList.ticketInfo?.ticketingPrice}

@@ -65,15 +65,16 @@ const Footer = () => {
         <Box className="container">
 
           <Flex w="100%" pt={'20px'} pb='10px' justifyContent="space-between" color={'white'}>
-            <Box >
-              <Image src={logo} alt="FirstTrip" w="160px" mb="24px" />
-              <HStack gap="10px">
-                {socialData.map((item, idx) => (
-                  <Circle bg="#E0ECFB" size="45px" key={idx}>
-                    <Icon as={item.icon} h="22px" w="22px" color='black' />
-                  </Circle>
-                ))}
-              </HStack>
+
+            <Box className="d-flex align-items-center">
+              {/* <Image src={logo} alt="FirstTrip" w="160px" mb="24px" /> */}
+
+              {socialData.map((item, idx) => (
+                <Circle bg="#E0ECFB" size="45px" key={idx} className="mx-1">
+                  <Icon as={item.icon} h="22px" w="22px" color='black' />
+                </Circle>
+              ))}
+
             </Box>
 
             {/* <Box borderRight="1px" color="#ECECEC" my={2} /> */}

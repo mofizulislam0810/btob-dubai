@@ -21,7 +21,7 @@ const DashboardPanel = () => {
 //  console.log(environment.getCalendarEventBooking+`/${date.year}/${(date.month)-1}`)
   const getEventBooking = async() => {
     const response = await axios.get(environment.getCalendarEventBooking+`/${date.year}/${(date.month)-1}`,environment.headerToken);
-    console.log(response);
+    // console.log(response);
     setEventList(await response.data.map((obj) => {
       var date = new Date(obj.date);
       var timestamp = +date;

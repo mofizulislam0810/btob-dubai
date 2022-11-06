@@ -355,7 +355,7 @@ const Support = () => {
       return;
     }
     if (subjectId === 0) {
-      toast.error("Sorry! Subject not selected..");
+      toast.error("Please select support type!");
       return;
     }
     if (message === "") {

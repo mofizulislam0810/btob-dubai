@@ -131,7 +131,7 @@ const Footer = () => {
             textAlign="center"
             mt="20px"
             mb="20px"
-          >© Copyright First Trip Limited. All rights reserved.</Text>
+          >© Copyright First Trip Ltd. All rights reserved.</Text>
         </Box>
       </Box>
 

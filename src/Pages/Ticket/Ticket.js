@@ -196,7 +196,7 @@ const Ticket = () => {
                           Edit Price
                         </a>
                       </li>
-                      <li id="menu-item">
+                      {/* <li id="menu-item">
                         <button
                           href="javascript:void(0)"
                           className="btn btn-sm btn-secondary float-right mr-1 d-print-none rounded"
@@ -216,7 +216,7 @@ const Ticket = () => {
                             <>Download</>
                           )}
                         </button>
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
                   <div className="card-body py-5" ref={componentRef}>
@@ -233,7 +233,7 @@ const Ticket = () => {
                               ticketingList.ticketInfo?.agentLogo !== "" ? (
                                 <img
                                   alt="img01"
-                                  src={`/${ticketingList.ticketInfo?.agentLogo}`}
+                                  src={`https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/${ticketingList.ticketInfo?.agentLogo}`}
                                   style={{ width: "160px" }}
                                 ></img>
                               ) : (
@@ -390,7 +390,7 @@ const Ticket = () => {
                                       ? "Adult"
                                       : item.passengerType === "CNN"
                                       ? "Child"
-                                      : "Infant"}
+                                      : item.passengerType === "INF" ? "Infant" : "Adult"}
                                   </td>
                                   <td>{item.ticketNumbers}</td>
                                   {index === 0 ? (
@@ -471,8 +471,8 @@ const Ticket = () => {
                                         <span className="d-flex align-items-center fw-bold">
                                           <img
                                             // src={`/airlines-logo${ticketingList.ticketInfo?.airlineCode}.png`}
-                                             src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`} 
-                                            // src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
+                                            //  src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`} 
+                                            src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
                                             className="me-2"
                                             alt=""
                                             width="30px"
@@ -668,7 +668,8 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
+                                                // src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
+                                                src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -955,7 +956,8 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
+                                                // src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
+                                                src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -1243,7 +1245,8 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
+                                                // src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
+                                                src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -1531,7 +1534,8 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
+                                                // src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
+                                                src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -1819,7 +1823,8 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
+                                                // src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
+                                                src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"
@@ -2107,7 +2112,8 @@ const Ticket = () => {
                                             </span>
                                             <span className="d-flex align-items-center fw-bold">
                                               <img
-                                                src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
+                                                // src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
+                                                src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
                                                 className="me-2"
                                                 alt=""
                                                 width="30px"

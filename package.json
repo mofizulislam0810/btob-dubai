@@ -2,7 +2,6 @@
   "name": "btobportal",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com",
   "dependencies": {
     "@chakra-ui/react": "^2.2.6",
     "@emotion/react": "^11.10.0",
@@ -72,8 +71,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "options": {
-    "allowedHosts": []
   }
 }

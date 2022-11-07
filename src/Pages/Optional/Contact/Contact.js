@@ -34,7 +34,7 @@ const Contact = () => {
                 <span className="">
                   <i className="la la-envelope la-lg"></i>
                 </span>{" "}
-                <a href="mailto:info@FirstTrip.com" className="text-dark fw-bold">info@FirstTrip.com</a>
+                <a href="" className="text-dark fw-bold">support@firsttrip.com</a>
               </p>
             </div>
             {/* <div className="col-lg-12">

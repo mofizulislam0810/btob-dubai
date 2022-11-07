@@ -178,7 +178,7 @@ const Invoice = () => {
                             src={
                                s3URL+`${ticketingList[0].agentLogo}`
                             }
-                            style={{ width: "150px", height: "50px" }}
+                            style={{ width: "150px"}}
                           ></img>
                         ) : (
                           <>
@@ -186,7 +186,7 @@ const Invoice = () => {
                               alt="img01"
                               className="p-2"
                               src={tllLogo}
-                              style={{ width: "150px", height: "50px" }}
+                              style={{ width: "150px"}}
                             ></img>
                           </>
                         )}
@@ -221,7 +221,7 @@ const Invoice = () => {
                                                     <td className="text-end bg-white">
                                                         <address>
                                                             <span className="fw-bold fs-6">
-                                                            FirstTrip Travel Agency LLC
+                                                            FirstTrip Limited
                                                             </span>
                                                             <br />
                                                             <div

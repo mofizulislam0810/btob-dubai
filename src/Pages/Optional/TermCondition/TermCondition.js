@@ -379,11 +379,11 @@ const TermCondition = () => {
                 <tbody>
                   <tr>
                     <td style={{ width: "50%" }}>Economy Class</td>
-                    <td>AED 20</td>
+                    <td>BDT 200</td>
                   </tr>
                   <tr>
                     <td>Business/First Class</td>
-                    <td>AED 30</td>
+                    <td>BDT 300</td>
                   </tr>
                 </tbody>
               </table>

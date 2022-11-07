@@ -9,6 +9,7 @@ import axios from "axios";
 import { environment } from "../../../SharePages/Utility/environment";
 import './SuccessTicketPanel.css';
 import airports from "../../../../JSON/airports.json";
+import { getPassengerType } from "../../../../common/functions";
 let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
 let staticURL = "wwwroot/Uploads/Support/";
 
@@ -123,7 +124,7 @@ const SuccessTicketPanel = () => {
                             )}
                           </td>
                           <td className="text-end bg-white">
-                            {/* <address>
+                            <address>
                               <span className="fw-bold fs-6">
                                 {agentInfo.name}
                               </span>
@@ -134,11 +135,11 @@ const SuccessTicketPanel = () => {
                               >
                                 {agentInfo.address}
                                 <br />
-                                Phone: {agentInfo.mobileNo}<br></br>
-                                Email: {agentInfo.email}
+                               <span style={{fontSize:"8px"}}><i class="fas fa-phone fa-rotate-90"></i></span> Phone: {agentInfo.mobileNo}<br></br>
+                               <span className="me-1"><i class="fa fa-envelope" aria-hidden="true"></i></span> Email: {agentInfo.email}
                               </div>
-                            </address> */}
-                            <address>
+                            </address>
+                            {/* <address>
                                 <span className="fw-bold fs-6">
                                   {agentInfo.name}
                                 </span>
@@ -152,7 +153,7 @@ const SuccessTicketPanel = () => {
                                  <span style={{fontSize:"8px"}}><i class="fas fa-phone fa-rotate-90"></i></span> Phone: +8801625987452<br></br>
                                  <span className="me-1"><i class="fa fa-envelope" aria-hidden="true"></i></span> Email: {agentInfo.email}
                                 </div>
-                              </address>
+                              </address> */}
                           </td>
                         </tr>
                       </tbody>
@@ -204,7 +205,7 @@ const SuccessTicketPanel = () => {
                                   {item.passengerInfo.nameElement.lastName}
                                 </td>
                                 <td>
-                                  {item.passengerInfo.passengerType === 'ADT' ? "Adult" : item.passengerInfo.passengerType === 'CNN' ? "Child" : "Infant"}
+                                  {getPassengerType(item.passengerInfo.passengerType)}
                                 </td>
                                 <td>
                                   {item.ticketNumbers[0]}

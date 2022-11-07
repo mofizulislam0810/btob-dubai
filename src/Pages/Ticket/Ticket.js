@@ -248,22 +248,22 @@ const Ticket = () => {
                               )}
                             </td>
                             <td className="text-end bg-white">
-                              {/* <address>
-                                <span className="fw-bold fs-6">
-                                  {agentInfo.name}
-                                </span>
+                            <address>
+                              <span className="fw-bold fs-6">
+                                {agentInfo.name}
+                              </span>
+                              <br />
+                              <div
+                                className="mt-2"
+                                style={{ fontSize: "12px", lineHeight: "12px" }}
+                              >
+                                {agentInfo.address}
                                 <br />
-                                <div
-                                  className="mt-2"
-                                  style={{ fontSize: "14px", lineHeight: "12px" }}
-                                >
-                                  {agentInfo.address}
-                                  <br />
-                                  Phone: {agentInfo.mobileNo}<br></br>
-                                  Email: {agentInfo.email}
-                                </div>
-                              </address> */}
-                              <address>
+                               <span style={{fontSize:"8px"}}><i class="fas fa-phone fa-rotate-90"></i></span> Phone: {agentInfo.mobileNo}<br></br>
+                               <span className="me-1"><i class="fa fa-envelope" aria-hidden="true"></i></span> Email: {agentInfo.email}
+                              </div>
+                            </address>
+                              {/* <address>
                                 <span className="fw-bold fs-6">
                                   {agentInfo.name}
                                 </span>
@@ -289,7 +289,7 @@ const Ticket = () => {
                                   </span>{" "}
                                   Email: {agentInfo.email}
                                 </div>
-                              </address>
+                              </address> */}
                             </td>
                           </tr>
                         </tbody>
@@ -471,7 +471,8 @@ const Ticket = () => {
                                         <span className="d-flex align-items-center fw-bold">
                                           <img
                                             // src={`/airlines-logo${ticketingList.ticketInfo?.airlineCode}.png`}
-                                            src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`}
+                                             src={`/AirlineLogos/${ticketingList.ticketInfo?.airlineCode}.jpg`} 
+                                            // src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${ticketingList.ticketInfo?.airlineCode}.png`}
                                             className="me-2"
                                             alt=""
                                             width="30px"

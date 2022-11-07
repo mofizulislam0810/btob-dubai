@@ -133,7 +133,7 @@ const LoginPage = () => {
                 <form onSubmit={handleLoginUser}>
                   <InputGroup my={2}>
                     <InputRightElement
-                      pointerEvents="none"
+                      // pointerEvents="none"
                       children={<MdOutlineEmail color="#B8B8B8" />}
                     />
                     <Input
@@ -151,8 +151,10 @@ const LoginPage = () => {
 
                   <InputGroup my={2} mb={6}>
                     <InputRightElement
-                      pointerEvents="none"
+                      // pointerEvents="none"
                       children={<BsEyeSlash color="#B8B8B8" />}
+                      onClick={() => setPasswordShown(!passwordShown)}
+                      style={{ cursor: "pointer", zIndex: "1000" }}
                     />
                     <Input
                       border="1px solid #dddddd"

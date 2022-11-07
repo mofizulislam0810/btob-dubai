@@ -61,6 +61,8 @@ const Registration = () => {
   let [cityId, setCityId] = useState(null);
   let [loading, setLoading] = useState(false);
   let [captchaValue, setCaptchaValue] = useState("");
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [passwordCanShown, setPasswordCanShown] = useState(false);
   const getZoneData = async (countryName) => {
     const responseZ = await axios.get(
       environment.getzoneListbycountryName + "/" + countryName
@@ -470,7 +472,7 @@ const Registration = () => {
                               <div className="col-lg-6">
                                 <div className="input-group mb-3">
                                   <input
-                                    type="password"
+                                    type={passwordShown ? "text" : "password"}
                                     className="form-control rounded"
                                     placeholder="Password"
                                     onChange={(e) =>
@@ -480,7 +482,7 @@ const Registration = () => {
                                   />
                                   <div className="input-group-append">
                                     <div className="input-group-text">
-                                      <span className="fas fa-lock"></span>
+                                      <span className="fas fa-lock" onClick={() => setPasswordShown(!passwordShown)}></span>
                                     </div>
                                   </div>
                                 </div>
@@ -488,7 +490,7 @@ const Registration = () => {
                               <div className="col-lg-6">
                                 <div className="input-group mb-3">
                                   <input
-                                    type="password"
+                                    type={passwordCanShown ? "text" : "password"}
                                     className="form-control rounded"
                                     placeholder="Confirm Password"
                                     onChange={(e) =>
@@ -498,7 +500,7 @@ const Registration = () => {
                                   />
                                   <div className="input-group-append">
                                     <div className="input-group-text">
-                                      <span className="fas fa-lock"></span>
+                                      <span className="fas fa-lock" onClick={() => setPasswordCanShown(!passwordCanShown)}></span>
                                     </div>
                                   </div>
                                 </div>

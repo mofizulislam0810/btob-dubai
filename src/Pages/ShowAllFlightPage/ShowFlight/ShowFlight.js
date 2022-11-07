@@ -1082,10 +1082,10 @@ const ShowFlight = (props) => {
                       style={{ fontSize: "12px" }}
                     >
                       {currency !== undefined ? currency : "BDT"}{" "}
-                      {totalPrice + bookingComponents[0].agentAdditionalPrice}
+                      {(totalPrice + bookingComponents[0].agentAdditionalPrice).toLocaleString("en-US")}
                     </div>
                     {currency !== undefined ? currency : "BDT"}{" "}
-                    {parseFloat(
+                    {(
                       totalPrice -
                         bookingComponents[0].discountPrice +
                         (bookingComponents[0].agentAdditionalPrice < 0
@@ -1097,7 +1097,7 @@ const ShowFlight = (props) => {
               ) : (
                 <div>
                   {currency !== undefined ? currency : "BDT"}{" "}
-                  {parseFloat(
+                  {(
                     totalPrice -
                       bookingComponents[0].discountPrice +
                       (bookingComponents[0].agentAdditionalPrice < 0

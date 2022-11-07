@@ -540,7 +540,7 @@ const ShowAllFlight = ({
           <div className="col-lg-9">
             {flightsData?.length === 0 && flightsData !== null && flightsData !== undefined ? (
               <>
-                {/* <NoDataFoundPage /> */}
+                <NoDataFoundPage />
               </>
             ) : (
               flightsData?.map((data, index) => (

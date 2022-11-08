@@ -43,7 +43,7 @@ const QuickPassenger = () => {
   let [cityName, setCityName] = useState("");
   let [passportFileName, setPassportFileName] = useState("");
   let [visaFileName, setVisaFileName] = useState("");
-  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+  let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
   let [loading, setLoading] = useState(false);
   

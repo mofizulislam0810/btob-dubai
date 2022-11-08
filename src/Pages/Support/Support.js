@@ -35,7 +35,7 @@ const Support = () => {
   let utid = "";
   let pnrs = "";
   let ticketno = "";
-  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+  let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
 
   const [isTicketNumRequired, setIsTicketNumRequired] = useState(true);

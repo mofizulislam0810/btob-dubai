@@ -30,7 +30,7 @@ const Ticket = () => {
   let [passengerListEdited, setPassengerListEdited] = useState([]);
   let [totalPriceEdited, setTotalPriceEdited] = useState(0);
   let [agentInfo, setAgentInfo] = useState([]);
-  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+  let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
   const [isDownloading, setIsDownloading] = useState(false);
   const componentRef = useRef();
@@ -233,7 +233,7 @@ const Ticket = () => {
                               ticketingList.ticketInfo?.agentLogo !== "" ? (
                                 <img
                                   alt="img01"
-                                  src={`https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/${ticketingList.ticketInfo?.agentLogo}`}
+                                  src={s3URL+`${ticketingList.ticketInfo?.agentLogo}`}
                                   style={{ width: "160px" }}
                                 ></img>
                               ) : (

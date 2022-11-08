@@ -14,7 +14,7 @@ const Navbar = () => {
   let [agentInfo, setAgentInfo] = useState(0);
   let [accountManager, setAccountManager] = useState({});
   let [serchText, setSearchText] = useState("");
-  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+  let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let localURL = "wwwroot/Uploads/Agent/";
 
   const navigate = useNavigate();

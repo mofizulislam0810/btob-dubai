@@ -18,7 +18,7 @@ const ProfilePagePanel = () => {
   let [mobile, setMobile] = useState();
   let [userId, setUserId] = useState();
   let [logoName, setLogoName] = useState();
-  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+  let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let localURL ="wwwroot/Uploads/Agent/"
   
   const handleGetUser = () => {

@@ -19,7 +19,7 @@ const Invoice = () => {
   let [passengerListEdited, setPassengerListEdited] = useState([]);
   let [totalPrice, setTotalPrice] = useState(0);
   let [totalPriceEdited, setTotalPriceEdited] = useState(0);
-  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+  let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
 	let staticURL ="wwwroot/Uploads/Support/";
   const location = useLocation();
 

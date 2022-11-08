@@ -48,7 +48,7 @@ const Balance = () => {
     setBdCityList(cityList.filter(item => item.name.split(",")[0] === 'Bangladesh'));
   }, [cityList])
 
-  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+  let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
   let sendObj = {
     agentId: sessionStorage.getItem("agentId") ?? 0,

@@ -79,6 +79,7 @@ const Ticket = () => {
       if (response.data > 0) {
         toast.success("Price updated successfully..");
         handleGetList();
+        document.getElementById("closeBtn").click();
       } else {
         toast.error("Price not updated..");
       }
@@ -233,7 +234,7 @@ const Ticket = () => {
                               ticketingList.ticketInfo?.agentLogo !== "" ? (
                                 <img
                                   alt="img01"
-                                  src={s3URL+`${ticketingList.ticketInfo?.agentLogo}`}
+                                  src={environment.s3URL+`${ticketingList.ticketInfo?.agentLogo}`}
                                   style={{ width: "160px" }}
                                 ></img>
                               ) : (
@@ -2777,12 +2778,14 @@ const Ticket = () => {
                     type="button"
                     className="btn btn-secondary rounded"
                     data-bs-dismiss="modal"
+                    id="closeBtn"
                   >
                     Close
                   </button>
                   <button
                     type="button"
-                    className="btn button-color fw-bold text-white rounded"
+                    className="btn button-color fw-bold text-white rounded" 
+                    
                     disabled={loading ? true : false}
                     onClick={() => handleSubmit()}
                   >

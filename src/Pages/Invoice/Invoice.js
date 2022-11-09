@@ -19,8 +19,8 @@ const Invoice = () => {
   let [passengerListEdited, setPassengerListEdited] = useState([]);
   let [totalPrice, setTotalPrice] = useState(0);
   let [totalPriceEdited, setTotalPriceEdited] = useState(0);
-  let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
-	let staticURL ="wwwroot/Uploads/Support/";
+  // let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
+	// let staticURL ="wwwroot/Uploads/Support/";
   const location = useLocation();
 
   const table = {
@@ -176,7 +176,7 @@ const Invoice = () => {
                           <img
                             alt="img01"
                             src={
-                               s3URL+`${ticketingList[0].agentLogo}`
+                              environment.s3URL+`${ticketingList[0].agentLogo}`
                             }
                             style={{ width: "150px"}}
                           ></img>

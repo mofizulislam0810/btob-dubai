@@ -18,8 +18,8 @@ const ProfilePagePanel = () => {
   let [mobile, setMobile] = useState();
   let [userId, setUserId] = useState();
   let [logoName, setLogoName] = useState();
-  let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
-  let localURL ="wwwroot/Uploads/Agent/"
+  // let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
+  // let localURL ="wwwroot/Uploads/Agent/"
   
   const handleGetUser = () => {
     const getData = async () => {
@@ -126,7 +126,7 @@ const ProfilePagePanel = () => {
                         <img
                         alt="img01"
                         className="mx-auto mb-3"
-                        src={s3URL +''+logoName}
+                        src={environment.s3URL +''+logoName}
                         style={{ width: "150px", height: "80px" }}
                       ></img>
                         </> : 
@@ -135,7 +135,7 @@ const ProfilePagePanel = () => {
                         alt="img01"
                         className="mx-auto mb-3"
                         src={ 
-                          s3URL +''+logoName
+                          environment.s3URL +''+logoName
                         }
                         style={{ width: "150px", height: "80px" }}
                       ></img>

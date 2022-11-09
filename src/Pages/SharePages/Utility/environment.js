@@ -5,6 +5,8 @@ const baseURL = 'http://54.169.108.46:81/';
 // const baseURL = 'http://18.142.212.139:81/';
 // const baseURL = 'https://api.triplover.ae/';
 // const baseURL = 'https://api.firsttrip.com/';
+// https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/
+// https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/
 
 const baseApiURL =baseURL+ 'api/';
 const tokenData = JSON.parse(localStorage.getItem('token'));
@@ -14,6 +16,7 @@ if(tokenData!=null && new Date(tokenData.expireIn)>=new Date())
   headerToken = { headers: { Authorization: 'Bearer ' + tokenData?.token } };
 }
 export const environment = {
+  s3URL : "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/",
   baseApiURL:baseApiURL,
   headerToken:headerToken,
 
@@ -115,4 +118,5 @@ export const environment = {
 
   sendEmailWithResetLink : baseApiURL + 'PasswordRecovery/SendResetLink',
   changePassword : baseApiURL + 'PasswordRecovery/changePassword',
+
 }

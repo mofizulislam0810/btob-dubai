@@ -96,7 +96,7 @@ const SuccessTicketPanel = () => {
                                   <img
                                     alt="img01"
                                     src={
-                                      s3URL + `${agentInfo?.logoName}`
+                                      environment.s3URL + `${agentInfo?.logoName}`
                                     }
                                     style={{ width: "150px", height: "70px" }}
                                   ></img>

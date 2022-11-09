@@ -446,7 +446,7 @@ const Support = () => {
                 <div className="mx-4">
                   <div className="row">
                     <div className="col-sm-3">
-                      {/* <label>
+                      <label>
                         Support Type<span style={{ color: "red" }}>*</span>
                       </label>
                       <select
@@ -467,7 +467,7 @@ const Support = () => {
                             </option>
                           );
                         })}
-                      </select> */}
+                      </select>
                     </div>
                   </div>
                   <br />
@@ -792,6 +792,7 @@ const Support = () => {
                                 type="button"
                                 className="btn btn-secondary rounded"
                                 data-bs-dismiss="modal"
+                                onClick={() => clearForm()}
                               >
                                 Close
                               </button>
@@ -858,7 +859,7 @@ const Support = () => {
                                   </td>
                                   <td>{item.uniqueTransID}</td>
                                   <td>{item.pnr}</td>
-                                  <td>{item.ticketNumber}</td>
+                                  <td>{item.ticketNumber === "null" ||  item.ticketNumber === null? "N/A" : item.ticketNumber}</td>
                                   <td>
                                     <a
                                       href="#"
@@ -1161,7 +1162,7 @@ const Support = () => {
                                               item.fileName != "" ? (
                                                 <a
                                                   href={
-                                                    s3URL + `${item.fileName}`
+                                                    environment.s3URL + `${item.fileName}`
                                                   }
                                                   download
                                                   target="_blank"
@@ -1309,7 +1310,7 @@ const Support = () => {
                                               item.fileName != "" ? (
                                                 <a
                                                   href={
-                                                    s3URL + `${item.fileName}`
+                                                    environment.s3URL + `${item.fileName}`
                                                   }
                                                   download
                                                   target="_blank"

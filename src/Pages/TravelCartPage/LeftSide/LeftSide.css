@@ -19,7 +19,7 @@ span::after {
   
 input:invalid + .validation::after {
     color: red;
-    content: "Input Empty or Invalid! (hint: hover massage)";
+    content: "Input Empty or Invalid!";
 }
 
 /* input:valid + .validation::after {

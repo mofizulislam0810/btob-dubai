@@ -326,7 +326,7 @@ const ShowFlight = (props) => {
 
             {flightType === "Multi City" ? (
               directions.map((item, index) => (
-                <div className="row p-2 text-color border m-1" key={index}>
+                <div className={index===0 ?"row p-2 text-color m-1" :"row p-2 text-color m-1 border-top" } key={index}>
                   <div className="col-lg-1 my-auto">
                     <img src={ImageUrlD} alt="" width="40px" height="40px" />
                   </div>
@@ -352,7 +352,7 @@ const ShowFlight = (props) => {
                     </h6>
                     <h6 className="flighttime">
                       {moment(item[0].segments[0].departure).format(
-                        "DD MMMM,yyyy, ddd"
+                        "DD MMM,yyyy, ddd"
                       )}
                     </h6>
                     <h6 className="flighttime">
@@ -378,20 +378,13 @@ const ShowFlight = (props) => {
                         </span>
                       </div>
                       <div className="col-lg-12 text-center">
-                        <span className="text-color me-5">
+                        <span className="text-color text-center">
                           <i className="fas fa-clock fa-sm"></i>
                           <span className="ms-1 font-size">
                             {item[0].segments[0].duration[0]}
                           </span>
                         </span>
-                        <span className="text-color">
-                          <i className="fas fa-briefcase fa-sm"></i>
-                          <span className="ms-1 font-size">
-                            {item[0].segments[0].baggage[0]?.amount +
-                              " " +
-                              directions[0][0].segments[0].baggage[0]?.units}
-                          </span>
-                        </span>
+                       
                       </div>
                     </div>
                   </div>
@@ -429,7 +422,7 @@ const ShowFlight = (props) => {
                     <h6 className="flighttime">
                       {moment(
                         item[0].segments[item[0].segments.length - 1].arrival
-                      ).format("DD MMMM,yyyy, ddd")}{" "}
+                      ).format("DD MMM,yyyy, ddd")}{" "}
                     </h6>
                     <h6 className="flighttime">
                       {airports
@@ -440,7 +433,7 @@ const ShowFlight = (props) => {
                 </div>
               ))
             ) : (
-              <div className="row p-2 text-color">
+              <div className="row p-2 text-color m-1">
                 <div className="col-lg-1 my-auto">
                   <img src={ImageUrlD} alt="" width="40px" height="40px" />
                 </div>
@@ -696,7 +689,7 @@ const ShowFlight = (props) => {
             {flightType === "Multi City" ? (
               <></>
             ) : directions[1] !== undefined ? (
-              <div className="row p-2 border-top text-color">
+              <div className="row p-2 border-top text-color m-1">
                 <div className="col-lg-1 my-auto">
                   <img src={ImageUrlR} alt="" width="40px" height="40px" />
                 </div>
@@ -1082,10 +1075,10 @@ const ShowFlight = (props) => {
                       style={{ fontSize: "12px" }}
                     >
                       {currency !== undefined ? currency : "BDT"}{" "}
-                      {totalPrice + bookingComponents[0].agentAdditionalPrice}
+                      {(totalPrice + bookingComponents[0].agentAdditionalPrice).toLocaleString("en-US")}
                     </div>
                     {currency !== undefined ? currency : "BDT"}{" "}
-                    {parseFloat(
+                    {(
                       totalPrice -
                         bookingComponents[0].discountPrice +
                         (bookingComponents[0].agentAdditionalPrice < 0
@@ -1097,7 +1090,7 @@ const ShowFlight = (props) => {
               ) : (
                 <div>
                   {currency !== undefined ? currency : "BDT"}{" "}
-                  {parseFloat(
+                  {(
                     totalPrice -
                       bookingComponents[0].discountPrice +
                       (bookingComponents[0].agentAdditionalPrice < 0

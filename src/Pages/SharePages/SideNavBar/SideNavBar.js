@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./SideNavBar.css";
+import { FaUserPlus } from "react-icons/fa";
 
 
 const SideNavBar = () => {
@@ -238,7 +239,8 @@ const SideNavBar = () => {
               <Link to="/staff" className="nav-link">
                 {/* <i className="nav-icon fas fa-tasks"></i> */}
                 {/* <i className="nav-icon fas fa-tachometer-alt"></i> */}
-                <i className="nav-icon fas fa-users"></i>
+                <i className="nav-icon fas fa-user"></i>
+                {/* <FaUserPlus height="25px" width="25px"/> */}
                 <p>
                   My Users
                   {/* <i className="right fas fa-angle-left"></i> */}

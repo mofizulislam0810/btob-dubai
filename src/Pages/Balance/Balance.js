@@ -48,8 +48,8 @@ const Balance = () => {
     setBdCityList(cityList.filter(item => item.name.split(",")[0] === 'Bangladesh'));
   }, [cityList])
 
-  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
-  let staticURL = "wwwroot/Uploads/Support/";
+  // let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
+  // let staticURL = "wwwroot/Uploads/Support/";
   let sendObj = {
     agentId: sessionStorage.getItem("agentId") ?? 0,
     fromOfPaymentType: depositTypeId,
@@ -1260,16 +1260,18 @@ const Balance = () => {
                                       <td>{item.currencyName} {item.amount.toLocaleString("en-US")}</td>
                                       <td>{item.currencyName} {item.bankChargeAdmin}</td>
                                       <td>{item.currencyName} {item.topupAmountAdmin.toLocaleString("en-US")}</td>
+                                      <td>
                                       {
                                         item.attachment !== null && item.attachment !== "" ? <>
-                                          <td><a href={s3URL + item.attachment} download>Download
+                                          <a href={environment.s3URL + item.attachment} download target="_blank">View
                                             {/* <img src="https://thumbs.dreamstime.com/b/smooth-nature-pic-full-hd-126695318.jpg" alt="W3Schools" width="50" height="15"/> */}
                                           </a>
-                                          </td>
                                         </> : <>
-                                          <td></td>
+                                          N/A
                                         </>
                                       }
+                                      </td>
+                                      
                                     </tr>
                                   );
                                 }) : <></>}

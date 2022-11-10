@@ -120,19 +120,15 @@ const Footer = () => {
 
 
       {/* <Box borderTop="1px solid #E2E2E2" mx={4} /> */}
-      <Box display={'flex'} justifyContent='center'>
-        <Box >
-          <img src={logo} alt="" width='100px' height={"10px"} />
-        </Box>
-        <Box>
+      <Box display={'flex'} justifyContent='center' alignItems="center">
+      <img src={logo} alt="" width='100px' height={"10px"} />
           <Text fontSize="14px"
             fontWeight={400}
             color="#908DAB"
             textAlign="center"
-            mt="20px"
-            mb="20px"
-          >© Copyright First Trip Limited. All rights reserved.</Text>
-        </Box>
+            pt="16px"
+            pl="5px"
+          > Copyright © 2022 First Trip Ltd. All rights reserved.</Text>
       </Box>
 
 

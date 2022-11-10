@@ -475,6 +475,7 @@ const ShowAllFlightPage = () => {
         setFetchFlighData(await response.data.item1);
         // setFetchFlighData(flightoneway.item1);
         setLoading(false);
+
       };
       getData();
     } else {
@@ -1029,6 +1030,7 @@ const ShowAllFlightPage = () => {
             );
             setFetchFlighData(await response.data.item1);
             setLoading(false);
+            document.getElementById("search-again").click();
           };
           console.log(searchParamMulti);
           console.log(origin, origin1, origin2, origin3, origin4, origin5);
@@ -1114,6 +1116,7 @@ const ShowAllFlightPage = () => {
           );
           setFetchFlighData(await response.data.item1);
           setLoading(false);
+          document.getElementById("search-again").click();
         };
         getData();
       } else {
@@ -1192,6 +1195,7 @@ const ShowAllFlightPage = () => {
           );
           setFetchFlighData(await response.data.item1);
           setLoading(false);
+          document.getElementById("search-again").click();
         };
         console.log(flightoneway);
         getData();
@@ -1478,7 +1482,7 @@ const ShowAllFlightPage = () => {
               </div>
               <div className="col-lg-2 my-auto d-flex justify-content-center bg-white">
                 <button
-                  className="btn button-color btn-sm text-white float-start fw-bold search-again rounded-3 d-flex align-items-center"
+                  className="btn button-color btn-sm text-white float-start fw-bold search-again rounded-3 d-flex align-items-center" id="search-again"
                   onClick={() => setModifySearch(!modifySearch)}
                 >
                   Modify search{" "}

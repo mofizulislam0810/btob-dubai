@@ -90,7 +90,7 @@ const InvoiceView = () => {
                                                     alt="img01"
                                                     className="p-2"
                                                     src={tllLogo}
-                                                    style={{ width: "150px", height: "50px" }}
+                                                    style={{ width: "150px"}}
                                                 ></img>
                                             </>
                                         </div>
@@ -119,18 +119,18 @@ const InvoiceView = () => {
                                                     <td className="text-end bg-white">
                                                         <address>
                                                             <span className="fw-bold fs-6">
-                                                                FirstTrip Travel Agency LLC
+                                                            First Trip Ltd.
                                                             </span>
                                                             <br />
                                                             <div
                                                                 className="mt-2"
                                                                 style={{ fontSize: "10px", lineHeight: "12px" }}
                                                             >
-                                                                Al Muhairi 113-127, Al Dhagaya
+                                                                39 Sharif Plaza, Kemal Ataturk
                                                                 <br />
-                                                                Dubai, United Arab Emirates<br></br>
-                                                                Phone: +97143375728<br></br>
-                                                                Email: support@FirstTrip.ae
+                                                                Avenue, Banani, Dhaka 1213<br></br>
+                                                                Phone: 09613123123<br></br>
+                                                                Email: support@firsttrip.com
                                                             </div>
                                                         </address>
                                                     </td>
@@ -183,11 +183,11 @@ const InvoiceView = () => {
                                             <tbody>
                                                 <tr>
                                                     <td>{invoice?.purpose}</td>
-                                                    <td className="text-end">{invoice?.amount}</td>
+                                                    <td className="text-end">{invoice?.amount.toLocaleString("en-US")}</td>
                                                 </tr>
                                                 <tr>
                                                     <td className="fw-bold" colSpan={2} style={{ textAlign: "right" }}>
-                                                        Total:  BDT {invoice?.amount}
+                                                        Total:  BDT {invoice?.amount.toLocaleString("en-US")}
                                                     </td>
                                                 </tr>
                                             </tbody>

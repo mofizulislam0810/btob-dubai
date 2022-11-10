@@ -4,8 +4,7 @@ import html2canvas from "html2canvas";
 import $ from "jquery";
 import jsPDF from "jspdf";
 import moment from "moment";
-import pdfMake from "pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -156,19 +155,19 @@ const Proposal = () => {
 
   console.log(defaultPriceList);
 
-  const printDocument = () => {
-    const doc = new jsPDF();
+  // const printDocument = () => {
+  //   const doc = new jsPDF();
 
-    //get table html
-    const pdfTable = document.getElementById("proposalPrint");
-    //html to pdf format
-    var html = htmlToPdfmake(pdfTable.innerHTML);
+    
+  //   const pdfTable = document.getElementById("proposalPrint");
+    
+  //   var html = htmlToPdfmake(pdfTable.innerHTML);
 
-    const documentDefinition = { content: html };
-    pdfMake.vfs = pdfFonts.pdfMake.vfs;
-    pdfMake.createPdf(documentDefinition).open();
-    pdfMake.createPdf(documentDefinition).download();
-  };
+  //   const documentDefinition = { content: html };
+  //   pdfMake.vfs = pdfFonts.pdfMake.vfs;
+  //   pdfMake.createPdf(documentDefinition).open();
+  //   pdfMake.createPdf(documentDefinition).download();
+  // };
 
 
   const [singleValue, setSingleValue] = useState(defaultPriceList);

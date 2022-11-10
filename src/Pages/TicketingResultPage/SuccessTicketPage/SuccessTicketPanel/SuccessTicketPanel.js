@@ -9,7 +9,8 @@ import axios from "axios";
 import { environment } from "../../../SharePages/Utility/environment";
 import './SuccessTicketPanel.css';
 import airports from "../../../../JSON/airports.json";
-let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
+import { getPassengerType } from "../../../../common/functions";
+let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
 let staticURL = "wwwroot/Uploads/Support/";
 
 const SuccessTicketPanel = () => {
@@ -95,7 +96,7 @@ const SuccessTicketPanel = () => {
                                   <img
                                     alt="img01"
                                     src={
-                                      s3URL + `${agentInfo?.logoName}`
+                                      environment.s3URL + `${agentInfo?.logoName}`
                                     }
                                     style={{ width: "150px", height: "70px" }}
                                   ></img>
@@ -123,7 +124,7 @@ const SuccessTicketPanel = () => {
                             )}
                           </td>
                           <td className="text-end bg-white">
-                            {/* <address>
+                            <address>
                               <span className="fw-bold fs-6">
                                 {agentInfo.name}
                               </span>
@@ -134,25 +135,10 @@ const SuccessTicketPanel = () => {
                               >
                                 {agentInfo.address}
                                 <br />
-                                Phone: {agentInfo.mobileNo}<br></br>
-                                Email: {agentInfo.email}
+                               <span style={{fontSize:"8px"}}><i class="fas fa-phone fa-rotate-90"></i></span> Phone: {agentInfo.mobileNo}<br></br>
+                               <span className="me-1"><i class="fa fa-envelope" aria-hidden="true"></i></span> Email: {agentInfo.email}
                               </div>
-                            </address> */}
-                            <address>
-                                <span className="fw-bold fs-6">
-                                  {agentInfo.name}
-                                </span>
-                                <br />
-                                <div
-                                  className="mt-2"
-                                  style={{ fontSize: "10px", lineHeight: "12px" }}
-                                >
-                                  179 Baizid Road Nasirabad <br />
-                                  Dhaka-1216, Bangladesh<br></br>
-                                 <span style={{fontSize:"8px"}}><i class="fas fa-phone fa-rotate-90"></i></span> Phone: +8801625987452<br></br>
-                                 <span className="me-1"><i class="fa fa-envelope" aria-hidden="true"></i></span> Email: {agentInfo.email}
-                                </div>
-                              </address>
+                            </address>
                           </td>
                         </tr>
                       </tbody>
@@ -204,7 +190,7 @@ const SuccessTicketPanel = () => {
                                   {item.passengerInfo.nameElement.lastName}
                                 </td>
                                 <td>
-                                  {item.passengerInfo.passengerType === 'ADT' ? "Adult" : item.passengerInfo.passengerType === 'CNN' ? "Child" : "Infant"}
+                                  {getPassengerType(item.passengerInfo.passengerType)}
                                 </td>
                                 <td>
                                   {item.ticketNumbers[0]}
@@ -312,7 +298,7 @@ const SuccessTicketPanel = () => {
                                               ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                                 return (
                                                   <>
-                                                    <span>{itm.passengerInfo.passengerType === 'ADT' ? 'Adult' : itm.passengerInfo.passengerType === 'CNN' ? 'Child' : 'Infant'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerInfo.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
+                                                    <span>{itm.passengerInfo.passengerType === 'ADT' ? 'Adult' : itm.passengerInfo.passengerType === 'CNN' ? 'Child' : itm.passengerInfo.passengerType === 'INF'?'Infant' : 'Adult'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerInfo.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
                                                   </>
                                                 )
                                               })
@@ -497,7 +483,7 @@ const SuccessTicketPanel = () => {
                                           ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                             return (
                                               <>
-                                                <span>{itm.passengerInfo.passengerType === 'ADT' ? 'Adult' : itm.passengerInfo.passengerType === 'CNN' ? 'Child' : 'Infant'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerInfo.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
+                                                <span>{itm.passengerInfo.passengerType === 'ADT' ? 'Adult' : itm.passengerInfo.passengerType === 'CNN' ? 'Child' : itm.passengerInfo.passengerType === 'INF'?'Infant' : 'Adult'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerInfo.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
                                               </>
                                             )
                                           })
@@ -590,7 +576,7 @@ const SuccessTicketPanel = () => {
                                           ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                             return (
                                               <>
-                                                <span>{itm.passengerInfo.passengerType === 'ADT' ? 'Adult' : itm.passengerInfo.passengerType === 'CNN' ? 'Child' : 'Infant'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerInfo.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
+                                                <span>{itm.passengerInfo.passengerType === 'ADT' ? 'Adult' : itm.passengerInfo.passengerType === 'CNN' ? 'Child' : itm.passengerInfo.passengerType === 'INF'?'Infant' : 'Adult'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerInfo.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
                                               </>
                                             )
                                           })
@@ -683,7 +669,7 @@ const SuccessTicketPanel = () => {
                                           ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                             return (
                                               <>
-                                                <span>{itm.passengerInfo.passengerType === 'ADT' ? 'Adult' : itm.passengerInfo.passengerType === 'CNN' ? 'Child' : 'Infant'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerInfo.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
+                                                <span>{itm.passengerInfo.passengerType === 'ADT' ? 'Adult' : itm.passengerInfo.passengerType === 'CNN' ? 'Child' : itm.passengerInfo.passengerType === 'INF'?'Infant' : 'Adult'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerInfo.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
                                               </>
                                             )
                                           })
@@ -776,7 +762,7 @@ const SuccessTicketPanel = () => {
                                           ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                             return (
                                               <>
-                                                <span>{itm.passengerInfo.passengerType === 'ADT' ? 'Adult' : itm.passengerInfo.passengerType === 'CNN' ? 'Child' : 'Infant'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerInfo.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
+                                                <span>{itm.passengerInfo.passengerType === 'ADT' ? 'Adult' : itm.passengerInfo.passengerType === 'CNN' ? 'Child' : itm.passengerInfo.passengerType === 'INF'?'Infant' : 'Adult'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerInfo.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
                                               </>
                                             )
                                           })

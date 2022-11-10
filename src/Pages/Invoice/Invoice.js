@@ -19,8 +19,8 @@ const Invoice = () => {
   let [passengerListEdited, setPassengerListEdited] = useState([]);
   let [totalPrice, setTotalPrice] = useState(0);
   let [totalPriceEdited, setTotalPriceEdited] = useState(0);
-  let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
-	let staticURL ="wwwroot/Uploads/Support/";
+  // let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
+	// let staticURL ="wwwroot/Uploads/Support/";
   const location = useLocation();
 
   const table = {
@@ -176,9 +176,9 @@ const Invoice = () => {
                           <img
                             alt="img01"
                             src={
-                               s3URL+`${ticketingList[0].agentLogo}`
+                              environment.s3URL+`${ticketingList[0].agentLogo}`
                             }
-                            style={{ width: "150px", height: "50px" }}
+                            style={{ width: "150px"}}
                           ></img>
                         ) : (
                           <>
@@ -186,7 +186,7 @@ const Invoice = () => {
                               alt="img01"
                               className="p-2"
                               src={tllLogo}
-                              style={{ width: "150px", height: "50px" }}
+                              style={{ width: "150px"}}
                             ></img>
                           </>
                         )}
@@ -221,7 +221,7 @@ const Invoice = () => {
                                                     <td className="text-end bg-white">
                                                         <address>
                                                             <span className="fw-bold fs-6">
-                                                            FirstTrip Travel Agency LLC
+                                                            First Trip Ltd.
                                                             </span>
                                                             <br />
                                                             <div
@@ -232,7 +232,7 @@ const Invoice = () => {
                                                                 <br />
                                                                 Avenue, Banani, Dhaka 1213<br></br>
                                                                 Phone: 09613123123<br></br>
-                                                                Email: support@frinttrip.com
+                                                                Email: support@firsttrip.com
                                                             </div>
                                                         </address>
                                                     </td>

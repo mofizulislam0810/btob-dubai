@@ -217,6 +217,7 @@ const Ledger = () => {
                                       <td>
                                         <a
                                           href="javascript:void(0)"
+                                          style={{ cursor: item.transactionType === "Invoice"? "pointer" : "none" }}
                                           onClick={() =>
                                             item.ticketNumbers !== null && item.transactionType === "Invoice" ?
                                               handleInvoice(item.uniqueTransID) : item.ticketNumbers === null && item.transactionType === "Invoice" ? handleViewInvoice(item.tnxNumber) : ""

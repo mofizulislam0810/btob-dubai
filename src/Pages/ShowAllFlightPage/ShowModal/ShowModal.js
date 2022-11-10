@@ -1005,7 +1005,30 @@ const ShowModal = ({
                                   <span>
                                     Duration :{" "}
                                     {/* {direction1.segments[0].duration[0]} */}
-                                    {totalFlightDuration(direction1.segments)}
+                                    {/* {totalFlightDuration(direction1.segments)} */}
+                                    {direction1.segments.length === 1
+                                      ? totalFlightDuration(direction1.segments)
+                                      : direction1.segments.length === 2
+                                      ? addDurations([
+                                          totalFlightDuration(
+                                            direction1.segments
+                                          ),
+                                          timeDuration(
+                                            direction1.segments[0].arrival,
+                                            direction1.segments[1].departure
+                                          ),
+                                        ])
+                                      : direction1.segments.length === 3
+                                      ? addDurations([
+                                          totalFlightDuration(
+                                            direction1.segments
+                                          ),
+                                          timeDuration(
+                                            direction1.segments[1].arrival,
+                                            direction1.segments[2].departure
+                                          ),
+                                        ])
+                                      : ""}
                                   </span>
                                 </div>
                               </div>

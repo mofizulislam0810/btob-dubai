@@ -17,20 +17,18 @@ const Support = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log('page ---------->', page);
-    if(page === 1) {
+    console.log("page ---------->", page);
+    if (page === 1) {
       setPageNumberH(1);
       handleGetOpened(1);
-    }
-    else if(page === 2) {
+    } else if (page === 2) {
       setPageNumberH(1);
-      handleGetOngoing(1)
-    }
-    else if(page === 3) {
+      handleGetOngoing(1);
+    } else if (page === 3) {
       setPageNumberH(1);
       handleGetClosed(1);
     }
-  },[filterSubjectId])
+  }, [filterSubjectId]);
 
   // console.log(
   //   location.search.split("ticketno=")[1] === "null" ? "YES" : "NO",
@@ -55,7 +53,7 @@ const Support = () => {
   let staticURL = "wwwroot/Uploads/Support/";
 
   //let page=1;
-  let [page, setPage] = useState(1)
+  let [page, setPage] = useState(1);
 
   const [isTicketNumRequired, setIsTicketNumRequired] = useState(true);
 
@@ -355,6 +353,85 @@ const Support = () => {
     postData();
   };
 
+  // const handleSupportSubmit = () => {
+  //   let ticketNumbersN = ticketNumbers.substring(1, ticketNumbers.length);
+  //   // alert(uniqueTransID)
+  //   // alert(pnr)
+  //   let supportObj = {
+  //     id: currentItem == null ? 0 : currentItem.id,
+  //     agentId: sessionStorage.getItem("agentId") ?? 0,
+  //     supportTypeId: 2,
+  //     subjectId: subjectId,
+  //     message: message,
+  //     fileName: fileName,
+  //     status: 0,
+  //     uniqueTransID: uniqueTransID,
+  //     pnr: pnr,
+  //     ticketNumber: ticketNumbersN,
+  //   };
+
+  //   if (supportObj.fileNamesupportTypeId === 0) {
+  //     toast.error("Sorry! Support type not selected..");
+  //     return;
+  //   }
+  //   if (subjectId === 0) {
+  //     toast.error("Please select support type!");
+  //     return;
+  //   }
+  //   if (message === "") {
+  //     toast.error("Sorry! Message is empty..");
+  //     return;
+  //   }
+  //   if (
+  //     !isTicketNumRequired &&
+  //     location.search.split("ticketno=")[1] !== "null" &&
+  //     subjectId !== 10 &&
+  //     ticketNumbers === ""
+  //   ) {
+  //     toast.error("Sorry! Ticket number not selected..");
+  //     return;
+  //   }
+  //   console.log(supportObj);
+  //   if ((currentItem == null ? 0 : currentItem.id) > 0) {
+  //     const putData = async () => {
+  //       const response = await axios.put(
+  //         environment.supportInfo,
+  //         supportObj,
+  //         environment.headerToken
+  //       );
+  //       if (response.data > 0) {
+  //         // document.getElementById("submitCloseBtn").click();
+  //         //handleGetOpened(1);
+  //         // clearForm();
+
+  //         toast.success("Thanks! Support Info updated successfully..");
+  //       } else {
+  //         toast.error("Sorry! Support Info not updated..");
+  //       }
+  //     };
+  //     putData();
+  //   } else {
+  //     const postData = async () => {
+  //       //alert("ok");
+  //       const response = await axios.post(
+  //         environment.supportInfo,
+  //         supportObj,
+  //         environment.headerToken
+  //       );
+
+  //       if (response.data > 0) {
+  //         handleGetOpened(1);
+  //         clearForm();
+  //         toast.success("Thanks! Support Info created successfully..");
+  //         document.getElementById("submitCloseBtn").click();
+  //       } else {
+  //         toast.error("Sorry! Support Info not created..");
+  //       }
+  //     };
+  //     postData();
+  //   }
+  // };
+
   const handleSupportSubmit = () => {
     let ticketNumbersN = ticketNumbers.substring(1, ticketNumbers.length);
     // alert(uniqueTransID)
@@ -377,7 +454,7 @@ const Support = () => {
       return;
     }
     if (subjectId === 0) {
-      toast.error("Please select support type!");
+      toast.error("Sorry! Support type is not selected..");
       return;
     }
     if (message === "") {
@@ -385,7 +462,6 @@ const Support = () => {
       return;
     }
     if (
-      !isTicketNumRequired &&
       location.search.split("ticketno=")[1] !== "null" &&
       subjectId !== 10 &&
       ticketNumbers === ""
@@ -475,9 +551,9 @@ const Support = () => {
                         className="form-select"
                         placeholder="Subject"
                         onChange={(e) => {
-                          Number(e.target.value)?
-                          setSearchSubjectId(Number(e.target.value)):
-                          setSearchSubjectId(0);
+                          Number(e.target.value)
+                            ? setSearchSubjectId(Number(e.target.value))
+                            : setSearchSubjectId(0);
                           Number(e.target.value)
                             ? setFilterSubjectId(Number(e.target.value))
                             : setFilterSubjectId("0");
@@ -501,7 +577,10 @@ const Support = () => {
                         href="#opened"
                         className="nav-link active"
                         data-bs-toggle="tab"
-                        onClick={() => {handleGetOpened(1); setPage(1)}}
+                        onClick={() => {
+                          handleGetOpened(1);
+                          setPage(1);
+                        }}
                       >
                         Opened
                       </a>
@@ -511,7 +590,10 @@ const Support = () => {
                         href="#ongoing"
                         className="nav-link"
                         data-bs-toggle="tab"
-                        onClick={() => {handleGetOngoing(1); setPage(2)}}
+                        onClick={() => {
+                          handleGetOngoing(1);
+                          setPage(2);
+                        }}
                       >
                         Ongoing
                       </a>
@@ -521,7 +603,10 @@ const Support = () => {
                         href="#closed"
                         className="nav-link"
                         data-bs-toggle="tab"
-                        onClick={() => {handleGetClosed(1); setPage(3)}}
+                        onClick={() => {
+                          handleGetClosed(1);
+                          setPage(3);
+                        }}
                       >
                         Closed
                       </a>
@@ -883,7 +968,12 @@ const Support = () => {
                                   </td>
                                   <td>{item.uniqueTransID}</td>
                                   <td>{item.pnr}</td>
-                                  <td>{item.ticketNumber === "null" ||  item.ticketNumber === null? "N/A" : item.ticketNumber}</td>
+                                  <td>
+                                    {item.ticketNumber === "null" ||
+                                    item.ticketNumber === null
+                                      ? "N/A"
+                                      : item.ticketNumber}
+                                  </td>
                                   <td>
                                     <a
                                       href="#"
@@ -1186,7 +1276,8 @@ const Support = () => {
                                               item.fileName != "" ? (
                                                 <a
                                                   href={
-                                                    environment.s3URL + `${item.fileName}`
+                                                    environment.s3URL +
+                                                    `${item.fileName}`
                                                   }
                                                   download
                                                   target="_blank"
@@ -1334,7 +1425,8 @@ const Support = () => {
                                               item.fileName != "" ? (
                                                 <a
                                                   href={
-                                                    environment.s3URL + `${item.fileName}`
+                                                    environment.s3URL +
+                                                    `${item.fileName}`
                                                   }
                                                   download
                                                   target="_blank"

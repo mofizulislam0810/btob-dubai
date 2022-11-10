@@ -15,6 +15,7 @@ import {
   timeDuration,
   totalFlightDuration,
 } from "../../../common/functions";
+import { Text } from "@chakra-ui/react";
 const ShowModal = ({
   flag,
   index,
@@ -795,6 +796,9 @@ const ShowModal = ({
                                       ),
                                     ])} */}
                                   </span>
+                                  <Text fontSize={"xs"} fontWeight={200}>
+                                    (including layover time)
+                                  </Text>
                                 </div>
                               </div>
                             ) : (
@@ -1030,6 +1034,9 @@ const ShowModal = ({
                                         ])
                                       : ""}
                                   </span>
+                                  <Text fontSize={"xs"} fontWeight={200}>
+                                    (including layover time)
+                                  </Text>
                                 </div>
                               </div>
                             </>

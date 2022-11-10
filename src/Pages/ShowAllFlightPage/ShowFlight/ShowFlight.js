@@ -307,6 +307,10 @@ const ShowFlight = (props) => {
   };
   // console.log(currency);
   const isTempInspector = sessionStorage.getItem("isTempInspector");
+
+  //BAGGAGE RESPONSE
+  //console.log(directions[0][0].segments[0].baggage, "====");
+
   return (
     <>
       <>

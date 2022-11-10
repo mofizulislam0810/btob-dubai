@@ -756,13 +756,44 @@ const ShowModal = ({
                                   <span>
                                     Duration :{" "}
                                     {/* {totalFlightDuration(direction0.segments)} */}
-                                    {addDurations([
+                                    {direction0.segments.length === 1
+                                      ? totalFlightDuration(direction0.segments)
+                                      : direction0.segments.length === 2
+                                      ? addDurations([
+                                          totalFlightDuration(
+                                            direction0.segments
+                                          ),
+                                          timeDuration(
+                                            direction0.segments[index].arrival,
+                                            direction0.segments[index + 1]
+                                              .departure
+                                          ),
+                                        ])
+                                      : direction0.segments.length === 3
+                                      ? addDurations([
+                                          totalFlightDuration(
+                                            direction0.segments
+                                          ),
+                                          timeDuration(
+                                            direction0.segments[index].arrival,
+                                            direction0.segments[index + 1]
+                                              .departure
+                                          ),
+                                          timeDuration(
+                                            direction0.segments[index + 1]
+                                              .arrival,
+                                            direction0.segments[index + 2]
+                                              .departure
+                                          ),
+                                        ])
+                                      : ""}
+                                    {/* {addDurations([
                                       totalFlightDuration(direction0.segments),
                                       timeDuration(
                                         direction0.segments[index].arrival,
                                         direction0.segments[index + 1].departure
                                       ),
-                                    ])}
+                                    ])} */}
                                   </span>
                                 </div>
                               </div>

@@ -1816,9 +1816,7 @@ const ShowFlight = (props) => {
                               <span className="text-color me-5">
                                 <i className="fas fa-clock fa-sm"></i>
                                 <span className="ms-1 font-size">
-                                  {totalFlightDuration(
-                                    directions[0][0].segments
-                                  )}
+                                  {totalFlightDuration(item.segments)}
                                 </span>
                               </span>
                               <span className="text-color">
@@ -1976,9 +1974,7 @@ const ShowFlight = (props) => {
                                   <span className="text-color me-5">
                                     <i className="fas fa-clock fa-sm"></i>
                                     <span className="ms-1 font-size">
-                                      {totalFlightDuration(
-                                        directions[0][0].segments
-                                      )}
+                                      {totalFlightDuration(item.segments)}
                                     </span>
                                   </span>
                                   <span className="text-color">
@@ -2142,9 +2138,7 @@ const ShowFlight = (props) => {
                                   <span className="text-color me-5">
                                     <i className="fas fa-clock fa-sm"></i>
                                     <span className="ms-1 font-size">
-                                      {totalFlightDuration(
-                                        directions[0][0].segments
-                                      )}
+                                      {totalFlightDuration(item.segments)}
                                     </span>
                                   </span>
                                   <span className="text-color">
@@ -2309,9 +2303,7 @@ const ShowFlight = (props) => {
                                   <span className="text-color me-5">
                                     <i className="fas fa-clock fa-sm"></i>
                                     <span className="ms-1 font-size">
-                                      {totalFlightDuration(
-                                        directions[0][0].segments
-                                      )}
+                                      {totalFlightDuration(item.segments)}
                                     </span>
                                   </span>
                                   <span className="text-color">
@@ -2475,9 +2467,7 @@ const ShowFlight = (props) => {
                                   <span className="text-color me-5">
                                     <i className="fas fa-clock fa-sm"></i>
                                     <span className="ms-1 font-size">
-                                      {totalFlightDuration(
-                                        directions[0][0].segments
-                                      )}
+                                      {totalFlightDuration(item.segments)}
                                     </span>
                                   </span>
                                   <span className="text-color">
@@ -2642,9 +2632,7 @@ const ShowFlight = (props) => {
                                   <span className="text-color me-5">
                                     <i className="fas fa-clock fa-sm"></i>
                                     <span className="ms-1 font-size">
-                                      {totalFlightDuration(
-                                        directions[0][0].segments
-                                      )}
+                                      {totalFlightDuration(item.segments)}
                                     </span>
                                   </span>
                                   <span className="text-color">
@@ -2805,7 +2793,7 @@ const ShowFlight = (props) => {
                             <span className="text-color me-5">
                               <i className="fas fa-clock fa-sm"></i>
                               <span className="ms-1 font-size">
-                                {totalFlightDuration(directions[0][0].segments)}
+                                {totalFlightDuration(item.segments)}
                               </span>
                             </span>
                             <span className="text-color">
@@ -2971,9 +2959,7 @@ const ShowFlight = (props) => {
                                 <span className="text-color me-5">
                                   <i className="fas fa-clock fa-sm"></i>
                                   <span className="ms-1 font-size">
-                                    {totalFlightDuration(
-                                      directions[0][0].segments
-                                    )}
+                                    {totalFlightDuration(item.segments)}
                                   </span>
                                 </span>
                                 <span className="text-color">

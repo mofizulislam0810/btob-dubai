@@ -754,7 +754,7 @@ const ShowModal = ({
                                 <div className="col-lg-3 fs-6 fw-bold">
                                   {/* <span>Duration: {seg.duration[0]}</span> */}
                                   <span>
-                                    Duration:{" "}
+                                    Duration :{" "}
                                     {/* {totalFlightDuration(direction0.segments)} */}
                                     {addDurations([
                                       totalFlightDuration(direction0.segments),
@@ -972,7 +972,7 @@ const ShowModal = ({
                                 </div>
                                 <div className="col-lg-3 fs-6 fw-bold">
                                   <span>
-                                    Duration:{" "}
+                                    Duration :{" "}
                                     {/* {direction1.segments[0].duration[0]} */}
                                     {totalFlightDuration(direction1.segments)}
                                   </span>

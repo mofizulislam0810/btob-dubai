@@ -56,9 +56,9 @@ export const addDurations = (inputArr) => {
   });
 
   return totalMinutes >= 1440
-    ? `${totalMinutes / 1440}d ${(totalMinutes % 1440) / 60}d ${
-        (totalMinutes % 1440) % 60
-      }m`
+    ? `${Math.floor(totalMinutes / 1440)}d ${Math.floor(
+        (totalMinutes % 1440) / 60
+      )}h ${(totalMinutes % 1440) % 60}m`
     : totalMinutes >= 60
     ? `${Math.floor(totalMinutes / 60)}h ${totalMinutes % 60}m`
     : `${totalMinutes % 60}m`;

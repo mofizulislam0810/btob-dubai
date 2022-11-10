@@ -13,8 +13,24 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactPaginate from "react-paginate";
 import { Box, Center, HStack, Text } from "@chakra-ui/react";
 const Support = () => {
-  const [filterSubjectId, setFilterSubjectId] = useState("ALL");
+  const [filterSubjectId, setFilterSubjectId] = useState("0");
   const location = useLocation();
+
+  useEffect(() => {
+    console.log('page ---------->', page);
+    if(page === 1) {
+      setPageNumberH(1);
+      handleGetOpened(1);
+    }
+    else if(page === 2) {
+      setPageNumberH(1);
+      handleGetOngoing(1)
+    }
+    else if(page === 3) {
+      setPageNumberH(1);
+      handleGetClosed(1);
+    }
+  },[filterSubjectId])
 
   // console.log(
   //   location.search.split("ticketno=")[1] === "null" ? "YES" : "NO",
@@ -37,6 +53,9 @@ const Support = () => {
   let ticketno = "";
   let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
+
+  //let page=1;
+  let [page, setPage] = useState(1)
 
   const [isTicketNumRequired, setIsTicketNumRequired] = useState(true);
 
@@ -180,6 +199,7 @@ const Support = () => {
     };
     getSubject();
     const getSupport = async () => {
+      setPageNumber(pageNumber);
       const response = await axios.get(
         environment.getSupportInfoesByStatustList +
           "/" +
@@ -198,6 +218,7 @@ const Support = () => {
     getSupport();
   };
   const handleGetOngoing = (pageNumber) => {
+    setPageNumber(pageNumber);
     const getSupport = async () => {
       const response = await axios.get(
         environment.getSupportInfoesByStatustList +
@@ -217,6 +238,7 @@ const Support = () => {
     getSupportHistory(currentItem, 1);
   };
   const handleGetClosed = (pageNumber) => {
+    setPageNumber(pageNumber);
     const getSupport = async () => {
       const response = await axios.get(
         environment.getSupportInfoesByStatustList +
@@ -453,10 +475,12 @@ const Support = () => {
                         className="form-select"
                         placeholder="Subject"
                         onChange={(e) => {
-                          setSearchSubjectId(Number(e.target.value));
+                          Number(e.target.value)?
+                          setSearchSubjectId(Number(e.target.value)):
+                          setSearchSubjectId(0);
                           Number(e.target.value)
                             ? setFilterSubjectId(Number(e.target.value))
-                            : setFilterSubjectId("ALL");
+                            : setFilterSubjectId("0");
                         }}
                       >
                         <option key={0}>Select Type</option>
@@ -477,7 +501,7 @@ const Support = () => {
                         href="#opened"
                         className="nav-link active"
                         data-bs-toggle="tab"
-                        onClick={() => handleGetOpened(1)}
+                        onClick={() => {handleGetOpened(1); setPage(1)}}
                       >
                         Opened
                       </a>
@@ -487,7 +511,7 @@ const Support = () => {
                         href="#ongoing"
                         className="nav-link"
                         data-bs-toggle="tab"
-                        onClick={() => handleGetOngoing(1)}
+                        onClick={() => {handleGetOngoing(1); setPage(2)}}
                       >
                         Ongoing
                       </a>
@@ -497,7 +521,7 @@ const Support = () => {
                         href="#closed"
                         className="nav-link"
                         data-bs-toggle="tab"
-                        onClick={() => handleGetClosed(1)}
+                        onClick={() => {handleGetClosed(1); setPage(3)}}
                       >
                         Closed
                       </a>
@@ -826,11 +850,11 @@ const Support = () => {
                         </thead>
                         <tbody className="tbody">
                           {supportOpenedList
-                            .filter((item) =>
-                              filterSubjectId !== "ALL"
-                                ? item.subjectId === filterSubjectId
-                                : item
-                            )
+                            // .filter((item) =>
+                            //   filterSubjectId !== "0"
+                            //     ? item.subjectId === filterSubjectId
+                            //     : item
+                            // )
                             .map((item, index) => {
                               return (
                                 <tr key={index}>

@@ -56,6 +56,7 @@ import InvoiceView from "./Pages/InvoiceView/InvoiceView";
 import Expired from "./Pages/Queues/Expired";
 import LoanLedger from "./Pages/Ledger/LoanLedger";
 import ResetPassword from "./Pages/AuthenticationPage/ResetPassword/ResetPassword";
+import EmiPolicy from "./Pages/Optional/EmiPolicy";
 function App() {
   var isLoggedIn = localStorage.getItem("token") !== null ? true : false;
   console.log(isLoggedIn);
@@ -78,6 +79,7 @@ function App() {
             <Route path="/bankdetail" element={<BankDetails />} />
             <Route path="/privacypolicy" element={<PrivacyPolicy />} />
             <Route path="/termandcondition" element={<TermCondition />} />
+            <Route path="/EmiPolicy" element={<EmiPolicy />} />
             <Route path="/regsuccess" element={<RegComplete />} />
             <Route
               path="/resetpassword"

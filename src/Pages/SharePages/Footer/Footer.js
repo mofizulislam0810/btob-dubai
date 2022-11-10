@@ -66,13 +66,13 @@ const Footer = () => {
           <Flex w="100%" pt={'20px'} pb='10px' justifyContent="space-between" color={'white'}>
             <Box className="d-flex align-items-center">
               {/* <div  w="160px" h="103px" /> */}
-            
-                {socialData.map((item, idx) => (
-                  <Circle bg="#E0ECFB" size="45px" key={idx} className="mx-1">
-                    <Icon as={item.icon} h="22px" w="22px" color='black' />
-                  </Circle>
-                ))}
-         
+
+              {socialData.map((item, idx) => (
+                <Circle bg="#E0ECFB" size="45px" key={idx} className="mx-1">
+                  <Icon as={item.icon} h="22px" w="22px" color='black' />
+                </Circle>
+              ))}
+
             </Box>
 
             {/* <Box borderRight="1px" color="#ECECEC" my={2} /> */}

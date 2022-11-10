@@ -10,7 +10,11 @@ import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
 import { Parser } from "html-to-react";
 import DurationFormat from "../../SharePages/Utility/DurationFormat";
-import { totalFlightDuration } from "../../../common/functions";
+import {
+  addDurations,
+  timeDuration,
+  totalFlightDuration,
+} from "../../../common/functions";
 const ShowModal = ({
   flag,
   index,
@@ -204,7 +208,6 @@ const ShowModal = ({
                       <div className="container">
                         {flightType === "Multi City" ? (
                           <>
-
                             {direction2.segments !== undefined ? (
                               <>
                                 {direction2.segments.map((seg, index) => (
@@ -714,9 +717,7 @@ const ShowModal = ({
                             )}
                           </>
                         ) : (
-                          <>
-
-                          </>
+                          <></>
                         )}
                         {direction0.segments.map((seg, index) => (
                           <div key={index}>
@@ -753,10 +754,46 @@ const ShowModal = ({
                                 <div className="col-lg-3 fs-6 fw-bold">
                                   {/* <span>Duration: {seg.duration[0]}</span> */}
                                   <span>
-                                    Duration:{" "}
-                                    {totalFlightDuration(
-                                      direction0.segments
-                                    )}
+                                    Duration :{" "}
+                                    {/* {totalFlightDuration(direction0.segments)} */}
+                                    {direction0.segments.length === 1
+                                      ? totalFlightDuration(direction0.segments)
+                                      : direction0.segments.length === 2
+                                      ? addDurations([
+                                          totalFlightDuration(
+                                            direction0.segments
+                                          ),
+                                          timeDuration(
+                                            direction0.segments[index].arrival,
+                                            direction0.segments[index + 1]
+                                              .departure
+                                          ),
+                                        ])
+                                      : direction0.segments.length === 3
+                                      ? addDurations([
+                                          totalFlightDuration(
+                                            direction0.segments
+                                          ),
+                                          timeDuration(
+                                            direction0.segments[index].arrival,
+                                            direction0.segments[index + 1]
+                                              .departure
+                                          ),
+                                          timeDuration(
+                                            direction0.segments[index + 1]
+                                              .arrival,
+                                            direction0.segments[index + 2]
+                                              .departure
+                                          ),
+                                        ])
+                                      : ""}
+                                    {/* {addDurations([
+                                      totalFlightDuration(direction0.segments),
+                                      timeDuration(
+                                        direction0.segments[index].arrival,
+                                        direction0.segments[index + 1].departure
+                                      ),
+                                    ])} */}
                                   </span>
                                 </div>
                               </div>
@@ -860,8 +897,7 @@ const ShowModal = ({
                                     Layover :&nbsp;
                                     {layOver(
                                       direction0.segments[index]?.departure,
-                                      direction0.segments[index - 1]
-                                        ?.arrival
+                                      direction0.segments[index - 1]?.arrival
                                     )}
                                   </div>
                                 ) : (
@@ -943,8 +979,7 @@ const ShowModal = ({
                                     {airports
                                       .filter(
                                         (f) =>
-                                          f.iata ===
-                                          direction1.segments[0].from
+                                          f.iata === direction1.segments[0].from
                                       )
                                       .map((item) => item.city)}
                                   </span>
@@ -968,7 +1003,7 @@ const ShowModal = ({
                                 </div>
                                 <div className="col-lg-3 fs-6 fw-bold">
                                   <span>
-                                    Duration:{" "}
+                                    Duration :{" "}
                                     {/* {direction1.segments[0].duration[0]} */}
                                     {totalFlightDuration(direction1.segments)}
                                   </span>
@@ -993,8 +1028,7 @@ const ShowModal = ({
                                           Layover : &nbsp;
                                           {layOver(
                                             seg.details[index]?.departure,
-                                            direction1.segments[index]
-                                              ?.arrival
+                                            direction1.segments[index]?.arrival
                                           )}
                                         </div>
                                       ) : (
@@ -1078,8 +1112,7 @@ const ShowModal = ({
                                         {" "}
                                         Layover : &nbsp;
                                         {layOver(
-                                          direction1.segments[index]
-                                            ?.departure,
+                                          direction1.segments[index]?.departure,
                                           direction1.segments[index - 1]
                                             ?.arrival
                                         )}
@@ -1192,16 +1225,24 @@ const ShowModal = ({
                                   <tr>
                                     <td className="left">Adult</td>
                                     <td className="left">
-                                      {passengerFares.adt.basePrice.toLocaleString("en-US")}
+                                      {passengerFares.adt.basePrice.toLocaleString(
+                                        "en-US"
+                                      )}
                                     </td>
                                     <td className="center">
-                                      {passengerFares.adt.taxes.toLocaleString("en-US")}
+                                      {passengerFares.adt.taxes.toLocaleString(
+                                        "en-US"
+                                      )}
                                     </td>
                                     <td className="right">
-                                      {passengerFares.adt.discountPrice.toLocaleString("en-US")}
+                                      {passengerFares.adt.discountPrice.toLocaleString(
+                                        "en-US"
+                                      )}
                                     </td>
                                     <td className="right">
-                                      {passengerFares.adt.ait.toLocaleString("en-US")}
+                                      {passengerFares.adt.ait.toLocaleString(
+                                        "en-US"
+                                      )}
                                     </td>
                                     <td className="right">
                                       {passengerCounts.adt}
@@ -1226,16 +1267,24 @@ const ShowModal = ({
                                   <tr>
                                     <td className="left">Child</td>
                                     <td className="left">
-                                      {passengerFares.cnn.basePrice.toLocaleString("en-US")}
+                                      {passengerFares.cnn.basePrice.toLocaleString(
+                                        "en-US"
+                                      )}
                                     </td>
                                     <td className="center">
-                                      {passengerFares.cnn.taxes.toLocaleString("en-US")}
+                                      {passengerFares.cnn.taxes.toLocaleString(
+                                        "en-US"
+                                      )}
                                     </td>
                                     <td className="right">
-                                      {passengerFares.cnn.discountPrice.toLocaleString("en-US")}
+                                      {passengerFares.cnn.discountPrice.toLocaleString(
+                                        "en-US"
+                                      )}
                                     </td>
                                     <td className="right">
-                                      {passengerFares.cnn.ait.toLocaleString("en-US")}
+                                      {passengerFares.cnn.ait.toLocaleString(
+                                        "en-US"
+                                      )}
                                     </td>
                                     <td className="right">
                                       {passengerCounts.cnn}
@@ -1260,16 +1309,24 @@ const ShowModal = ({
                                   <tr>
                                     <td className="left">Infant</td>
                                     <td className="left">
-                                      {passengerFares.inf.basePrice.toLocaleString("en-US")}
+                                      {passengerFares.inf.basePrice.toLocaleString(
+                                        "en-US"
+                                      )}
                                     </td>
                                     <td className="center">
-                                      {passengerFares.inf.taxes.toLocaleString("en-US")}
+                                      {passengerFares.inf.taxes.toLocaleString(
+                                        "en-US"
+                                      )}
                                     </td>
                                     <td className="right">
-                                      {passengerFares.inf.discountPrice.toLocaleString("en-US")}
+                                      {passengerFares.inf.discountPrice.toLocaleString(
+                                        "en-US"
+                                      )}
                                     </td>
                                     <td className="right">
-                                      {passengerFares.inf.ait.toLocaleString("en-US")}
+                                      {passengerFares.inf.ait.toLocaleString(
+                                        "en-US"
+                                      )}
                                     </td>
                                     <td className="right">
                                       {passengerCounts.inf}
@@ -1294,7 +1351,9 @@ const ShowModal = ({
                                 <td>
                                   {currency !== undefined ? currency : "BDT"}{" "}
                                   {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
-                                  {bookingComponents[0].totalPrice.toLocaleString("en-US")}
+                                  {bookingComponents[0].totalPrice.toLocaleString(
+                                    "en-US"
+                                  )}
                                 </td>
                               </tr>
                             </tbody>
@@ -1327,8 +1386,7 @@ const ShowModal = ({
                                     {airports
                                       .filter(
                                         (f) =>
-                                          f.iata ===
-                                          direction0.segments[0].from
+                                          f.iata === direction0.segments[0].from
                                       )
                                       .map((item) => item.city)}
                                   </span>
@@ -1381,11 +1439,9 @@ const ShowModal = ({
                                 </div>
                                 <div className="col-lg-6">
                                   <span className="d-inline fs-6 float-end">
-                                    {direction0.segments[0].baggage[0]
-                                      .amount +
+                                    {direction0.segments[0].baggage[0].amount +
                                       " " +
-                                      direction0.segments[0].baggage[0]
-                                        .units}
+                                      direction0.segments[0].baggage[0].units}
                                   </span>
                                 </div>
                               </div>
@@ -1394,8 +1450,6 @@ const ShowModal = ({
                         </>
                         {flightType === "Multi City" ? (
                           <>
-
-
                             {direction2.segments !== undefined ? (
                               <>
                                 <div className="row pt-4 pb-2">
@@ -1725,9 +1779,7 @@ const ShowModal = ({
                             )}
                           </>
                         ) : (
-                          <>
-
-                          </>
+                          <></>
                         )}
                       </div>
 

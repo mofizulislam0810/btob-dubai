@@ -23,18 +23,53 @@ export const getPassengerType = (input) => {
 };
 
 export const totalFlightDuration = (input) => {
-  // console.log(input[0].departure, "================");
-  // console.log(input[input.length - 1].arrival, "++++++++=====");
+  let totalMinutes = 0;
+  input?.map((item) => {
+    let h = item.duration?.[0].length > 4 ? item.duration[0].split("h")[0] : 0;
 
-  const res = intervalToDuration({
-    start: parse(input[0].departure, "yyyy-MM-dd H:m:s", new Date()),
-    end: parse(input[input.length - 1].arrival, "yyyy-MM-dd H:m:s", new Date()),
+    let m =
+      item.duration?.[0].length > 4
+        ? item.duration[0].split(" ")[1]?.split("m")[0]
+        : item.duration[0].split("m")[0];
+
+    totalMinutes += parseInt(h) * 60 + parseInt(m);
   });
 
-  // console.log(res, "============");
-  return res.days === 0
-    ? res.hours === 0
-      ? `${res.minutes}m`
-      : `${res.hours}h ${res.minutes}m`
-    : `${res.days}d ${res.hours}h ${res.minutes}m`;
+  return totalMinutes >= 60
+    ? `${Math.floor(totalMinutes / 60)}h ${totalMinutes % 60}m`
+    : `${totalMinutes % 60}m`;
+  //return `${Math.floor(totalMinutes / 60)}h+`;
+};
+
+export const addDurations = (inputArr) => {
+  let arr = inputArr.map((item) => {
+    return item.length > 7 ? item : `0d ${item}`;
+  });
+
+  let totalMinutes = 0;
+  arr.map((item) => {
+    let d = parseInt(item.split(" ")[0].slice(0, -1));
+    let h = parseInt(item.split(" ")[1].slice(0, -1));
+    let m = parseInt(item.split(" ")[2].slice(0, -1));
+
+    totalMinutes += parseInt(d) * 24 * 60 + parseInt(h) * 60 + parseInt(m);
+  });
+
+  return totalMinutes >= 1440
+    ? `${Math.floor(totalMinutes / 1440)}d ${Math.floor(
+        (totalMinutes % 1440) / 60
+      )}h ${(totalMinutes % 1440) % 60}m`
+    : totalMinutes >= 60
+    ? `${Math.floor(totalMinutes / 60)}h ${totalMinutes % 60}m`
+    : `${totalMinutes % 60}m`;
+};
+
+// INTERVAL BETWEEN SEGMENTS
+export const timeDuration = (start, end) => {
+  const result = intervalToDuration({
+    start: parse(start, "yyyy-MM-dd H:m:s", new Date()),
+    end: parse(end, "yyyy-MM-dd H:m:s", new Date()),
+  });
+
+  return `${result.hours}h ${result.minutes}m`;
 };

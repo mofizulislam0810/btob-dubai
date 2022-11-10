@@ -35,7 +35,7 @@ const ShowFlight = (props) => {
     itemCodeRef,
     passengerCounts,
     totalPrice,
-    avlSrc
+    avlSrc,
   } = props.data;
   // console.log(directions);
   const flightType = props.flightType;
@@ -326,7 +326,14 @@ const ShowFlight = (props) => {
 
             {flightType === "Multi City" ? (
               directions.map((item, index) => (
-                <div className={index===0 ?"row p-2 text-color m-1" :"row p-2 text-color m-1 border-top" } key={index}>
+                <div
+                  className={
+                    index === 0
+                      ? "row p-2 text-color m-1"
+                      : "row p-2 text-color m-1 border-top"
+                  }
+                  key={index}
+                >
                   <div className="col-lg-1 my-auto">
                     <img src={ImageUrlD} alt="" width="40px" height="40px" />
                   </div>
@@ -384,7 +391,6 @@ const ShowFlight = (props) => {
                             {item[0].segments[0].duration[0]}
                           </span>
                         </span>
-                       
                       </div>
                     </div>
                   </div>
@@ -984,7 +990,7 @@ const ShowFlight = (props) => {
                           {directions[0][0].from}-{directions[0][0].to}
                         </td>
                         <td className="left">
-                        Adult :{" "}
+                          Adult :{" "}
                           <span className="ms-1 font-size">
                             {directions[0][0].segments[0].baggage[0]?.amount +
                               " " +
@@ -1000,7 +1006,7 @@ const ShowFlight = (props) => {
                               {directions[1][0].from}-{directions[1][0].to}
                             </td>
                             <td className="left">
-                            Adult :{" "}
+                              Adult :{" "}
                               <span className="ms-1 font-size">
                                 {directions[1][0].segments[0].baggage[0]
                                   ?.amount +
@@ -1038,7 +1044,7 @@ const ShowFlight = (props) => {
                 {refundable === true ? (
                   <>
                     <span className="font-size">
-                     <span style={{color:avlSrc}}>
+                      <span style={{ color: avlSrc }}>
                         <i class="fas fa-circle fa-sm me-1"></i>
                       </span>
                       <span className="text-success">
@@ -1050,7 +1056,7 @@ const ShowFlight = (props) => {
                 ) : (
                   <>
                     <span className="font-size">
-                    <span style={{color:avlSrc}}>
+                      <span style={{ color: avlSrc }}>
                         <i class="fas fa-circle fa-sm me-1"></i>
                       </span>
                       <span className="text-danger">
@@ -1075,15 +1081,17 @@ const ShowFlight = (props) => {
                       style={{ fontSize: "12px" }}
                     >
                       {currency !== undefined ? currency : "BDT"}{" "}
-                      {(totalPrice + bookingComponents[0].agentAdditionalPrice).toLocaleString("en-US")}
+                      {(
+                        totalPrice + bookingComponents[0].agentAdditionalPrice
+                      ).toLocaleString("en-US")}
                     </div>
                     {currency !== undefined ? currency : "BDT"}{" "}
                     {(
                       totalPrice -
-                        bookingComponents[0].discountPrice +
-                        (bookingComponents[0].agentAdditionalPrice < 0
-                          ? 0
-                          : bookingComponents[0].agentAdditionalPrice)
+                      bookingComponents[0].discountPrice +
+                      (bookingComponents[0].agentAdditionalPrice < 0
+                        ? 0
+                        : bookingComponents[0].agentAdditionalPrice)
                     ).toLocaleString("en-US")}
                   </div>
                 </>
@@ -1092,10 +1100,10 @@ const ShowFlight = (props) => {
                   {currency !== undefined ? currency : "BDT"}{" "}
                   {(
                     totalPrice -
-                      bookingComponents[0].discountPrice +
-                      (bookingComponents[0].agentAdditionalPrice < 0
-                        ? 0
-                        : bookingComponents[0].agentAdditionalPrice)
+                    bookingComponents[0].discountPrice +
+                    (bookingComponents[0].agentAdditionalPrice < 0
+                      ? 0
+                      : bookingComponents[0].agentAdditionalPrice)
                   ).toLocaleString("en-US")}
                 </div>
               )}
@@ -1327,7 +1335,8 @@ const ShowFlight = (props) => {
                     <tr>
                       <td className="left">Adult</td>
                       <td className="left">
-                        {(passengerFares.adt.basePrice +
+                        {(
+                          passengerFares.adt.basePrice +
                           bookingComponents[0].agentAdditionalPrice /
                             (passengerCounts.adt +
                               (passengerCounts.cnn !== null
@@ -1335,13 +1344,20 @@ const ShowFlight = (props) => {
                                 : 0) +
                               (passengerCounts.inf !== null
                                 ? passengerCounts.inf
-                                : 0))).toLocaleString("en-US")}
+                                : 0))
+                        ).toLocaleString("en-US")}
                       </td>
-                      <td className="center">{passengerFares.adt.taxes.toLocaleString("en-US")}</td>
+                      <td className="center">
+                        {passengerFares.adt.taxes.toLocaleString("en-US")}
+                      </td>
                       <td className="right">
-                        {passengerFares.adt.discountPrice.toLocaleString("en-US")}
+                        {passengerFares.adt.discountPrice.toLocaleString(
+                          "en-US"
+                        )}
                       </td>
-                      <td className="right">{passengerFares.adt.ait.toLocaleString("en-US")}</td>
+                      <td className="right">
+                        {passengerFares.adt.ait.toLocaleString("en-US")}
+                      </td>
                       <td className="right">{passengerCounts.adt}</td>
                       {isTempInspector !== null && isTempInspector == "true" ? (
                         <>
@@ -1381,8 +1397,9 @@ const ShowFlight = (props) => {
                             }
                           >
                             {currency !== undefined ? currency : "BDT"}{" "}
-                            {(passengerFares.adt.totalPrice *
-                              passengerCounts.adt +
+                            {(
+                              passengerFares.adt.totalPrice *
+                                passengerCounts.adt +
                               bookingComponents[0].agentAdditionalPrice /
                                 (passengerCounts.adt +
                                   (passengerCounts.cnn !== null
@@ -1390,15 +1407,17 @@ const ShowFlight = (props) => {
                                     : 0) +
                                   (passengerCounts.inf !== null
                                     ? passengerCounts.inf
-                                    : 0))).toLocaleString("en-US")}
+                                    : 0))
+                            ).toLocaleString("en-US")}
                           </td>
                         </>
                       ) : (
                         <>
                           <td className="right fw-bold">
                             {currency !== undefined ? currency : "BDT"}{" "}
-                            {(passengerFares.adt.totalPrice *
-                              passengerCounts.adt +
+                            {(
+                              passengerFares.adt.totalPrice *
+                                passengerCounts.adt +
                               bookingComponents[0].agentAdditionalPrice /
                                 (passengerCounts.adt +
                                   (passengerCounts.cnn !== null
@@ -1406,7 +1425,8 @@ const ShowFlight = (props) => {
                                     : 0) +
                                   (passengerCounts.inf !== null
                                     ? passengerCounts.inf
-                                    : 0))).toLocaleString("en-US")}
+                                    : 0))
+                            ).toLocaleString("en-US")}
                           </td>
                         </>
                       )}
@@ -1421,7 +1441,8 @@ const ShowFlight = (props) => {
                     <tr>
                       <td className="left">Child</td>
                       <td className="left">
-                        {(passengerFares.cnn.basePrice +
+                        {(
+                          passengerFares.cnn.basePrice +
                           bookingComponents[0].agentAdditionalPrice /
                             (passengerCounts.adt +
                               (passengerCounts.cnn !== null
@@ -1429,13 +1450,20 @@ const ShowFlight = (props) => {
                                 : 0) +
                               (passengerCounts.inf !== null
                                 ? passengerCounts.inf
-                                : 0))).toLocaleString("en-US")}
+                                : 0))
+                        ).toLocaleString("en-US")}
                       </td>
-                      <td className="center">{passengerFares.cnn.taxes.toLocaleString("en-US")}</td>
+                      <td className="center">
+                        {passengerFares.cnn.taxes.toLocaleString("en-US")}
+                      </td>
                       <td className="right">
-                        {passengerFares.cnn.discountPrice.toLocaleString("en-US")}
+                        {passengerFares.cnn.discountPrice.toLocaleString(
+                          "en-US"
+                        )}
                       </td>
-                      <td className="right">{passengerFares.cnn.ait.toLocaleString("en-US")}</td>
+                      <td className="right">
+                        {passengerFares.cnn.ait.toLocaleString("en-US")}
+                      </td>
                       <td className="right">{passengerCounts.cnn}</td>
                       {isTempInspector !== null && isTempInspector == "true" ? (
                         <>
@@ -1476,8 +1504,9 @@ const ShowFlight = (props) => {
                             }
                           >
                             {currency !== undefined ? currency : "BDT"}{" "}
-                            {(passengerFares.cnn.totalPrice *
-                              passengerCounts.cnn +
+                            {(
+                              passengerFares.cnn.totalPrice *
+                                passengerCounts.cnn +
                               bookingComponents[0].agentAdditionalPrice /
                                 (passengerCounts.adt +
                                   (passengerCounts.cnn !== null
@@ -1485,7 +1514,8 @@ const ShowFlight = (props) => {
                                     : 0) +
                                   (passengerCounts.inf !== null
                                     ? passengerCounts.inf
-                                    : 0))).toLocaleString("en-US")}
+                                    : 0))
+                            ).toLocaleString("en-US")}
                           </td>
                         </>
                       ) : (
@@ -1493,8 +1523,9 @@ const ShowFlight = (props) => {
                           {" "}
                           <td className="right fw-bold">
                             {currency !== undefined ? currency : "BDT"}{" "}
-                            {(passengerFares.cnn.totalPrice *
-                              passengerCounts.cnn +
+                            {(
+                              passengerFares.cnn.totalPrice *
+                                passengerCounts.cnn +
                               bookingComponents[0].agentAdditionalPrice /
                                 (passengerCounts.adt +
                                   (passengerCounts.cnn !== null
@@ -1502,7 +1533,8 @@ const ShowFlight = (props) => {
                                     : 0) +
                                   (passengerCounts.inf !== null
                                     ? passengerCounts.inf
-                                    : 0))).toLocaleString("en-US")}
+                                    : 0))
+                            ).toLocaleString("en-US")}
                           </td>
                         </>
                       )}
@@ -1517,7 +1549,8 @@ const ShowFlight = (props) => {
                     <tr>
                       <td className="left">Infant</td>
                       <td className="left">
-                        {(passengerFares.inf.basePrice +
+                        {(
+                          passengerFares.inf.basePrice +
                           bookingComponents[0].agentAdditionalPrice /
                             (passengerCounts.adt +
                               (passengerCounts.cnn !== null
@@ -1525,13 +1558,20 @@ const ShowFlight = (props) => {
                                 : 0) +
                               (passengerCounts.inf !== null
                                 ? passengerCounts.inf
-                                : 0))).toLocaleString("en-US")}
+                                : 0))
+                        ).toLocaleString("en-US")}
                       </td>
-                      <td className="center">{passengerFares.inf.taxes.toLocaleString("en-US")}</td>
+                      <td className="center">
+                        {passengerFares.inf.taxes.toLocaleString("en-US")}
+                      </td>
                       <td className="right">
-                        {passengerFares.inf.discountPrice.toLocaleString("en-US")}
+                        {passengerFares.inf.discountPrice.toLocaleString(
+                          "en-US"
+                        )}
                       </td>
-                      <td className="right">{passengerFares.inf.ait.toLocaleString("en-US")}</td>
+                      <td className="right">
+                        {passengerFares.inf.ait.toLocaleString("en-US")}
+                      </td>
                       <td className="right">{passengerCounts.inf}</td>
                       {isTempInspector !== null && isTempInspector == "true" ? (
                         <>
@@ -1572,8 +1612,9 @@ const ShowFlight = (props) => {
                             }
                           >
                             {currency !== undefined ? currency : "BDT"}{" "}
-                            {(passengerFares.inf.totalPrice *
-                              passengerCounts.inf +
+                            {(
+                              passengerFares.inf.totalPrice *
+                                passengerCounts.inf +
                               bookingComponents[0].agentAdditionalPrice /
                                 (passengerCounts.adt +
                                   (passengerCounts.cnn !== null
@@ -1581,7 +1622,8 @@ const ShowFlight = (props) => {
                                     : 0) +
                                   (passengerCounts.inf !== null
                                     ? passengerCounts.inf
-                                    : 0))).toLocaleString("en-US")}
+                                    : 0))
+                            ).toLocaleString("en-US")}
                           </td>
                         </>
                       ) : (
@@ -1592,8 +1634,9 @@ const ShowFlight = (props) => {
                             onLoadedData={(e) => console.log({ e })}
                           >
                             {currency !== undefined ? currency : "BDT"}{" "}
-                            {(passengerFares.inf.totalPrice *
-                              passengerCounts.inf +
+                            {(
+                              passengerFares.inf.totalPrice *
+                                passengerCounts.inf +
                               bookingComponents[0].agentAdditionalPrice /
                                 (passengerCounts.adt +
                                   (passengerCounts.cnn !== null
@@ -1601,7 +1644,8 @@ const ShowFlight = (props) => {
                                     : 0) +
                                   (passengerCounts.inf !== null
                                     ? passengerCounts.inf
-                                    : 0))).toLocaleString("en-US")}
+                                    : 0))
+                            ).toLocaleString("en-US")}
                           </td>
                         </>
                       )}
@@ -1772,7 +1816,9 @@ const ShowFlight = (props) => {
                               <span className="text-color me-5">
                                 <i className="fas fa-clock fa-sm"></i>
                                 <span className="ms-1 font-size">
-                                  {item.segments[0].duration[0]}
+                                  {totalFlightDuration(
+                                    directions[0][0].segments
+                                  )}
                                 </span>
                               </span>
                               <span className="text-color">
@@ -1930,7 +1976,9 @@ const ShowFlight = (props) => {
                                   <span className="text-color me-5">
                                     <i className="fas fa-clock fa-sm"></i>
                                     <span className="ms-1 font-size">
-                                      {item.segments[0].duration[0]}
+                                      {totalFlightDuration(
+                                        directions[0][0].segments
+                                      )}
                                     </span>
                                   </span>
                                   <span className="text-color">
@@ -2094,7 +2142,9 @@ const ShowFlight = (props) => {
                                   <span className="text-color me-5">
                                     <i className="fas fa-clock fa-sm"></i>
                                     <span className="ms-1 font-size">
-                                      {item.segments[0].duration[0]}
+                                      {totalFlightDuration(
+                                        directions[0][0].segments
+                                      )}
                                     </span>
                                   </span>
                                   <span className="text-color">
@@ -2259,7 +2309,9 @@ const ShowFlight = (props) => {
                                   <span className="text-color me-5">
                                     <i className="fas fa-clock fa-sm"></i>
                                     <span className="ms-1 font-size">
-                                      {item.segments[0].duration[0]}
+                                      {totalFlightDuration(
+                                        directions[0][0].segments
+                                      )}
                                     </span>
                                   </span>
                                   <span className="text-color">
@@ -2423,7 +2475,9 @@ const ShowFlight = (props) => {
                                   <span className="text-color me-5">
                                     <i className="fas fa-clock fa-sm"></i>
                                     <span className="ms-1 font-size">
-                                      {item.segments[0].duration[0]}
+                                      {totalFlightDuration(
+                                        directions[0][0].segments
+                                      )}
                                     </span>
                                   </span>
                                   <span className="text-color">
@@ -2588,7 +2642,9 @@ const ShowFlight = (props) => {
                                   <span className="text-color me-5">
                                     <i className="fas fa-clock fa-sm"></i>
                                     <span className="ms-1 font-size">
-                                      {item.segments[0].duration[0]}
+                                      {totalFlightDuration(
+                                        directions[0][0].segments
+                                      )}
                                     </span>
                                   </span>
                                   <span className="text-color">
@@ -2749,7 +2805,7 @@ const ShowFlight = (props) => {
                             <span className="text-color me-5">
                               <i className="fas fa-clock fa-sm"></i>
                               <span className="ms-1 font-size">
-                                {item.segments[0].duration[0]}
+                                {totalFlightDuration(directions[0][0].segments)}
                               </span>
                             </span>
                             <span className="text-color">
@@ -2915,7 +2971,9 @@ const ShowFlight = (props) => {
                                 <span className="text-color me-5">
                                   <i className="fas fa-clock fa-sm"></i>
                                   <span className="ms-1 font-size">
-                                    {item.segments[0].duration[0]}
+                                    {totalFlightDuration(
+                                      directions[0][0].segments
+                                    )}
                                   </span>
                                 </span>
                                 <span className="text-color">
@@ -3100,7 +3158,7 @@ const ShowFlight = (props) => {
                   fareRules.item1 != null ? (
                     fareRules.item2.isSuccess == true ? (
                       <Tabs>
-                        <TabList style={{overflowY: "scroll"}}>
+                        <TabList style={{ overflowY: "scroll" }}>
                           {fareRules.item1.fareRuleDetails.map(
                             (item, index) => {
                               return (

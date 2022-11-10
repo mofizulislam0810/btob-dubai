@@ -1257,9 +1257,9 @@ const Balance = () => {
                                                 ? "Approved"
                                                 : ""}
                                       </td>
-                                      <td>{item.currencyName} {item.amount}</td>
+                                      <td>{item.currencyName} {item.amount.toLocaleString("en-US")}</td>
                                       <td>{item.currencyName} {item.bankChargeAdmin}</td>
-                                      <td>{item.currencyName} {item.topupAmountAdmin}</td>
+                                      <td>{item.currencyName} {item.topupAmountAdmin.toLocaleString("en-US")}</td>
                                       {
                                         item.attachment !== null && item.attachment !== "" ? <>
                                           <td><a href={s3URL + item.attachment} download>Download

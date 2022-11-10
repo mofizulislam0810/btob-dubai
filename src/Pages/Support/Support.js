@@ -15,6 +15,12 @@ import { Box, Center, HStack, Text } from "@chakra-ui/react";
 const Support = () => {
   const [filterSubjectId, setFilterSubjectId] = useState("ALL");
   const location = useLocation();
+
+  // console.log(
+  //   location.search.split("ticketno=")[1] === "null" ? "YES" : "NO",
+  //   "===="
+  // );
+
   const [refundType, setRefundType] = useState("Full");
   let [message, setMessage] = useState("");
   let [fileName, setFileName] = useState("");
@@ -31,6 +37,8 @@ const Support = () => {
   let ticketno = "";
   let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
+
+  const [isTicketNumRequired, setIsTicketNumRequired] = useState(true);
 
   const handleGetPassengerList = (trid) => {
     const getPassengerList = async () => {
@@ -233,18 +241,18 @@ const Support = () => {
     handleGetOngoing(currentPage);
     handleGetClosed(currentPage);
   };
-  const handleEditItem = (item) => {
-    setCurrentItem(item);
-    setSupportTypeId(item.supportTypeId);
-    setSubjectId(item.subjectId);
-    setMessage(item.message);
-    setFileName(item.fileName);
-    setStatus(item.status);
-    setRefundType(item.refundType);
-    setUniqueTransID(item.uniqueTransID);
-    setPNR(item.pnr);
-    setTicketno(item.ticketNumber);
-  };
+  // const handleEditItem = (item) => {
+  //   setCurrentItem(item);
+  //   setSupportTypeId(item.supportTypeId);
+  //   setSubjectId(item.subjectId);
+  //   setMessage(item.message);
+  //   setFileName(item.fileName);
+  //   setStatus(item.status);
+  //   setRefundType(item.refundType);
+  //   setUniqueTransID(item.uniqueTransID);
+  //   setPNR(item.pnr);
+  //   setTicketno(item.ticketNumber);
+  // };
   const clearForm = (item) => {
     setCurrentItem(null);
     setSupportTypeId(0);
@@ -317,6 +325,7 @@ const Support = () => {
         handleGetOngoing();
         toast.success("Thanks! Message sent successfully..");
         document.getElementById("replyBtn").click();
+        setHistoryMessage("");
       } else {
         toast.error("Sorry! Message not sent..");
       }
@@ -331,16 +340,17 @@ const Support = () => {
     let supportObj = {
       id: currentItem == null ? 0 : currentItem.id,
       agentId: sessionStorage.getItem("agentId") ?? 0,
-      supportTypeId: supportTypeId,
+      supportTypeId: 2,
       subjectId: subjectId,
       message: message,
       fileName: fileName,
-      status: status,
+      status: 0,
       uniqueTransID: uniqueTransID,
       pnr: pnr,
       ticketNumber: ticketNumbersN,
     };
-    if (supportTypeId === 0) {
+
+    if (supportObj.fileNamesupportTypeId === 0) {
       toast.error("Sorry! Support type not selected..");
       return;
     }
@@ -352,7 +362,12 @@ const Support = () => {
       toast.error("Sorry! Message is empty..");
       return;
     }
-    if (ticketNumbers === "") {
+    if (
+      !isTicketNumRequired &&
+      location.search.split("ticketno=")[1] !== "null" &&
+      subjectId !== 10 &&
+      ticketNumbers === ""
+    ) {
       toast.error("Sorry! Ticket number not selected..");
       return;
     }
@@ -377,6 +392,7 @@ const Support = () => {
       putData();
     } else {
       const postData = async () => {
+        //alert("ok");
         const response = await axios.post(
           environment.supportInfo,
           supportObj,
@@ -531,32 +547,36 @@ const Support = () => {
                               <div className="row">
                                 <input type={"hidden"}></input>
                                 <div className="row my-3">
-                                  <div className="col-sm-4">
-                                    <label class="form-label">
-                                      Support Type
-                                      <span style={{ color: "red" }}>*</span>
-                                    </label>
-                                    <select
-                                      className="form-select"
-                                      value={subjectId}
-                                      placeholder="Subject"
-                                      onChange={(e) =>
-                                        setSubjectId(Number(e.target.value))
-                                      }
-                                    >
-                                      <option key={0}>Select Type</option>
-                                      {subjectList.map((item, index) => {
-                                        return (
-                                          <option
-                                            key={index + 1}
-                                            value={item.id}
-                                          >
-                                            {item.name}
-                                          </option>
-                                        );
-                                      })}
-                                    </select>
-                                  </div>
+                                  {location.search.split("ticketno=")[1] !==
+                                    "null" && (
+                                    <div className="col-sm-4">
+                                      <label class="form-label">
+                                        Support Type
+                                        <span style={{ color: "red" }}>*</span>
+                                      </label>
+                                      <select
+                                        className="form-select"
+                                        value={subjectId}
+                                        placeholder="Subject"
+                                        onChange={(e) =>
+                                          setSubjectId(Number(e.target.value))
+                                        }
+                                      >
+                                        <option key={0}>Select Type</option>
+                                        {subjectList.map((item, index) => {
+                                          return (
+                                            <option
+                                              key={index + 1}
+                                              value={item.id}
+                                            >
+                                              {item.name}
+                                            </option>
+                                          );
+                                        })}
+                                      </select>
+                                    </div>
+                                  )}
+
                                   <HStack w="400px">
                                     <div className="col-sm-8">
                                       <label class="form-label">
@@ -600,90 +620,121 @@ const Support = () => {
                                     </div>
                                   </HStack>
 
-                                  <div className="col-sm-12">
-                                    <table
-                                      className="table table-boardered table-sm mt-3"
-                                      style={{
-                                        width: "100%",
-                                        fontSize: "13px",
-                                      }}
-                                    >
-                                      <thead className="text-center fw-bold bg-secondary">
-                                        <tr>
-                                          <th>Pax Name</th>
-                                          <th>Type</th>
-                                          <th>
-                                            Ticket Number{" "}
-                                            <span style={{ color: "red" }}>
-                                              *
-                                            </span>
-                                          </th>
-                                        </tr>
-                                      </thead>
+                                  {location.search.split("ticketno=")[1] !==
+                                  "null" ? (
+                                    <div className="col-sm-12">
+                                      <table
+                                        className="table table-boardered table-sm mt-3"
+                                        style={{
+                                          width: "100%",
+                                          fontSize: "13px",
+                                        }}
+                                      >
+                                        <thead className="text-center fw-bold bg-secondary">
+                                          <tr>
+                                            <th>Pax Name</th>
+                                            <th>Type</th>
+                                            <th>
+                                              Ticket Number{" "}
+                                              <span style={{ color: "red" }}>
+                                                *
+                                              </span>
+                                            </th>
+                                          </tr>
+                                        </thead>
 
-                                      <tbody className="lh-1 tbody text-center">
-                                        {passengerList.length > 0
-                                          ? passengerList.map((item, index) => {
-                                              return (
-                                                <>
-                                                  <tr>
-                                                    <td>
-                                                      {item.title +
-                                                        " " +
-                                                        item.first +
-                                                        " " +
-                                                        item.middle +
-                                                        " " +
-                                                        item.last}
-                                                    </td>
-                                                    <td>
-                                                      {item.passengerType}
-                                                    </td>
-                                                    <td>
-                                                      {
-                                                        <>
-                                                          <input
-                                                            type={"checkbox"}
-                                                            defaultChecked={
-                                                              item.ticketNumbers ===
-                                                              defaultTicketNumber
-                                                                ? true
-                                                                : false
-                                                            }
-                                                            onChange={(e) =>
-                                                              handleSetTicketNo(
-                                                                e.target
-                                                                  .checked,
-                                                                item.ticketNumbers
-                                                              )
-                                                            }
-                                                          ></input>
-                                                          &nbsp;{" "}
-                                                          {item.ticketNumbers}
-                                                        </>
-                                                      }
-                                                    </td>
-                                                  </tr>
-                                                </>
-                                              );
-                                            })
-                                          : ""}
-                                      </tbody>
-                                    </table>
-                                    <Text
-                                      fontSize="xs"
-                                      textAlign="center"
-                                      w="100%"
-                                    >
-                                      Plase make sure to select Ticket Number{" "}
+                                        <tbody className="lh-1 tbody text-center">
+                                          {passengerList.length > 0
+                                            ? passengerList.map(
+                                                (item, index) => {
+                                                  // console.log(
+                                                  //   item.ticketNumbers === null
+                                                  //     ? "TRUE"
+                                                  //     : "FALSE",
+                                                  //   "++++"
+                                                  // );
+                                                  item.ticketNumbers === null &&
+                                                    setIsTicketNumRequired(
+                                                      false
+                                                    );
+
+                                                  return (
+                                                    <>
+                                                      {item.ticketNumbers &&
+                                                        item.ticketNumbers !==
+                                                          null && (
+                                                          <tr>
+                                                            <td>
+                                                              {item.title +
+                                                                " " +
+                                                                item.first +
+                                                                " " +
+                                                                item.middle +
+                                                                " " +
+                                                                item.last}
+                                                            </td>
+                                                            <td>
+                                                              {
+                                                                item.passengerType
+                                                              }
+                                                            </td>
+                                                            <td>
+                                                              {
+                                                                <>
+                                                                  <input
+                                                                    type={
+                                                                      "checkbox"
+                                                                    }
+                                                                    defaultChecked={
+                                                                      item.ticketNumbers ===
+                                                                      defaultTicketNumber
+                                                                        ? true
+                                                                        : false
+                                                                    }
+                                                                    onChange={(
+                                                                      e
+                                                                    ) =>
+                                                                      handleSetTicketNo(
+                                                                        e.target
+                                                                          .checked,
+                                                                        item.ticketNumbers
+                                                                      )
+                                                                    }
+                                                                  ></input>
+                                                                  &nbsp;{" "}
+                                                                  {
+                                                                    item.ticketNumbers
+                                                                  }
+                                                                </>
+                                                              }
+                                                            </td>
+                                                          </tr>
+                                                        )}
+                                                    </>
+                                                  );
+                                                }
+                                              )
+                                            : ""}
+                                        </tbody>
+                                      </table>
+                                      <Text
+                                        fontSize="xs"
+                                        textAlign="center"
+                                        w="100%"
+                                      >
+                                        Plase make sure to select Ticket Number{" "}
+                                        <br />
+                                        (You can seach for your ticket number
+                                        with Booking ID or PNR)
+                                      </Text>
                                       <br />
-                                      (You can seach for your ticket number with
-                                      Booking ID or PNR)
-                                    </Text>
-                                    <br />
-                                    {/* <label>{ticketNumbers}</label> */}
-                                    {/* <input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumber === "null" ? "" : ticketNumber} className="form-control" onChange={(e) => setTicketno()}></input> */}
-                                  </div>
+                                      {/* <label>{ticketNumbers}</label> */}
+                                      {/* <input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumber === "null" ? "" : ticketNumber} className="form-control" onChange={(e) => setTicketno()}></input> */}
+                                    </div>
+                                  ) : (
+                                    ""
+                                  )}
+
                                   {/* {
 																		subjectId === 2 ? 
 																		<>		
@@ -1325,6 +1376,7 @@ const Support = () => {
                                         />
                                       </span>
                                       <input
+                                        value={historyMessage}
                                         className="form-control border no-shadow no-rounded"
                                         placeholder="Type your message here"
                                         onChange={(e) =>

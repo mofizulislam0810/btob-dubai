@@ -33,7 +33,7 @@ const SideNavBar = () => {
           >
             {/* Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library  */}
-            
+
             <li className="nav-item">
               <Link to="/dashboard" className="nav-link">
                 <i className="nav-icon fa fa-desktop"></i>
@@ -43,7 +43,7 @@ const SideNavBar = () => {
               </Link>
             </li>
 
-            
+
             <li className="nav-item">
               <Link to="/search" className="nav-link">
                 <i className="nav-icon fas fa-search"></i>
@@ -63,31 +63,31 @@ const SideNavBar = () => {
                 </p>
               </a>
               <ul className="nav nav-treeview">
-               <li className={currentPage === "booked" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("booked")}>
+                <li className={currentPage === "booked" ? "nav-item active__color" : "nav-item"} onClick={() => setCurrentPage("booked")}>
                   <Link to="/booked" className="nav-link nav__link__font__size">
                     <i className="fa fa-minus nav-icon"></i>
                     <p>On Hold</p>
                   </Link>
                 </li>
-                <li className={currentPage === "canceled" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("canceled")}>
+                <li className={currentPage === "canceled" ? "nav-item active__color" : "nav-item"} onClick={() => setCurrentPage("canceled")}>
                   <Link to="/expired" className="nav-link nav__link__font__size">
                     <i className="fa fa-minus nav-icon"></i>
                     <p>Expired</p>
                   </Link>
                 </li>
-                <li className={currentPage === "ticketed" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("ticketed")}>
+                <li className={currentPage === "ticketed" ? "nav-item active__color" : "nav-item"} onClick={() => setCurrentPage("ticketed")}>
                   <Link to="/ticketed" className="nav-link nav__link__font__size">
                     <i className="fa fa-minus nav-icon"></i>
                     <p>Ticketed</p>
                   </Link>
                 </li>
-                <li className={currentPage === "canceled" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("canceled")}>
+                <li className={currentPage === "canceled" ? "nav-item active__color" : "nav-item"} onClick={() => setCurrentPage("canceled")}>
                   <Link to="/canceled" className="nav-link nav__link__font__size">
                     <i className="fa fa-minus nav-icon"></i>
                     <p>Canceled</p>
                   </Link>
                 </li>
-                <li className={currentPage === "all" ? "nav-item active__color" : "nav-item"} onClick={()=>setCurrentPage("all")}>
+                <li className={currentPage === "all" ? "nav-item active__color" : "nav-item"} onClick={() => setCurrentPage("all")}>
                   <Link to="/queues?id=1" className="nav-link nav__link__font__size">
                     <i className="fa fa-minus nav-icon"></i>
                     <p>All</p>
@@ -234,7 +234,7 @@ const SideNavBar = () => {
                 </p>
               </Link>
             </li> */}
-           <li className="nav-item">
+            <li className="nav-item">
               <Link to="/staff" className="nav-link">
                 {/* <i className="nav-icon fas fa-tasks"></i> */}
                 {/* <i className="nav-icon fas fa-tachometer-alt"></i> */}

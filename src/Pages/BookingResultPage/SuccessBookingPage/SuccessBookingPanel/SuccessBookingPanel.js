@@ -10,6 +10,7 @@ import Loading from "../../../Loading/Loading";
 import airports from "../../../../JSON/airports.json";
 import ReactToPrint from 'react-to-print';
 import { getDefaultNormalizer } from "@testing-library/react";
+import { getPassengerType } from "../../../../common/functions";
 
 const SuccessBookingPanel = () => {
   const { setTicketData, setLoading, loading } = useAuth();
@@ -170,7 +171,6 @@ const SuccessBookingPanel = () => {
                               </td>
                             </tr>
                           </> : <>
-
                           </>
                         }
                       </tbody>
@@ -201,7 +201,7 @@ const SuccessBookingPanel = () => {
                                   {item.nameElement.firstName}{" "}
                                   {item.nameElement.lastName}
                                 </td>
-                                <td>{item.passengerType}</td>
+                                <td>{getPassengerType(item.passengerType)}</td>
                                 <td>{item.gender}</td>
                                 <td>
                                   {item.dateOfBirth === null ? "N/A" : moment(item.dateOfBirth).format(
@@ -255,12 +255,15 @@ const SuccessBookingPanel = () => {
                                       {airports
                                         .filter((f) => f.iata === item.from)
                                         .map((item) => item.city)}
-                                      {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                      {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>{" "}(Terminal-{item.details[0].originTerminal})</> : <></>}
                                     </span>
                                   </td>
                                   <td>
                                     {moment(item.departure).format(
-                                      "DD-MM-YYYY hh:mm:ss A"
+                                      "DD-MM-YYYY"
+                                    )}<br></br>
+                                    {moment(item.departure).format(
+                                      "hh:mm:ss A"
                                     )}
 
                                     {/* moment(item.issueDate).format(
@@ -274,12 +277,15 @@ const SuccessBookingPanel = () => {
                                       {airports
                                         .filter((f) => f.iata === item.to)
                                         .map((item) => item.city)}
-                                      {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                      {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>{" "}(Terminal-{item.details[0].destinationTerminal})</> : <></>}
                                     </span>
                                   </td>
                                   <td>
                                     {moment(item.arrival).format(
-                                      "DD-MM-YYYY hh:mm:ss A"
+                                      "DD-MM-YYYY"
+                                    )}<br></br>
+                                    {moment(item.arrival).format(
+                                      "hh:mm:ss A"
                                     )}
                                   </td>
                                   <td>{item.fareBasisCode}</td>
@@ -299,52 +305,61 @@ const SuccessBookingPanel = () => {
                               {bookData.data?.item1.flightInfo.directions[1][0].segments.map(
                                 (item, index) => (
                                   <tr key={index}>
-                                    {console.log(item)}
-                                    <td>
-                                      {item.airline}
-                                      <br></br>
-                                      <span style={{ fontSize: "12px" }}>
-                                        {item.plane[0]}
-                                      </span>
-                                    </td>
-                                    <td>{item.flightNumber}</td>
-                                    <td>
-                                      {item.from}
-                                      <br></br>
-                                      <span style={{ fontSize: "12px" }}>
-                                        {airports
-                                          .filter((f) => f.iata === item.from)
-                                          .map((item) => item.city)}
-                                        {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
-                                      </span>
-                                    </td>
-                                    <td>
-                                      {moment(item.departure).format(
-                                        "DD-MM-YYYY hh:mm:ss A"
-                                      )}
-                                    </td>
-                                    <td>
-                                      {item.to}
-                                      <br></br>
-                                      <span style={{ fontSize: "12px" }}>
-                                        {airports
-                                          .filter((f) => f.iata === item.to)
-                                          .map((item) => item.city)}
-                                        {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
-                                      </span>
-                                    </td>
-                                    <td>
-                                      {moment(item.arrival).format(
-                                        "DD-MM-YYYY hh:mm:ss A"
-                                      )}
-                                    </td>
-                                    <td>{item.fareBasisCode}</td>
-                                    <td> {item.serviceClass === "Y"
-                                      ? "ECONOMY" + " (" + item.bookingClass + ")"
-                                      : item.serviceClass === "C"
-                                        ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
-                                        : item.serviceClass + " (" + item.bookingClass + ")"}</td>
-                                  </tr>
+                                  <td>
+                                    {item.airline}
+                                    <br></br>
+                                    <span style={{ fontSize: "12px" }}>
+                                      {item.plane[0]}
+                                    </span>
+                                  </td>
+                                  <td>{item.flightNumber}</td>
+                                  <td>
+                                    {item.from}
+                                    <br></br>
+                                    <span style={{ fontSize: "12px" }}>
+                                      {airports
+                                        .filter((f) => f.iata === item.from)
+                                        .map((item) => item.city)}
+                                      {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>{" "}(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    {moment(item.departure).format(
+                                      "DD-MM-YYYY"
+                                    )}<br></br>
+                                    {moment(item.departure).format(
+                                      "hh:mm:ss A"
+                                    )}
+
+                                    {/* moment(item.issueDate).format(
+                                    "DD-MM-YYYY hh:mm:ss A"
+                                    ) */}
+                                  </td>
+                                  <td>
+                                    {item.to}
+                                    <br></br>
+                                    <span style={{ fontSize: "12px" }}>
+                                      {airports
+                                        .filter((f) => f.iata === item.to)
+                                        .map((item) => item.city)}
+                                      {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>{" "}(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    {moment(item.arrival).format(
+                                      "DD-MM-YYYY"
+                                    )}<br></br>
+                                    {moment(item.arrival).format(
+                                      "hh:mm:ss A"
+                                    )}
+                                  </td>
+                                  <td>{item.fareBasisCode}</td>
+                                  <td> {item.serviceClass === "Y"
+                                    ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                    : item.serviceClass === "C"
+                                      ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                      : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                </tr>
                                 )
                               )}
                             </>
@@ -358,52 +373,61 @@ const SuccessBookingPanel = () => {
                               {bookData.data?.item1.flightInfo.directions[2][0].segments.map(
                                 (item, index) => (
                                   <tr key={index}>
-                                    {console.log(item)}
-                                    <td>
-                                      {item.airline}
-                                      <br></br>
-                                      <span style={{ fontSize: "12px" }}>
-                                        {item.plane[0]}
-                                      </span>
-                                    </td>
-                                    <td>{item.flightNumber}</td>
-                                    <td>
-                                      {item.from}
-                                      <br></br>
-                                      <span style={{ fontSize: "12px" }}>
-                                        {airports
-                                          .filter((f) => f.iata === item.from)
-                                          .map((item) => item.city)}
-                                        {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
-                                      </span>
-                                    </td>
-                                    <td>
-                                      {moment(item.departure).format(
-                                        "DD-MM-YYYY hh:mm:ss A"
-                                      )}
-                                    </td>
-                                    <td>
-                                      {item.to}
-                                      <br></br>
-                                      <span style={{ fontSize: "12px" }}>
-                                        {airports
-                                          .filter((f) => f.iata === item.to)
-                                          .map((item) => item.city)}
-                                        {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
-                                      </span>
-                                    </td>
-                                    <td>
-                                      {moment(item.arrival).format(
-                                        "DD-MM-YYYY hh:mm:ss A"
-                                      )}
-                                    </td>
-                                    <td>{item.fareBasisCode}</td>
-                                    <td> {item.serviceClass === "Y"
-                                      ? "ECONOMY" + " (" + item.bookingClass + ")"
-                                      : item.serviceClass === "C"
-                                        ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
-                                        : item.serviceClass + " (" + item.bookingClass + ")"}</td>
-                                  </tr>
+                                  <td>
+                                    {item.airline}
+                                    <br></br>
+                                    <span style={{ fontSize: "12px" }}>
+                                      {item.plane[0]}
+                                    </span>
+                                  </td>
+                                  <td>{item.flightNumber}</td>
+                                  <td>
+                                    {item.from}
+                                    <br></br>
+                                    <span style={{ fontSize: "12px" }}>
+                                      {airports
+                                        .filter((f) => f.iata === item.from)
+                                        .map((item) => item.city)}
+                                      {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>{" "}(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    {moment(item.departure).format(
+                                      "DD-MM-YYYY"
+                                    )}<br></br>
+                                    {moment(item.departure).format(
+                                      "hh:mm:ss A"
+                                    )}
+
+                                    {/* moment(item.issueDate).format(
+                                    "DD-MM-YYYY hh:mm:ss A"
+                                    ) */}
+                                  </td>
+                                  <td>
+                                    {item.to}
+                                    <br></br>
+                                    <span style={{ fontSize: "12px" }}>
+                                      {airports
+                                        .filter((f) => f.iata === item.to)
+                                        .map((item) => item.city)}
+                                      {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>{" "}(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    {moment(item.arrival).format(
+                                      "DD-MM-YYYY"
+                                    )}<br></br>
+                                    {moment(item.arrival).format(
+                                      "hh:mm:ss A"
+                                    )}
+                                  </td>
+                                  <td>{item.fareBasisCode}</td>
+                                  <td> {item.serviceClass === "Y"
+                                    ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                    : item.serviceClass === "C"
+                                      ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                      : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                </tr>
                                 )
                               )}
                             </>
@@ -417,52 +441,61 @@ const SuccessBookingPanel = () => {
                               {bookData.data?.item1.flightInfo.directions[3][0].segments.map(
                                 (item, index) => (
                                   <tr key={index}>
-                                    {console.log(item)}
-                                    <td>
-                                      {item.airline}
-                                      <br></br>
-                                      <span style={{ fontSize: "12px" }}>
-                                        {item.plane[0]}
-                                      </span>
-                                    </td>
-                                    <td>{item.flightNumber}</td>
-                                    <td>
-                                      {item.from}
-                                      <br></br>
-                                      <span style={{ fontSize: "12px" }}>
-                                        {airports
-                                          .filter((f) => f.iata === item.from)
-                                          .map((item) => item.city)}
-                                        {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
-                                      </span>
-                                    </td>
-                                    <td>
-                                      {moment(item.departure).format(
-                                        "DD-MM-YYYY hh:mm:ss A"
-                                      )}
-                                    </td>
-                                    <td>
-                                      {item.to}
-                                      <br></br>
-                                      <span style={{ fontSize: "12px" }}>
-                                        {airports
-                                          .filter((f) => f.iata === item.to)
-                                          .map((item) => item.city)}
-                                        ({item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
-                                      </span>
-                                    </td>
-                                    <td>
-                                      {moment(item.arrival).format(
-                                        "DD-MM-YYYY hh:mm:ss A"
-                                      )}
-                                    </td>
-                                    <td>{item.fareBasisCode}</td>
-                                    <td> {item.serviceClass === "Y"
-                                      ? "ECONOMY" + " (" + item.bookingClass + ")"
-                                      : item.serviceClass === "C"
-                                        ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
-                                        : item.serviceClass + " (" + item.bookingClass + ")"}</td>
-                                  </tr>
+                                  <td>
+                                    {item.airline}
+                                    <br></br>
+                                    <span style={{ fontSize: "12px" }}>
+                                      {item.plane[0]}
+                                    </span>
+                                  </td>
+                                  <td>{item.flightNumber}</td>
+                                  <td>
+                                    {item.from}
+                                    <br></br>
+                                    <span style={{ fontSize: "12px" }}>
+                                      {airports
+                                        .filter((f) => f.iata === item.from)
+                                        .map((item) => item.city)}
+                                      {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>{" "}(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    {moment(item.departure).format(
+                                      "DD-MM-YYYY"
+                                    )}<br></br>
+                                    {moment(item.departure).format(
+                                      "hh:mm:ss A"
+                                    )}
+
+                                    {/* moment(item.issueDate).format(
+                                    "DD-MM-YYYY hh:mm:ss A"
+                                    ) */}
+                                  </td>
+                                  <td>
+                                    {item.to}
+                                    <br></br>
+                                    <span style={{ fontSize: "12px" }}>
+                                      {airports
+                                        .filter((f) => f.iata === item.to)
+                                        .map((item) => item.city)}
+                                      {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>{" "}(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    {moment(item.arrival).format(
+                                      "DD-MM-YYYY"
+                                    )}<br></br>
+                                    {moment(item.arrival).format(
+                                      "hh:mm:ss A"
+                                    )}
+                                  </td>
+                                  <td>{item.fareBasisCode}</td>
+                                  <td> {item.serviceClass === "Y"
+                                    ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                    : item.serviceClass === "C"
+                                      ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                      : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                </tr>
                                 )
                               )}
                             </>
@@ -476,52 +509,61 @@ const SuccessBookingPanel = () => {
                               {bookData.data?.item1.flightInfo.directions[4][0].segments.map(
                                 (item, index) => (
                                   <tr key={index}>
-                                    {console.log(item)}
-                                    <td>
-                                      {item.airline}
-                                      <br></br>
-                                      <span style={{ fontSize: "12px" }}>
-                                        {item.plane[0]}
-                                      </span>
-                                    </td>
-                                    <td>{item.flightNumber}</td>
-                                    <td>
-                                      {item.from}
-                                      <br></br>
-                                      <span style={{ fontSize: "12px" }}>
-                                        {airports
-                                          .filter((f) => f.iata === item.from)
-                                          .map((item) => item.city)}
-                                        {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
-                                      </span>
-                                    </td>
-                                    <td>
-                                      {moment(item.departure).format(
-                                        "DD-MM-YYYY hh:mm:ss A"
-                                      )}
-                                    </td>
-                                    <td>
-                                      {item.to}
-                                      <br></br>
-                                      <span style={{ fontSize: "12px" }}>
-                                        {airports
-                                          .filter((f) => f.iata === item.to)
-                                          .map((item) => item.city)}
-                                        {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
-                                      </span>
-                                    </td>
-                                    <td>
-                                      {moment(item.arrival).format(
-                                        "DD-MM-YYYY hh:mm:ss A"
-                                      )}
-                                    </td>
-                                    <td>{item.fareBasisCode}</td>
-                                    <td> {item.serviceClass === "Y"
-                                      ? "ECONOMY" + " (" + item.bookingClass + ")"
-                                      : item.serviceClass === "C"
-                                        ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
-                                        : item.serviceClass + " (" + item.bookingClass + ")"}</td>
-                                  </tr>
+                                  <td>
+                                    {item.airline}
+                                    <br></br>
+                                    <span style={{ fontSize: "12px" }}>
+                                      {item.plane[0]}
+                                    </span>
+                                  </td>
+                                  <td>{item.flightNumber}</td>
+                                  <td>
+                                    {item.from}
+                                    <br></br>
+                                    <span style={{ fontSize: "12px" }}>
+                                      {airports
+                                        .filter((f) => f.iata === item.from)
+                                        .map((item) => item.city)}
+                                      {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>{" "}(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    {moment(item.departure).format(
+                                      "DD-MM-YYYY"
+                                    )}<br></br>
+                                    {moment(item.departure).format(
+                                      "hh:mm:ss A"
+                                    )}
+
+                                    {/* moment(item.issueDate).format(
+                                    "DD-MM-YYYY hh:mm:ss A"
+                                    ) */}
+                                  </td>
+                                  <td>
+                                    {item.to}
+                                    <br></br>
+                                    <span style={{ fontSize: "12px" }}>
+                                      {airports
+                                        .filter((f) => f.iata === item.to)
+                                        .map((item) => item.city)}
+                                      {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>{" "}(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    {moment(item.arrival).format(
+                                      "DD-MM-YYYY"
+                                    )}<br></br>
+                                    {moment(item.arrival).format(
+                                      "hh:mm:ss A"
+                                    )}
+                                  </td>
+                                  <td>{item.fareBasisCode}</td>
+                                  <td> {item.serviceClass === "Y"
+                                    ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                    : item.serviceClass === "C"
+                                      ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                      : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                </tr>
                                 )
                               )}
                             </>
@@ -535,52 +577,61 @@ const SuccessBookingPanel = () => {
                               {bookData.data?.item1.flightInfo.directions[5][0].segments.map(
                                 (item, index) => (
                                   <tr key={index}>
-                                    {console.log(item)}
-                                    <td>
-                                      {item.airline}
-                                      <br></br>
-                                      <span style={{ fontSize: "12px" }}>
-                                        {item.plane[0]}
-                                      </span>
-                                    </td>
-                                    <td>{item.flightNumber}</td>
-                                    <td>
-                                      {item.from}
-                                      <br></br>
-                                      <span style={{ fontSize: "12px" }}>
-                                        {airports
-                                          .filter((f) => f.iata === item.from)
-                                          .map((item) => item.city)}
-                                        {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>(Terminal-{item.details[0].originTerminal})</> : <></>}
-                                      </span>
-                                    </td>
-                                    <td>
-                                      {moment(item.departure).format(
-                                        "DD-MM-YYYY hh:mm:ss A"
-                                      )}
-                                    </td>
-                                    <td>
-                                      {item.to}
-                                      <br></br>
-                                      <span style={{ fontSize: "12px" }}>
-                                        {airports
-                                          .filter((f) => f.iata === item.to)
-                                          .map((item) => item.city)}
-                                        {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>(Terminal-{item.details[0].destinationTerminal})</> : <></>}
-                                      </span>
-                                    </td>
-                                    <td>
-                                      {moment(item.arrival).format(
-                                        "DD-MM-YYYY hh:mm:ss A"
-                                      )}
-                                    </td>
-                                    <td>{item.fareBasisCode}</td>
-                                    <td> {item.serviceClass === "Y"
-                                      ? "ECONOMY" + " (" + item.bookingClass + ")"
-                                      : item.serviceClass === "C"
-                                        ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
-                                        : item.serviceClass + " (" + item.bookingClass + ")"}</td>
-                                  </tr>
+                                  <td>
+                                    {item.airline}
+                                    <br></br>
+                                    <span style={{ fontSize: "12px" }}>
+                                      {item.plane[0]}
+                                    </span>
+                                  </td>
+                                  <td>{item.flightNumber}</td>
+                                  <td>
+                                    {item.from}
+                                    <br></br>
+                                    <span style={{ fontSize: "12px" }}>
+                                      {airports
+                                        .filter((f) => f.iata === item.from)
+                                        .map((item) => item.city)}
+                                      {item.details[0].originTerminal !== null && item.details[0].originTerminal !== '' ? <>{" "}(Terminal-{item.details[0].originTerminal})</> : <></>}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    {moment(item.departure).format(
+                                      "DD-MM-YYYY"
+                                    )}<br></br>
+                                    {moment(item.departure).format(
+                                      "hh:mm:ss A"
+                                    )}
+
+                                    {/* moment(item.issueDate).format(
+                                    "DD-MM-YYYY hh:mm:ss A"
+                                    ) */}
+                                  </td>
+                                  <td>
+                                    {item.to}
+                                    <br></br>
+                                    <span style={{ fontSize: "12px" }}>
+                                      {airports
+                                        .filter((f) => f.iata === item.to)
+                                        .map((item) => item.city)}
+                                      {item.details[0].destinationTerminal !== null && item.details[0].destinationTerminal !== '' ? <>{" "}(Terminal-{item.details[0].destinationTerminal})</> : <></>}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    {moment(item.arrival).format(
+                                      "DD-MM-YYYY"
+                                    )}<br></br>
+                                    {moment(item.arrival).format(
+                                      "hh:mm:ss A"
+                                    )}
+                                  </td>
+                                  <td>{item.fareBasisCode}</td>
+                                  <td> {item.serviceClass === "Y"
+                                    ? "ECONOMY" + " (" + item.bookingClass + ")"
+                                    : item.serviceClass === "C"
+                                      ? "BUSINESS CLASS" + " (" + item.bookingClass + ")"
+                                      : item.serviceClass + " (" + item.bookingClass + ")"}</td>
+                                </tr>
                                 )
                               )}
                             </>
@@ -615,23 +666,23 @@ const SuccessBookingPanel = () => {
                           {bookData.data?.item1.flightInfo?.passengerFares.adt !== null ? (
                             <>
                               <tr>
-                                <td className="left">ADT</td>
+                                <td className="left">Adult</td>
                                 <td className="left">
-                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.basePrice}
+                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.basePrice.toLocaleString("en-US")}
                                 </td>
                                 <td className="center">
-                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.taxes}
+                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.taxes.toLocaleString("en-US")}
                                 </td>
                                 <td className="right">
-                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.discountPrice}
+                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.discountPrice.toLocaleString("en-US")}
                                 </td>
                                 <td className="right">
-                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.ait}
+                                  {bookData.data?.item1.flightInfo?.passengerFares.adt.ait.toLocaleString("en-US")}
                                 </td>
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.adt}</td>
                                 <td className="right fw-bold">
                                   BDT {(bookData.data?.item1.flightInfo?.passengerFares.adt.totalPrice *
-                                    bookData.data?.item1.flightInfo?.passengerCounts.adt).toFixed(2)}
+                                    bookData.data?.item1.flightInfo?.passengerCounts.adt).toLocaleString("en-US")}
                                 </td>
                               </tr>
                             </>
@@ -642,23 +693,23 @@ const SuccessBookingPanel = () => {
                           {bookData.data?.item1.flightInfo?.passengerFares.cnn !== null ? (
                             <>
                               <tr>
-                                <td className="left">CNN</td>
+                                <td className="left">Child</td>
                                 <td className="left">
-                                  {bookData.data?.item1.flightInfo?.passengerFares.cnn.basePrice}
+                                  {bookData.data?.item1.flightInfo?.passengerFares.cnn.basePrice.toLocaleString("en-US")}
                                 </td>
                                 <td className="center">
-                                  {bookData.data?.item1.flightInfo?.passengerFares.cnn.taxes}
+                                  {bookData.data?.item1.flightInfo?.passengerFares.cnn.taxes.toLocaleString("en-US")}
                                 </td>
                                 <td className="right">
-                                  {bookData.data?.item1.flightInfo?.passengerFares.cnn.discountPrice}
+                                  {bookData.data?.item1.flightInfo?.passengerFares.cnn.discountPrice.toLocaleString("en-US")}
                                 </td>
                                 <td className="right">
-                                  {bookData.data?.item1.flightInfo?.passengerFares.cnn.ait}
+                                  {bookData.data?.item1.flightInfo?.passengerFares.cnn.ait.toLocaleString("en-US")}
                                 </td>
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.cnn}</td>
                                 <td className="right fw-bold">
                                   BDT {(bookData.data?.item1.flightInfo?.passengerFares.cnn.totalPrice *
-                                    bookData.data?.item1.flightInfo?.passengerCounts.cnn).toFixed(2)}
+                                    bookData.data?.item1.flightInfo?.passengerCounts.cnn).toLocaleString("en-US")}
                                 </td>
                               </tr>
                             </>
@@ -669,23 +720,23 @@ const SuccessBookingPanel = () => {
                           {bookData.data?.item1.flightInfo?.passengerFares.inf !== null ? (
                             <>
                               <tr>
-                                <td className="left">INF</td>
+                                <td className="left">Infant</td>
                                 <td className="left">
-                                  {bookData.data?.item1.flightInfo?.passengerFares.inf.basePrice}
+                                  {bookData.data?.item1.flightInfo?.passengerFares.inf.basePrice.toLocaleString("en-US")}
                                 </td>
                                 <td className="center">
-                                  {bookData.data?.item1.flightInfo?.passengerFares.inf.taxes}
+                                  {bookData.data?.item1.flightInfo?.passengerFares.inf.taxes.toLocaleString("en-US")}
                                 </td>
                                 <td className="right">
-                                  {bookData.data?.item1.flightInfo?.passengerFares.inf.discountPrice}
+                                  {bookData.data?.item1.flightInfo?.passengerFares.inf.discountPrice.toLocaleString("en-US")}
                                 </td>
                                 <td className="right">
-                                  {bookData.data?.item1.flightInfo?.passengerFares.inf.ait}
+                                  {bookData.data?.item1.flightInfo?.passengerFares.inf.ait.toLocaleString("en-US")}
                                 </td>
                                 <td className="right">{bookData.data?.item1.flightInfo?.passengerCounts.inf}</td>
                                 <td className="right fw-bold">
                                   BDT {(bookData.data?.item1.flightInfo?.passengerFares.inf.totalPrice *
-                                    bookData.data?.item1.flightInfo?.passengerCounts.inf).toFixed(2)}
+                                    bookData.data?.item1.flightInfo?.passengerCounts.inf).toLocaleString("en-US")}
                                 </td>
                               </tr>
                             </>
@@ -696,7 +747,7 @@ const SuccessBookingPanel = () => {
                             <td colSpan={5} className='border-none'></td>
                             <td>Grand Total</td>
                             <td>BDT{" "}
-                              {bookData.data?.item1.flightInfo?.bookingComponents[0].totalPrice}
+                              {(bookData.data?.item1.flightInfo?.bookingComponents[0].totalPrice).toLocaleString("en-US")}
                             </td>
                           </tr>
                         </tbody>

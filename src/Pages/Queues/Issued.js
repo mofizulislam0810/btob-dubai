@@ -8,6 +8,7 @@ import ReactPaginate from "react-paginate";
 import { Box, Button, Center, Spinner, Text } from "@chakra-ui/react";
 import { ToastContainer, toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
+import Footer from '../SharePages/Footer/Footer';
 
 const Issued = () => {
     let [pageCount, setPageCount] = useState(0);
@@ -295,7 +296,7 @@ const Issued = () => {
                                                                             </a>
                                                                         </td>
                                                                         <td>{item.ticketNumber}</td>
-                                                                        <td>{item.ticketingPrice}</td>
+                                                                        <td>{item.ticketingPrice.toLocaleString("en-US")}</td>
                                                                         <td>
                                                                             {item.status === "Issued" ? "Ticketed" :" "} <br />{" "}
                                                                             {item.refundStatus != null
@@ -514,6 +515,7 @@ const Issued = () => {
                     </form>
                 </section>
             </div>
+            <Footer />
         </div>
     );
 };

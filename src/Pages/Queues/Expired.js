@@ -154,7 +154,7 @@ const Expired = () => {
                                       {item.pnr}
                                     </a>
                                   </td>
-                                  <td>{item.ticketingPrice}</td>
+                                  <td>{item.ticketingPrice.toLocaleString("en-US")}</td>
                                   <td>
                                     {item.status} <br />{" "}
                                   </td>

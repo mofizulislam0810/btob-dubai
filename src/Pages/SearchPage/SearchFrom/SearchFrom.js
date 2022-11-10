@@ -13,7 +13,7 @@ import "../../../plugins/t-datepicker/t-datepicker.min";
 import { environment } from "../../SharePages/Utility/environment";
 import "./SearchFrom.css";
 
-const childrenAges = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const childrenAges = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const SearchFrom = () => {
   const formCount = 0;
@@ -110,7 +110,6 @@ const SearchFrom = () => {
       const inputDateMulti4 = $("#departureDate4").children("input").val();
       const inputDateMulti5 = $("#departureDate5").children("input").val();
 
-      console.log("origin1, destination1, inputDateMulti1", origin2.length, destination2.length, inputDateMulti1, inputDateMulti1.length)
 
       if (origin === destination && origin !== "" && destination !== "") {
         toast.error("Depart From and Going To must be difference No.1");
@@ -390,6 +389,21 @@ const SearchFrom = () => {
     $("#departureDate").attr("class", "t-check-in");
     $("#returnDate").hide();
     $("#returnLavel").hide();
+
+    // if (tripType === "Round Trip") {
+    //   $(document).ready(function () {
+    //     $(".class_0").tDatePicker("update", [
+    //       new Date(),
+    //        new Date(),
+    //     ]);
+    //   });
+    // } else {
+    //   $(document).ready(function () {
+    //     $(".class_0").tDatePicker("update", [
+    //       new Date(),
+    //     ]);
+    //   });
+    // }
 
     // for passenger count
     $("#passengerBlock").on({

@@ -9,7 +9,7 @@ import { environment } from "../SharePages/Utility/environment";
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 const Balance = () => {
   let [pageCount, setPageCount] = useState(0);
   let [pageCountBank, setPageCountBank] = useState(0);
@@ -24,7 +24,7 @@ const Balance = () => {
   let [reference, setReference] = useState("");
   let [depositInAccountId, setDepositInAccount] = useState(0);
   let [vendorAmount, setVendorAmount] = useState(0);
-  let [amount, setAmount] = useState('');
+  let [amount, setAmount] = useState("");
   let [attachment, setAttachment] = useState("");
   let [depositFromAccountId, setDepositFromAccount] = useState(0);
   let [depositDate, setDepositDate] = useState("");
@@ -45,8 +45,10 @@ const Balance = () => {
   let [bdCityList, setBdCityList] = useState([]);
   // console.log(bdCityList);
   useEffect(() => {
-    setBdCityList(cityList.filter(item => item.name.split(",")[0] === 'Bangladesh'));
-  }, [cityList])
+    setBdCityList(
+      cityList.filter((item) => item.name.split(",")[0] === "Bangladesh")
+    );
+  }, [cityList]);
 
   // let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
   // let staticURL = "wwwroot/Uploads/Support/";
@@ -77,22 +79,22 @@ const Balance = () => {
     setCheckIssueDate("");
     setReference("");
     setDepositInAccount(0);
-    setAmount('');
+    setAmount("");
     setAttachment("");
     setDepositFromAccount(0);
     setDepositDate("");
     setTransferDate("");
     setBranch(0);
     setTransaction("");
-  }
+  };
   let onlineSendObj = {
     agentId: sessionStorage.getItem("agentId") ?? 0,
     uniqueTransID: "",
     amount: onlineAmount,
     charge: onlineCharge,
-    totalAmount: onlineAmount + (onlineAmount * onlineCharge / 100),
-    remarks: "Online Deposit Checkout"
-  }
+    totalAmount: onlineAmount + (onlineAmount * onlineCharge) / 100,
+    remarks: "Online Deposit Checkout",
+  };
   const deposittypeList = [
     { id: 1, name: "Cheque" },
     { id: 2, name: "Bank Deposit" },
@@ -187,7 +189,9 @@ const Balance = () => {
           return;
         }
       }
-      setAmount(vendorAmount + vendorAmount * (paymentTypeId === 1 ? 1.50 : 1.00) / 100)
+      setAmount(
+        vendorAmount + (vendorAmount * (paymentTypeId === 1 ? 1.5 : 1.0)) / 100
+      );
     }
     if (depositTypeId == 6) {
       if (amount == 0) {
@@ -198,14 +202,14 @@ const Balance = () => {
         toast.error("Sorry! Transaction Id is empty..");
         return;
       }
-      setAmount(vendorAmount + vendorAmount * 1.00 / 100)
+      setAmount(vendorAmount + (vendorAmount * 1.0) / 100);
     }
     if (amount <= 0) {
       toast.error("Sorry! Amount is empty..");
       return;
     }
     const postData = async () => {
-      console.log(sendObj)
+      console.log(sendObj);
       setLoading(true);
       const response = await axios.post(
         environment.depositRequest,
@@ -220,19 +224,18 @@ const Balance = () => {
         toast.error("Sorry! Try again..");
         setLoading(false);
       }
-
     };
     postData();
   };
   const handleOnlineDepositSubmit = () => {
-    console.log(onlineSendObj)
+    console.log(onlineSendObj);
     const postData = async () => {
       const response = await axios.post(
         environment.paymentCheckout,
         onlineSendObj,
         environment.headerToken
       );
-      console.log(response)
+      console.log(response);
       if (response.data.isSuccess === true) {
         window.location = response.data.sslUrl;
       } else {
@@ -240,16 +243,17 @@ const Balance = () => {
       }
     };
     postData();
-  }
+  };
   const handleGetTransaction = (currentPageNumber) => {
     const getData = async () => {
       const response = await axios.get(
         environment.agentDeposits +
-        "/" +
-        (sessionStorage.getItem("agentId") ?? 0) + `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
+          "/" +
+          (sessionStorage.getItem("agentId") ?? 0) +
+          `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
         environment.headerToken
       );
-      console.log(response.data.totalPages)
+      console.log(response.data.totalPages);
       setBalanceList(response.data.data);
       setPageCount(await response.data.totalPages);
     };
@@ -265,13 +269,16 @@ const Balance = () => {
     let agentId = sessionStorage.getItem("agentId") ?? 0;
     const getAgentBankAccounts = async () => {
       const response = await axios.get(
-        environment.bankAccountsByAgent + "/" + agentId + `?pageNumber=${currentPageNumberBank}&pageSize=${pageSize}`,
+        environment.bankAccountsByAgent +
+          "/" +
+          agentId +
+          `?pageNumber=${currentPageNumberBank}&pageSize=${pageSize}`,
         environment.headerToken
       );
-      console.log(response.data.data)
+      console.log(response.data.data);
       setAgentBankAccountList(response.data.data);
       setPageCountBank(await response.data.totalPages);
-      console.log(response.data.totalPages)
+      console.log(response.data.totalPages);
     };
     getAgentBankAccounts();
 
@@ -280,13 +287,12 @@ const Balance = () => {
         environment.accountsByAgentDropdown + "?agentId=" + agentId,
         environment.headerToken
       );
-      console.log(response.data)
+      console.log(response.data);
       setAgentAccountDropdownList(response.data);
-      console.log()
+      console.log();
     };
     getAgentBankDropdown();
   };
-
 
   console.log(pageCount);
   const handlePageClick = async (data) => {
@@ -317,7 +323,7 @@ const Balance = () => {
         environment.paymentGateway + "/2",
         environment.headerToken
       );
-      console.log(response)
+      console.log(response);
       setOnlineCharge(response.data.charge);
     };
     getGatewayCharge();
@@ -327,7 +333,7 @@ const Balance = () => {
         environment.headerToken
       );
       setBranchList(response.data);
-      console.log(branchList)
+      console.log(branchList);
     };
     getBranches();
 
@@ -340,7 +346,6 @@ const Balance = () => {
       setAgentAccountDropdownList(response.data);
     };
     getAgentAccounts();
-
   };
 
   const handleFileUpload = (file) => {
@@ -361,7 +366,6 @@ const Balance = () => {
     };
     postData();
   };
-
 
   const handleCreateItem = () => {
     clearBankForm();
@@ -390,7 +394,7 @@ const Balance = () => {
     setCityId(0);
     setAddress("");
     setSwiftCode("");
-  }
+  };
   let [holderName, setHolderName] = useState("");
   let [accountNumber, setAccountNumber] = useState("");
   let [routingNumber, setRoutingNumber] = useState("");
@@ -418,14 +422,12 @@ const Balance = () => {
     isActive: isActive,
   };
 
-
   function handleCloseModal() {
     $("#accountModal").click();
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
     $("body").removeAttr("style");
   }
-
 
   const handleBankSubmit = () => {
     if (holderName === "") {
@@ -553,7 +555,9 @@ const Balance = () => {
                           href="#transaction"
                           className="nav-link"
                           data-bs-toggle="tab"
-                          onClick={() => handleGetTransaction(currentPageNumber)}
+                          onClick={() =>
+                            handleGetTransaction(currentPageNumber)
+                          }
                         >
                           Transaction
                         </a>
@@ -563,7 +567,9 @@ const Balance = () => {
                           href="#bankaccounts"
                           className="nav-link"
                           data-bs-toggle="tab"
-                          onClick={() => handleGetAgentBankAccounts(currentPageNumberBank)}
+                          onClick={() =>
+                            handleGetAgentBankAccounts(currentPageNumberBank)
+                          }
                         >
                           My Bank Accounts
                         </a>
@@ -595,9 +601,8 @@ const Balance = () => {
                               placeholder="Deposit Type"
                               onChange={(e) => {
                                 setDepositType(Number(e.target.value));
-                                setAmount('');
-                              }
-                              }
+                                setAmount("");
+                              }}
                             >
                               {deposittypeList.map((item, index) => {
                                 return (
@@ -646,6 +651,7 @@ const Balance = () => {
                                 </label>
                                 <input
                                   type={"date"}
+                                  pattern="\d{4}-\d{2}-\d{2}"
                                   className="form-control"
                                   onChange={(e) =>
                                     setCheckIssueDate(e.target.value)
@@ -682,19 +688,17 @@ const Balance = () => {
                                   onChange={(e) =>
                                     setDepositInAccount(Number(e.target.value))
                                   }
-
                                 >
                                   <option key={0} value="0">
                                     Select One
                                   </option>
-                                  {
-                                    accountList.map((item, index) => {
-                                      return (
-                                        <option key={index + 1} value={item.id}>
-                                          {item.name}
-                                        </option>
-                                      );
-                                    })}
+                                  {accountList.map((item, index) => {
+                                    return (
+                                      <option key={index + 1} value={item.id}>
+                                        {item.name}
+                                      </option>
+                                    );
+                                  })}
                                 </select>
                               </div>
                               <div className="col-sm-3">
@@ -705,9 +709,7 @@ const Balance = () => {
                                   type={"number"}
                                   className="form-control"
                                   placeholder="Amount"
-                                  onChange={(e) =>
-                                    setAmount((e.target.value))
-                                  }
+                                  onChange={(e) => setAmount(e.target.value)}
                                   value={amount}
                                 ></input>
                               </div>
@@ -731,9 +733,15 @@ const Balance = () => {
                                   onClick={() => handleSubmit()}
                                   disabled={loading ? true : false}
                                 >
-                                  {
-                                    loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
-                                  }
+                                  {loading ? (
+                                    <span
+                                      class="spinner-border spinner-border-sm"
+                                      role="status"
+                                      aria-hidden="true"
+                                    ></span>
+                                  ) : (
+                                    <span>Submit</span>
+                                  )}
                                 </button>
                               </div>
                             </div>
@@ -772,6 +780,7 @@ const Balance = () => {
                               </label>
                               <input
                                 type={"date"}
+                                pattern="\d{4}-\d{2}-\d{2}"
                                 className="form-control"
                                 onChange={(e) => setDepositDate(e.target.value)}
                                 value={depositDate}
@@ -798,9 +807,7 @@ const Balance = () => {
                                 type={"number"}
                                 className="form-control"
                                 placeholder="Amount"
-                                onChange={(e) =>
-                                  setAmount((e.target.value))
-                                }
+                                onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
                               ></input>
                             </div>
@@ -822,9 +829,15 @@ const Balance = () => {
                                 onClick={() => handleSubmit()}
                                 disabled={loading ? true : false}
                               >
-                                {
-                                  loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
-                                }
+                                {loading ? (
+                                  <span
+                                    class="spinner-border spinner-border-sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                  ></span>
+                                ) : (
+                                  <span>Submit</span>
+                                )}
                               </button>
                             </div>
                           </div>
@@ -842,7 +855,6 @@ const Balance = () => {
                                 onChange={(e) =>
                                   setDepositInAccount(Number(e.target.value))
                                 }
-
                               >
                                 <option key={0} value="0">
                                   Select One
@@ -867,27 +879,33 @@ const Balance = () => {
                                   value={depositFromAccountId}
                                   placeholder="My Bank A/C"
                                   onChange={(e) =>
-                                    setDepositFromAccount(Number(e.target.value))
+                                    setDepositFromAccount(
+                                      Number(e.target.value)
+                                    )
                                   }
-
                                 >
                                   <option key={0} value="0">
                                     Select One
                                   </option>
-                                  {agentAccountDropdownList.map((item, index) => {
-                                    return (
-                                      <option key={index + 1} value={item.id}>
-                                        {item.name}
-                                      </option>
-                                    );
-                                  })}
+                                  {agentAccountDropdownList.map(
+                                    (item, index) => {
+                                      return (
+                                        <option key={index + 1} value={item.id}>
+                                          {item.name}
+                                        </option>
+                                      );
+                                    }
+                                  )}
                                 </select>
-                                <div className="btn button-color text-white fw-bold px-3"
+                                <div
+                                  className="btn button-color text-white fw-bold px-3"
                                   onClick={() => handleCreateItem()}
                                   data-bs-toggle="modal"
-                                  data-bs-target="#accountModal">New</div>
+                                  data-bs-target="#accountModal"
+                                >
+                                  New
+                                </div>
                               </div>
-
                             </div>
                             <div className="col-sm-3">
                               <label>
@@ -896,6 +914,7 @@ const Balance = () => {
                               </label>
                               <input
                                 type={"date"}
+                                pattern="\d{4}-\d{2}-\d{2}"
                                 className="form-control"
                                 onChange={(e) =>
                                   setTransferDate(e.target.value)
@@ -924,9 +943,7 @@ const Balance = () => {
                                 type={"number"}
                                 className="form-control"
                                 placeholder="Amount"
-                                onChange={(e) =>
-                                  setAmount((e.target.value))
-                                }
+                                onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
                               ></input>
                             </div>
@@ -948,9 +965,15 @@ const Balance = () => {
                                 onClick={() => handleSubmit()}
                                 disabled={loading ? true : false}
                               >
-                                {
-                                  loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
-                                }
+                                {loading ? (
+                                  <span
+                                    class="spinner-border spinner-border-sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                  ></span>
+                                ) : (
+                                  <span>Submit</span>
+                                )}
                               </button>
                             </div>
                           </div>
@@ -979,7 +1002,15 @@ const Balance = () => {
                                   );
                                 })}
                               </select> */}
-                              <input type="text" className="form-control" placeholder="Branch Name" onChange={(e) => setBranchNameCash(e.target.value)} required />
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Branch Name"
+                                onChange={(e) =>
+                                  setBranchNameCash(e.target.value)
+                                }
+                                required
+                              />
                             </div>
 
                             <div className="col-sm-3">
@@ -1002,9 +1033,7 @@ const Balance = () => {
                                 type={"number"}
                                 className="form-control"
                                 placeholder="Amount"
-                                onChange={(e) =>
-                                  setAmount((e.target.value))
-                                }
+                                onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
                               ></input>
                             </div>
@@ -1026,9 +1055,15 @@ const Balance = () => {
                                 onClick={() => handleSubmit()}
                                 disabled={loading ? true : false}
                               >
-                                {
-                                  loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
-                                }
+                                {loading ? (
+                                  <span
+                                    class="spinner-border spinner-border-sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                  ></span>
+                                ) : (
+                                  <span>Submit</span>
+                                )}
                               </button>
                             </div>
                           </div>
@@ -1111,15 +1146,18 @@ const Balance = () => {
                             </div>
                             {paymentTypeId === 2 ? (
                               <div className="col-sm-3">
-                                <label>
-                                  Payable  Amount
-                                </label>
+                                <label>Payable Amount</label>
                                 <input
                                   type={"number"}
                                   className="form-control"
                                   placeholder="Amount"
                                   disabled
-                                  value={vendorAmount + vendorAmount * (paymentTypeId === 1 ? 1.50 : 1.00) / 100}
+                                  value={
+                                    vendorAmount +
+                                    (vendorAmount *
+                                      (paymentTypeId === 1 ? 1.5 : 1.0)) /
+                                      100
+                                  }
                                 ></input>
                               </div>
                             ) : (
@@ -1132,9 +1170,15 @@ const Balance = () => {
                                 onClick={() => handleSubmit()}
                                 disabled={loading ? true : false}
                               >
-                                {
-                                  loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
-                                }
+                                {loading ? (
+                                  <span
+                                    class="spinner-border spinner-border-sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                  ></span>
+                                ) : (
+                                  <span>Submit</span>
+                                )}
                               </button>
                             </div>
                           </div>
@@ -1169,15 +1213,15 @@ const Balance = () => {
                               />
                             </div>
                             <div className="col-sm-3">
-                              <label>
-                                Payable Amount
-                              </label>
+                              <label>Payable Amount</label>
                               <input
                                 type={"number"}
                                 className="form-control"
                                 placeholder="Payable Amount"
                                 disabled
-                                value={vendorAmount + vendorAmount * 1.00 / 100}
+                                value={
+                                  vendorAmount + (vendorAmount * 1.0) / 100
+                                }
                               ></input>
                             </div>
                             <div className="col-sm-12 text-right">
@@ -1187,9 +1231,15 @@ const Balance = () => {
                                 onClick={() => handleSubmit()}
                                 disabled={loading ? true : false}
                               >
-                                {
-                                  loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
-                                }
+                                {loading ? (
+                                  <span
+                                    class="spinner-border spinner-border-sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                  ></span>
+                                ) : (
+                                  <span>Submit</span>
+                                )}
                               </button>
                             </div>
                           </div>
@@ -1219,62 +1269,86 @@ const Balance = () => {
                             </tr>
                           </thead>
                           <tbody className="tbody text-center">
-                            {
-                              balanceList.length > 0 ?
-                                balanceList.map((item, index) => {
-                                  return (
-                                    <tr key={index}>
-                                      {/* <td>{((currentPageNumber - 1) * pageSize) + index + 1}</td> */}
-                                      <td>{moment(item.createdDate).format('DD-MM-yyyy hh:mm A')}</td>
-                                      <td>
-                                        {item.depositTypeId === 1
-                                          ? "Cheque"
-                                          : item.depositTypeId === 2
-                                            ? "Bank Deposit"
-                                            : item.depositTypeId === 3
-                                              ? "Bank Transfer"
-                                              : item.depositTypeId === 4
-                                                ? "Cash"
-                                                : item.depositTypeId === 5
-                                                  ? "BKash"
-                                                  : item.depositTypeId === 6
-                                                    ? "Nagad"
-                                                    : item.depositTypeId === 7
-                                                      ? "Online"
-                                                      : ""}
-                                      </td>
-                                      <td>{item.tnxNumber}</td>
-                                      <td>{item.reference}</td>
+                            {balanceList.length > 0 ? (
+                              balanceList.map((item, index) => {
+                                return (
+                                  <tr key={index}>
+                                    {/* <td>{((currentPageNumber - 1) * pageSize) + index + 1}</td> */}
+                                    <td>
+                                      {moment(item.createdDate).format(
+                                        "DD-MM-yyyy hh:mm A"
+                                      )}
+                                    </td>
+                                    <td>
+                                      {item.depositTypeId === 1
+                                        ? "Cheque"
+                                        : item.depositTypeId === 2
+                                        ? "Bank Deposit"
+                                        : item.depositTypeId === 3
+                                        ? "Bank Transfer"
+                                        : item.depositTypeId === 4
+                                        ? "Cash"
+                                        : item.depositTypeId === 5
+                                        ? "BKash"
+                                        : item.depositTypeId === 6
+                                        ? "Nagad"
+                                        : item.depositTypeId === 7
+                                        ? "Online"
+                                        : ""}
+                                    </td>
+                                    <td>{item.tnxNumber}</td>
+                                    <td>{item.reference}</td>
 
-                                      <td>
-                                        {item.status === 1
-                                          ? "Processing"
-                                          : item.status === 2
-                                            ? "Cancelled"
-                                            : item.status === 3
-                                              ? "Rejected"
-                                              : item.status === 4
-                                                ? "Approved"
-                                                : ""}
-                                      </td>
-                                      <td>{item.currencyName} {item.amount.toLocaleString("en-US")}</td>
-                                      <td>{item.currencyName} {item.bankChargeAdmin}</td>
-                                      <td>{item.currencyName} {item.topupAmountAdmin.toLocaleString("en-US")}</td>
-                                      <td>
-                                      {
-                                        item.attachment !== null && item.attachment !== "" ? <>
-                                          <a href={environment.s3URL + item.attachment} download target="_blank">View
+                                    <td>
+                                      {item.status === 1
+                                        ? "Processing"
+                                        : item.status === 2
+                                        ? "Cancelled"
+                                        : item.status === 3
+                                        ? "Rejected"
+                                        : item.status === 4
+                                        ? "Approved"
+                                        : ""}
+                                    </td>
+                                    <td>
+                                      {item.currencyName}{" "}
+                                      {item.amount.toLocaleString("en-US")}
+                                    </td>
+                                    <td>
+                                      {item.currencyName} {item.bankChargeAdmin}
+                                    </td>
+                                    <td>
+                                      {item.currencyName}{" "}
+                                      {item.topupAmountAdmin.toLocaleString(
+                                        "en-US"
+                                      )}
+                                    </td>
+                                    <td>
+                                      {item.attachment !== null &&
+                                      item.attachment !== "" ? (
+                                        <>
+                                          <a
+                                            href={
+                                              environment.s3URL +
+                                              item.attachment
+                                            }
+                                            download
+                                            target="_blank"
+                                          >
+                                            View
                                             {/* <img src="https://thumbs.dreamstime.com/b/smooth-nature-pic-full-hd-126695318.jpg" alt="W3Schools" width="50" height="15"/> */}
                                           </a>
-                                        </> : <>
-                                          N/A
                                         </>
-                                      }
-                                      </td>
-                                      
-                                    </tr>
-                                  );
-                                }) : <></>}
+                                      ) : (
+                                        <>N/A</>
+                                      )}
+                                    </td>
+                                  </tr>
+                                );
+                              })
+                            ) : (
+                              <></>
+                            )}
                           </tbody>
                         </table>
                         <ReactPaginate
@@ -1285,7 +1359,9 @@ const Balance = () => {
                           marginPagesDisplayed={2}
                           pageRangeDisplayed={3}
                           onPageChange={handlePageClick}
-                          containerClassName={"pagination justify-content-center"}
+                          containerClassName={
+                            "pagination justify-content-center"
+                          }
                           pageClassName={"page-item"}
                           pageLinkClassName={"page-link"}
                           previousClassName={"page-item"}
@@ -1310,7 +1386,6 @@ const Balance = () => {
                         >
                           Add
                         </button>
-
 
                         <table
                           className="table table-bordered table-sm"
@@ -1370,7 +1445,9 @@ const Balance = () => {
                           marginPagesDisplayed={2}
                           pageRangeDisplayed={3}
                           onPageChange={handlePageClickBank}
-                          containerClassName={"pagination justify-content-center"}
+                          containerClassName={
+                            "pagination justify-content-center"
+                          }
                           pageClassName={"page-item"}
                           pageLinkClassName={"page-link"}
                           previousClassName={"page-item"}
@@ -1401,12 +1478,8 @@ const Balance = () => {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5
-                className="modal-title"
-                id="accountModalLabel"
-              >
-                {currentItem === null ? "Add" : "Edit"} Bank
-                Account
+              <h5 className="modal-title" id="accountModalLabel">
+                {currentItem === null ? "Add" : "Edit"} Bank Account
               </h5>
               <button
                 type="button"
@@ -1427,9 +1500,7 @@ const Balance = () => {
                     value={holderName}
                     className="form-control"
                     placeholder="Account Name"
-                    onChange={(e) =>
-                      setHolderName(e.target.value)
-                    }
+                    onChange={(e) => setHolderName(e.target.value)}
                   ></input>
                 </div>
                 <div className="col-sm-3">
@@ -1442,9 +1513,7 @@ const Balance = () => {
                     value={accountNumber}
                     className="form-control"
                     placeholder="Account Number"
-                    onChange={(e) =>
-                      setAccountNumber(e.target.value)
-                    }
+                    onChange={(e) => setAccountNumber(e.target.value)}
                   ></input>
                 </div>
                 <div className="col-sm-3">
@@ -1457,9 +1526,7 @@ const Balance = () => {
                     value={bankName}
                     className="form-control"
                     placeholder="Bank Name"
-                    onChange={(e) =>
-                      setBankName(e.target.value)
-                    }
+                    onChange={(e) => setBankName(e.target.value)}
                   ></input>
                 </div>
                 <div className="col-sm-3">
@@ -1472,9 +1539,7 @@ const Balance = () => {
                     value={branchName}
                     className="form-control"
                     placeholder="Branch Name"
-                    onChange={(e) =>
-                      setBranchName(e.target.value)
-                    }
+                    onChange={(e) => setBranchName(e.target.value)}
                   ></input>
                 </div>
               </div>
@@ -1489,9 +1554,7 @@ const Balance = () => {
                     value={routingNumber}
                     className="form-control"
                     placeholder="Routing Number"
-                    onChange={(e) =>
-                      setRoutingNumber(e.target.value)
-                    }
+                    onChange={(e) => setRoutingNumber(e.target.value)}
                   ></input>
                 </div>
                 <div className="col-sm-3">
@@ -1504,9 +1567,7 @@ const Balance = () => {
                     value={branchCode}
                     className="form-control"
                     placeholder="Branch Code"
-                    onChange={(e) =>
-                      setBranchCode(e.target.value)
-                    }
+                    onChange={(e) => setBranchCode(e.target.value)}
                   ></input>
                 </div>
                 <div className="col-sm-3">
@@ -1518,17 +1579,12 @@ const Balance = () => {
                     className="form-select"
                     value={cityId}
                     placeholder="City"
-                    onChange={(e) =>
-                      setCityId(Number(e.target.value))
-                    }
+                    onChange={(e) => setCityId(Number(e.target.value))}
                   >
                     <option key={0}>Select One</option>
                     {bdCityList.map((item, index) => {
                       return (
-                        <option
-                          key={index + 1}
-                          value={item.id}
-                        >
+                        <option key={index + 1} value={item.id}>
                           {item.name}
                         </option>
                       );
@@ -1545,9 +1601,7 @@ const Balance = () => {
                     value={address}
                     className="form-control"
                     placeholder="Address"
-                    onChange={(e) =>
-                      setAddress(e.target.value)
-                    }
+                    onChange={(e) => setAddress(e.target.value)}
                   ></input>
                 </div>
               </div>
@@ -1562,9 +1616,7 @@ const Balance = () => {
                     value={swiftCode}
                     className="form-control"
                     placeholder="Swift Code"
-                    onChange={(e) =>
-                      setSwiftCode(e.target.value)
-                    }
+                    onChange={(e) => setSwiftCode(e.target.value)}
                   ></input>
                 </div>
                 <div className="col-sm-3">
@@ -1575,9 +1627,7 @@ const Balance = () => {
                   <input
                     type={"checkbox"}
                     checked={isActive ?? true}
-                    onChange={(e) =>
-                      setIsActive(e.target.checked)
-                    }
+                    onChange={(e) => setIsActive(e.target.checked)}
                     className="form-check"
                   ></input>
                 </div>
@@ -1597,9 +1647,15 @@ const Balance = () => {
                 onClick={() => handleBankSubmit()}
                 disabled={loading ? true : false}
               >
-                {
-                  loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
-                }
+                {loading ? (
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                ) : (
+                  <span>Submit</span>
+                )}
               </button>
             </div>
           </div>
@@ -1614,11 +1670,7 @@ const Balance = () => {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5
-                className="modal-title"
-              >
-                Online Deposit
-              </h5>
+              <h5 className="modal-title">Online Deposit</h5>
               <button
                 type="button"
                 className="btn-close"
@@ -1627,9 +1679,15 @@ const Balance = () => {
               ></button>
             </div>
             <div className="modal-body">
-              <strong>Amount</strong>    <input onChange={(e) => setOnlineAmount(Number(e.target.value))} type={'number'} className='form-control'></input>
-              <strong>Charge:</strong>     {onlineCharge}% <br />
-              <strong>Total Amount:</strong>  {onlineAmount + (onlineAmount * onlineCharge / 100)} <br />
+              <strong>Amount</strong>{" "}
+              <input
+                onChange={(e) => setOnlineAmount(Number(e.target.value))}
+                type={"number"}
+                className="form-control"
+              ></input>
+              <strong>Charge:</strong> {onlineCharge}% <br />
+              <strong>Total Amount:</strong>{" "}
+              {onlineAmount + (onlineAmount * onlineCharge) / 100} <br />
             </div>
             <div className="modal-footer">
               <button

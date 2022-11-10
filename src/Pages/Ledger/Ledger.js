@@ -111,7 +111,7 @@ const Ledger = () => {
                                 id="dropdownMenuButton1"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
-                                style={{fontSize:"12px",height:"100%"}}
+                                style={{ fontSize: "12px", height: "100%" }}
                               >
                                 {balanceType === null ? (
                                   "All"
@@ -130,21 +130,21 @@ const Ledger = () => {
                                 <li
                                   class="dropdown-item"
                                   onClick={() => setBalanceType(null)}
-                                  style={{fontSize:"12px"}}
+                                  style={{ fontSize: "12px" }}
                                 >
                                   All
                                 </li>
                                 <li
                                   class="dropdown-item"
                                   onClick={() => setBalanceType(0)}
-                                  style={{fontSize:"12px"}}
+                                  style={{ fontSize: "12px" }}
                                 >
                                   Debit
                                 </li>
                                 <li
                                   class="dropdown-item"
                                   onClick={() => setBalanceType(1)}
-                                  style={{fontSize:"12px"}}
+                                  style={{ fontSize: "12px" }}
                                 >
                                   Credit
                                 </li>
@@ -152,25 +152,27 @@ const Ledger = () => {
                             </div>
                             <input
                               type="date"
+                              pattern="\d{4}-\d{2}-\d{2}"
                               class="form-control w-50"
                               name="from"
                               value={fromDate}
                               onChange={(e) => handleFromDate(e)}
-                              style={{fontSize:"12px"}}
+                              style={{ fontSize: "12px" }}
                             />
                             <input
                               type="date"
+                              pattern="\d{4}-\d{2}-\d{2}"
                               class="form-control w-50"
                               name="to"
                               value={toDate}
                               onChange={(e) => handleToDate(e)}
-                              style={{fontSize:"12px"}}
+                              style={{ fontSize: "12px" }}
                             />
                             <button
                               type="button"
                               className="btn btn-secondary fw-bold rounded-end text-white"
                               onClick={handleSubmit}
-                              style={{fontSize:"12px"}}
+                              style={{ fontSize: "12px" }}
                             >
                               Search
                             </button>
@@ -213,14 +215,33 @@ const Ledger = () => {
                                 return (
                                   <>
                                     <tr>
-                                      <td>{moment(item.createdDate).format("DD-MMM-yyyy hh:mm:ss")}</td>
+                                      <td>
+                                        {moment(item.createdDate).format(
+                                          "DD-MMM-yyyy hh:mm:ss"
+                                        )}
+                                      </td>
                                       <td>
                                         <a
                                           href="javascript:void(0)"
-                                          style={{ cursor: item.transactionType === "Invoice"? "pointer" : "none" }}
+                                          style={{
+                                            cursor:
+                                              item.transactionType === "Invoice"
+                                                ? "pointer"
+                                                : "none",
+                                          }}
                                           onClick={() =>
-                                            item.ticketNumbers !== null && item.transactionType === "Invoice" ?
-                                              handleInvoice(item.uniqueTransID) : item.ticketNumbers === null && item.transactionType === "Invoice" ? handleViewInvoice(item.tnxNumber) : ""
+                                            item.ticketNumbers !== null &&
+                                            item.transactionType === "Invoice"
+                                              ? handleInvoice(
+                                                  item.uniqueTransID
+                                                )
+                                              : item.ticketNumbers === null &&
+                                                item.transactionType ===
+                                                  "Invoice"
+                                              ? handleViewInvoice(
+                                                  item.tnxNumber
+                                                )
+                                              : ""
                                           }
                                         >
                                           {item.tnxNumber}
@@ -239,29 +260,35 @@ const Ledger = () => {
                                       <td>{item.pnr}</td>
                                       <td>
                                         <a
-                                            href="javascript:void(0)"
-                                            onClick={() =>
-                                              handleViewTicket(item.uniqueTransID)
-                                            }
-                                          >
-                                            {item.ticketNumbers}
+                                          href="javascript:void(0)"
+                                          onClick={() =>
+                                            handleViewTicket(item.uniqueTransID)
+                                          }
+                                        >
+                                          {item.ticketNumbers}
                                         </a>
                                       </td>
                                       {/* <td>{item.passengerName}</td> */}
                                       <td>{item.description}</td>
-                                      <td>
-                                       {item.transactionType}
+                                      <td>{item.transactionType}</td>
+                                      <td className="fw-bold text-end">
+                                        {item.debitAmount.toLocaleString(
+                                          "en-US"
+                                        )}
                                       </td>
                                       <td className="fw-bold text-end">
-                                        {item.debitAmount.toLocaleString("en-US")}
+                                        {item.creditAmount.toLocaleString(
+                                          "en-US"
+                                        )}
                                       </td>
                                       <td className="fw-bold text-end">
-                                        {item.creditAmount.toLocaleString("en-US")}
+                                        {item.balanceAmount.toLocaleString(
+                                          "en-US"
+                                        )}
                                       </td>
-                                      <td className="fw-bold text-end">
-                                        {item.balanceAmount.toLocaleString("en-US")}
+                                      <td className="text-center">
+                                        {item.createdByName}
                                       </td>
-                                      <td className="text-center">{item.createdByName}</td>
                                     </tr>
                                   </>
                                 );
@@ -285,7 +312,7 @@ const Ledger = () => {
                         )}
                       </div>
                       <div className="my-2">
-                      <ReactPaginate
+                        <ReactPaginate
                           previousLabel={"previous"}
                           nextLabel={"next"}
                           breakLabel={"..."}

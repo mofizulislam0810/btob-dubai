@@ -1,9 +1,9 @@
 import axios from "axios";
 import { add, format } from "date-fns";
-import $ from 'jquery';
+import $ from "jquery";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { isValidEmail } from "../../common/functions";
@@ -28,7 +28,7 @@ const QuickPassenger = () => {
   // let [dobDay, setDOBDay] = useState("");
   // let [dobMonth, setDOBMonth] = useState("");
   // let [dobYear, setDOBYear] = useState("");
-  let [dob, setDOB] = useState("2018-07-22")
+  let [dob, setDOB] = useState("2018-07-22");
   let [dobMinMax, setDobMinMax] = useState({ min: "", max: "" });
   let [nationality, setNationality] = useState("BD");
   let [gender, setGender] = useState("Male");
@@ -46,18 +46,15 @@ const QuickPassenger = () => {
   let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
   let [loading, setLoading] = useState(false);
-  
+
   const handlePassportFileUpload = (file) => {
     let fileExt = file.name.split(".").pop().toLowerCase();
     if (
-      (
-        fileExt === "jpg" ||
-        fileExt === "jpeg" ||
-        fileExt === "png" ||
-        fileExt === "pdf"
-      )
+      fileExt === "jpg" ||
+      fileExt === "jpeg" ||
+      fileExt === "png" ||
+      fileExt === "pdf"
     ) {
-
       var formData = new FormData();
       formData.append(`file`, file);
       const config = {
@@ -74,20 +71,17 @@ const QuickPassenger = () => {
         setPassportFileName(response.data.fileName);
       };
       postData();
-    }
-    else {
+    } else {
       toast.error("Sorry! file format not valid..");
     }
   };
   const handleVisaFileUpload = (file) => {
     let fileExt = file.name.split(".").pop().toLowerCase();
     if (
-      (
-        fileExt === "jpg" ||
-        fileExt === "jpeg" ||
-        fileExt === "png" ||
-        fileExt === "pdf"
-      )
+      fileExt === "jpg" ||
+      fileExt === "jpeg" ||
+      fileExt === "png" ||
+      fileExt === "pdf"
     ) {
       setVisaFileName(file.name);
       var formData = new FormData();
@@ -107,8 +101,7 @@ const QuickPassenger = () => {
         setVisaFileName(response.data.fileName);
       };
       postData();
-    }
-    else {
+    } else {
       toast.error("Sorry! file format not valid..");
     }
   };
@@ -120,7 +113,8 @@ const QuickPassenger = () => {
         SearchText: "",
       };
       const response = await axios.post(
-        environment.getAgentPassengers + `?pageNumber=${currentPage}&pageSize=${pageSize}`,
+        environment.getAgentPassengers +
+          `?pageNumber=${currentPage}&pageSize=${pageSize}`,
         sendObj,
         environment.headerToken
       );
@@ -144,18 +138,18 @@ const QuickPassenger = () => {
     // setDOBYear("");
     // setDOBMonth("");
     // setDOBDay("");
-    setDOB("")
+    setDOB("");
     setNationality("BD");
     setGender("Male");
     setPassportNo("");
     setIssuingCountry("");
-    setpassportExDate("")
+    setpassportExDate("");
     setPhone("");
     setEmail("");
     setPhoneCountryCode("+88");
     setCityName("");
     setPassengerType("ADT");
-  }
+  };
   const handleCreateItem = () => {
     clearForm();
   };
@@ -165,11 +159,11 @@ const QuickPassenger = () => {
     setFirstName(item.first);
     setMiddleName(item.middle);
     setLastName(item.last);
-    setDOB(item.dateOfBirth)
+    setDOB(item.dateOfBirth);
     setNationality(item.nationality);
     setGender(item.gender);
     setPassportNo(item.documentNumber);
-    setpassportExDate(item.expireDate)
+    setpassportExDate(item.expireDate);
     setIssuingCountry(item.documentIssuingCountry);
     setPhone(item.phone);
     setEmail(item.email);
@@ -193,7 +187,7 @@ const QuickPassenger = () => {
           });
         // console.log(response);
         if (response !== undefined && response.data > 0) {
-          handleGetPassengers(currentPageNumber)
+          handleGetPassengers(currentPageNumber);
           toast.success("Passenger deleted successfully..");
           setLoading(false);
         } else {
@@ -228,27 +222,27 @@ const QuickPassenger = () => {
 
   const handleSubmit = () => {
     if (title === "") {
-      toast.error("Sorry! Title is empty..")
+      toast.error("Sorry! Title is empty..");
       return;
     }
     if (firstName === "") {
-      toast.error("Sorry! First Name is empty..")
+      toast.error("Sorry! First Name is empty..");
       return;
     }
     if (lastName === "") {
-      toast.error("Sorry! Last Name is empty..")
+      toast.error("Sorry! Last Name is empty..");
       return;
     }
     if (email === "") {
-      toast.error("Sorry! Email is empty..")
+      toast.error("Sorry! Email is empty..");
       return;
     }
-    if (!isValidEmail(email)){
-      toast.error("You have entered an invalid email address!")
+    if (!isValidEmail(email)) {
+      toast.error("You have entered an invalid email address!");
       return;
     }
     if (dob === "") {
-      toast.error("Sorry! DOB is not selected..")
+      toast.error("Sorry! DOB is not selected..");
       return;
     }
 
@@ -278,17 +272,17 @@ const QuickPassenger = () => {
           toast.error("Please try again..");
           setLoading(false);
         }
-
       };
       putData();
     } else {
       const postData = async () => {
         setLoading(true);
-        const response = await axios.post(
-          environment.saveAgentPassenger,
-          sendObj,
-          environment.headerToken
-        )
+        const response = await axios
+          .post(
+            environment.saveAgentPassenger,
+            sendObj,
+            environment.headerToken
+          )
           .catch((error) => {
             console.log(error);
           });
@@ -317,40 +311,47 @@ const QuickPassenger = () => {
     switch (passengerType) {
       case "ADT":
         setDobMinMax({
-          min: null, max: ISODateFormatter(add(new Date(), {
-            years: -12,
-          }))
-        })
+          min: null,
+          max: ISODateFormatter(
+            add(new Date(), {
+              years: -12,
+            })
+          ),
+        });
         break;
       case "CNN":
         setDobMinMax({
-          min: ISODateFormatter(add(new Date(), {
-            years: -12,
-          })), max: ISODateFormatter(add(new Date(), {
-            years: -2,
-          }))
-        })
+          min: ISODateFormatter(
+            add(new Date(), {
+              years: -12,
+            })
+          ),
+          max: ISODateFormatter(
+            add(new Date(), {
+              years: -2,
+            })
+          ),
+        });
         break;
       case "INF":
         setDobMinMax({
-          min: ISODateFormatter(add(new Date(), {
-            years: -2,
-          })), max: ISODateFormatter(new Date())
-        })
+          min: ISODateFormatter(
+            add(new Date(), {
+              years: -2,
+            })
+          ),
+          max: ISODateFormatter(new Date()),
+        });
         break;
       default:
         break;
     }
-
-  }
+  };
 
   useEffect(() => {
-    passengerTypeFuc(passengerType)
+    passengerTypeFuc(passengerType);
     handleGetPassengers(currentPageNumber);
-
   }, [currentPageNumber, passengerType]);
-
-
 
   console.log(passengerList);
   return (
@@ -384,7 +385,10 @@ const QuickPassenger = () => {
                         </a>
                       </li>
                     </ul>
-                    <table className="table table-bordered text-center mt-1 table-sm" style={{ width: "100%", fontSize: "13px" }}>
+                    <table
+                      className="table table-bordered text-center mt-1 table-sm"
+                      style={{ width: "100%", fontSize: "13px" }}
+                    >
                       <thead className="text-center fw-bold bg-secondary">
                         <tr>
                           <th>SL</th>
@@ -417,8 +421,8 @@ const QuickPassenger = () => {
                                   " " +
                                   item.middle +
                                   " " +
-                                  item.last} ({item.passengerType})
-                                {/* </a> */}
+                                  item.last}{" "}
+                                ({item.passengerType}){/* </a> */}
                               </td>
                               <td>{item.email}</td>
                               <td>{item.phone}</td>
@@ -428,7 +432,11 @@ const QuickPassenger = () => {
                                 )}
                               </td>
                               <td>{item.gender}</td>
-                              <td>{item.documentNumber === "" ? "N/A" : item.documentNumber}</td>
+                              <td>
+                                {item.documentNumber === ""
+                                  ? "N/A"
+                                  : item.documentNumber}
+                              </td>
 
                               {/* <td>
                                 {item.passportCopy !== null &&
@@ -555,24 +563,28 @@ const QuickPassenger = () => {
                                   required
                                 >
                                   <option value=""> Title</option>
-                                  {
-                                    passengerType === "ADT" ? <>
+                                  {passengerType === "ADT" ? (
+                                    <>
                                       <option value="Mr"> Mr</option>
                                       <option value="Ms"> Ms</option>
                                       <option value="Mrs"> Mrs</option>
-                                    </> : <>
+                                    </>
+                                  ) : (
+                                    <>
                                       <option value="Mstr">Mstr</option>
                                       <option value="Miss">Miss</option>
                                     </>
-                                  }
+                                  )}
                                 </select>
                                 <input
                                   name="firstName"
                                   className="form-control rounded-end"
                                   onChange={(e) => {
-                                    setFirstName(e.target.value); const result = add(new Date(), {
-                                      years: -2
-                                    }); console.log({ result })
+                                    setFirstName(e.target.value);
+                                    const result = add(new Date(), {
+                                      years: -2,
+                                    });
+                                    console.log({ result });
                                   }}
                                   value={firstName}
                                   required
@@ -636,13 +648,15 @@ const QuickPassenger = () => {
                             <div className="input-group mb-3 d-flex">
                               <input
                                 type={"date"}
+                                pattern="\d{4}-\d{2}-\d{2}"
                                 name="dateOfBirth"
                                 className="form-control rounded"
                                 onChange={(e) => {
-                                  setDOB(e.target.value)
+                                  setDOB(e.target.value);
                                 }}
                                 value={dob}
-                                min={dobMinMax?.min} max={dobMinMax?.max}
+                                min={dobMinMax?.min}
+                                max={dobMinMax?.max}
                                 required
                                 autoComplete="off"
                                 placeholder="Date of Birth"
@@ -676,10 +690,7 @@ const QuickPassenger = () => {
                         </div>
                         <div className="col-lg-4">
                           <div className="form-group">
-                            <label
-                              className="float-start fw-bold"
-                              htmlFor=""
-                            >
+                            <label className="float-start fw-bold" htmlFor="">
                               Email
                               <span className="text-danger">*</span>
                             </label>
@@ -740,7 +751,7 @@ const QuickPassenger = () => {
                                 setIssuingCountry(e.target.value)
                               }
                               value={issuingCountry}
-                            // required
+                              // required
                             >
                               <option value="">Issuing Country</option>
                               {courtries.map((item, index) => {
@@ -769,11 +780,12 @@ const QuickPassenger = () => {
                               name="passportExDate"
                               className="form-control rounded"
                               onChange={(e) => {
-                                setpassportExDate(e.target.value)
+                                setpassportExDate(e.target.value);
                               }}
                               value={passportExDate}
                               min={ISODateFormatter(new Date())}
                               autoComplete="off"
+                              pattern="\d{4}-\d{2}-\d{2}"
                               placeholder="Passport Expaire Date"
                             />
                           </div>
@@ -912,8 +924,6 @@ const QuickPassenger = () => {
                           </div>
                         </div> */}
                       </div>
-
-
                     </div>
                   </div>
                   <div className="modal-footer">
@@ -930,9 +940,15 @@ const QuickPassenger = () => {
                       onClick={() => handleSubmit()}
                       disabled={loading ? true : false}
                     >
-                      {
-                        loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span>Submit</span>
-                      }
+                      {loading ? (
+                        <span
+                          class="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>
+                      ) : (
+                        <span>Submit</span>
+                      )}
                     </button>
                   </div>
                 </div>

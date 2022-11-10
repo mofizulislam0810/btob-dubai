@@ -103,71 +103,74 @@ const SalesReport = () => {
       <div className="content-wrapper search-panel-bg">
         <section className="content-header"></section>
         <section className="content">
-            <form
-              className="mx-5 mt-3"
-              encType="multipart/form-data"
-              style={{ minHeight: "500px" }}
-            >
-              <div className="card">
-                <div className="card-body">
-                  <div className="m-4">
-                    <div className="tab-content">
-                      <div className="tab-pane fade show active" id="tp1">
-                        <h4> Sales Report</h4>
-                        <hr className="my-3" />
-                        <div
-                          className="row"
-                          style={{ width: "100%", paddingBottom: "5px" }}
-                        >
-                          <div className="col-sm-12 text-left pb-2">
-                            <div className="d-flex float-end">
-                              <input
-                                type="date"
-                                class="form-control w-50 rounded-start"
-                                name="from"
-                                value={fromDate}
-                                onChange={(e) => handleFromDate(e)}
-                                style={{fontSize:"12px"}}
-                              />
-                              <input
-                                type="date"
-                                class="form-control w-50"
-                                name="to"
-                                value={toDate}
-                                onChange={(e) => handleToDate(e)}
-                                style={{fontSize:"12px"}}
-                              />
-                              <button
-                                type="button"
-                                className="btn btn-secondary fw-bold rounded-end"
-                                onClick={handleSubmit}  style={{fontSize:"12px"}}
-                              >
-                                Search
-                              </button>
-                            </div>
+          <form
+            className="mx-5 mt-3"
+            encType="multipart/form-data"
+            style={{ minHeight: "500px" }}
+          >
+            <div className="card">
+              <div className="card-body">
+                <div className="m-4">
+                  <div className="tab-content">
+                    <div className="tab-pane fade show active" id="tp1">
+                      <h4> Sales Report</h4>
+                      <hr className="my-3" />
+                      <div
+                        className="row"
+                        style={{ width: "100%", paddingBottom: "5px" }}
+                      >
+                        <div className="col-sm-12 text-left pb-2">
+                          <div className="d-flex float-end">
+                            <input
+                              type="date"
+                              pattern="\d{4}-\d{2}-\d{2}"
+                              class="form-control w-50 rounded-start"
+                              name="from"
+                              value={fromDate}
+                              onChange={(e) => handleFromDate(e)}
+                              style={{ fontSize: "12px" }}
+                            />
+                            <input
+                              type="date"
+                              pattern="\d{4}-\d{2}-\d{2}"
+                              class="form-control w-50"
+                              name="to"
+                              value={toDate}
+                              onChange={(e) => handleToDate(e)}
+                              style={{ fontSize: "12px" }}
+                            />
+                            <button
+                              type="button"
+                              className="btn btn-secondary fw-bold rounded-end"
+                              onClick={handleSubmit}
+                              style={{ fontSize: "12px" }}
+                            >
+                              Search
+                            </button>
                           </div>
                         </div>
-                        <div className="tableFixHead">
-                          <table
-                            className="table table-bordered table-sm"
-                            style={{ width: "100%", fontSize: "12px" }}
-                          >
-                            <thead className="text-center fw-bold bg-secondary">
-                              <tr>
-                                <th>Date Time</th>
-                                <th>Booking ID</th>
-                                <th>PNR</th>
-                                <th>Ticket Number</th>
-                                <th className="text-start">Passenger Name</th>
-                                <th>Passenger Type</th>
-                                {/* <th colSpan={3}>Buying</th> */}
-                                {/* <th colSpan={3}>Selling</th> */}
-                                <th className="text-end">Base Fare</th>
-                                <th className="text-end">Tax</th>
-                                <th className="text-end">Total Price</th>
-                                {/* <th rowSpan={2}>Profit</th> */}
-                              </tr>
-                              {/* <tr>
+                      </div>
+                      <div className="tableFixHead">
+                        <table
+                          className="table table-bordered table-sm"
+                          style={{ width: "100%", fontSize: "12px" }}
+                        >
+                          <thead className="text-center fw-bold bg-secondary">
+                            <tr>
+                              <th>Date Time</th>
+                              <th>Booking ID</th>
+                              <th>PNR</th>
+                              <th>Ticket Number</th>
+                              <th className="text-start">Passenger Name</th>
+                              <th>Passenger Type</th>
+                              {/* <th colSpan={3}>Buying</th> */}
+                              {/* <th colSpan={3}>Selling</th> */}
+                              <th className="text-end">Base Fare</th>
+                              <th className="text-end">Tax</th>
+                              <th className="text-end">Total Price</th>
+                              {/* <th rowSpan={2}>Profit</th> */}
+                            </tr>
+                            {/* <tr>
                                 <th>Base Price</th>
                                 <th>Tax</th>
                                 <th>Total Price</th>
@@ -175,30 +178,65 @@ const SalesReport = () => {
                                 <th>Tax</th>
                                 <th>Total Price</th>
                               </tr> */}
-                            </thead>
-                            <tbody className="tbody">
-                              {reportData !== undefined ? (
-                                reportData?.map((item, index) => {
-                                  return (
-                                    <>
-                                      <tr key={index}>
-                                        <td className="text-center">{moment(item.createdDate).format("DD-MMM-yyyy hh:mm")}</td>
-                                        <td>
+                          </thead>
+                          <tbody className="tbody">
+                            {reportData !== undefined ? (
+                              reportData?.map((item, index) => {
+                                return (
+                                  <>
+                                    <tr key={index}>
+                                      <td className="text-center">
+                                        {moment(item.createdDate).format(
+                                          "DD-MMM-yyyy hh:mm"
+                                        )}
+                                      </td>
+                                      <td>
                                         <a
-                                            style={{ borderRadius: "50%" }}
-                                            href="javascript:void(0)"
-                                            title="Ticket"
-                                            onClick={() =>
-                                              handleViewTicket(
-                                                item.uniqueTransID
-                                              )
-                                            }
-                                          >
-                                             {item.uniqueTransID}
-                                          </a>
-                                         
-                                          </td>
-                                        <td className="text-center">
+                                          style={{ borderRadius: "50%" }}
+                                          href="javascript:void(0)"
+                                          title="Ticket"
+                                          onClick={() =>
+                                            handleViewTicket(item.uniqueTransID)
+                                          }
+                                        >
+                                          {item.uniqueTransID}
+                                        </a>
+                                      </td>
+                                      <td className="text-center">
+                                        &nbsp;{" "}
+                                        <a
+                                          style={{ borderRadius: "50%" }}
+                                          href="javascript:void(0)"
+                                          title="Ticket"
+                                          onClick={() =>
+                                            handleViewTicket(item.uniqueTransID)
+                                          }
+                                        >
+                                          {item.pnr}
+                                        </a>
+                                      </td>
+                                      <td className="text-center">
+                                        {" "}
+                                        <span
+                                          key={index}
+                                          data-tip={
+                                            item.paxNames !== undefined ? (
+                                              item.paxNames
+                                                .split(",")
+                                                .map((item, index) => {
+                                                  return (
+                                                    index +
+                                                    1 +
+                                                    ". " +
+                                                    item.replace(",", " ") +
+                                                    "<br/>"
+                                                  );
+                                                })
+                                            ) : (
+                                              <></>
+                                            )
+                                          }
+                                        >
                                           &nbsp;{" "}
                                           <a
                                             style={{ borderRadius: "50%" }}
@@ -210,48 +248,14 @@ const SalesReport = () => {
                                               )
                                             }
                                           >
-                                            {item.pnr}
+                                            {item.ticketNumbers}
                                           </a>
-                                        </td>
-                                        <td className="text-center">
-                                          {" "}
-                                          <span
-                                            key={index}
-                                            data-tip={
-                                              item.paxNames !== undefined ? (
-                                                item.paxNames
-                                                  .split(",")
-                                                  .map((item, index) => {
-                                                    return (
-                                                      index +
-                                                      1 +
-                                                      ". " +
-                                                      item.replace(",", " ") +
-                                                      "<br/>"
-                                                    );
-                                                  })
-                                              ) : (
-                                                <></>
-                                              )
-                                            }
-                                          >
-                                            &nbsp;{" "}
-                                            <a
-                                              style={{ borderRadius: "50%" }}
-                                              href="javascript:void(0)"
-                                              title="Ticket"
-                                              onClick={() =>
-                                                handleViewTicket(
-                                                  item.uniqueTransID
-                                                )
-                                              }
-                                            >
-                                              {item.ticketNumbers}
-                                            </a>
-                                          </span>{" "}
-                                        </td>
-                                        <td className="text-start">{item.paxNames}</td>
-                                        {/* <td style={{ textAlign: "right" }}>
+                                        </span>{" "}
+                                      </td>
+                                      <td className="text-start">
+                                        {item.paxNames}
+                                      </td>
+                                      {/* <td style={{ textAlign: "right" }}>
                                           {item.basePriceBuying}
                                         </td>
                                         <td style={{ textAlign: "right" }}>
@@ -260,42 +264,50 @@ const SalesReport = () => {
                                         <td style={{ textAlign: "right" }}>
                                           {item.priceBuying}
                                         </td> */}
-                                        <td className="text-center">{getPassengerType(item.passengerType)}</td>
-                                        <td style={{ textAlign: "right" }}>
-                                          {item.basePriceSelling.toLocaleString("en-US")}
-                                        </td>
-                                        <td style={{ textAlign: "right" }}>
-                                          {item.taxesSelling.toLocaleString("en-US")}
-                                        </td>
-                                        <td style={{ textAlign: "right" }}>
-                                          {item.priceSelling.toLocaleString("en-US")}
-                                        </td>
-                                        {/* <td style={{ textAlign: "right" }}>
+                                      <td className="text-center">
+                                        {getPassengerType(item.passengerType)}
+                                      </td>
+                                      <td style={{ textAlign: "right" }}>
+                                        {item.basePriceSelling.toLocaleString(
+                                          "en-US"
+                                        )}
+                                      </td>
+                                      <td style={{ textAlign: "right" }}>
+                                        {item.taxesSelling.toLocaleString(
+                                          "en-US"
+                                        )}
+                                      </td>
+                                      <td style={{ textAlign: "right" }}>
+                                        {item.priceSelling.toLocaleString(
+                                          "en-US"
+                                        )}
+                                      </td>
+                                      {/* <td style={{ textAlign: "right" }}>
                                           {item.profit}
                                         </td> */}
-                                      </tr>
-                                    </>
-                                  );
-                                })
-                              ) : (
-                                <></>
-                              )}
-                            </tbody>
-                            <tfoot>
-                              {reportData !== undefined &&
-                              reportData?.length > 0 ? (
-                                <>
-                                  {" "}
-                                  <tr>
-                                    <td
-                                      colSpan={6}
-                                      style={{ textAlign: "right" }}
-                                    >
-                                      <strong>
-                                        Grand Total ({currencyName})
-                                      </strong>
-                                    </td>
-                                    {/* <td style={{ textAlign: "right" }}>
+                                    </tr>
+                                  </>
+                                );
+                              })
+                            ) : (
+                              <></>
+                            )}
+                          </tbody>
+                          <tfoot>
+                            {reportData !== undefined &&
+                            reportData?.length > 0 ? (
+                              <>
+                                {" "}
+                                <tr>
+                                  <td
+                                    colSpan={6}
+                                    style={{ textAlign: "right" }}
+                                  >
+                                    <strong>
+                                      Grand Total ({currencyName})
+                                    </strong>
+                                  </td>
+                                  {/* <td style={{ textAlign: "right" }}>
                                       <strong>{(totalBuyingBasePrice).toFixed(2)}</strong>
                                     </td>
                                     <td style={{ textAlign: "right" }}>
@@ -304,70 +316,78 @@ const SalesReport = () => {
                                     <td style={{ textAlign: "right" }}>
                                       <strong>{totalBuyingPrice}</strong>
                                     </td> */}
-                                    <td style={{ textAlign: "right" }}>
-                                      <strong>{totalSellingBasePrice.toLocaleString("en-US")}</strong>
-                                    </td>
-                                    <td style={{ textAlign: "right" }}>
-                                      <strong>{totalSellingTax.toLocaleString("en-US")}</strong>
-                                    </td>
-                                    <td style={{ textAlign: "right" }}>
-                                      <strong>{totalSellingPrice.toLocaleString("en-US")}</strong>
-                                    </td>
-                                    {/* <td style={{ textAlign: "right" }}>
+                                  <td style={{ textAlign: "right" }}>
+                                    <strong>
+                                      {totalSellingBasePrice.toLocaleString(
+                                        "en-US"
+                                      )}
+                                    </strong>
+                                  </td>
+                                  <td style={{ textAlign: "right" }}>
+                                    <strong>
+                                      {totalSellingTax.toLocaleString("en-US")}
+                                    </strong>
+                                  </td>
+                                  <td style={{ textAlign: "right" }}>
+                                    <strong>
+                                      {totalSellingPrice.toLocaleString(
+                                        "en-US"
+                                      )}
+                                    </strong>
+                                  </td>
+                                  {/* <td style={{ textAlign: "right" }}>
                                       <strong>{totalProfit}</strong>
                                     </td> */}
-                                  </tr>
-                                </>
-                              ) : (
-                                <></>
-                              )}
-                            </tfoot>
-                          </table>
+                                </tr>
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                          </tfoot>
+                        </table>
 
-                          {Object.keys(reportData).length === 0 && !isTimeOut && (
-                            <Center w="100%" py="50px">
-                              <Spinner
-                                thickness="4px"
-                                speed="0.65s"
-                                emptyColor="gray.200"
-                                color="red.500"
-                                size="xl"
-                              />
-                            </Center>
-                          )}
-
-                         
-                        </div>
-                        <div className="my-2">
-                          <ReactPaginate
-                            previousLabel={"previous"}
-                            nextLabel={"next"}
-                            breakLabel={"..."}
-                            pageCount={pageCount}
-                            marginPagesDisplayed={2}
-                            pageRangeDisplayed={3}
-                            onPageChange={handlePageClick}
-                            containerClassName={
-                              "pagination justify-content-center"
-                            }
-                            pageClassName={"page-item"}
-                            pageLinkClassName={"page-link"}
-                            previousClassName={"page-item"}
-                            previousLinkClassName={"page-link"}
-                            nextClassName={"page-item"}
-                            nextLinkClassName={"page-link"}
-                            breakClassName={"page-item"}
-                            breakLinkClassName={"page-link"}
-                            activeClassName={"active"}
-                          />
-                          </div>
-                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
+                        {Object.keys(reportData).length === 0 && !isTimeOut && (
+                          <Center w="100%" py="50px">
+                            <Spinner
+                              thickness="4px"
+                              speed="0.65s"
+                              emptyColor="gray.200"
+                              color="red.500"
+                              size="xl"
+                            />
+                          </Center>
+                        )}
                       </div>
+                      <div className="my-2">
+                        <ReactPaginate
+                          previousLabel={"previous"}
+                          nextLabel={"next"}
+                          breakLabel={"..."}
+                          pageCount={pageCount}
+                          marginPagesDisplayed={2}
+                          pageRangeDisplayed={3}
+                          onPageChange={handlePageClick}
+                          containerClassName={
+                            "pagination justify-content-center"
+                          }
+                          pageClassName={"page-item"}
+                          pageLinkClassName={"page-link"}
+                          previousClassName={"page-item"}
+                          previousLinkClassName={"page-link"}
+                          nextClassName={"page-item"}
+                          nextLinkClassName={"page-link"}
+                          breakClassName={"page-item"}
+                          breakLinkClassName={"page-link"}
+                          activeClassName={"active"}
+                        />
+                      </div>
+                      <ReactTooltip effect="solid" html={true}></ReactTooltip>
                     </div>
                   </div>
                 </div>
               </div>
-            </form>
+            </div>
+          </form>
         </section>
       </div>
       <Footer />

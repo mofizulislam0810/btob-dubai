@@ -10,14 +10,14 @@ import { MultiSelectComponent } from "@syncfusion/ej2-react-dropdowns";
 import $ from "jquery";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 const Markup = () => {
   useEffect(() => {
     $("#js-licensing").remove();
     $(document).ready(function () {
       $("#js-licensing").remove();
-    })
-  }, [])
+    });
+  }, []);
 
   let [airlineList, setAirlineList] = useState([]);
   let [countryList, setCountryList] = useState([]);
@@ -94,11 +94,14 @@ const Markup = () => {
   const handleGetAgentMarkups = (currentPageNumber) => {
     const getData = async () => {
       const response = await axios.get(
-        environment.markupsByAgent + "/" + (sessionStorage.getItem("agentId") ?? 0) + `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
+        environment.markupsByAgent +
+          "/" +
+          (sessionStorage.getItem("agentId") ?? 0) +
+          `?pageNumber=${currentPageNumber}&pageSize=${pageSize}`,
         environment.headerToken
       );
       setAgentMarkupList(response.data.data);
-      setPageCount(response.data.totalPages)
+      setPageCount(response.data.totalPages);
     };
     getData();
   };
@@ -124,7 +127,6 @@ const Markup = () => {
     };
     getAirlports();
     clearForm();
-
   };
   const clearForm = () => {
     setCurrentItem(null);
@@ -148,7 +150,7 @@ const Markup = () => {
     setDestinationAirportCode(null);
     setFareTypeId(null);
     setTripTypeId(null);
-  }
+  };
   const handleEditItem = (item) => {
     const getAirlines = async () => {
       const response = await axios.get(environment.getairlineList);
@@ -187,21 +189,21 @@ const Markup = () => {
     setDestinationAirportCode(item.destinationAirportCodes?.split(","));
     setFareTypeId(item.fareTypeId);
     setTripTypeId(item.tripTypeId);
-
   };
 
   const handlePageClick = async (data) => {
-
-
     let currentPage = data.selected + 1;
     setCurrentPageNumber(currentPage);
     handleGetAgentMarkups(currentPage);
   };
 
   const handleMarkupSubmit = () => {
-
     let originAirportAll = false;
-    if (originAirportCode !== undefined && originAirportCode !== null && originAirportCode !== "") {
+    if (
+      originAirportCode !== undefined &&
+      originAirportCode !== null &&
+      originAirportCode !== ""
+    ) {
       originAirportCode?.map((item, index) => {
         if (item === "ALL Airports") {
           originAirportAll = true;
@@ -209,7 +211,11 @@ const Markup = () => {
       });
     }
     let destinationAirportAll = false;
-    if (destinationAirportCode !== undefined && destinationAirportCode !== null && destinationAirportCode !== "") {
+    if (
+      destinationAirportCode !== undefined &&
+      destinationAirportCode !== null &&
+      destinationAirportCode !== ""
+    ) {
       destinationAirportCode?.map((item, index) => {
         if (item === "ALL Airports") {
           destinationAirportAll = true;
@@ -235,8 +241,14 @@ const Markup = () => {
       markupApplyOn: markupApplyOn,
       commissionApplyOn: commissionApplyOn,
       applyFor: applyForId,
-      originAirportCodes: originAirportAll === false ? originAirportCode?.toString() : "ALL Airports",
-      destinationAirportCodes: destinationAirportAll === false ? destinationAirportCode?.toString() : "ALL Airports",
+      originAirportCodes:
+        originAirportAll === false
+          ? originAirportCode?.toString()
+          : "ALL Airports",
+      destinationAirportCodes:
+        destinationAirportAll === false
+          ? destinationAirportCode?.toString()
+          : "ALL Airports",
       fareType: fareTypeId,
       tripType: tripTypeId,
       isActive: isActive,
@@ -277,7 +289,7 @@ const Markup = () => {
     }
   };
   useEffect(() => {
-    handleGetAgentMarkups(currentPageNumber)
+    handleGetAgentMarkups(currentPageNumber);
     handleCreateItem();
   }, [currentPageNumber]);
 
@@ -287,7 +299,8 @@ const Markup = () => {
       const deleteMarkup = async () => {
         const response = await axios
           .put(
-            environment.markupsDelete + "/" + item.id,null,
+            environment.markupsDelete + "/" + item.id,
+            null,
             environment.headerToken
           )
           .catch((error) => {
@@ -305,7 +318,7 @@ const Markup = () => {
     }
   };
 
-console.log(agentMarkupList);
+  console.log(agentMarkupList);
 
   return (
     <div>
@@ -314,7 +327,7 @@ console.log(agentMarkupList);
       <div className="content-wrapper search-panel-bg">
         <section className="content-header"></section>
         <section className="content">
-          <ToastContainer position="bottom-right" autoClose={1500}/>
+          <ToastContainer position="bottom-right" autoClose={1500} />
           <form
             className="mx-5 my-3"
             encType="multipart/form-data"
@@ -356,9 +369,7 @@ console.log(agentMarkupList);
                       <hr />
                       <div className="row my-3">
                         <div className="col-sm-3">
-                          <label>
-                            Airline
-                          </label>
+                          <label>Airline</label>
                           <MultiSelectComponent
                             id="mtselement"
                             value={airlineId}
@@ -366,14 +377,10 @@ console.log(agentMarkupList);
                             fields={fieldIds}
                             placeholder="Select Airline"
                             onChange={(e) => setAirlineId(e.target.value)}
-
                           />
                         </div>
                         <div className="col-sm-3">
-                          <label>
-                            Origin Country
-
-                          </label>
+                          <label>Origin Country</label>
                           <MultiSelectComponent
                             id="mtselement"
                             value={originCountryId}
@@ -384,10 +391,7 @@ console.log(agentMarkupList);
                           />
                         </div>
                         <div className="col-sm-3">
-                          <label>
-                            Destination Country
-
-                          </label>
+                          <label>Destination Country</label>
                           <MultiSelectComponent
                             id="mtselement"
                             value={destinationCountryId}
@@ -400,11 +404,10 @@ console.log(agentMarkupList);
                           />
                         </div>
                         <div className="col-sm-3">
-                          <label>
-                            Valid From
-                          </label>
+                          <label>Valid From</label>
                           <input
                             type={"date"}
+                            pattern="\d{4}-\d{2}-\d{2}"
                             value={validFrom?.split("T")[0]}
                             className="form-control"
                             onChange={(e) => setValidFrom(e.target.value)}
@@ -413,20 +416,17 @@ console.log(agentMarkupList);
                       </div>
                       <div className="row mb-3">
                         <div className="col-sm-3">
-                          <label>
-                            Valid To
-                          </label>
+                          <label>Valid To</label>
                           <input
                             type={"date"}
+                            pattern="\d{4}-\d{2}-\d{2}"
                             value={validTo?.split("T")[0]}
                             className="form-control"
                             onChange={(e) => setValidTo(e.target.value)}
                           ></input>
                         </div>
                         <div className="col-sm-3">
-                          <label>
-                            RBD
-                          </label>
+                          <label>RBD</label>
                           <input
                             type={"text"}
                             value={rbDs}
@@ -489,9 +489,7 @@ console.log(agentMarkupList);
                           </select>
                         </div>
                         <div className="col-sm-3">
-                          <label>
-                            Markup Type
-                          </label>
+                          <label>Markup Type</label>
                           <select
                             className="form-select"
                             value={null}
@@ -508,9 +506,7 @@ console.log(agentMarkupList);
                           </select>
                         </div>
                         <div className="col-sm-3">
-                          <label>
-                            Markup Value
-                          </label>
+                          <label>Markup Value</label>
                           <input
                             type={"number"}
                             value={markupValue}
@@ -521,7 +517,8 @@ console.log(agentMarkupList);
                         </div>
                         <div className="col-sm-3">
                           <label>
-                            Markup  Apply On<span style={{ color: "red" }}>*</span>
+                            Markup Apply On
+                            <span style={{ color: "red" }}>*</span>
                           </label>
                           <select
                             className="form-select"
@@ -539,10 +536,7 @@ console.log(agentMarkupList);
                           </select>
                         </div>
                         <div className="col-sm-3">
-                          <label>
-                            Commission Type
-
-                          </label>
+                          <label>Commission Type</label>
                           <select
                             className="form-select"
                             value={commissionTypeId}
@@ -561,29 +555,27 @@ console.log(agentMarkupList);
                           </select>
                         </div>
                         <div className="col-sm-3">
-                          <label>
-                            Commission Value
-
-                          </label>
+                          <label>Commission Value</label>
                           <input
                             type={"number"}
                             value={commissionValue}
                             className="form-control"
-                            onChange={(e) =>
-                              setCommissionValue(e.target.value)
-                            }
+                            onChange={(e) => setCommissionValue(e.target.value)}
                             placeholder="Commission Value"
                           ></input>
                         </div>
                         <div className="col-sm-3">
                           <label>
-                            Commission  Apply On<span style={{ color: "red" }}>*</span>
+                            Commission Apply On
+                            <span style={{ color: "red" }}>*</span>
                           </label>
                           <select
                             className="form-select"
                             value={null}
                             placeholder="Apply On"
-                            onChange={(e) => setCommissionApplyOn(e.target.value)}
+                            onChange={(e) =>
+                              setCommissionApplyOn(e.target.value)
+                            }
                           >
                             {applyonList.map((item, index) => {
                               return (
@@ -613,22 +605,19 @@ console.log(agentMarkupList);
                             })}
                           </select>
                         </div>
-
                       </div>
                       <div className="row mb-3">
                         <div className="col-sm-3">
-                          <label>
-                            Origin Airport
-
-                          </label>
+                          <label>Origin Airport</label>
                           <MultiSelectComponent
                             id="mtselement"
                             value={originAirportCode}
                             dataSource={airportList}
                             fields={fieldCodes}
                             placeholder="Select Origin Airport"
-                            onChange={(e) => setOriginAirportCode(e.target.value)}
-
+                            onChange={(e) =>
+                              setOriginAirportCode(e.target.value)
+                            }
                           />
                           {/* <select
                             className="form-select"
@@ -647,18 +636,16 @@ console.log(agentMarkupList);
                           </select> */}
                         </div>
                         <div className="col-sm-3">
-                          <label>
-                            Destination Airport
-
-                          </label>
+                          <label>Destination Airport</label>
                           <MultiSelectComponent
                             id="mtselement"
                             value={destinationAirportCode}
                             dataSource={airportList}
                             fields={fieldCodes}
                             placeholder="Select Destination Airport"
-                            onChange={(e) => setDestinationAirportCode(e.target.value)}
-
+                            onChange={(e) =>
+                              setDestinationAirportCode(e.target.value)
+                            }
                           />
                           {/* <select
                             className="form-select"
@@ -679,9 +666,7 @@ console.log(agentMarkupList);
                           </select> */}
                         </div>
                         <div className="col-sm-3">
-                          <label>
-                            Fare Type
-                          </label>
+                          <label>Fare Type</label>
                           <select
                             className="form-select"
                             value={null}
@@ -699,9 +684,7 @@ console.log(agentMarkupList);
                           </select>
                         </div>
                         <div className="col-sm-3">
-                          <label>
-                            Trip Type
-                          </label>
+                          <label>Trip Type</label>
                           <select
                             className="form-select"
                             value={null}
@@ -735,7 +718,7 @@ console.log(agentMarkupList);
 
                     <div className="tab-pane fade" id="existing">
                       <h4 className="mt-4">Existing</h4>
-                      <hr className="mb-3"/>
+                      <hr className="mb-3" />
                       {/* <button onClick={() => handleCreateItem()} type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#accountModal">
                                             Add
                                         </button> */}
@@ -798,10 +781,7 @@ console.log(agentMarkupList);
                                                                 </select>
                                                             </div> */}
                                 <div className="col-sm-3">
-                                  <label>
-                                    Airline
-
-                                  </label>
+                                  <label>Airline</label>
                                   <MultiSelectComponent
                                     id="mtselement"
                                     value={airlineId}
@@ -814,10 +794,7 @@ console.log(agentMarkupList);
                                   />
                                 </div>
                                 <div className="col-sm-3">
-                                  <label>
-                                    Origin Country
-
-                                  </label>
+                                  <label>Origin Country</label>
                                   <MultiSelectComponent
                                     id="mtselement"
                                     value={originCountryId}
@@ -830,10 +807,7 @@ console.log(agentMarkupList);
                                   />
                                 </div>
                                 <div className="col-sm-3">
-                                  <label>
-                                    Destination Country
-
-                                  </label>
+                                  <label>Destination Country</label>
                                   <MultiSelectComponent
                                     id="mtselement"
                                     value={destinationCountryId}
@@ -846,12 +820,10 @@ console.log(agentMarkupList);
                                   />
                                 </div>
                                 <div className="col-sm-3">
-                                  <label>
-                                    Valid From
-
-                                  </label>
+                                  <label>Valid From</label>
                                   <input
                                     type={"date"}
+                                    pattern="\d{4}-\d{2}-\d{2}"
                                     value={validFrom?.split("T")[0]}
                                     className="form-control"
                                     onChange={(e) =>
@@ -862,21 +834,17 @@ console.log(agentMarkupList);
                               </div>
                               <div className="row mb-3">
                                 <div className="col-sm-3">
-                                  <label>
-                                    Valid To
-
-                                  </label>
+                                  <label>Valid To</label>
                                   <input
                                     type={"date"}
+                                    pattern="\d{4}-\d{2}-\d{2}"
                                     value={validTo?.split("T")[0]}
                                     className="form-control"
                                     onChange={(e) => setValidTo(e.target.value)}
                                   ></input>
                                 </div>
                                 <div className="col-sm-3">
-                                  <label>
-                                    RBD
-                                  </label>
+                                  <label>RBD</label>
                                   <input
                                     type={"text"}
                                     value={rbDs}
@@ -948,10 +916,7 @@ console.log(agentMarkupList);
                                   </select>
                                 </div>
                                 <div className="col-sm-3">
-                                  <label>
-                                    Markup Type
-
-                                  </label>
+                                  <label>Markup Type</label>
                                   <select
                                     className="form-select"
                                     value={markupTypeId}
@@ -970,10 +935,7 @@ console.log(agentMarkupList);
                                   </select>
                                 </div>
                                 <div className="col-sm-3">
-                                  <label>
-                                    Markup Value
-
-                                  </label>
+                                  <label>Markup Value</label>
                                   <input
                                     type={"number"}
                                     value={markupValue}
@@ -986,7 +948,7 @@ console.log(agentMarkupList);
                                 </div>
                                 <div className="col-sm-3">
                                   <label>
-                                    Markup  Apply On
+                                    Markup Apply On
                                     <span style={{ color: "red" }}>*</span>
                                   </label>
                                   <select
@@ -1007,10 +969,7 @@ console.log(agentMarkupList);
                                   </select>
                                 </div>
                                 <div className="col-sm-3">
-                                  <label>
-                                    Commission Type
-
-                                  </label>
+                                  <label>Commission Type</label>
                                   <select
                                     className="form-select"
                                     value={commissionTypeId}
@@ -1029,10 +988,7 @@ console.log(agentMarkupList);
                                   </select>
                                 </div>
                                 <div className="col-sm-3">
-                                  <label>
-                                    Commission Value
-
-                                  </label>
+                                  <label>Commission Value</label>
                                   <input
                                     type={"number"}
                                     value={commissionValue}
@@ -1045,7 +1001,7 @@ console.log(agentMarkupList);
                                 </div>
                                 <div className="col-sm-3">
                                   <label>
-                                    Commission  Apply On
+                                    Commission Apply On
                                     <span style={{ color: "red" }}>*</span>
                                   </label>
                                   <select
@@ -1067,13 +1023,16 @@ console.log(agentMarkupList);
                                 </div>
                                 <div className="col-sm-3">
                                   <label>
-                                    Apply For<span style={{ color: "red" }}>*</span>
+                                    Apply For
+                                    <span style={{ color: "red" }}>*</span>
                                   </label>
                                   <select
                                     className="form-select"
                                     value={null}
                                     placeholder="Apply On"
-                                    onChange={(e) => setApplyForId(e.target.value)}
+                                    onChange={(e) =>
+                                      setApplyForId(e.target.value)
+                                    }
                                   >
                                     <option key={0}>Select Apply For</option>
                                     {applyforList.map((item, index) => {
@@ -1089,18 +1048,16 @@ console.log(agentMarkupList);
 
                               <div className="row mb-3">
                                 <div className="col-sm-3">
-                                  <label>
-                                    Origin Airport
-
-                                  </label>
+                                  <label>Origin Airport</label>
                                   <MultiSelectComponent
                                     id="mtselement"
                                     value={originAirportCode}
                                     dataSource={airportList}
                                     fields={fieldCodes}
                                     placeholder="Select Origin Airport"
-                                    onChange={(e) => setOriginAirportCode(e.target.value)}
-
+                                    onChange={(e) =>
+                                      setOriginAirportCode(e.target.value)
+                                    }
                                   />
                                   {/* <select
                                     className="form-select"
@@ -1120,18 +1077,16 @@ console.log(agentMarkupList);
                                   </select> */}
                                 </div>
                                 <div className="col-sm-3">
-                                  <label>
-                                    Destination Airport
-
-                                  </label>
+                                  <label>Destination Airport</label>
                                   <MultiSelectComponent
                                     id="mtselement"
                                     value={destinationAirportCode}
                                     dataSource={airportList}
                                     fields={fieldCodes}
                                     placeholder="Select Destination Airport"
-                                    onChange={(e) => setDestinationAirportCode(e.target.value)}
-
+                                    onChange={(e) =>
+                                      setDestinationAirportCode(e.target.value)
+                                    }
                                   />
                                   {/* <select
                                     className="form-select"
@@ -1151,10 +1106,7 @@ console.log(agentMarkupList);
                                   </select> */}
                                 </div>
                                 <div className="col-sm-3">
-                                  <label>
-                                    Fare Type
-
-                                  </label>
+                                  <label>Fare Type</label>
                                   <select
                                     className="form-select"
                                     value={fareTypeId}
@@ -1173,10 +1125,7 @@ console.log(agentMarkupList);
                                   </select>
                                 </div>
                                 <div className="col-sm-3">
-                                  <label>
-                                    Trip Type
-
-                                  </label>
+                                  <label>Trip Type</label>
                                   <select
                                     className="form-select"
                                     value={tripTypeId}
@@ -1230,7 +1179,7 @@ console.log(agentMarkupList);
                             <th>Travell Validity From</th>
                             <th>Travell Validity To</th>
                             <th>Created On</th>
-                            <th>Markup Value</th> 
+                            <th>Markup Value</th>
                             <th>Discount Value</th>
                             <th>Action</th>
                           </tr>
@@ -1239,7 +1188,11 @@ console.log(agentMarkupList);
                           {agentMarkupList.map((item, index) => {
                             return (
                               <tr key={index}>
-                                <td>{((currentPageNumber - 1) * pageSize) + index + 1}</td>
+                                <td>
+                                  {(currentPageNumber - 1) * pageSize +
+                                    index +
+                                    1}
+                                </td>
                                 <td>
                                   {/* <a
                                     href="#"
@@ -1249,7 +1202,7 @@ console.log(agentMarkupList);
                                   >
                                     {item.code}
                                   </a> */}
-                                    {item.code}
+                                  {item.code}
                                 </td>
                                 <td>
                                   {item.isActive === true
@@ -1260,23 +1213,51 @@ console.log(agentMarkupList);
                                 <td>{item.destinationCountryCodes}</td>
                                 <td>{item.airlineNames}</td>
                                 <td>
-                                  {
-                                    console.log(item.validFrom)
-                                  }
-                                  {item.validFrom !== null ? moment(item.validFrom).format("yyyy-MM-DD") : ""}
+                                  {console.log(item.validFrom)}
+                                  {item.validFrom !== null
+                                    ? moment(item.validFrom).format(
+                                        "yyyy-MM-DD"
+                                      )
+                                    : ""}
                                 </td>
                                 <td>
-                                  {item.validFrom !== null ? moment(item.validTo).format("yyyy-MM-DD") : ""}
+                                  {item.validFrom !== null
+                                    ? moment(item.validTo).format("yyyy-MM-DD")
+                                    : ""}
                                 </td>
                                 <td>
                                   {moment(item.createdDate).format(
                                     "yyyy-MM-DD"
                                   )}
                                 </td>
-                                <td>{item.markupTypeId===1?"Flat":"Percent"} {item.markupValue}</td>
-                                <td>{item.commissionTypeId===1?"Flat":"Percent"} {item.commissionValue}</td>
-                                <td><span onClick={() => handleDeleteItem(item)} className="text-danger me-2"><i class="fa fa-trash" aria-hidden="true"></i></span>
-                                <span data-bs-target="#accountModal"  data-bs-toggle="modal"   onClick={() => handleEditItem(item)} className="text-danger"><i class="fas fa-edit"></i></span>
+                                <td>
+                                  {item.markupTypeId === 1 ? "Flat" : "Percent"}{" "}
+                                  {item.markupValue}
+                                </td>
+                                <td>
+                                  {item.commissionTypeId === 1
+                                    ? "Flat"
+                                    : "Percent"}{" "}
+                                  {item.commissionValue}
+                                </td>
+                                <td>
+                                  <span
+                                    onClick={() => handleDeleteItem(item)}
+                                    className="text-danger me-2"
+                                  >
+                                    <i
+                                      class="fa fa-trash"
+                                      aria-hidden="true"
+                                    ></i>
+                                  </span>
+                                  <span
+                                    data-bs-target="#accountModal"
+                                    data-bs-toggle="modal"
+                                    onClick={() => handleEditItem(item)}
+                                    className="text-danger"
+                                  >
+                                    <i class="fas fa-edit"></i>
+                                  </span>
                                 </td>
                               </tr>
                             );

@@ -161,11 +161,11 @@ const QuickPassenger = () => {
     setFirstName(item.first);
     setMiddleName(item.middle);
     setLastName(item.last);
-    setDOB(item.dateOfBirth);
+    setDOB(ISODateFormatter(item.dateOfBirth));
     setNationality(item.nationality);
     setGender(item.gender);
     setPassportNo(item.documentNumber);
-    setpassportExDate(item.expireDate);
+    setpassportExDate(ISODateFormatter(item.expireDate));
     setIssuingCountry(item.documentIssuingCountry);
     setPhone(item.phone);
     setEmail(item.email);

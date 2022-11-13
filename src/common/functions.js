@@ -1,4 +1,4 @@
-import { intervalToDuration, parse } from "date-fns";
+import { format, intervalToDuration, parse } from "date-fns";
 export const isValidEmail = (input) => {
   return input
     ?.toLowerCase()
@@ -72,4 +72,8 @@ export const timeDuration = (start, end) => {
   });
 
   return `${result.hours}h ${result.minutes}m`;
+};
+
+export const ISODateFormatter = (input) => {
+  return format(new Date(input), "yyyy-MM-dd");
 };

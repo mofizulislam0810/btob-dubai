@@ -39,9 +39,9 @@ const FailedTicketPage = () => {
             <div className="row">
               <div className="col-lg-12 text-center">
                 <h5 className="pt-4 fw-bold">Please try again</h5>
-                {
+                {/* {
                   ticketData.item2 != undefined ? <><p className="text-danger">{ticketData.item2?.message}</p></> :<><p className="text-danger">{ticketData.message}</p></>
-                }
+                } */}
                 
                 <div className="my-3">
                   <span className="text-danger fs-3">
@@ -55,10 +55,10 @@ const FailedTicketPage = () => {
                   We couldn't issue ticket that flight <br></br>Please contact
                   the support or order e-ticket<br></br>Thank You
                 </p>
-                <hr></hr>
+                {/* <hr></hr>
                 <button className="btn button-color my-3 text-white fw-bold" onClick={()=>handleOrder()}>
                   Order e-ticket
-                </button>
+                </button> */}
               </div>
             </div>
           </div>

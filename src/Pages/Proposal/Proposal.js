@@ -1549,10 +1549,10 @@ const Proposal = () => {
                                     <tr>
                                       <td className="left">Adult</td>
                                       <td className="left">
-                                        {item.passengerFares.adt.basePrice +
+                                        {(item.passengerFares.adt.basePrice +
                                           parseInt(addBalance) -
                                           decBalance +
-                                          parseInt(adultPriceValue[index])}
+                                          parseInt(adultPriceValue[index])).toLocaleString("en-US")}
                                       </td>
                                       <td className="center">
                                         {item.passengerFares.adt.taxes}
@@ -1561,7 +1561,7 @@ const Proposal = () => {
                                         {item.passengerFares.adt.discountPrice}
                                       </td>
                                       <td className="right">
-                                        {item.passengerFares.adt.ait}
+                                        {item.passengerFares.adt.ait + (adultPriceValue[index]*.003)}
                                       </td>
                                       <td className="right">
                                         {item.passengerCounts.adt}
@@ -1620,7 +1620,7 @@ const Proposal = () => {
                                         {item.passengerFares.cnn.discountPrice}
                                       </td>
                                       <td className="right">
-                                        {item.passengerFares.cnn.ait}
+                                        {item.passengerFares.cnn.ait + (childPriceValue[index]*.003)}
                                       </td>
                                       <td className="right">
                                         {item.passengerCounts.cnn}
@@ -1681,7 +1681,7 @@ const Proposal = () => {
                                         {item.passengerFares.inf.discountPrice}
                                       </td>
                                       <td className="right">
-                                        {item.passengerFares.inf.ait}
+                                        {item.passengerFares.inf.ait + (infantPriceValue[index]*.003)}
                                       </td>
                                       <td className="right">
                                         {item.passengerCounts.inf}
@@ -2041,7 +2041,7 @@ const Proposal = () => {
                                   {item.passengerFares.adt.discountPrice}
                                 </td>
                                 <td style={{ border: "1px solid black" }}>
-                                  {item.passengerFares.adt.ait}
+                                  {item.passengerFares.adt.ait + (adultPriceValue[index]*.003)}
                                 </td>
                                 <td style={{ border: "1px solid black" }}>
                                   {item.passengerCounts.adt}
@@ -2079,7 +2079,7 @@ const Proposal = () => {
                                   {item.passengerFares.cnn.discountPrice}
                                 </td>
                                 <td style={{ border: "1px solid black" }}>
-                                  {item.passengerFares.cnn.ait}
+                                  {item.passengerFares.cnn.ait + (childPriceValue[index]*.003)}
                                 </td>
                                 <td style={{ border: "1px solid black" }}>
                                   {item.passengerCounts.cnn}
@@ -2119,7 +2119,7 @@ const Proposal = () => {
                                   {item.passengerFares.inf.discountPrice}
                                 </td>
                                 <td style={{ border: "1px solid black" }}>
-                                  {item.passengerFares.inf.ait}
+                                  {item.passengerFares.inf.ait + (infantPriceValue[index]*.003)}
                                 </td>
                                 <td style={{ border: "1px solid black" }}>
                                   {item.passengerCounts.inf}

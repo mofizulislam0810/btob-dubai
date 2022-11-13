@@ -325,7 +325,7 @@ const Staff = () => {
                           placeholder="Email"
                           onChange={(e) => setUserEmail(e.target.value)}
                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                          readOnly
+                          readOnly={currentItem === null ? false : true}
                         ></input>
                       </div>
                       <div className="col-sm-3">

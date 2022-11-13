@@ -15,6 +15,8 @@ import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import courtries from "../../../JSON/countries.json";
 import { environment } from "../../SharePages/Utility/environment";
+import moment from "moment";
+
 import "./LeftSide.css";
 const LeftSide = () => {
   const [validityError, setValidityError] = useState(false);
@@ -744,6 +746,18 @@ const LeftSide = () => {
   };
 
   // console.log(isChecked);
+
+  $('input[type="date"]')
+    .on("change", function () {
+      this.setAttribute(
+        "data-date",
+        moment(this.value, "YYYY-MM-DD").format(
+          this.getAttribute("data-date-format")
+        )
+      );
+    })
+    .trigger("change");
+
   return (
     <form onSubmit={bookingData}>
       <div className="col-lg-12">
@@ -1048,6 +1062,8 @@ const LeftSide = () => {
                               <div className="input-group mb-3">
                                 <input
                                   type={"date"}
+                                  data-date=""
+                                  data-date-format="DD/MM/YYYY"
                                   name="dateOfBirth"
                                   className="form-control rounded"
                                   id="dateOfBirth"
@@ -1060,7 +1076,27 @@ const LeftSide = () => {
                                       })
                                     );
                                   }}
-                                  value={p?.dateOfBirth}
+                                  value={
+                                    p.dateOfBirth
+                                      ? p.dateOfBirth
+                                      : ISODateFormatter(
+                                          add(
+                                            new Date(
+                                              Database?.tripTypeModify ===
+                                                "Round Trip" &&
+                                              calculateFullAge(
+                                                Database?.journeyDate,
+                                                Database?.returnDate
+                                              )
+                                                ? Database?.returnDate
+                                                : Database?.journeyDate
+                                            ),
+                                            {
+                                              years: -12,
+                                            }
+                                          )
+                                        )
+                                  }
                                   max={ISODateFormatter(
                                     add(
                                       new Date(
@@ -1466,6 +1502,8 @@ const LeftSide = () => {
                             <div className="mb-3">
                               <input
                                 type={"date"}
+                                data-date=""
+                                data-date-format="DD/MM/YYYY"
                                 id={`passportExDate_${p.id}`}
                                 name={`passportExDate_${p.id}`}
                                 className="form-control rounded"
@@ -1477,7 +1515,22 @@ const LeftSide = () => {
                                     })
                                   );
                                 }}
-                                value={p.passportExDate}
+                                value={
+                                  p.passportExDate
+                                    ? p.passportExDate
+                                    : ISODateFormatter(
+                                        new Date(
+                                          Database?.tripTypeModify ===
+                                            "Round Trip" &&
+                                          calculateFullAge(
+                                            Database?.journeyDate,
+                                            Database?.returnDate
+                                          )
+                                            ? Database?.returnDate
+                                            : Database?.journeyDate
+                                        )
+                                      )
+                                }
                                 min={ISODateFormatter(
                                   new Date(
                                     Database?.tripTypeModify === "Round Trip" &&
@@ -1786,6 +1839,8 @@ const LeftSide = () => {
                           <div className="input-group mb-3">
                             <input
                               type={"date"}
+                              data-date=""
+                              data-date-format="DD/MM/YYYY"
                               id={`dateOfBirth_${p.id}`}
                               name={`dateOfBirth_${p.id}`}
                               className="form-control rounded"
@@ -1798,7 +1853,27 @@ const LeftSide = () => {
                                   })
                                 );
                               }}
-                              value={p?.dateOfBirth}
+                              value={
+                                p.dateOfBirth
+                                  ? p.dateOfBirth
+                                  : ISODateFormatter(
+                                      add(
+                                        new Date(
+                                          Database?.tripTypeModify ===
+                                            "Round Trip" &&
+                                          calculateFullAge(
+                                            Database?.journeyDate,
+                                            Database?.returnDate
+                                          )
+                                            ? Database?.returnDate
+                                            : Database?.journeyDate
+                                        ),
+                                        {
+                                          years: -12,
+                                        }
+                                      )
+                                    )
+                              }
                               min={ISODateFormatter(
                                 add(
                                   new Date(
@@ -2158,6 +2233,8 @@ const LeftSide = () => {
                             <div className="input-group mb-3">
                               <input
                                 type={"date"}
+                                data-date=""
+                                data-date-format="DD/MM/YYYY"
                                 name="passportExDate"
                                 className="form-control rounded"
                                 onChange={(e) => {
@@ -2168,7 +2245,22 @@ const LeftSide = () => {
                                     })
                                   );
                                 }}
-                                value={p.passportExDate}
+                                value={
+                                  p.passportExDate
+                                    ? p.passportExDate
+                                    : ISODateFormatter(
+                                        new Date(
+                                          Database?.tripTypeModify ===
+                                            "Round Trip" &&
+                                          calculateFullAge(
+                                            Database?.journeyDate,
+                                            Database?.returnDate
+                                          )
+                                            ? Database?.returnDate
+                                            : Database?.journeyDate
+                                        )
+                                      )
+                                }
                                 min={ISODateFormatter(
                                   new Date(
                                     Database?.tripTypeModify === "Round Trip" &&
@@ -2551,6 +2643,8 @@ const LeftSide = () => {
                           <div className="input-group mb-3 d-flex">
                             <input
                               type={"date"}
+                              data-date=""
+                              data-date-format="DD/MM/YYYY"
                               name="dateOfBirth"
                               className="form-control rounded"
                               id="dateOfBirth"
@@ -2563,7 +2657,15 @@ const LeftSide = () => {
                                   })
                                 );
                               }}
-                              value={p?.dateOfBirth}
+                              value={
+                                p.dateOfBirth
+                                  ? p.dateOfBirth
+                                  : ISODateFormatter(
+                                      add(new Date(Database?.journeyDate), {
+                                        years: -2,
+                                      })
+                                    )
+                              }
                               min={ISODateFormatter(
                                 add(new Date(Database?.journeyDate), {
                                   years: -2,
@@ -2846,6 +2948,8 @@ const LeftSide = () => {
                             <div className="input-group mb-3">
                               <input
                                 type={"date"}
+                                data-date=""
+                                data-date-format="DD/MM/YYYY"
                                 name="passportExDate"
                                 className="form-control rounded"
                                 onChange={(e) => {
@@ -2856,7 +2960,22 @@ const LeftSide = () => {
                                     })
                                   );
                                 }}
-                                value={p.passportExDate}
+                                value={
+                                  p.passportExDate
+                                    ? p.passportExDate
+                                    : ISODateFormatter(
+                                        new Date(
+                                          Database?.tripTypeModify ===
+                                            "Round Trip" &&
+                                          calculateFullAge(
+                                            Database?.journeyDate,
+                                            Database?.returnDate
+                                          )
+                                            ? Database?.returnDate
+                                            : Database?.journeyDate
+                                        )
+                                      )
+                                }
                                 min={ISODateFormatter(
                                   new Date(
                                     Database?.tripTypeModify === "Round Trip" &&

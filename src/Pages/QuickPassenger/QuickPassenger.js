@@ -354,6 +354,18 @@ const QuickPassenger = () => {
   }, [currentPageNumber, passengerType]);
 
   console.log(passengerList);
+
+  $('input[type="date"]')
+    .on("change", function () {
+      this.setAttribute(
+        "data-date",
+        moment(this.value, "YYYY-MM-DD").format(
+          this.getAttribute("data-date-format")
+        )
+      );
+    })
+    .trigger("change");
+
   return (
     <div>
       <Navbar></Navbar>
@@ -661,13 +673,19 @@ const QuickPassenger = () => {
                             <div className="input-group mb-3 d-flex">
                               <input
                                 type={"date"}
+                                data-date=""
+                                data-date-format="DD/MM/YYYY"
                                 pattern="\d{4}-\d{2}-\d{2}"
                                 name="dateOfBirth"
                                 className="form-control rounded"
                                 onChange={(e) => {
                                   setDOB(e.target.value);
                                 }}
-                                value={dob}
+                                value={
+                                  currentItem !== null
+                                    ? dob
+                                    : ISODateFormatter(dobMinMax?.max)
+                                }
                                 min={dobMinMax?.min}
                                 max={dobMinMax?.max}
                                 required
@@ -790,12 +808,18 @@ const QuickPassenger = () => {
                           <div className="input-group mb-3 d-flex">
                             <input
                               type={"date"}
+                              data-date=""
+                              data-date-format="DD/MM/YYYY"
                               name="passportExDate"
                               className="form-control rounded"
                               onChange={(e) => {
                                 setpassportExDate(e.target.value);
                               }}
-                              value={passportExDate}
+                              value={
+                                currentItem !== null
+                                  ? passportExDate
+                                  : ISODateFormatter(new Date())
+                              }
                               min={ISODateFormatter(new Date())}
                               autoComplete="off"
                               required

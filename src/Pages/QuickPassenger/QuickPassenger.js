@@ -13,6 +13,7 @@ import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
 import SideNavBar from "../SharePages/SideNavBar/SideNavBar";
 import { BiEdit } from "react-icons/bi";
+import { ISODateFormatter } from "../../common/functions";
 
 import { environment } from "../SharePages/Utility/environment";
 const QuickPassenger = () => {
@@ -305,9 +306,6 @@ const QuickPassenger = () => {
       };
       postData();
     }
-  };
-  const ISODateFormatter = (input) => {
-    return format(new Date(input), "yyyy-MM-dd");
   };
   const passengerTypeFuc = (passengerType) => {
     switch (passengerType) {

@@ -42,6 +42,7 @@ const ShowFlight = (props) => {
   const amountChange = props.amountChange;
   let currency = props.currency;
   let checkList = props.checkList;
+  console.log(checkList);
   const getFareRules = (uId, dir, itemCode) => {
     handleFareRules(uId, dir, itemCode);
   };
@@ -295,12 +296,13 @@ const ShowFlight = (props) => {
     const checked = e.target.checked;
     if (checked) {
       checkList.push(props.data);
-      sessionStorage.setItem("checkList", JSON.stringify(checkList));
       setCount(checkList.length);
+      sessionStorage.setItem("checkList", JSON.stringify(checkList));
     } else {
       checkList = checkList.filter(
         (item) => item.itemCodeRef !== props.data.itemCodeRef
       );
+      console.log(checkList,"======")
       sessionStorage.setItem("checkList", JSON.stringify(checkList));
       setCount(checkList.length);
     }

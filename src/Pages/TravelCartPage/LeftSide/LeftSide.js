@@ -1492,6 +1492,7 @@ const LeftSide = () => {
                                 autoComplete="off"
                                 placeholder="Passport Expaire Date"
                                 pattern="\d{4}-\d{2}-\d{2}"
+                                max="9999-12-31"
                                 required
                               />
                               {validityError && (
@@ -2182,6 +2183,7 @@ const LeftSide = () => {
                                 autoComplete="off"
                                 placeholder="Passport Expaire Date"
                                 pattern="\d{4}-\d{2}-\d{2}"
+                                max="9999-12-31"
                                 required
                               />
                               {validityError && (
@@ -2869,6 +2871,7 @@ const LeftSide = () => {
                                 autoComplete="off"
                                 placeholder="Passport Expaire Date"
                                 pattern="\d{4}-\d{2}-\d{2}"
+                                max="9999-12-31"
                                 required
                               />
                               {validityError && (

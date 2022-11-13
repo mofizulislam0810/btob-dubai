@@ -1,3 +1,4 @@
+import { HStack, Icon, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { add, format } from "date-fns";
 import $ from "jquery";
@@ -11,6 +12,7 @@ import courtries from "../../JSON/countries.json";
 import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
 import SideNavBar from "../SharePages/SideNavBar/SideNavBar";
+import { BiEdit } from "react-icons/bi";
 
 import { environment } from "../SharePages/Utility/environment";
 const QuickPassenger = () => {
@@ -159,11 +161,11 @@ const QuickPassenger = () => {
     setFirstName(item.first);
     setMiddleName(item.middle);
     setLastName(item.last);
-    setDOB(item.dateOfBirth);
+    setDOB(ISODateFormatter(item.dateOfBirth));
     setNationality(item.nationality);
     setGender(item.gender);
     setPassportNo(item.documentNumber);
-    setpassportExDate(item.expireDate);
+    setpassportExDate(ISODateFormatter(item.expireDate));
     setIssuingCountry(item.documentIssuingCountry);
     setPhone(item.phone);
     setEmail(item.email);
@@ -400,7 +402,7 @@ const QuickPassenger = () => {
                           <th>Passport Number</th>
                           {/* <th>Passport Copy</th>
                           <th>Visa Copy</th> */}
-                          {/* <th>Action</th> */}
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody className="lh-1 tbody">
@@ -409,12 +411,6 @@ const QuickPassenger = () => {
                             <tr key={index}>
                               <td>{index + 1}</td>
                               <td>
-                                {/* <a
-                                  onClick={() => handleEditItem(item)}
-                                  href="#"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#accountModal"
-                                > */}
                                 {item.title +
                                   " " +
                                   item.first +
@@ -422,7 +418,7 @@ const QuickPassenger = () => {
                                   item.middle +
                                   " " +
                                   item.last}{" "}
-                                ({item.passengerType}){/* </a> */}
+                                ({item.passengerType})
                               </td>
                               <td>{item.email}</td>
                               <td>{item.phone}</td>
@@ -475,6 +471,25 @@ const QuickPassenger = () => {
                               {/* <td>
                                 <span onClick={() => handleDeleteItem(item)} className="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></span>
                               </td> */}
+
+                              <td>
+                                <a
+                                  onClick={() => handleEditItem(item)}
+                                  href="#"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#accountModal"
+                                >
+                                  <HStack justifyContent="center">
+                                    <Icon
+                                      as={BiEdit}
+                                      h="18px"
+                                      w="18px"
+                                      color={"logoGreen"}
+                                    />
+                                    <Text>Edit</Text>
+                                  </HStack>
+                                </a>
+                              </td>
                             </tr>
                           );
                         })}
@@ -785,144 +800,13 @@ const QuickPassenger = () => {
                               value={passportExDate}
                               min={ISODateFormatter(new Date())}
                               autoComplete="off"
+                              required
                               pattern="\d{4}-\d{2}-\d{2}"
+                              max="9999-12-31"
                               placeholder="Passport Expaire Date"
                             />
                           </div>
                         </div>
-                      </div>
-
-                      <div className="row">
-                        {/* <div className="col-lg-4">
-                          <div className="form-group">
-                            <label
-                              className="form-label float-start fw-bold"
-                              htmlFor=""
-                            >
-                              City Name
-                            </label>
-                          </div>
-                          <div className="input-group mb-3">
-                            <input
-                              type="text"
-                              className="form-control rounded"
-                              name="cityName"
-                              onChange={(e) => setCityName(e.target.value)}
-                              value={cityName}
-                              required
-                              autoComplete="off"
-                              placeholder="City Name"
-                            />
-                          </div>
-                        </div> */}
-                        {/* <div className="col-lg-4">
-                          <div className="form-group">
-                            <label
-                              className="form-label float-start fw-bold"
-                              htmlFor=""
-                            >
-                              Phone Number
-                            </label>
-                          </div>
-                          <div className="input-group mb-3">
-                            <select
-                              id="name"
-                              placeholder="Title"
-                              className="form-select rounded-start"
-                              onChange={(e) =>
-                                setPhoneCountryCode(e.target.value)
-                              }
-                              value={phoneCountryCode}
-                              required
-                              style={{ maxWidth: "5rem" }}
-                            >
-                              <option value="+88">+88</option>
-                              {courtries.map((item, index) => {
-                                return (
-                                  <option key={index} value={item.dial_code}>
-                                    {item.dial_code}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                            <input
-                              type="number"
-                              className="form-control rounded-end"
-                              name="passport-number"
-                              onChange={(e) => setPhone(e.target.value)}
-                              value={phone}
-                              required
-                              autoComplete="off"
-                              placeholder="Phone"
-                            />
-                          </div>
-                        </div> */}
-                        {/* <div className="col-lg-4">
-                          <div className="form-group">
-                            <label
-                              className="form-label float-start fw-bold"
-                              htmlFor=""
-                            >
-                              Passport Copy
-
-                            </label>
-                          </div>
-                          <div className="input-group mb-3 d-flex">
-                            {passportNo !== "" ? (
-                              <input
-                                type={"file"}
-                                accept=".jpg, .jpeg, .png, .pdf"
-                                className="form-control rounded"
-                                onChange={(e) =>
-                                  handlePassportFileUpload(e.target.files[0])
-                                }
-                              ></input>
-                            ) : (
-                              <></>
-                            )}
-                            <input
-                              type={"file"}
-                              accept=".jpg, .jpeg, .png, .pdf"
-                              className="form-control rounded"
-                              onChange={(e) =>
-                                handlePassportFileUpload(e.target.files[0])
-                              }
-                            />
-                          </div>
-                        </div> */}
-                        {/* <div className="col-lg-4">
-                          <div className="form-group">
-                            <label
-                              className="form-label float-start fw-bold"
-                              htmlFor=""
-                            >
-                              Visa Copy
-
-                            </label>
-                          </div>
-                          <div className="input-group mb-3 d-flex">
-                            {passportNo !== "" ? (
-                              <input
-                                type={"file"}
-                                accept=".jpg, .jpeg, .png, .pdf"
-                                className="form-control rounded"
-                                onChange={(e) =>
-                                  handleVisaFileUpload(e.target.files[0])
-                                }
-                              ></input>
-                            ) : (
-                              <></>
-                            )}
-                            <input
-                              type={"file"}
-                              accept=".jpg, .jpeg, .png, .pdf"
-                              className="form-control rounded"
-                              onChange={(e) =>
-                                handleVisaFileUpload(e.target.files[0])
-                              }
-                            />
-                          </div>
-                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -947,7 +831,10 @@ const QuickPassenger = () => {
                           aria-hidden="true"
                         ></span>
                       ) : (
-                        <span>Submit</span>
+                        <span>
+                          {" "}
+                          {currentItem === null ? "Submit" : "Update"}
+                        </span>
                       )}
                     </button>
                   </div>

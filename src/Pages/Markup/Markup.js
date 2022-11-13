@@ -407,6 +407,7 @@ const Markup = () => {
                           <label>Valid From</label>
                           <input
                             type={"date"}
+                            max="9999-12-31"
                             pattern="\d{4}-\d{2}-\d{2}"
                             value={validFrom?.split("T")[0]}
                             className="form-control"
@@ -419,6 +420,7 @@ const Markup = () => {
                           <label>Valid To</label>
                           <input
                             type={"date"}
+                            max="9999-12-31"
                             pattern="\d{4}-\d{2}-\d{2}"
                             value={validTo?.split("T")[0]}
                             className="form-control"
@@ -823,6 +825,7 @@ const Markup = () => {
                                   <label>Valid From</label>
                                   <input
                                     type={"date"}
+                                    max="9999-12-31"
                                     pattern="\d{4}-\d{2}-\d{2}"
                                     value={validFrom?.split("T")[0]}
                                     className="form-control"
@@ -838,6 +841,7 @@ const Markup = () => {
                                   <input
                                     type={"date"}
                                     pattern="\d{4}-\d{2}-\d{2}"
+                                    max="9999-12-31"
                                     value={validTo?.split("T")[0]}
                                     className="form-control"
                                     onChange={(e) => setValidTo(e.target.value)}

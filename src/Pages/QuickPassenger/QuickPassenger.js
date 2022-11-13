@@ -786,6 +786,7 @@ const QuickPassenger = () => {
                               min={ISODateFormatter(new Date())}
                               autoComplete="off"
                               pattern="\d{4}-\d{2}-\d{2}"
+                              max="9999-12-31"
                               placeholder="Passport Expaire Date"
                             />
                           </div>

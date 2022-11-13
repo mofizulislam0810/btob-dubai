@@ -425,6 +425,7 @@ const Queues = () => {
                                 <input
                                   type={"date"}
                                   pattern="\d{4}-\d{2}-\d{2}"
+                                  max="9999-12-31"
                                   value={fromDate}
                                   onChange={(e) => setFromDate(e.target.value)}
                                   className="form-control"
@@ -436,6 +437,7 @@ const Queues = () => {
                                 <input
                                   type={"date"}
                                   pattern="\d{4}-\d{2}-\d{2}"
+                                  max="9999-12-31"
                                   value={toDate}
                                   onChange={(e) => setToDate(e.target.value)}
                                   className="form-control"

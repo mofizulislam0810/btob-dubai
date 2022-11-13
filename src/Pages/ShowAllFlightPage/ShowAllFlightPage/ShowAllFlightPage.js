@@ -19,7 +19,10 @@ import SideNavBar from "../../SharePages/SideNavBar/SideNavBar";
 import { environment } from "../../SharePages/Utility/environment";
 import ShowAllFlight from "../ShowAllFlight/ShowAllFlight";
 let cIndex = 1;
+
 const ShowAllFlightPage = () => {
+  let checkList = [];
+  sessionStorage.removeItem("checkList");
   const searchData = JSON.parse(localStorage.getItem("Database"));
   window.scrollTo(0, 0);
   const { state } = useLocation();
@@ -606,10 +609,10 @@ const ShowAllFlightPage = () => {
       if (results.length >= index + 1) {
         autoinput.val(
           results[index].city +
-            " - " +
-            results[index].country +
-            ", " +
-            results[index].name
+          " - " +
+          results[index].country +
+          ", " +
+          results[index].name
         );
         clearResults();
       }
@@ -1237,12 +1240,12 @@ const ShowAllFlightPage = () => {
                     <span className="me-2">
                       <i className="fas fa-plane-departure"></i>
                     </span>{" "}
-                    <span data-tip={searchData.origin.split(",")[1]}>
+                    <span>
                       {originCode[0]}(
                       {airports
                         .filter((f) => f.iata === originCode[0])
                         .map((item) => item.city)}
-                      : {searchData.journeyDate})
+                      )
                     </span>
                     <ReactTooltip effect="solid" html={true}></ReactTooltip>
                   </span>
@@ -1252,7 +1255,7 @@ const ShowAllFlightPage = () => {
                       <i className="fas fa-plane-arrival"></i>
                     </span>
                     {searchData.returnDate === "null" ? (
-                      <span data-tip={searchData.destination.split(",")[1]}>
+                      <span>
                         {destinationCode[0]}(
                         {airports
                           .filter((f) => f.iata === destinationCode[0])
@@ -1260,12 +1263,11 @@ const ShowAllFlightPage = () => {
                         )
                       </span>
                     ) : (
-                      <span data-tip={searchData.destination.split(",")[1]}>
+                      <span>
                         {destinationCode[0]}(
                         {airports
                           .filter((f) => f.iata === destinationCode[0])
-                          .map((item) => item.city)}
-                        : {searchData.returnDate})
+                          .map((item) => item.city)})
                       </span>
                     )}
 
@@ -1273,21 +1275,19 @@ const ShowAllFlightPage = () => {
                   </span>
                 </span>
                 {searchData.origin1 !== "" &&
-                searchData.origin1 !== undefined ? (
+                  searchData.origin1 !== undefined ? (
                   <>
                     <span className="p-2 border ms-1">
                       <span className="fw-bold" style={{ fontSize: "14px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-departure"></i>
                         </span>{" "}
-                        <span
-                          data-tip={
-                            searchData.origin1.split(",")[1] +
-                            "<br>" +
-                            searchData.inputDateMulti1
-                          }
-                        >
-                          {originCode1[0]}
+                        <span>
+                          {originCode1[0]}(
+                          {airports
+                            .filter((f) => f.iata === originCode1[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
@@ -1297,10 +1297,13 @@ const ShowAllFlightPage = () => {
                           <i className="fas fa-plane-arrival"></i>
                         </span>
 
-                        <span data-tip={searchData.destination1.split(",")[1]}>
-                          {destinationCode1[0]}
+                        <span>
+                          {destinationCode1[0]}(
+                          {airports
+                            .filter((f) => f.iata === destinationCode1[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
-
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
                     </span>
@@ -1309,7 +1312,7 @@ const ShowAllFlightPage = () => {
                   <></>
                 )}
                 {searchData.origin2 !== "" &&
-                searchData.origin2 !== undefined ? (
+                  searchData.origin2 !== undefined ? (
                   <>
                     <span className="p-2 border ms-1">
                       <span className="fw-bold" style={{ fontSize: "14px" }}>
@@ -1317,13 +1320,13 @@ const ShowAllFlightPage = () => {
                           <i className="fas fa-plane-departure"></i>
                         </span>{" "}
                         <span
-                          data-tip={
-                            searchData.origin2.split(",")[1] +
-                            "<br>" +
-                            searchData.inputDateMulti2
-                          }
+
                         >
-                          {originCode2[0]}
+                          {originCode2[0]}(
+                          {airports
+                            .filter((f) => f.iata === originCode2[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
@@ -1333,8 +1336,12 @@ const ShowAllFlightPage = () => {
                           <i className="fas fa-plane-arrival"></i>
                         </span>
 
-                        <span data-tip={searchData.destination2.split(",")[1]}>
-                          {destinationCode2[0]}
+                        <span>
+                          {destination2[0]}(
+                          {airports
+                            .filter((f) => f.iata === destination2[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
@@ -1345,21 +1352,19 @@ const ShowAllFlightPage = () => {
                 )}
 
                 {searchData.origin3 !== "" &&
-                searchData.origin3 !== undefined ? (
+                  searchData.origin3 !== undefined ? (
                   <>
                     <span className="p-2 border ms-1">
                       <span className="fw-bold" style={{ fontSize: "14px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-departure"></i>
                         </span>{" "}
-                        <span
-                          data-tip={
-                            searchData.origin3.split(",")[1] +
-                            "<br>" +
-                            searchData.inputDateMulti3
-                          }
-                        >
-                          {originCode3[0]}
+                        <span>
+                          {originCode3[0]}(
+                          {airports
+                            .filter((f) => f.iata === originCode3[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
@@ -1369,8 +1374,13 @@ const ShowAllFlightPage = () => {
                           <i className="fas fa-plane-arrival"></i>
                         </span>
 
-                        <span data-tip={searchData.destination3.split(",")[1]}>
-                          {destinationCode3[0]}
+                        <span>
+
+                          {destinationCode3[0]}(
+                          {airports
+                            .filter((f) => f.iata === destinationCode3[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
@@ -1381,21 +1391,19 @@ const ShowAllFlightPage = () => {
                 )}
 
                 {searchData.origin4 !== "" &&
-                searchData.origin4 !== undefined ? (
+                  searchData.origin4 !== undefined ? (
                   <>
                     <span className="p-2 border ms-1">
                       <span className="fw-bold" style={{ fontSize: "14px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-departure"></i>
                         </span>{" "}
-                        <span
-                          data-tip={
-                            searchData.origin4.split(",")[1] +
-                            "<br>" +
-                            searchData.inputDateMulti4
-                          }
-                        >
-                          {originCode4[0]}
+                        <span>
+                          {originCode4[0]}(
+                          {airports
+                            .filter((f) => f.iata === originCode4[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
@@ -1405,8 +1413,12 @@ const ShowAllFlightPage = () => {
                           <i className="fas fa-plane-arrival"></i>
                         </span>
 
-                        <span data-tip={searchData.destination4.split(",")[1]}>
-                          {destinationCode4[0]}
+                        <span>
+                          {destinationCode4[0]}(
+                          {airports
+                            .filter((f) => f.iata === destinationCode4[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
@@ -1417,21 +1429,19 @@ const ShowAllFlightPage = () => {
                 )}
 
                 {searchData.origin5 !== "" &&
-                searchData.origin5 !== undefined ? (
+                  searchData.origin5 !== undefined ? (
                   <>
                     <span className="p-2 border">
                       <span className="fw-bold" style={{ fontSize: "14px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-departure"></i>
                         </span>{" "}
-                        <span
-                          data-tip={
-                            searchData.origin5.split(",")[1] +
-                            "<br>" +
-                            searchData.inputDateMulti5
-                          }
-                        >
-                          {originCode5[0]}
+                        <span>
+                          {originCode5[0]}(
+                          {airports
+                            .filter((f) => f.iata === originCode5[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
@@ -1441,8 +1451,12 @@ const ShowAllFlightPage = () => {
                           <i className="fas fa-plane-arrival"></i>
                         </span>
 
-                        <span data-tip={searchData.destination5.split(",")[1]}>
-                          {destinationCode5[0]}
+                        <span>
+                          {destinationCode5[0]}(
+                          {airports
+                            .filter((f) => f.iata === destinationCode5[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
@@ -1679,20 +1693,20 @@ const ShowAllFlightPage = () => {
                                                       title="adultminus"
                                                       onClick={
                                                         infantCount > 0 &&
-                                                        adultCount ===
+                                                          adultCount ===
                                                           infantCount
                                                           ? () => {
-                                                              setAdultCount(
-                                                                adultCount - 1
-                                                              );
-                                                              setInfantCount(
-                                                                infantCount - 1
-                                                              );
-                                                            }
+                                                            setAdultCount(
+                                                              adultCount - 1
+                                                            );
+                                                            setInfantCount(
+                                                              infantCount - 1
+                                                            );
+                                                          }
                                                           : () =>
-                                                              setAdultCount(
-                                                                adultCount - 1
-                                                              )
+                                                            setAdultCount(
+                                                              adultCount - 1
+                                                            )
                                                       }
                                                       disabled={
                                                         adultCount === 1
@@ -1866,10 +1880,10 @@ const ShowAllFlightPage = () => {
                                                       onClick={
                                                         infantCount < adultCount
                                                           ? () =>
-                                                              setInfantCount(
-                                                                infantCount + 1
-                                                              )
-                                                          : () => {}
+                                                            setInfantCount(
+                                                              infantCount + 1
+                                                            )
+                                                          : () => { }
                                                       }
                                                       disabled={
                                                         infantCount === 9
@@ -2572,6 +2586,7 @@ const ShowAllFlightPage = () => {
                     loading={loading}
                     destinationCode={destinationCode}
                     tripType={tripType}
+                    checkList={checkList}
                   ></ShowAllFlight>
                 </>
               )

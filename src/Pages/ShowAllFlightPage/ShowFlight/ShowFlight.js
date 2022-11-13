@@ -16,7 +16,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { decode as base64_decode, encode as base64_encode } from "base-64";
 import { totalFlightDuration } from "../../../common/functions";
 
-let checkList = [];
+
 const ShowFlight = (props) => {
   const [grandTotal, setGrandTotal] = useState();
   const { setCount, handleFareRules, loading, fareRules, setFareRules } =
@@ -41,7 +41,7 @@ const ShowFlight = (props) => {
   const flightType = props.flightType;
   const amountChange = props.amountChange;
   let currency = props.currency;
-
+  let checkList = props.checkList;
   const getFareRules = (uId, dir, itemCode) => {
     handleFareRules(uId, dir, itemCode);
   };

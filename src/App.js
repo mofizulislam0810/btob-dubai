@@ -289,7 +289,7 @@ function App() {
               }
             />
             <Route
-              path="/failticket"
+              path="/processticket"
               element={
                 <PrivateRoute>
                   <FailedTicketPage />

@@ -17,7 +17,7 @@ const ShowAllFlight = ({
   fecthMulti,
   loading,
   airlineFilters,
-  tripType
+  tripType,checkList
 }) => {
   const { count } = useAuth();
   // console.log(count);
@@ -551,6 +551,7 @@ const ShowAllFlight = ({
                   data={data}
                   amountChange={amountChange}
                   currency={currency}
+                  checkList={checkList}
                 ></ShowFlight>
               ))
             )}

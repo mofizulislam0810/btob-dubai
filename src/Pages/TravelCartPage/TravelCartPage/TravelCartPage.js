@@ -8,7 +8,9 @@ import TravelCartPanel from "../TravelCartPanel/TravelCartPanel";
 
 const TravelCartPage = () => {
   window.scrollTo(0,0);
-  const {loading} = useAuth();
+  sessionStorage.removeItem("checkList");
+  const {loading,setCount} = useAuth();
+  setCount(0);
   console.log(loading);
   return (
     <div>

@@ -63,6 +63,7 @@ input::-webkit-calendar-picker-indicator {
   position: absolute;
   top: 3px;
   right: 0;
-  color: black;
-  opacity: 1;
+  width: 260px;
+  height: 28px;
+  opacity: 0;
 }

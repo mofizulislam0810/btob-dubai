@@ -802,7 +802,7 @@ const QuickPassenger = () => {
                               autoComplete="off"
                               required
                               pattern="\d{4}-\d{2}-\d{2}"
-                              //max="9999-12-31"
+                              max="9999-12-31"
                               placeholder="Passport Expaire Date"
                             />
                           </div>
@@ -831,7 +831,10 @@ const QuickPassenger = () => {
                           aria-hidden="true"
                         ></span>
                       ) : (
-                        <span>Submit</span>
+                        <span>
+                          {" "}
+                          {currentItem === null ? "Submit" : "Update"}
+                        </span>
                       )}
                     </button>
                   </div>

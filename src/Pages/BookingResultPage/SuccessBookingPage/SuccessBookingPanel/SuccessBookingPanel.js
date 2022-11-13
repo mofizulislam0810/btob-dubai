@@ -73,7 +73,7 @@ const SuccessBookingPanel = () => {
           } else {
             setLoading(false);
             setTicketData(response.data);
-            navigate("/failticket");
+            navigate("/processticket");
           }
         });
     }

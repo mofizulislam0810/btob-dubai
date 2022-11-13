@@ -594,7 +594,7 @@ const Registration = () => {
                   </div>
 
                   <p className="my-2 font-size text-center">
-                    Already have account
+                    Already have account?
                     <Link to="/">
                       <span
                         className="fw-bold ms-1"

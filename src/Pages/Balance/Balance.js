@@ -719,6 +719,7 @@ const Balance = () => {
                                   type={"file"}
                                   className="form-control"
                                   placeholder="Attachment"
+                                  accept="image/*"
                                   onChange={(e) =>
                                     handleFileUpload(e.target.files[0])
                                   }
@@ -1326,19 +1327,22 @@ const Balance = () => {
                                     <td>
                                       {item.attachment !== null &&
                                       item.attachment !== "" ? (
-                                        <>
+                                        <span className="d-flex justify-content-center">
                                           <a
                                             href={
                                               environment.s3URL +
                                               item.attachment
                                             }
-                                            download
+                                            download="images"
                                             target="_blank"
                                           >
-                                            View
-                                            {/* <img src="https://thumbs.dreamstime.com/b/smooth-nature-pic-full-hd-126695318.jpg" alt="W3Schools" width="50" height="15"/> */}
+                                            {/* View */}
+                                            <img src={
+                                              environment.s3URL +
+                                              item.attachment
+                                            } alt="images" width="50" height="10"/>
                                           </a>
-                                        </>
+                                        </span>
                                       ) : (
                                         <>N/A</>
                                       )}

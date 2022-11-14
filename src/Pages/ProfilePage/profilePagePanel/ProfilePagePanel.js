@@ -18,6 +18,7 @@ const ProfilePagePanel = () => {
   let [mobile, setMobile] = useState();
   let [userId, setUserId] = useState();
   let [logoName, setLogoName] = useState();
+  let [agentInfo, setAgentInfo] = useState(0);
   // let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
   // let localURL ="wwwroot/Uploads/Agent/"
   
@@ -32,9 +33,27 @@ const ProfilePagePanel = () => {
       setLogoName(response.data.logoName)
     };
     getData();
+    const getAgentData = async () =>{
+      axios
+      .get(environment.agentInfo, environment.headerToken)
+      .then((agentRes) => {
+        // console.log("------------------", agentRes.data);
+        sessionStorage.setItem("agentId", agentRes.data.id);
+        sessionStorage.setItem("agentName", agentRes.data.name);
+        sessionStorage.setItem("logoName", agentRes.data.logoName);
+        sessionStorage.setItem("agentAddress", agentRes.data.address);
+        setAgentInfo(agentRes.data);
+      })
+      .catch((err) => {
+        //alert('Invalid login')
+      });
+    }
+    getAgentData();
   };
 
-  console.log(logoName);
+
+
+  // console.log(currentUser);
   const handleSubmit = () => {
     currentUser.fullName = fullName;
     currentUser.email = email;
@@ -42,7 +61,7 @@ const ProfilePagePanel = () => {
     console.log(currentUser);
 
     const putData = async () => {
-      const response = await axios.put(environment.userList, currentUser, environment.headerToken).catch((err) => {
+      const response = await axios.put(environment.userProfileEdit, currentUser, environment.headerToken).catch((err) => {
         toast.error("Sorry! Profile not updated..");
       });
       if (response.data.isSuccess == true) {
@@ -230,11 +249,11 @@ const ProfilePagePanel = () => {
                               </div>
                               <div className="col-sm-4">
                                 <label>
-                                  Email<span style={{ color: "red" }}>*</span>
+                                  Company Email<span style={{ color: "red" }}>*</span>
                                 </label>
                                 <input
                                   type={"email"}
-                                  value={email}
+                                  defaultValue={agentInfo.email}
                                   className="form-control"
                                   placeholder="Email"
                                   onChange={(e) => setEmail(e.target.value)}
@@ -318,6 +337,11 @@ const ProfilePagePanel = () => {
                                 <td>Company Name</td>
                                 <td>:</td>
                                 <td>{sessionStorage.getItem("agentName")}</td>
+                              </tr>
+                              <tr>
+                                <td>Company Email</td>
+                                <td>:</td>
+                                <td>{agentInfo.email}</td>
                               </tr>
                               <tr>
                                 <td>Company Address</td>

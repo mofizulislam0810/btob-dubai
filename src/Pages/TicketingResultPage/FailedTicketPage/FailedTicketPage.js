@@ -12,18 +12,20 @@ const FailedTicketPage = () => {
   const { loading, ticketData } = useAuth();
   const navigate = useNavigate();
     const handleOrder=()=>{
-        const orderTicket = async () => {
-            let transactionId=JSON.parse(localStorage.getItem("uniqueTransID"));
-			      const response = await axios.put(environment.changeTicketStatus+"/"+transactionId+"/Ordered",null,environment.headerToken);
-            console.log(response);
-            if(response.data>0){
-                navigate('/successorderticket');
-            }
-            else{
-                toast.error('Sorry! try again..');
-            }
-		};
-		orderTicket();
+    //     const orderTicket = async () => {
+    //         let transactionId=JSON.parse(localStorage.getItem("uniqueTransID"));
+		// 	      const response = await axios.put(environment.changeTicketStatus+"/"+transactionId+"/Ordered",null,environment.headerToken);
+    //         console.log(response);
+    //         if(response.data>0){
+    //             navigate('/successorderticket');
+    //         }
+    //         else{
+    //             toast.error('Sorry! try again..');
+    //         }
+		// };
+		// orderTicket();
+    navigate('/search');
+
     }
     console.log(ticketData);
   return (
@@ -36,29 +38,34 @@ const FailedTicketPage = () => {
         <section className="content-header"></section>
         <section className="content content-panel">
           <div className="container bg-white w-25">
-            <div className="row">
+            <div className="row p-4">
               <div className="col-lg-12 text-center">
-                <h5 className="pt-4 fw-bold">Please try again</h5>
+                {/* <h5 className="pt-4 fw-bold">Please try again</h5> */}
                 {/* {
                   ticketData.item2 != undefined ? <><p className="text-danger">{ticketData.item2?.message}</p></> :<><p className="text-danger">{ticketData.message}</p></>
                 } */}
                 
-                <div className="my-3">
-                  <span className="text-danger fs-3">
+                <div className="my-3 p-4">
+                  {/* <span className="text-danger fs-3">
                     <i
                       class="fa fa-exclamation-triangle"
                       aria-hidden="true"
                     ></i>
-                  </span>
-                </div>
-                <p>
-                  We couldn't issue ticket that flight <br></br>Please contact
-                  the support or order e-ticket<br></br>Thank You
+                    
+                  </span> */}
+                   <p>
+                  We are processing your ticket.<br></br>Please contact to
+                  the support.<br></br>Thank You
                 </p>
-                {/* <hr></hr>
+                </div>
+                {/* <p>
+                  We are processing your ticket.<br></br>Please contact to
+                  the support.<br></br>Thank You
+                </p> */}
+                <hr></hr>
                 <button className="btn button-color my-3 text-white fw-bold" onClick={()=>handleOrder()}>
-                  Order e-ticket
-                </button> */}
+                  Search more
+                </button>
               </div>
             </div>
           </div>

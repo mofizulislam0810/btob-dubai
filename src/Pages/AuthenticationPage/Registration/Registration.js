@@ -210,9 +210,13 @@ const Registration = () => {
 
             <div className="card">
               <div className="card-header text-center">
-                <Link to="/">
+                <div className="row">
+                  <div className="col-lg-2">
+                  <Link to="/">
                   <img src={logo} alt="Triplover" width="160px" />
                 </Link>
+                  </div>
+                </div>
               </div>
               <div className="card-body login-card-body">
                 <form>

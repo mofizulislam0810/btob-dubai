@@ -43,13 +43,21 @@ const FailedTicketPage = () => {
               <div className="col-lg-12 text-center">
                 {/* <h5 className="pt-4 fw-bold">Please try again</h5> */}
                 {
-                  ticketData.item2 != undefined ? <><p className="text-primary">{ticketData.item2?.message.split("#")[0]=="1"?ticketData.item2?.message.split("#")[1]: <p>
-                  We are processing your ticket.<br></br>Please contact to
-                  the support.<br></br>Thank You
-                </p>}</p></> :<><p className="text-danger">{ticketData.message.split("#")[0]=="1"?ticketData.message.split("#")[1]: <p>
-                  We are processing your ticket.<br></br>Please contact to
-                  the support.<br></br>Thank You
-                </p>}</p></>
+                  ticketData.item2 != undefined ? 
+                    <>
+                      <p className="">
+                        {ticketData.item2?.message.split("#")[0]=="1"?ticketData.item2?.message.split("#")[1]:
+                           <p>We are processing your ticket.<br></br>Please contact to the support.<br></br>
+                           Thank You</p>
+                        }
+                      </p>
+                    </> :
+                    <>
+                      <p className="">
+                        {ticketData.message.split("#")[0]=="1"?ticketData.message.split("#")[1]: 
+                        <p>We are processing your ticket.<br></br>Please contact to the support.<br></br>Thank You</p>
+                        }
+                        </p></>
                 }
                 
                 <div className="my-3 p-4">

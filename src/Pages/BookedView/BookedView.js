@@ -36,6 +36,22 @@ const BookedView = () => {
   let [lastTicketTime, setLastTicketTime] = useState('');
   let [isLoading, setIsLoading] = useState(false);
 
+  let [agentInfo, setAgentInfo] = useState(0);
+  const getAgentData = async () =>{
+    axios
+    .get(environment.agentInfo, environment.headerToken)
+    .then((agentRes) => {
+      setAgentInfo(agentRes.data);
+    })
+    .catch((err) => {
+      //alert('Invalid login')
+    });
+  }
+
+  useEffect(()=>{
+    getAgentData();
+  },[])
+
   const location = useLocation();
   console.log(ticketingList);
   const handleGetList = () => {
@@ -1594,7 +1610,18 @@ const BookedView = () => {
 
                       {ticketingList.ticketInfo?.status === "Booking Cancelled" || ticketingList.ticketInfo?.status === "Ticket Cancelled" ? <>
                       </> : <>
-                        <div className="container mt-3 mb-5">
+                      {
+                        agentInfo.activeCredit +
+                        agentInfo.currentBalance  <  ticketingList.ticketInfo?.ticketingPrice ?
+
+                        <>
+                        <div className="row mb-5 mt-2">
+                    <div className="col-lg-12 text-center text-danger">
+                      <p>You don't have available balance to generate Ticket!</p>
+                    </div>
+                  </div>
+                        </> :<>
+                         <div className="container mt-3 mb-5">
                           <div className="row">
                             <div className="col-lg-12 text-center">
                               <button
@@ -1605,8 +1632,11 @@ const BookedView = () => {
                               </button>
                             </div>
                           </div>
-                        </div>
-                      </>}
+                        </div></>
+                      }
+                       
+                      </>
+                      }
                     </div>
                   </div>
                 </div>

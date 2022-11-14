@@ -1019,7 +1019,7 @@ const SearchFrom = () => {
                       type="text"
                       className="form-control rounded-3"
                       placeholder="e.g. BS, BG, TK"
-                      // onChange={handleChange}
+                      onChange={handleChange}
                       autoComplete="off"
                       style={{
                         background: "#f8f2fb",

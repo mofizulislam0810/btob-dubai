@@ -25,6 +25,7 @@ export const environment = {
   logoFileUpload: baseApiURL + "user/uploadB2B",
 
   userList: baseApiURL + "user",
+  userProfileEdit: baseApiURL + "user/B2BProfileEdit",
   searchFlight: baseApiURL + "Search",
   bookFlight: baseApiURL + "Book",
   ticketingFlight: baseApiURL + "Ticket",

@@ -784,7 +784,6 @@ const SuccessBookingPanel = () => {
                                                 ?.directions[0][0].from
                                           )
                                           .map((item) => item.city)}{" "}
-                                        (Mandatory)
                                         {/* {bookData.data?.item1.flightInfo.dirrections[0][0].from} */}
                                       </td>
                                       <td>

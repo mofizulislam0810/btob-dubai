@@ -634,7 +634,7 @@ const BookedView = () => {
                                                 (f) =>
                                                   f.iata === ticketingList.segmentInfo[0]?.origin
                                               )
-                                              .map((item) => item.city)} (Mandatory)
+                                              .map((item) => item.city)}
                                             {/* {bookData.data?.item1.flightInfo.dirrections[0][0].from} */}
                                           </td>
                                           <td>
@@ -1564,7 +1564,7 @@ const BookedView = () => {
                                                 (f) =>
                                                   f.iata === ticketingList.segmentInfo[0]?.origin
                                               )
-                                              .map((item) => item.city)} (Mandatory)
+                                              .map((item) => item.city)}
                                             {/* {bookData.data?.item1.flightInfo.dirrections[0][0].from} */}
                                           </td>
                                           <td>

@@ -52,8 +52,8 @@ const FailedTicketPage = () => {
                   </span>
                 </div>
                 <p>
-                  We couldn't issue ticket that flight <br></br>Please contact
-                  the support or order e-ticket<br></br>Thank You
+                  We are processing your ticket.<br></br>Please contact to
+                  the support.<br></br>Thank You
                 </p>
                 {/* <hr></hr>
                 <button className="btn button-color my-3 text-white fw-bold" onClick={()=>handleOrder()}>

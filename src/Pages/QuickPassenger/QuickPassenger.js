@@ -4,6 +4,8 @@ import { add } from "date-fns";
 import $ from "jquery";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { BiEdit } from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import { toast, ToastContainer } from "react-toastify";
@@ -13,8 +15,6 @@ import courtries from "../../JSON/countries.json";
 import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
 import SideNavBar from "../SharePages/SideNavBar/SideNavBar";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 import { environment } from "../SharePages/Utility/environment";
 const QuickPassenger = () => {
@@ -119,7 +119,7 @@ const QuickPassenger = () => {
       };
       const response = await axios.post(
         environment.getAgentPassengers +
-          `?pageNumber=${currentPage}&pageSize=${pageSize}`,
+        `?pageNumber=${currentPage}&pageSize=${pageSize}`,
         sendObj,
         environment.headerToken
       );
@@ -440,7 +440,7 @@ const QuickPassenger = () => {
 
                               <td>
                                 {item.passportCopy !== null &&
-                                item.passportCopy !== "" ? (
+                                  item.passportCopy !== "" ? (
                                   <a
                                     href={
                                       environment.s3URL + `${item.passportCopy}`
@@ -457,7 +457,7 @@ const QuickPassenger = () => {
                               </td>
                               <td>
                                 {item.visaCopy != null &&
-                                item.visaCopy != "" ? (
+                                  item.visaCopy != "" ? (
                                   <a
                                     href={
                                       environment.s3URL + `${item.visaCopy}`
@@ -798,7 +798,7 @@ const QuickPassenger = () => {
                                 setIssuingCountry(e.target.value)
                               }
                               value={issuingCountry}
-                              // required
+                            // required
                             >
                               <option value="">Issuing Country</option>
                               {courtries.map((item, index) => {
@@ -880,18 +880,14 @@ const QuickPassenger = () => {
                               </label>
                             </div>
                             <div className="input-group mb-3 d-flex">
-                              {passportNo !== "" ? (
-                                <input
-                                  type={"file"}
-                                  accept=".jpg, .jpeg, .png, .pdf"
-                                  className="form-control rounded"
-                                  onChange={(e) =>
-                                    handlePassportFileUpload(e.target.files[0])
-                                  }
-                                ></input>
-                              ) : (
-                                <></>
-                              )}
+                              <input
+                                type={"file"}
+                                accept=".jpg, .jpeg, .png, .pdf"
+                                className="form-control rounded"
+                                onChange={(e) =>
+                                  handlePassportFileUpload(e.target.files[0])
+                                }
+                              />
                             </div>
                           </div>
                           <div className="col-lg-6">
@@ -904,18 +900,14 @@ const QuickPassenger = () => {
                               </label>
                             </div>
                             <div className="input-group mb-3 d-flex">
-                              {passportNo !== "" ? (
-                                <input
-                                  type={"file"}
-                                  accept=".jpg, .jpeg, .png, .pdf"
-                                  className="form-control rounded"
-                                  onChange={(e) =>
-                                    handleVisaFileUpload(e.target.files[0])
-                                  }
-                                ></input>
-                              ) : (
-                                <></>
-                              )}
+                              <input
+                                type={"file"}
+                                accept=".jpg, .jpeg, .png, .pdf"
+                                className="form-control rounded"
+                                onChange={(e) =>
+                                  handleVisaFileUpload(e.target.files[0])
+                                }
+                              />
                             </div>
                           </div>
                         </div>

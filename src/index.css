@@ -47,7 +47,7 @@ input {
   color: white;
 }
 
-input:before {
+input[type="date"]:before {
   position: absolute;
   top: 3px; left: 3px;
   content: attr(data-date);
@@ -55,11 +55,11 @@ input:before {
   color: black;
 }
 
-input::-webkit-datetime-edit, input::-webkit-inner-spin-button, input::-webkit-clear-button {
+input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-clear-button {
   display: none;
 }
 
-input::-webkit-calendar-picker-indicator {
+input[type="date"]::-webkit-calendar-picker-indicator {
   position: absolute;
   top: 3px;
   right: 0;

@@ -801,9 +801,6 @@ const QuickPassenger = () => {
                             />
                           </div>
                         </div>
-                      </div>
-
-                      <div className="row">
                         <div className="col-lg-4">
                           <div className="form-group">
                             <label
@@ -913,47 +910,46 @@ const QuickPassenger = () => {
                             /> */}
                           </div>
                         </div>
-
-                        <div className="row">
-                          <div className="col-lg-6">
-                            <div className="form-group">
-                              <label
-                                className="form-label float-start fw-bold"
-                                htmlFor=""
-                              >
-                                Passport Copy
-                              </label>
-                            </div>
-                            <div className="input-group mb-3 d-flex">
-                              <input
-                                type={"file"}
-                                accept=".jpg, .jpeg, .png, .pdf"
-                                className="form-control rounded"
-                                onChange={(e) =>
-                                  handlePassportFileUpload(e.target.files[0])
-                                }
-                              />
-                            </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <label
+                              className="form-label float-start fw-bold"
+                              htmlFor=""
+                            >
+                              Passport Copy
+                            </label>
                           </div>
-                          <div className="col-lg-6">
-                            <div className="form-group">
-                              <label
-                                className="form-label float-start fw-bold"
-                                htmlFor=""
-                              >
-                                Visa Copy
-                              </label>
-                            </div>
-                            <div className="input-group mb-3 d-flex">
-                              <input
-                                type={"file"}
-                                accept=".jpg, .jpeg, .png, .pdf"
-                                className="form-control rounded"
-                                onChange={(e) =>
-                                  handleVisaFileUpload(e.target.files[0])
-                                }
-                              />
-                            </div>
+                          <div className="input-group mb-3 d-flex">
+                            <input
+                              type={"file"}
+                              accept=".jpg, .jpeg, .png, .pdf"
+                              className="form-control rounded"
+                              onChange={(e) =>
+                                handlePassportFileUpload(e.target.files[0])
+                              }
+                            />
+                          </div>
+                        </div>
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <label
+                              className="form-label float-start fw-bold"
+                              htmlFor=""
+                            >
+                              Visa Copy
+                            </label>
+                          </div>
+                          <div className="input-group mb-3 d-flex">
+                            <input
+                              type={"file"}
+                              accept=".jpg, .jpeg, .png, .pdf"
+                              className="form-control rounded"
+                              onChange={(e) =>
+                                handleVisaFileUpload(e.target.files[0])
+                              }
+                            />
                           </div>
                         </div>
                       </div>

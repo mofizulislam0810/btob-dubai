@@ -1025,7 +1025,6 @@ const LeftSide = () => {
                                 Date of birth
                                 <span className="text-danger">*</span>
                               </label>
-                              <div className="input-group mb-3">
                                 <input
                                   type={"date"}
                                   name="dateOfBirth"
@@ -1052,7 +1051,6 @@ const LeftSide = () => {
                                   pattern="\d{4}-\d{2}-\d{2}"
                                 />
                                 {validityError && (<div className="validation"></div>)}
-                              </div>
                               {/* <div className="input-group mb-3 d-flex">
                                 <select
                                   name="date"
@@ -1260,7 +1258,6 @@ const LeftSide = () => {
                                 <span className="text-danger">*</span>
                               </label>
                             </div>
-                            <div className="input-group mb-3">
                               <input
                                 type="text"
                                 className="form-control"
@@ -1280,8 +1277,6 @@ const LeftSide = () => {
                                 spellcheck="false"
                               />
                               {validityError && (<div className="validation"></div>)}
-
-                            </div>
                           </div>
                           <div className="col-lg-4">
                             <div className="form-group">
@@ -1330,7 +1325,6 @@ const LeftSide = () => {
                                 Passport Expiry Date{" "}
                                 <span className="text-danger">*</span>
                               </label>
-                            </div>
                             {/* <div className="input-group mb-3 d-flex">
                               <select
                                 name="passDate"
@@ -1436,7 +1430,7 @@ const LeftSide = () => {
                                 <option>2022</option>
                               </select>
                             </div> */}
-                            <div className="mb-3">
+                   
                               <input
                                 type={"date"}
                                 id={`passportExDate_${p.id}`}
@@ -1452,8 +1446,8 @@ const LeftSide = () => {
                                   );
                                 }}
                                 value={(p.passportExDate)}
-                                min={ISODateFormatter(new Date(Database?.tripTypeModify ===
-                                  "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate))}
+                                min={ISODateFormatter(add(new Date(Database?.tripTypeModify ===
+                                  "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate),{months: 6}))}
                                 autoComplete="off"
                                 placeholder="Passport Expaire Date"
                                 pattern="\d{4}-\d{2}-\d{2}"
@@ -1740,7 +1734,6 @@ const LeftSide = () => {
                             Date of birth
                             <span className="text-danger">*</span>
                           </label>
-                          <div className="input-group mb-3">
                             <input
                               type={"date"}
                               id={`dateOfBirth_${p.id}`}
@@ -1770,7 +1763,6 @@ const LeftSide = () => {
                               pattern="\d{4}-\d{2}-\d{2}"
                             />
                             {validityError && (<div className="validation"></div>)}
-                          </div>
                           {/* <div className="input-group mb-3 d-flex">
                             <select
                               name="date"
@@ -2022,8 +2014,7 @@ const LeftSide = () => {
                                 Passport number{" "}
                                 <span className="text-danger">*</span>
                               </label>
-                            </div>
-                            <div className="input-group mb-3">
+                         
                               <input
                                 type="text"
                                 className="form-control"
@@ -2092,8 +2083,7 @@ const LeftSide = () => {
                                 Passport Expiry Date{" "}
                                 <span className="text-danger">*</span>
                               </label>
-                            </div>
-                            <div className="input-group mb-3">
+
                               <input
                                 type={"date"}
                                 name="passportExDate"
@@ -2108,8 +2098,8 @@ const LeftSide = () => {
                                   );
                                 }}
                                 value={(p.passportExDate)}
-                                min={ISODateFormatter(new Date(Database?.tripTypeModify ===
-                                  "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate))}
+                                min={ISODateFormatter(add(new Date(Database?.tripTypeModify ===
+                                  "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate),{months: 6}))}
                                 autoComplete="off"
                                 placeholder="Passport Expaire Date"
                                 pattern="\d{4}-\d{2}-\d{2}"
@@ -2696,8 +2686,7 @@ const LeftSide = () => {
                                 Passport number{" "}
                                 <span className="text-danger">*</span>
                               </label>
-                            </div>
-                            <div className="input-group mb-3">
+                          
                               <input
                                 type="text"
                                 className="form-control"
@@ -2766,8 +2755,6 @@ const LeftSide = () => {
                                 Passport Expiry Date{" "}
                                 <span className="text-danger">*</span>
                               </label>
-                            </div>
-                            <div className="input-group mb-3">
                               <input
                                 type={"date"}
                                 name="passportExDate"
@@ -2782,8 +2769,8 @@ const LeftSide = () => {
                                   );
                                 }}
                                 value={(p.passportExDate)}
-                                min={ISODateFormatter(new Date(Database?.tripTypeModify ===
-                                  "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate))}
+                                min={ISODateFormatter(add(new Date(Database?.tripTypeModify ===
+                                  "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate),{months: 6}))}
                                 autoComplete="off"
                                 placeholder="Passport Expaire Date"
                                 pattern="\d{4}-\d{2}-\d{2}"

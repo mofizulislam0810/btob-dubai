@@ -2408,11 +2408,11 @@ const Ticket = () => {
                                       <>
                                         <tr>
                                           <td className="text-start">Adult</td>
-                                          <td>{item.basePriceEdited > 0 ? item.basePriceEdited : item.basePrice}</td>
-                                          <td>{item.taxEdited > 0 ? item.taxEdited : item.tax}</td>
+                                          <td>{item.basePriceEdited > 0 ? item.basePriceEdited.toLocaleString("en-US") : item.basePrice.toLocaleString("en-US")}</td>
+                                          <td>{item.taxEdited > 0 ? item.taxEdited.toLocaleString("en-US") : item.tax.toLocaleString("en-US")}</td>
 
-                                          <td>{item.ait}</td>
-                                          <td>{item.discountEdited > 0 ? item.discountEdited : item.discount}</td>
+                                          <td>{item.ait.toLocaleString("en-US")}</td>
+                                          <td>{item.discountEdited > 0 ? item.discountEdited.toLocaleString("en-US") : item.discount.toLocaleString("en-US")}</td>
                                           <td>{item.passengerCount}</td>
                                           <td className="fw-bold">
                                             {item.currencyName}{" "}
@@ -2427,11 +2427,11 @@ const Ticket = () => {
                                       <>
                                         <tr>
                                           <td className="text-start">Child</td>
-                                          <td>{item.basePriceEdited > 0 ? item.basePriceEdited : item.basePrice}</td>
-                                          <td>{item.taxEdited > 0 ? item.taxEdited : item.tax}</td>
+                                          <td>{item.basePriceEdited > 0 ? item.basePriceEdited.toLocaleString("en-US") : item.basePrice.toLocaleString("en-US")}</td>
+                                          <td>{item.taxEdited > 0 ? item.taxEdited.toLocaleString("en-US") : item.tax.toLocaleString("en-US")}</td>
 
-                                          <td>{item.ait}</td>
-                                          <td>{item.discountEdited > 0 ? item.discountEdited : item.discount}</td>
+                                          <td>{item.ait.toLocaleString("en-US")}</td>
+                                          <td>{item.discountEdited > 0 ? item.discountEdited.toLocaleString("en-US") : item.discount.toLocaleString("en-US")}</td>
                                           <td>{item.passengerCount}</td>
                                           <td className="fw-bold">
                                             {item.currencyName}{" "}
@@ -2446,11 +2446,11 @@ const Ticket = () => {
                                       <>
                                         <tr>
                                           <td className="text-start">Infant</td>
-                                          <td>{item.basePriceEdited > 0 ? item.basePriceEdited : item.basePrice}</td>
-                                          <td>{item.taxEdited > 0 ? item.taxEdited : item.tax}</td>
+                                          <td>{item.basePriceEdited > 0 ? item.basePriceEdited.toLocaleString("en-US") : item.basePrice.toLocaleString("en-US")}</td>
+                                          <td>{item.taxEdited > 0 ? item.taxEdited.toLocaleString("en-US") : item.tax.toLocaleString("en-US")}</td>
 
-                                          <td>{item.ait}</td>
-                                          <td>{item.discountEdited > 0 ? item.discountEdited : item.discount}</td>
+                                          <td>{item.ait.toLocaleString("en-US")}</td>
+                                          <td>{item.discountEdited > 0 ? item.discountEdited.toLocaleString("en-US") : item.discount.toLocaleString("en-US")}</td>
                                           <td>{item.passengerCount}</td>
                                           <td className="fw-bold">
                                             {item.currencyName}{" "}

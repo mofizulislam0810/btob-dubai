@@ -1,11 +1,5 @@
 import axios from "axios";
-import {
-  add,
-  differenceInYears,
-  format,
-  intervalToDuration,
-  parse,
-} from "date-fns";
+import { add, differenceInYears, format, intervalToDuration, parse } from "date-fns";
 import produce from "immer";
 import $ from "jquery";
 import React, { useEffect, useState } from "react";
@@ -15,8 +9,6 @@ import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import courtries from "../../../JSON/countries.json";
 import { environment } from "../../SharePages/Utility/environment";
-import moment from "moment";
-
 import "./LeftSide.css";
 const LeftSide = () => {
   const [validityError, setValidityError] = useState(false);
@@ -35,14 +27,8 @@ const LeftSide = () => {
   const itemCodeRef = JSON.parse(localStorage.getItem("itemCodeRef"));
   const origin = searchData.origin;
   const destination = searchData.destination;
-  console.log(
-    origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : ""
-  );
-  console.log(
-    destination.match("Bangladesh") !== null
-      ? destination.match("Bangladesh")[0]
-      : ""
-  );
+  console.log(origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "");
+  console.log(destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "");
   const qtyList = searchData.qtyList;
   const adultNumber = searchData.qtyList.Adult;
   const childrenNumber = searchData.qtyList.Children;
@@ -53,32 +39,29 @@ const LeftSide = () => {
   let [passengerCNNList, setPassengerCNNList] = useState([]);
   let [passengerINFList, setPassengerINFList] = useState([]);
   const [click, setClick] = useState(false);
-  const Database = JSON.parse(localStorage.getItem("Database"));
-  console.log({ object: Database });
+  const Database = JSON.parse(localStorage.getItem("Database"))
+  console.log({ "object": Database })
   // console.log(Database?.journeyDate)
   function calculateMonth(from, to) {
-    console.log({ from, to });
+    console.log({ from, to })
     const dateFrom = parse(from, "dd/MM/yyyy", new Date());
     const dateTo = parse(to, "dd/MM/yyyy", new Date());
 
     const age = differenceInYears(dateFrom, dateTo);
-    console.log("dateFrom", dateFrom, "dateTo", dateTo, "age", age);
+    console.log("dateFrom", dateFrom, "dateTo", dateTo, "age", age)
 
     return age;
   }
   function calculateFullAge(dobFrom, dobTo) {
-    const dob1 = format(new Date(dobFrom), "dd/MM/yyyy");
-    const dob2 = format(new Date(dobTo), "dd/MM/yyyy");
+    const dob1 = format(new Date(dobFrom), 'dd/MM/yyyy');
+    const dob2 = format(new Date(dobTo), 'dd/MM/yyyy')
     const birthDateStart = parse(dob1, "dd/MM/yyyy", new Date());
     const birthDateEnd = parse(dob2, "dd/MM/yyyy", new Date());
 
-    const { years, months, days } = intervalToDuration({
-      start: birthDateStart,
-      end: birthDateEnd,
-    });
+    const { years, months, days } = intervalToDuration({ start: birthDateStart, end: birthDateEnd });
     if (years < 1 && months < 6 && days <= 31) {
-      return true;
-    } else return false;
+      return true
+    } else return false
   }
   // console.log('- using intervalToDuration: ', calculateFullAge(Database?.journeyDate, Database?.returnDate));
 
@@ -244,8 +227,9 @@ const LeftSide = () => {
     return format(new Date(input), "yyyy-MM-dd");
   };
   useEffect(() => {
+
     handleGetPassengers();
-    $(document).ready(function () {});
+    $(document).ready(function () { });
   }, []);
   const handleClick = (e) => {
     if (e.target.checked) {
@@ -338,12 +322,13 @@ const LeftSide = () => {
       passportExDate: "",
       gender: "Male",
       countryCode: "BD",
-      frequentFlyerNumber: "",
+      frequentFlyerNumber: ""
     };
     adultList.push(newObj);
   }
 
   const [adult, setAdult] = useState(adultList);
+
 
   // if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
   //   adult.map((i) =>
@@ -353,6 +338,12 @@ const LeftSide = () => {
   //       : toast.error("Passport expiry date does not valid")
   //   );
   // }
+
+
+
+
+
+
 
   let dataObj = courtries.find((i) => i.name === adult[0].nationality);
   // console.log(dataObj!=undefined?dataObj.dial_code:"")
@@ -378,7 +369,7 @@ const LeftSide = () => {
       passportExDate: "",
       gender: "Male",
       countryCode: "BD",
-      frequentFlyerNumber: "",
+      frequentFlyerNumber: ""
     };
     childList.push(newObj);
   }
@@ -407,7 +398,7 @@ const LeftSide = () => {
       passportExDate: "",
       gender: "Male",
       countryCode: "BD",
-      frequentFlyerNumber: "",
+      frequentFlyerNumber: ""
     };
     infantList.push(newObj);
   }
@@ -423,7 +414,7 @@ const LeftSide = () => {
       email: "",
       mobailCode: "+88",
       mobailNumber: "",
-      nationality: "BD",
+      nationality: "BD"
     },
   ];
   const [contact, setContact] = useState(contactDetail);
@@ -443,6 +434,8 @@ const LeftSide = () => {
   //       : toast.error("Passport expiry date does not valid")
   //   );
   // }
+
+
 
   // if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
   //   infant.map((i) =>
@@ -471,12 +464,15 @@ const LeftSide = () => {
   //   );
   // }
 
+
+
+
   const bookingData = (e) => {
     e.preventDefault();
     // infant.map((item,index)=>{
-    //   const ageInYears = moment().diff(moment(item.date+'/'+item.month+'/'+item.year, "DD/MM/YYYY"), 'months');
-    //   console.log(ageInYears);
-    //   if (ageInYears > 24) {
+    //   const ageInYears = moment().diff(moment(item.date+'/'+item.month+'/'+item.year, "DD/MM/YYYY"), 'months'); 
+    //   console.log(ageInYears);      
+    //   if (ageInYears > 24) { 
     //     toast.error(`Infant ${index+1} age is more than 2 years!`);
     //     return;
     //   }
@@ -491,17 +487,7 @@ const LeftSide = () => {
     };
 
     adult.map((item) => {
-      let idObj = passengerADTList.find(
-        (f) =>
-          f.title + " " + f.first + " " + f.middle + " " + f.last ===
-          item.title +
-            " " +
-            item.firstName +
-            " " +
-            item.middleName +
-            " " +
-            item.lastName
-      );
+      let idObj = passengerADTList.find(f => (f.title + " " + f.first + " " + f.middle + " " + f.last) === (item.title + " " + item.firstName + " " + item.middleName + " " + item.lastName));
       let passengerObj = {
         nameElement: {
           title: item.title,
@@ -533,18 +519,17 @@ const LeftSide = () => {
         },
         passengerType: "ADT",
         gender: item.gender,
-        dateOfBirth:
-          (origin.match("Bangladesh") !== null
-            ? origin.match("Bangladesh")[0]
-            : "") &&
+        dateOfBirth: (origin.match("Bangladesh") !== null
+          ? origin.match("Bangladesh")[0]
+          : "") &&
           (destination.match("Bangladesh") !== null
             ? destination.match("Bangladesh")[0]
             : "") === "Bangladesh"
-            ? ""
-            : item.dateOfBirth,
+          ? ""
+          : item.dateOfBirth,
         passengerKey: idObj !== undefined ? String(idObj.id) : "0",
         isLeadPassenger: true,
-        isQuickPassenger: isChecked,
+        isQuickPassenger: isChecked
       };
       sendObj.passengerInfoes.push(passengerObj);
     });
@@ -584,13 +569,13 @@ const LeftSide = () => {
         dateOfBirth: item.dateOfBirth,
         passengerKey: "0",
         isLeadPassenger: true,
-        isQuickPassenger: isChecked,
+        isQuickPassenger: isChecked
       };
       sendObj.passengerInfoes.push(passengerObj);
     });
 
     infant.map((item) => {
-      console.log({ year: item.year });
+      console.log({ "year": item.year })
       let passengerObj = {
         nameElement: {
           title: item.title,
@@ -625,7 +610,7 @@ const LeftSide = () => {
         dateOfBirth: item.dateOfBirth,
         passengerKey: "0",
         isLeadPassenger: true,
-        isQuickPassenger: isChecked,
+        isQuickPassenger: isChecked
       };
       sendObj.passengerInfoes.push(passengerObj);
     });
@@ -713,7 +698,7 @@ const LeftSide = () => {
             if (response.data.item2?.isSuccess === true) {
               console.log(response);
               setBookData(response);
-              sessionStorage.setItem("bookData", JSON.stringify(response));
+              sessionStorage.setItem('bookData', JSON.stringify(response));
               setLoading(false);
               navigate("/successbooking");
             } else {
@@ -734,10 +719,12 @@ const LeftSide = () => {
     e.preventDefault();
   };
 
+
+
   // let phoneCode = courtries.filter((item) => item.code === contact[0].nationality);
   // console.log(courtries.filter((item) => item.code === contact[0].nationality)[0].dial_code);
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     if (event.target.checked) {
       setIsChecked(true);
     } else {
@@ -746,18 +733,6 @@ const LeftSide = () => {
   };
 
   // console.log(isChecked);
-
-  $('input[type="date"]')
-    .on("change", function () {
-      this.setAttribute(
-        "data-date",
-        moment(this.value, "YYYY-MM-DD").format(
-          this.getAttribute("data-date-format")
-        )
-      );
-    })
-    .trigger("change");
-
   return (
     <form onSubmit={bookingData}>
       <div className="col-lg-12">
@@ -814,13 +789,10 @@ const LeftSide = () => {
                                   // v[index].year = Number(item.dateOfBirth == null ? "" :
                                   //   item.dateOfBirth.split("-")[0]
                                   // );
-                                  v[index].dateOfBirth = ISODateFormatter(
-                                    item?.dateOfBirth
-                                  );
+                                  v[index].dateOfBirth = ISODateFormatter(item?.dateOfBirth);
                                   v[index].nationality = item.nationality;
                                   v[index].passportNumber = item.documentNumber;
-                                  v[index].issuingCountry =
-                                    item.documentIssuingCountry;
+                                  v[index].issuingCountry = item.documentIssuingCountry;
                                   // v[index].passportDate = Number(
                                   //   item.expireDate == null ? "" : item.expireDate.split("-")[2].split("T")[0]
                                   // );
@@ -830,9 +802,7 @@ const LeftSide = () => {
                                   // v[index].passportYear = Number(
                                   //   item.expireDate == null ? "" : item.expireDate.split("-")[0]
                                   // );
-                                  v[index].passportExDate = ISODateFormatter(
-                                    item?.expireDate
-                                  );
+                                  v[index].passportExDate = ISODateFormatter(item?.expireDate);
                                   v[index].gender = item.gender;
                                   v[index].phoneNumber = item.phone;
                                   v[index].passportCopy = item.passportCopy;
@@ -871,7 +841,8 @@ const LeftSide = () => {
                       <div className="col-md-4">
                         <div className="form-group">
                           <label className="form-label float-start fw-bold">
-                            First name <span className="text-danger">*</span>
+                            First name{" "}
+                            <span className="text-danger">*</span>
                           </label>
                           <div className="input-group mb-3">
                             <input
@@ -904,9 +875,7 @@ const LeftSide = () => {
                               autoComplete="off"
                               spellcheck="false"
                             />
-                            {validityError && (
-                              <div className="validation"></div>
-                            )}
+                            {validityError && (<div className="validation"></div>)}
                           </div>
                         </div>
                       </div>
@@ -916,7 +885,8 @@ const LeftSide = () => {
                             className="form-label float-start fw-bold"
                             type=""
                           >
-                            Last name <span className="text-danger">*</span>
+                            Last name{" "}
+                            <span className="text-danger">*</span>
                           </label>
                           <input
                             type="text"
@@ -940,17 +910,13 @@ const LeftSide = () => {
                             autoComplete="off"
                             spellcheck="false"
                           />
-                          {validityError && <div className="validation"></div>}
+                          {validityError && (<div className="validation"></div>)}
                         </div>
                       </div>
                       <div className="col-lg-4">
                         <div className="form-group">
                           <label
-                            className={
-                              adult[index].gender === "Female"
-                                ? "form-label float-start fw-bold mb-0"
-                                : "form-label float-start fw-bold"
-                            }
+                            className={adult[index].gender === "Female" ? "form-label float-start fw-bold mb-0" : "form-label float-start fw-bold"}
                             type=""
                           >
                             Gender <span className="text-danger">*</span>
@@ -1043,9 +1009,9 @@ const LeftSide = () => {
                     {(origin.match("Bangladesh") !== null
                       ? origin.match("Bangladesh")[0]
                       : "") &&
-                    (destination.match("Bangladesh") !== null
-                      ? destination.match("Bangladesh")[0]
-                      : "") === "Bangladesh" ? (
+                      (destination.match("Bangladesh") !== null
+                        ? destination.match("Bangladesh")[0]
+                        : "") === "Bangladesh" ? (
                       <></>
                     ) : (
                       <>
@@ -1062,8 +1028,6 @@ const LeftSide = () => {
                               <div className="input-group mb-3">
                                 <input
                                   type={"date"}
-                                  data-date=""
-                                  data-date-format="DD/MM/YYYY"
                                   name="dateOfBirth"
                                   className="form-control rounded"
                                   id="dateOfBirth"
@@ -1071,57 +1035,23 @@ const LeftSide = () => {
                                     const date = e.target.value;
                                     setAdult((ob) =>
                                       produce(ob, (v) => {
-                                        console.log({ v });
+                                        console.log({ v })
                                         v[index].dateOfBirth = date;
                                       })
                                     );
                                   }}
-                                  value={
-                                    p.dateOfBirth
-                                      ? p.dateOfBirth
-                                      : ISODateFormatter(
-                                          add(
-                                            new Date(
-                                              Database?.tripTypeModify ===
-                                                "Round Trip" &&
-                                              calculateFullAge(
-                                                Database?.journeyDate,
-                                                Database?.returnDate
-                                              )
-                                                ? Database?.returnDate
-                                                : Database?.journeyDate
-                                            ),
-                                            {
-                                              years: -12,
-                                            }
-                                          )
-                                        )
-                                  }
-                                  max={ISODateFormatter(
-                                    add(
-                                      new Date(
-                                        Database?.tripTypeModify ===
-                                          "Round Trip" &&
-                                        calculateFullAge(
-                                          Database?.journeyDate,
-                                          Database?.returnDate
-                                        )
-                                          ? Database?.returnDate
-                                          : Database?.journeyDate
-                                      ),
-                                      {
-                                        years: -12,
-                                      }
-                                    )
-                                  )}
+
+                                  value={p?.dateOfBirth}
+                                  max={ISODateFormatter(add(new Date(Database?.tripTypeModify ===
+                                    "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), {
+                                    years: -12,
+                                  }))}
                                   required
                                   autoComplete="off"
                                   placeholder="Date of Birth"
                                   pattern="\d{4}-\d{2}-\d{2}"
                                 />
-                                {validityError && (
-                                  <div className="validation"></div>
-                                )}
+                                {validityError && (<div className="validation"></div>)}
                               </div>
                               {/* <div className="input-group mb-3 d-flex">
                                 <select
@@ -1240,7 +1170,8 @@ const LeftSide = () => {
                                     const nationality = e.target.value;
                                     setAdult((ob) =>
                                       produce(ob, (v) => {
-                                        v[index].nationality = nationality;
+                                        v[index].nationality =
+                                          nationality;
                                         v[index].countryCode = nationality;
                                       })
                                     );
@@ -1252,7 +1183,10 @@ const LeftSide = () => {
                                   </option>
                                   {courtries.map((item, index) => {
                                     return (
-                                      <option key={index} value={item.code}>
+                                      <option
+                                        key={index}
+                                        value={item.code}
+                                      >
                                         {item.name}
                                       </option>
                                     );
@@ -1285,16 +1219,16 @@ const LeftSide = () => {
                               >
                                 <option value="">Not Required</option>
                                 <option value="WCHR">
-                                  Passenger can not walk short distance up or
-                                  down stairs.
+                                  Passenger can not walk short distance up
+                                  or down stairs.
                                 </option>
                                 <option value="WCHS">
-                                  Passenger can not walk short distance, but not
-                                  up or down stairs
+                                  Passenger can not walk short distance,
+                                  but not up or down stairs
                                 </option>
                                 <option value="WCHC">
-                                  Passenger cannot walk any distance and will
-                                  require the aisle chair to board.
+                                  Passenger cannot walk any distance and
+                                  will require the aisle chair to board.
                                 </option>
                                 <option value="WCOB">
                                   On-board aisle wheelchair requested
@@ -1336,7 +1270,8 @@ const LeftSide = () => {
                                   const passportNumber = e.target.value;
                                   setAdult((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportNumber = passportNumber;
+                                      v[index].passportNumber =
+                                        passportNumber;
                                     })
                                   );
                                 }}
@@ -1344,9 +1279,8 @@ const LeftSide = () => {
                                 autoComplete="off"
                                 spellcheck="false"
                               />
-                              {validityError && (
-                                <div className="validation"></div>
-                              )}
+                              {validityError && (<div className="validation"></div>)}
+
                             </div>
                           </div>
                           <div className="col-lg-4">
@@ -1366,14 +1300,17 @@ const LeftSide = () => {
                                   const issuingCountry = e.target.value;
                                   setAdult((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].issuingCountry = issuingCountry;
+                                      v[index].issuingCountry =
+                                        issuingCountry;
                                     })
                                   );
                                 }}
                                 value={p.issuingCountry}
                                 required
                               >
-                                <option value="BD">Bangladesh</option>
+                                <option value="BD">
+                                  Bangladesh
+                                </option>
                                 {courtries.map((item, index) => {
                                   return (
                                     <option key={index} value={item.code}>
@@ -1502,8 +1439,6 @@ const LeftSide = () => {
                             <div className="mb-3">
                               <input
                                 type={"date"}
-                                data-date=""
-                                data-date-format="DD/MM/YYYY"
                                 id={`passportExDate_${p.id}`}
                                 name={`passportExDate_${p.id}`}
                                 className="form-control rounded"
@@ -1511,46 +1446,20 @@ const LeftSide = () => {
                                   const passportDate = e.target.value;
                                   setAdult((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportExDate = passportDate;
+                                      v[index].passportExDate =
+                                        passportDate;
                                     })
                                   );
                                 }}
-                                value={
-                                  p.passportExDate
-                                    ? p.passportExDate
-                                    : ISODateFormatter(
-                                        new Date(
-                                          Database?.tripTypeModify ===
-                                            "Round Trip" &&
-                                          calculateFullAge(
-                                            Database?.journeyDate,
-                                            Database?.returnDate
-                                          )
-                                            ? Database?.returnDate
-                                            : Database?.journeyDate
-                                        )
-                                      )
-                                }
-                                min={ISODateFormatter(
-                                  new Date(
-                                    Database?.tripTypeModify === "Round Trip" &&
-                                    calculateFullAge(
-                                      Database?.journeyDate,
-                                      Database?.returnDate
-                                    )
-                                      ? Database?.returnDate
-                                      : Database?.journeyDate
-                                  )
-                                )}
+                                value={(p.passportExDate)}
+                                min={ISODateFormatter(new Date(Database?.tripTypeModify ===
+                                  "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate))}
                                 autoComplete="off"
                                 placeholder="Passport Expaire Date"
                                 pattern="\d{4}-\d{2}-\d{2}"
-                                max="9999-12-31"
                                 required
                               />
-                              {validityError && (
-                                <div className="validation"></div>
-                              )}
+                              {validityError && (<div className="validation"></div>)}
                             </div>
                           </div>
                         </div>
@@ -1574,8 +1483,7 @@ const LeftSide = () => {
                               const frequentFlyerNumber = e.target.value;
                               setAdult((ob) =>
                                 produce(ob, (v) => {
-                                  v[index].frequentFlyerNumber =
-                                    frequentFlyerNumber;
+                                  v[index].frequentFlyerNumber = frequentFlyerNumber;
                                 })
                               );
                             }}
@@ -1690,9 +1598,7 @@ const LeftSide = () => {
                                   // v[index].year = Number(item.dateOfBirth == null ? "" :
                                   //   item.dateOfBirth.split("-")[0]
                                   // );
-                                  v[index].dateOfBirth = ISODateFormatter(
-                                    item?.dateOfBirth
-                                  );
+                                  v[index].dateOfBirth = ISODateFormatter(item?.dateOfBirth);
                                   v[index].nationality = item.nationality;
                                   v[index].passportNumber = item.documentNumber;
                                   v[index].issuingCountry =
@@ -1706,9 +1612,7 @@ const LeftSide = () => {
                                   // v[index].passportYear = Number(
                                   //   item.expireDate.split("-")[0]
                                   // );
-                                  v[index].passportExDate = ISODateFormatter(
-                                    item?.expireDate
-                                  );
+                                  v[index].passportExDate = ISODateFormatter(item?.expireDate);
                                   v[index].gender = item.gender;
                                   v[index].phoneNumber = item.phone;
                                   v[index].passportCopy = item.passportCopy;
@@ -1722,7 +1626,8 @@ const LeftSide = () => {
                       <div className="col-md-4">
                         <div className="form-group">
                           <label className="form-label float-start fw-bold">
-                            First name <span className="text-danger">*</span>
+                            First name{" "}
+                            <span className="text-danger">*</span>
                           </label>
                           <div className="input-group mb-3">
                             <input
@@ -1754,16 +1659,15 @@ const LeftSide = () => {
                               autoComplete="off"
                               spellcheck="false"
                             />
-                            {validityError && (
-                              <div className="validation"></div>
-                            )}
+                            {validityError && (<div className="validation"></div>)}
                           </div>
                         </div>
                       </div>
                       <div className="col-md-4">
                         <div className="form-group">
                           <label className="form-label float-start fw-bold">
-                            Last name <span className="text-danger">*</span>
+                            Last name{" "}
+                            <span className="text-danger">*</span>
                           </label>
                           <input
                             type="text"
@@ -1786,7 +1690,7 @@ const LeftSide = () => {
                             autoComplete="off"
                             spellcheck="false"
                           />
-                          {validityError && <div className="validation"></div>}
+                          {validityError && (<div className="validation"></div>)}
                         </div>
                       </div>
                       <div className="col-lg-4">
@@ -1839,8 +1743,6 @@ const LeftSide = () => {
                           <div className="input-group mb-3">
                             <input
                               type={"date"}
-                              data-date=""
-                              data-date-format="DD/MM/YYYY"
                               id={`dateOfBirth_${p.id}`}
                               name={`dateOfBirth_${p.id}`}
                               className="form-control rounded"
@@ -1848,72 +1750,26 @@ const LeftSide = () => {
                                 const date = e.target.value;
                                 setChild((ob) =>
                                   produce(ob, (v) => {
-                                    console.log({ v });
+                                    console.log({ v })
                                     v[index].dateOfBirth = date;
                                   })
                                 );
                               }}
-                              value={
-                                p.dateOfBirth
-                                  ? p.dateOfBirth
-                                  : ISODateFormatter(
-                                      add(
-                                        new Date(
-                                          Database?.tripTypeModify ===
-                                            "Round Trip" &&
-                                          calculateFullAge(
-                                            Database?.journeyDate,
-                                            Database?.returnDate
-                                          )
-                                            ? Database?.returnDate
-                                            : Database?.journeyDate
-                                        ),
-                                        {
-                                          years: -12,
-                                        }
-                                      )
-                                    )
-                              }
-                              min={ISODateFormatter(
-                                add(
-                                  new Date(
-                                    Database?.tripTypeModify === "Round Trip" &&
-                                    calculateFullAge(
-                                      Database?.journeyDate,
-                                      Database?.returnDate
-                                    )
-                                      ? Database?.returnDate
-                                      : Database?.journeyDate
-                                  ),
-                                  {
-                                    years: -12,
-                                  }
-                                )
-                              )}
-                              max={ISODateFormatter(
-                                add(
-                                  new Date(
-                                    Database?.tripTypeModify === "Round Trip" &&
-                                    calculateFullAge(
-                                      Database?.journeyDate,
-                                      Database?.returnDate
-                                    )
-                                      ? Database?.returnDate
-                                      : Database?.journeyDate
-                                  ),
-                                  {
-                                    years: -2,
-                                  }
-                                )
-                              )}
+                              value={p?.dateOfBirth}
+                              min={ISODateFormatter(add(new Date(Database?.tripTypeModify ===
+                                "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), {
+                                years: -12,
+                              }))}
+                              max={ISODateFormatter(add(new Date(Database?.tripTypeModify ===
+                                "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), {
+                                years: -2,
+                              }))}
                               required
                               autoComplete="off"
                               placeholder="Date of Birth"
                               pattern="\d{4}-\d{2}-\d{2}"
                             />
-                            {validityError && (
-                              <div className="validation"></div>
-                            )}
+                            {validityError && (<div className="validation"></div>)}
                           </div>
                           {/* <div className="input-group mb-3 d-flex">
                             <select
@@ -2028,8 +1884,7 @@ const LeftSide = () => {
                               const frequentFlyerNumber = e.target.value;
                               setChild((ob) =>
                                 produce(ob, (v) => {
-                                  v[index].frequentFlyerNumber =
-                                    frequentFlyerNumber;
+                                  v[index].frequentFlyerNumber = frequentFlyerNumber;
                                 })
                               );
                             }}
@@ -2042,9 +1897,9 @@ const LeftSide = () => {
                       {(origin.match("Bangladesh") !== null
                         ? origin.match("Bangladesh")[0]
                         : "") &&
-                      (destination.match("Bangladesh") !== null
-                        ? destination.match("Bangladesh")[0]
-                        : "") === "Bangladesh" ? (
+                        (destination.match("Bangladesh") !== null
+                          ? destination.match("Bangladesh")[0]
+                          : "") === "Bangladesh" ? (
                         <></>
                       ) : (
                         <>
@@ -2065,7 +1920,8 @@ const LeftSide = () => {
                                     const nationality = e.target.value;
                                     setChild((ob) =>
                                       produce(ob, (v) => {
-                                        v[index].nationality = nationality;
+                                        v[index].nationality =
+                                          nationality;
                                         v[index].countryCode = nationality;
                                       })
                                     );
@@ -2073,10 +1929,15 @@ const LeftSide = () => {
                                   value={p.nationality}
                                   required
                                 >
-                                  <option value="BD">Bangladesh</option>
+                                  <option value="BD">
+                                    Bangladesh
+                                  </option>
                                   {courtries.map((item, index) => {
                                     return (
-                                      <option key={index} value={item.code}>
+                                      <option
+                                        key={index}
+                                        value={item.code}
+                                      >
                                         {item.name}
                                       </option>
                                     );
@@ -2145,9 +2006,9 @@ const LeftSide = () => {
                     {(origin.match("Bangladesh") !== null
                       ? origin.match("Bangladesh")[0]
                       : "") &&
-                    (destination.match("Bangladesh") !== null
-                      ? destination.match("Bangladesh")[0]
-                      : "") === "Bangladesh" ? (
+                      (destination.match("Bangladesh") !== null
+                        ? destination.match("Bangladesh")[0]
+                        : "") === "Bangladesh" ? (
                       <></>
                     ) : (
                       <>
@@ -2172,7 +2033,8 @@ const LeftSide = () => {
                                   const passportNumber = e.target.value;
                                   setChild((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportNumber = passportNumber;
+                                      v[index].passportNumber =
+                                        passportNumber;
                                     })
                                   );
                                 }}
@@ -2180,9 +2042,7 @@ const LeftSide = () => {
                                 autoComplete="off"
                                 spellcheck="false"
                               />
-                              {validityError && (
-                                <div className="validation"></div>
-                              )}
+                              {validityError && (<div className="validation"></div>)}
                             </div>
                           </div>
                           <div className="col-lg-4">
@@ -2202,14 +2062,17 @@ const LeftSide = () => {
                                   const issuingCountry = e.target.value;
                                   setChild((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].issuingCountry = issuingCountry;
+                                      v[index].issuingCountry =
+                                        issuingCountry;
                                     })
                                   );
                                 }}
                                 value={p.issuingCountry}
                                 required
                               >
-                                <option value="BD">Bangladesh</option>
+                                <option value="BD">
+                                  Bangladesh
+                                </option>
                                 {courtries.map((item, index) => {
                                   return (
                                     <option key={index} value={item.code}>
@@ -2233,54 +2096,26 @@ const LeftSide = () => {
                             <div className="input-group mb-3">
                               <input
                                 type={"date"}
-                                data-date=""
-                                data-date-format="DD/MM/YYYY"
                                 name="passportExDate"
                                 className="form-control rounded"
                                 onChange={(e) => {
                                   const passportDate = e.target.value;
                                   setChild((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportExDate = passportDate;
+                                      v[index].passportExDate =
+                                        passportDate;
                                     })
                                   );
                                 }}
-                                value={
-                                  p.passportExDate
-                                    ? p.passportExDate
-                                    : ISODateFormatter(
-                                        new Date(
-                                          Database?.tripTypeModify ===
-                                            "Round Trip" &&
-                                          calculateFullAge(
-                                            Database?.journeyDate,
-                                            Database?.returnDate
-                                          )
-                                            ? Database?.returnDate
-                                            : Database?.journeyDate
-                                        )
-                                      )
-                                }
-                                min={ISODateFormatter(
-                                  new Date(
-                                    Database?.tripTypeModify === "Round Trip" &&
-                                    calculateFullAge(
-                                      Database?.journeyDate,
-                                      Database?.returnDate
-                                    )
-                                      ? Database?.returnDate
-                                      : Database?.journeyDate
-                                  )
-                                )}
+                                value={(p.passportExDate)}
+                                min={ISODateFormatter(new Date(Database?.tripTypeModify ===
+                                  "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate))}
                                 autoComplete="off"
                                 placeholder="Passport Expaire Date"
                                 pattern="\d{4}-\d{2}-\d{2}"
-                                max="9999-12-31"
                                 required
                               />
-                              {validityError && (
-                                <div className="validation"></div>
-                              )}
+                              {validityError && (<div className="validation"></div>)}
                             </div>
                             {/* <div className="input-group mb-3 d-flex">
                               <select
@@ -2494,9 +2329,7 @@ const LeftSide = () => {
                                   // v[index].year = Number(item.dateOfBirth == null ? "" :
                                   //   item.dateOfBirth.split("-")[0]
                                   // );
-                                  v[index].dateOfBirth = ISODateFormatter(
-                                    item?.dateOfBirth
-                                  );
+                                  v[index].dateOfBirth = ISODateFormatter(item?.dateOfBirth);
                                   v[index].nationality = item.nationality;
                                   v[index].passportNumber = item.documentNumber;
                                   v[index].issuingCountry =
@@ -2510,9 +2343,7 @@ const LeftSide = () => {
                                   // v[index].passportYear = Number(
                                   //   item.expireDate.split("-")[0]
                                   // );
-                                  v[index].passportExDate = ISODateFormatter(
-                                    item?.expireDate
-                                  );
+                                  v[index].passportExDate = ISODateFormatter(item?.expireDate);
                                   v[index].gender = item.gender;
                                   v[index].phoneNumber = item.phone;
                                   v[index].passportCopy = item.passportCopy;
@@ -2526,7 +2357,8 @@ const LeftSide = () => {
                       <div className="col-md-4">
                         <div className="form-group">
                           <label className="form-label float-start fw-bold">
-                            First name <span className="text-danger">*</span>
+                            First name{" "}
+                            <span className="text-danger">*</span>
                           </label>
                           <div className="input-group mb-3">
                             <input
@@ -2558,16 +2390,15 @@ const LeftSide = () => {
                               autoComplete="off"
                               spellcheck="false"
                             />
-                            {validityError && (
-                              <div className="validation"></div>
-                            )}
+                            {validityError && (<div className="validation"></div>)}
                           </div>
                         </div>
                       </div>
                       <div className="col-md-4">
                         <div className="form-group">
                           <label className="form-label float-start fw-bold">
-                            Last name <span className="text-danger">*</span>
+                            Last name{" "}
+                            <span className="text-danger">*</span>
                           </label>
                           <input
                             type="text"
@@ -2590,7 +2421,7 @@ const LeftSide = () => {
                             autoComplete="off"
                             spellcheck="false"
                           />
-                          {validityError && <div className="validation"></div>}
+                          {validityError && (<div className="validation"></div>)}
                         </div>
                       </div>
                       <div className="col-lg-4">
@@ -2643,8 +2474,6 @@ const LeftSide = () => {
                           <div className="input-group mb-3 d-flex">
                             <input
                               type={"date"}
-                              data-date=""
-                              data-date-format="DD/MM/YYYY"
                               name="dateOfBirth"
                               className="form-control rounded"
                               id="dateOfBirth"
@@ -2652,36 +2481,22 @@ const LeftSide = () => {
                                 const date = e.target.value;
                                 setInfant((ob) =>
                                   produce(ob, (v) => {
-                                    console.log({ v });
+                                    console.log({ v })
                                     v[index].dateOfBirth = date;
                                   })
                                 );
                               }}
-                              value={
-                                p.dateOfBirth
-                                  ? p.dateOfBirth
-                                  : ISODateFormatter(
-                                      add(new Date(Database?.journeyDate), {
-                                        years: -2,
-                                      })
-                                    )
-                              }
-                              min={ISODateFormatter(
-                                add(new Date(Database?.journeyDate), {
-                                  years: -2,
-                                })
-                              )}
-                              max={ISODateFormatter(
-                                new Date(Database?.journeyDate)
-                              )}
+                              value={p?.dateOfBirth}
+                              min={ISODateFormatter(add(new Date(Database?.journeyDate), {
+                                years: -2,
+                              }))}
+                              max={ISODateFormatter(new Date(Database?.journeyDate))}
                               required
                               autoComplete="off"
                               placeholder="Date of Birth"
                               pattern="\d{4}-\d{2}-\d{2}"
                             />
-                            {validityError && (
-                              <div className="validation"></div>
-                            )}
+                            {validityError && (<div className="validation"></div>)}
                           </div>
                           {/* <div className="input-group mb-3 d-flex">
                             <select
@@ -2796,8 +2611,7 @@ const LeftSide = () => {
                               const frequentFlyerNumber = e.target.value;
                               setInfant((ob) =>
                                 produce(ob, (v) => {
-                                  v[index].frequentFlyerNumber =
-                                    frequentFlyerNumber;
+                                  v[index].frequentFlyerNumber = frequentFlyerNumber;
                                 })
                               );
                             }}
@@ -2810,9 +2624,9 @@ const LeftSide = () => {
                       {(origin.match("Bangladesh") !== null
                         ? origin.match("Bangladesh")[0]
                         : "") &&
-                      (destination.match("Bangladesh") !== null
-                        ? destination.match("Bangladesh")[0]
-                        : "") === "Bangladesh" ? (
+                        (destination.match("Bangladesh") !== null
+                          ? destination.match("Bangladesh")[0]
+                          : "") === "Bangladesh" ? (
                         <></>
                       ) : (
                         <>
@@ -2833,7 +2647,8 @@ const LeftSide = () => {
                                     const nationality = e.target.value;
                                     setInfant((ob) =>
                                       produce(ob, (v) => {
-                                        v[index].nationality = nationality;
+                                        v[index].nationality =
+                                          nationality;
                                         v[index].countryCode = nationality;
                                       })
                                     );
@@ -2841,10 +2656,15 @@ const LeftSide = () => {
                                   value={p.nationality}
                                   required
                                 >
-                                  <option value="BD">Bangladesh</option>
+                                  <option value="BD">
+                                    Bangladesh
+                                  </option>
                                   {courtries.map((item, index) => {
                                     return (
-                                      <option key={index} value={item.code}>
+                                      <option
+                                        key={index}
+                                        value={item.code}
+                                      >
                                         {item.name}
                                       </option>
                                     );
@@ -2860,9 +2680,9 @@ const LeftSide = () => {
                     {(origin.match("Bangladesh") !== null
                       ? origin.match("Bangladesh")[0]
                       : "") &&
-                    (destination.match("Bangladesh") !== null
-                      ? destination.match("Bangladesh")[0]
-                      : "") === "Bangladesh" ? (
+                      (destination.match("Bangladesh") !== null
+                        ? destination.match("Bangladesh")[0]
+                        : "") === "Bangladesh" ? (
                       <></>
                     ) : (
                       <>
@@ -2887,7 +2707,8 @@ const LeftSide = () => {
                                   const passportNumber = e.target.value;
                                   setInfant((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportNumber = passportNumber;
+                                      v[index].passportNumber =
+                                        passportNumber;
                                     })
                                   );
                                 }}
@@ -2895,9 +2716,7 @@ const LeftSide = () => {
                                 autoComplete="off"
                                 spellcheck="false"
                               />
-                              {validityError && (
-                                <div className="validation"></div>
-                              )}
+                              {validityError && (<div className="validation"></div>)}
                             </div>
                           </div>
                           <div className="col-lg-4">
@@ -2917,14 +2736,17 @@ const LeftSide = () => {
                                   const issuingCountry = e.target.value;
                                   setInfant((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].issuingCountry = issuingCountry;
+                                      v[index].issuingCountry =
+                                        issuingCountry;
                                     })
                                   );
                                 }}
                                 value={p.issuingCountry}
                                 required
                               >
-                                <option value="BD">Bangladesh</option>
+                                <option value="BD">
+                                  Bangladesh
+                                </option>
                                 {courtries.map((item, index) => {
                                   return (
                                     <option key={index} value={item.code}>
@@ -2948,54 +2770,27 @@ const LeftSide = () => {
                             <div className="input-group mb-3">
                               <input
                                 type={"date"}
-                                data-date=""
-                                data-date-format="DD/MM/YYYY"
                                 name="passportExDate"
                                 className="form-control rounded"
                                 onChange={(e) => {
                                   const passportDate = e.target.value;
                                   setInfant((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].passportExDate = passportDate;
+                                      v[index].passportExDate =
+                                        passportDate;
                                     })
                                   );
                                 }}
-                                value={
-                                  p.passportExDate
-                                    ? p.passportExDate
-                                    : ISODateFormatter(
-                                        new Date(
-                                          Database?.tripTypeModify ===
-                                            "Round Trip" &&
-                                          calculateFullAge(
-                                            Database?.journeyDate,
-                                            Database?.returnDate
-                                          )
-                                            ? Database?.returnDate
-                                            : Database?.journeyDate
-                                        )
-                                      )
-                                }
-                                min={ISODateFormatter(
-                                  new Date(
-                                    Database?.tripTypeModify === "Round Trip" &&
-                                    calculateFullAge(
-                                      Database?.journeyDate,
-                                      Database?.returnDate
-                                    )
-                                      ? Database?.returnDate
-                                      : Database?.journeyDate
-                                  )
-                                )}
+                                value={(p.passportExDate)}
+                                min={ISODateFormatter(new Date(Database?.tripTypeModify ===
+                                  "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate))}
                                 autoComplete="off"
                                 placeholder="Passport Expaire Date"
                                 pattern="\d{4}-\d{2}-\d{2}"
-                                max="9999-12-31"
                                 required
                               />
-                              {validityError && (
-                                <div className="validation"></div>
-                              )}
+                              {validityError && (<div className="validation"></div>)}
+
                             </div>
                             {/* <div className="input-group mb-3 d-flex">
                               <select
@@ -3172,7 +2967,7 @@ const LeftSide = () => {
                     <input
                       class="form-check-input"
                       type="checkbox"
-                      style={{ cursor: "pointer" }}
+                      style={{ cursor: 'pointer' }}
                       value={isChecked}
                       id="flexCheckDefault100"
                       onChange={handleChange}
@@ -3247,9 +3042,7 @@ const LeftSide = () => {
                                 setContact((ob) =>
                                   produce(ob, (v) => {
                                     v[index].nationality = nationality;
-                                    v[index].mobailCode = courtries.filter(
-                                      (item) => item.code === nationality
-                                    )[0].dial_code;
+                                    v[index].mobailCode = courtries.filter((item) => item.code === nationality)[0].dial_code;
                                   })
                                 );
                               }}
@@ -3281,21 +3074,7 @@ const LeftSide = () => {
                               required
                               disabled
                             >
-                              <option
-                                value={
-                                  courtries.filter(
-                                    (item) =>
-                                      item.code === contact[0].nationality
-                                  )[0].dial_code
-                                }
-                              >
-                                {
-                                  courtries.filter(
-                                    (item) =>
-                                      item.code === contact[0].nationality
-                                  )[0].dial_code
-                                }
-                              </option>
+                              <option value={courtries.filter((item) => item.code === contact[0].nationality)[0].dial_code}>{courtries.filter((item) => item.code === contact[0].nationality)[0].dial_code}</option>
                               {/* {courtries.map((item, index) => {
                                 return (
                                   <option key={index} value={item.dial_code}>
@@ -3410,14 +3189,9 @@ const LeftSide = () => {
                     id="flexCheckDefault"
                     onChange={handleClick}
                   />
-                  <label
-                    class="form-check-label font-size-checkbok"
-                    for="flexCheckDefault"
-                  >
+                  <label class="form-check-label font-size-checkbok" for="flexCheckDefault">
                     By Booking/Issuing this Ticket I agree to{" "}
-                    <Link to="/termandcondition">
-                      FirstTrip Terms & Conditions
-                    </Link>
+                    <Link to="/termandcondition">FirstTrip Terms & Conditions</Link>
                   </label>
                 </div>
               </div>

@@ -1,13 +1,14 @@
 import { Box, HStack, Icon, Text } from "@chakra-ui/react";
 import axios from "axios";
-import { add, format } from "date-fns";
+import { add } from "date-fns";
 import $ from "jquery";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { BiEdit } from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { isValidEmail } from "../../common/functions";
+import { ISODateFormatter, isValidEmail } from "../../common/functions";
 import courtries from "../../JSON/countries.json";
 import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
@@ -48,11 +49,12 @@ const QuickPassenger = () => {
   let [cityName, setCityName] = useState("");
   let [passportFileName, setPassportFileName] = useState("");
   let [visaFileName, setVisaFileName] = useState("");
-  let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
+  // let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
   let [loading, setLoading] = useState(false);
-
+  console.log({ passengerList });
   const handlePassportFileUpload = (file) => {
+    console.log({ file });
     let fileExt = file.name.split(".").pop().toLowerCase();
     if (
       fileExt === "jpg" ||
@@ -404,8 +406,8 @@ const QuickPassenger = () => {
                           <th>DOB</th>
                           <th>Gender</th>
                           <th>Passport Number</th>
-                          {/* <th>Passport Copy</th>
-                          <th>Visa Copy</th> */}
+                          <th>Passport Copy</th>
+                          <th>Visa Copy</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -438,16 +440,16 @@ const QuickPassenger = () => {
                                   : item.documentNumber}
                               </td>
 
-                              {/* <td>
+                              <td>
                                 {item.passportCopy !== null &&
-                                  item.passportCopy !== "" ? (
+                                item.passportCopy !== "" ? (
                                   <a
                                     href={
-                                      environment.baseApiURL +
-                                      `agentinfo/GetPassengerFile/${item.passportCopy}/1`
+                                      environment.s3URL + `${item.passportCopy}`
                                     }
                                     download
-                                    target="_blank" rel="noreferrer"
+                                    target="_blank"
+                                    rel="noreferrer"
                                   >
                                     Passport Copy
                                   </a>
@@ -457,21 +459,21 @@ const QuickPassenger = () => {
                               </td>
                               <td>
                                 {item.visaCopy != null &&
-                                  item.visaCopy != "" ? (
+                                item.visaCopy != "" ? (
                                   <a
                                     href={
-                                      environment.baseApiURL +
-                                      `agentinfo/GetPassengerFile/${item.visaCopy}/2`
+                                      environment.s3URL + `${item.visaCopy}`
                                     }
                                     download
-                                    target="_blank" rel="noreferrer"
+                                    target="_blank"
+                                    rel="noreferrer"
                                   >
                                     Visa Copy
                                   </a>
                                 ) : (
                                   <></>
                                 )}
-                              </td> */}
+                              </td>
                               {/* <td>
                                 <span onClick={() => handleDeleteItem(item)} className="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></span>
                               </td> */}
@@ -838,6 +840,57 @@ const QuickPassenger = () => {
                               max="9999-12-31"
                               placeholder="Passport Expaire Date"
                             />
+                          </div>
+                        </div>
+
+                        <div className="row">
+                          <div className="col-lg-6">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                htmlFor=""
+                              >
+                                Passport Copy
+                              </label>
+                            </div>
+                            <div className="input-group mb-3 d-flex">
+                              {passportNo !== "" ? (
+                                <input
+                                  type={"file"}
+                                  accept=".jpg, .jpeg, .png, .pdf"
+                                  className="form-control rounded"
+                                  onChange={(e) =>
+                                    handlePassportFileUpload(e.target.files[0])
+                                  }
+                                ></input>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                htmlFor=""
+                              >
+                                Visa Copy
+                              </label>
+                            </div>
+                            <div className="input-group mb-3 d-flex">
+                              {passportNo !== "" ? (
+                                <input
+                                  type={"file"}
+                                  accept=".jpg, .jpeg, .png, .pdf"
+                                  className="form-control rounded"
+                                  onChange={(e) =>
+                                    handleVisaFileUpload(e.target.files[0])
+                                  }
+                                ></input>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>

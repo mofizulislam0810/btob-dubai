@@ -1307,7 +1307,7 @@ const Support = () => {
                                         );
                                       })}
                                     </ul>
-                                    <ReactPaginate
+                                    {/* <ReactPaginate
                                       previousLabel={"previous"}
                                       nextLabel={"next"}
                                       breakLabel={"..."}
@@ -1327,7 +1327,7 @@ const Support = () => {
                                       breakClassName={"page-item"}
                                       breakLinkClassName={"page-link"}
                                       activeClassName={"active"}
-                                    />
+                                    /> */}
                                   </div>
                                   {/* <div className="chat-box bg-white">
 																				<div className='row'>{fileCurrentName}</div>
@@ -1456,7 +1456,7 @@ const Support = () => {
                                         );
                                       })}
                                     </ul>
-                                    <ReactPaginate
+                                    {/* <ReactPaginate
                                       previousLabel={"previous"}
                                       nextLabel={"next"}
                                       breakLabel={"..."}
@@ -1476,7 +1476,7 @@ const Support = () => {
                                       breakClassName={"page-item"}
                                       breakLinkClassName={"page-link"}
                                       activeClassName={"active"}
-                                    />
+                                    /> */}
                                   </div>
                                   <div className="chat-box bg-white">
                                     <div className="row">{fileCurrentName}</div>

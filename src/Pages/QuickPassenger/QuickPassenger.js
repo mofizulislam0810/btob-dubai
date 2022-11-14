@@ -828,7 +828,7 @@ const QuickPassenger = () => {
                               pt="6px"
                               pl="8px"
                             >
-                              <DatePicker
+                              {/* <DatePicker
                                 dateFormat="dd/MM/yyyy"
                                 selected={
                                   passportExDate.length === 10
@@ -839,7 +839,7 @@ const QuickPassenger = () => {
                                 placeholderText="dd/mm/yyyy"
                                 minDate={new Date()}
                                 maxDate={new Date("2099-12-30")}
-                              />
+                              /> */}
                             </Box>
 
                             {/* <input

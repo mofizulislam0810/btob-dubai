@@ -16,7 +16,8 @@ const RegComplete = () => {
                         {/* <h5 className="card-title">Special title treatment</h5> */}
                         <p className="card-text text-success py-3">Thank you for registering with FirstTrip.
                             We really appreciate you choosing FirstTrip for your travel plans.
-                            Your account activation is waiting for approval. After the process is completed, you will receive email with login credentials.
+                            Your account activation is waiting for approval. 
+                            {/* After the process is completed, you will receive email with login credentials. */}
                         </p>
                         <div className="text-center">
                             <Link to="/" className="btn button-color text-white rounded">Close</Link>

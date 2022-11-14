@@ -11,9 +11,27 @@ import airports from "../../../../JSON/airports.json";
 import ReactToPrint from 'react-to-print';
 import { getDefaultNormalizer } from "@testing-library/react";
 import { getPassengerType } from "../../../../common/functions";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const SuccessBookingPanel = () => {
   const { setTicketData, setLoading, loading } = useAuth();
+  let [agentInfo, setAgentInfo] = useState(0);
+  const getAgentData = async () =>{
+    axios
+    .get(environment.agentInfo, environment.headerToken)
+    .then((agentRes) => {
+      setAgentInfo(agentRes.data);
+    })
+    .catch((err) => {
+      //alert('Invalid login')
+    });
+  }
+
+  useEffect(()=>{
+    getAgentData();
+  },[])
+
 
   const bookData = JSON.parse(sessionStorage.getItem('bookData'));
   // const handleEmail = () => {
@@ -784,7 +802,6 @@ const SuccessBookingPanel = () => {
                                                 ?.directions[0][0].from
                                           )
                                           .map((item) => item.city)}{" "}
-                                        (Mandatory)
                                         {/* {bookData.data?.item1.flightInfo.dirrections[0][0].from} */}
                                       </td>
                                       <td>
@@ -822,7 +839,16 @@ const SuccessBookingPanel = () => {
                     </div>
 
                   </div>
-                  <div className="row mb-5 mt-2">
+                  {
+                    agentInfo.activeCredit +
+                    agentInfo.currentBalance  <  bookData.data?.item1.flightInfo?.bookingComponents[0].totalPrice ?
+                    <>
+                    <div className="row mb-5 mt-2">
+                    <div className="col-lg-12 text-center text-danger">
+                      <p>You don't have available balance to generate Ticket!</p>
+                    </div>
+                  </div>
+                    </> : <div className="row mb-5 mt-2">
                     <div className="col-lg-12 text-center">
                       <button
                         className="btn button-color text-white fw-bold w-25 mt-2 rounded btn-sm"
@@ -833,6 +859,8 @@ const SuccessBookingPanel = () => {
                       </button>
                     </div>
                   </div>
+                  }
+                  
                 </div>
               </div>
             </div>

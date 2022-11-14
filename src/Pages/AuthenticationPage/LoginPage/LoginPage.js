@@ -100,23 +100,25 @@ const LoginPage = () => {
           borderRadius="5px"
           overflow="hidden"
           boxShadow="0px 4px 67px rgba(156, 156, 156, 0.25)"
+          zIndex={2}
+          bg="white"
         >
           <div className="login-box">
             <ToastContainer position="bottom-right" autoClose={1500} />
-            <div className="card">
+            <div>
               <Center className="text-center">
                 <Image
                   src={logo}
-                  alt="Triplover"
+                  alt="Firsttrip"
                   w="160px"
                   h="84px"
-                  mt={8}
-                  mb={"25px"}
+                  mt={10}
+                  mb={2}
                 />
               </Center>
               <div className="card-body login-card-body">
                 {/* <p className="login-box-msg">Sign in to start your session</p> */}
-                <VStack spacing="0px" mb={4}>
+                <VStack spacing="0px" my={4}>
                   <Divider h="1px" color="#dddddd" mb="-12px" />
                   <Text
                     zIndex={1}
@@ -131,7 +133,7 @@ const LoginPage = () => {
                 </VStack>
 
                 <form onSubmit={handleLoginUser}>
-                  <InputGroup my={2}>
+                  <InputGroup my={3}>
                     <InputRightElement
                       // pointerEvents="none"
                       children={<MdOutlineEmail color="#B8B8B8" />}
@@ -206,33 +208,31 @@ const LoginPage = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="row">
-                    <div className="col-12 my-2">
-                      <button
-                        type="submit"
-                        className="btn text-white fw-bold btn-block rounded btn-sm"
-                        disabled={loading ? true : false}
+                  <div className="row my-2">
+                    <button
+                      type="submit"
+                      className="btn text-white fw-bold btn-block rounded btn-sm mt-2"
+                      disabled={loading ? true : false}
+                    >
+                      <Center
+                        bg="gradient"
+                        borderRadius="6px"
+                        h="55px"
+                        _hover={{ opacity: 0.9 }}
                       >
-                        <Center
-                          bg="gradient"
-                          borderRadius="6px"
-                          h="55px"
-                          _hover={{ opacity: 0.9 }}
-                        >
-                          {loading ? (
-                            <span
-                              class="spinner-border spinner-border-sm"
-                              role="status"
-                              aria-hidden="true"
-                            ></span>
-                          ) : (
-                            <>
-                              <Text color="white">Sign In</Text>
-                            </>
-                          )}
-                        </Center>
-                      </button>
-                    </div>
+                        {loading ? (
+                          <span
+                            class="spinner-border spinner-border-sm"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                        ) : (
+                          <>
+                            <Text color="white">Sign In</Text>
+                          </>
+                        )}
+                      </Center>
+                    </button>
                   </div>
                 </form>
 
@@ -257,12 +257,12 @@ const LoginPage = () => {
           <Hide below="md">
             <Box bg="background">
               <Image
-                w="460px"
+                w="450px"
                 layout="fill"
                 objectFit="cover"
                 src={cardImage}
                 alt="Cities"
-                h="455px"
+                h="490px"
               />
             </Box>
           </Hide>

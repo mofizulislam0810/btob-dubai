@@ -41,7 +41,7 @@ code {
 /*  */
 
 
-input {
+/* input {
   position: relative;
   width: 150px; height: 20px;
   color: white;
@@ -66,4 +66,4 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 260px;
   height: 28px;
   opacity: 0;
-}
+} */

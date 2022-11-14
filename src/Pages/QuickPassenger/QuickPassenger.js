@@ -675,7 +675,9 @@ const QuickPassenger = () => {
                               >
                                 <DatePicker
                                   dateFormat="dd/MM/yyyy"
-                                  selected={dob}
+                                  selected={
+                                    dob.length === 10 ? new Date(dob) : dob
+                                  }
                                   onChange={(date) => setDOB(date)}
                                   placeholderText="dd/mm/yyyy"
                                   minDate={new Date(dobMinMax?.min)}
@@ -828,7 +830,11 @@ const QuickPassenger = () => {
                             >
                               <DatePicker
                                 dateFormat="dd/MM/yyyy"
-                                selected={passportExDate}
+                                selected={
+                                  passportExDate.length === 10
+                                    ? new Date(passportExDate)
+                                    : passportExDate
+                                }
                                 onChange={(date) => setpassportExDate(date)}
                                 placeholderText="dd/mm/yyyy"
                                 minDate={new Date()}

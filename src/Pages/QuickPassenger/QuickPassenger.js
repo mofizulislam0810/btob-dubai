@@ -1,19 +1,20 @@
-import { HStack, Icon, Text } from "@chakra-ui/react";
+import { Box, HStack, Icon, Text } from "@chakra-ui/react";
 import axios from "axios";
-import { add, format } from "date-fns";
+import { add } from "date-fns";
 import $ from "jquery";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { BiEdit } from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { isValidEmail } from "../../common/functions";
+import { ISODateFormatter, isValidEmail } from "../../common/functions";
 import courtries from "../../JSON/countries.json";
 import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
 import SideNavBar from "../SharePages/SideNavBar/SideNavBar";
-import { BiEdit } from "react-icons/bi";
-import { ISODateFormatter } from "../../common/functions";
 
 import { environment } from "../SharePages/Utility/environment";
 const QuickPassenger = () => {
@@ -23,9 +24,7 @@ const QuickPassenger = () => {
   let [currentItem, setCurrentItem] = useState({});
   let [passengerList, setPassengerList] = useState([]);
   let [passengerType, setPassengerType] = useState("ADT");
-  let [passportExDate, setpassportExDate] = useState(
-    ISODateFormatter(new Date())
-  );
+  let [passportExDate, setpassportExDate] = useState();
   let [title, setTitle] = useState("");
   let [firstName, setFirstName] = useState("");
   let [middleName, setMiddleName] = useState("");
@@ -33,7 +32,7 @@ const QuickPassenger = () => {
   // let [dobDay, setDOBDay] = useState("");
   // let [dobMonth, setDOBMonth] = useState("");
   // let [dobYear, setDOBYear] = useState("");
-  let [dob, setDOB] = useState("2018-07-22");
+  let [dob, setDOB] = useState(new Date());
   let [dobMinMax, setDobMinMax] = useState({ min: "", max: "" });
   let [nationality, setNationality] = useState("BD");
   let [gender, setGender] = useState("Male");
@@ -48,11 +47,12 @@ const QuickPassenger = () => {
   let [cityName, setCityName] = useState("");
   let [passportFileName, setPassportFileName] = useState("");
   let [visaFileName, setVisaFileName] = useState("");
-  let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
+  // let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
   let [loading, setLoading] = useState(false);
-
+  console.log({ passengerList });
   const handlePassportFileUpload = (file) => {
+    console.log({ file });
     let fileExt = file.name.split(".").pop().toLowerCase();
     if (
       fileExt === "jpg" ||
@@ -119,7 +119,7 @@ const QuickPassenger = () => {
       };
       const response = await axios.post(
         environment.getAgentPassengers +
-          `?pageNumber=${currentPage}&pageSize=${pageSize}`,
+        `?pageNumber=${currentPage}&pageSize=${pageSize}`,
         sendObj,
         environment.headerToken
       );
@@ -357,16 +357,8 @@ const QuickPassenger = () => {
 
   console.log(passengerList);
 
-  $('input[type="date"]')
-    .on("change", function () {
-      this.setAttribute(
-        "data-date",
-        moment(this.value, "YYYY-MM-DD").format(
-          this.getAttribute("data-date-format")
-        )
-      );
-    })
-    .trigger("change");
+  console.log(new Date(), "===");
+  console.log(dob, "=");
 
   return (
     <div>
@@ -412,8 +404,8 @@ const QuickPassenger = () => {
                           <th>DOB</th>
                           <th>Gender</th>
                           <th>Passport Number</th>
-                          {/* <th>Passport Copy</th>
-                          <th>Visa Copy</th> */}
+                          <th>Passport Copy</th>
+                          <th>Visa Copy</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -446,16 +438,16 @@ const QuickPassenger = () => {
                                   : item.documentNumber}
                               </td>
 
-                              {/* <td>
+                              <td>
                                 {item.passportCopy !== null &&
                                   item.passportCopy !== "" ? (
                                   <a
                                     href={
-                                      environment.baseApiURL +
-                                      `agentinfo/GetPassengerFile/${item.passportCopy}/1`
+                                      environment.s3URL + `${item.passportCopy}`
                                     }
                                     download
-                                    target="_blank" rel="noreferrer"
+                                    target="_blank"
+                                    rel="noreferrer"
                                   >
                                     Passport Copy
                                   </a>
@@ -468,18 +460,18 @@ const QuickPassenger = () => {
                                   item.visaCopy != "" ? (
                                   <a
                                     href={
-                                      environment.baseApiURL +
-                                      `agentinfo/GetPassengerFile/${item.visaCopy}/2`
+                                      environment.s3URL + `${item.visaCopy}`
                                     }
                                     download
-                                    target="_blank" rel="noreferrer"
+                                    target="_blank"
+                                    rel="noreferrer"
                                   >
                                     Visa Copy
                                   </a>
                                 ) : (
                                   <></>
                                 )}
-                              </td> */}
+                              </td>
                               {/* <td>
                                 <span onClick={() => handleDeleteItem(item)} className="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></span>
                               </td> */}
@@ -673,7 +665,29 @@ const QuickPassenger = () => {
                               <span className="text-danger">*</span>
                             </label>
                             <div className="input-group mb-3 d-flex">
-                              <input
+                              <Box
+                                border="1px solid #ced4da"
+                                borderRadius="4px"
+                                w="100%"
+                                h="40px"
+                                pt="6px"
+                                pl="8px"
+                              >
+                                <DatePicker
+                                  dateFormat="dd/MM/yyyy"
+                                  selected={
+                                    dob?.length === 10 ? new Date(dob) : dob
+                                  }
+                                  onChange={(date) =>
+                                    date !== "" && setDOB(date)
+                                  }
+                                  placeholderText="dd/mm/yyyy"
+                                  minDate={new Date(dobMinMax?.min)}
+                                  maxDate={new Date(dobMinMax?.max)}
+                                />
+                              </Box>
+
+                              {/* <input
                                 type={"date"}
                                 data-date=""
                                 data-date-format="DD/MM/YYYY"
@@ -693,7 +707,7 @@ const QuickPassenger = () => {
                                 required
                                 autoComplete="off"
                                 placeholder="Date of Birth"
-                              />
+                              /> */}
                             </div>
                           </div>
                         </div>
@@ -784,7 +798,7 @@ const QuickPassenger = () => {
                                 setIssuingCountry(e.target.value)
                               }
                               value={issuingCountry}
-                              // required
+                            // required
                             >
                               <option value="">Issuing Country</option>
                               {courtries.map((item, index) => {
@@ -808,7 +822,30 @@ const QuickPassenger = () => {
                             </label>
                           </div>
                           <div className="input-group mb-3 d-flex">
-                            <input
+                            <Box
+                              border="1px solid #ced4da"
+                              borderRadius="4px"
+                              w="100%"
+                              h="40px"
+                              pt="6px"
+                              pl="8px"
+                            >
+                              <DatePicker
+                                dateFormat="dd/MM/yyyy"
+                                selected={
+                                  passportExDate?.length === 10
+                                    ? new Date(passportExDate)
+                                    : passportExDate
+                                }
+                                onChange={(date) =>
+                                  date !== "" && setpassportExDate(date)
+                                }
+                                placeholderText="dd/mm/yyyy"
+                                minDate={new Date()}
+                              />
+                            </Box>
+
+                            {/* <input
                               type={"date"}
                               data-date=""
                               data-date-format="DD/MM/YYYY"
@@ -817,14 +854,61 @@ const QuickPassenger = () => {
                               onChange={(e) => {
                                 setpassportExDate(e.target.value);
                               }}
-                              value={passportExDate}
+                              value={
+                                currentItem !== null
+                                  ? passportExDate
+                                  : ISODateFormatter(new Date())
+                              }
                               min={ISODateFormatter(new Date())}
                               autoComplete="off"
                               required
                               pattern="\d{4}-\d{2}-\d{2}"
                               max="9999-12-31"
                               placeholder="Passport Expaire Date"
-                            />
+                            /> */}
+                          </div>
+                        </div>
+
+                        <div className="row">
+                          <div className="col-lg-6">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                htmlFor=""
+                              >
+                                Passport Copy
+                              </label>
+                            </div>
+                            <div className="input-group mb-3 d-flex">
+                              <input
+                                type={"file"}
+                                accept=".jpg, .jpeg, .png, .pdf"
+                                className="form-control rounded"
+                                onChange={(e) =>
+                                  handlePassportFileUpload(e.target.files[0])
+                                }
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                htmlFor=""
+                              >
+                                Visa Copy
+                              </label>
+                            </div>
+                            <div className="input-group mb-3 d-flex">
+                              <input
+                                type={"file"}
+                                accept=".jpg, .jpeg, .png, .pdf"
+                                className="form-control rounded"
+                                onChange={(e) =>
+                                  handleVisaFileUpload(e.target.files[0])
+                                }
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>

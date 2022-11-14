@@ -1,31 +1,20 @@
 import {
-  Box,
-  Center,
-  Circle,
+  Box, Circle,
   Flex,
   HStack,
-  Icon,
-  Image,
-  VStack,
-  Text,
-  Divider,
+  Icon, Text
 } from "@chakra-ui/react";
 import React from "react";
-import logo from "../../../images/logo/logo-combined.png";
-import paymentOptions from "../../../images/footer/payment.png";
+import { BsFillHouseFill } from "react-icons/bs";
 import {
-  FaTwitter,
-  FaYoutube,
   FaFacebookF,
   FaLinkedinIn,
-  FaPhoneAlt,
+  FaPhoneAlt, FaTwitter,
+  FaYoutube
 } from "react-icons/fa";
 import { GrMail } from "react-icons/gr";
-import { BsFillHouseFill } from "react-icons/bs";
-import Contact from "../../Optional/Contact/Contact";
-import { map } from "jquery";
 import { Link } from "react-router-dom";
-import { nanoid } from "nanoid";
+import logo from "../../../images/logo/logo-combined.png";
 
 const socialData = [
   { icon: FaTwitter },
@@ -37,6 +26,7 @@ const socialData = [
 const quickLinksData = [
   { text: "Contact", to: "contact" },
   // { text: "Bank Details", to: "bankdetail" },
+  { text: "EMI Policy", to: "EmiPolicy" },
   { text: "Privacy Policy", to: "privacypolicy" },
   { text: "Terms And Conditions", to: "termandcondition" },
   { text: "Refund & Cancellation", to: "refundandcancellation" },
@@ -121,14 +111,14 @@ const Footer = () => {
 
       {/* <Box borderTop="1px solid #E2E2E2" mx={4} /> */}
       <Box display={'flex'} justifyContent='center' alignItems="center">
-      <img src={logo} alt="" width='100px' height={"10px"} />
-          <Text fontSize="14px"
-            fontWeight={400}
-            color="#908DAB"
-            textAlign="center"
-            pt="16px"
-            pl="5px"
-          > Copyright © 2022 First Trip Ltd. All rights reserved.</Text>
+        <img src={logo} alt="" width='100px' height={"10px"} />
+        <Text fontSize="14px"
+          fontWeight={400}
+          color="#908DAB"
+          textAlign="center"
+          pt="16px"
+          pl="5px"
+        > Copyright © 2022 First Trip Ltd. All rights reserved.</Text>
       </Box>
 
 

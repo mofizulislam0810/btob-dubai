@@ -16,8 +16,11 @@ import useAuth from "../../../hooks/useAuth";
 import courtries from "../../../JSON/countries.json";
 import { environment } from "../../SharePages/Utility/environment";
 import moment from "moment";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import "./LeftSide.css";
+import { Box } from "@chakra-ui/react";
 const LeftSide = () => {
   const [validityError, setValidityError] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -1060,7 +1063,52 @@ const LeftSide = () => {
                                 <span className="text-danger">*</span>
                               </label>
                               <div className="input-group mb-3">
-                                <input
+                                <Box
+                                  border="1px solid #ced4da"
+                                  borderRadius="4px"
+                                  w="100%"
+                                  h="40px"
+                                  pt="8px"
+                                  pl="8px"
+                                  fontSize="md"
+                                >
+                                  <DatePicker
+                                    dateFormat="dd/MM/yyyy"
+                                    selected={
+                                      p.dateOfBirth
+                                        ? p.dateOfBirth
+                                        : add(
+                                            new Date(
+                                              Database?.tripTypeModify ===
+                                                "Round Trip" &&
+                                              calculateFullAge(
+                                                Database?.journeyDate,
+                                                Database?.returnDate
+                                              )
+                                                ? Database?.returnDate
+                                                : Database?.journeyDate
+                                            ),
+                                            {
+                                              years: -12,
+                                            }
+                                          )
+                                    }
+                                    onChange={(date) =>
+                                      date !== "" &&
+                                      setAdult((ob) =>
+                                        produce(ob, (v) => {
+                                          console.log({ v });
+                                          v[index].dateOfBirth = date;
+                                        })
+                                      )
+                                    }
+                                    placeholderText="dd/mm/yyyy"
+                                    // minDate={new Date(dobMinMax?.min)}
+                                    // maxDate={new Date(dobMinMax?.max)}
+                                  />
+                                </Box>
+
+                                {/* <input
                                   type={"date"}
                                   data-date=""
                                   data-date-format="DD/MM/YYYY"
@@ -1118,7 +1166,7 @@ const LeftSide = () => {
                                   autoComplete="off"
                                   placeholder="Date of Birth"
                                   pattern="\d{4}-\d{2}-\d{2}"
-                                />
+                                /> */}
                                 {validityError && (
                                   <div className="validation"></div>
                                 )}
@@ -1499,8 +1547,57 @@ const LeftSide = () => {
                                 <option>2022</option>
                               </select>
                             </div> */}
-                            <div className="mb-3">
-                              <input
+                            <div className="input-group mb-3">
+                              <Box
+                                border="1px solid #ced4da"
+                                borderRadius="4px"
+                                w="100%"
+                                h="40px"
+                                pt="8px"
+                                pl="8px"
+                                fontSize="md"
+                              >
+                                <DatePicker
+                                  dateFormat="dd/MM/yyyy"
+                                  selected={
+                                    p.passportExDate
+                                      ? p.passportExDate
+                                      : new Date(
+                                          Database?.tripTypeModify ===
+                                            "Round Trip" &&
+                                          calculateFullAge(
+                                            Database?.journeyDate,
+                                            Database?.returnDate
+                                          )
+                                            ? Database?.returnDate
+                                            : Database?.journeyDate
+                                        )
+                                  }
+                                  onChange={(date) =>
+                                    date !== "" &&
+                                    setAdult((ob) =>
+                                      produce(ob, (v) => {
+                                        v[index].passportExDate = date;
+                                      })
+                                    )
+                                  }
+                                  placeholderText="dd/mm/yyyy"
+                                  minDate={
+                                    new Date(
+                                      Database?.tripTypeModify ===
+                                        "Round Trip" &&
+                                      calculateFullAge(
+                                        Database?.journeyDate,
+                                        Database?.returnDate
+                                      )
+                                        ? Database?.returnDate
+                                        : Database?.journeyDate
+                                    )
+                                  }
+                                />
+                              </Box>
+
+                              {/* <input
                                 type={"date"}
                                 data-date=""
                                 data-date-format="DD/MM/YYYY"
@@ -1547,7 +1644,8 @@ const LeftSide = () => {
                                 pattern="\d{4}-\d{2}-\d{2}"
                                 max="9999-12-31"
                                 required
-                              />
+                              /> */}
+
                               {validityError && (
                                 <div className="validation"></div>
                               )}

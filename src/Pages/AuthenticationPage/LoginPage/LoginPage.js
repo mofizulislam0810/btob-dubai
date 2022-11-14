@@ -107,7 +107,7 @@ const LoginPage = () => {
               <Center className="text-center">
                 <Image
                   src={logo}
-                  alt="Triplover"
+                  alt="Firsttrip"
                   w="160px"
                   h="84px"
                   mt={8}

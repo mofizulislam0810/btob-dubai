@@ -570,7 +570,7 @@ const ShowAllFlightPage = () => {
       var ac = $(this);
 
       ac.on("click", function (e) {
-        e.stopPropagation();
+        // e.stopPropagation();
       })
         .on("focus keyup", search)
         .on("keydown", onKeyDown);

@@ -298,10 +298,12 @@ const ShowFlight = (props) => {
       sessionStorage.setItem("checkList", JSON.stringify(checkList));
       console.log("1", { checkList })
     } else {
-      checkList.pop(props.data);
+      
       checkList = checkList.filter(
         (item) => item.itemCodeRef !== props.data.itemCodeRef
       );
+      checkList.pop(props.data);
+
       console.log(checkList,"======")
       sessionStorage.setItem("checkList", JSON.stringify(checkList));
       setCount(checkList.length);

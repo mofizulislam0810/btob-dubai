@@ -13,7 +13,7 @@ import "../../../plugins/t-datepicker/t-datepicker.min";
 import { environment } from "../../SharePages/Utility/environment";
 import "./SearchFrom.css";
 
-const childrenAges = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const childrenAges = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 const SearchFrom = () => {
   const formCount = 0;
@@ -445,7 +445,7 @@ const SearchFrom = () => {
       var ac = $(this);
 
       ac.on("click", function (e) {
-        e.stopPropagation();
+        // e.stopPropagation();
       })
         .on("focus keyup", search)
         .on("keydown", onKeyDown);

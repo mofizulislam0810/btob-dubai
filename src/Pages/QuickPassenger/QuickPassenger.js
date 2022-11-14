@@ -10,7 +10,7 @@ import { BiEdit } from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ISODateFormatter, isValidEmail } from "../../common/functions";
+import { getCountryNameFomCountryCode, ISODateFormatter, isValidEmail } from "../../common/functions";
 import courtries from "../../JSON/countries.json";
 import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
@@ -44,6 +44,7 @@ const QuickPassenger = () => {
   let [phone, setPhone] = useState("");
   let [email, setEmail] = useState("");
   let [phoneCountryCode, setPhoneCountryCode] = useState("+88");
+  let [cityList, setCityList] = useState([]);
   let [cityName, setCityName] = useState("");
   let [passportFileName, setPassportFileName] = useState("");
   let [visaFileName, setVisaFileName] = useState("");
@@ -355,11 +356,28 @@ const QuickPassenger = () => {
     handleGetPassengers(currentPageNumber);
   }, [currentPageNumber, passengerType]);
 
-  console.log(passengerList);
+  const getCityData = async (countryName) => {
+    console.log({ countryName })
 
-  console.log(new Date(), "===");
-  console.log(dob, "=");
+    const response = await axios.get(
+      environment.getcityListbycountryName + "/" + countryName
+    );
+    if (response.data.length > 0) {
+      setCityList(response.data);
+      // console.log(cityList);
+    }
+  };
+  useEffect(() => {
+    getCityData("Bangladesh");
+  }, []);
 
+  const handleCountryChange = (e) => {
+    console.log({ e },)
+    const country = getCountryNameFomCountryCode(e.target.value);
+    setNationality(e.target.value);
+    getCityData(country);
+  };
+  console.log({ courtries })
   return (
     <div>
       <Navbar></Navbar>
@@ -720,7 +738,7 @@ const QuickPassenger = () => {
                               <select
                                 name="nationality"
                                 className="form-select rounded"
-                                onChange={(e) => setNationality(e.target.value)}
+                                onChange={(e) => handleCountryChange(e)}
                                 value={nationality}
                                 required
                               >
@@ -733,6 +751,33 @@ const QuickPassenger = () => {
                                 })}
                               </select>
                             </div>
+                          </div>
+                        </div>
+                        <div className="col-lg-4">
+                          <div className="form-group">
+                            <label
+                              className="form-label float-start fw-bold"
+                              htmlFor=""
+                            >
+                              City
+                              {/* <span className="text-danger">*</span> */}
+                            </label>
+                          </div>
+                          <div className="input-group mb-3">
+                            <select
+                              class="form-select rounded"
+                              aria-label="City"
+                              onChange={(e) => setCityName(e.target.value)}
+                            >
+                              <option selected>Select City</option>
+                              {cityList.map((item, index) => {
+                                return (
+                                  <option key={index} value={item.name}>
+                                    {item.name}
+                                  </option>
+                                );
+                              })}
+                            </select>
                           </div>
                         </div>
                         <div className="col-lg-4">
@@ -795,7 +840,7 @@ const QuickPassenger = () => {
                             <select
                               className="form-select rounded"
                               onChange={(e) =>
-                                setIssuingCountry(e.target.value)
+                                handleCountryChange(e)
                               }
                               value={issuingCountry}
                             // required

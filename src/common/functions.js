@@ -1,5 +1,5 @@
 import { format, intervalToDuration, parse } from "date-fns";
-import { CalendarContainer } from "react-datepicker";
+import countries from "../JSON/countries.json";
 export const isValidEmail = (input) => {
   return input
     ?.toLowerCase()
@@ -58,11 +58,11 @@ export const addDurations = (inputArr) => {
 
   return totalMinutes >= 1440
     ? `${Math.floor(totalMinutes / 1440)}d ${Math.floor(
-        (totalMinutes % 1440) / 60
-      )}h ${(totalMinutes % 1440) % 60}m`
+      (totalMinutes % 1440) / 60
+    )}h ${(totalMinutes % 1440) % 60}m`
     : totalMinutes >= 60
-    ? `${Math.floor(totalMinutes / 60)}h ${totalMinutes % 60}m`
-    : `${totalMinutes % 60}m`;
+      ? `${Math.floor(totalMinutes / 60)}h ${totalMinutes % 60}m`
+      : `${totalMinutes % 60}m`;
 };
 
 // INTERVAL BETWEEN SEGMENTS
@@ -77,4 +77,10 @@ export const timeDuration = (start, end) => {
 
 export const ISODateFormatter = (input) => {
   return format(new Date(input), "yyyy-MM-dd");
+};
+
+export const getCountryNameFomCountryCode = (input) => {
+  return countries.find((obj) => {
+    return obj.code === input;
+  })?.name;
 };

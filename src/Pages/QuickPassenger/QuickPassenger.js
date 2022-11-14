@@ -674,6 +674,7 @@ const QuickPassenger = () => {
                                 pl="8px"
                               >
                                 <DatePicker
+                                  dateFormat="dd/MM/yyyy"
                                   selected={dob}
                                   onChange={(date) => setDOB(date)}
                                   placeholderText="dd/mm/yyyy"
@@ -817,7 +818,25 @@ const QuickPassenger = () => {
                             </label>
                           </div>
                           <div className="input-group mb-3 d-flex">
-                            <input
+                            <Box
+                              border="1px solid #ced4da"
+                              borderRadius="4px"
+                              w="100%"
+                              h="40px"
+                              pt="6px"
+                              pl="8px"
+                            >
+                              <DatePicker
+                                dateFormat="dd/MM/yyyy"
+                                selected={passportExDate}
+                                onChange={(date) => setpassportExDate(date)}
+                                placeholderText="dd/mm/yyyy"
+                                minDate={new Date()}
+                                maxDate={new Date("2099-12-30")}
+                              />
+                            </Box>
+
+                            {/* <input
                               type={"date"}
                               data-date=""
                               data-date-format="DD/MM/YYYY"
@@ -837,7 +856,7 @@ const QuickPassenger = () => {
                               pattern="\d{4}-\d{2}-\d{2}"
                               max="9999-12-31"
                               placeholder="Passport Expaire Date"
-                            />
+                            /> */}
                           </div>
                         </div>
 

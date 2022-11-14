@@ -2859,7 +2859,42 @@ const LeftSide = () => {
                             <span className="text-danger">*</span>
                           </label>
                           <div className="input-group mb-3 d-flex">
-                            <input
+                            <Box
+                              border="1px solid #ced4da"
+                              borderRadius="4px"
+                              w="100%"
+                              h="40px"
+                              pt="8px"
+                              pl="8px"
+                              fontSize="md"
+                            >
+                              <DatePicker
+                                dateFormat="dd/MM/yyyy"
+                                selected={
+                                  p.dateOfBirth
+                                    ? p.dateOfBirth
+                                    : add(new Date(Database?.journeyDate), {
+                                        years: -2,
+                                      })
+                                }
+                                onChange={(date) =>
+                                  date !== "" &&
+                                  setInfant((ob) =>
+                                    produce(ob, (v) => {
+                                      console.log({ v });
+                                      v[index].dateOfBirth = date;
+                                    })
+                                  )
+                                }
+                                placeholderText="dd/mm/yyyy"
+                                minDate={add(new Date(Database?.journeyDate), {
+                                  years: -2,
+                                })}
+                                maxDate={new Date(Database?.journeyDate)}
+                              />
+                            </Box>
+
+                            {/* <input
                               type={"date"}
                               data-date=""
                               data-date-format="DD/MM/YYYY"
@@ -2896,7 +2931,7 @@ const LeftSide = () => {
                               autoComplete="off"
                               placeholder="Date of Birth"
                               pattern="\d{4}-\d{2}-\d{2}"
-                            />
+                            /> */}
                             {validityError && (
                               <div className="validation"></div>
                             )}
@@ -3164,7 +3199,56 @@ const LeftSide = () => {
                               </label>
                             </div>
                             <div className="input-group mb-3">
-                              <input
+                              <Box
+                                border="1px solid #ced4da"
+                                borderRadius="4px"
+                                w="100%"
+                                h="40px"
+                                pt="8px"
+                                pl="8px"
+                                fontSize="md"
+                              >
+                                <DatePicker
+                                  dateFormat="dd/MM/yyyy"
+                                  selected={
+                                    p.passportExDate
+                                      ? p.passportExDate
+                                      : new Date(
+                                          Database?.tripTypeModify ===
+                                            "Round Trip" &&
+                                          calculateFullAge(
+                                            Database?.journeyDate,
+                                            Database?.returnDate
+                                          )
+                                            ? Database?.returnDate
+                                            : Database?.journeyDate
+                                        )
+                                  }
+                                  onChange={(date) =>
+                                    date !== "" &&
+                                    setInfant((ob) =>
+                                      produce(ob, (v) => {
+                                        v[index].passportExDate = date;
+                                      })
+                                    )
+                                  }
+                                  placeholderText="dd/mm/yyyy"
+                                  minDate={
+                                    new Date(
+                                      Database?.tripTypeModify ===
+                                        "Round Trip" &&
+                                      calculateFullAge(
+                                        Database?.journeyDate,
+                                        Database?.returnDate
+                                      )
+                                        ? Database?.returnDate
+                                        : Database?.journeyDate
+                                    )
+                                  }
+                                />
+                              </Box>
+
+                              {/* <input
                                 type={"date"}
                                 data-date=""
                                 data-date-format="DD/MM/YYYY"
@@ -3210,7 +3294,7 @@ const LeftSide = () => {
                                 pattern="\d{4}-\d{2}-\d{2}"
                                 max="9999-12-31"
                                 required
-                              />
+                              /> */}
                               {validityError && (
                                 <div className="validation"></div>
                               )}

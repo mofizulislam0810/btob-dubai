@@ -22,7 +22,9 @@ const QuickPassenger = () => {
   let [currentItem, setCurrentItem] = useState({});
   let [passengerList, setPassengerList] = useState([]);
   let [passengerType, setPassengerType] = useState("ADT");
-  let [passportExDate, setpassportExDate] = useState();
+  let [passportExDate, setpassportExDate] = useState(
+    ISODateFormatter(new Date())
+  );
   let [title, setTitle] = useState("");
   let [firstName, setFirstName] = useState("");
   let [middleName, setMiddleName] = useState("");
@@ -815,11 +817,7 @@ const QuickPassenger = () => {
                               onChange={(e) => {
                                 setpassportExDate(e.target.value);
                               }}
-                              value={
-                                currentItem !== null
-                                  ? passportExDate
-                                  : ISODateFormatter(new Date())
-                              }
+                              value={passportExDate}
                               min={ISODateFormatter(new Date())}
                               autoComplete="off"
                               required

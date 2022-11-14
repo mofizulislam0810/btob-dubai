@@ -38,14 +38,14 @@ const LeftSide = () => {
   const itemCodeRef = JSON.parse(localStorage.getItem("itemCodeRef"));
   const origin = searchData.origin;
   const destination = searchData.destination;
-  console.log(
-    origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : ""
-  );
-  console.log(
-    destination.match("Bangladesh") !== null
-      ? destination.match("Bangladesh")[0]
-      : ""
-  );
+  // console.log(
+  //   origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : ""
+  // );
+  // console.log(
+  //   destination.match("Bangladesh") !== null
+  //     ? destination.match("Bangladesh")[0]
+  //     : ""
+  // );
   const qtyList = searchData.qtyList;
   const adultNumber = searchData.qtyList.Adult;
   const childrenNumber = searchData.qtyList.Children;
@@ -474,6 +474,10 @@ const LeftSide = () => {
   //   );
   // }
 
+  // console.log( ISODateFormatter(
+  //   'Wed Dec 15 2010 00:00:00 GMT+0600 (East Kazakhstan Time)'
+  //  ));
+
   const bookingData = (e) => {
     e.preventDefault();
     // infant.map((item,index)=>{
@@ -544,7 +548,7 @@ const LeftSide = () => {
             ? destination.match("Bangladesh")[0]
             : "") === "Bangladesh"
             ? ""
-            : item.dateOfBirth,
+            :  ISODateFormatter(item.dateOfBirth),
         passengerKey: idObj !== undefined ? String(idObj.id) : "0",
         isLeadPassenger: true,
         isQuickPassenger: isChecked,
@@ -593,7 +597,7 @@ const LeftSide = () => {
     });
 
     infant.map((item) => {
-      console.log({ year: item.year });
+      // console.log({ year: item.year });
       let passengerObj = {
         nameElement: {
           title: item.title,
@@ -703,7 +707,7 @@ const LeftSide = () => {
         });
     }
     fetchOptions();
-    console.log(sendObj);
+    // console.log(sendObj);
     async function booking(price, uniqueTransID, itemCodeRef) {
       sendObj.uniqueTransID = uniqueTransID;
       sendObj.itemCodeRef = itemCodeRef;
@@ -714,7 +718,7 @@ const LeftSide = () => {
         .then((response) => {
           if (response.data.item1 !== null) {
             if (response.data.item2?.isSuccess === true) {
-              console.log(response);
+              // console.log(response);
               setBookData(response);
               sessionStorage.setItem("bookData", JSON.stringify(response));
               setLoading(false);
@@ -794,12 +798,12 @@ const LeftSide = () => {
                           }))}
                           onChange={(e) => {
                             const id = Number(e.value);
-                            console.log(id);
-                            console.log(passengerADTList);
+                            // console.log(id);
+                            // console.log(passengerADTList);
                             const item = passengerADTList.find(
                               (f) => f.id === id
                             );
-                            console.log(item);
+                            // console.log(item);
                             if (item !== undefined) {
                               setAdult((ob) =>
                                 produce(ob, (v) => {
@@ -1019,7 +1023,7 @@ const LeftSide = () => {
                               className="form-select"
                               onChange={(e) => {
                                 const gender = e.target.value;
-                                console.log(gender);
+                                // console.log(gender);
                                 setAdult((ob) =>
                                   produce(ob, (v) => {
                                     v[index].gender = gender;
@@ -1076,35 +1080,49 @@ const LeftSide = () => {
                                     dateFormat="dd/MM/yyyy"
                                     selected={
                                       p.dateOfBirth
-                                        ? p.dateOfBirth
-                                        : add(
-                                            new Date(
-                                              Database?.tripTypeModify ===
-                                                "Round Trip" &&
-                                              calculateFullAge(
-                                                Database?.journeyDate,
-                                                Database?.returnDate
-                                              )
-                                                ? Database?.returnDate
-                                                : Database?.journeyDate
-                                            ),
-                                            {
-                                              years: -12,
-                                            }
-                                          )
+                                        // ? p.dateOfBirth
+                                        // : add(
+                                        //     new Date(
+                                        //       Database?.tripTypeModify ===
+                                        //         "Round Trip" &&
+                                        //       calculateFullAge(
+                                        //         Database?.journeyDate,
+                                        //         Database?.returnDate
+                                        //       )
+                                        //         ? Database?.returnDate
+                                        //         : Database?.journeyDate
+                                        //     ),
+                                        //     {
+                                        //       years: -12,
+                                        //     }
+                                        //   )
                                     }
                                     onChange={(date) =>
                                       date !== "" &&
                                       setAdult((ob) =>
                                         produce(ob, (v) => {
-                                          console.log({ v });
+                                          // console.log({ v });
                                           v[index].dateOfBirth = date;
                                         })
                                       )
                                     }
                                     placeholderText="dd/mm/yyyy"
                                     // minDate={new Date(dobMinMax?.min)}
-                                    // maxDate={new Date(dobMinMax?.max)}
+                                    maxDate={add(
+                                      new Date(
+                                        Database?.tripTypeModify ===
+                                          "Round Trip" &&
+                                        calculateFullAge(
+                                          Database?.journeyDate,
+                                          Database?.returnDate
+                                        )
+                                          ? Database?.returnDate
+                                          : Database?.journeyDate
+                                      ),
+                                      {
+                                        years: -12,
+                                      }
+                                    )}
                                   />
                                 </Box>
 
@@ -1392,6 +1410,7 @@ const LeftSide = () => {
                                 autoComplete="off"
                                 spellcheck="false"
                               />
+                       
                               {validityError && (
                                 <div className="validation"></div>
                               )}
@@ -1594,6 +1613,7 @@ const LeftSide = () => {
                                         : Database?.journeyDate
                                     )
                                   }
+                                  required
                                 />
                               </Box>
 
@@ -1766,12 +1786,12 @@ const LeftSide = () => {
                           }))}
                           onChange={(e) => {
                             const id = Number(e.value);
-                            console.log(id);
-                            console.log(passengerCNNList);
+                            // console.log(id);
+                            // console.log(passengerCNNList);
                             const item = passengerCNNList.find(
                               (f) => f.id === id
                             );
-                            console.log(item);
+                            // console.log(item);
                             if (item !== undefined) {
                               setChild((ob) =>
                                 produce(ob, (v) => {
@@ -1969,7 +1989,7 @@ const LeftSide = () => {
                                   date !== "" &&
                                   setChild((ob) =>
                                     produce(ob, (v) => {
-                                      console.log({ v });
+                                      // console.log({ v });
                                       v[index].dateOfBirth = date;
                                     })
                                   )
@@ -2881,7 +2901,7 @@ const LeftSide = () => {
                                   date !== "" &&
                                   setInfant((ob) =>
                                     produce(ob, (v) => {
-                                      console.log({ v });
+                                      // console.log({ v });
                                       v[index].dateOfBirth = date;
                                     })
                                   )

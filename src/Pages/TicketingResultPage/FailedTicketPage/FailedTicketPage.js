@@ -41,9 +41,9 @@ const FailedTicketPage = () => {
             <div className="row p-4">
               <div className="col-lg-12 text-center">
                 {/* <h5 className="pt-4 fw-bold">Please try again</h5> */}
-                {/* {
+                {
                   ticketData.item2 != undefined ? <><p className="text-danger">{ticketData.item2?.message}</p></> :<><p className="text-danger">{ticketData.message}</p></>
-                } */}
+                }
                 
                 <div className="my-3 p-4">
                   {/* <span className="text-danger fs-3">

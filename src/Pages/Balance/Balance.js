@@ -1297,7 +1297,7 @@ const Balance = () => {
                                         ? "Online"
                                         : ""}
                                     </td>
-                                    <td>{item.tnxNumber}</td>
+                                    <td>{item.tnxNumber === null ? "N/A" : item.tnxNumber }</td>
                                     <td>{item.reference}</td>
 
                                     <td>

@@ -2809,19 +2809,18 @@ const Ticket = () => {
                               </td>
                               <td>
                                 <input
-                                  value={item.discount}
+                                  value={item.discount !== 0 && item.discount}
                                   type={"number"}
-                                  disabled
+                                  // disabled
                                   onChange={(e) =>
                                     setPassengerListEdited((ob) =>
                                       produce(ob, (v) => {
-                                        v[index].discount = Number(
-                                          e.target.value
-                                        );
+                                        v[index].discount = e.target.value;
                                       })
                                     )
                                   }
                                   className="form-control"
+                                  placeholder="0"
                                 />
                               </td>
                               {/* <td>
@@ -2844,7 +2843,7 @@ const Ticket = () => {
                                 {(
                                   item.basePrice +
                                   item.tax +
-                                  item.ait +
+                                  item.ait -
                                   item.discount
                                 ).toFixed(2)}
                               </td>
@@ -2859,7 +2858,7 @@ const Ticket = () => {
                             (totalPriceEdited +=
                               item.basePrice +
                               item.tax +
-                              item.ait +
+                              item.ait -
                               item.discount).toFixed(2);
                             return index === passengerListEdited.length - 1
                               ? totalPriceEdited.toFixed(2)

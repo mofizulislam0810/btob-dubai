@@ -683,7 +683,7 @@ const QuickPassenger = () => {
                               <span className="text-danger">*</span>
                             </label>
                             <div className="input-group mb-3 d-flex">
-                              <Box
+                              {/* <Box
                                 border="1px solid #ced4da"
                                 borderRadius="4px"
                                 w="100%"
@@ -703,9 +703,9 @@ const QuickPassenger = () => {
                                   minDate={new Date(dobMinMax?.min)}
                                   maxDate={new Date(dobMinMax?.max)}
                                 />
-                              </Box>
+                              </Box> */}
 
-                              {/* <input
+                              <input
                                 type={"date"}
                                 data-date=""
                                 data-date-format="DD/MM/YYYY"
@@ -725,7 +725,7 @@ const QuickPassenger = () => {
                                 required
                                 autoComplete="off"
                                 placeholder="Date of Birth"
-                              /> */}
+                              />
                             </div>
                           </div>
                         </div>

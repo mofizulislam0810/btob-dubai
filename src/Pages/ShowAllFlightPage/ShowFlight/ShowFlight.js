@@ -16,6 +16,7 @@ import "./ShowFlight.css";
 
 const ShowFlight = (props) => {
   const [grandTotal, setGrandTotal] = useState();
+  const [isChecked, setCheck] = useState();
   const { setCount, handleFareRules, loading, fareRules, setFareRules } =
     useAuth();
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const ShowFlight = (props) => {
   const amountChange = props.amountChange;
   let currency = props.currency;
   let checkList = props.checkList;
-  console.log(checkList);
+  // console.log(checkList);
   const getFareRules = (uId, dir, itemCode) => {
     handleFareRules(uId, dir, itemCode);
   };
@@ -290,25 +291,28 @@ const ShowFlight = (props) => {
   }, [props.index]);
 
   const handleCheckBox = (e) => {
+    if (checkList.length >= 3) {
+      return;
+    }
     const checked = e.target.checked;
-    console.log("e.target.checked", e.target.checked)
     if (checked) {
+      setCheck(true)
       checkList.push(props.data);
       setCount(checkList.length);
       sessionStorage.setItem("checkList", JSON.stringify(checkList));
-      console.log("1", { checkList })
     } else {
-      
-      checkList = checkList.filter(
+      setCheck(false)
+      const checkListPOP = checkList.filter(
         (item) => item.itemCodeRef !== props.data.itemCodeRef
       );
-      checkList.pop(props.data);
-
-      console.log(checkList,"======")
+      checkList.splice(0, checkList.length, ...checkListPOP);
+      setCount(checkListPOP.length);
       sessionStorage.setItem("checkList", JSON.stringify(checkList));
-      setCount(checkList.length);
     }
   };
+  console.log({ checkList })
+
+
   // console.log(currency);
   const isTempInspector = sessionStorage.getItem("isTempInspector");
 
@@ -326,7 +330,10 @@ const ShowFlight = (props) => {
             {/* up flight section  */}
             <span className="text-start">
               <input
+                name={"checkBox" + props.index}
                 type="checkbox"
+                value={false}
+                // checked={checkList.length > 3 ? false : isChecked}
                 className="show-flight-checkbox"
                 onClick={(e) => handleCheckBox(e)}
               />

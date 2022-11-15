@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+
+import { RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack } from "@chakra-ui/react";
 import $ from "jquery";
-import SearchFrom from "../../SearchPage/SearchFrom/SearchFrom";
-import gif from "../../../images/icon/Spinner-1s-200px.gif";
-import ShowFlight from "../ShowFlight/ShowFlight";
-import "./ShowAllFlight.css";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import NoDataFoundPage from "../../NoDataFoundPage/NoDataFoundPage/NoDataFoundPage";
+import { toast, ToastContainer } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import Loading from "../../Loading/Loading";
-import { RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack } from "@chakra-ui/react";
+import NoDataFoundPage from "../../NoDataFoundPage/NoDataFoundPage/NoDataFoundPage";
+import ShowFlight from "../ShowFlight/ShowFlight";
+import "./ShowAllFlight.css";
 
 const ShowAllFlight = ({
   fetchFlighData,
@@ -17,7 +17,7 @@ const ShowAllFlight = ({
   fecthMulti,
   loading,
   airlineFilters,
-  tripType,checkList
+  tripType, checkList
 }) => {
   const { count } = useAuth();
   // console.log(count);
@@ -83,7 +83,7 @@ const ShowAllFlight = ({
     Math.floor(mainJson?.minMaxPrice?.minPrice),
     Math.ceil(mainJson?.minMaxPrice?.maxPrice),
   ]);
-  console.log(name)
+  // console.log(name)
 
   if (parseInt(radioname) === 0 && name.length === 0) {
     dataPrice = jsonData?.filter(
@@ -169,7 +169,7 @@ const ShowAllFlight = ({
       });
     }
   }
-  console.log(check);
+  // console.log(check);
   const handleChange = (e) => {
     //  alert(name.length+", "+flightName.length);
     if (e.target.checked) {
@@ -237,9 +237,10 @@ const ShowAllFlight = ({
   }
 
   let currency = mainJson?.currency;
-  console.log(currency);
+  // console.log(currency);
   localStorage.setItem("currency", JSON.stringify(currency));
   useEffect(() => {
+
     // setName(flightName?.name);
     setCheck(true);
     flightName.map((item, index) => {
@@ -280,11 +281,21 @@ const ShowAllFlight = ({
   }, []);
 
   const handleProposal = () => {
-    navigate("/proposal");
+    if (count > 3) {
+      toast.error("You can't select flight more then three.");
+    } else {
+      navigate("/proposal");
+    }
   };
 
+  useEffect(() => {
+    if (count > 3) {
+      toast.error("You can't select flight more then three.");
+    }
+  }, [count])
   return (
     <div>
+      <ToastContainer position="bottom-right" autoClose={1500} />
       <div className="container box-shadow content-width">
         <div className="row border mt-3">
           <div className="col-lg-6 py-3 px-5 bg-white">
@@ -566,6 +577,7 @@ const ShowAllFlight = ({
             <button
               className="btn button-color fw-bold text-white ms-3 btn-sm rounded"
               onClick={handleProposal}
+            // disabled={count > 3 ? true : false}
             >
               Create Proposal
             </button>

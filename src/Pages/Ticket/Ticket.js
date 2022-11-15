@@ -2389,7 +2389,7 @@ const Ticket = () => {
                             class="table table-bordered table-sm text-end mt-1"
                             style={{ fontSize: "14px" }}
                           >
-                            <thead>
+                            <thead className="text-end">
                               <tr>
                                 <th className="text-start">Type</th>
                                 <th>Base Fare</th>
@@ -2400,7 +2400,7 @@ const Ticket = () => {
                                 <th>Total</th>
                               </tr>
                             </thead>
-                            <tbody>
+                            <tbody className="text-end">
                               {ticketingList.fareBreakdown?.map(
                                 (item, index) => (
                                   <>

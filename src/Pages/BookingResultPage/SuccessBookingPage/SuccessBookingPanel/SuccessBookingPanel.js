@@ -669,8 +669,8 @@ const SuccessBookingPanel = () => {
                               FARE DETAILS
                             </th>
                           </tr>
-                          <tr className="text-center">
-                            <th>Type</th>
+                          <tr className="text-end">
+                            <th className="text-center">Type</th>
                             <th>Base</th>
                             <th>Tax</th>
                             <th>Discount</th>
@@ -679,12 +679,12 @@ const SuccessBookingPanel = () => {
                             <th>Total Pax Fare</th>
                           </tr>
                         </thead>
-                        <tbody className="text-center">
+                        <tbody className="text-end">
 
                           {bookData.data?.item1.flightInfo?.passengerFares.adt !== null ? (
                             <>
                               <tr>
-                                <td className="left">Adult</td>
+                                <td className="text-center">Adult</td>
                                 <td className="left">
                                   {bookData.data?.item1.flightInfo?.passengerFares.adt.basePrice.toLocaleString("en-US")}
                                 </td>
@@ -711,7 +711,7 @@ const SuccessBookingPanel = () => {
                           {bookData.data?.item1.flightInfo?.passengerFares.cnn !== null ? (
                             <>
                               <tr>
-                                <td className="left">Child</td>
+                                <td className="text-center">Child</td>
                                 <td className="left">
                                   {bookData.data?.item1.flightInfo?.passengerFares.cnn.basePrice.toLocaleString("en-US")}
                                 </td>
@@ -738,7 +738,7 @@ const SuccessBookingPanel = () => {
                           {bookData.data?.item1.flightInfo?.passengerFares.inf !== null ? (
                             <>
                               <tr>
-                                <td className="left">Infant</td>
+                                <td className="text-center">Infant</td>
                                 <td className="left">
                                   {bookData.data?.item1.flightInfo?.passengerFares.inf.basePrice.toLocaleString("en-US")}
                                 </td>

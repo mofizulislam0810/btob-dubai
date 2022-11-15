@@ -169,7 +169,7 @@ const QuickPassenger = () => {
     setNationality(item.nationality);
     setGender(item.gender);
     setPassportNo(item.documentNumber);
-    setpassportExDate(item.expireDate);
+    setpassportExDate(item.expireDate === null ? null : ISODateFormatter(item.expireDate));
     setIssuingCountry(item.documentIssuingCountry);
     setPhone(item.phone);
     setEmail(item.email);

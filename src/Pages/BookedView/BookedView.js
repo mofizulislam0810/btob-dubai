@@ -583,8 +583,8 @@ const BookedView = () => {
                                   FARE DETAILS
                                 </th>
                               </tr>
-                              <tr className="text-center">
-                                <th>Type</th>
+                              <tr className="text-end">
+                                <th className="text-center">Type</th>
                                 <th>Base</th>
                                 <th>Tax</th>
                                 <th>Discount</th>
@@ -593,12 +593,12 @@ const BookedView = () => {
                                 <th>Total Pax Fare</th>
                               </tr>
                             </thead>
-                            <tbody className="text-center">
+                            <tbody className="text-end">
                               {ticketingList.fareBreakdown?.map((item, index) => {
                                 return (
                                   <>
                                     <tr>
-                                      <td>{getPassengerType(item.passengerType)}</td>
+                                      <td className="text-center">{getPassengerType(item.passengerType)}</td>
                                       <td>{item.basePrice.toLocaleString("en-US")}</td>
                                       <td>{item.tax.toLocaleString("en-US")}</td>
                                       <td>{item.discount.toLocaleString("en-US")}</td>
@@ -1513,8 +1513,8 @@ const BookedView = () => {
                                   FARE DETAILS
                                 </th>
                               </tr>
-                              <tr className="text-center">
-                                <th>Type</th>
+                              <tr className="text-end">
+                                <th className="text-center">Type</th>
                                 <th>Base</th>
                                 <th>Tax</th>
                                 <th>Discount</th>
@@ -1523,12 +1523,12 @@ const BookedView = () => {
                                 <th>Total Pax Fare</th>
                               </tr>
                             </thead>
-                            <tbody className="text-center">
+                            <tbody className="text-end">
                               {ticketingList.fareBreakdown?.map((item, index) => {
                                 return (
                                   <>
                                     <tr>
-                                      <td>{getPassengerType(item.passengerType)}</td>
+                                      <td className="text-center">{getPassengerType(item.passengerType)}</td>
                                       <td>{item.basePrice.toLocaleString("en-US")}</td>
                                       <td>{item.tax.toLocaleString("en-US")}</td>
                                       <td>{item.discount.toLocaleString("en-US")}</td>

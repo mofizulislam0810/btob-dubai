@@ -114,7 +114,7 @@ const ShowAllFlightPage = () => {
   //     cIndex=1;
   // }
 
-  const childrenAges = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const childrenAges = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   if (originRefValue2 && document.getElementById("multiCity2")) {
     // alert(cIndex+"o2");

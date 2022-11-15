@@ -800,7 +800,7 @@ const SuccessTicketPanel = () => {
                             style={{ fontSize: "12px" }}
                           >
                             <thead>
-                              <tr>
+                              <tr className="text-end">
                                 <th className="text-start">Type</th>
                                 <th>Base Price</th>
                                 <th>Tax</th>
@@ -814,7 +814,7 @@ const SuccessTicketPanel = () => {
                               {ticketData.item1?.flightInfo.passengerFares
                                 .adt !== null ? (
                                 <>
-                                  <tr>
+                                  <tr className="text-end">
                                     <td className="text-start">Adult</td>
                                     <td>
                                       {
@@ -862,7 +862,7 @@ const SuccessTicketPanel = () => {
                               {ticketData.item1?.flightInfo.passengerFares
                                 .cnn !== null ? (
                                 <>
-                                  <tr>
+                                  <tr className="text-end">
                                     <td className="text-start">Child</td>
                                     <td>
                                       {
@@ -911,7 +911,7 @@ const SuccessTicketPanel = () => {
                               {ticketData.item1?.flightInfo.passengerFares
                                 .inf !== null ? (
                                 <>
-                                  <tr>
+                                  <tr className="text-end">
                                     <td className="text-start">Infant</td>
                                     <td>
                                       {

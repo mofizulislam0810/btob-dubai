@@ -143,7 +143,9 @@ const Support = () => {
   let [supportHistoryList, setSupportHistoryList] = useState([]);
   let [fileCurrentName, setCurrentFileName] = useState("");
   let [pageSize, setPageSize] = useState(10);
-  let [pageCount, setPageCount] = useState(0);
+  let [pageCountOn, setPageCountOn] = useState(0);
+  let [pageCountOg, setPageCountOg] = useState(0);
+  let [pageCountCl, setPageCountCl] = useState(0);
   let [pageNumber, setPageNumber] = useState(1);
 
   let [pageSizeH, setPageSizeH] = useState(10);
@@ -210,7 +212,7 @@ const Support = () => {
         environment.headerToken
       );
       setSupportOpenedList(response.data.data);
-      setPageCount(response.data.totalPages);
+      setPageCountOn(response.data.totalPages);
       console.log(response.data.data);
     };
     getSupport();
@@ -230,7 +232,7 @@ const Support = () => {
         environment.headerToken
       );
       setSupportOngoingList(response.data.data);
-      setPageCount(response.data.totalPages);
+      setPageCountOg(response.data.totalPages);
     };
     getSupport();
     getSupportHistory(currentItem, 1);
@@ -250,7 +252,7 @@ const Support = () => {
         environment.headerToken
       );
       setSupportClosedList(response.data.data);
-      setPageCount(response.data.totalPages);
+      setPageCountCl(response.data.totalPages);
     };
     getSupport();
   };
@@ -261,18 +263,7 @@ const Support = () => {
     handleGetOngoing(currentPage);
     handleGetClosed(currentPage);
   };
-  // const handleEditItem = (item) => {
-  //   setCurrentItem(item);
-  //   setSupportTypeId(item.supportTypeId);
-  //   setSubjectId(item.subjectId);
-  //   setMessage(item.message);
-  //   setFileName(item.fileName);
-  //   setStatus(item.status);
-  //   setRefundType(item.refundType);
-  //   setUniqueTransID(item.uniqueTransID);
-  //   setPNR(item.pnr);
-  //   setTicketno(item.ticketNumber);
-  // };
+
   const clearForm = (item) => {
     setCurrentItem(null);
     setSupportTypeId(0);
@@ -353,84 +344,6 @@ const Support = () => {
     postData();
   };
 
-  // const handleSupportSubmit = () => {
-  //   let ticketNumbersN = ticketNumbers.substring(1, ticketNumbers.length);
-  //   // alert(uniqueTransID)
-  //   // alert(pnr)
-  //   let supportObj = {
-  //     id: currentItem == null ? 0 : currentItem.id,
-  //     agentId: sessionStorage.getItem("agentId") ?? 0,
-  //     supportTypeId: 2,
-  //     subjectId: subjectId,
-  //     message: message,
-  //     fileName: fileName,
-  //     status: 0,
-  //     uniqueTransID: uniqueTransID,
-  //     pnr: pnr,
-  //     ticketNumber: ticketNumbersN,
-  //   };
-
-  //   if (supportObj.fileNamesupportTypeId === 0) {
-  //     toast.error("Sorry! Support type not selected..");
-  //     return;
-  //   }
-  //   if (subjectId === 0) {
-  //     toast.error("Please select support type!");
-  //     return;
-  //   }
-  //   if (message === "") {
-  //     toast.error("Sorry! Message is empty..");
-  //     return;
-  //   }
-  //   if (
-  //     !isTicketNumRequired &&
-  //     location.search.split("ticketno=")[1] !== "null" &&
-  //     subjectId !== 10 &&
-  //     ticketNumbers === ""
-  //   ) {
-  //     toast.error("Sorry! Ticket number not selected..");
-  //     return;
-  //   }
-  //   console.log(supportObj);
-  //   if ((currentItem == null ? 0 : currentItem.id) > 0) {
-  //     const putData = async () => {
-  //       const response = await axios.put(
-  //         environment.supportInfo,
-  //         supportObj,
-  //         environment.headerToken
-  //       );
-  //       if (response.data > 0) {
-  //         // document.getElementById("submitCloseBtn").click();
-  //         //handleGetOpened(1);
-  //         // clearForm();
-
-  //         toast.success("Thanks! Support Info updated successfully..");
-  //       } else {
-  //         toast.error("Sorry! Support Info not updated..");
-  //       }
-  //     };
-  //     putData();
-  //   } else {
-  //     const postData = async () => {
-  //       //alert("ok");
-  //       const response = await axios.post(
-  //         environment.supportInfo,
-  //         supportObj,
-  //         environment.headerToken
-  //       );
-
-  //       if (response.data > 0) {
-  //         handleGetOpened(1);
-  //         clearForm();
-  //         toast.success("Thanks! Support Info created successfully..");
-  //         document.getElementById("submitCloseBtn").click();
-  //       } else {
-  //         toast.error("Sorry! Support Info not created..");
-  //       }
-  //     };
-  //     postData();
-  //   }
-  // };
 
   const handleSupportSubmit = () => {
     let ticketNumbersN = ticketNumbers.substring(1, ticketNumbers.length);
@@ -580,6 +493,7 @@ const Support = () => {
                         onClick={() => {
                           handleGetOpened(1);
                           setPage(1);
+
                         }}
                       >
                         Opened
@@ -685,7 +599,7 @@ const Support = () => {
                                       </select>
                                     </div>
                                   )}
-
+                                   
                                   <HStack w="400px">
                                     <div className="col-sm-8">
                                       <label class="form-label">
@@ -731,6 +645,10 @@ const Support = () => {
 
                                   {location.search.split("ticketno=")[1] !==
                                   "null" ? (
+                                    <>
+                                     {
+                                      passengerList.length > 0 ? <>
+                                          
                                     <div className="col-sm-12">
                                       <table
                                         className="table table-boardered table-sm mt-3"
@@ -840,28 +758,13 @@ const Support = () => {
                                       {/* <label>{ticketNumbers}</label> */}
                                       {/* <input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumber === "null" ? "" : ticketNumber} className="form-control" onChange={(e) => setTicketno()}></input> */}
                                     </div>
+                                      </> :<></>
+                                    }
+                                    </>
+                               
                                   ) : (
                                     ""
                                   )}
-
-                                  {/* {
-																		subjectId === 2 ? 
-																		<>		
-																			<div className='col-sm-5'>
-																				<label  class="form-label my-2">Refund Type</label><br></br>
-																				<input type="radio" value={refundType} name="refundType" checked={refundType == "Full"}
-																					onClick={() => { setRefundType("Full"); }} />&nbsp; Full &nbsp;&nbsp;
-
-																				<input type="radio" disabled value={refundType} name="refundType" checked={refundType == "Partial"}
-																					onClick={() => { setRefundType("Partial"); }} />&nbsp; Partial &nbsp;&nbsp;
-
-																				<input type="radio" disabled value={refundType} name="refundType" checked={refundType == "Split"}
-																					onClick={() => { setRefundType("Split"); }} /> &nbsp;Split
-
-																			</div>
-																		</> : <>
-																		</>
-																	} */}
                                 </div>
                                 <div className="row mb-3">
                                   <div className="col-sm-12">
@@ -1005,7 +908,7 @@ const Support = () => {
                         previousLabel={"previous"}
                         nextLabel={"next"}
                         breakLabel={"..."}
-                        pageCount={pageCount}
+                        pageCount={pageCountOn}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={3}
                         onPageChange={handlePageClick}
@@ -1101,7 +1004,7 @@ const Support = () => {
                         previousLabel={"previous"}
                         nextLabel={"next"}
                         breakLabel={"..."}
-                        pageCount={pageCount}
+                        pageCount={pageCountOg}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={3}
                         onPageChange={handlePageClick}
@@ -1184,7 +1087,7 @@ const Support = () => {
                         previousLabel={"previous"}
                         nextLabel={"next"}
                         breakLabel={"..."}
-                        pageCount={pageCount}
+                        pageCount={pageCountCl}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={3}
                         onPageChange={handlePageClick}

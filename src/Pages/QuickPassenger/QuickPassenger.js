@@ -10,7 +10,7 @@ import { BiEdit } from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { getCountryNameFomCountryCode, ISODateFormatter, isValidEmail } from "../../common/functions";
+import { getCountryNameFomCountryCode, getPassengerType, ISODateFormatter, isValidEmail } from "../../common/functions";
 import courtries from "../../JSON/countries.json";
 import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
@@ -32,7 +32,7 @@ const QuickPassenger = () => {
   // let [dobDay, setDOBDay] = useState("");
   // let [dobMonth, setDOBMonth] = useState("");
   // let [dobYear, setDOBYear] = useState("");
-  let [dob, setDOB] = useState(new Date());
+  let [dob, setDOB] = useState();
   let [dobMinMax, setDobMinMax] = useState({ min: "", max: "" });
   let [nationality, setNationality] = useState("BD");
   let [gender, setGender] = useState("Male");
@@ -169,7 +169,7 @@ const QuickPassenger = () => {
     setNationality(item.nationality);
     setGender(item.gender);
     setPassportNo(item.documentNumber);
-    setpassportExDate(ISODateFormatter(item.expireDate));
+    setpassportExDate(item.expireDate);
     setIssuingCountry(item.documentIssuingCountry);
     setPhone(item.phone);
     setEmail(item.email);
@@ -177,6 +177,7 @@ const QuickPassenger = () => {
     setCityName(item.cityName);
     setPassengerType(item.passengerType);
   };
+  console.log(passportExDate);
   const handleDeleteItem = (item) => {
     let result = window.confirm("Are you sure");
     if (result) {
@@ -303,7 +304,7 @@ const QuickPassenger = () => {
           $("body").removeAttr("style");
           setLoading(false);
         } else {
-          toast.error("Please try again..");
+          toast.error(response.data.message);
           setLoading(false);
         }
       };
@@ -417,11 +418,12 @@ const QuickPassenger = () => {
                         <tr>
                           <th>SL</th>
                           <th>Name</th>
+                          <th>Passenger Type</th>
                           <th>Email</th>
-                          <th>Mobile</th>
                           <th>DOB</th>
                           <th>Gender</th>
                           <th>Passport Number</th>
+                          <th>Passport Expire Date</th>
                           <th>Passport Copy</th>
                           <th>Visa Copy</th>
                           <th>Action</th>
@@ -440,10 +442,9 @@ const QuickPassenger = () => {
                                   item.middle +
                                   " " +
                                   item.last}{" "}
-                                ({item.passengerType})
                               </td>
+                              <td>{getPassengerType(item.passengerType)}</td>
                               <td>{item.email}</td>
-                              <td>{item.phone}</td>
                               <td>
                                 {moment(item.dateOfBirth).format(
                                   "DD-MMMM-yyyy"
@@ -454,6 +455,13 @@ const QuickPassenger = () => {
                                 {item.documentNumber === ""
                                   ? "N/A"
                                   : item.documentNumber}
+                              </td>
+                              <td>
+                                {item.expireDate === null
+                                  ? "N/A"
+                                  : moment(item.expireDate).format(
+                                    "DD-MMMM-yyyy"
+                                  )}
                               </td>
 
                               <td>
@@ -716,9 +724,9 @@ const QuickPassenger = () => {
                                   setDOB(e.target.value);
                                 }}
                                 value={
-                                  currentItem !== null
+                                  currentItem === null
                                     ? dob
-                                    : ISODateFormatter(dobMinMax?.max)
+                                    : dob
                                 }
                                 min={dobMinMax?.min}
                                 max={dobMinMax?.max}
@@ -864,7 +872,7 @@ const QuickPassenger = () => {
                             </label>
                           </div>
                           <div className="input-group mb-3 d-flex">
-                            <Box
+                            {/* <Box
                               border="1px solid #ced4da"
                               borderRadius="4px"
                               w="100%"
@@ -885,9 +893,9 @@ const QuickPassenger = () => {
                                 placeholderText="dd/mm/yyyy"
                                 minDate={new Date()}
                               />
-                            </Box>
+                            </Box> */}
 
-                            {/* <input
+                            <input
                               type={"date"}
                               data-date=""
                               data-date-format="DD/MM/YYYY"
@@ -897,9 +905,9 @@ const QuickPassenger = () => {
                                 setpassportExDate(e.target.value);
                               }}
                               value={
-                                currentItem !== null
+                                currentItem === null
                                   ? passportExDate
-                                  : ISODateFormatter(new Date())
+                                  : passportExDate
                               }
                               min={ISODateFormatter(new Date())}
                               autoComplete="off"
@@ -907,7 +915,7 @@ const QuickPassenger = () => {
                               pattern="\d{4}-\d{2}-\d{2}"
                               max="9999-12-31"
                               placeholder="Passport Expaire Date"
-                            /> */}
+                            />
                           </div>
                         </div>
                       </div>

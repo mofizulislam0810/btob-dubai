@@ -289,26 +289,49 @@ const ShowFlight = (props) => {
     });
   }, [props.index]);
 
+  // const handleCheckBox = (e) => {
+  //   const checked = e.target.checked;
+  //   console.log("e.target.checked", e.target.checked)
+  //   if (checked) {
+  //     checkList.push(props.data);
+  //     setCount(checkList.length);
+  //     sessionStorage.setItem("checkList", JSON.stringify(checkList));
+  //     console.log("1", { checkList })
+  //   } else {
+      
+  //     checkList = checkList.filter(
+  //       (item) => item.itemCodeRef !== props.data.itemCodeRef
+  //     );
+  //     checkList.pop(props.data);
+
+  //     console.log(checkList,"======")
+  //     sessionStorage.setItem("checkList", JSON.stringify(checkList));
+  //     setCount(checkList.length);
+  //   }
+  // };
+
   const handleCheckBox = (e) => {
+    // if (checkList.length >= 3) {
+    //   return e.target.unchecked;
+    // }
     const checked = e.target.checked;
-    console.log("e.target.checked", e.target.checked)
     if (checked) {
       checkList.push(props.data);
       setCount(checkList.length);
       sessionStorage.setItem("checkList", JSON.stringify(checkList));
-      console.log("1", { checkList })
     } else {
-      
-      checkList = checkList.filter(
+      const checkListPOP = checkList.filter(
         (item) => item.itemCodeRef !== props.data.itemCodeRef
       );
-      checkList.pop(props.data);
-
-      console.log(checkList,"======")
+      checkList.splice(0, checkList.length, ...checkListPOP);
+      setCount(checkListPOP.length);
       sessionStorage.setItem("checkList", JSON.stringify(checkList));
-      setCount(checkList.length);
     }
   };
+
+
+
+
   // console.log(currency);
   const isTempInspector = sessionStorage.getItem("isTempInspector");
 

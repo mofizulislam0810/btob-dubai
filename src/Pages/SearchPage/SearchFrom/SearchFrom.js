@@ -228,8 +228,6 @@ const SearchFrom = () => {
           });
         }
       }
-
-
     } else {
       const origin = originRef.current.value;
       const destination = destinationRef.current.value;

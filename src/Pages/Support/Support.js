@@ -6,7 +6,7 @@ import "./Support.css";
 import axios from "axios";
 import { environment } from "../SharePages/Utility/environment";
 import moment from "moment";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import $ from "jquery";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,6 +15,7 @@ import { Box, Center, HStack, Text } from "@chakra-ui/react";
 const Support = () => {
   const [filterSubjectId, setFilterSubjectId] = useState("0");
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("page ---------->", page);
@@ -274,6 +275,7 @@ const Support = () => {
     setUniqueTransID("");
     setPNR("");
     setTicketno("");
+    navigate("/support");
   };
   const handleFileUpload = (file) => {
     var formData = new FormData();
@@ -396,6 +398,7 @@ const Support = () => {
           // clearForm();
 
           toast.success("Thanks! Support Info updated successfully..");
+          navigate("/search");
         } else {
           toast.error("Sorry! Support Info not updated..");
         }
@@ -544,8 +547,10 @@ const Support = () => {
                         className="modal fade"
                         id="supportModal"
                         tabIndex={-1}
-                        aria-labelledby="supportModalLabel"
                         aria-hidden="true"
+                        aria-labelledby="staticBackdropLabel"
+                        data-bs-keyboard="false"
+                        data-bs-backdrop="static"
                       >
                         <div className="modal-dialog">
                           <div className="modal-content">

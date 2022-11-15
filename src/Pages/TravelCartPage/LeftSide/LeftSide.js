@@ -4,23 +4,23 @@ import {
   differenceInYears,
   format,
   intervalToDuration,
-  parse,
+  parse
 } from "date-fns";
 import produce from "immer";
 import $ from "jquery";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { Link, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import courtries from "../../../JSON/countries.json";
 import { environment } from "../../SharePages/Utility/environment";
-import moment from "moment";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
-import "./LeftSide.css";
 import { Box } from "@chakra-ui/react";
+import "./LeftSide.css";
 const LeftSide = () => {
   const [validityError, setValidityError] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -248,7 +248,7 @@ const LeftSide = () => {
   };
   useEffect(() => {
     handleGetPassengers();
-    $(document).ready(function () {});
+    $(document).ready(function () { });
   }, []);
   const handleClick = (e) => {
     if (e.target.checked) {
@@ -498,12 +498,12 @@ const LeftSide = () => {
         (f) =>
           f.title + " " + f.first + " " + f.middle + " " + f.last ===
           item.title +
-            " " +
-            item.firstName +
-            " " +
-            item.middleName +
-            " " +
-            item.lastName
+          " " +
+          item.firstName +
+          " " +
+          item.middleName +
+          " " +
+          item.lastName
       );
       let passengerObj = {
         nameElement: {
@@ -540,9 +540,9 @@ const LeftSide = () => {
           (origin.match("Bangladesh") !== null
             ? origin.match("Bangladesh")[0]
             : "") &&
-          (destination.match("Bangladesh") !== null
-            ? destination.match("Bangladesh")[0]
-            : "") === "Bangladesh"
+            (destination.match("Bangladesh") !== null
+              ? destination.match("Bangladesh")[0]
+              : "") === "Bangladesh"
             ? ""
             : item.dateOfBirth,
         passengerKey: idObj !== undefined ? String(idObj.id) : "0",
@@ -1046,9 +1046,9 @@ const LeftSide = () => {
                     {(origin.match("Bangladesh") !== null
                       ? origin.match("Bangladesh")[0]
                       : "") &&
-                    (destination.match("Bangladesh") !== null
-                      ? destination.match("Bangladesh")[0]
-                      : "") === "Bangladesh" ? (
+                      (destination.match("Bangladesh") !== null
+                        ? destination.match("Bangladesh")[0]
+                        : "") === "Bangladesh" ? (
                       <></>
                     ) : (
                       <>
@@ -1076,22 +1076,22 @@ const LeftSide = () => {
                                     dateFormat="dd/MM/yyyy"
                                     selected={
                                       p.dateOfBirth
-                                        ? p.dateOfBirth
+                                        ? new Date(p.dateOfBirth)
                                         : add(
-                                            new Date(
-                                              Database?.tripTypeModify ===
-                                                "Round Trip" &&
+                                          new Date(
+                                            Database?.tripTypeModify ===
+                                              "Round Trip" &&
                                               calculateFullAge(
                                                 Database?.journeyDate,
                                                 Database?.returnDate
                                               )
-                                                ? Database?.returnDate
-                                                : Database?.journeyDate
-                                            ),
-                                            {
-                                              years: -12,
-                                            }
-                                          )
+                                              ? Database?.returnDate
+                                              : Database?.journeyDate
+                                          ),
+                                          {
+                                            years: -12,
+                                          }
+                                        )
                                     }
                                     onChange={(date) =>
                                       date !== "" &&
@@ -1104,7 +1104,21 @@ const LeftSide = () => {
                                     }
                                     placeholderText="dd/mm/yyyy"
                                     // minDate={new Date(dobMinMax?.min)}
-                                    // maxDate={new Date(dobMinMax?.max)}
+                                    maxDate={add(
+                                      new Date(
+                                        Database?.tripTypeModify ===
+                                          "Round Trip" &&
+                                          calculateFullAge(
+                                            Database?.journeyDate,
+                                            Database?.returnDate
+                                          )
+                                          ? Database?.returnDate
+                                          : Database?.journeyDate
+                                      ),
+                                      {
+                                        years: -12,
+                                      }
+                                    )}
                                   />
                                 </Box>
 
@@ -1561,17 +1575,17 @@ const LeftSide = () => {
                                   dateFormat="dd/MM/yyyy"
                                   selected={
                                     p.passportExDate
-                                      ? p.passportExDate
+                                      ? new Date(p.passportExDate)
                                       : new Date(
-                                          Database?.tripTypeModify ===
-                                            "Round Trip" &&
+                                        Database?.tripTypeModify ===
+                                          "Round Trip" &&
                                           calculateFullAge(
                                             Database?.journeyDate,
                                             Database?.returnDate
                                           )
-                                            ? Database?.returnDate
-                                            : Database?.journeyDate
-                                        )
+                                          ? Database?.returnDate
+                                          : Database?.journeyDate
+                                      )
                                   }
                                   onChange={(date) =>
                                     date !== "" &&
@@ -1582,18 +1596,20 @@ const LeftSide = () => {
                                     )
                                   }
                                   placeholderText="dd/mm/yyyy"
-                                  minDate={
+                                  minDate={add(
                                     new Date(
                                       Database?.tripTypeModify ===
                                         "Round Trip" &&
-                                      calculateFullAge(
-                                        Database?.journeyDate,
-                                        Database?.returnDate
-                                      )
+                                        calculateFullAge(
+                                          Database?.journeyDate,
+                                          Database?.returnDate
+                                        )
                                         ? Database?.returnDate
                                         : Database?.journeyDate
-                                    )
-                                  }
+                                    ),
+                                    {
+                                      years: -12,
+                                    })}
                                 />
                               </Box>
 
@@ -1948,22 +1964,22 @@ const LeftSide = () => {
                                 dateFormat="dd/MM/yyyy"
                                 selected={
                                   p.dateOfBirth
-                                    ? p.dateOfBirth
+                                    ? new Date(p.dateOfBirth)
                                     : add(
-                                        new Date(
-                                          Database?.tripTypeModify ===
-                                            "Round Trip" &&
+                                      new Date(
+                                        Database?.tripTypeModify ===
+                                          "Round Trip" &&
                                           calculateFullAge(
                                             Database?.journeyDate,
                                             Database?.returnDate
                                           )
-                                            ? Database?.returnDate
-                                            : Database?.journeyDate
-                                        ),
-                                        {
-                                          years: -12,
-                                        }
-                                      )
+                                          ? Database?.returnDate
+                                          : Database?.journeyDate
+                                      ),
+                                      {
+                                        years: -12,
+                                      }
+                                    )
                                 }
                                 onChange={(date) =>
                                   date !== "" &&
@@ -1978,10 +1994,10 @@ const LeftSide = () => {
                                 minDate={add(
                                   new Date(
                                     Database?.tripTypeModify === "Round Trip" &&
-                                    calculateFullAge(
-                                      Database?.journeyDate,
-                                      Database?.returnDate
-                                    )
+                                      calculateFullAge(
+                                        Database?.journeyDate,
+                                        Database?.returnDate
+                                      )
                                       ? Database?.returnDate
                                       : Database?.journeyDate
                                   ),
@@ -1992,10 +2008,10 @@ const LeftSide = () => {
                                 maxDate={add(
                                   new Date(
                                     Database?.tripTypeModify === "Round Trip" &&
-                                    calculateFullAge(
-                                      Database?.journeyDate,
-                                      Database?.returnDate
-                                    )
+                                      calculateFullAge(
+                                        Database?.journeyDate,
+                                        Database?.returnDate
+                                      )
                                       ? Database?.returnDate
                                       : Database?.journeyDate
                                   ),
@@ -2211,9 +2227,9 @@ const LeftSide = () => {
                       {(origin.match("Bangladesh") !== null
                         ? origin.match("Bangladesh")[0]
                         : "") &&
-                      (destination.match("Bangladesh") !== null
-                        ? destination.match("Bangladesh")[0]
-                        : "") === "Bangladesh" ? (
+                        (destination.match("Bangladesh") !== null
+                          ? destination.match("Bangladesh")[0]
+                          : "") === "Bangladesh" ? (
                         <></>
                       ) : (
                         <>
@@ -2314,9 +2330,9 @@ const LeftSide = () => {
                     {(origin.match("Bangladesh") !== null
                       ? origin.match("Bangladesh")[0]
                       : "") &&
-                    (destination.match("Bangladesh") !== null
-                      ? destination.match("Bangladesh")[0]
-                      : "") === "Bangladesh" ? (
+                      (destination.match("Bangladesh") !== null
+                        ? destination.match("Bangladesh")[0]
+                        : "") === "Bangladesh" ? (
                       <></>
                     ) : (
                       <>
@@ -2413,17 +2429,19 @@ const LeftSide = () => {
                                   dateFormat="dd/MM/yyyy"
                                   selected={
                                     p.passportExDate
-                                      ? p.passportExDate
-                                      : new Date(
-                                          Database?.tripTypeModify ===
-                                            "Round Trip" &&
+                                      ? new Date(p.passportExDate)
+                                      :
+                                      new Date(
+                                        Database?.tripTypeModify ===
+                                          "Round Trip" &&
                                           calculateFullAge(
                                             Database?.journeyDate,
                                             Database?.returnDate
                                           )
-                                            ? Database?.returnDate
-                                            : Database?.journeyDate
-                                        )
+                                          ? Database?.returnDate
+                                          : Database?.journeyDate
+                                      )
+
                                   }
                                   onChange={(date) =>
                                     date !== "" &&
@@ -2435,16 +2453,20 @@ const LeftSide = () => {
                                   }
                                   placeholderText="dd/mm/yyyy"
                                   minDate={
-                                    new Date(
-                                      Database?.tripTypeModify ===
-                                        "Round Trip" &&
-                                      calculateFullAge(
-                                        Database?.journeyDate,
-                                        Database?.returnDate
-                                      )
-                                        ? Database?.returnDate
-                                        : Database?.journeyDate
-                                    )
+                                    add(
+                                      new Date(
+                                        Database?.tripTypeModify ===
+                                          "Round Trip" &&
+                                          calculateFullAge(
+                                            Database?.journeyDate,
+                                            Database?.returnDate
+                                          )
+                                          ? Database?.returnDate
+                                          : Database?.journeyDate
+                                      ),
+                                      {
+                                        months: 6,
+                                      })
                                   }
                                 />
                               </Box>
@@ -2872,10 +2894,10 @@ const LeftSide = () => {
                                 dateFormat="dd/MM/yyyy"
                                 selected={
                                   p.dateOfBirth
-                                    ? p.dateOfBirth
+                                    ? new Date(p.dateOfBirth)
                                     : add(new Date(Database?.journeyDate), {
-                                        years: -2,
-                                      })
+                                      years: -2,
+                                    })
                                 }
                                 onChange={(date) =>
                                   date !== "" &&
@@ -3063,9 +3085,9 @@ const LeftSide = () => {
                       {(origin.match("Bangladesh") !== null
                         ? origin.match("Bangladesh")[0]
                         : "") &&
-                      (destination.match("Bangladesh") !== null
-                        ? destination.match("Bangladesh")[0]
-                        : "") === "Bangladesh" ? (
+                        (destination.match("Bangladesh") !== null
+                          ? destination.match("Bangladesh")[0]
+                          : "") === "Bangladesh" ? (
                         <></>
                       ) : (
                         <>
@@ -3113,9 +3135,9 @@ const LeftSide = () => {
                     {(origin.match("Bangladesh") !== null
                       ? origin.match("Bangladesh")[0]
                       : "") &&
-                    (destination.match("Bangladesh") !== null
-                      ? destination.match("Bangladesh")[0]
-                      : "") === "Bangladesh" ? (
+                      (destination.match("Bangladesh") !== null
+                        ? destination.match("Bangladesh")[0]
+                        : "") === "Bangladesh" ? (
                       <></>
                     ) : (
                       <>
@@ -3212,17 +3234,17 @@ const LeftSide = () => {
                                   dateFormat="dd/MM/yyyy"
                                   selected={
                                     p.passportExDate
-                                      ? p.passportExDate
+                                      ? new Date(p.passportExDate)
                                       : new Date(
-                                          Database?.tripTypeModify ===
-                                            "Round Trip" &&
+                                        Database?.tripTypeModify ===
+                                          "Round Trip" &&
                                           calculateFullAge(
                                             Database?.journeyDate,
                                             Database?.returnDate
                                           )
-                                            ? Database?.returnDate
-                                            : Database?.journeyDate
-                                        )
+                                          ? Database?.returnDate
+                                          : Database?.journeyDate
+                                      )
                                   }
                                   onChange={(date) =>
                                     date !== "" &&
@@ -3237,10 +3259,10 @@ const LeftSide = () => {
                                     new Date(
                                       Database?.tripTypeModify ===
                                         "Round Trip" &&
-                                      calculateFullAge(
-                                        Database?.journeyDate,
-                                        Database?.returnDate
-                                      )
+                                        calculateFullAge(
+                                          Database?.journeyDate,
+                                          Database?.returnDate
+                                        )
                                         ? Database?.returnDate
                                         : Database?.journeyDate
                                     )

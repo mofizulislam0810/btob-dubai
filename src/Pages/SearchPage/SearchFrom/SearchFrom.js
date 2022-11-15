@@ -113,61 +113,66 @@ const SearchFrom = () => {
 
       if (origin === destination && origin !== "" && destination !== "") {
         toast.error("Depart From and Going To must be difference No.1");
-        setSameMatchError(true)
-      }
-      else if (origin1 === destination1 && origin1 !== "" && destination1 !== "") {
+      } else if (
+        origin1 === destination1 &&
+        origin1 !== "" &&
+        destination1 !== ""
+      ) {
         toast.error("Depart From and Going To must be difference No.2");
-        setSameMatchError(true)
-      }
-      else if (origin2 === destination2 && origin2 !== "" && destination2 !== "") {
+      } else if (
+        origin2 === destination2 &&
+        origin2 !== "" &&
+        destination2 !== ""
+      ) {
         toast.error("Depart From and Going To must be difference No.3");
-        setSameMatchError(true)
-      }
-      else if (origin3 === destination3 && origin3 !== "" && destination3 !== "") {
+      } else if (
+        origin3 === destination3 &&
+        origin3 !== "" &&
+        destination3 !== ""
+      ) {
         toast.error("Depart From and Going To must be difference No.4");
-        setSameMatchError(true)
-      }
-      else if (origin4 === destination4 && origin4 !== "" && destination4 !== "") {
+      } else if (
+        origin4 === destination4 &&
+        origin4 !== "" &&
+        destination4 !== ""
+      ) {
         toast.error("Depart From and Going To must be difference No.5");
-        setSameMatchError(true)
-      }
-      else if (origin5 === destination5 && origin5 !== "" && destination5 !== "") {
+      } else if (
+        origin5 === destination5 &&
+        origin5 !== "" &&
+        destination5 !== ""
+      ) {
         toast.error("Depart From and Going To must be difference No.5");
-        setSameMatchError(true)
-      }
-      else setSameMatchError(false)
-
-      if (String(journeyDate) === String(null) && origin !== destination) {
-        toast.error("Please select all departing date no.1");
-        setJourneyDateError(true)
-      }
-
-      else if (String(inputDateMulti1) === String(null) && origin1 !== destination1) {
-        toast.error("Please select all departing date no.2");
-        setJourneyDateError(true)
-      }
-      else if (String(inputDateMulti2) === String(null) && origin2 !== destination2) {
-        toast.error("Please select all departing date no.3");
-        setJourneyDateError(true)
-      }
-
-      else if (String(inputDateMulti3) === String(null) && origin3 !== destination3) {
-        toast.error("Please select all departing date no.3");
-        setJourneyDateError(true)
-      }
-      else if (String(inputDateMulti4) === String(null) && origin4 !== destination4) {
-        toast.error("Please select all departing date no.4");
-        setJourneyDateError(true)
-      }
-      else if (String(inputDateMulti5) === String(null) && origin5 !== destination5) {
-        toast.error("Please select all departing date no.5");
-        setJourneyDateError(true)
-      }
-      else setJourneyDateError(false)
-
-      console.log("String(inputDateMulti3)", inputDateMulti1, String(null))
-      if (!sameMatchError) {
-        if (!journeyDateError) {
+      } else {
+        if (String(journeyDate) === String(null) && origin !== destination) {
+          toast.error("Please select all departing date no.1");
+        } else if (
+          String(inputDateMulti1) === String(null) &&
+          origin1 !== destination1
+        ) {
+          toast.error("Please select all departing date no.2");
+        } else if (
+          String(inputDateMulti2) === String(null) &&
+          origin2 !== destination2
+        ) {
+          toast.error("Please select all departing date no.3");
+        } else if (
+          String(inputDateMulti3) === String(null) &&
+          origin3 !== destination3
+        ) {
+          toast.error("Please select all departing date no.3");
+        } else if (
+          String(inputDateMulti4) === String(null) &&
+          origin4 !== destination4
+        ) {
+          toast.error("Please select all departing date no.4");
+        } else if (
+          String(inputDateMulti5) === String(null) &&
+          origin5 !== destination5
+        ) {
+          toast.error("Please select all departing date no.5");
+          setJourneyDateError(true);
+        } else {
           const qtyList = {
             Adult: adultCount,
             Children: childCount,

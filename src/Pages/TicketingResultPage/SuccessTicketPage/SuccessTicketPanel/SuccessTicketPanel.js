@@ -819,26 +819,26 @@ const SuccessTicketPanel = () => {
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.adt.basePrice
+                                          .passengerFares.adt.basePrice.toLocaleString("en-US")
                                       }
                                     </td>
 
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.adt.taxes
+                                          .passengerFares.adt.taxes.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.adt.ait
+                                          .passengerFares.adt.ait.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.adt.discountPrice
+                                          .passengerFares.adt.discountPrice.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
@@ -867,26 +867,26 @@ const SuccessTicketPanel = () => {
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.cnn.basePrice
+                                          .passengerFares.cnn.basePrice.toLocaleString("en-US")
                                       }
                                     </td>
 
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.cnn.taxes
+                                          .passengerFares.cnn.taxes.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.adt.ait
+                                          .passengerFares.cnn.ait.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.cnn.discountPrice
+                                          .passengerFares.cnn.discountPrice.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
@@ -916,26 +916,26 @@ const SuccessTicketPanel = () => {
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.inf.basePrice
+                                          .passengerFares.inf.basePrice.toLocaleString("en-US")
                                       }
                                     </td>
 
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.inf.taxes
+                                          .passengerFares.inf.taxes.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.adt.ait
+                                          .passengerFares.inf.ait.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.inf.discountPrice
+                                          .passengerFares.inf.discountPrice.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>

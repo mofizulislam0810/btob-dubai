@@ -150,6 +150,17 @@ const ShowAllFlightPage = () => {
     }
   }
 
+  const [preAirlines, setPreAirlines] = useState();
+
+  const handleChange = (e) => {
+    const re = /^[a-zA-Z,]*$/;
+    let text = e.target.value;
+    if (re.test(text)) {
+      setPreAirlines(text);
+    } else {
+    }
+  };
+
   const handleFlightOptionP = () => {
     // alert(cIndex);
     if (cIndex < 5) {
@@ -570,7 +581,7 @@ const ShowAllFlightPage = () => {
       var ac = $(this);
 
       ac.on("click", function (e) {
-        e.stopPropagation();
+        // e.stopPropagation();
       })
         .on("focus keyup", search)
         .on("keydown", onKeyDown);
@@ -961,7 +972,7 @@ const ShowAllFlightPage = () => {
             infants: qtyList.Infant,
             isOpenCombination: false,
             cabinClass: getCabinClass(travelClassType),
-            preferredCarriers: [],
+            preferredCarriers: preAirlines !== undefined ? preAirlines.split(",") : [],
             prohibitedCarriers: [],
             taxRedemptions: [],
             childrenAges: [],
@@ -1103,7 +1114,7 @@ const ShowAllFlightPage = () => {
           infants: qtyList.Infant,
           isOpenCombination: false,
           cabinClass: getCabinClass(travelClassType),
-          preferredCarriers: [],
+          preferredCarriers: preAirlines !== undefined ? preAirlines.split(",") : [],
           prohibitedCarriers: [],
           taxRedemptions: [],
           childrenAges: [],
@@ -1181,7 +1192,7 @@ const ShowAllFlightPage = () => {
           infants: qtyList.Infant,
           isOpenCombination: false,
           cabinClass: getCabinClass(travelClassType),
-          preferredCarriers: [],
+          preferredCarriers: preAirlines !== undefined ? preAirlines.split(",") : [],
           prohibitedCarriers: [],
           taxRedemptions: [],
           childrenAges: [],
@@ -1970,7 +1981,7 @@ const ShowAllFlightPage = () => {
                                   <div className="col-lg-2">
                                     <label
                                       htmlFor="formGroupExampleInput"
-                                      className="form-label text-white"
+                                      className="form-label"
                                     >
                                       Preferred Airline
                                     </label>
@@ -1983,6 +1994,7 @@ const ShowAllFlightPage = () => {
                                       style={{
                                         background: "#f8f2fb",
                                       }}
+                                      onChange={handleChange}
                                     />
                                   </div>
                                 </div>

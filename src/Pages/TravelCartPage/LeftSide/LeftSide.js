@@ -1122,6 +1122,11 @@ const LeftSide = () => {
                                   />
                                 </Box>
 
+                                {
+                                  validityError && p.dateOfBirth === "" && <Text pl="2px" color="red">Date of birth is required</Text>
+                                }
+
+
                                 {/* <input
                                   type={"date"}
                                   data-date=""
@@ -1575,9 +1580,7 @@ const LeftSide = () => {
                                   dateFormat="dd/MM/yyyy"
                                   selected={
                                     p.passportExDate
-                                      ? new Date(ISODateFormatter(p.passportExDate))
-                                      : add(new Date(Database?.tripTypeModify ===
-                                        "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), { months: 6 })
+                                    && new Date(ISODateFormatter(p.passportExDate))
                                   }
                                   onChange={(date) =>
                                     date !== "" &&
@@ -1596,11 +1599,17 @@ const LeftSide = () => {
                                   helperText="Your error message"
                                 />
                               </Box>
+                              {
+                                validityError && p.passportExDate === "" && <Text pl="2px" color="red">Passport expiry date is required</Text>
+                              }
+
+
+
                               {/* CHECK THIS AGAIN IN BOOK NOW VALIDATION */}
                               {
                                 moment(p?.passportExDate).isBefore(ISODateFormatter(add(new Date(Database?.tripTypeModify ===
                                   "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), { months: 6 }))) &&
-                                <Text color="red" mt="10px">Expiry Date not valid! </Text>
+                                <Text color="red" pl="4px">Expiry Date not valid! </Text>
                               }
 
                               {/* {validityError && (<div className="validation"></div>)} */}
@@ -3745,8 +3754,7 @@ const LeftSide = () => {
                     <button
                       type="submit"
                       className="btn button-color text-white fw-bold w-25 mt-2 rounded btn-sm"
-                      onClick={() => { setValidityError(true) }}
-                      disabled={!isExDateValidAdt || !isExDateValidCnn || !isExDateValidInf}
+                      onClick={() => { (!isExDateValidAdt || !isExDateValidCnn || !isExDateValidInf) && setValidityError(true) }}
                     >
                       Book Now
                     </button>

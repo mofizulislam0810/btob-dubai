@@ -767,8 +767,9 @@ const LeftSide = () => {
 
   useEffect(() => {
     let arr = adult.map(p => {
-      return !moment(p?.passportExDate).isBefore(ISODateFormatter(add(new Date(Database?.tripTypeModify ===
-        "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), { months: 6 })))
+      //console.log(p.dateOfBirth === "" ? "TRUE" : "FALSE", "=")
+      return !(moment(p?.passportExDate).isBefore(ISODateFormatter(add(new Date(Database?.tripTypeModify ===
+        "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), { months: 6 }))) || p.dateOfBirth === "")
     })
     setisExDateValidAdtAdt(arr.every(element => element === true))
   }, [adult])
@@ -1090,22 +1091,7 @@ const LeftSide = () => {
                                     dateFormat="dd/MM/yyyy"
                                     selected={
                                       p.dateOfBirth
-                                        ? new Date(p.dateOfBirth)
-                                        : add(
-                                          new Date(
-                                            Database?.tripTypeModify ===
-                                              "Round Trip" &&
-                                              calculateFullAge(
-                                                Database?.journeyDate,
-                                                Database?.returnDate
-                                              )
-                                              ? Database?.returnDate
-                                              : Database?.journeyDate
-                                          ),
-                                          {
-                                            years: -12,
-                                          }
-                                        )
+                                      && new Date(p.dateOfBirth)
                                     }
                                     onChange={(date) =>
                                       date !== "" &&

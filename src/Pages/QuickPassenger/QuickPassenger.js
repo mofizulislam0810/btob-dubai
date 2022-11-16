@@ -169,7 +169,7 @@ const QuickPassenger = () => {
     setNationality(item.nationality);
     setGender(item.gender);
     setPassportNo(item.documentNumber);
-    setpassportExDate(ISODateFormatter(item.expireDate));
+    setpassportExDate(item.expireDate === null ? null : ISODateFormatter(item.expireDate));
     setIssuingCountry(item.documentIssuingCountry);
     setPhone(item.phone);
     setEmail(item.email);
@@ -275,7 +275,7 @@ const QuickPassenger = () => {
           $("body").removeAttr("style");
           setLoading(false);
         } else {
-          toast.error("Please try again..");
+          toast.error(response.data.message);
           setLoading(false);
         }
       };
@@ -303,7 +303,7 @@ const QuickPassenger = () => {
           $("body").removeAttr("style");
           setLoading(false);
         } else {
-          toast.error("Please try again..");
+          toast.error(response.data.message);
           setLoading(false);
         }
       };
@@ -418,10 +418,10 @@ const QuickPassenger = () => {
                           <th>SL</th>
                           <th>Name</th>
                           <th>Email</th>
-                          <th>Mobile</th>
                           <th>DOB</th>
                           <th>Gender</th>
                           <th>Passport Number</th>
+                          <th>Passport Expire Date</th>
                           <th>Passport Copy</th>
                           <th>Visa Copy</th>
                           <th>Action</th>
@@ -443,7 +443,6 @@ const QuickPassenger = () => {
                                 ({item.passengerType})
                               </td>
                               <td>{item.email}</td>
-                              <td>{item.phone}</td>
                               <td>
                                 {moment(item.dateOfBirth).format(
                                   "DD-MMMM-yyyy"
@@ -451,9 +450,16 @@ const QuickPassenger = () => {
                               </td>
                               <td>{item.gender}</td>
                               <td>
-                                {item.documentNumber === ""
+                              {item.documentNumber === ""
                                   ? "N/A"
                                   : item.documentNumber}
+                              </td>
+                              <td>
+                               {item.expireDate === null
+                                  ? "N/A"
+                                  : moment(item.expireDate).format(
+                                    "DD-MMMM-yyyy"
+                                  )}
                               </td>
 
                               <td>
@@ -470,7 +476,7 @@ const QuickPassenger = () => {
                                     Passport Copy
                                   </a>
                                 ) : (
-                                  <></>
+                                  <>N/A</>
                                 )}
                               </td>
                               <td>
@@ -487,7 +493,7 @@ const QuickPassenger = () => {
                                     Visa Copy
                                   </a>
                                 ) : (
-                                  <></>
+                                  <>N/A</>
                                 )}
                               </td>
                               {/* <td>
@@ -864,6 +870,10 @@ const QuickPassenger = () => {
                             </label>
                           </div>
                           <div className="input-group mb-3 d-flex">
+                            {/* {
+                              <Text color="red">{passportExDate === null ? "NAI" : "ASE"}</Text>
+                              
+                            } */}
                             <Box
                               border="1px solid #ced4da"
                               borderRadius="4px"
@@ -875,6 +885,7 @@ const QuickPassenger = () => {
                               <DatePicker
                                 dateFormat="dd/MM/yyyy"
                                 selected={
+                                  passportExDate !== null &&
                                   passportExDate?.length === 10
                                     ? new Date(passportExDate)
                                     : passportExDate

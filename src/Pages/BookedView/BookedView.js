@@ -178,7 +178,7 @@ const BookedView = () => {
             navigate("/successticket");
           } else {
             setLoading(false);
-            navigate("/failticket");
+            navigate("/processticket");
           }
         });
     }

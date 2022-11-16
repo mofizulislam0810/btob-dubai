@@ -837,7 +837,32 @@ const LeftSide = () => {
     setisExDateValidInf(arr.every((element) => element === true));
   }, [infant]);
 
-  useEffect(() => console.log(isExDateValidAdt, "===="), [isExDateValidAdt]);
+  // FOR BOOK NOW BUTTON DISABLE
+  const [isDisableAdt, setIsDisableAdt] = useState(false);
+  const [isDisableCnn, setIsDisableCnn] = useState(false);
+  const [isDisableInf, setIsDisableInf] = useState(false);
+
+  useEffect(() => {
+    let arr = adult.map((p) => {
+      return p.dateOfBirth === "" || p.passportExDate === "";
+    });
+    setIsDisableAdt(arr.includes(true) ? true : false);
+  }, [adult]);
+
+  useEffect(() => {
+    let arr = child.map((p) => {
+      return p.dateOfBirth === "" || p.passportExDate === "";
+    });
+    setIsDisableCnn(arr.includes(true) ? true : false);
+  }, [child]);
+
+  useEffect(() => {
+    let arr = infant.map((p) => {
+      return p.dateOfBirth === "" || p.passportExDate === "";
+    });
+    setIsDisableInf(arr.includes(true) ? true : false);
+  }, [infant]);
+  // useEffect(() => console.log(isExDateValidAdt, "===="), [isExDateValidAdt]);
 
   return (
     <form onSubmit={bookingData}>
@@ -3854,6 +3879,7 @@ const LeftSide = () => {
                           !isExDateValidInf) &&
                           setValidityError(true);
                       }}
+                      disabled={isDisableAdt || isDisableCnn || isDisableInf}
                     >
                       Book Now
                     </button>

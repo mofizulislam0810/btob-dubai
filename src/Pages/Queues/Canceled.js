@@ -274,7 +274,7 @@ const Canceled = () => {
                                       )}
                                     </td>
                                     <td>
-                                      {item.origin === "null"
+                                      {/* {item.origin === "null"
                                         ? ""
                                         : item.journeyType == "Round Trip"
                                         ? item.origin +
@@ -284,7 +284,8 @@ const Canceled = () => {
                                         : item.origin +
                                           (item.destination === ""
                                             ? ""
-                                            : "→" + item.destination)}
+                                            : "→" + item.destination)} */}
+                                            {item?.routes ?? ""}
                                     </td>
                                     <td>
                                       <a

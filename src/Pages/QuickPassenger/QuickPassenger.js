@@ -10,7 +10,11 @@ import { BiEdit } from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { getCountryNameFomCountryCode, ISODateFormatter, isValidEmail } from "../../common/functions";
+import {
+  getCountryNameFomCountryCode,
+  ISODateFormatter,
+  isValidEmail,
+} from "../../common/functions";
 import courtries from "../../JSON/countries.json";
 import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
@@ -120,7 +124,7 @@ const QuickPassenger = () => {
       };
       const response = await axios.post(
         environment.getAgentPassengers +
-        `?pageNumber=${currentPage}&pageSize=${pageSize}`,
+          `?pageNumber=${currentPage}&pageSize=${pageSize}`,
         sendObj,
         environment.headerToken
       );
@@ -169,7 +173,9 @@ const QuickPassenger = () => {
     setNationality(item.nationality);
     setGender(item.gender);
     setPassportNo(item.documentNumber);
-    setpassportExDate(item.expireDate === null ? null : ISODateFormatter(item.expireDate));
+    setpassportExDate(
+      item.expireDate === null ? null : ISODateFormatter(item.expireDate)
+    );
     setIssuingCountry(item.documentIssuingCountry);
     setPhone(item.phone);
     setEmail(item.email);
@@ -357,7 +363,7 @@ const QuickPassenger = () => {
   }, [currentPageNumber, passengerType]);
 
   const getCityData = async (countryName) => {
-    console.log({ countryName })
+    console.log({ countryName });
 
     const response = await axios.get(
       environment.getcityListbycountryName + "/" + countryName
@@ -372,12 +378,12 @@ const QuickPassenger = () => {
   }, []);
 
   const handleCountryChange = (e) => {
-    console.log({ e },)
+    console.log({ e });
     const country = getCountryNameFomCountryCode(e.target.value);
     setNationality(e.target.value);
     getCityData(country);
   };
-  console.log({ courtries })
+  console.log({ courtries });
   return (
     <div>
       <Navbar></Navbar>
@@ -450,21 +456,21 @@ const QuickPassenger = () => {
                               </td>
                               <td>{item.gender}</td>
                               <td>
-                              {item.documentNumber === ""
+                                {item.documentNumber === ""
                                   ? "N/A"
                                   : item.documentNumber}
                               </td>
                               <td>
-                               {item.expireDate === null
+                                {item.expireDate === null
                                   ? "N/A"
                                   : moment(item.expireDate).format(
-                                    "DD-MMMM-yyyy"
-                                  )}
+                                      "DD-MMMM-yyyy"
+                                    )}
                               </td>
 
                               <td>
                                 {item.passportCopy !== null &&
-                                  item.passportCopy !== "" ? (
+                                item.passportCopy !== "" ? (
                                   <a
                                     href={
                                       environment.s3URL + `${item.passportCopy}`
@@ -481,7 +487,7 @@ const QuickPassenger = () => {
                               </td>
                               <td>
                                 {item.visaCopy != null &&
-                                  item.visaCopy != "" ? (
+                                item.visaCopy != "" ? (
                                   <a
                                     href={
                                       environment.s3URL + `${item.visaCopy}`
@@ -708,6 +714,10 @@ const QuickPassenger = () => {
                                   placeholderText="dd/mm/yyyy"
                                   minDate={new Date(dobMinMax?.min)}
                                   maxDate={new Date(dobMinMax?.max)}
+                                  peekNextMonth
+                                  showMonthDropdown
+                                  showYearDropdown
+                                  dropdownMode="select"
                                 />
                               </Box>
 
@@ -842,11 +852,9 @@ const QuickPassenger = () => {
                           <div className="input-group mb-3">
                             <select
                               className="form-select rounded"
-                              onChange={(e) =>
-                                handleCountryChange(e)
-                              }
+                              onChange={(e) => handleCountryChange(e)}
                               value={issuingCountry}
-                            // required
+                              // required
                             >
                               <option value="">Issuing Country</option>
                               {courtries.map((item, index) => {
@@ -896,6 +904,9 @@ const QuickPassenger = () => {
                                 placeholderText="dd/mm/yyyy"
                                 minDate={new Date()}
                                 maxDate={new Date("2199-12-30")}
+                                showMonthDropdown
+                                showYearDropdown
+                                dropdownMode="select"
                               />
                             </Box>
 

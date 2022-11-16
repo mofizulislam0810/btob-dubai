@@ -518,6 +518,11 @@ const BookedView = () => {
                                 <>
                                   {ticketingList?.directions[0][0].segments.map(
                                     (item, index) => {
+                              //         (getCountryFomAirport(item.from) !==
+                              // "Bangladesh" ||
+                              // getCountryFomAirport(item.to) !==
+                              //   "Bangladesh") &&
+                              // setIsDomestic(false);
                                       return (
                                         <tr key={index}>
                                           <td>

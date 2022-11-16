@@ -559,7 +559,7 @@ const Queues = () => {
                                       )}
                                     </td>
                                     <td>
-                                      {item.origin === "null"
+                                      {/* {item.origin === "null"
                                         ? ""
                                         : item.journeyType == "Round Trip"
                                         ? item.origin +
@@ -569,7 +569,9 @@ const Queues = () => {
                                         : item.origin +
                                           (item.destination === ""
                                             ? ""
-                                            : "→" + item.destination)}
+                                            : "→" + item.destination)} */}
+
+                                        {item?.routes ?? ""}
                                     </td>
                                     <td>
                                       {item.status === "Booked" ? (
@@ -866,7 +868,34 @@ const Queues = () => {
                                             </Button>
                                           </a>
                                         </>
-                                      ) : item.status === "Ticket Cancelled" &&
+                                      ) : item.status === "Ticket Ordered" ? (
+                                        <>
+                                          <a
+                                            href="javascript:void(0)"
+                                            title="View Booking"
+                                            onClick={() =>
+                                              handleBookedView(
+                                                item.uniqueTransID
+                                              )
+                                            }
+                                          >
+                                            <Button
+                                              border="2px solid"
+                                              colorScheme="messenger"
+                                              variant="outline"
+                                              size="xsm"
+                                              borderRadius="16px"
+                                              p="1"
+                                            >
+                                              <span
+                                                style={{ fontSize: "10px" }}
+                                              >
+                                                VB
+                                              </span>
+                                            </Button>
+                                          </a>
+                                        </>
+                                      ) :  item.status === "Ticket Cancelled" &&
                                         item.refundStatus == null ? (
                                         <>
                                           <a

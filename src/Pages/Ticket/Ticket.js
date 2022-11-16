@@ -231,8 +231,8 @@ const Ticket = () => {
                             {/* FIXED COMPANY LOGO */}
                             {/* CHANGE THIS LATER */}
                             <td className="text-start">
-                              {ticketingList.ticketInfo?.agentLogo !== null &&
-                                ticketingList.ticketInfo?.agentLogo === "" ? (
+                              {ticketingList.ticketInfo?.agentLogo !== null ? (
+                                 <> 
                                 <img
                                   alt="img01"
                                   src={
@@ -241,8 +241,10 @@ const Ticket = () => {
                                   }
                                   style={{ width: "160px" }}
                                 ></img>
+                                </>
                               ) : (
                                 <>
+                           
                                   <img
                                     alt="img01"
                                     className="p-2"
@@ -654,8 +656,8 @@ const Ticket = () => {
                               </>
                             ) : (
                               <>
-                                {ticketingList?.directions[0] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
+                                {ticketingList?.directions !== undefined && ticketingList?.directions[0] !== undefined 
+                                  ? (
                                   <div className="border my-1">
                                     {ticketingList?.directions[0][0].segments.map(
                                       (item, index) => {
@@ -988,8 +990,8 @@ const Ticket = () => {
                                 ) : (
                                   <></>
                                 )}
-                                {ticketingList?.directions[1] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
+                                {ticketingList?.directions !== undefined && ticketingList?.directions[1] !== undefined 
+                                   ? (
                                   <div className="border mb-1">
                                     {ticketingList?.directions[1][0].segments.map(
                                       (item, index) => {
@@ -1323,8 +1325,8 @@ const Ticket = () => {
                                   <></>
                                 )}
 
-                                {ticketingList?.directions[2] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
+                                { ticketingList?.directions !== undefined &&  ticketingList?.directions[2] !== undefined 
+                                  ? (
                                   <div className="border mb-1">
                                     {ticketingList?.directions[2][0].segments.map(
                                       (item, index) => {
@@ -1658,8 +1660,8 @@ const Ticket = () => {
                                   <></>
                                 )}
 
-                                {ticketingList?.directions[3] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
+                                { ticketingList?.directions !== undefined && ticketingList?.directions[3] !== undefined 
+                                   ? (
                                   <div className="border mb-1">
                                     {ticketingList?.directions[3][0].segments.map(
                                       (item, index) => {
@@ -1993,8 +1995,8 @@ const Ticket = () => {
                                   <></>
                                 )}
 
-                                {ticketingList?.directions[4] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
+                                {ticketingList?.directions !== undefined && ticketingList?.directions[4] !== undefined 
+                                   ? (
                                   <div className="border mb-1">
                                     {ticketingList?.directions[4][0].segments.map(
                                       (item, index) => {
@@ -2328,8 +2330,8 @@ const Ticket = () => {
                                   <></>
                                 )}
 
-                                {ticketingList?.directions[5] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
+                                {ticketingList?.directions !== undefined && ticketingList?.directions[5] !== undefined 
+                                   ? (
                                   <div className="border mb-1">
                                     {ticketingList?.directions[5][0].segments.map(
                                       (item, index) => {

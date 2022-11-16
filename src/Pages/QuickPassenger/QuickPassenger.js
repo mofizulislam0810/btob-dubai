@@ -10,12 +10,7 @@ import { BiEdit } from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  getCountryNameFomCountryCode,
-  getPassengerType,
-  ISODateFormatter,
-  isValidEmail,
-} from "../../common/functions";
+import { getCountryNameFomCountryCode, ISODateFormatter, isValidEmail } from "../../common/functions";
 import courtries from "../../JSON/countries.json";
 import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
@@ -37,7 +32,7 @@ const QuickPassenger = () => {
   // let [dobDay, setDOBDay] = useState("");
   // let [dobMonth, setDOBMonth] = useState("");
   // let [dobYear, setDOBYear] = useState("");
-  let [dob, setDOB] = useState();
+  let [dob, setDOB] = useState(new Date());
   let [dobMinMax, setDobMinMax] = useState({ min: "", max: "" });
   let [nationality, setNationality] = useState("BD");
   let [gender, setGender] = useState("Male");
@@ -125,7 +120,7 @@ const QuickPassenger = () => {
       };
       const response = await axios.post(
         environment.getAgentPassengers +
-          `?pageNumber=${currentPage}&pageSize=${pageSize}`,
+        `?pageNumber=${currentPage}&pageSize=${pageSize}`,
         sendObj,
         environment.headerToken
       );
@@ -174,7 +169,7 @@ const QuickPassenger = () => {
     setNationality(item.nationality);
     setGender(item.gender);
     setPassportNo(item.documentNumber);
-    setpassportExDate(item.expireDate === null ? null : ISODateFormatter(item.expireDate));
+    setpassportExDate(ISODateFormatter(item.expireDate));
     setIssuingCountry(item.documentIssuingCountry);
     setPhone(item.phone);
     setEmail(item.email);
@@ -182,7 +177,6 @@ const QuickPassenger = () => {
     setCityName(item.cityName);
     setPassengerType(item.passengerType);
   };
-  console.log(passportExDate);
   const handleDeleteItem = (item) => {
     let result = window.confirm("Are you sure");
     if (result) {
@@ -254,7 +248,7 @@ const QuickPassenger = () => {
       return;
     }
     if (dob === "") {
-      toast.error("Date of birth not entered!");
+      toast.error("Sorry! DOB is not selected..");
       return;
     }
 
@@ -309,7 +303,7 @@ const QuickPassenger = () => {
           $("body").removeAttr("style");
           setLoading(false);
         } else {
-          toast.error(response.data.message);
+          toast.error("Please try again..");
           setLoading(false);
         }
       };
@@ -363,7 +357,7 @@ const QuickPassenger = () => {
   }, [currentPageNumber, passengerType]);
 
   const getCityData = async (countryName) => {
-    console.log({ countryName });
+    console.log({ countryName })
 
     const response = await axios.get(
       environment.getcityListbycountryName + "/" + countryName
@@ -378,12 +372,12 @@ const QuickPassenger = () => {
   }, []);
 
   const handleCountryChange = (e) => {
-    console.log({ e });
+    console.log({ e },)
     const country = getCountryNameFomCountryCode(e.target.value);
     setNationality(e.target.value);
     getCityData(country);
   };
-  console.log({ courtries });
+  console.log({ courtries })
   return (
     <div>
       <Navbar></Navbar>
@@ -423,12 +417,11 @@ const QuickPassenger = () => {
                         <tr>
                           <th>SL</th>
                           <th>Name</th>
-                          <th>Passenger Type</th>
                           <th>Email</th>
-                          <th>Date of Birth</th>
+                          <th>Mobile</th>
+                          <th>DOB</th>
                           <th>Gender</th>
                           <th>Passport Number</th>
-                          <th>Passport Expire Date</th>
                           <th>Passport Copy</th>
                           <th>Visa Copy</th>
                           <th>Action</th>
@@ -447,9 +440,10 @@ const QuickPassenger = () => {
                                   item.middle +
                                   " " +
                                   item.last}{" "}
+                                ({item.passengerType})
                               </td>
-                              <td>{getPassengerType(item.passengerType)}</td>
                               <td>{item.email}</td>
+                              <td>{item.phone}</td>
                               <td>
                                 {moment(item.dateOfBirth).format(
                                   "DD-MMMM-yyyy"
@@ -461,17 +455,10 @@ const QuickPassenger = () => {
                                   ? "N/A"
                                   : item.documentNumber}
                               </td>
-                              <td>
-                                {item.expireDate === null
-                                  ? "N/A"
-                                  : moment(item.expireDate).format(
-                                      "DD-MMMM-yyyy"
-                                    )}
-                              </td>
 
                               <td>
                                 {item.passportCopy !== null &&
-                                item.passportCopy !== "" ? (
+                                  item.passportCopy !== "" ? (
                                   <a
                                     href={
                                       environment.s3URL + `${item.passportCopy}`
@@ -488,7 +475,7 @@ const QuickPassenger = () => {
                               </td>
                               <td>
                                 {item.visaCopy != null &&
-                                item.visaCopy != "" ? (
+                                  item.visaCopy != "" ? (
                                   <a
                                     href={
                                       environment.s3URL + `${item.visaCopy}`
@@ -696,7 +683,7 @@ const QuickPassenger = () => {
                               <span className="text-danger">*</span>
                             </label>
                             <div className="input-group mb-3 d-flex">
-                              {/* <Box
+                              <Box
                                 border="1px solid #ced4da"
                                 borderRadius="4px"
                                 w="100%"
@@ -716,9 +703,9 @@ const QuickPassenger = () => {
                                   minDate={new Date(dobMinMax?.min)}
                                   maxDate={new Date(dobMinMax?.max)}
                                 />
-                              </Box> */}
+                              </Box>
 
-                              <input
+                              {/* <input
                                 type={"date"}
                                 data-date=""
                                 data-date-format="DD/MM/YYYY"
@@ -728,13 +715,17 @@ const QuickPassenger = () => {
                                 onChange={(e) => {
                                   setDOB(e.target.value);
                                 }}
-                                value={currentItem === null ? dob : dob}
+                                value={
+                                  currentItem !== null
+                                    ? dob
+                                    : ISODateFormatter(dobMinMax?.max)
+                                }
                                 min={dobMinMax?.min}
                                 max={dobMinMax?.max}
                                 required
                                 autoComplete="off"
                                 placeholder="Date of Birth"
-                              />
+                              /> */}
                             </div>
                           </div>
                         </div>
@@ -845,9 +836,11 @@ const QuickPassenger = () => {
                           <div className="input-group mb-3">
                             <select
                               className="form-select rounded"
-                              onChange={(e) => handleCountryChange(e)}
+                              onChange={(e) =>
+                                handleCountryChange(e)
+                              }
                               value={issuingCountry}
-                              // required
+                            // required
                             >
                               <option value="">Issuing Country</option>
                               {courtries.map((item, index) => {
@@ -871,7 +864,7 @@ const QuickPassenger = () => {
                             </label>
                           </div>
                           <div className="input-group mb-3 d-flex">
-                            {/* <Box
+                            <Box
                               border="1px solid #ced4da"
                               borderRadius="4px"
                               w="100%"
@@ -891,10 +884,11 @@ const QuickPassenger = () => {
                                 }
                                 placeholderText="dd/mm/yyyy"
                                 minDate={new Date()}
+                                maxDate={new Date("2199-12-30")}
                               />
-                            </Box> */}
+                            </Box>
 
-                            <input
+                            {/* <input
                               type={"date"}
                               data-date=""
                               data-date-format="DD/MM/YYYY"
@@ -904,9 +898,9 @@ const QuickPassenger = () => {
                                 setpassportExDate(e.target.value);
                               }}
                               value={
-                                currentItem === null
+                                currentItem !== null
                                   ? passportExDate
-                                  : passportExDate
+                                  : ISODateFormatter(new Date())
                               }
                               min={ISODateFormatter(new Date())}
                               autoComplete="off"
@@ -914,7 +908,7 @@ const QuickPassenger = () => {
                               pattern="\d{4}-\d{2}-\d{2}"
                               max="9999-12-31"
                               placeholder="Passport Expaire Date"
-                            />
+                            /> */}
                           </div>
                         </div>
                       </div>

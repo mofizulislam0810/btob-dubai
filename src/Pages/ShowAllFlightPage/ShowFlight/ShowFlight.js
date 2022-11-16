@@ -313,14 +313,15 @@ const ShowFlight = (props) => {
   const refCheck = useRef()
 
   const handleCheckBox = (e) => {
-    console.log({ refCheck }, { e })
-    if (checkList.length >= 3) {
-      toast.error("Sorry! You can't select more then three.");
-      refCheck.current.checked = false
-      return
-    }
+ 
     const checked = e.target.checked;
     if (checked) {
+      console.log({ refCheck }, { e })
+      if (checkList.length >= 3) {
+        toast.error("Sorry! You can't select more then three.");
+        refCheck.current.checked = false
+        return
+      }
       checkList.push(props.data);
       setCount(checkList.length);
       sessionStorage.setItem("checkList", JSON.stringify(checkList));

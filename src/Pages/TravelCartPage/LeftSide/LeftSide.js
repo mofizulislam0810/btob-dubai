@@ -781,7 +781,9 @@ const LeftSide = () => {
               { months: 6 }
             )
           )
-        ) || p.dateOfBirth === ""
+        ) ||
+        p.dateOfBirth === "" ||
+        p.passportExDate === ""
       );
     });
     setisExDateValidAdt(arr.every((element) => element === true));
@@ -803,7 +805,9 @@ const LeftSide = () => {
               { months: 6 }
             )
           )
-        ) || p.dateOfBirth === ""
+        ) ||
+        p.dateOfBirth === "" ||
+        p.passportExDate === ""
       );
     });
     setisExDateValidCnn(arr.every((element) => element === true));
@@ -825,7 +829,9 @@ const LeftSide = () => {
               { months: 6 }
             )
           )
-        ) || p.dateOfBirth === ""
+        ) ||
+        p.dateOfBirth === "" ||
+        p.passportExDate === ""
       );
     });
     setisExDateValidInf(arr.every((element) => element === true));

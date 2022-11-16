@@ -884,6 +884,7 @@ const QuickPassenger = () => {
                                 }
                                 placeholderText="dd/mm/yyyy"
                                 minDate={new Date()}
+                                maxDate={new Date("2199-12-30")}
                               />
                             </Box>
 

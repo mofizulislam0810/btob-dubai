@@ -864,6 +864,27 @@ const LeftSide = () => {
   }, [infant]);
   // useEffect(() => console.log(isExDateValidAdt, "===="), [isExDateValidAdt]);
 
+  const [isDomestic, setIsDomestic] = useState(false);
+
+  // useEffect(() => {
+  //   setIsDomestic(
+  //     getCountryFomAirport(cartData[0]?.flights[0].from) === "Bangladesh" &&
+  //       getCountryFomAirport(cartData[0]?.flights[1].from) === "Bangladesh"
+  //   );
+  // },[])
+
+  useEffect(() => {
+    setIsDomestic(
+      origin.split(",")[0].split("- ")[1] === "Bangladesh" &&
+        destination.split(",")[0].split("- ")[1] === "Bangladesh"
+        ? true
+        : false
+    );
+  }, [origin, destination]);
+
+  // console.log(origin.split(",")[0].split("- ")[1], "= o");
+  // console.log(destination.split(",")[0].split("- ")[1], "= d");
+
   return (
     <form onSubmit={bookingData}>
       <div className="col-lg-12">
@@ -3879,7 +3900,11 @@ const LeftSide = () => {
                           !isExDateValidInf) &&
                           setValidityError(true);
                       }}
-                      disabled={isDisableAdt || isDisableCnn || isDisableInf}
+                      disabled={
+                        isDomestic
+                          ? false
+                          : isDisableAdt || isDisableCnn || isDisableInf
+                      }
                     >
                       Book Now
                     </button>

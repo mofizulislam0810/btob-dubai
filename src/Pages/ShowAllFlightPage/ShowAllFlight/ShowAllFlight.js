@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack } from "@chakra-ui/react";
 import $ from "jquery";
-import SearchFrom from "../../SearchPage/SearchFrom/SearchFrom";
-import gif from "../../../images/icon/Spinner-1s-200px.gif";
-import ShowFlight from "../ShowFlight/ShowFlight";
-import "./ShowAllFlight.css";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import NoDataFoundPage from "../../NoDataFoundPage/NoDataFoundPage/NoDataFoundPage";
+import { ToastContainer } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import Loading from "../../Loading/Loading";
-import { RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack } from "@chakra-ui/react";
+import NoDataFoundPage from "../../NoDataFoundPage/NoDataFoundPage/NoDataFoundPage";
+import ShowFlight from "../ShowFlight/ShowFlight";
+import "./ShowAllFlight.css";
 
 const ShowAllFlight = ({
   fetchFlighData,
@@ -17,7 +16,7 @@ const ShowAllFlight = ({
   fecthMulti,
   loading,
   airlineFilters,
-  tripType,checkList
+  tripType, checkList
 }) => {
   const { count } = useAuth();
   // console.log(count);
@@ -279,12 +278,15 @@ const ShowAllFlight = ({
 
   }, []);
 
+
   const handleProposal = () => {
     navigate("/proposal");
   };
 
+
   return (
     <div>
+      <ToastContainer position="bottom-right" autoClose={1500} />
       <div className="container box-shadow content-width">
         <div className="row border mt-3">
           <div className="col-lg-6 py-3 px-5 bg-white">

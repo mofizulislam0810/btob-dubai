@@ -1,9 +1,10 @@
 import { decode as base64_decode } from "base-64";
 import $ from "jquery";
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import { toast } from "react-toastify";
 import ReactTooltip from "react-tooltip";
 import { totalFlightDuration } from "../../../common/functions";
 import useAuth from "../../../hooks/useAuth";
@@ -298,7 +299,7 @@ const ShowFlight = (props) => {
   //     sessionStorage.setItem("checkList", JSON.stringify(checkList));
   //     console.log("1", { checkList })
   //   } else {
-      
+
   //     checkList = checkList.filter(
   //       (item) => item.itemCodeRef !== props.data.itemCodeRef
   //     );
@@ -309,11 +310,15 @@ const ShowFlight = (props) => {
   //     setCount(checkList.length);
   //   }
   // };
+  const refCheck = useRef()
 
   const handleCheckBox = (e) => {
-    // if (checkList.length >= 3) {
-    //   return e.target.unchecked;
-    // }
+    console.log({ refCheck }, { e })
+    if (checkList.length >= 3) {
+      toast.error("Sorry! You can't select more then three.");
+      refCheck.current.checked = false
+      return
+    }
     const checked = e.target.checked;
     if (checked) {
       checkList.push(props.data);
@@ -334,10 +339,8 @@ const ShowFlight = (props) => {
 
   // console.log(currency);
   const isTempInspector = sessionStorage.getItem("isTempInspector");
-
   //BAGGAGE RESPONSE
   //console.log(directions[0][0].segments[0].baggage, "====");
-
   return (
     <>
       <>
@@ -349,8 +352,11 @@ const ShowFlight = (props) => {
             {/* up flight section  */}
             <span className="text-start">
               <input
+                ref={refCheck}
                 type="checkbox"
                 className="show-flight-checkbox"
+                // checked={checkList.length <= 3 ? true : false}
+                // onChange={(e) => console.log(e.target.value)}
                 onClick={(e) => handleCheckBox(e)}
               />
             </span>

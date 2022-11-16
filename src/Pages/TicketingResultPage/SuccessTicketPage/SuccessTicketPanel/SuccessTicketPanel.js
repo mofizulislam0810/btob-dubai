@@ -294,7 +294,7 @@ const SuccessTicketPanel = () => {
                                                 ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
                                                 : item.serviceClass + "(" + item.bookingClass + ")"}</td>
                                           <td className="align-middle">
-                                            {
+                                            {/* {
                                               ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                                 return (
                                                   <>
@@ -302,6 +302,26 @@ const SuccessTicketPanel = () => {
                                                   </>
                                                 )
                                               })
+                                            }
+
+{
+                                            ticketData.item1?.ticketInfoes.map((itm, idx) => {
+                                                return (
+                                                  <>
+                                                    <span>{itm.passengerInfo.passengerType === 'ADT' ? 'Adult' : itm.passengerInfo.passengerType === 'CNN' ? 'Child' : itm.passengerInfo.passengerType === 'INF'?'Infant' : 'Adult'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerInfo.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
+                                                  </>
+                                                )
+                                              })
+                                            } */}
+
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.adt !== null ? <><span>Adult <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.cnn !== null ? <><span>Child <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.inf !== null ? <><span>Infant <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : 10Kg</span><br></br> </> : <></>
                                             }
                                           </td>
                                         </tr>
@@ -386,7 +406,7 @@ const SuccessTicketPanel = () => {
                                             ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
                                             : item.serviceClass + "(" + item.bookingClass + ")"}</td>
                                       <td className="align-middle">
-                                        {
+                                        {/* {
                                           ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                             return (
                                               <>
@@ -394,7 +414,16 @@ const SuccessTicketPanel = () => {
                                               </>
                                             )
                                           })
-                                        }
+                                        } */}
+                                         {
+                                              ticketData.item1?.flightInfo.passengerFares.adt !== null ? <><span>Adult <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.cnn !== null ? <><span>Child <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.inf !== null ? <><span>Infant <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : 10Kg</span><br></br> </> : <></>
+                                            }
                                       </td>
                                     </tr>
                                   </tbody>
@@ -479,7 +508,7 @@ const SuccessTicketPanel = () => {
                                             ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
                                             : item.serviceClass + "(" + item.bookingClass + ")"}</td>
                                       <td className="align-middle">
-                                        {
+                                        {/* {
                                           ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                             return (
                                               <>
@@ -487,7 +516,17 @@ const SuccessTicketPanel = () => {
                                               </>
                                             )
                                           })
-                                        }
+                                        } */}
+
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.adt !== null ? <><span>Adult <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.cnn !== null ? <><span>Child <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.inf !== null ? <><span>Infant <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : 10Kg</span><br></br> </> : <></>
+                                            }
                                       </td>
                                     </tr>
                                   </tbody>
@@ -572,7 +611,7 @@ const SuccessTicketPanel = () => {
                                             ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
                                             : item.serviceClass + "(" + item.bookingClass + ")"}</td>
                                       <td className="align-middle">
-                                        {
+                                        {/* {
                                           ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                             return (
                                               <>
@@ -580,7 +619,16 @@ const SuccessTicketPanel = () => {
                                               </>
                                             )
                                           })
-                                        }
+                                        } */}
+                                           {
+                                              ticketData.item1?.flightInfo.passengerFares.adt !== null ? <><span>Adult <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.cnn !== null ? <><span>Child <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.inf !== null ? <><span>Infant <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : 10Kg</span><br></br> </> : <></>
+                                            }
                                       </td>
                                     </tr>
                                   </tbody>
@@ -665,7 +713,7 @@ const SuccessTicketPanel = () => {
                                             ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
                                             : item.serviceClass + "(" + item.bookingClass + ")"}</td>
                                       <td className="align-middle">
-                                        {
+                                        {/* {
                                           ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                             return (
                                               <>
@@ -673,7 +721,17 @@ const SuccessTicketPanel = () => {
                                               </>
                                             )
                                           })
-                                        }
+                                        } */}
+
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.adt !== null ? <><span>Adult <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.cnn !== null ? <><span>Child <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.inf !== null ? <><span>Infant <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : 10Kg</span><br></br> </> : <></>
+                                            }
                                       </td>
                                     </tr>
                                   </tbody>
@@ -758,7 +816,7 @@ const SuccessTicketPanel = () => {
                                             ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
                                             : item.serviceClass + "(" + item.bookingClass + ")"}</td>
                                       <td className="align-middle">
-                                        {
+                                        {/* {
                                           ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                             return (
                                               <>
@@ -766,7 +824,17 @@ const SuccessTicketPanel = () => {
                                               </>
                                             )
                                           })
-                                        }
+                                        } */}
+
+                                             {
+                                              ticketData.item1?.flightInfo.passengerFares.adt !== null ? <><span>Adult <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.cnn !== null ? <><span>Child <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.inf !== null ? <><span>Infant <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : 10Kg</span><br></br> </> : <></>
+                                            }
                                       </td>
                                     </tr>
                                   </tbody>

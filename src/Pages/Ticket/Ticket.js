@@ -901,7 +901,7 @@ const Ticket = () => {
                                                               itm.passengerType === "ADT" ?
                                                                 <>
                                                                   {
-                                                                    idx === 0 ? <>
+                                                                    <>
                                                                       <span> Adult<span
                                                                         style={{
                                                                           fontSize:
@@ -918,7 +918,7 @@ const Ticket = () => {
                                                                         }
                                                                       </span>
                                                                       <br></br>
-                                                                    </> : <></>
+                                                                    </>
                                                                   }
                                                                 </> : <></>
                                                             }
@@ -926,7 +926,7 @@ const Ticket = () => {
                                                               itm.passengerType === "CNN" ?
                                                                 <>
                                                                   {
-                                                                    idx === 1 ? <>
+                                                                   <>
                                                                       <span> Child<span
                                                                         style={{
                                                                           fontSize:
@@ -941,9 +941,9 @@ const Ticket = () => {
                                                                           item.baggage[0]
                                                                             ?.units
                                                                         }
-                                                                      </span>
+                                                                      </span> 
                                                                       <br></br>
-                                                                    </> : <></>
+                                                              </>
                                                                   }
                                                                 </> : <></>
                                                             }
@@ -951,7 +951,7 @@ const Ticket = () => {
                                                               itm.passengerType === "INF" ?
                                                                 <>
                                                                   {
-                                                                    idx === 2 ? <>
+                                                             <>
                                                                       <span> Infant<span
                                                                         style={{
                                                                           fontSize:
@@ -960,15 +960,15 @@ const Ticket = () => {
                                                                       >
                                                                         <i class="fas fa-arrow-right"></i>
                                                                       </span>{" "}
-                                                                        Check in :{" "}
-                                                                        {item.baggage[0]?.amount}
+                                                                        Check in :{" "} 10Kg
+                                                                        {/* {item.baggage[0]?.amount}
                                                                         {
                                                                           item.baggage[0]
                                                                             ?.units
-                                                                        }
+                                                                        } */}
                                                                       </span>
-
-                                                                    </> : <></>
+                                                                      <br></br>
+                                                                    </> 
                                                                   }
                                                                 </> : <></>
                                                             }
@@ -1227,39 +1227,85 @@ const Ticket = () => {
                                                         ")"}
                                                   </td>
                                                   <td className="align-middle">
-                                                    {ticketingList.passengerInfo?.map(
+                                                  {ticketingList.fareBreakdown?.map(
                                                       (itm, idx) => {
                                                         return (
                                                           <>
-                                                            <span>
-                                                              {itm.passengerType ===
-                                                                "ADT"
-                                                                ? "Adult"
-                                                                : itm.passengerType ===
-                                                                  "CNN"
-                                                                  ? "Child"
-                                                                  : "Infant"}{" "}
-                                                              <span
-                                                                style={{
-                                                                  fontSize:
-                                                                    "10px",
-                                                                }}
-                                                              >
-                                                                <i class="fas fa-arrow-right"></i>
-                                                              </span>{" "}
-                                                              Check in :{" "}
-                                                              {itm.passengerType ===
-                                                                "INF"
-                                                                ? "10"
-                                                                : item
-                                                                  .baggage[0]
-                                                                  ?.amount}
-                                                              {
-                                                                item.baggage[0]
-                                                                  ?.units
-                                                              }
-                                                            </span>
-                                                            <br></br>
+                                                            {
+                                                              itm.passengerType === "ADT" ?
+                                                                <>
+                                                                  {
+                                                                    <>
+                                                                      <span> Adult<span
+                                                                        style={{
+                                                                          fontSize:
+                                                                            "10px",
+                                                                        }}
+                                                                      >
+                                                                        <i class="fas fa-arrow-right"></i>
+                                                                      </span>{" "}
+                                                                        Check in :{" "}
+                                                                        {item.baggage[0]?.amount}
+                                                                        {
+                                                                          item.baggage[0]
+                                                                            ?.units
+                                                                        }
+                                                                      </span>
+                                                                      <br></br>
+                                                                    </>
+                                                                  }
+                                                                </> : <></>
+                                                            }
+                                                            {
+                                                              itm.passengerType === "CNN" ?
+                                                                <>
+                                                                  {
+                                                                   <>
+                                                                      <span> Child<span
+                                                                        style={{
+                                                                          fontSize:
+                                                                            "10px",
+                                                                        }}
+                                                                      >
+                                                                        <i class="fas fa-arrow-right"></i>
+                                                                      </span>{" "}
+                                                                        Check in :{" "}
+                                                                        {item.baggage[0]?.amount}
+                                                                        {
+                                                                          item.baggage[0]
+                                                                            ?.units
+                                                                        }
+                                                                      </span> 
+                                                                      <br></br>
+                                                              </>
+                                                                  }
+                                                                </> : <></>
+                                                            }
+                                                            {
+                                                              itm.passengerType === "INF" ?
+                                                                <>
+                                                                  {
+                                                             <>
+                                                                      <span> Infant<span
+                                                                        style={{
+                                                                          fontSize:
+                                                                            "10px",
+                                                                        }}
+                                                                      >
+                                                                        <i class="fas fa-arrow-right"></i>
+                                                                      </span>{" "}
+                                                                        Check in :{" "} 10Kg
+                                                                        {/* {item.baggage[0]?.amount}
+                                                                        {
+                                                                          item.baggage[0]
+                                                                            ?.units
+                                                                        } */}
+                                                                      </span>
+                                                                      <br></br>
+                                                                    </> 
+                                                                  }
+                                                                </> : <></>
+                                                            }
                                                           </>
                                                         );
                                                       }
@@ -1516,39 +1562,85 @@ const Ticket = () => {
                                                         ")"}
                                                   </td>
                                                   <td className="align-middle">
-                                                    {ticketingList.passengerInfo?.map(
+                                                  {ticketingList.fareBreakdown?.map(
                                                       (itm, idx) => {
                                                         return (
                                                           <>
-                                                            <span>
-                                                              {itm.passengerType ===
-                                                                "ADT"
-                                                                ? "Adult"
-                                                                : itm.passengerType ===
-                                                                  "CNN"
-                                                                  ? "Child"
-                                                                  : "Infant"}{" "}
-                                                              <span
-                                                                style={{
-                                                                  fontSize:
-                                                                    "10px",
-                                                                }}
-                                                              >
-                                                                <i class="fas fa-arrow-right"></i>
-                                                              </span>{" "}
-                                                              Check in :{" "}
-                                                              {itm.passengerType ===
-                                                                "INF"
-                                                                ? "10"
-                                                                : item
-                                                                  .baggage[0]
-                                                                  ?.amount}
-                                                              {
-                                                                item.baggage[0]
-                                                                  ?.units
-                                                              }
-                                                            </span>
-                                                            <br></br>
+                                                            {
+                                                              itm.passengerType === "ADT" ?
+                                                                <>
+                                                                  {
+                                                                    <>
+                                                                      <span> Adult<span
+                                                                        style={{
+                                                                          fontSize:
+                                                                            "10px",
+                                                                        }}
+                                                                      >
+                                                                        <i class="fas fa-arrow-right"></i>
+                                                                      </span>{" "}
+                                                                        Check in :{" "}
+                                                                        {item.baggage[0]?.amount}
+                                                                        {
+                                                                          item.baggage[0]
+                                                                            ?.units
+                                                                        }
+                                                                      </span>
+                                                                      <br></br>
+                                                                    </>
+                                                                  }
+                                                                </> : <></>
+                                                            }
+                                                            {
+                                                              itm.passengerType === "CNN" ?
+                                                                <>
+                                                                  {
+                                                                   <>
+                                                                      <span> Child<span
+                                                                        style={{
+                                                                          fontSize:
+                                                                            "10px",
+                                                                        }}
+                                                                      >
+                                                                        <i class="fas fa-arrow-right"></i>
+                                                                      </span>{" "}
+                                                                        Check in :{" "}
+                                                                        {item.baggage[0]?.amount}
+                                                                        {
+                                                                          item.baggage[0]
+                                                                            ?.units
+                                                                        }
+                                                                      </span> 
+                                                                      <br></br>
+                                                              </>
+                                                                  }
+                                                                </> : <></>
+                                                            }
+                                                            {
+                                                              itm.passengerType === "INF" ?
+                                                                <>
+                                                                  {
+                                                             <>
+                                                                      <span> Infant<span
+                                                                        style={{
+                                                                          fontSize:
+                                                                            "10px",
+                                                                        }}
+                                                                      >
+                                                                        <i class="fas fa-arrow-right"></i>
+                                                                      </span>{" "}
+                                                                        Check in :{" "} 10Kg
+                                                                        {/* {item.baggage[0]?.amount}
+                                                                        {
+                                                                          item.baggage[0]
+                                                                            ?.units
+                                                                        } */}
+                                                                      </span>
+                                                                      <br></br>
+                                                                    </> 
+                                                                  }
+                                                                </> : <></>
+                                                            }
                                                           </>
                                                         );
                                                       }
@@ -1805,39 +1897,85 @@ const Ticket = () => {
                                                         ")"}
                                                   </td>
                                                   <td className="align-middle">
-                                                    {ticketingList.passengerInfo?.map(
+                                                  {ticketingList.fareBreakdown?.map(
                                                       (itm, idx) => {
                                                         return (
                                                           <>
-                                                            <span>
-                                                              {itm.passengerType ===
-                                                                "ADT"
-                                                                ? "Adult"
-                                                                : itm.passengerType ===
-                                                                  "CNN"
-                                                                  ? "Child"
-                                                                  : "Infant"}{" "}
-                                                              <span
-                                                                style={{
-                                                                  fontSize:
-                                                                    "10px",
-                                                                }}
-                                                              >
-                                                                <i class="fas fa-arrow-right"></i>
-                                                              </span>{" "}
-                                                              Check in :{" "}
-                                                              {itm.passengerType ===
-                                                                "INF"
-                                                                ? "10"
-                                                                : item
-                                                                  .baggage[0]
-                                                                  ?.amount}
-                                                              {
-                                                                item.baggage[0]
-                                                                  ?.units
-                                                              }
-                                                            </span>
-                                                            <br></br>
+                                                            {
+                                                              itm.passengerType === "ADT" ?
+                                                                <>
+                                                                  {
+                                                                    <>
+                                                                      <span> Adult<span
+                                                                        style={{
+                                                                          fontSize:
+                                                                            "10px",
+                                                                        }}
+                                                                      >
+                                                                        <i class="fas fa-arrow-right"></i>
+                                                                      </span>{" "}
+                                                                        Check in :{" "}
+                                                                        {item.baggage[0]?.amount}
+                                                                        {
+                                                                          item.baggage[0]
+                                                                            ?.units
+                                                                        }
+                                                                      </span>
+                                                                      <br></br>
+                                                                    </>
+                                                                  }
+                                                                </> : <></>
+                                                            }
+                                                            {
+                                                              itm.passengerType === "CNN" ?
+                                                                <>
+                                                                  {
+                                                                   <>
+                                                                      <span> Child<span
+                                                                        style={{
+                                                                          fontSize:
+                                                                            "10px",
+                                                                        }}
+                                                                      >
+                                                                        <i class="fas fa-arrow-right"></i>
+                                                                      </span>{" "}
+                                                                        Check in :{" "}
+                                                                        {item.baggage[0]?.amount}
+                                                                        {
+                                                                          item.baggage[0]
+                                                                            ?.units
+                                                                        }
+                                                                      </span> 
+                                                                      <br></br>
+                                                              </>
+                                                                  }
+                                                                </> : <></>
+                                                            }
+                                                            {
+                                                              itm.passengerType === "INF" ?
+                                                                <>
+                                                                  {
+                                                             <>
+                                                                      <span> Infant<span
+                                                                        style={{
+                                                                          fontSize:
+                                                                            "10px",
+                                                                        }}
+                                                                      >
+                                                                        <i class="fas fa-arrow-right"></i>
+                                                                      </span>{" "}
+                                                                        Check in :{" "} 10Kg
+                                                                        {/* {item.baggage[0]?.amount}
+                                                                        {
+                                                                          item.baggage[0]
+                                                                            ?.units
+                                                                        } */}
+                                                                      </span>
+                                                                      <br></br>
+                                                                    </> 
+                                                                  }
+                                                                </> : <></>
+                                                            }
                                                           </>
                                                         );
                                                       }
@@ -2094,39 +2232,85 @@ const Ticket = () => {
                                                         ")"}
                                                   </td>
                                                   <td className="align-middle">
-                                                    {ticketingList.passengerInfo?.map(
+                                                  {ticketingList.fareBreakdown?.map(
                                                       (itm, idx) => {
                                                         return (
                                                           <>
-                                                            <span>
-                                                              {itm.passengerType ===
-                                                                "ADT"
-                                                                ? "Adult"
-                                                                : itm.passengerType ===
-                                                                  "CNN"
-                                                                  ? "Child"
-                                                                  : "Infant"}{" "}
-                                                              <span
-                                                                style={{
-                                                                  fontSize:
-                                                                    "10px",
-                                                                }}
-                                                              >
-                                                                <i class="fas fa-arrow-right"></i>
-                                                              </span>{" "}
-                                                              Check in :{" "}
-                                                              {itm.passengerType ===
-                                                                "INF"
-                                                                ? "10"
-                                                                : item
-                                                                  .baggage[0]
-                                                                  ?.amount}
-                                                              {
-                                                                item.baggage[0]
-                                                                  ?.units
-                                                              }
-                                                            </span>
-                                                            <br></br>
+                                                            {
+                                                              itm.passengerType === "ADT" ?
+                                                                <>
+                                                                  {
+                                                                    <>
+                                                                      <span> Adult<span
+                                                                        style={{
+                                                                          fontSize:
+                                                                            "10px",
+                                                                        }}
+                                                                      >
+                                                                        <i class="fas fa-arrow-right"></i>
+                                                                      </span>{" "}
+                                                                        Check in :{" "}
+                                                                        {item.baggage[0]?.amount}
+                                                                        {
+                                                                          item.baggage[0]
+                                                                            ?.units
+                                                                        }
+                                                                      </span>
+                                                                      <br></br>
+                                                                    </>
+                                                                  }
+                                                                </> : <></>
+                                                            }
+                                                            {
+                                                              itm.passengerType === "CNN" ?
+                                                                <>
+                                                                  {
+                                                                   <>
+                                                                      <span> Child<span
+                                                                        style={{
+                                                                          fontSize:
+                                                                            "10px",
+                                                                        }}
+                                                                      >
+                                                                        <i class="fas fa-arrow-right"></i>
+                                                                      </span>{" "}
+                                                                        Check in :{" "}
+                                                                        {item.baggage[0]?.amount}
+                                                                        {
+                                                                          item.baggage[0]
+                                                                            ?.units
+                                                                        }
+                                                                      </span> 
+                                                                      <br></br>
+                                                              </>
+                                                                  }
+                                                                </> : <></>
+                                                            }
+                                                            {
+                                                              itm.passengerType === "INF" ?
+                                                                <>
+                                                                  {
+                                                             <>
+                                                                      <span> Infant<span
+                                                                        style={{
+                                                                          fontSize:
+                                                                            "10px",
+                                                                        }}
+                                                                      >
+                                                                        <i class="fas fa-arrow-right"></i>
+                                                                      </span>{" "}
+                                                                        Check in :{" "} 10Kg
+                                                                        {/* {item.baggage[0]?.amount}
+                                                                        {
+                                                                          item.baggage[0]
+                                                                            ?.units
+                                                                        } */}
+                                                                      </span>
+                                                                      <br></br>
+                                                                    </> 
+                                                                  }
+                                                                </> : <></>
+                                                            }
                                                           </>
                                                         );
                                                       }
@@ -2383,16 +2567,15 @@ const Ticket = () => {
                                                         ")"}
                                                   </td>
                                                   <td className="align-middle">
-                                                    {ticketingList.passengerInfo?.map(
+                                                  {ticketingList.fareBreakdown?.map(
                                                       (itm, idx) => {
                                                         return (
                                                           <>
-
                                                             {
                                                               itm.passengerType === "ADT" ?
                                                                 <>
                                                                   {
-                                                                    idx === 0 ? <>
+                                                                    <>
                                                                       <span> Adult<span
                                                                         style={{
                                                                           fontSize:
@@ -2408,7 +2591,58 @@ const Ticket = () => {
                                                                             ?.units
                                                                         }
                                                                       </span>
-                                                                    </> : <></>
+                                                                      <br></br>
+                                                                    </>
+                                                                  }
+                                                                </> : <></>
+                                                            }
+                                                            {
+                                                              itm.passengerType === "CNN" ?
+                                                                <>
+                                                                  {
+                                                                   <>
+                                                                      <span> Child<span
+                                                                        style={{
+                                                                          fontSize:
+                                                                            "10px",
+                                                                        }}
+                                                                      >
+                                                                        <i class="fas fa-arrow-right"></i>
+                                                                      </span>{" "}
+                                                                        Check in :{" "}
+                                                                        {item.baggage[0]?.amount}
+                                                                        {
+                                                                          item.baggage[0]
+                                                                            ?.units
+                                                                        }
+                                                                      </span> 
+                                                                      <br></br>
+                                                              </>
+                                                                  }
+                                                                </> : <></>
+                                                            }
+                                                            {
+                                                              itm.passengerType === "INF" ?
+                                                                <>
+                                                                  {
+                                                             <>
+                                                                      <span> Infant<span
+                                                                        style={{
+                                                                          fontSize:
+                                                                            "10px",
+                                                                        }}
+                                                                      >
+                                                                        <i class="fas fa-arrow-right"></i>
+                                                                      </span>{" "}
+                                                                        Check in :{" "} 10Kg
+                                                                        {/* {item.baggage[0]?.amount}
+                                                                        {
+                                                                          item.baggage[0]
+                                                                            ?.units
+                                                                        } */}
+                                                                      </span>
+                                                                      <br></br>
+                                                                    </> 
                                                                   }
                                                                 </> : <></>
                                                             }

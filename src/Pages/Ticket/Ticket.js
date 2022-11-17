@@ -16,6 +16,7 @@ import airports from "../../JSON/airports.json";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import logo from "../../images/logo/logo-combined.png";
+import { getPassengerType } from "../../common/functions";
 
 const Ticket = () => {
   let [ticketingList, setTicketingList] = useState([]);
@@ -2993,8 +2994,7 @@ const Ticket = () => {
                   <table className="table table-bordered table-hover">
                     <thead style={{ background: "gray", color: "white" }}>
                       <tr>
-                        <th>Ticket No</th>
-                        <th>Pax Name</th>
+                        <th>Passenger Type</th>
                         <th>Base Fare</th>
                         <th>Tax</th>
                         <th>AIT</th>
@@ -3008,16 +3008,7 @@ const Ticket = () => {
                         return (
                           <>
                             <tr>
-                              <td>{item.ticketNumbers}</td>
-                              <td>
-                                {item.title +
-                                  " " +
-                                  item.first +
-                                  " " +
-                                  item.middle +
-                                  " " +
-                                  item.last}
-                              </td>
+                              <td>{getPassengerType(item.passengerType)}</td>
                               <td>
                                 <input
                                   value={item.basePrice}

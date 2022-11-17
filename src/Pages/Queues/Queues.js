@@ -342,7 +342,7 @@ const Queues = () => {
                                 Cancelled
                               </a>
                             </li>
-                            <li id="menu-item">
+                            {/* <li id="menu-item">
                               <a
                                 href="javascript:void(0)"
                                 className={
@@ -355,7 +355,7 @@ const Queues = () => {
                               >
                                 Pending
                               </a>
-                            </li>
+                            </li> */}
                             <li id="menu-item">
                               <a
                                 href="javascript:void(0)"
@@ -504,13 +504,13 @@ const Queues = () => {
                                         index +
                                         1}
                                     </td> */}
-                                    <td>
-                                      {item.issueDate != null ? (
+                                    <td className="text-center">
+                                      {item.issueDate != null && item.status !== "Ticket Ordered"? (
                                         moment(item.issueDate).format(
                                           "DD-MM-YYYY hh:mm:ss A"
                                         )
                                       ) : (
-                                        <></>
+                                        <>N/A</>
                                       )}
                                     </td>
                                     <td>
@@ -519,7 +519,7 @@ const Queues = () => {
                                       )}
                                     </td>
                                     <td>
-                                      {item.status === "Booked" ? (
+                                      {item.status === "Booked" || item.status === "Ticket Ordered" ? (
                                         <>
                                           <a
                                             href="javascript:void(0)"
@@ -574,7 +574,7 @@ const Queues = () => {
                                         {item?.routes ?? ""}
                                     </td>
                                     <td>
-                                      {item.status === "Booked" ? (
+                                      {item.status === "Booked" || item.status === "Ticket Ordered"? (
                                         <>
                                           <a
                                             href="javascript:void(0)"
@@ -602,7 +602,7 @@ const Queues = () => {
                                         </>
                                       )}
                                     </td>
-                                    <td>{item.ticketNumber}</td>
+                                    <td className="text-center">{item.ticketNumber !== null && item.status !== "Ticket Ordered" ? item.ticketNumber : "N/A"}</td>
                                     <td>
                                       {item.ticketingPrice.toLocaleString(
                                         "en-US"

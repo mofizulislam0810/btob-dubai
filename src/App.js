@@ -58,6 +58,7 @@ import LoanLedger from "./Pages/Ledger/LoanLedger";
 import ResetPassword from "./Pages/AuthenticationPage/ResetPassword/ResetPassword";
 import EmiPolicy from "./Pages/Optional/EmiPolicy";
 import AboutUs from "./Pages/Optional/About/About";
+import CancleTicketView from "./Pages/CancleTicketView/CancleTicketView";
 function App() {
   var isLoggedIn = localStorage.getItem("token") !== null ? true : false;
   console.log(isLoggedIn);
@@ -115,6 +116,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <TravelCartPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/cancelticket"
+              element={
+                <PrivateRoute>
+                  <CancleTicketView />
                 </PrivateRoute>
               }
             />

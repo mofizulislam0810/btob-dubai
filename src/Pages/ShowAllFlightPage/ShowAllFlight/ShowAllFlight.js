@@ -1,9 +1,14 @@
-
-import { RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack } from "@chakra-ui/react";
+import {
+  RangeSlider,
+  RangeSliderFilledTrack,
+  RangeSliderThumb,
+  RangeSliderTrack,
+} from "@chakra-ui/react";
 import $ from "jquery";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { moveToFirstPlaceOneWay } from "../../../common/functions";
 import useAuth from "../../../hooks/useAuth";
 import Loading from "../../Loading/Loading";
 import NoDataFoundPage from "../../NoDataFoundPage/NoDataFoundPage/NoDataFoundPage";
@@ -17,11 +22,12 @@ const ShowAllFlight = ({
   fecthMulti,
   loading,
   airlineFilters,
-  tripType, checkList
+  tripType,
+  checkList,
 }) => {
   const { count } = useAuth();
   // console.log(count);
-  const [amountChange, setAmountChange] = useState('Gross Amount');
+  const [amountChange, setAmountChange] = useState("Gross Amount");
   const { state } = useLocation();
   const navigate = useNavigate();
   const { tripTypeModify } = state;
@@ -69,7 +75,7 @@ const ShowAllFlight = ({
   // console.log(price);
   // setPrice(mainJson.minMaxPrice?.maxPrice);
   //price=mainJson.minMaxPrice?.maxPrice;
-  const [name, setName] = useState(flightName.map(item => item.code));
+  const [name, setName] = useState(flightName.map((item) => item.code));
   const [radioname, setRadioName] = useState(0);
   const [check, setCheck] = useState(true);
   const handleInput = (e) => {
@@ -77,7 +83,6 @@ const ShowAllFlight = ({
   };
 
   let dataPrice = [];
-
 
   const [filterPrice, setFilterPrice] = useState([
     Math.floor(mainJson?.minMaxPrice?.minPrice),
@@ -90,7 +95,8 @@ const ShowAllFlight = ({
       // (item) => parseInt(item.totalPrice) <= parseInt(price, 10)
       (item) =>
         parseInt(item.totalPrice) >= filterPrice[0] &&
-        parseInt(item.totalPrice) <= filterPrice[1] && name.some((category) => [item.platingCarrier].flat().includes(category))
+        parseInt(item.totalPrice) <= filterPrice[1] &&
+        name.some((category) => [item.platingCarrier].flat().includes(category))
     );
   } else if (parseInt(radioname) === 1 && name.length === 0) {
     dataPrice = jsonData?.filter(
@@ -152,12 +158,11 @@ const ShowAllFlight = ({
     );
   }
 
-
   const [itemCkeck, setItemCheck] = useState(true);
   const handleClick = (e) => {
     if (e.target.checked) {
       setCheck(true);
-      setName(flightName.map(item => item.code))
+      setName(flightName.map((item) => item.code));
       flightName.map((item, index) => {
         document.getElementById("checkDefault" + index).checked = true;
       });
@@ -168,7 +173,7 @@ const ShowAllFlight = ({
         document.getElementById("checkDefault" + index).checked = false;
       });
     }
-  }
+  };
   // console.log(check);
   const handleChange = (e) => {
     //  alert(name.length+", "+flightName.length);
@@ -240,7 +245,6 @@ const ShowAllFlight = ({
   // console.log(currency);
   localStorage.setItem("currency", JSON.stringify(currency));
   useEffect(() => {
-
     // setName(flightName?.name);
     setCheck(true);
     flightName.map((item, index) => {
@@ -277,7 +281,6 @@ const ShowAllFlight = ({
         $("#pricesection").toggle();
       });
     });
-
   }, []);
 
   const handleProposal = () => {
@@ -292,23 +295,55 @@ const ShowAllFlight = ({
     if (count > 3) {
       toast.error("You can't select flight more then three.");
     }
-  }, [count])
+  }, [count]);
+
+  // console.log(flightsData, "flightsData");
+  //console.log(moveToFirstPlaceOneWay(flightsData, "BS"), "flightsData +");
+
+  // MOVE USB AIR ON TOP
+  moveToFirstPlaceOneWay(flightsData, "BS");
+
   return (
     <div>
       <ToastContainer position="bottom-right" autoClose={1500} />
       <div className="container box-shadow content-width">
         <div className="row border mt-3">
           <div className="col-lg-6 py-3 px-5 bg-white">
-            <h5 className="pt-1">We found {fetchFlighData?.totalFlights} flights, {fetchFlighData?.airlineFilters?.length} Unique Airlines </h5>
+            <h5 className="pt-1">
+              We found {fetchFlighData?.totalFlights} flights,{" "}
+              {fetchFlighData?.airlineFilters?.length} Unique Airlines{" "}
+            </h5>
           </div>
           <div className="col-lg-6 bg-white py-3 px-5 ">
             <div class="dropdown float-end">
-              <button class="fw-bold text-color dropdown-toggle" style={{ fontSize: "11px" }} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <span className="me-1"><i class="fas fa-money-bill-wave"></i></span>{amountChange}
+              <button
+                class="fw-bold text-color dropdown-toggle"
+                style={{ fontSize: "11px" }}
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <span className="me-1">
+                  <i class="fas fa-money-bill-wave"></i>
+                </span>
+                {amountChange}
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li class="dropdown-item" style={{ cursor: "pointer" }} onClick={() => setAmountChange("Gross Amount")}>Gross Amount</li>
-                <li class="dropdown-item" style={{ cursor: "pointer" }} onClick={() => setAmountChange("Invoice Amount")}>Invoice Amount</li>
+                <li
+                  class="dropdown-item"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setAmountChange("Gross Amount")}
+                >
+                  Gross Amount
+                </li>
+                <li
+                  class="dropdown-item"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setAmountChange("Invoice Amount")}
+                >
+                  Invoice Amount
+                </li>
               </ul>
             </div>
           </div>
@@ -320,8 +355,11 @@ const ShowAllFlight = ({
           <div
             className="col-lg-3 rounded box-shadow bg-white"
             style={{
-              height: "100%", position: "sticky", top: "9%", maxHeight: "100vh",
-              overflowY: "auto"
+              height: "100%",
+              position: "sticky",
+              top: "9%",
+              maxHeight: "100vh",
+              overflowY: "auto",
             }}
           >
             <div className="container">
@@ -373,11 +411,19 @@ const ShowAllFlight = ({
                     </RangeSlider>
                   </div>
                   <div>
-                    <span className="float-start fw-bold" style={{ fontSize: "13px" }}>
-                      MIN {currency !== undefined ? currency : "BDT"}   {filterPrice[0]}
+                    <span
+                      className="float-start fw-bold"
+                      style={{ fontSize: "13px" }}
+                    >
+                      MIN {currency !== undefined ? currency : "BDT"}{" "}
+                      {filterPrice[0]}
                     </span>
-                    <span className="float-end fw-bold" style={{ fontSize: "13px" }}>
-                      MAX {currency !== undefined ? currency : "BDT"}   {filterPrice[1]}
+                    <span
+                      className="float-end fw-bold"
+                      style={{ fontSize: "13px" }}
+                    >
+                      MAX {currency !== undefined ? currency : "BDT"}{" "}
+                      {filterPrice[1]}
                     </span>
                   </div>
                 </div>
@@ -405,7 +451,11 @@ const ShowAllFlight = ({
                 <div className="col-lg-12 mt-2" id="stopsection">
                   <div className="form-check mt-2">
                     {radioflightName.map((item, index) => (
-                      <div key={index} style={{ fontSize: "13px" }} className="fw-bold">
+                      <div
+                        key={index}
+                        style={{ fontSize: "13px" }}
+                        className="fw-bold"
+                      >
                         <input
                           className="form-check-input"
                           type="radio"
@@ -468,24 +518,39 @@ const ShowAllFlight = ({
                   </div>
                   <div className="form-check mt-2">
                     {flightName.map((item, index) => (
-                      <div key={index} className="d-flex align-items-center justify-content-between">
+                      <div
+                        key={index}
+                        className="d-flex align-items-center justify-content-between"
+                      >
                         <input
                           className="form-check-input"
                           type="checkbox"
                           value={item.code}
                           id={"checkDefault" + index}
                           onChange={handleChange}
-                        // defaultChecked={itemCkeck}
+                          // defaultChecked={itemCkeck}
                         />
-                        <img src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.code}.png`} alt="airlineCode" width="35px" height="30px" />
+                        <img
+                          src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.code}.png`}
+                          alt="airlineCode"
+                          width="35px"
+                          height="30px"
+                        />
                         <label
                           className="form-check-label fw-bold px-2"
                           htmlFor="flexCheckDefault"
-                          title={item.name} style={{ fontSize: "13px" }}
+                          title={item.name}
+                          style={{ fontSize: "13px" }}
                         >
                           {item.code} ({item.totalFlights})
                         </label>{" "}
-                        <span className="fw-bold float-end" style={{ fontSize: "13px" }}>{currency !== undefined ? currency : "BDT"}   {item.minPrice}</span>
+                        <span
+                          className="fw-bold float-end"
+                          style={{ fontSize: "13px" }}
+                        >
+                          {currency !== undefined ? currency : "BDT"}{" "}
+                          {item.minPrice}
+                        </span>
                         <br></br>
                       </div>
                     ))}
@@ -549,7 +614,9 @@ const ShowAllFlight = ({
             </div>
           </div>
           <div className="col-lg-9">
-            {flightsData?.length === 0 && flightsData !== null && flightsData !== undefined ? (
+            {flightsData?.length === 0 &&
+            flightsData !== null &&
+            flightsData !== undefined ? (
               <>
                 <NoDataFoundPage />
               </>
@@ -577,7 +644,7 @@ const ShowAllFlight = ({
             <button
               className="btn button-color fw-bold text-white ms-3 btn-sm rounded"
               onClick={handleProposal}
-            // disabled={count > 3 ? true : false}
+              // disabled={count > 3 ? true : false}
             >
               Create Proposal
             </button>

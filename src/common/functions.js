@@ -58,11 +58,11 @@ export const addDurations = (inputArr) => {
 
   return totalMinutes >= 1440
     ? `${Math.floor(totalMinutes / 1440)}d ${Math.floor(
-      (totalMinutes % 1440) / 60
-    )}h ${(totalMinutes % 1440) % 60}m`
+        (totalMinutes % 1440) / 60
+      )}h ${(totalMinutes % 1440) % 60}m`
     : totalMinutes >= 60
-      ? `${Math.floor(totalMinutes / 60)}h ${totalMinutes % 60}m`
-      : `${totalMinutes % 60}m`;
+    ? `${Math.floor(totalMinutes / 60)}h ${totalMinutes % 60}m`
+    : `${totalMinutes % 60}m`;
 };
 
 // INTERVAL BETWEEN SEGMENTS
@@ -83,4 +83,14 @@ export const getCountryNameFomCountryCode = (input) => {
   return countries.find((obj) => {
     return obj.code === input;
   })?.name;
+};
+
+export const moveToFirstPlaceOneWay = (arr, text) => {
+  arr.map((elem, index) => {
+    if (elem.platingCarrier === text) {
+      arr.splice(index, 1);
+      arr.splice(0, 0, elem);
+    }
+  });
+  return arr;
 };

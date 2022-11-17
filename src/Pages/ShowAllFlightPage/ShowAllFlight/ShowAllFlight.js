@@ -8,7 +8,7 @@ import $ from "jquery";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import { moveToFirstPlaceOneWay } from "../../../common/functions";
+import { moveToFirstPlace } from "../../../common/functions";
 import useAuth from "../../../hooks/useAuth";
 import Loading from "../../Loading/Loading";
 import NoDataFoundPage from "../../NoDataFoundPage/NoDataFoundPage/NoDataFoundPage";
@@ -234,11 +234,11 @@ const ShowAllFlight = ({
   };
 
   if (String(tripType) === String("One Way")) {
-    flightsData = dataPrice && moveToFirstPlaceOneWay(dataPrice, "VQ");
+    flightsData = dataPrice && moveToFirstPlace(dataPrice, "BS");
   } else if (String(tripType) === String("Round Trip")) {
-    flightsData = dataPrice;
+    flightsData = dataPrice && moveToFirstPlace(dataPrice, "BS");
   } else if (String(tripType) === String("Multi City")) {
-    flightsData = dataPrice;
+    flightsData = dataPrice && moveToFirstPlace(dataPrice, "BS");
   }
 
   let currency = mainJson?.currency;

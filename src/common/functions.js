@@ -87,7 +87,7 @@ export const getCountryNameFomCountryCode = (input) => {
 
 export const moveToFirstPlaceOneWay = (arr, text) => {
   arr.map((elem, index) => {
-    if (elem.platingCarrier === text) {
+    if (elem?.platingCarrier === text) {
       arr.splice(index, 1);
       arr.splice(0, 0, elem);
     }

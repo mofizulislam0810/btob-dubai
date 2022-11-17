@@ -234,7 +234,7 @@ const ShowAllFlight = ({
   };
 
   if (String(tripType) === String("One Way")) {
-    flightsData = dataPrice;
+    flightsData = dataPrice && moveToFirstPlaceOneWay(dataPrice, "VQ");
   } else if (String(tripType) === String("Round Trip")) {
     flightsData = dataPrice;
   } else if (String(tripType) === String("Multi City")) {
@@ -298,10 +298,10 @@ const ShowAllFlight = ({
   }, [count]);
 
   // console.log(flightsData, "flightsData");
-  //console.log(moveToFirstPlaceOneWay(flightsData, "BS"), "flightsData +");
+  //console.log(moveToFirstPlaceOneWay(flightsData, "VQ"), "++++");
 
   // MOVE USB AIR ON TOP
-  moveToFirstPlaceOneWay(flightsData, "BS");
+  //moveToFirstPlace(flightsData, "VQ");
 
   return (
     <div>

@@ -388,7 +388,7 @@ const LeftSide = () => {
 
   const [child, setChild] = useState(childList);
 
-  const [isExDateValidAdt, setisExDateValidAdtAdt] = useState(true);
+  const [isExDateValidAdt, setisExDateValidAdt] = useState(true);
   const [isExDateValidCnn, setisExDateValidCnn] = useState(true);
   const [isExDateValidInf, setisExDateValidInf] = useState(true);
 
@@ -781,10 +781,12 @@ const LeftSide = () => {
               { months: 6 }
             )
           )
-        ) || p.dateOfBirth === ""
+        ) ||
+        p.dateOfBirth === "" ||
+        p.passportExDate === ""
       );
     });
-    setisExDateValidAdtAdt(arr.every((element) => element === true));
+    setisExDateValidAdt(arr.every((element) => element === true));
   }, [adult]);
 
   useEffect(() => {
@@ -803,10 +805,12 @@ const LeftSide = () => {
               { months: 6 }
             )
           )
-        ) || p.dateOfBirth === ""
+        ) ||
+        p.dateOfBirth === "" ||
+        p.passportExDate === ""
       );
     });
-    setisExDateValidAdtAdt(arr.every((element) => element === true));
+    setisExDateValidCnn(arr.every((element) => element === true));
   }, [child]);
 
   useEffect(() => {
@@ -825,13 +829,61 @@ const LeftSide = () => {
               { months: 6 }
             )
           )
-        ) || p.dateOfBirth === ""
+        ) ||
+        p.dateOfBirth === "" ||
+        p.passportExDate === ""
       );
     });
-    setisExDateValidAdtAdt(arr.every((element) => element === true));
+    setisExDateValidInf(arr.every((element) => element === true));
   }, [infant]);
 
-  useEffect(() => console.log(isExDateValidAdt, "===="), [isExDateValidAdt]);
+  // FOR BOOK NOW BUTTON DISABLE
+  const [isDisableAdt, setIsDisableAdt] = useState(false);
+  const [isDisableCnn, setIsDisableCnn] = useState(false);
+  const [isDisableInf, setIsDisableInf] = useState(false);
+
+  useEffect(() => {
+    let arr = adult.map((p) => {
+      return p.dateOfBirth === "" || p.passportExDate === "";
+    });
+    setIsDisableAdt(arr.includes(true) ? true : false);
+  }, [adult]);
+
+  useEffect(() => {
+    let arr = child.map((p) => {
+      return p.dateOfBirth === "" || p.passportExDate === "";
+    });
+    setIsDisableCnn(arr.includes(true) ? true : false);
+  }, [child]);
+
+  useEffect(() => {
+    let arr = infant.map((p) => {
+      return p.dateOfBirth === "" || p.passportExDate === "";
+    });
+    setIsDisableInf(arr.includes(true) ? true : false);
+  }, [infant]);
+  // useEffect(() => console.log(isExDateValidAdt, "===="), [isExDateValidAdt]);
+
+  const [isDomestic, setIsDomestic] = useState(false);
+
+  // useEffect(() => {
+  //   setIsDomestic(
+  //     getCountryFomAirport(cartData[0]?.flights[0].from) === "Bangladesh" &&
+  //       getCountryFomAirport(cartData[0]?.flights[1].from) === "Bangladesh"
+  //   );
+  // },[])
+
+  useEffect(() => {
+    setIsDomestic(
+      origin.split(",")[0].split("- ")[1] === "Bangladesh" &&
+        destination.split(",")[0].split("- ")[1] === "Bangladesh"
+        ? true
+        : false
+    );
+  }, [origin, destination]);
+
+  // console.log(origin.split(",")[0].split("- ")[1], "= o");
+  // console.log(destination.split(",")[0].split("- ")[1], "= d");
 
   return (
     <form onSubmit={bookingData}>
@@ -1146,9 +1198,6 @@ const LeftSide = () => {
                                 >
                                   <DatePicker
                                     dateFormat="dd/MM/yyyy"
-                                    showMonthDropdown
-                                    showYearDropdown
-                                    dropdownMode="select"
                                     selected={
                                       p.dateOfBirth && new Date(p.dateOfBirth)
                                     }
@@ -1178,6 +1227,9 @@ const LeftSide = () => {
                                         years: -12,
                                       }
                                     )}
+                                    showMonthDropdown
+                                    showYearDropdown
+                                    dropdownMode="select"
                                   />
                                 </Box>
 
@@ -1638,9 +1690,6 @@ const LeftSide = () => {
                               >
                                 <DatePicker
                                   dateFormat="dd/MM/yyyy"
-                                  showMonthDropdown
-                                  showYearDropdown
-                                  dropdownMode="select"
                                   selected={
                                     p.passportExDate &&
                                     new Date(ISODateFormatter(p.passportExDate))
@@ -1670,6 +1719,9 @@ const LeftSide = () => {
                                   maxDate={new Date("2199-12-30")}
                                   error
                                   helperText="Your error message"
+                                  showMonthDropdown
+                                  showYearDropdown
+                                  dropdownMode="select"
                                 />
                               </Box>
                               {validityError && p.passportExDate === "" && (
@@ -2052,9 +2104,6 @@ const LeftSide = () => {
                             >
                               <DatePicker
                                 dateFormat="dd/MM/yyyy"
-                                showMonthDropdown
-                                showYearDropdown
-                                dropdownMode="select"
                                 selected={
                                   p.dateOfBirth && new Date(p.dateOfBirth)
                                 }
@@ -2096,6 +2145,9 @@ const LeftSide = () => {
                                     years: -2,
                                   }
                                 )}
+                                showMonthDropdown
+                                showYearDropdown
+                                dropdownMode="select"
                               />
                             </Box>
 
@@ -2510,9 +2562,6 @@ const LeftSide = () => {
                               >
                                 <DatePicker
                                   dateFormat="dd/MM/yyyy"
-                                  showMonthDropdown
-                                  showYearDropdown
-                                  dropdownMode="select"
                                   selected={
                                     p.passportExDate &&
                                     new Date(ISODateFormatter(p.passportExDate))
@@ -2540,6 +2589,9 @@ const LeftSide = () => {
                                     { months: 6 }
                                   )}
                                   maxDate={new Date("2199-12-30")}
+                                  showMonthDropdown
+                                  showYearDropdown
+                                  dropdownMode="select"
                                 />
                               </Box>
 
@@ -2993,9 +3045,6 @@ const LeftSide = () => {
                             >
                               <DatePicker
                                 dateFormat="dd/MM/yyyy"
-                                showMonthDropdown
-                                showYearDropdown
-                                dropdownMode="select"
                                 selected={
                                   p.dateOfBirth && new Date(p.dateOfBirth)
                                 }
@@ -3013,6 +3062,9 @@ const LeftSide = () => {
                                   years: -2,
                                 })}
                                 maxDate={new Date(Database?.journeyDate)}
+                                showMonthDropdown
+                                showYearDropdown
+                                dropdownMode="select"
                               />
                             </Box>
 
@@ -3338,9 +3390,6 @@ const LeftSide = () => {
                               >
                                 <DatePicker
                                   dateFormat="dd/MM/yyyy"
-                                  showMonthDropdown
-                                  showYearDropdown
-                                  dropdownMode="select"
                                   selected={
                                     p.passportExDate &&
                                     new Date(p.passportExDate)
@@ -3368,6 +3417,9 @@ const LeftSide = () => {
                                     { months: 6 }
                                   )}
                                   maxDate={new Date("2199-12-30")}
+                                  showMonthDropdown
+                                  showYearDropdown
+                                  dropdownMode="select"
                                 />
                               </Box>
 
@@ -3866,6 +3918,11 @@ const LeftSide = () => {
                           !isExDateValidInf) &&
                           setValidityError(true);
                       }}
+                      disabled={
+                        isDomestic
+                          ? false
+                          : isDisableAdt || isDisableCnn || isDisableInf
+                      }
                     >
                       Book Now
                     </button>

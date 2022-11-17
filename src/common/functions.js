@@ -93,3 +93,13 @@ export const getCountryFomAirport = (input) => {
     return obj.iata === input;
   })?.country;
 };
+
+
+
+export const sumRating = (agent) => {
+  let total = 0;
+    agent?.forEach(a => {
+         total+= a.totalPrice * a.passengerCount;
+    });
+return total;
+}

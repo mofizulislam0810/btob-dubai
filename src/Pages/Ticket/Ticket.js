@@ -53,7 +53,7 @@ const Ticket = () => {
       );
       console.log(response.data, "+++");
       setTicketingList(response.data);
-      setPassengerListEdited(response.data.passengerInfo);
+      setPassengerListEdited(response.data.fareBreakdown);
       // console.log(response.data.data);
       //   handleGetPassengerList(
       //   response.data.data[0].passengerIds,
@@ -70,7 +70,7 @@ const Ticket = () => {
   };
   const handleSubmit = () => {
     setLoading(true);
-    console.log(passengerListEdited);
+    console.log({passengerListEdited});
     const postPassengerList = async () => {
       const response = await axios.post(
         environment.updateBookingFareBreakdown,
@@ -2706,51 +2706,30 @@ const Ticket = () => {
                                         <tr>
                                           <td className="text-start">Adult</td>
                                           <td>
-                                            {item.basePriceEdited > 0
-                                              ? item.basePriceEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.basePrice.toLocaleString(
+                                            { item.basePrice.toLocaleString(
                                                 "en-US"
                                               )}
                                           </td>
                                           <td>
-                                            {item.taxEdited > 0
-                                              ? item.taxEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.tax.toLocaleString(
+                                            { item.tax.toLocaleString(
                                                 "en-US"
                                               )}
                                           </td>
 
                                           <td>
-                                            {item.aitEdited > 0
-                                              ? item.aitEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.ait.toLocaleString(
+                                            {item.ait.toLocaleString(
                                                 "en-US"
                                               )}
                                           </td>
                                           <td>
-                                            {item.discountEdited > 0
-                                              ? item.discountEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.discount.toLocaleString(
+                                            {item.discount.toLocaleString(
                                                 "en-US"
                                               )}
                                           </td>
                                           <td>{item.passengerCount}</td>
                                           <td className="fw-bold">
                                             {item.currencyName}{" "}
-                                            {
-                                              item.totalPriceEdited > 0 ? (
-                                                item.totalPriceEdited *
-                                                item.passengerCount
-                                              ).toLocaleString("en-US") :
-                                                (
+                                            {(
                                                   item.totalPrice *
                                                   item.passengerCount
                                                 ).toLocaleString("en-US")}
@@ -2760,115 +2739,74 @@ const Ticket = () => {
                                     ) : item.passengerType === "CNN" ? (
                                       <>
                                         <tr>
-                                          <td className="text-start">Child</td>
-                                          <td>
-                                            {item.basePriceEdited > 0
-                                              ? item.basePriceEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.basePrice.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
-                                          <td>
-                                            {item.taxEdited > 0
-                                              ? item.taxEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.tax.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
+                                       <td className="text-start">Child</td>
+                                       <td>
+                                         { item.basePrice.toLocaleString(
+                                             "en-US"
+                                           )}
+                                       </td>
+                                       <td>
+                                         { item.tax.toLocaleString(
+                                             "en-US"
+                                           )}
+                                       </td>
 
-                                          <td>
-                                            {item.aitEdited > 0
-                                              ? item.aitEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.ait.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
-                                          <td>
-                                            {item.discountEdited > 0
-                                              ? item.discountEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.discount.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
-                                          <td>{item.passengerCount}</td>
-                                          <td className="fw-bold">
-                                            {item.currencyName}{" "}
-                                            {
-                                              item.totalPriceEdited > 0 ? (
-                                                item.totalPriceEdited *
-                                                item.passengerCount
-                                              ).toLocaleString("en-US") :
-                                                (
-                                                  item.totalPrice *
-                                                  item.passengerCount
-                                                ).toLocaleString("en-US")}
-                                          </td>
-                                        </tr>
+                                       <td>
+                                         {item.ait.toLocaleString(
+                                             "en-US"
+                                           )}
+                                       </td>
+                                       <td>
+                                         {item.discount.toLocaleString(
+                                             "en-US"
+                                           )}
+                                       </td>
+                                       <td>{item.passengerCount}</td>
+                                       <td className="fw-bold">
+                                         {item.currencyName}{" "}
+                                         {(
+                                               item.totalPrice *
+                                               item.passengerCount
+                                             ).toLocaleString("en-US")}
+                                       </td>
+                                     </tr>
                                       </>
+                                       
                                     ) : item.passengerType === "INF" ? (
                                       <>
-                                        <tr>
-                                          <td className="text-start">Infant</td>
-                                          <td>
-                                            {item.basePriceEdited > 0
-                                              ? item.basePriceEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.basePrice.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
-                                          <td>
-                                            {item.taxEdited > 0
-                                              ? item.taxEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.tax.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
+                                      <tr>
+                                     <td className="text-start">Infant</td>
+                                     <td>
+                                       { item.basePrice.toLocaleString(
+                                           "en-US"
+                                         )}
+                                     </td>
+                                     <td>
+                                       { item.tax.toLocaleString(
+                                           "en-US"
+                                         )}
+                                     </td>
 
-                                          <td>
-                                            {item.aitEdited > 0
-                                              ? item.aitEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.ait.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
-                                          <td>
-                                            {item.discountEdited > 0
-                                              ? item.discountEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.discount.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
-                                          <td>{item.passengerCount}</td>
-                                          <td className="fw-bold">
-                                            {item.currencyName}{" "}
-                                            {
-                                              item.totalPriceEdited > 0 ? (
-                                                item.totalPriceEdited *
-                                                item.passengerCount
-                                              ).toLocaleString("en-US") :
-                                                (
-                                                  item.totalPrice *
-                                                  item.passengerCount
-                                                ).toLocaleString("en-US")}
-                                          </td>
-                                        </tr>
-                                      </>
+                                     <td>
+                                       {item.ait.toLocaleString(
+                                           "en-US"
+                                         )}
+                                     </td>
+                                     <td>
+                                       {item.discount.toLocaleString(
+                                           "en-US"
+                                         )}
+                                     </td>
+                                     <td>{item.passengerCount}</td>
+                                     <td className="fw-bold">
+                                       {item.currencyName}{" "}
+                                       {(
+                                             item.totalPrice *
+                                             item.passengerCount
+                                           ).toLocaleString("en-US")}
+                                     </td>
+                                   </tr>
+                                    </>
                                     ) : (
                                       <></>
                                     )}

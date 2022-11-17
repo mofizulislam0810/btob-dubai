@@ -342,7 +342,7 @@ const Queues = () => {
                                 Cancelled
                               </a>
                             </li>
-                            <li id="menu-item">
+                            {/* <li id="menu-item">
                               <a
                                 href="javascript:void(0)"
                                 className={
@@ -355,7 +355,7 @@ const Queues = () => {
                               >
                                 Pending
                               </a>
-                            </li>
+                            </li> */}
                             <li id="menu-item">
                               <a
                                 href="javascript:void(0)"
@@ -504,13 +504,13 @@ const Queues = () => {
                                         index +
                                         1}
                                     </td> */}
-                                    <td>
-                                      {item.issueDate != null ? (
+                                    <td className="text-center">
+                                      {item.issueDate != null && item.status !== "Ticket Ordered"? (
                                         moment(item.issueDate).format(
                                           "DD-MM-YYYY hh:mm:ss A"
                                         )
                                       ) : (
-                                        <></>
+                                        <>N/A</>
                                       )}
                                     </td>
                                     <td>
@@ -519,7 +519,7 @@ const Queues = () => {
                                       )}
                                     </td>
                                     <td>
-                                      {item.status === "Booked" ? (
+                                      {item.status === "Booked" || item.status === "Ticket Ordered" ? (
                                         <>
                                           <a
                                             href="javascript:void(0)"
@@ -559,7 +559,7 @@ const Queues = () => {
                                       )}
                                     </td>
                                     <td>
-                                      {item.origin === "null"
+                                      {/* {item.origin === "null"
                                         ? ""
                                         : item.journeyType == "Round Trip"
                                         ? item.origin +
@@ -569,10 +569,12 @@ const Queues = () => {
                                         : item.origin +
                                           (item.destination === ""
                                             ? ""
-                                            : "→" + item.destination)}
+                                            : "→" + item.destination)} */}
+
+                                        {item?.routes ?? ""}
                                     </td>
                                     <td>
-                                      {item.status === "Booked" ? (
+                                      {item.status === "Booked" || item.status === "Ticket Ordered"? (
                                         <>
                                           <a
                                             href="javascript:void(0)"
@@ -600,7 +602,7 @@ const Queues = () => {
                                         </>
                                       )}
                                     </td>
-                                    <td>{item.ticketNumber}</td>
+                                    <td className="text-center">{item.ticketNumber !== null && item.status !== "Ticket Ordered" ? item.ticketNumber : "N/A"}</td>
                                     <td>
                                       {item.ticketingPrice.toLocaleString(
                                         "en-US"
@@ -866,7 +868,34 @@ const Queues = () => {
                                             </Button>
                                           </a>
                                         </>
-                                      ) : item.status === "Ticket Cancelled" &&
+                                      ) : item.status === "Ticket Ordered" ? (
+                                        <>
+                                          <a
+                                            href="javascript:void(0)"
+                                            title="View Booking"
+                                            onClick={() =>
+                                              handleBookedView(
+                                                item.uniqueTransID
+                                              )
+                                            }
+                                          >
+                                            <Button
+                                              border="2px solid"
+                                              colorScheme="messenger"
+                                              variant="outline"
+                                              size="xsm"
+                                              borderRadius="16px"
+                                              p="1"
+                                            >
+                                              <span
+                                                style={{ fontSize: "10px" }}
+                                              >
+                                                VB
+                                              </span>
+                                            </Button>
+                                          </a>
+                                        </>
+                                      ) :  item.status === "Ticket Cancelled" &&
                                         item.refundStatus == null ? (
                                         <>
                                           <a

@@ -46,18 +46,21 @@ const FailedTicketPage = () => {
                   ticketData.item2 != undefined ? 
                     <>
                       <p className="">
-                        {ticketData.item2?.message.split("#")[0]=="1"?ticketData.item2?.message.split("#")[1]:
+                        {
+                        ticketData.item2?.isMessageShow ===true ? ticketData.item2?.message:
                            <p>We are processing your ticket.<br></br>Please contact to the support.<br></br>
                            Thank You</p>
                         }
                       </p>
                     </> :
+                    
                     <>
-                      <p className="">
-                        {ticketData.message.split("#")[0]=="1"?ticketData.message.split("#")[1]: 
-                        <p>We are processing your ticket.<br></br>Please contact to the support.<br></br>Thank You</p>
+                     {
+                        ticketData.isMessageShow ===true ? ticketData.message:
+                           <p>We are processing your ticket.<br></br>Please contact to the support.<br></br>
+                           Thank You</p>
                         }
-                        </p></>
+                    </>
                 }
                 
                 <div className="my-3 p-4">

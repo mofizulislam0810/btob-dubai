@@ -178,7 +178,8 @@ const BookedView = () => {
             navigate("/successticket");
           } else {
             setLoading(false);
-            navigate("/failticket");
+            setTicketData(response.data);
+            navigate("/processticket");
           }
         });
     }
@@ -314,7 +315,7 @@ const BookedView = () => {
                               <td className="fw-bold">Booking ID:</td>
                               <td>{ticketingList.ticketInfo?.uniqueTransID}</td>
                             </tr>
-                            <tr>
+                            {/* <tr>
                               <th>Issue Before:</th>
                               <td style={{ color: "red" }}>
                                 {lastTicketTime !== "" &&
@@ -353,12 +354,56 @@ const BookedView = () => {
                               </td>
                               <td className="fw-bold">PNR</td>
                               <td>{ticketingList.ticketInfo?.pnr}</td>
-                            </tr>
+                            </tr> */}
                             <tr>
-                              <th>Booking Status:</th>
-                              <td>{ticketingList.ticketInfo?.status}</td>
+                              <th>{ticketingList.ticketInfo?.status === "Ticket Ordered"? "" :"Booking"} Status:</th>
+                              <td>{ticketingList.ticketInfo?.status === "Ticket Ordered"? "Ticket Processing " : ticketingList.ticketInfo?.status}</td>
                               <td className="fw-bold">Booked By:</td>
                               <td>{ticketingList.ticketInfo?.agentName}</td>
+                            </tr>
+
+                            <tr>
+                                  {ticketingList.ticketInfo?.status === "Ticket Ordered"? "" :<>
+                                  <th>Issue Before:</th>
+                                    <td style={{ color: "red" }}>
+                                      {lastTicketTime !== "" &&
+                                      lastTicketTime !== null &&
+                                      lastTicketTime !== undefined ? (
+                                        lastTicketTime
+                                      ) : (
+                                        <>
+                                          <a
+                                            href="javascript:void(0)"
+                                            title="Last Ticketing Time"
+                                            onClick={() =>
+                                              handleGetTime(
+                                                ticketingList.ticketInfo?.referenceLog
+                                              )
+                                            }
+                                          >
+                                            <Button
+                                              isLoading={isLoading}
+                                              border="2px solid"
+                                              colorScheme="blue"
+                                              variant="outline"
+                                              size="xsm"
+                                              borderRadius="16px"
+                                              p="1"
+                                              m="1"
+                                              // disabled = {click}
+                                            >
+                                              <span style={{ fontSize: "10px" }}>
+                                                Get Limit
+                                              </span>
+                                            </Button>
+                                          </a>
+                                        </>
+                                      )}
+                                    </td>
+                                  </>
+                                  }
+                              <td className="fw-bold">PNR</td>
+                              <td>{ticketingList.ticketInfo?.pnr}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -518,6 +563,11 @@ const BookedView = () => {
                                 <>
                                   {ticketingList?.directions[0][0].segments.map(
                                     (item, index) => {
+                              //         (getCountryFomAirport(item.from) !==
+                              // "Bangladesh" ||
+                              // getCountryFomAirport(item.to) !==
+                              //   "Bangladesh") &&
+                              // setIsDomestic(false);
                                       return (
                                         <tr key={index}>
                                           <td>
@@ -1132,8 +1182,17 @@ const BookedView = () => {
                               <td className="fw-bold">Booking ID:</td>
                               <td>{ticketingList.ticketInfo?.uniqueTransID}</td>
                             </tr>
+                            
                             <tr>
-                              <th>Issue Before:</th>
+                            <th>{ticketingList.ticketInfo?.status === "Ticket Ordered"? "" :"Booking"} Status:</th>
+                              <td>{ticketingList.ticketInfo?.status === "Ticket Ordered"? "Ticket Processing " : ticketingList.ticketInfo?.status}</td>
+                              <td className="fw-bold">Booked By:</td>
+                              <td>{ticketingList.ticketInfo?.agentName}</td>
+                            </tr>
+                            <tr>
+
+                            {ticketingList.ticketInfo?.status === "Ticket Ordered"? "" :<>
+                            <th>Issue Before:</th>
                               <td style={{ color: "red" }}>
                                 {lastTicketTime !== "" &&
                                 lastTicketTime !== null &&
@@ -1169,14 +1228,10 @@ const BookedView = () => {
                                   </>
                                 )}
                               </td>
+                            </>}
+                              
                               <td className="fw-bold">PNR</td>
                               <td>{ticketingList.ticketInfo?.pnr}</td>
-                            </tr>
-                            <tr>
-                              <th>Booking Status:</th>
-                              <td>{ticketingList.ticketInfo?.status}</td>
-                              <td className="fw-bold">Booked By:</td>
-                              <td>{ticketingList.ticketInfo?.agentName}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -2225,7 +2280,8 @@ const BookedView = () => {
                       {ticketingList.ticketInfo?.status ===
                         "Booking Cancelled" ||
                       ticketingList.ticketInfo?.status ===
-                        "Ticket Cancelled" ? (
+                        "Ticket Cancelled" || ticketingList.ticketInfo?.status ===
+                        "Ticket Ordered"? (
                         <></>
                       ) : (
                         <>

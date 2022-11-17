@@ -5,19 +5,18 @@ import {
   FaFacebookF,
   FaLinkedinIn,
   FaPhoneAlt,
-  FaTwitter,
-  FaYoutube,
+  FaInstagram
 } from "react-icons/fa";
 import { GrMail } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import logo from "../../../images/logo/logo-combined.png";
 
 const socialData = [
-  { icon: FaTwitter },
-  { icon: FaYoutube },
   { icon: FaFacebookF },
+  { icon: FaInstagram },
   { icon: FaLinkedinIn },
 ];
+
 
 const quickLinksData = [
   { text: "Contact", to: "contact" },

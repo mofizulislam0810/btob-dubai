@@ -488,8 +488,8 @@ const ShowAllFlight = ({
             {/* End of Airlines Section  */}
 
             {/* Baggage section  */}
-            <div className="container pb-5 mb-5">
-              <div className="row px-2">
+            <div className="container pb-3 mb-5">
+              {/* <div className="row px-2">
                 <div className="col-lg-6 mt-3">
                   <h6 className="float-start text-color fw-bold">Baggage</h6>
                 </div>
@@ -536,7 +536,7 @@ const ShowAllFlight = ({
                     </label>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="col-lg-9">

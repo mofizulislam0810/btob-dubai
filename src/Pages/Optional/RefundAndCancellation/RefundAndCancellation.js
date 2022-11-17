@@ -98,7 +98,7 @@ const RefundAndCancellation = () => {
               </Box>
 
               <Box>
-                <Text fontWeight={700} fontSize='20px' pb={'10px'} pt={'20px'}>Hotel</Text>
+                <Text fontWeight={700} fontSize='20px' pb={'10px'} pt={'20px'}>Hotel:</Text>
                 <Text pb={'4px'}>Please email us at info@firsttrip.com with any questions regarding refunds, cancellations, or date modifications.</Text>
                 {
                   Hotel.map(item => {

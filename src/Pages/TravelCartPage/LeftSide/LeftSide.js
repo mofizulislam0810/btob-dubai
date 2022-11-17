@@ -4,7 +4,7 @@ import {
   differenceInYears,
   format,
   intervalToDuration,
-  parse
+  parse,
 } from "date-fns";
 import produce from "immer";
 import $ from "jquery";
@@ -248,7 +248,7 @@ const LeftSide = () => {
   };
   useEffect(() => {
     handleGetPassengers();
-    $(document).ready(function () { });
+    $(document).ready(function () {});
   }, []);
   const handleClick = (e) => {
     if (e.target.checked) {
@@ -388,7 +388,7 @@ const LeftSide = () => {
 
   const [child, setChild] = useState(childList);
 
-  const [isExDateValidAdt, setisExDateValidAdtAdt] = useState(true);
+  const [isExDateValidAdt, setisExDateValidAdt] = useState(true);
   const [isExDateValidCnn, setisExDateValidCnn] = useState(true);
   const [isExDateValidInf, setisExDateValidInf] = useState(true);
 
@@ -502,12 +502,12 @@ const LeftSide = () => {
         (f) =>
           f.title + " " + f.first + " " + f.middle + " " + f.last ===
           item.title +
-          " " +
-          item.firstName +
-          " " +
-          item.middleName +
-          " " +
-          item.lastName
+            " " +
+            item.firstName +
+            " " +
+            item.middleName +
+            " " +
+            item.lastName
       );
       let passengerObj = {
         nameElement: {
@@ -544,9 +544,9 @@ const LeftSide = () => {
           (origin.match("Bangladesh") !== null
             ? origin.match("Bangladesh")[0]
             : "") &&
-            (destination.match("Bangladesh") !== null
-              ? destination.match("Bangladesh")[0]
-              : "") === "Bangladesh"
+          (destination.match("Bangladesh") !== null
+            ? destination.match("Bangladesh")[0]
+            : "") === "Bangladesh"
             ? ""
             : item.dateOfBirth,
         passengerKey: idObj !== undefined ? String(idObj.id) : "0",
@@ -766,34 +766,124 @@ const LeftSide = () => {
     .trigger("change");
 
   useEffect(() => {
-    let arr = adult.map(p => {
+    let arr = adult.map((p) => {
       //console.log(p.dateOfBirth === "" ? "TRUE" : "FALSE", "=")
-      return !(moment(p?.passportExDate).isBefore(ISODateFormatter(add(new Date(Database?.tripTypeModify ===
-        "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), { months: 6 }))) || p.dateOfBirth === "")
-    })
-    setisExDateValidAdtAdt(arr.every(element => element === true))
-  }, [adult])
+      return !(
+        moment(p?.passportExDate).isBefore(
+          ISODateFormatter(
+            add(
+              new Date(
+                Database?.tripTypeModify === "Round Trip" &&
+                calculateFullAge(Database?.journeyDate, Database?.returnDate)
+                  ? Database?.returnDate
+                  : Database?.journeyDate
+              ),
+              { months: 6 }
+            )
+          )
+        ) ||
+        p.dateOfBirth === "" ||
+        p.passportExDate === ""
+      );
+    });
+    setisExDateValidAdt(arr.every((element) => element === true));
+  }, [adult]);
 
   useEffect(() => {
-    let arr = child.map(p => {
+    let arr = child.map((p) => {
       //console.log(p.dateOfBirth === "" ? "TRUE" : "FALSE", "=")
-      return !(moment(p?.passportExDate).isBefore(ISODateFormatter(add(new Date(Database?.tripTypeModify ===
-        "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), { months: 6 }))) || p.dateOfBirth === "")
-    })
-    setisExDateValidAdtAdt(arr.every(element => element === true))
-  }, [child])
+      return !(
+        moment(p?.passportExDate).isBefore(
+          ISODateFormatter(
+            add(
+              new Date(
+                Database?.tripTypeModify === "Round Trip" &&
+                calculateFullAge(Database?.journeyDate, Database?.returnDate)
+                  ? Database?.returnDate
+                  : Database?.journeyDate
+              ),
+              { months: 6 }
+            )
+          )
+        ) ||
+        p.dateOfBirth === "" ||
+        p.passportExDate === ""
+      );
+    });
+    setisExDateValidCnn(arr.every((element) => element === true));
+  }, [child]);
 
   useEffect(() => {
-    let arr = infant.map(p => {
+    let arr = infant.map((p) => {
       //console.log(p.dateOfBirth === "" ? "TRUE" : "FALSE", "=")
-      return !(moment(p?.passportExDate).isBefore(ISODateFormatter(add(new Date(Database?.tripTypeModify ===
-        "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), { months: 6 }))) || p.dateOfBirth === "")
-    })
-    setisExDateValidAdtAdt(arr.every(element => element === true))
-  }, [infant])
+      return !(
+        moment(p?.passportExDate).isBefore(
+          ISODateFormatter(
+            add(
+              new Date(
+                Database?.tripTypeModify === "Round Trip" &&
+                calculateFullAge(Database?.journeyDate, Database?.returnDate)
+                  ? Database?.returnDate
+                  : Database?.journeyDate
+              ),
+              { months: 6 }
+            )
+          )
+        ) ||
+        p.dateOfBirth === "" ||
+        p.passportExDate === ""
+      );
+    });
+    setisExDateValidInf(arr.every((element) => element === true));
+  }, [infant]);
 
+  // FOR BOOK NOW BUTTON DISABLE
+  const [isDisableAdt, setIsDisableAdt] = useState(false);
+  const [isDisableCnn, setIsDisableCnn] = useState(false);
+  const [isDisableInf, setIsDisableInf] = useState(false);
 
-  useEffect(() => console.log(isExDateValidAdt, "===="), [isExDateValidAdt])
+  useEffect(() => {
+    let arr = adult.map((p) => {
+      return p.dateOfBirth === "" || p.passportExDate === "";
+    });
+    setIsDisableAdt(arr.includes(true) ? true : false);
+  }, [adult]);
+
+  useEffect(() => {
+    let arr = child.map((p) => {
+      return p.dateOfBirth === "" || p.passportExDate === "";
+    });
+    setIsDisableCnn(arr.includes(true) ? true : false);
+  }, [child]);
+
+  useEffect(() => {
+    let arr = infant.map((p) => {
+      return p.dateOfBirth === "" || p.passportExDate === "";
+    });
+    setIsDisableInf(arr.includes(true) ? true : false);
+  }, [infant]);
+  // useEffect(() => console.log(isExDateValidAdt, "===="), [isExDateValidAdt]);
+
+  const [isDomestic, setIsDomestic] = useState(false);
+
+  // useEffect(() => {
+  //   setIsDomestic(
+  //     getCountryFomAirport(cartData[0]?.flights[0].from) === "Bangladesh" &&
+  //       getCountryFomAirport(cartData[0]?.flights[1].from) === "Bangladesh"
+  //   );
+  // },[])
+
+  useEffect(() => {
+    setIsDomestic(
+      origin.split(",")[0].split("- ")[1] === "Bangladesh" &&
+        destination.split(",")[0].split("- ")[1] === "Bangladesh"
+        ? true
+        : false
+    );
+  }, [origin, destination]);
+
+  // console.log(origin.split(",")[0].split("- ")[1], "= o");
+  // console.log(destination.split(",")[0].split("- ")[1], "= d");
 
   return (
     <form onSubmit={bookingData}>
@@ -1080,9 +1170,9 @@ const LeftSide = () => {
                     {(origin.match("Bangladesh") !== null
                       ? origin.match("Bangladesh")[0]
                       : "") &&
-                      (destination.match("Bangladesh") !== null
-                        ? destination.match("Bangladesh")[0]
-                        : "") === "Bangladesh" ? (
+                    (destination.match("Bangladesh") !== null
+                      ? destination.match("Bangladesh")[0]
+                      : "") === "Bangladesh" ? (
                       <></>
                     ) : (
                       <>
@@ -1109,8 +1199,7 @@ const LeftSide = () => {
                                   <DatePicker
                                     dateFormat="dd/MM/yyyy"
                                     selected={
-                                      p.dateOfBirth
-                                      && new Date(p.dateOfBirth)
+                                      p.dateOfBirth && new Date(p.dateOfBirth)
                                     }
                                     onChange={(date) =>
                                       date !== "" &&
@@ -1127,10 +1216,10 @@ const LeftSide = () => {
                                       new Date(
                                         Database?.tripTypeModify ===
                                           "Round Trip" &&
-                                          calculateFullAge(
-                                            Database?.journeyDate,
-                                            Database?.returnDate
-                                          )
+                                        calculateFullAge(
+                                          Database?.journeyDate,
+                                          Database?.returnDate
+                                        )
                                           ? Database?.returnDate
                                           : Database?.journeyDate
                                       ),
@@ -1138,13 +1227,17 @@ const LeftSide = () => {
                                         years: -12,
                                       }
                                     )}
+                                    showMonthDropdown
+                                    showYearDropdown
+                                    dropdownMode="select"
                                   />
                                 </Box>
 
-                                {
-                                  validityError && p.dateOfBirth === "" && <Text pl="2px" color="red">Date of birth is required</Text>
-                                }
-
+                                {validityError && p.dateOfBirth === "" && (
+                                  <Text pl="2px" color="red">
+                                    Date of birth is required
+                                  </Text>
+                                )}
 
                                 {/* <input
                                   type={"date"}
@@ -1598,8 +1691,8 @@ const LeftSide = () => {
                                 <DatePicker
                                   dateFormat="dd/MM/yyyy"
                                   selected={
-                                    p.passportExDate
-                                    && new Date(ISODateFormatter(p.passportExDate))
+                                    p.passportExDate &&
+                                    new Date(ISODateFormatter(p.passportExDate))
                                   }
                                   onChange={(date) =>
                                     date !== "" &&
@@ -1610,27 +1703,55 @@ const LeftSide = () => {
                                     )
                                   }
                                   placeholderText="dd/mm/yyyy"
-                                  minDate={
-                                    add(new Date(Database?.tripTypeModify ===
-                                      "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), { months: 6 })
-                                  }
+                                  minDate={add(
+                                    new Date(
+                                      Database?.tripTypeModify ===
+                                        "Round Trip" &&
+                                      calculateFullAge(
+                                        Database?.journeyDate,
+                                        Database?.returnDate
+                                      )
+                                        ? Database?.returnDate
+                                        : Database?.journeyDate
+                                    ),
+                                    { months: 6 }
+                                  )}
                                   maxDate={new Date("2199-12-30")}
                                   error
                                   helperText="Your error message"
+                                  showMonthDropdown
+                                  showYearDropdown
+                                  dropdownMode="select"
                                 />
                               </Box>
-                              {
-                                validityError && p.passportExDate === "" && <Text pl="2px" color="red">Passport expiry date is required</Text>
-                              }
-
-
+                              {validityError && p.passportExDate === "" && (
+                                <Text pl="2px" color="red">
+                                  Passport expiry date is required
+                                </Text>
+                              )}
 
                               {/* CHECK THIS AGAIN IN BOOK NOW VALIDATION */}
-                              {
-                                moment(p?.passportExDate).isBefore(ISODateFormatter(add(new Date(Database?.tripTypeModify ===
-                                  "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), { months: 6 }))) &&
-                                <Text color="red" pl="4px">Expiry Date not valid! </Text>
-                              }
+                              {moment(p?.passportExDate).isBefore(
+                                ISODateFormatter(
+                                  add(
+                                    new Date(
+                                      Database?.tripTypeModify ===
+                                        "Round Trip" &&
+                                      calculateFullAge(
+                                        Database?.journeyDate,
+                                        Database?.returnDate
+                                      )
+                                        ? Database?.returnDate
+                                        : Database?.journeyDate
+                                    ),
+                                    { months: 6 }
+                                  )
+                                )
+                              ) && (
+                                <Text color="red" pl="4px">
+                                  Expiry Date not valid!{" "}
+                                </Text>
+                              )}
 
                               {/* {validityError && (<div className="validation"></div>)} */}
 
@@ -1984,8 +2105,7 @@ const LeftSide = () => {
                               <DatePicker
                                 dateFormat="dd/MM/yyyy"
                                 selected={
-                                  p.dateOfBirth
-                                  && new Date(p.dateOfBirth)
+                                  p.dateOfBirth && new Date(p.dateOfBirth)
                                 }
                                 onChange={(date) =>
                                   date !== "" &&
@@ -2000,10 +2120,10 @@ const LeftSide = () => {
                                 minDate={add(
                                   new Date(
                                     Database?.tripTypeModify === "Round Trip" &&
-                                      calculateFullAge(
-                                        Database?.journeyDate,
-                                        Database?.returnDate
-                                      )
+                                    calculateFullAge(
+                                      Database?.journeyDate,
+                                      Database?.returnDate
+                                    )
                                       ? Database?.returnDate
                                       : Database?.journeyDate
                                   ),
@@ -2014,10 +2134,10 @@ const LeftSide = () => {
                                 maxDate={add(
                                   new Date(
                                     Database?.tripTypeModify === "Round Trip" &&
-                                      calculateFullAge(
-                                        Database?.journeyDate,
-                                        Database?.returnDate
-                                      )
+                                    calculateFullAge(
+                                      Database?.journeyDate,
+                                      Database?.returnDate
+                                    )
                                       ? Database?.returnDate
                                       : Database?.journeyDate
                                   ),
@@ -2025,12 +2145,17 @@ const LeftSide = () => {
                                     years: -2,
                                   }
                                 )}
+                                showMonthDropdown
+                                showYearDropdown
+                                dropdownMode="select"
                               />
                             </Box>
 
-                            {
-                              validityError && p.dateOfBirth === "" && <Text pl="2px" color="red">Date of birth is required</Text>
-                            }
+                            {validityError && p.dateOfBirth === "" && (
+                              <Text pl="2px" color="red">
+                                Date of birth is required
+                              </Text>
+                            )}
 
                             {/* <input
                               type={"date"}
@@ -2237,9 +2362,9 @@ const LeftSide = () => {
                       {(origin.match("Bangladesh") !== null
                         ? origin.match("Bangladesh")[0]
                         : "") &&
-                        (destination.match("Bangladesh") !== null
-                          ? destination.match("Bangladesh")[0]
-                          : "") === "Bangladesh" ? (
+                      (destination.match("Bangladesh") !== null
+                        ? destination.match("Bangladesh")[0]
+                        : "") === "Bangladesh" ? (
                         <></>
                       ) : (
                         <>
@@ -2340,9 +2465,9 @@ const LeftSide = () => {
                     {(origin.match("Bangladesh") !== null
                       ? origin.match("Bangladesh")[0]
                       : "") &&
-                      (destination.match("Bangladesh") !== null
-                        ? destination.match("Bangladesh")[0]
-                        : "") === "Bangladesh" ? (
+                    (destination.match("Bangladesh") !== null
+                      ? destination.match("Bangladesh")[0]
+                      : "") === "Bangladesh" ? (
                       <></>
                     ) : (
                       <>
@@ -2438,8 +2563,8 @@ const LeftSide = () => {
                                 <DatePicker
                                   dateFormat="dd/MM/yyyy"
                                   selected={
-                                    p.passportExDate
-                                    && new Date(ISODateFormatter(p.passportExDate))
+                                    p.passportExDate &&
+                                    new Date(ISODateFormatter(p.passportExDate))
                                   }
                                   onChange={(date) =>
                                     date !== "" &&
@@ -2450,25 +2575,54 @@ const LeftSide = () => {
                                     )
                                   }
                                   placeholderText="dd/mm/yyyy"
-                                  minDate={
-                                    add(new Date(Database?.tripTypeModify ===
-                                      "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), { months: 6 })
-                                  }
+                                  minDate={add(
+                                    new Date(
+                                      Database?.tripTypeModify ===
+                                        "Round Trip" &&
+                                      calculateFullAge(
+                                        Database?.journeyDate,
+                                        Database?.returnDate
+                                      )
+                                        ? Database?.returnDate
+                                        : Database?.journeyDate
+                                    ),
+                                    { months: 6 }
+                                  )}
                                   maxDate={new Date("2199-12-30")}
+                                  showMonthDropdown
+                                  showYearDropdown
+                                  dropdownMode="select"
                                 />
                               </Box>
 
-                              {
-                                validityError && p.passportExDate === "" && <Text pl="2px" color="red">Passport expiry date is required</Text>
-                              }
+                              {validityError && p.passportExDate === "" && (
+                                <Text pl="2px" color="red">
+                                  Passport expiry date is required
+                                </Text>
+                              )}
 
                               {/* CHECK THIS AGAIN IN BOOK NOW VALIDATION */}
-                              {
-                                moment(p?.passportExDate).isBefore(ISODateFormatter(add(new Date(Database?.tripTypeModify ===
-                                  "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), { months: 6 }))) &&
-                                <Text color="red" pl="4px">Expiry Date not valid! </Text>
-                              }
-
+                              {moment(p?.passportExDate).isBefore(
+                                ISODateFormatter(
+                                  add(
+                                    new Date(
+                                      Database?.tripTypeModify ===
+                                        "Round Trip" &&
+                                      calculateFullAge(
+                                        Database?.journeyDate,
+                                        Database?.returnDate
+                                      )
+                                        ? Database?.returnDate
+                                        : Database?.journeyDate
+                                    ),
+                                    { months: 6 }
+                                  )
+                                )
+                              ) && (
+                                <Text color="red" pl="4px">
+                                  Expiry Date not valid!{" "}
+                                </Text>
+                              )}
 
                               {/* <input
                                 type={"date"}
@@ -2892,8 +3046,7 @@ const LeftSide = () => {
                               <DatePicker
                                 dateFormat="dd/MM/yyyy"
                                 selected={
-                                  p.dateOfBirth
-                                  && new Date(p.dateOfBirth)
+                                  p.dateOfBirth && new Date(p.dateOfBirth)
                                 }
                                 onChange={(date) =>
                                   date !== "" &&
@@ -2909,12 +3062,17 @@ const LeftSide = () => {
                                   years: -2,
                                 })}
                                 maxDate={new Date(Database?.journeyDate)}
+                                showMonthDropdown
+                                showYearDropdown
+                                dropdownMode="select"
                               />
                             </Box>
 
-                            {
-                              validityError && p.dateOfBirth === "" && <Text pl="2px" color="red">Date of birth is required</Text>
-                            }
+                            {validityError && p.dateOfBirth === "" && (
+                              <Text pl="2px" color="red">
+                                Date of birth is required
+                              </Text>
+                            )}
 
                             {/* <input
                               type={"date"}
@@ -3085,9 +3243,9 @@ const LeftSide = () => {
                       {(origin.match("Bangladesh") !== null
                         ? origin.match("Bangladesh")[0]
                         : "") &&
-                        (destination.match("Bangladesh") !== null
-                          ? destination.match("Bangladesh")[0]
-                          : "") === "Bangladesh" ? (
+                      (destination.match("Bangladesh") !== null
+                        ? destination.match("Bangladesh")[0]
+                        : "") === "Bangladesh" ? (
                         <></>
                       ) : (
                         <>
@@ -3135,9 +3293,9 @@ const LeftSide = () => {
                     {(origin.match("Bangladesh") !== null
                       ? origin.match("Bangladesh")[0]
                       : "") &&
-                      (destination.match("Bangladesh") !== null
-                        ? destination.match("Bangladesh")[0]
-                        : "") === "Bangladesh" ? (
+                    (destination.match("Bangladesh") !== null
+                      ? destination.match("Bangladesh")[0]
+                      : "") === "Bangladesh" ? (
                       <></>
                     ) : (
                       <>
@@ -3233,8 +3391,8 @@ const LeftSide = () => {
                                 <DatePicker
                                   dateFormat="dd/MM/yyyy"
                                   selected={
-                                    p.passportExDate
-                                    && new Date(p.passportExDate)
+                                    p.passportExDate &&
+                                    new Date(p.passportExDate)
                                   }
                                   onChange={(date) =>
                                     date !== "" &&
@@ -3245,18 +3403,31 @@ const LeftSide = () => {
                                     )
                                   }
                                   placeholderText="dd/mm/yyyy"
-                                  minDate={
-                                    add(new Date(Database?.tripTypeModify ===
-                                      "Round Trip" && calculateFullAge(Database?.journeyDate, Database?.returnDate) ? Database?.returnDate : Database?.journeyDate), { months: 6 })
-                                  }
+                                  minDate={add(
+                                    new Date(
+                                      Database?.tripTypeModify ===
+                                        "Round Trip" &&
+                                      calculateFullAge(
+                                        Database?.journeyDate,
+                                        Database?.returnDate
+                                      )
+                                        ? Database?.returnDate
+                                        : Database?.journeyDate
+                                    ),
+                                    { months: 6 }
+                                  )}
                                   maxDate={new Date("2199-12-30")}
+                                  showMonthDropdown
+                                  showYearDropdown
+                                  dropdownMode="select"
                                 />
                               </Box>
 
-                              {
-                                validityError && p.passportExDate === "" && <Text pl="2px" color="red">Passport expiry date is required</Text>
-                              }
-
+                              {validityError && p.passportExDate === "" && (
+                                <Text pl="2px" color="red">
+                                  Passport expiry date is required
+                                </Text>
+                              )}
 
                               {/* <input
                                 type={"date"}
@@ -3741,7 +3912,17 @@ const LeftSide = () => {
                     <button
                       type="submit"
                       className="btn button-color text-white fw-bold w-25 mt-2 rounded btn-sm"
-                      onClick={() => { (!isExDateValidAdt || !isExDateValidCnn || !isExDateValidInf) && setValidityError(true) }}
+                      onClick={() => {
+                        (!isExDateValidAdt ||
+                          !isExDateValidCnn ||
+                          !isExDateValidInf) &&
+                          setValidityError(true);
+                      }}
+                      disabled={
+                        isDomestic
+                          ? false
+                          : isDisableAdt || isDisableCnn || isDisableInf
+                      }
                     >
                       Book Now
                     </button>

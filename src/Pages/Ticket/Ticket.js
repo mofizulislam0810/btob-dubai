@@ -16,6 +16,7 @@ import airports from "../../JSON/airports.json";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import logo from "../../images/logo/logo-combined.png";
+import { getPassengerType } from "../../common/functions";
 
 const Ticket = () => {
   let [ticketingList, setTicketingList] = useState([]);
@@ -53,7 +54,7 @@ const Ticket = () => {
       );
       console.log(response.data, "+++");
       setTicketingList(response.data);
-      setPassengerListEdited(response.data.passengerInfo);
+      setPassengerListEdited(response.data.fareBreakdown);
       // console.log(response.data.data);
       //   handleGetPassengerList(
       //   response.data.data[0].passengerIds,
@@ -70,7 +71,7 @@ const Ticket = () => {
   };
   const handleSubmit = () => {
     setLoading(true);
-    console.log(passengerListEdited);
+    console.log({passengerListEdited});
     const postPassengerList = async () => {
       const response = await axios.post(
         environment.updateBookingFareBreakdown,
@@ -231,8 +232,8 @@ const Ticket = () => {
                             {/* FIXED COMPANY LOGO */}
                             {/* CHANGE THIS LATER */}
                             <td className="text-start">
-                              {ticketingList.ticketInfo?.agentLogo !== null &&
-                                ticketingList.ticketInfo?.agentLogo === "" ? (
+                              {ticketingList.ticketInfo?.agentLogo !== null ? (
+                                 <> 
                                 <img
                                   alt="img01"
                                   src={
@@ -241,8 +242,10 @@ const Ticket = () => {
                                   }
                                   style={{ width: "160px" }}
                                 ></img>
+                                </>
                               ) : (
                                 <>
+                           
                                   <img
                                     alt="img01"
                                     className="p-2"
@@ -654,8 +657,8 @@ const Ticket = () => {
                               </>
                             ) : (
                               <>
-                                {ticketingList?.directions[0] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
+                                {ticketingList?.directions !== undefined && ticketingList?.directions[0] !== undefined 
+                                  ? (
                                   <div className="border my-1">
                                     {ticketingList?.directions[0][0].segments.map(
                                       (item, index) => {
@@ -988,8 +991,8 @@ const Ticket = () => {
                                 ) : (
                                   <></>
                                 )}
-                                {ticketingList?.directions[1] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
+                                {ticketingList?.directions !== undefined && ticketingList?.directions[1] !== undefined 
+                                   ? (
                                   <div className="border mb-1">
                                     {ticketingList?.directions[1][0].segments.map(
                                       (item, index) => {
@@ -1323,8 +1326,8 @@ const Ticket = () => {
                                   <></>
                                 )}
 
-                                {ticketingList?.directions[2] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
+                                { ticketingList?.directions !== undefined &&  ticketingList?.directions[2] !== undefined 
+                                  ? (
                                   <div className="border mb-1">
                                     {ticketingList?.directions[2][0].segments.map(
                                       (item, index) => {
@@ -1658,8 +1661,8 @@ const Ticket = () => {
                                   <></>
                                 )}
 
-                                {ticketingList?.directions[3] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
+                                { ticketingList?.directions !== undefined && ticketingList?.directions[3] !== undefined 
+                                   ? (
                                   <div className="border mb-1">
                                     {ticketingList?.directions[3][0].segments.map(
                                       (item, index) => {
@@ -1993,8 +1996,8 @@ const Ticket = () => {
                                   <></>
                                 )}
 
-                                {ticketingList?.directions[4] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
+                                {ticketingList?.directions !== undefined && ticketingList?.directions[4] !== undefined 
+                                   ? (
                                   <div className="border mb-1">
                                     {ticketingList?.directions[4][0].segments.map(
                                       (item, index) => {
@@ -2328,8 +2331,8 @@ const Ticket = () => {
                                   <></>
                                 )}
 
-                                {ticketingList?.directions[5] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
+                                {ticketingList?.directions !== undefined && ticketingList?.directions[5] !== undefined 
+                                   ? (
                                   <div className="border mb-1">
                                     {ticketingList?.directions[5][0].segments.map(
                                       (item, index) => {
@@ -2704,51 +2707,30 @@ const Ticket = () => {
                                         <tr>
                                           <td className="text-start">Adult</td>
                                           <td>
-                                            {item.basePriceEdited > 0
-                                              ? item.basePriceEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.basePrice.toLocaleString(
+                                            { item.basePrice.toLocaleString(
                                                 "en-US"
                                               )}
                                           </td>
                                           <td>
-                                            {item.taxEdited > 0
-                                              ? item.taxEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.tax.toLocaleString(
+                                            { item.tax.toLocaleString(
                                                 "en-US"
                                               )}
                                           </td>
 
                                           <td>
-                                            {item.aitEdited > 0
-                                              ? item.aitEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.ait.toLocaleString(
+                                            {item.ait.toLocaleString(
                                                 "en-US"
                                               )}
                                           </td>
                                           <td>
-                                            {item.discountEdited > 0
-                                              ? item.discountEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.discount.toLocaleString(
+                                            {item.discount.toLocaleString(
                                                 "en-US"
                                               )}
                                           </td>
                                           <td>{item.passengerCount}</td>
                                           <td className="fw-bold">
                                             {item.currencyName}{" "}
-                                            {
-                                              item.totalPriceEdited > 0 ? (
-                                                item.totalPriceEdited *
-                                                item.passengerCount
-                                              ).toLocaleString("en-US") :
-                                                (
+                                            {(
                                                   item.totalPrice *
                                                   item.passengerCount
                                                 ).toLocaleString("en-US")}
@@ -2758,115 +2740,74 @@ const Ticket = () => {
                                     ) : item.passengerType === "CNN" ? (
                                       <>
                                         <tr>
-                                          <td className="text-start">Child</td>
-                                          <td>
-                                            {item.basePriceEdited > 0
-                                              ? item.basePriceEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.basePrice.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
-                                          <td>
-                                            {item.taxEdited > 0
-                                              ? item.taxEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.tax.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
+                                       <td className="text-start">Child</td>
+                                       <td>
+                                         { item.basePrice.toLocaleString(
+                                             "en-US"
+                                           )}
+                                       </td>
+                                       <td>
+                                         { item.tax.toLocaleString(
+                                             "en-US"
+                                           )}
+                                       </td>
 
-                                          <td>
-                                            {item.aitEdited > 0
-                                              ? item.aitEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.ait.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
-                                          <td>
-                                            {item.discountEdited > 0
-                                              ? item.discountEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.discount.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
-                                          <td>{item.passengerCount}</td>
-                                          <td className="fw-bold">
-                                            {item.currencyName}{" "}
-                                            {
-                                              item.totalPriceEdited > 0 ? (
-                                                item.totalPriceEdited *
-                                                item.passengerCount
-                                              ).toLocaleString("en-US") :
-                                                (
-                                                  item.totalPrice *
-                                                  item.passengerCount
-                                                ).toLocaleString("en-US")}
-                                          </td>
-                                        </tr>
+                                       <td>
+                                         {item.ait.toLocaleString(
+                                             "en-US"
+                                           )}
+                                       </td>
+                                       <td>
+                                         {item.discount.toLocaleString(
+                                             "en-US"
+                                           )}
+                                       </td>
+                                       <td>{item.passengerCount}</td>
+                                       <td className="fw-bold">
+                                         {item.currencyName}{" "}
+                                         {(
+                                               item.totalPrice *
+                                               item.passengerCount
+                                             ).toLocaleString("en-US")}
+                                       </td>
+                                     </tr>
                                       </>
+                                       
                                     ) : item.passengerType === "INF" ? (
                                       <>
-                                        <tr>
-                                          <td className="text-start">Infant</td>
-                                          <td>
-                                            {item.basePriceEdited > 0
-                                              ? item.basePriceEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.basePrice.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
-                                          <td>
-                                            {item.taxEdited > 0
-                                              ? item.taxEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.tax.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
+                                      <tr>
+                                     <td className="text-start">Infant</td>
+                                     <td>
+                                       { item.basePrice.toLocaleString(
+                                           "en-US"
+                                         )}
+                                     </td>
+                                     <td>
+                                       { item.tax.toLocaleString(
+                                           "en-US"
+                                         )}
+                                     </td>
 
-                                          <td>
-                                            {item.aitEdited > 0
-                                              ? item.aitEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.ait.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
-                                          <td>
-                                            {item.discountEdited > 0
-                                              ? item.discountEdited.toLocaleString(
-                                                "en-US"
-                                              )
-                                              : item.discount.toLocaleString(
-                                                "en-US"
-                                              )}
-                                          </td>
-                                          <td>{item.passengerCount}</td>
-                                          <td className="fw-bold">
-                                            {item.currencyName}{" "}
-                                            {
-                                              item.totalPriceEdited > 0 ? (
-                                                item.totalPriceEdited *
-                                                item.passengerCount
-                                              ).toLocaleString("en-US") :
-                                                (
-                                                  item.totalPrice *
-                                                  item.passengerCount
-                                                ).toLocaleString("en-US")}
-                                          </td>
-                                        </tr>
-                                      </>
+                                     <td>
+                                       {item.ait.toLocaleString(
+                                           "en-US"
+                                         )}
+                                     </td>
+                                     <td>
+                                       {item.discount.toLocaleString(
+                                           "en-US"
+                                         )}
+                                     </td>
+                                     <td>{item.passengerCount}</td>
+                                     <td className="fw-bold">
+                                       {item.currencyName}{" "}
+                                       {(
+                                             item.totalPrice *
+                                             item.passengerCount
+                                           ).toLocaleString("en-US")}
+                                     </td>
+                                   </tr>
+                                    </>
                                     ) : (
                                       <></>
                                     )}
@@ -3053,8 +2994,7 @@ const Ticket = () => {
                   <table className="table table-bordered table-hover">
                     <thead style={{ background: "gray", color: "white" }}>
                       <tr>
-                        <th>Ticket No</th>
-                        <th>Pax Name</th>
+                        <th>Passenger Type</th>
                         <th>Base Fare</th>
                         <th>Tax</th>
                         <th>AIT</th>
@@ -3068,16 +3008,7 @@ const Ticket = () => {
                         return (
                           <>
                             <tr>
-                              <td>{item.ticketNumbers}</td>
-                              <td>
-                                {item.title +
-                                  " " +
-                                  item.first +
-                                  " " +
-                                  item.middle +
-                                  " " +
-                                  item.last}
-                              </td>
+                              <td>{getPassengerType(item.passengerType)}</td>
                               <td>
                                 <input
                                   value={item.basePrice}

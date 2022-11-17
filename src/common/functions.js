@@ -1,5 +1,8 @@
 import { format, intervalToDuration, parse } from "date-fns";
 import countries from "../JSON/countries.json";
+import airports from "../JSON/airports.json";
+
+
 export const isValidEmail = (input) => {
   return input
     ?.toLowerCase()
@@ -83,4 +86,10 @@ export const getCountryNameFomCountryCode = (input) => {
   return countries.find((obj) => {
     return obj.code === input;
   })?.name;
+};
+
+export const getCountryFomAirport = (input) => {
+  return airports.find((obj) => {
+    return obj.iata === input;
+  })?.country;
 };

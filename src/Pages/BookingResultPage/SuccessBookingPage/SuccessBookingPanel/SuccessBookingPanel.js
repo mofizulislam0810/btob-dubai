@@ -10,7 +10,7 @@ import Loading from "../../../Loading/Loading";
 import airports from "../../../../JSON/airports.json";
 import ReactToPrint from "react-to-print";
 import { getDefaultNormalizer } from "@testing-library/react";
-import { getPassengerType } from "../../../../common/functions";
+import { getCountryFomAirport, getPassengerType } from "../../../../common/functions";
 import { useEffect } from "react";
 import { useState } from "react";
 
@@ -45,6 +45,8 @@ const SuccessBookingPanel = () => {
   // };
   const navigate = useNavigate();
   const componentRef = useRef();
+
+  const [isDomestic, setIsDomestic] = useState(true);
 
   const filterParam = JSON.parse(localStorage.getItem("Database"));
   const flightType = filterParam.flightType;
@@ -233,7 +235,7 @@ const SuccessBookingPanel = () => {
                                       )}
                                 </td>
                                 <td>
-                                  {item.documentInfo.documentNumber === ""
+                                {item.documentInfo.documentNumber === "" 
                                     ? "N/A"
                                     : item.documentInfo.documentNumber}
                                 </td>
@@ -269,6 +271,11 @@ const SuccessBookingPanel = () => {
                         <tbody className="text-center">
                           {bookData.data?.item1.flightInfo?.directions[0][0].segments.map(
                             (item, index) => {
+                              // (getCountryFomAirport(item.from) !==
+                              // "Bangladesh" ||
+                              // getCountryFomAirport(item.to) !==
+                              //   "Bangladesh") &&
+                              // setIsDomestic(false);
                               return (
                                 <tr key={index}>
                                   <td>

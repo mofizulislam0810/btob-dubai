@@ -15,6 +15,7 @@ import {
   ISODateFormatter,
   isValidEmail
 } from "../../common/functions";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 import courtries from "../../JSON/countries.json";
 import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
@@ -58,8 +59,13 @@ const QuickPassenger = () => {
   console.log({ passengerList });
   const passCopy = useRef()
   const visaCopy = useRef()
+  const formReset = useRef()
+  // const outSideClick = useRef()
   const [fileError, setFileError] = useState(false)
-  // passCopy.current.disabled = true
+  const handleClickOutside = () => {
+    formReset.current.reset()
+  };
+  const outSideClick = useOutsideClick(handleClickOutside);
 
   const handleRestrict = () => {
     if (passportNo === "" || passportNo === null || passportNo === undefined) {
@@ -70,12 +76,14 @@ const QuickPassenger = () => {
     }
 
   }
+
   useEffect(() => {
     if (passportNo.length > 0) {
       setFileError(false)
       passCopy.current.disabled = false
       visaCopy.current.disabled = false
     }
+
   }, [passportNo])
   const handlePassportFileUpload = (file) => {
     console.log({ file });
@@ -433,7 +441,7 @@ const QuickPassenger = () => {
                           style={{ fontSize: "12px" }}
                         >
                           <span className="me-1">
-                            <i class="fas fa-user-plus"></i>
+                            <i className="fas fa-user-plus"></i>
                           </span>{" "}
                           Add
                         </a>
@@ -578,6 +586,7 @@ const QuickPassenger = () => {
             </div>
 
             <div
+              ref={outSideClick}
               className="modal fade"
               id="accountModal"
               tabIndex={-1}
@@ -586,12 +595,13 @@ const QuickPassenger = () => {
             >
               <div className="modal-dialog">
                 <div className="modal-content">
-                  <form >
+                  <form ref={formReset}>
                     <div className="modal-header">
                       <h5 className="modal-title" id="accountModalLabel">
                         {currentItem === null ? "Add" : "Edit"} Passenger
                       </h5>
                       <button
+                        onClick={() => formReset.current.reset()}
                         type="button"
                         className="btn-close"
                         data-bs-dismiss="modal"

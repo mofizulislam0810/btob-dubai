@@ -2,7 +2,7 @@ import { HStack, Text } from "@chakra-ui/react";
 import axios from "axios";
 import $ from "jquery";
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -52,7 +52,7 @@ const Support = () => {
   let ticketno = "";
   let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
-
+  const buttonActive = useRef()
   //let page=1;
   let [page, setPage] = useState(1);
 
@@ -356,7 +356,8 @@ const Support = () => {
   };
 
 
-  const handleSupportSubmit = () => {
+  const handleSupportSubmit = (e) => {
+    e.preventDefault()
     let ticketNumbersN = ticketNumbers.substring(1, ticketNumbers.length);
     // alert(uniqueTransID)
     // alert(pnr)
@@ -393,6 +394,8 @@ const Support = () => {
       toast.error("Sorry! Ticket number not selected..");
       return;
     }
+    e.target.disabled = true;
+    console.log({ e })
     console.log(supportObj);
     if ((currentItem == null ? 0 : currentItem.id) > 0) {
       const putData = async () => {
@@ -445,6 +448,8 @@ const Support = () => {
   }, [pageNumber]);
 
   const clearSupportForm = () => {
+    console.log({ buttonActive })
+    buttonActive.current.disabled = false
     if (location.search === "") {
       setUniqueTransID("");
       setPassengerList([]);
@@ -824,10 +829,12 @@ const Support = () => {
                                 Close
                               </button>
                               <button
+                                ref={buttonActive}
                                 id="submitBtn"
                                 type="button"
                                 className="btn button-color fw-bold text-white rounded"
-                                onClick={() => handleSupportSubmit()}
+                                onClick={(e) => handleSupportSubmit(e)}
+
                               >
                                 Submit
                               </button>

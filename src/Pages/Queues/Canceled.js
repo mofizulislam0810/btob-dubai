@@ -141,9 +141,16 @@ const Canceled = () => {
       );
     }
   };
-  const handleViewTicket = (utid) => {
-    window.open("/ticket?utid=" + utid, "_blank");
-    //navigate("/ticket?utid="+utid,'_blank');
+  const handleViewTicket = (utid,status) => {
+    if(status="Ticket Cancelled"){
+      window.open("/cancelticket?utid=" + utid, "_blank");
+    }
+    else
+    {
+      window.open("/ticket?utid=" + utid + "&st="+status, "_blank");
+      //navigate("/ticket?utid="+utid,'_blank');
+    }
+
   };
 
   const handleBookedView = (utid) => {
@@ -307,34 +314,36 @@ const Canceled = () => {
                                     </td>
                                     <td className="text-left">
                                       <>
-                                        {item.status === "Booking Cancelled" ? (
-                                          <>
-                                            <a
-                                              href="javascript:void(0)"
-                                              title="View Booking"
-                                              onClick={() =>
-                                                handleBookedView(
-                                                  item.uniqueTransID
-                                                )
-                                              }
-                                            >
-                                              <Button
-                                                border="2px solid"
-                                                colorScheme="messenger"
-                                                variant="outline"
-                                                size="xsm"
-                                                borderRadius="16px"
-                                                p="1"
-                                              >
-                                                <span
-                                                  style={{ fontSize: "10px" }}
-                                                >
-                                                  VB
-                                                </span>
-                                              </Button>
-                                            </a>
-                                          </>
-                                        ) : item.status ===
+                                        {
+                                        // item.status === "Booking Cancelled" ? (
+                                        //   <>
+                                        //     <a
+                                        //       href="javascript:void(0)"
+                                        //       title="View Booking"
+                                        //       onClick={() =>
+                                        //         handleBookedView(
+                                        //           item.uniqueTransID
+                                        //         )
+                                        //       }
+                                        //     >
+                                        //       <Button
+                                        //         border="2px solid"
+                                        //         colorScheme="messenger"
+                                        //         variant="outline"
+                                        //         size="xsm"
+                                        //         borderRadius="16px"
+                                        //         p="1"
+                                        //       >
+                                        //         <span
+                                        //           style={{ fontSize: "10px" }}
+                                        //         >
+                                        //           VB
+                                        //         </span>
+                                        //       </Button>
+                                        //     </a>
+                                        //   </>
+                                        // ) : 
+                                        item.status ===
                                             "Ticket Cancelled" &&
                                           item.refundStatus == null ? (
                                           <>
@@ -371,7 +380,7 @@ const Canceled = () => {
                                               title="View Ticket"
                                               onClick={() =>
                                                 handleViewTicket(
-                                                  item.uniqueTransID
+                                                  item.uniqueTransID,item.status
                                                 )
                                               }
                                             >

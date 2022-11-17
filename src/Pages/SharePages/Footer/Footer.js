@@ -19,6 +19,7 @@ const socialData = [
 
 
 const quickLinksData = [
+  { text: "About Us", to: "aboutus" },
   { text: "Contact", to: "contact" },
   // { text: "Bank Details", to: "bankdetail" },
   { text: "EMI Policy", to: "EmiPolicy" },
@@ -72,7 +73,7 @@ const Footer = () => {
               </Text>
               {quickLinksData.map((item, idx) => (
                 <Link to={`/${item.to}`} key={idx}>
-                  <Text fontSize="14px" fontWeight={400} mb="17px">
+                  <Text fontSize="14px" fontWeight={400} mb="8px">
                     {item.text}
                   </Text>
                 </Link>

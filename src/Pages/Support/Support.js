@@ -1,17 +1,17 @@
+import { HStack, Text } from "@chakra-ui/react";
+import axios from "axios";
+import $ from "jquery";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
+import { useLocation, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
 import SideNavBar from "../SharePages/SideNavBar/SideNavBar";
-import Footer from "../SharePages/Footer/Footer";
-import "./Support.css";
-import axios from "axios";
 import { environment } from "../SharePages/Utility/environment";
-import moment from "moment";
-import { useLocation, useNavigate } from "react-router-dom";
-import $ from "jquery";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import ReactPaginate from "react-paginate";
-import { Box, Center, HStack, Text } from "@chakra-ui/react";
+import "./Support.css";
 const Support = () => {
   const [filterSubjectId, setFilterSubjectId] = useState("0");
   const location = useLocation();
@@ -124,14 +124,23 @@ const Support = () => {
   let [ticketNumbers, setTicketno] = useState(
     ticketno != "" ? "," + ticketno : ""
   );
+
+  useEffect(() => {
+    console.log(ticketNumbers, "+++")
+  }, [ticketNumbers])
   const handleSetTicketNo = (isChecked, tNo) => {
     if (isChecked) {
       //let ticketNew = ticketNumbers + "," + tNo;
       // ticketNew=ticketNew.substring(1,ticketNew.length())
+      if (ticketNumbers === tNo) {
+        return
+      }
       setTicketno((oldData) => oldData + "," + tNo);
+      // setTicketno(tNo);
     } else {
       //let ticketNew = ticketNumbers.replace("," + tNo, "");
-      setTicketno(ticketNumbers + "," + tNo);
+      //setTicketno(ticketNumbers + "," + tNo);
+      setTicketno("")
     }
   };
 
@@ -164,13 +173,13 @@ const Support = () => {
     setCurrentItem(item);
     const response = await axios.get(
       environment.getSupportHistoriesByAgentList +
-        "/" +
-        (sessionStorage.getItem("agentId") ?? 0) +
-        "/" +
-        (item == null ? 0 : item.id) +
-        "/" +
-        true +
-        `?pageNumber=${pageNumberH}&pageSize=${pageSizeH}`,
+      "/" +
+      (sessionStorage.getItem("agentId") ?? 0) +
+      "/" +
+      (item == null ? 0 : item.id) +
+      "/" +
+      true +
+      `?pageNumber=${pageNumberH}&pageSize=${pageSizeH}`,
       environment.headerToken
     );
     setSupportHistoryList(response.data.data);
@@ -203,13 +212,13 @@ const Support = () => {
       setPageNumber(pageNumber);
       const response = await axios.get(
         environment.getSupportInfoesByStatustList +
-          "/" +
-          (sessionStorage.getItem("agentId") ?? 0) +
-          "/" +
-          1 +
-          "/" +
-          searchSubjectId +
-          `?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+        "/" +
+        (sessionStorage.getItem("agentId") ?? 0) +
+        "/" +
+        1 +
+        "/" +
+        searchSubjectId +
+        `?pageNumber=${pageNumber}&pageSize=${pageSize}`,
         environment.headerToken
       );
       setSupportOpenedList(response.data.data);
@@ -223,13 +232,13 @@ const Support = () => {
     const getSupport = async () => {
       const response = await axios.get(
         environment.getSupportInfoesByStatustList +
-          "/" +
-          (sessionStorage.getItem("agentId") ?? 0) +
-          "/" +
-          2 +
-          "/" +
-          searchSubjectId +
-          `?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+        "/" +
+        (sessionStorage.getItem("agentId") ?? 0) +
+        "/" +
+        2 +
+        "/" +
+        searchSubjectId +
+        `?pageNumber=${pageNumber}&pageSize=${pageSize}`,
         environment.headerToken
       );
       setSupportOngoingList(response.data.data);
@@ -243,13 +252,13 @@ const Support = () => {
     const getSupport = async () => {
       const response = await axios.get(
         environment.getSupportInfoesByStatustList +
-          "/" +
-          (sessionStorage.getItem("agentId") ?? 0) +
-          "/" +
-          3 +
-          "/" +
-          searchSubjectId +
-          `?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+        "/" +
+        (sessionStorage.getItem("agentId") ?? 0) +
+        "/" +
+        3 +
+        "/" +
+        searchSubjectId +
+        `?pageNumber=${pageNumber}&pageSize=${pageSize}`,
         environment.headerToken
       );
       setSupportClosedList(response.data.data);
@@ -577,34 +586,34 @@ const Support = () => {
                                 <div className="row my-3">
                                   {location.search.split("ticketno=")[1] !==
                                     "null" && (
-                                    <div className="col-sm-4">
-                                      <label class="form-label">
-                                        Support Type
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
-                                      <select
-                                        className="form-select"
-                                        value={subjectId}
-                                        placeholder="Subject"
-                                        onChange={(e) =>
-                                          setSubjectId(Number(e.target.value))
-                                        }
-                                      >
-                                        <option key={0}>Select Type</option>
-                                        {subjectList.map((item, index) => {
-                                          return (
-                                            <option
-                                              key={index + 1}
-                                              value={item.id}
-                                            >
-                                              {item.name}
-                                            </option>
-                                          );
-                                        })}
-                                      </select>
-                                    </div>
-                                  )}
-                                   
+                                      <div className="col-sm-4">
+                                        <label class="form-label">
+                                          Support Type
+                                          <span style={{ color: "red" }}>*</span>
+                                        </label>
+                                        <select
+                                          className="form-select"
+                                          value={subjectId}
+                                          placeholder="Subject"
+                                          onChange={(e) =>
+                                            setSubjectId(Number(e.target.value))
+                                          }
+                                        >
+                                          <option key={0}>Select Type</option>
+                                          {subjectList.map((item, index) => {
+                                            return (
+                                              <option
+                                                key={index + 1}
+                                                value={item.id}
+                                              >
+                                                {item.name}
+                                              </option>
+                                            );
+                                          })}
+                                        </select>
+                                      </div>
+                                    )}
+
                                   <HStack w="400px">
                                     <div className="col-sm-8">
                                       <label class="form-label">
@@ -649,124 +658,125 @@ const Support = () => {
                                   </HStack>
 
                                   {location.search.split("ticketno=")[1] !==
-                                  "null" ? (
+                                    "null" ? (
                                     <>
-                                     {
-                                      passengerList.length > 0 ? <>
-                                          
-                                    <div className="col-sm-12">
-                                      <table
-                                        className="table table-boardered table-sm mt-3"
-                                        style={{
-                                          width: "100%",
-                                          fontSize: "13px",
-                                        }}
-                                      >
-                                        <thead className="text-center fw-bold bg-secondary">
-                                          <tr>
-                                            <th>Pax Name</th>
-                                            <th>Type</th>
-                                            <th>
-                                              Ticket Number{" "}
-                                              <span style={{ color: "red" }}>
-                                                *
-                                              </span>
-                                            </th>
-                                          </tr>
-                                        </thead>
+                                      {
+                                        passengerList.length > 0 ? <>
 
-                                        <tbody className="lh-1 tbody text-center">
-                                          {passengerList.length > 0
-                                            ? passengerList.map(
-                                                (item, index) => {
-                                                  // console.log(
-                                                  //   item.ticketNumbers === null
-                                                  //     ? "TRUE"
-                                                  //     : "FALSE",
-                                                  //   "++++"
-                                                  // );
-                                                  item.ticketNumbers === null &&
-                                                    setIsTicketNumRequired(
-                                                      false
-                                                    );
+                                          <div className="col-sm-12">
+                                            <table
+                                              className="table table-boardered table-sm mt-3"
+                                              style={{
+                                                width: "100%",
+                                                fontSize: "13px",
+                                              }}
+                                            >
+                                              <thead className="text-center fw-bold bg-secondary">
+                                                <tr>
+                                                  <th>Pax Name</th>
+                                                  <th>Type</th>
+                                                  <th>
+                                                    Ticket Number{" "}
+                                                    <span style={{ color: "red" }}>
+                                                      *
+                                                    </span>
+                                                  </th>
+                                                </tr>
+                                              </thead>
 
-                                                  return (
-                                                    <>
-                                                      {item.ticketNumbers &&
-                                                        item.ticketNumbers !==
-                                                          null && (
-                                                          <tr>
-                                                            <td>
-                                                              {item.title +
-                                                                " " +
-                                                                item.first +
-                                                                " " +
-                                                                item.middle +
-                                                                " " +
-                                                                item.last}
-                                                            </td>
-                                                            <td>
-                                                              {
-                                                                item.passengerType
-                                                              }
-                                                            </td>
-                                                            <td>
-                                                              {
-                                                                <>
-                                                                  <input
-                                                                    type={
-                                                                      "checkbox"
-                                                                    }
-                                                                    defaultChecked={
-                                                                      item.ticketNumbers ===
-                                                                      defaultTicketNumber
-                                                                        ? true
-                                                                        : false
-                                                                    }
-                                                                    onChange={(
-                                                                      e
-                                                                    ) =>
-                                                                      handleSetTicketNo(
-                                                                        e.target
-                                                                          .checked,
-                                                                        item.ticketNumbers
-                                                                      )
-                                                                    }
-                                                                  ></input>
-                                                                  &nbsp;{" "}
+                                              <tbody className="lh-1 tbody text-center">
+                                                {passengerList.length > 0
+                                                  ? passengerList.map(
+                                                    (item, index) => {
+                                                      // console.log(
+                                                      //   item.ticketNumbers === null
+                                                      //     ? "TRUE"
+                                                      //     : "FALSE",
+                                                      //   "++++"
+                                                      // );
+                                                      item.ticketNumbers === null &&
+                                                        setIsTicketNumRequired(
+                                                          false
+                                                        );
+
+                                                      return (
+                                                        <>
+                                                          {item.ticketNumbers &&
+                                                            item.ticketNumbers !==
+                                                            null && (
+                                                              <tr>
+                                                                <td>
+                                                                  {item.title +
+                                                                    " " +
+                                                                    item.first +
+                                                                    " " +
+                                                                    item.middle +
+                                                                    " " +
+                                                                    item.last}
+                                                                </td>
+                                                                <td>
                                                                   {
-                                                                    item.ticketNumbers
+                                                                    item.passengerType
                                                                   }
-                                                                </>
-                                                              }
-                                                            </td>
-                                                          </tr>
-                                                        )}
-                                                    </>
-                                                  );
-                                                }
-                                              )
-                                            : ""}
-                                        </tbody>
-                                      </table>
-                                      <Text
-                                        fontSize="xs"
-                                        textAlign="center"
-                                        w="100%"
-                                      >
-                                        Plase make sure to select Ticket Number{" "}
-                                        <br />
-                                        (You can seach for your ticket number
-                                        with Booking ID or PNR)
-                                      </Text>
-                                      <br />
-                                      {/* <label>{ticketNumbers}</label> */}
-                                      {/* <input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumber === "null" ? "" : ticketNumber} className="form-control" onChange={(e) => setTicketno()}></input> */}
-                                    </div>
-                                      </> :<></>
-                                    }
+                                                                </td>
+                                                                <td>
+                                                                  {
+                                                                    <>
+                                                                      <input
+                                                                        type={
+                                                                          "checkbox"
+                                                                        }
+                                                                        defaultChecked={
+                                                                          item.ticketNumbers ===
+                                                                            defaultTicketNumber
+                                                                            ? true
+                                                                            : false
+                                                                        }
+                                                                        onChange={(
+                                                                          e
+                                                                        ) =>
+                                                                          handleSetTicketNo(
+                                                                            e.target
+                                                                              .checked,
+                                                                            item.ticketNumbers
+                                                                          )
+                                                                        }
+                                                                      ></input>
+                                                                      &nbsp;{" "}
+                                                                      {
+                                                                        item.ticketNumbers
+                                                                      }
+                                                                    </>
+                                                                  }
+                                                                </td>
+                                                              </tr>
+                                                            )}
+                                                        </>
+                                                      );
+                                                    }
+                                                  )
+                                                  : ""}
+                                              </tbody>
+                                            </table>
+
+                                            <br />
+                                            {/* <label>{ticketNumbers}</label> */}
+                                            {/* <input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumber === "null" ? "" : ticketNumber} className="form-control" onChange={(e) => setTicketno()}></input> */}
+                                          </div>
+                                        </> : subjectId !== 10 && <Text
+                                          pt="30px"
+                                          fontSize="sm"
+                                          textAlign="center"
+                                          w="100%"
+                                        >
+                                          Plase make sure to select Ticket Number{" "}
+                                          <br />
+                                          (You can seach for your ticket number
+                                          with Booking ID or PNR)
+                                        </Text>
+                                      }
                                     </>
-                               
+
                                   ) : (
                                     ""
                                   )}
@@ -878,7 +888,7 @@ const Support = () => {
                                   <td>{item.pnr}</td>
                                   <td>
                                     {item.ticketNumber === "null" ||
-                                    item.ticketNumber === null
+                                      item.ticketNumber === null
                                       ? "N/A"
                                       : item.ticketNumber}
                                   </td>
@@ -1140,11 +1150,10 @@ const Support = () => {
                                       {supportHistoryList.map((item, index) => {
                                         return (
                                           <li
-                                            className={`text-${
-                                              item.isAgent === true
-                                                ? "right"
-                                                : "left"
-                                            } clearfix`}
+                                            className={`text-${item.isAgent === true
+                                              ? "right"
+                                              : "left"
+                                              } clearfix`}
                                           >
                                             <span className="chat-img">
                                               {/* <img src={require(`../../images/icon/${'user.png'}`)} alt=''/> */}
@@ -1156,11 +1165,10 @@ const Support = () => {
                                                 </strong>
                                                 <br />
                                                 <small
-                                                  className={`text-${
-                                                    item.isAgent === true
-                                                      ? "right"
-                                                      : "left"
-                                                  } text-muted`}
+                                                  className={`text-${item.isAgent === true
+                                                    ? "right"
+                                                    : "left"
+                                                    } text-muted`}
                                                 >
                                                   <i className="fa fa-clock-o"></i>{" "}
                                                   {moment(
@@ -1171,30 +1179,29 @@ const Support = () => {
                                                 </small>
                                               </div>
                                               <p
-                                                className={`text-${
-                                                  item.isAgent === true
-                                                    ? "right"
-                                                    : "left"
-                                                } text-muted`}
+                                                className={`text-${item.isAgent === true
+                                                  ? "right"
+                                                  : "left"
+                                                  } text-muted`}
                                               >
                                                 {item.message}
                                               </p>
                                               {/* <a href={require(`../../images/icon/${'user.png'}`)} download>download</a> */}
                                               {item.fileName != null &&
-                                              item.fileName != "" ? (
+                                                item.fileName != "" ? (
                                                 <a
                                                   href={
                                                     environment.s3URL +
                                                     `${item.fileName}`
                                                   }
                                                   download
-                                                  target="_blank"
+                                                  target="_blank" rel="noreferrer"
                                                 >
                                                   {item.fileName.length > 50
                                                     ? item.fileName.substr(
-                                                        0,
-                                                        50
-                                                      ) + "..."
+                                                      0,
+                                                      50
+                                                    ) + "..."
                                                     : item.fileName}
                                                 </a>
                                               ) : (
@@ -1205,7 +1212,7 @@ const Support = () => {
                                                   style={{ color: "green" }}
                                                 >
                                                   {item.isAgent === true &&
-                                                  item.isAdminRead === true
+                                                    item.isAdminRead === true
                                                     ? "Seen"
                                                     : ""}
                                                 </span>
@@ -1289,11 +1296,10 @@ const Support = () => {
                                       {supportHistoryList.map((item, index) => {
                                         return (
                                           <li
-                                            className={`text-${
-                                              item.isAgent === true
-                                                ? "right"
-                                                : "left"
-                                            } clearfix`}
+                                            className={`text-${item.isAgent === true
+                                              ? "right"
+                                              : "left"
+                                              } clearfix`}
                                           >
                                             <span className="chat-img">
                                               {/* <img src={require(`../../images/icon/${'user.png'}`)} alt=''/> */}
@@ -1305,11 +1311,10 @@ const Support = () => {
                                                 </strong>
                                                 <br />
                                                 <small
-                                                  className={`text-${
-                                                    item.isAgent === true
-                                                      ? "right"
-                                                      : "left"
-                                                  } text-muted`}
+                                                  className={`text-${item.isAgent === true
+                                                    ? "right"
+                                                    : "left"
+                                                    } text-muted`}
                                                 >
                                                   <i className="fa fa-clock-o"></i>{" "}
                                                   {moment(
@@ -1320,30 +1325,29 @@ const Support = () => {
                                                 </small>
                                               </div>
                                               <p
-                                                className={`text-${
-                                                  item.isAgent === true
-                                                    ? "right"
-                                                    : "left"
-                                                } text-muted`}
+                                                className={`text-${item.isAgent === true
+                                                  ? "right"
+                                                  : "left"
+                                                  } text-muted`}
                                               >
                                                 {item.message}
                                               </p>
                                               {/* <a href={require(`../../images/icon/${'user.png'}`)} download>download</a> */}
                                               {item.fileName != null &&
-                                              item.fileName != "" ? (
+                                                item.fileName != "" ? (
                                                 <a
                                                   href={
                                                     environment.s3URL +
                                                     `${item.fileName}`
                                                   }
                                                   download
-                                                  target="_blank"
+                                                  target="_blank" rel="noreferrer"
                                                 >
                                                   {item.fileName.length > 50
                                                     ? item.fileName.substr(
-                                                        0,
-                                                        50
-                                                      ) + "..."
+                                                      0,
+                                                      50
+                                                    ) + "..."
                                                     : item.fileName}
                                                 </a>
                                               ) : (
@@ -1354,7 +1358,7 @@ const Support = () => {
                                                   style={{ color: "green" }}
                                                 >
                                                   {item.isAgent === true &&
-                                                  item.isAdminRead === true
+                                                    item.isAdminRead === true
                                                     ? "Seen"
                                                     : ""}
                                                 </span>

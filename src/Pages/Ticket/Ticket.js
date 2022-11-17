@@ -16,9 +16,10 @@ import airports from "../../JSON/airports.json";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import logo from "../../images/logo/logo-combined.png";
-import { getPassengerType } from "../../common/functions";
+import { getPassengerType, sumRating } from "../../common/functions";
 
 const Ticket = () => {
+  // let total = 0;
   let [ticketingList, setTicketingList] = useState([]);
   let [passengerList, setPassengerList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -33,6 +34,9 @@ const Ticket = () => {
   let [agentInfo, setAgentInfo] = useState([]);
   let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
+// let [totalFare,setTotalFare]=useState(0);
+
+
   const [isDownloading, setIsDownloading] = useState(false);
   const componentRef = useRef();
   const getAgentInfo = async () => {
@@ -55,11 +59,9 @@ const Ticket = () => {
       console.log(response.data, "+++");
       setTicketingList(response.data);
       setPassengerListEdited(response.data.fareBreakdown);
-      // console.log(response.data.data);
-      //   handleGetPassengerList(
-      //   response.data.data[0].passengerIds,
-      //   response.data.data[0].uniqueTransID
-      // );
+      // response.data.fareBreakdown?.map((item,idx)=>{
+      //   setTotalFare(item.totalPrice * item.passengerCount);
+      // })
       setBasePrice(response?.data[0]?.basePrice);
       setTax(response?.data[0]?.tax);
       setAIT(Number(response?.data[0]?.basePrice) * 0.003);
@@ -2818,14 +2820,27 @@ const Ticket = () => {
                                 <td colSpan={5} className="border-none"></td>
                                 <td>Grand Total</td>
                                 <td>
+                                  {/* {ticketingList.passengerInfo !== undefined
+                                    ? ticketingList.passengerInfo[0]
+                                      ?.currencyName
+                                    : ""}{" "}
+           
+                                  {ticketingList.ticketInfo?.ticketingPrice.toLocaleString(
+                                    "en-US"
+                                  )} */}
+
                                   {ticketingList.passengerInfo !== undefined
                                     ? ticketingList.passengerInfo[0]
                                       ?.currencyName
                                     : ""}{" "}
-                                  {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
-                                  {ticketingList.ticketInfo?.ticketingPrice.toLocaleString(
-                                    "en-US"
-                                  )}
+
+                                  {
+                                    sumRating(ticketingList.fareBreakdown).toLocaleString("en-US")
+                                    // ticketingList.fareBreakdown?.map((item,idx)=>{
+                                    // (total +=  item.totalPrice * item.passengerCount)
+                                    // return total;
+                                  }
+                                 
                                 </td>
                               </tr>
                             </tbody>

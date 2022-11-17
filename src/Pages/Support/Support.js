@@ -132,8 +132,11 @@ const Support = () => {
     if (isChecked) {
       //let ticketNew = ticketNumbers + "," + tNo;
       // ticketNew=ticketNew.substring(1,ticketNew.length())
-      //setTicketno((oldData) => oldData + "," + tNo);
-      setTicketno(tNo);
+      if (ticketNumbers === tNo) {
+        return
+      }
+      setTicketno((oldData) => oldData + "," + tNo);
+      // setTicketno(tNo);
     } else {
       //let ticketNew = ticketNumbers.replace("," + tNo, "");
       //setTicketno(ticketNumbers + "," + tNo);
@@ -760,7 +763,7 @@ const Support = () => {
                                             {/* <label>{ticketNumbers}</label> */}
                                             {/* <input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumber === "null" ? "" : ticketNumber} className="form-control" onChange={(e) => setTicketno()}></input> */}
                                           </div>
-                                        </> : <Text
+                                        </> : subjectId !== 10 && <Text
                                           pt="30px"
                                           fontSize="sm"
                                           textAlign="center"

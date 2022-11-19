@@ -857,7 +857,7 @@ const SearchFrom = () => {
                                       ></i>
                                       Children
                                     </div>
-                                    <div className="adult">Aged 2-12</div>
+                                    <div className="adult">Aged 2-11</div>
                                   </div>
                                   <div className="number-input text-center">
                                     <button

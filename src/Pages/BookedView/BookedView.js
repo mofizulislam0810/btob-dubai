@@ -15,7 +15,7 @@ import airports from "../../JSON/airports.json";
 import Footer from "../SharePages/Footer/Footer";
 import { Button } from "@chakra-ui/react";
 import { toast, ToastContainer } from "react-toastify";
-import { getPassengerType } from "../../common/functions";
+import { getCountryCode, getPassengerType } from "../../common/functions";
 
 const BookedView = () => {
   const { setLoading, setTicketData, loading } = useAuth();
@@ -1120,36 +1120,6 @@ const BookedView = () => {
                 <div id="ui-view" data-select2-id="ui-view">
                   <div>
                     <div className="card box-shadow">
-                      {/* <div className="card-header">
-                      
-                      {
-                        ticketingList[0]?.status==="Booking Cancelled" ||  ticketingList[0]?.status==="Ticket Cancelled" ? <> </> :
-                        <>
-                        <span className="me-3 float-end">
-                          <ReactToPrint
-                            trigger={() => (
-                              <button className="btn btn-secondary">
-                                <span className="me-1">
-                                  <i className="fa fa-print"></i>
-                                </span>
-                                Print
-                              </button>
-                            )}
-                            content={() => componentRef.current}
-                          />
-                          <Link
-                            className="btn btn-secondary ms-2 d-print-none"
-                            to="#"
-                            data-abc="true"
-                          >
-                            <i className="fa fa-envelope"></i>
-                            <span className="ms-1">Email</span>
-                          </Link>
-                        </span>
-                        </>
-                      }
-                        
-                      </div> */}
                       <div className="card-body" ref={componentRef}>
                         <img
                           src={logo}
@@ -1288,9 +1258,27 @@ const BookedView = () => {
                                             )}
                                       </td>
                                       <td>
-                                        {item.documentNumber === ""
+                                      {
+                                       ticketingList?.directions[0][0].segments.map((itm, index) => {
+                                      return (
+                                        <>
+                                          {index === 0 ? <>
+                                            {
+                                              
+                                              getCountryCode(itm.from) === "Bangladesh" && getCountryCode(itm.to) === "Bangladesh" ? <>
+                                                N/A
+                                              </> : <>
+                                                {item?.documentNumber === "" ? "N/A" : item?.documentNumber}
+                                              </>
+                                            }
+                                          </> : <></>}
+                                        </>
+                                      )
+                                    })
+                                  }
+                                        {/* {item.documentNumber === ""
                                           ? "N/A"
-                                          : item.documentNumber}
+                                          : item.documentNumber} */}
                                       </td>
                                     </tr>
                                   );

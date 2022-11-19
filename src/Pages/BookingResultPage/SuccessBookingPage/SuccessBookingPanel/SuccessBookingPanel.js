@@ -10,7 +10,7 @@ import Loading from "../../../Loading/Loading";
 import airports from "../../../../JSON/airports.json";
 import ReactToPrint from "react-to-print";
 import { getDefaultNormalizer } from "@testing-library/react";
-import { getCountryFomAirport, getPassengerType } from "../../../../common/functions";
+import { getCountryCode, getCountryFomAirport, getPassengerType } from "../../../../common/functions";
 import { useEffect } from "react";
 import { useState } from "react";
 
@@ -231,13 +231,29 @@ const SuccessBookingPanel = () => {
                                   {item.dateOfBirth === null
                                     ? "N/A"
                                     : moment(item.dateOfBirth).format(
-                                        "DD-MMMM-yyyy"
-                                      )}
+                                      "DD-MMMM-yyyy"
+                                    )}
                                 </td>
                                 <td>
-                                {item.documentInfo.documentNumber === "" 
-                                    ? "N/A"
-                                    : item.documentInfo.documentNumber}
+                                  {
+                                    bookData.data?.item1.flightInfo?.directions[0][0].segments.map((itm, index) => {
+                                      return (
+                                        <>
+                                          {index === 0 ? <>
+                                            {
+                                              getCountryCode(itm.from) === "Bangladesh" && getCountryCode(itm.to) === "Bangladesh" ? <>
+                                                N/A
+                                              </> : <>
+                                                {item.documentInfo?.documentNumber === ""
+                                                  ? "N/A"
+                                                  : item.documentInfo?.documentNumber}
+                                              </>
+                                            }
+                                          </> : <></>}
+                                        </>
+                                      )
+                                    })
+                                  }
                                 </td>
                               </tr>
                             )
@@ -297,7 +313,7 @@ const SuccessBookingPanel = () => {
                                         .map((item) => item.city)}
                                       {item.details[0].originTerminal !==
                                         null &&
-                                      item.details[0].originTerminal !== "" ? (
+                                        item.details[0].originTerminal !== "" ? (
                                         <>
                                           {" "}
                                           (Terminal-
@@ -330,7 +346,7 @@ const SuccessBookingPanel = () => {
                                         .map((item) => item.city)}
                                       {item.details[0].destinationTerminal !==
                                         null &&
-                                      item.details[0].destinationTerminal !==
+                                        item.details[0].destinationTerminal !==
                                         "" ? (
                                         <>
                                           {" "}
@@ -352,15 +368,15 @@ const SuccessBookingPanel = () => {
                                     {" "}
                                     {item.serviceClass === "Y"
                                       ? "ECONOMY" +
-                                        " (" +
-                                        item.bookingClass +
-                                        ")"
+                                      " (" +
+                                      item.bookingClass +
+                                      ")"
                                       : item.serviceClass === "C"
-                                      ? "BUSINESS CLASS" +
+                                        ? "BUSINESS CLASS" +
                                         " (" +
                                         item.bookingClass +
                                         ")"
-                                      : item.serviceClass +
+                                        : item.serviceClass +
                                         " (" +
                                         item.bookingClass +
                                         ")"}
@@ -371,7 +387,7 @@ const SuccessBookingPanel = () => {
                           )}
 
                           {bookData.data?.item1.flightInfo.directions[1] !==
-                          undefined ? (
+                            undefined ? (
                             <>
                               {bookData.data?.item1.flightInfo.directions[1][0].segments.map(
                                 (item, index) => (
@@ -395,7 +411,7 @@ const SuccessBookingPanel = () => {
                                           .map((item) => item.city)}
                                         {item.details[0].originTerminal !==
                                           null &&
-                                        item.details[0].originTerminal !==
+                                          item.details[0].originTerminal !==
                                           "" ? (
                                           <>
                                             {" "}
@@ -429,7 +445,7 @@ const SuccessBookingPanel = () => {
                                           .map((item) => item.city)}
                                         {item.details[0].destinationTerminal !==
                                           null &&
-                                        item.details[0].destinationTerminal !==
+                                          item.details[0].destinationTerminal !==
                                           "" ? (
                                           <>
                                             {" "}
@@ -459,15 +475,15 @@ const SuccessBookingPanel = () => {
                                       {" "}
                                       {item.serviceClass === "Y"
                                         ? "ECONOMY" +
-                                          " (" +
-                                          item.bookingClass +
-                                          ")"
+                                        " (" +
+                                        item.bookingClass +
+                                        ")"
                                         : item.serviceClass === "C"
-                                        ? "BUSINESS CLASS" +
+                                          ? "BUSINESS CLASS" +
                                           " (" +
                                           item.bookingClass +
                                           ")"
-                                        : item.serviceClass +
+                                          : item.serviceClass +
                                           " (" +
                                           item.bookingClass +
                                           ")"}
@@ -481,7 +497,7 @@ const SuccessBookingPanel = () => {
                           )}
 
                           {bookData.data?.item1.flightInfo.directions[2] !==
-                          undefined ? (
+                            undefined ? (
                             <>
                               {bookData.data?.item1.flightInfo.directions[2][0].segments.map(
                                 (item, index) => (
@@ -505,7 +521,7 @@ const SuccessBookingPanel = () => {
                                           .map((item) => item.city)}
                                         {item.details[0].originTerminal !==
                                           null &&
-                                        item.details[0].originTerminal !==
+                                          item.details[0].originTerminal !==
                                           "" ? (
                                           <>
                                             {" "}
@@ -539,7 +555,7 @@ const SuccessBookingPanel = () => {
                                           .map((item) => item.city)}
                                         {item.details[0].destinationTerminal !==
                                           null &&
-                                        item.details[0].destinationTerminal !==
+                                          item.details[0].destinationTerminal !==
                                           "" ? (
                                           <>
                                             {" "}
@@ -569,15 +585,15 @@ const SuccessBookingPanel = () => {
                                       {" "}
                                       {item.serviceClass === "Y"
                                         ? "ECONOMY" +
-                                          " (" +
-                                          item.bookingClass +
-                                          ")"
+                                        " (" +
+                                        item.bookingClass +
+                                        ")"
                                         : item.serviceClass === "C"
-                                        ? "BUSINESS CLASS" +
+                                          ? "BUSINESS CLASS" +
                                           " (" +
                                           item.bookingClass +
                                           ")"
-                                        : item.serviceClass +
+                                          : item.serviceClass +
                                           " (" +
                                           item.bookingClass +
                                           ")"}
@@ -591,7 +607,7 @@ const SuccessBookingPanel = () => {
                           )}
 
                           {bookData.data?.item1.flightInfo.directions[3] !==
-                          undefined ? (
+                            undefined ? (
                             <>
                               {bookData.data?.item1.flightInfo.directions[3][0].segments.map(
                                 (item, index) => (
@@ -615,7 +631,7 @@ const SuccessBookingPanel = () => {
                                           .map((item) => item.city)}
                                         {item.details[0].originTerminal !==
                                           null &&
-                                        item.details[0].originTerminal !==
+                                          item.details[0].originTerminal !==
                                           "" ? (
                                           <>
                                             {" "}
@@ -649,7 +665,7 @@ const SuccessBookingPanel = () => {
                                           .map((item) => item.city)}
                                         {item.details[0].destinationTerminal !==
                                           null &&
-                                        item.details[0].destinationTerminal !==
+                                          item.details[0].destinationTerminal !==
                                           "" ? (
                                           <>
                                             {" "}
@@ -679,15 +695,15 @@ const SuccessBookingPanel = () => {
                                       {" "}
                                       {item.serviceClass === "Y"
                                         ? "ECONOMY" +
-                                          " (" +
-                                          item.bookingClass +
-                                          ")"
+                                        " (" +
+                                        item.bookingClass +
+                                        ")"
                                         : item.serviceClass === "C"
-                                        ? "BUSINESS CLASS" +
+                                          ? "BUSINESS CLASS" +
                                           " (" +
                                           item.bookingClass +
                                           ")"
-                                        : item.serviceClass +
+                                          : item.serviceClass +
                                           " (" +
                                           item.bookingClass +
                                           ")"}
@@ -701,7 +717,7 @@ const SuccessBookingPanel = () => {
                           )}
 
                           {bookData.data?.item1.flightInfo.directions[4] !==
-                          undefined ? (
+                            undefined ? (
                             <>
                               {bookData.data?.item1.flightInfo.directions[4][0].segments.map(
                                 (item, index) => (
@@ -725,7 +741,7 @@ const SuccessBookingPanel = () => {
                                           .map((item) => item.city)}
                                         {item.details[0].originTerminal !==
                                           null &&
-                                        item.details[0].originTerminal !==
+                                          item.details[0].originTerminal !==
                                           "" ? (
                                           <>
                                             {" "}
@@ -759,7 +775,7 @@ const SuccessBookingPanel = () => {
                                           .map((item) => item.city)}
                                         {item.details[0].destinationTerminal !==
                                           null &&
-                                        item.details[0].destinationTerminal !==
+                                          item.details[0].destinationTerminal !==
                                           "" ? (
                                           <>
                                             {" "}
@@ -789,15 +805,15 @@ const SuccessBookingPanel = () => {
                                       {" "}
                                       {item.serviceClass === "Y"
                                         ? "ECONOMY" +
-                                          " (" +
-                                          item.bookingClass +
-                                          ")"
+                                        " (" +
+                                        item.bookingClass +
+                                        ")"
                                         : item.serviceClass === "C"
-                                        ? "BUSINESS CLASS" +
+                                          ? "BUSINESS CLASS" +
                                           " (" +
                                           item.bookingClass +
                                           ")"
-                                        : item.serviceClass +
+                                          : item.serviceClass +
                                           " (" +
                                           item.bookingClass +
                                           ")"}
@@ -811,7 +827,7 @@ const SuccessBookingPanel = () => {
                           )}
 
                           {bookData.data?.item1.flightInfo.directions[5] !==
-                          undefined ? (
+                            undefined ? (
                             <>
                               {bookData.data?.item1.flightInfo.directions[5][0].segments.map(
                                 (item, index) => (
@@ -835,7 +851,7 @@ const SuccessBookingPanel = () => {
                                           .map((item) => item.city)}
                                         {item.details[0].originTerminal !==
                                           null &&
-                                        item.details[0].originTerminal !==
+                                          item.details[0].originTerminal !==
                                           "" ? (
                                           <>
                                             {" "}
@@ -869,7 +885,7 @@ const SuccessBookingPanel = () => {
                                           .map((item) => item.city)}
                                         {item.details[0].destinationTerminal !==
                                           null &&
-                                        item.details[0].destinationTerminal !==
+                                          item.details[0].destinationTerminal !==
                                           "" ? (
                                           <>
                                             {" "}
@@ -899,15 +915,15 @@ const SuccessBookingPanel = () => {
                                       {" "}
                                       {item.serviceClass === "Y"
                                         ? "ECONOMY" +
-                                          " (" +
-                                          item.bookingClass +
-                                          ")"
+                                        " (" +
+                                        item.bookingClass +
+                                        ")"
                                         : item.serviceClass === "C"
-                                        ? "BUSINESS CLASS" +
+                                          ? "BUSINESS CLASS" +
                                           " (" +
                                           item.bookingClass +
                                           ")"
-                                        : item.serviceClass +
+                                          : item.serviceClass +
                                           " (" +
                                           item.bookingClass +
                                           ")"}
@@ -1164,8 +1180,8 @@ const SuccessBookingPanel = () => {
                     </div>
                   </div>
                   {agentInfo.activeCredit + agentInfo.currentBalance <
-                  bookData.data?.item1.flightInfo?.bookingComponents[0]
-                    .totalPrice ? (
+                    bookData.data?.item1.flightInfo?.bookingComponents[0]
+                      .totalPrice ? (
                     <>
                       <div className="row mb-5 mt-2">
                         <div className="col-lg-12 text-center text-danger">

@@ -892,9 +892,15 @@ const Support = () => {
                                     )}
                                   </td>
                                   <td>{item.uniqueTransID}</td>
-                                  <td>{item.pnr}</td>
                                   <td>
-                                    {item.ticketNumber === "null" ||
+                                  {item.pnr === "" ||
+                                      item.pnr === null
+                                      ? "N/A"
+                                      : item.pnr}
+                                  
+                                  </td>
+                                  <td>
+                                    {item.ticketNumber === "" ||
                                       item.ticketNumber === null
                                       ? "N/A"
                                       : item.ticketNumber}

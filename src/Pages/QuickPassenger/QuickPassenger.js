@@ -198,7 +198,7 @@ const QuickPassenger = () => {
     setFirstName(item.first);
     setMiddleName(item.middle);
     setLastName(item.last);
-    setDOB(ISODateFormatter(item.dateOfBirth));
+    setDOB(item.dateOfBirth === null ? null : ISODateFormatter(item.dateOfBirth));
     setNationality(item.nationality);
     setGender(item.gender);
     setPassportNo(item.documentNumber);
@@ -481,10 +481,12 @@ const QuickPassenger = () => {
                                 ({item.passengerType})
                               </td>
                               <td>{item.email}</td>
-                              <td>
-                                {moment(item.dateOfBirth).format(
-                                  "DD-MMMM-yyyy"
-                                )}
+                              <td>  
+                                {item.dateOfBirth === null
+                                  ? "N/A"
+                                  : moment(item.dateOfBirth).format(
+                                    "DD-MMMM-yyyy"
+                                  )}
                               </td>
                               <td>{item.gender}</td>
                               <td>

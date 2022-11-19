@@ -88,6 +88,17 @@ export const getCountryNameFomCountryCode = (input) => {
   })?.name;
 };
 
+export const getCountryCode = (input) => {
+  // return countries.find((obj) => {
+  //   return obj.code === input;
+  // })?.name;
+ console.log(input);
+ let list = airports.find((obj) => obj.iata === input);
+ console.log(list.country,"++++");
+ return list.country
+};
+
+
 export const getCountryFomAirport = (input) => {
   return airports.find((obj) => {
     return obj.iata === input;

@@ -1406,7 +1406,7 @@ const ShowAllFlightPage = () => {
                       <i className="fas fa-plane-departure"></i>
                     </span>{" "}
                     <span>
-                      {originCode[0]}(
+                      {originCode[0]}{" "}(
                       {airports
                         .filter((f) => f.iata === originCode[0])
                         .map((item) => item.city)}
@@ -1421,7 +1421,7 @@ const ShowAllFlightPage = () => {
                     </span>
                     {searchData.returnDate === "null" ? (
                       <span>
-                        {destinationCode[0]}(
+                        {destinationCode[0]}{" "}(
                         {airports
                           .filter((f) => f.iata === destinationCode[0])
                           .map((item) => item.city)}
@@ -1429,7 +1429,7 @@ const ShowAllFlightPage = () => {
                       </span>
                     ) : (
                       <span>
-                        {destinationCode[0]}(
+                        {destinationCode[0]}{" "}(
                         {airports
                           .filter((f) => f.iata === destinationCode[0])
                           .map((item) => item.city)})
@@ -1448,7 +1448,7 @@ const ShowAllFlightPage = () => {
                           <i className="fas fa-plane-departure"></i>
                         </span>{" "}
                         <span>
-                          {originCode1[0]}(
+                          {originCode1[0]}{" "}(
                           {airports
                             .filter((f) => f.iata === originCode1[0])
                             .map((item) => item.city)}
@@ -1463,7 +1463,7 @@ const ShowAllFlightPage = () => {
                         </span>
 
                         <span>
-                          {destinationCode1[0]}(
+                          {destinationCode1[0]}{" "}(
                           {airports
                             .filter((f) => f.iata === destinationCode1[0])
                             .map((item) => item.city)}
@@ -1487,7 +1487,7 @@ const ShowAllFlightPage = () => {
                         <span
 
                         >
-                          {originCode2[0]}(
+                          {originCode2[0]}{" "}(
                           {airports
                             .filter((f) => f.iata === originCode2[0])
                             .map((item) => item.city)}
@@ -1502,7 +1502,7 @@ const ShowAllFlightPage = () => {
                         </span>
 
                         <span>
-                          {destinationCode2[0]}(
+                          {destinationCode2[0]}{" "}(
                           {airports
                             .filter((f) => f.iata === destinationCode2[0])
                             .map((item) => item.city)}
@@ -1525,7 +1525,7 @@ const ShowAllFlightPage = () => {
                           <i className="fas fa-plane-departure"></i>
                         </span>{" "}
                         <span>
-                          {originCode3[0]}(
+                          {originCode3[0]}{" "}(
                           {airports
                             .filter((f) => f.iata === originCode3[0])
                             .map((item) => item.city)}
@@ -1541,7 +1541,7 @@ const ShowAllFlightPage = () => {
 
                         <span>
 
-                          {destinationCode3[0]}(
+                          {destinationCode3[0]}{" "}(
                           {airports
                             .filter((f) => f.iata === destinationCode3[0])
                             .map((item) => item.city)}
@@ -1564,7 +1564,7 @@ const ShowAllFlightPage = () => {
                           <i className="fas fa-plane-departure"></i>
                         </span>{" "}
                         <span>
-                          {originCode4[0]}(
+                          {originCode4[0]}{" "}(
                           {airports
                             .filter((f) => f.iata === originCode4[0])
                             .map((item) => item.city)}
@@ -1579,7 +1579,7 @@ const ShowAllFlightPage = () => {
                         </span>
 
                         <span>
-                          {destinationCode4[0]}(
+                          {destinationCode4[0]}{" "}(
                           {airports
                             .filter((f) => f.iata === destinationCode4[0])
                             .map((item) => item.city)}
@@ -1602,7 +1602,7 @@ const ShowAllFlightPage = () => {
                           <i className="fas fa-plane-departure"></i>
                         </span>{" "}
                         <span>
-                          {originCode5[0]}(
+                          {originCode5[0]}{" "}(
                           {airports
                             .filter((f) => f.iata === originCode5[0])
                             .map((item) => item.city)}
@@ -1617,7 +1617,7 @@ const ShowAllFlightPage = () => {
                         </span>
 
                         <span>
-                          {destinationCode5[0]}(
+                          {destinationCode5[0]}{" "}(
                           {airports
                             .filter((f) => f.iata === destinationCode5[0])
                             .map((item) => item.city)}
@@ -1931,7 +1931,7 @@ const ShowAllFlightPage = () => {
                                                       Children
                                                     </div>
                                                     <div className="adult">
-                                                      Aged 2-12
+                                                      Aged 2-11
                                                     </div>
                                                   </div>
                                                   <div className="number-input text-center">

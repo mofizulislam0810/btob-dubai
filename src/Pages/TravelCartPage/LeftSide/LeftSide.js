@@ -53,6 +53,7 @@ const LeftSide = () => {
   const [firstname, setFirstname] = useState("");
   const [message, setMessage] = useState("");
   let [passengerADTList, setPassengerADTList] = useState([]);
+
   let [passengerCNNList, setPassengerCNNList] = useState([]);
   let [passengerINFList, setPassengerINFList] = useState([]);
   const [click, setClick] = useState(false);
@@ -391,6 +392,22 @@ const LeftSide = () => {
   const [isExDateValidAdt, setisExDateValidAdt] = useState(true);
   const [isExDateValidCnn, setisExDateValidCnn] = useState(true);
   const [isExDateValidInf, setisExDateValidInf] = useState(true);
+
+  // useEffect(
+  //   () =>
+  //     console.log(
+  //       passengerADTList.filter((obj) => {
+  //         if (
+  //           adult.filter((e) => e.passportNumber === obj.documentNumber)
+  //             .length > 0
+  //         )
+  //           return null;
+  //         else return obj;
+  //       }),
+  //       "+++++=="
+  //     ),
+  //   [passengerADTList, adult]
+  // );
 
   let infantList = [];
   for (var i = 0; i < infantNumber; i++) {
@@ -885,9 +902,47 @@ const LeftSide = () => {
   // console.log(origin.split(",")[0].split("- ")[1], "= o");
   // console.log(destination.split(",")[0].split("- ")[1], "= d");
 
+  const [isExDateEmptyAdt, setIsExDateEmptyAdt] = useState(true);
+  const [isExDateEmptyCnn, setIsExDateEmptyCnn] = useState(true);
+  const [isExDateEmptyInf, setIsExDateEmptyInf] = useState(true);
+
+  useEffect(() => {
+    //console.log(adult, "+++++");
+    let arr = adult.map(
+      (obj) => obj.passportExDate === "" || obj.passportExDate === null
+    );
+    // console.log(arr, "+++++===");
+    setIsExDateEmptyAdt(arr.some((val) => val === true));
+  }, [adult]);
+
+  useEffect(() => {
+    //console.log(adult, "+++++");
+    let arr = child.map(
+      (obj) => obj.passportExDate === "" || obj.passportExDate === null
+    );
+    // console.log(arr, "+++++===");
+    setIsExDateEmptyCnn(arr.some((val) => val === true));
+  }, [child]);
+
+  useEffect(() => {
+    //console.log(adult, "+++++");
+    let arr = infant.map(
+      (obj) => obj.passportExDate === "" || obj.passportExDate === null
+    );
+    // console.log(arr, "+++++===");
+    setIsExDateEmptyInf(arr.some((val) => val === true));
+  }, [infant]);
+
   return (
     <form onSubmit={bookingData}>
       <div className="col-lg-12">
+        {/* {
+          <>
+            <Text color="red">{isExDateEmptyAdt ? "TRUE" : "FALSE"}</Text>
+            <Text color="red">{isExDateEmptyCnn ? "TRUE" : "FALSE"}</Text>
+            <Text color="red">{isExDateEmptyInf ? "TRUE" : "FALSE"}</Text>
+          </>
+        } */}
         <div className="card box-shadow">
           <div className="card-body border">
             <div style={{ fontSize: "small" }}>
@@ -905,17 +960,29 @@ const LeftSide = () => {
                       <div className="col-lg-12 my-2">
                         {" "}
                         <Select
-                          options={passengerADTList.map((item) => ({
-                            label:
-                              item.title +
-                              " " +
-                              item.first +
-                              " " +
-                              item.middle +
-                              " " +
-                              item.last,
-                            value: item.id,
-                          }))}
+                          options={passengerADTList
+                            .filter((obj) => {
+                              if (
+                                adult.filter(
+                                  (e) =>
+                                    e.passportNumber === obj.documentNumber &&
+                                    e.first === obj.firstName
+                                ).length > 0
+                              )
+                                return null;
+                              else return obj;
+                            })
+                            .map((item) => ({
+                              label:
+                                item.title +
+                                " " +
+                                item.first +
+                                " " +
+                                item.middle +
+                                " " +
+                                item.last,
+                              value: item.id,
+                            }))}
                           onChange={(e) => {
                             const id = Number(e.value);
                             console.log(id);
@@ -1720,15 +1787,17 @@ const LeftSide = () => {
                                   error
                                   helperText="Your error message"
                                   showMonthDropdown
-                                  showYearDropdown
-                                  dropdownMode="select"
+                                    showYearDropdown
+                                    dropdownMode="select"
                                 />
                               </Box>
-                              {validityError && p.passportExDate === "" && (
-                                <Text pl="2px" color="red">
-                                  Passport expiry date is required
-                                </Text>
-                              )}
+                              {validityError &&
+                                p.passportExDate ===
+                                  ""(
+                                    <Text pl="2px" color="red">
+                                      Passport expiry date is required
+                                    </Text>
+                                  )}
 
                               {/* CHECK THIS AGAIN IN BOOK NOW VALIDATION */}
                               {moment(p?.passportExDate).isBefore(
@@ -1911,17 +1980,29 @@ const LeftSide = () => {
                       </h3>
                       <div className="col-lg-12 my-2">
                         <Select
-                          options={passengerCNNList.map((item) => ({
-                            label:
-                              item.title +
-                              " " +
-                              item.first +
-                              " " +
-                              item.middle +
-                              " " +
-                              item.last,
-                            value: item.id,
-                          }))}
+                          options={passengerCNNList
+                            .filter((obj) => {
+                              if (
+                                child.filter(
+                                  (e) =>
+                                    e.passportNumber === obj.documentNumber &&
+                                    e.first === obj.firstName
+                                ).length > 0
+                              )
+                                return null;
+                              else return obj;
+                            })
+                            .map((item) => ({
+                              label:
+                                item.title +
+                                " " +
+                                item.first +
+                                " " +
+                                item.middle +
+                                " " +
+                                item.last,
+                              value: item.id,
+                            }))}
                           onChange={(e) => {
                             const id = Number(e.value);
                             console.log(id);
@@ -2127,12 +2208,10 @@ const LeftSide = () => {
                                       ? Database?.returnDate
                                       : Database?.journeyDate
                                   ),
-                                  {
-                                    years: -12,
-                                  }
+                                  { years: -12 }
                                 )}
-                                maxDate={add(
-                                  new Date(
+                                maxDate={
+                                  add(new Date(
                                     Database?.tripTypeModify === "Round Trip" &&
                                     calculateFullAge(
                                       Database?.journeyDate,
@@ -2140,14 +2219,11 @@ const LeftSide = () => {
                                     )
                                       ? Database?.returnDate
                                       : Database?.journeyDate
-                                  ),
-                                  {
-                                    years: -2,
-                                  }
-                                )}
+                                  ), { years: -2})
+                                }
                                 showMonthDropdown
-                                showYearDropdown
-                                dropdownMode="select"
+                                    showYearDropdown
+                                    dropdownMode="select"
                               />
                             </Box>
 
@@ -2590,8 +2666,8 @@ const LeftSide = () => {
                                   )}
                                   maxDate={new Date("2199-12-30")}
                                   showMonthDropdown
-                                  showYearDropdown
-                                  dropdownMode="select"
+                                    showYearDropdown
+                                    dropdownMode="select"
                                 />
                               </Box>
 
@@ -2852,17 +2928,29 @@ const LeftSide = () => {
                       </h3>
                       <div className="col-lg-12  my-2">
                         <Select
-                          options={passengerINFList.map((item) => ({
-                            label:
-                              item.title +
-                              " " +
-                              item.first +
-                              " " +
-                              item.middle +
-                              " " +
-                              item.last,
-                            value: item.id,
-                          }))}
+                          options={passengerINFList
+                            .filter((obj) => {
+                              if (
+                                infant.filter(
+                                  (e) =>
+                                    e.passportNumber === obj.documentNumber &&
+                                    e.first === obj.firstName
+                                ).length > 0
+                              )
+                                return null;
+                              else return obj;
+                            })
+                            .map((item) => ({
+                              label:
+                                item.title +
+                                " " +
+                                item.first +
+                                " " +
+                                item.middle +
+                                " " +
+                                item.last,
+                              value: item.id,
+                            }))}
                           onChange={(e) => {
                             const id = Number(e.value);
                             // console.log(id);
@@ -3063,8 +3151,8 @@ const LeftSide = () => {
                                 })}
                                 maxDate={new Date(Database?.journeyDate)}
                                 showMonthDropdown
-                                showYearDropdown
-                                dropdownMode="select"
+                                    showYearDropdown
+                                    dropdownMode="select"
                               />
                             </Box>
 
@@ -3418,8 +3506,8 @@ const LeftSide = () => {
                                   )}
                                   maxDate={new Date("2199-12-30")}
                                   showMonthDropdown
-                                  showYearDropdown
-                                  dropdownMode="select"
+                                    showYearDropdown
+                                    dropdownMode="select"
                                 />
                               </Box>
 
@@ -3920,8 +4008,18 @@ const LeftSide = () => {
                       }}
                       disabled={
                         isDomestic
-                          ? false
-                          : isDisableAdt || isDisableCnn || isDisableInf
+                          ? isDisableAdt ||
+                          isDisableCnn ||
+                          isDisableInf
+                          : isDisableAdt ||
+                            isDisableCnn ||
+                            isDisableInf ||
+                            !isExDateValidAdt ||
+                            !isExDateValidCnn ||
+                            !isExDateValidInf ||
+                            isExDateEmptyAdt ||
+                            isExDateEmptyCnn ||
+                            isExDateEmptyInf
                       }
                     >
                       Book Now

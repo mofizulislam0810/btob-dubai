@@ -349,10 +349,6 @@ const LeftSide = () => {
 
   const [adult, setAdult] = useState(adultList);
 
-  useEffect(() => {
-    console.log(adult, "+++++");
-  }, [adult]);
-
   // if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
   //   adult.map((i) =>
   //     i.dateOfBirth <= ISODateFormatter(add(new Date(), {
@@ -906,9 +902,47 @@ const LeftSide = () => {
   // console.log(origin.split(",")[0].split("- ")[1], "= o");
   // console.log(destination.split(",")[0].split("- ")[1], "= d");
 
+  const [isExDateEmptyAdt, setIsExDateEmptyAdt] = useState(true);
+  const [isExDateEmptyCnn, setIsExDateEmptyCnn] = useState(true);
+  const [isExDateEmptyInf, setIsExDateEmptyInf] = useState(true);
+
+  useEffect(() => {
+    //console.log(adult, "+++++");
+    let arr = adult.map(
+      (obj) => obj.passportExDate === "" || obj.passportExDate === null
+    );
+    // console.log(arr, "+++++===");
+    setIsExDateEmptyAdt(arr.some((val) => val === true));
+  }, [adult]);
+
+  useEffect(() => {
+    //console.log(adult, "+++++");
+    let arr = child.map(
+      (obj) => obj.passportExDate === "" || obj.passportExDate === null
+    );
+    // console.log(arr, "+++++===");
+    setIsExDateEmptyCnn(arr.some((val) => val === true));
+  }, [child]);
+
+  useEffect(() => {
+    //console.log(adult, "+++++");
+    let arr = infant.map(
+      (obj) => obj.passportExDate === "" || obj.passportExDate === null
+    );
+    // console.log(arr, "+++++===");
+    setIsExDateEmptyInf(arr.some((val) => val === true));
+  }, [infant]);
+
   return (
     <form onSubmit={bookingData}>
       <div className="col-lg-12">
+        {/* {
+          <>
+            <Text color="red">{isExDateEmptyAdt ? "TRUE" : "FALSE"}</Text>
+            <Text color="red">{isExDateEmptyCnn ? "TRUE" : "FALSE"}</Text>
+            <Text color="red">{isExDateEmptyInf ? "TRUE" : "FALSE"}</Text>
+          </>
+        } */}
         <div className="card box-shadow">
           <div className="card-body border">
             <div style={{ fontSize: "small" }}>
@@ -1751,11 +1785,13 @@ const LeftSide = () => {
                                   helperText="Your error message"
                                 />
                               </Box>
-                              {validityError && p.passportExDate === "" && (
-                                <Text pl="2px" color="red">
-                                  Passport expiry date is required
-                                </Text>
-                              )}
+                              {validityError &&
+                                p.passportExDate ===
+                                  ""(
+                                    <Text pl="2px" color="red">
+                                      Passport expiry date is required
+                                    </Text>
+                                  )}
 
                               {/* CHECK THIS AGAIN IN BOOK NOW VALIDATION */}
                               {moment(p?.passportExDate).isBefore(
@@ -3960,7 +3996,12 @@ const LeftSide = () => {
                       disabled={
                         isDomestic
                           ? false
-                          : isDisableAdt || isDisableCnn || isDisableInf
+                          : isDisableAdt ||
+                            isDisableCnn ||
+                            isDisableInf ||
+                            isExDateEmptyAdt ||
+                            isExDateEmptyCnn ||
+                            isExDateEmptyInf
                       }
                     >
                       Book Now

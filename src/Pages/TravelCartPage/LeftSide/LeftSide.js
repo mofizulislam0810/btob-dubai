@@ -785,8 +785,8 @@ const LeftSide = () => {
   useEffect(() => {
     let arr = adult.map((p) => {
       //console.log(p.dateOfBirth === "" ? "TRUE" : "FALSE", "=")
-      return !(
-        moment(p?.passportExDate).isBefore(
+      return (
+        !moment(p?.passportExDate).isBefore(
           ISODateFormatter(
             add(
               new Date(
@@ -3495,7 +3495,7 @@ const LeftSide = () => {
 
                               {validityError && p.passportExDate === "" && (
                                 <Text pl="2px" color="red">
-                                  Passport expiry date is required
+                                  Expiry Date not valid!
                                 </Text>
                               )}
 
@@ -3991,9 +3991,9 @@ const LeftSide = () => {
                       disabled={
                         isDomestic
                           ? false
-                          : isDisableAdt ||
-                            isDisableCnn ||
-                            isDisableInf ||
+                          : !isExDateValidAdt ||
+                            !isExDateValidCnn ||
+                            !isExDateValidInf ||
                             isExDateEmptyAdt ||
                             isExDateEmptyCnn ||
                             isExDateEmptyInf

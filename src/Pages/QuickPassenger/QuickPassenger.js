@@ -796,6 +796,9 @@ const QuickPassenger = () => {
                                   value={nationality}
                                   required
                                 >
+                                  <option value="BD" selected>
+                                    Bangladesh
+                                  </option>
                                   {courtries.map((item, index) => {
                                     return (
                                       <option key={index} value={item.code}>

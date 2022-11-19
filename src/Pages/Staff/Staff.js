@@ -66,7 +66,7 @@ const Staff = () => {
           });
         console.log(response);
 
-        if (response !== undefined && response.data > 0) {
+        if (response !== undefined && response.data.item1 === true) {
           toast.success("User updated successfully..");
           handleGetStaffs(1);
           setLoading(false);
@@ -75,7 +75,7 @@ const Staff = () => {
           $("body").removeClass("modal-open");
           $("body").removeAttr("style");
         } else {
-          toast.error("Please try again..");
+          toast.error(response.data.item2);
           setLoading(false);
         }
 
@@ -93,7 +93,7 @@ const Staff = () => {
               console.log(error);
             });
           console.log(response);
-          if (response !== undefined && response.data > 0) {
+          if (response !== undefined && response.data.item1 === true) {
             handleGetStaffs(1);
             setUserName("");
             setUserEmail("");
@@ -112,7 +112,7 @@ const Staff = () => {
             $("body").removeAttr("style");
             setLoading(false);
           } else {
-            toast.error("Please try again..");
+            toast.error(response.data.item2);
             setLoading(false);
           }
         };

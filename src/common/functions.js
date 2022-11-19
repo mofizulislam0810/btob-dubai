@@ -114,3 +114,13 @@ export const sumRating = (agent) => {
     });
 return total;
 }
+
+export const moveToFirstPlace = (arr, text) => {
+  arr.map((elem, index) => {
+    if (elem?.platingCarrier === text) {
+      arr.splice(index, 1);
+      arr.splice(0, 0, elem);
+    }
+  });
+  return arr;
+};

@@ -466,10 +466,9 @@ const Ticket = () => {
                             className="border p-1"
                             style={{ fontSize: "14px" }}
                           >
-                            {ticketingList?.ticketInfo?.bookingType !==
-                              "Online" ? (
+                            {ticketingList?.directions === undefined  ? (
                               <>
-                                {ticketingList.segmentInfo?.map(
+                                {ticketingList?.segmentInfo?.map(
                                   (item, index) => {
                                     let baggage = JSON.parse(item.baggageInfo);
                                     return (

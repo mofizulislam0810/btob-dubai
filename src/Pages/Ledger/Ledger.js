@@ -7,7 +7,8 @@ import { environment } from "../SharePages/Utility/environment";
 import moment from "moment";
 import ReactPaginate from "react-paginate";
 import Footer from "../SharePages/Footer/Footer";
-import { Center, Spinner } from "@chakra-ui/react";
+import { Box, Button, Center, Spinner, Text } from "@chakra-ui/react";
+import { CSVDownload, CSVLink } from "react-csv";
 const Ledger = () => {
   const [ledgerData, setLedgerData] = useState();
   let [fromDate, setFromDate] = useState(new Date().toJSON().slice(0, 10));
@@ -79,6 +80,39 @@ const Ledger = () => {
     //navigate("/invoice?utid="+utid,'_blank');
   };
 
+  const csvHeaders = [
+    { label: "Date", key: "date" },
+    { label: "Invoice Number	", key: "invoiceNumber" },
+    { label: "Booking ID", key: "bookingId" },
+    { label: "PNR", key: "pnr" },
+    { label: "Ticket Number	", key: "ticketNumbers" },
+    { label: "Description", key: "description" },
+    { label: "Type", key: "transactionType" },
+    { label: "Debit (BDT)", key: "debitAmount" },
+    { label: "Credit (BDT)", key: "creditAmount" },
+    { label: "Running Balance (BDT)", key: "balanceAmount" },
+    { label: "Created By", key: "createdByName" },
+  ];
+
+  const [csvData, setCsvData] = useState([]);
+  useEffect(() => {
+    const csvArr = ledgerData?.map((item) => ({
+      date: item.createdDate,
+      invoiceNumber: item.tnxNumber.toLocaleString("en-US"),
+      bookingId: item.uniqueTransID,
+      pnr: item.pnr,
+      ticketNumbers: item.ticketNumbers,
+      description: item.description,
+      transactionType: item.transactionType,
+      debitAmount: item.debitAmount.toLocaleString("en-US"),
+      creditAmount: item.creditAmount.toLocaleString("en-US"),
+      balanceAmount: item.balanceAmount.toLocaleString("en-US"),
+      createdByName: item.createdByName,
+    }));
+
+    csvArr && setCsvData(csvArr);
+  }, [ledgerData]);
+
   return (
     <div>
       <Navbar></Navbar>
@@ -104,6 +138,18 @@ const Ledger = () => {
                       >
                         <div className="col-sm-12 text-left ">
                           <div className="d-flex float-end pb-2">
+                            <Box w="260px">
+                              <Button size="xs" h="38px" colorScheme="whatsapp">
+                                <CSVLink
+                                  filename={"ledger.xls"}
+                                  data={csvData}
+                                  headers={csvHeaders}
+                                >
+                                  <Text color="white">Download Excel File</Text>
+                                </CSVLink>
+                              </Button>
+                            </Box>
+
                             <div class="dropdown">
                               <button
                                 class="btn btn-secondary dropdown-toggle fw-bold rounded-start text-white"

@@ -917,8 +917,13 @@ const LeftSide = () => {
 
   useEffect(() => {
     //console.log(adult, "+++++");
-    let arr = child.map(
-      (obj) => obj.passportExDate === "" || obj.passportExDate === null
+    let arr = child.map((obj) =>
+      isDomestic
+        ? obj.dateOfBirth === "" || obj.dateOfBirth === null
+        : obj.passportExDate === "" ||
+          obj.passportExDate === null ||
+          obj.dateOfBirth === "" ||
+          obj.dateOfBirth === null
     );
     // console.log(arr, "+++++===");
     setIsExDateEmptyCnn(arr.some((val) => val === true));
@@ -926,8 +931,13 @@ const LeftSide = () => {
 
   useEffect(() => {
     //console.log(adult, "+++++");
-    let arr = infant.map(
-      (obj) => obj.passportExDate === "" || obj.passportExDate === null
+    let arr = infant.map((obj) =>
+      isDomestic
+        ? obj.dateOfBirth === "" || obj.dateOfBirth === null
+        : obj.passportExDate === "" ||
+          obj.passportExDate === null ||
+          obj.dateOfBirth === "" ||
+          obj.dateOfBirth === null
     );
     // console.log(arr, "+++++===");
     setIsExDateEmptyInf(arr.some((val) => val === true));
@@ -1787,8 +1797,8 @@ const LeftSide = () => {
                                   error
                                   helperText="Your error message"
                                   showMonthDropdown
-                                    showYearDropdown
-                                    dropdownMode="select"
+                                  showYearDropdown
+                                  dropdownMode="select"
                                 />
                               </Box>
                               {validityError &&
@@ -2210,8 +2220,8 @@ const LeftSide = () => {
                                   ),
                                   { years: -12 }
                                 )}
-                                maxDate={
-                                  add(new Date(
+                                maxDate={add(
+                                  new Date(
                                     Database?.tripTypeModify === "Round Trip" &&
                                     calculateFullAge(
                                       Database?.journeyDate,
@@ -2219,11 +2229,12 @@ const LeftSide = () => {
                                     )
                                       ? Database?.returnDate
                                       : Database?.journeyDate
-                                  ), { years: -2})
-                                }
+                                  ),
+                                  { years: -2 }
+                                )}
                                 showMonthDropdown
-                                    showYearDropdown
-                                    dropdownMode="select"
+                                showYearDropdown
+                                dropdownMode="select"
                               />
                             </Box>
 
@@ -2666,8 +2677,8 @@ const LeftSide = () => {
                                   )}
                                   maxDate={new Date("2199-12-30")}
                                   showMonthDropdown
-                                    showYearDropdown
-                                    dropdownMode="select"
+                                  showYearDropdown
+                                  dropdownMode="select"
                                 />
                               </Box>
 
@@ -3151,8 +3162,8 @@ const LeftSide = () => {
                                 })}
                                 maxDate={new Date(Database?.journeyDate)}
                                 showMonthDropdown
-                                    showYearDropdown
-                                    dropdownMode="select"
+                                showYearDropdown
+                                dropdownMode="select"
                               />
                             </Box>
 
@@ -3506,8 +3517,8 @@ const LeftSide = () => {
                                   )}
                                   maxDate={new Date("2199-12-30")}
                                   showMonthDropdown
-                                    showYearDropdown
-                                    dropdownMode="select"
+                                  showYearDropdown
+                                  dropdownMode="select"
                                 />
                               </Box>
 
@@ -4008,13 +4019,8 @@ const LeftSide = () => {
                       }}
                       disabled={
                         isDomestic
-                          ? isDisableAdt ||
-                          isDisableCnn ||
-                          isDisableInf
-                          : isDisableAdt ||
-                            isDisableCnn ||
-                            isDisableInf ||
-                            !isExDateValidAdt ||
+                          ? isExDateEmptyCnn || isExDateEmptyInf
+                          : !isExDateValidAdt ||
                             !isExDateValidCnn ||
                             !isExDateValidInf ||
                             isExDateEmptyAdt ||

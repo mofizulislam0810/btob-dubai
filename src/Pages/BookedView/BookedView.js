@@ -298,7 +298,7 @@ const BookedView = () => {
                             <tr>
                               <th colspan="4" className="fw-bold py-2 bg-light">
                                 {ticketingList.ticketInfo?.status ===
-                                "Booking Cancelled"
+                                  "Booking Cancelled"
                                   ? ticketingList.ticketInfo?.status
                                   : "BOOKING CONFIRMED"}
                               </th>
@@ -356,52 +356,52 @@ const BookedView = () => {
                               <td>{ticketingList.ticketInfo?.pnr}</td>
                             </tr> */}
                             <tr>
-                              <th>{ticketingList.ticketInfo?.status === "Ticket Ordered"? "" :"Booking"} Status:</th>
-                              <td>{ticketingList.ticketInfo?.status === "Ticket Ordered"? "Ticket Processing " : ticketingList.ticketInfo?.status}</td>
+                              <th>{ticketingList.ticketInfo?.status === "Ticket Ordered" ? "" : "Booking"} Status:</th>
+                              <td>{ticketingList.ticketInfo?.status === "Ticket Ordered" ? "Ticket Processing " : ticketingList.ticketInfo?.status}</td>
                               <td className="fw-bold">Booked By:</td>
                               <td>{ticketingList.ticketInfo?.agentName}</td>
                             </tr>
 
                             <tr>
-                                  {ticketingList.ticketInfo?.status === "Ticket Ordered"? "" :<>
-                                  <th>Issue Before:</th>
-                                    <td style={{ color: "red" }}>
-                                      {lastTicketTime !== "" &&
-                                      lastTicketTime !== null &&
-                                      lastTicketTime !== undefined ? (
-                                        lastTicketTime
-                                      ) : (
-                                        <>
-                                          <a
-                                            href="javascript:void(0)"
-                                            title="Last Ticketing Time"
-                                            onClick={() =>
-                                              handleGetTime(
-                                                ticketingList.ticketInfo?.referenceLog
-                                              )
-                                            }
-                                          >
-                                            <Button
-                                              isLoading={isLoading}
-                                              border="2px solid"
-                                              colorScheme="blue"
-                                              variant="outline"
-                                              size="xsm"
-                                              borderRadius="16px"
-                                              p="1"
-                                              m="1"
-                                              // disabled = {click}
-                                            >
-                                              <span style={{ fontSize: "10px" }}>
-                                                Get Limit
-                                              </span>
-                                            </Button>
-                                          </a>
-                                        </>
-                                      )}
-                                    </td>
-                                  </>
-                                  }
+                              {ticketingList.ticketInfo?.status === "Ticket Ordered" ? "" : <>
+                                <th>Issue Before:</th>
+                                <td style={{ color: "red" }}>
+                                  {lastTicketTime !== "" &&
+                                    lastTicketTime !== null &&
+                                    lastTicketTime !== undefined ? (
+                                    lastTicketTime
+                                  ) : (
+                                    <>
+                                      <a
+                                        href="javascript:void(0)"
+                                        title="Last Ticketing Time"
+                                        onClick={() =>
+                                          handleGetTime(
+                                            ticketingList.ticketInfo?.referenceLog
+                                          )
+                                        }
+                                      >
+                                        <Button
+                                          isLoading={isLoading}
+                                          border="2px solid"
+                                          colorScheme="blue"
+                                          variant="outline"
+                                          size="xsm"
+                                          borderRadius="16px"
+                                          p="1"
+                                          m="1"
+                                        // disabled = {click}
+                                        >
+                                          <span style={{ fontSize: "10px" }}>
+                                            Get Limit
+                                          </span>
+                                        </Button>
+                                      </a>
+                                    </>
+                                  )}
+                                </td>
+                              </>
+                              }
                               <td className="fw-bold">PNR</td>
                               <td>{ticketingList.ticketInfo?.pnr}</td>
                             </tr>
@@ -452,8 +452,8 @@ const BookedView = () => {
                                         {item.dateOfBirth === null
                                           ? "---"
                                           : moment(item.dateOfBirth).format(
-                                              "DD-MMMM-yyyy"
-                                            )}
+                                            "DD-MMMM-yyyy"
+                                          )}
                                       </td>
                                       <td>
                                         {item.documentNumber === ""
@@ -495,7 +495,7 @@ const BookedView = () => {
                             </thead>
                             <tbody className="text-center">
                               {ticketingList?.ticketInfo?.bookingType !==
-                              "Online" ? (
+                                "Online" ? (
                                 <>
                                   {ticketingList.segmentInfo?.map(
                                     (item, index) => {
@@ -563,11 +563,11 @@ const BookedView = () => {
                                 <>
                                   {ticketingList?.directions[0][0].segments.map(
                                     (item, index) => {
-                              //         (getCountryFomAirport(item.from) !==
-                              // "Bangladesh" ||
-                              // getCountryFomAirport(item.to) !==
-                              //   "Bangladesh") &&
-                              // setIsDomestic(false);
+                                      //         (getCountryFomAirport(item.from) !==
+                                      // "Bangladesh" ||
+                                      // getCountryFomAirport(item.to) !==
+                                      //   "Bangladesh") &&
+                                      // setIsDomestic(false);
                                       return (
                                         <tr key={index}>
                                           <td>
@@ -593,7 +593,7 @@ const BookedView = () => {
                                               <br></br>
                                               {item.details[0]
                                                 .originTerminal !== null &&
-                                              item.details[0].originTerminal !==
+                                                item.details[0].originTerminal !==
                                                 "" ? (
                                                 <>
                                                   (Terminal-
@@ -625,8 +625,8 @@ const BookedView = () => {
                                               <br></br>
                                               {item.details[0]
                                                 .destinationTerminal !== null &&
-                                              item.details[0]
-                                                .destinationTerminal !== "" ? (
+                                                item.details[0]
+                                                  .destinationTerminal !== "" ? (
                                                 <>
                                                   (Terminal-
                                                   {
@@ -650,15 +650,15 @@ const BookedView = () => {
                                             {" "}
                                             {item.serviceClass === "Y"
                                               ? "ECONOMY" +
-                                                " (" +
-                                                item.bookingClass +
-                                                ")"
+                                              " (" +
+                                              item.bookingClass +
+                                              ")"
                                               : item.serviceClass === "C"
-                                              ? "BUSINESS CLASS" +
+                                                ? "BUSINESS CLASS" +
                                                 " (" +
                                                 item.bookingClass +
                                                 ")"
-                                              : item.serviceClass +
+                                                : item.serviceClass +
                                                 " (" +
                                                 item.bookingClass +
                                                 ")"}
@@ -668,7 +668,7 @@ const BookedView = () => {
                                     }
                                   )}
                                   {ticketingList?.directions[1] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
+                                    ticketingList?.directions !== undefined ? (
                                     <>
                                       {ticketingList?.directions[1][0].segments.map(
                                         (item, index) => {
@@ -701,8 +701,8 @@ const BookedView = () => {
                                                     .map((item) => item.city)}
                                                   {item.details[0]
                                                     .originTerminal !== null &&
-                                                  item.details[0]
-                                                    .originTerminal !== "" ? (
+                                                    item.details[0]
+                                                      .originTerminal !== "" ? (
                                                     <>
                                                       (Terminal-
                                                       {
@@ -735,8 +735,8 @@ const BookedView = () => {
                                                   {item.details[0]
                                                     .destinationTerminal !==
                                                     null &&
-                                                  item.details[0]
-                                                    .destinationTerminal !==
+                                                    item.details[0]
+                                                      .destinationTerminal !==
                                                     "" ? (
                                                     <>
                                                       (Terminal-
@@ -761,15 +761,15 @@ const BookedView = () => {
                                                 {" "}
                                                 {item.serviceClass === "Y"
                                                   ? "ECONOMY" +
-                                                    " (" +
-                                                    item.bookingClass +
-                                                    ")"
+                                                  " (" +
+                                                  item.bookingClass +
+                                                  ")"
                                                   : item.serviceClass === "C"
-                                                  ? "BUSINESS CLASS" +
+                                                    ? "BUSINESS CLASS" +
                                                     " (" +
                                                     item.bookingClass +
                                                     ")"
-                                                  : item.serviceClass +
+                                                    : item.serviceClass +
                                                     " (" +
                                                     item.bookingClass +
                                                     ")"}
@@ -824,7 +824,7 @@ const BookedView = () => {
                                       <td>{item.ait.toLocaleString("en-US")}</td>
                                       <td>{item.passengerCount}</td>
                                       <td>{item.currencyName} {(item.totalPrice *
-                                            item.passengerCount).toLocaleString("en-US")}</td>
+                                        item.passengerCount).toLocaleString("en-US")}</td>
                                     </tr>
                                   </>
                                 );
@@ -835,7 +835,7 @@ const BookedView = () => {
                                 <td>
                                   {ticketingList.passengerInfo !== undefined
                                     ? ticketingList.passengerInfo[0]
-                                        ?.currencyName
+                                      ?.currencyName
                                     : ""}{" "}
                                   {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
                                   {ticketingList.ticketInfo?.ticketingPrice}
@@ -912,7 +912,7 @@ const BookedView = () => {
 
                       {ticketingList.ticketInfo?.status ===
                         "Booking Cancelled" ||
-                      ticketingList.ticketInfo?.status ===
+                        ticketingList.ticketInfo?.status ===
                         "Ticket Cancelled" ? (
                         <></>
                       ) : (
@@ -1135,7 +1135,7 @@ const BookedView = () => {
                             <tr>
                               <th colspan="4" className="fw-bold py-2 bg-light">
                                 {ticketingList.ticketInfo?.status ===
-                                "Booking Cancelled"
+                                  "Booking Cancelled"
                                   ? ticketingList.ticketInfo?.status
                                   : "BOOKING CONFIRMED"}
                               </th>
@@ -1152,54 +1152,54 @@ const BookedView = () => {
                               <td className="fw-bold">Booking ID:</td>
                               <td>{ticketingList.ticketInfo?.uniqueTransID}</td>
                             </tr>
-                            
+
                             <tr>
-                            <th>{ticketingList.ticketInfo?.status === "Ticket Ordered"? "" :"Booking"} Status:</th>
-                              <td>{ticketingList.ticketInfo?.status === "Ticket Ordered"? "Ticket Processing " : ticketingList.ticketInfo?.status}</td>
+                              <th>{ticketingList.ticketInfo?.status === "Ticket Ordered" ? "" : "Booking"} Status:</th>
+                              <td>{ticketingList.ticketInfo?.status === "Ticket Ordered" ? "Ticket Processing " : ticketingList.ticketInfo?.status}</td>
                               <td className="fw-bold">Booked By:</td>
                               <td>{ticketingList.ticketInfo?.agentName}</td>
                             </tr>
                             <tr>
 
-                            {ticketingList.ticketInfo?.status === "Ticket Ordered"? "" :<>
-                            <th>Issue Before:</th>
-                              <td style={{ color: "red" }}>
-                                {lastTicketTime !== "" &&
-                                lastTicketTime !== null &&
-                                lastTicketTime !== undefined ? (
-                                  lastTicketTime
-                                ) : (
-                                  <>
-                                    <a
-                                      href="javascript:void(0)"
-                                      title="Last Ticketing Time"
-                                      onClick={() =>
-                                        handleGetTime(
-                                          ticketingList.ticketInfo?.referenceLog
-                                        )
-                                      }
-                                    >
-                                      <Button
-                                        isLoading={isLoading}
-                                        border="2px solid"
-                                        colorScheme="blue"
-                                        variant="outline"
-                                        size="xsm"
-                                        borderRadius="16px"
-                                        p="1"
-                                        m="1"
-                                        // disabled = {click}
+                              {ticketingList.ticketInfo?.status === "Ticket Ordered" ? "" : <>
+                                <th>Issue Before:</th>
+                                <td style={{ color: "red" }}>
+                                  {lastTicketTime !== "" &&
+                                    lastTicketTime !== null &&
+                                    lastTicketTime !== undefined ? (
+                                    lastTicketTime
+                                  ) : (
+                                    <>
+                                      <a
+                                        href="javascript:void(0)"
+                                        title="Last Ticketing Time"
+                                        onClick={() =>
+                                          handleGetTime(
+                                            ticketingList.ticketInfo?.referenceLog
+                                          )
+                                        }
                                       >
-                                        <span style={{ fontSize: "10px" }}>
-                                          Get Limit
-                                        </span>
-                                      </Button>
-                                    </a>
-                                  </>
-                                )}
-                              </td>
-                            </>}
-                              
+                                        <Button
+                                          isLoading={isLoading}
+                                          border="2px solid"
+                                          colorScheme="blue"
+                                          variant="outline"
+                                          size="xsm"
+                                          borderRadius="16px"
+                                          p="1"
+                                          m="1"
+                                        // disabled = {click}
+                                        >
+                                          <span style={{ fontSize: "10px" }}>
+                                            Get Limit
+                                          </span>
+                                        </Button>
+                                      </a>
+                                    </>
+                                  )}
+                                </td>
+                              </>}
+
                               <td className="fw-bold">PNR</td>
                               <td>{ticketingList.ticketInfo?.pnr}</td>
                             </tr>
@@ -1246,36 +1246,60 @@ const BookedView = () => {
                                         {item.passengerType === "ADT"
                                           ? "Adult"
                                           : item.passengerType === "CNN"
-                                          ? "Child"
-                                          : "Infant"}
+                                            ? "Child"
+                                            : "Infant"}
                                       </td>
                                       <td>{item.gender}</td>
                                       <td>
                                         {item.dateOfBirth === null
                                           ? "N/A"
                                           : moment(item.dateOfBirth).format(
-                                              "DD-MMMM-yyyy"
-                                            )}
+                                            "DD-MMMM-yyyy"
+                                          )}
                                       </td>
                                       <td>
-                                      {
-                                       ticketingList?.directions[0][0].segments.map((itm, index) => {
-                                      return (
-                                        <>
-                                          {index === 0 ? <>
+                                        {
+                                          ticketingList?.directions !== undefined ? <>
                                             {
-                                              
-                                              getCountryCode(itm.from) === "Bangladesh" && getCountryCode(itm.to) === "Bangladesh" ? <>
-                                                N/A
-                                              </> : <>
-                                                {item?.documentNumber === "" ? "N/A" : item?.documentNumber}
-                                              </>
+                                              ticketingList?.directions[0][0]?.segments.map((itm, index) => {
+                                                return (
+                                                  <>
+                                                    {index === 0 ? <>
+                                                      {
+
+                                                        getCountryCode(itm.from) === "Bangladesh" && getCountryCode(itm.to) === "Bangladesh" ? <>
+                                                          N/A
+                                                        </> : <>
+                                                          {item?.documentNumber === "" ? "N/A" : item?.documentNumber}
+                                                        </>
+                                                      }
+                                                    </> : <></>}
+                                                  </>
+                                                )
+                                              })
                                             }
-                                          </> : <></>}
-                                        </>
-                                      )
-                                    })
-                                  }
+                                          </> : <>
+                                            {
+                                              ticketingList?.segmentInfo?.map((itm, index) => {
+                                                return (
+                                                  <>
+                                                    {index === 0 ? <>
+                                                      {
+
+                                                        getCountryCode(itm.origin) === "Bangladesh" && getCountryCode(itm.destination) === "Bangladesh" ? <>
+                                                          N/A
+                                                        </> : <>
+                                                          {item?.documentNumber === "" ? "N/A" : item?.documentNumber}
+                                                        </>
+                                                      }
+                                                    </> : <></>}
+                                                  </>
+                                                )
+                                              })
+                                            }
+                                          </>
+                                        }
+
                                         {/* {item.documentNumber === ""
                                           ? "N/A"
                                           : item.documentNumber} */}
@@ -1314,33 +1338,120 @@ const BookedView = () => {
                               </tr>
                             </thead>
                             <tbody className="text-center">
-                              {ticketingList?.ticketInfo?.bookingType !==
-                              "Online" ? (
-                                <>
-                                  {ticketingList.segmentInfo?.map(
-                                    (item, index) => {
-                                      return (
-                                        <>
-                                          <tr>
+                              {ticketingList?.directions === undefined
+                                ? (
+                                  <>
+                                    {ticketingList.segmentInfo?.map(
+                                      (item, index) => {
+                                        return (
+                                          <>
+                                            <tr>
+                                              <td>
+                                                {item.operationCarrierName}
+                                              </td>
+                                              <td>
+                                                {item.airlineCode}-
+                                                {item.flightNumber}
+                                              </td>
+                                              <td>
+                                                {item.origin}
+                                                <br></br>
+                                                <span
+                                                  style={{ fontSize: "12px" }}
+                                                >
+                                                  {airports
+                                                    .filter(
+                                                      (f) =>
+                                                        f.iata === item.origin
+                                                    )
+                                                    .map((item) => item.city)}
+                                                </span>
+                                              </td>
+                                              <td>
+                                                {moment(item.departure).format(
+                                                  "DD-MMMM-yyyy"
+                                                )}
+                                                <br></br>
+                                                {moment(item.departure).format(
+                                                  "hh:mm:ss"
+                                                )}
+                                              </td>
+                                              <td>
+                                                {item.destination}
+                                                <br></br>
+                                                <span
+                                                  style={{ fontSize: "12px" }}
+                                                >
+                                                  {airports
+                                                    .filter(
+                                                      (f) =>
+                                                        f.iata ===
+                                                        item.destination
+                                                    )
+                                                    .map((item) => item.city)}
+                                                </span>
+                                              </td>
+                                              <td>
+                                                {moment(item.arrival).format(
+                                                  "DD-MMMM-yyyy"
+                                                )}
+                                                <br></br>
+                                                {moment(item.arrival).format(
+                                                  "hh:mm:ss"
+                                                )}
+                                              </td>
+                                              <td>{item.fareBasisCode}</td>
+                                              <td>
+                                                {item.cabinClass} (
+                                                {item.bookingCode})
+                                              </td>
+                                            </tr>
+                                          </>
+                                        );
+                                      }
+                                    )}
+                                  </>
+                                ) : (
+                                  <>
+                                    {ticketingList?.directions[0][0].segments.map(
+                                      (item, index) => {
+                                        return (
+                                          <tr key={index}>
                                             <td>
-                                              {ticketingList[0].airlineName}
+                                              {item.airline}
+                                              <br></br>
+                                              <span style={{ fontSize: "12px" }}>
+                                                {item.plane[0]}
+                                              </span>
                                             </td>
                                             <td>
                                               {item.airlineCode}-
                                               {item.flightNumber}
                                             </td>
                                             <td>
-                                              {item.origin}
+                                              {item.from}
                                               <br></br>
-                                              <span
-                                                style={{ fontSize: "12px" }}
-                                              >
+                                              <span style={{ fontSize: "12px" }}>
                                                 {airports
                                                   .filter(
-                                                    (f) =>
-                                                      f.iata === item.origin
+                                                    (f) => f.iata === item.from
                                                   )
-                                                  .map((item) => item.city)}
+                                                  .map((item) => item.city)}{" "}
+                                                {item.details[0]
+                                                  .originTerminal !== null &&
+                                                  item.details[0].originTerminal !==
+                                                  "" ? (
+                                                  <>
+                                                    (Terminal-
+                                                    {
+                                                      item.details[0]
+                                                        .originTerminal
+                                                    }
+                                                    )
+                                                  </>
+                                                ) : (
+                                                  <></>
+                                                )}
                                               </span>
                                             </td>
                                             <td>
@@ -1349,22 +1460,33 @@ const BookedView = () => {
                                               )}
                                               <br></br>
                                               {moment(item.departure).format(
-                                                "hh:mm:ss"
+                                                "hh:mm:ss A"
                                               )}
                                             </td>
                                             <td>
-                                              {item.destination}
+                                              {item.to}
                                               <br></br>
-                                              <span
-                                                style={{ fontSize: "12px" }}
-                                              >
+                                              <span style={{ fontSize: "12px" }}>
                                                 {airports
                                                   .filter(
-                                                    (f) =>
-                                                      f.iata ===
-                                                      item.destination
+                                                    (f) => f.iata === item.to
                                                   )
-                                                  .map((item) => item.city)}
+                                                  .map((item) => item.city)}{" "}
+                                                {item.details[0]
+                                                  .destinationTerminal !== null &&
+                                                  item.details[0]
+                                                    .destinationTerminal !== "" ? (
+                                                  <>
+                                                    (Terminal-
+                                                    {
+                                                      item.details[0]
+                                                        .destinationTerminal
+                                                    }
+                                                    )
+                                                  </>
+                                                ) : (
+                                                  <></>
+                                                )}
                                               </span>
                                             </td>
                                             <td>
@@ -1373,770 +1495,672 @@ const BookedView = () => {
                                               )}
                                               <br></br>
                                               {moment(item.arrival).format(
-                                                "hh:mm:ss"
+                                                "hh:mm:ss A"
                                               )}
                                             </td>
                                             <td>{item.fareBasisCode}</td>
                                             <td>
-                                              {item.cabinClass} (
-                                              {item.bookingCode})
+                                              {" "}
+                                              {item.serviceClass === "Y"
+                                                ? "ECONOMY" +
+                                                " (" +
+                                                item.bookingClass +
+                                                ")"
+                                                : item.serviceClass === "C"
+                                                  ? "BUSINESS CLASS" +
+                                                  " (" +
+                                                  item.bookingClass +
+                                                  ")"
+                                                  : item.serviceClass +
+                                                  " (" +
+                                                  item.bookingClass +
+                                                  ")"}
                                             </td>
                                           </tr>
-                                        </>
-                                      );
-                                    }
-                                  )}
-                                </>
-                              ) : (
-                                <>
-                                  {ticketingList?.directions[0][0].segments.map(
-                                    (item, index) => {
-                                      return (
-                                        <tr key={index}>
-                                          <td>
-                                            {item.airline}
-                                            <br></br>
-                                            <span style={{ fontSize: "12px" }}>
-                                              {item.plane[0]}
-                                            </span>
-                                          </td>
-                                          <td>
-                                            {item.airlineCode}-
-                                            {item.flightNumber}
-                                          </td>
-                                          <td>
-                                            {item.from}
-                                            <br></br>
-                                            <span style={{ fontSize: "12px" }}>
-                                              {airports
-                                                .filter(
-                                                  (f) => f.iata === item.from
-                                                )
-                                                .map((item) => item.city)}{" "}
-                                              {item.details[0]
-                                                .originTerminal !== null &&
-                                              item.details[0].originTerminal !==
-                                                "" ? (
-                                                <>
-                                                  (Terminal-
-                                                  {
-                                                    item.details[0]
-                                                      .originTerminal
-                                                  }
-                                                  )
-                                                </>
-                                              ) : (
-                                                <></>
-                                              )}
-                                            </span>
-                                          </td>
-                                          <td>
-                                            {moment(item.departure).format(
-                                              "DD-MMMM-yyyy"
-                                            )}
-                                            <br></br>
-                                            {moment(item.departure).format(
-                                              "hh:mm:ss A"
-                                            )}
-                                          </td>
-                                          <td>
-                                            {item.to}
-                                            <br></br>
-                                            <span style={{ fontSize: "12px" }}>
-                                              {airports
-                                                .filter(
-                                                  (f) => f.iata === item.to
-                                                )
-                                                .map((item) => item.city)}{" "}
-                                              {item.details[0]
-                                                .destinationTerminal !== null &&
-                                              item.details[0]
-                                                .destinationTerminal !== "" ? (
-                                                <>
-                                                  (Terminal-
-                                                  {
-                                                    item.details[0]
-                                                      .destinationTerminal
-                                                  }
-                                                  )
-                                                </>
-                                              ) : (
-                                                <></>
-                                              )}
-                                            </span>
-                                          </td>
-                                          <td>
-                                            {moment(item.arrival).format(
-                                              "DD-MMMM-yyyy"
-                                            )}
-                                            <br></br>
-                                            {moment(item.arrival).format(
-                                              "hh:mm:ss A"
-                                            )}
-                                          </td>
-                                          <td>{item.fareBasisCode}</td>
-                                          <td>
-                                            {" "}
-                                            {item.serviceClass === "Y"
-                                              ? "ECONOMY" +
-                                                " (" +
-                                                item.bookingClass +
-                                                ")"
-                                              : item.serviceClass === "C"
-                                              ? "BUSINESS CLASS" +
-                                                " (" +
-                                                item.bookingClass +
-                                                ")"
-                                              : item.serviceClass +
-                                                " (" +
-                                                item.bookingClass +
-                                                ")"}
-                                          </td>
-                                        </tr>
-                                      );
-                                    }
-                                  )}
-                                  {ticketingList?.directions[1] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
-                                    <>
-                                      {ticketingList?.directions[1][0].segments.map(
-                                        (item, index) => {
-                                          return (
-                                            <tr key={index}>
-                                              <td>
-                                                {item.airline}
-                                                <br></br>
-                                                <span
-                                                  style={{ fontSize: "12px" }}
-                                                >
-                                                  {item.plane[0]}
-                                                </span>
-                                              </td>
-                                              <td>
-                                                {item.airlineCode}-
-                                                {item.flightNumber}
-                                              </td>
-                                              <td>
-                                                {item.from}
-                                                <br></br>
-                                                <span
-                                                  style={{ fontSize: "12px" }}
-                                                >
-                                                  {airports
-                                                    .filter(
-                                                      (f) =>
-                                                        f.iata === item.from
-                                                    )
-                                                    .map(
-                                                      (item) => item.city
-                                                    )}{" "}
-                                                  {item.details[0]
-                                                    .originTerminal !== null &&
-                                                  item.details[0]
-                                                    .originTerminal !== "" ? (
-                                                    <>
-                                                      (Terminal-
-                                                      {
-                                                        item.details[0]
-                                                          .originTerminal
-                                                      }
+                                        );
+                                      }
+                                    )}
+                                    {ticketingList?.directions[1] !== undefined &&
+                                      ticketingList?.directions !== undefined ? (
+                                      <>
+                                        {ticketingList?.directions[1][0].segments.map(
+                                          (item, index) => {
+                                            return (
+                                              <tr key={index}>
+                                                <td>
+                                                  {item.airline}
+                                                  <br></br>
+                                                  <span
+                                                    style={{ fontSize: "12px" }}
+                                                  >
+                                                    {item.plane[0]}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {item.airlineCode}-
+                                                  {item.flightNumber}
+                                                </td>
+                                                <td>
+                                                  {item.from}
+                                                  <br></br>
+                                                  <span
+                                                    style={{ fontSize: "12px" }}
+                                                  >
+                                                    {airports
+                                                      .filter(
+                                                        (f) =>
+                                                          f.iata === item.from
                                                       )
-                                                    </>
-                                                  ) : (
-                                                    <></>
+                                                      .map(
+                                                        (item) => item.city
+                                                      )}{" "}
+                                                    {item.details[0]
+                                                      .originTerminal !== null &&
+                                                      item.details[0]
+                                                        .originTerminal !== "" ? (
+                                                      <>
+                                                        (Terminal-
+                                                        {
+                                                          item.details[0]
+                                                            .originTerminal
+                                                        }
+                                                        )
+                                                      </>
+                                                    ) : (
+                                                      <></>
+                                                    )}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.departure).format(
+                                                    "DD-MMMM-yyyy"
                                                   )}
-                                                </span>
-                                              </td>
-                                              <td>
-                                                {moment(item.departure).format(
-                                                  "DD-MMMM-yyyy"
-                                                )}
-                                                <br></br>
-                                                {moment(item.departure).format(
-                                                  "hh:mm:ss A"
-                                                )}
-                                              </td>
-                                              <td>
-                                                {item.to}
-                                                <br></br>
-                                                <span
-                                                  style={{ fontSize: "12px" }}
-                                                >
-                                                  {airports
-                                                    .filter(
-                                                      (f) => f.iata === item.to
-                                                    )
-                                                    .map(
-                                                      (item) => item.city
-                                                    )}{" "}
-                                                  {item.details[0]
-                                                    .destinationTerminal !==
-                                                    null &&
-                                                  item.details[0]
-                                                    .destinationTerminal !==
-                                                    "" ? (
-                                                    <>
-                                                      (Terminal-
-                                                      {
-                                                        item.details[0]
-                                                          .destinationTerminal
-                                                      }
+                                                  <br></br>
+                                                  {moment(item.departure).format(
+                                                    "hh:mm:ss A"
+                                                  )}
+                                                </td>
+                                                <td>
+                                                  {item.to}
+                                                  <br></br>
+                                                  <span
+                                                    style={{ fontSize: "12px" }}
+                                                  >
+                                                    {airports
+                                                      .filter(
+                                                        (f) => f.iata === item.to
                                                       )
-                                                    </>
-                                                  ) : (
-                                                    <></>
+                                                      .map(
+                                                        (item) => item.city
+                                                      )}{" "}
+                                                    {item.details[0]
+                                                      .destinationTerminal !==
+                                                      null &&
+                                                      item.details[0]
+                                                        .destinationTerminal !==
+                                                      "" ? (
+                                                      <>
+                                                        (Terminal-
+                                                        {
+                                                          item.details[0]
+                                                            .destinationTerminal
+                                                        }
+                                                        )
+                                                      </>
+                                                    ) : (
+                                                      <></>
+                                                    )}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.arrival).format(
+                                                    "DD-MMMM-yyyy"
                                                   )}
-                                                </span>
-                                              </td>
-                                              <td>
-                                                {moment(item.arrival).format(
-                                                  "DD-MMMM-yyyy"
-                                                )}
-                                                <br></br>
-                                                {moment(item.arrival).format(
-                                                  "hh:mm:ss A"
-                                                )}
-                                              </td>
-                                              <td>{item.fareBasisCode}</td>
-                                              <td>
-                                                {" "}
-                                                {item.serviceClass === "Y"
-                                                  ? "ECONOMY" +
+                                                  <br></br>
+                                                  {moment(item.arrival).format(
+                                                    "hh:mm:ss A"
+                                                  )}
+                                                </td>
+                                                <td>{item.fareBasisCode}</td>
+                                                <td>
+                                                  {" "}
+                                                  {item.serviceClass === "Y"
+                                                    ? "ECONOMY" +
                                                     " (" +
                                                     item.bookingClass +
                                                     ")"
-                                                  : item.serviceClass === "C"
-                                                  ? "BUSINESS CLASS" +
-                                                    " (" +
-                                                    item.bookingClass +
-                                                    ")"
-                                                  : item.serviceClass +
-                                                    " (" +
-                                                    item.bookingClass +
-                                                    ")"}
-                                              </td>
-                                            </tr>
-                                          );
-                                        }
-                                      )}
-                                    </>
-                                  ) : (
-                                    <></>
-                                  )}
+                                                    : item.serviceClass === "C"
+                                                      ? "BUSINESS CLASS" +
+                                                      " (" +
+                                                      item.bookingClass +
+                                                      ")"
+                                                      : item.serviceClass +
+                                                      " (" +
+                                                      item.bookingClass +
+                                                      ")"}
+                                                </td>
+                                              </tr>
+                                            );
+                                          }
+                                        )}
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
 
-                                  {ticketingList?.directions[2] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
-                                    <>
-                                      {ticketingList?.directions[2][0].segments.map(
-                                        (item, index) => {
-                                          return (
-                                            <tr key={index}>
-                                              <td>
-                                                {item.airline}
-                                                <br></br>
-                                                <span
-                                                  style={{ fontSize: "12px" }}
-                                                >
-                                                  {item.plane[0]}
-                                                </span>
-                                              </td>
-                                              <td>
-                                                {item.airlineCode}-
-                                                {item.flightNumber}
-                                              </td>
-                                              <td>
-                                                {item.from}
-                                                <br></br>
-                                                <span
-                                                  style={{ fontSize: "12px" }}
-                                                >
-                                                  {airports
-                                                    .filter(
-                                                      (f) =>
-                                                        f.iata === item.from
-                                                    )
-                                                    .map(
-                                                      (item) => item.city
-                                                    )}{" "}
-                                                  {item.details[0]
-                                                    .originTerminal !== null &&
-                                                  item.details[0]
-                                                    .originTerminal !== "" ? (
-                                                    <>
-                                                      (Terminal-
-                                                      {
-                                                        item.details[0]
-                                                          .originTerminal
-                                                      }
+                                    {ticketingList?.directions[2] !== undefined &&
+                                      ticketingList?.directions !== undefined ? (
+                                      <>
+                                        {ticketingList?.directions[2][0].segments.map(
+                                          (item, index) => {
+                                            return (
+                                              <tr key={index}>
+                                                <td>
+                                                  {item.airline}
+                                                  <br></br>
+                                                  <span
+                                                    style={{ fontSize: "12px" }}
+                                                  >
+                                                    {item.plane[0]}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {item.airlineCode}-
+                                                  {item.flightNumber}
+                                                </td>
+                                                <td>
+                                                  {item.from}
+                                                  <br></br>
+                                                  <span
+                                                    style={{ fontSize: "12px" }}
+                                                  >
+                                                    {airports
+                                                      .filter(
+                                                        (f) =>
+                                                          f.iata === item.from
                                                       )
-                                                    </>
-                                                  ) : (
-                                                    <></>
+                                                      .map(
+                                                        (item) => item.city
+                                                      )}{" "}
+                                                    {item.details[0]
+                                                      .originTerminal !== null &&
+                                                      item.details[0]
+                                                        .originTerminal !== "" ? (
+                                                      <>
+                                                        (Terminal-
+                                                        {
+                                                          item.details[0]
+                                                            .originTerminal
+                                                        }
+                                                        )
+                                                      </>
+                                                    ) : (
+                                                      <></>
+                                                    )}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.departure).format(
+                                                    "DD-MMMM-yyyy"
                                                   )}
-                                                </span>
-                                              </td>
-                                              <td>
-                                                {moment(item.departure).format(
-                                                  "DD-MMMM-yyyy"
-                                                )}
-                                                <br></br>
-                                                {moment(item.departure).format(
-                                                  "hh:mm:ss A"
-                                                )}
-                                              </td>
-                                              <td>
-                                                {item.to}
-                                                <br></br>
-                                                <span
-                                                  style={{ fontSize: "12px" }}
-                                                >
-                                                  {airports
-                                                    .filter(
-                                                      (f) => f.iata === item.to
-                                                    )
-                                                    .map(
-                                                      (item) => item.city
-                                                    )}{" "}
-                                                  {item.details[0]
-                                                    .destinationTerminal !==
-                                                    null &&
-                                                  item.details[0]
-                                                    .destinationTerminal !==
-                                                    "" ? (
-                                                    <>
-                                                      (Terminal-
-                                                      {
-                                                        item.details[0]
-                                                          .destinationTerminal
-                                                      }
+                                                  <br></br>
+                                                  {moment(item.departure).format(
+                                                    "hh:mm:ss A"
+                                                  )}
+                                                </td>
+                                                <td>
+                                                  {item.to}
+                                                  <br></br>
+                                                  <span
+                                                    style={{ fontSize: "12px" }}
+                                                  >
+                                                    {airports
+                                                      .filter(
+                                                        (f) => f.iata === item.to
                                                       )
-                                                    </>
-                                                  ) : (
-                                                    <></>
+                                                      .map(
+                                                        (item) => item.city
+                                                      )}{" "}
+                                                    {item.details[0]
+                                                      .destinationTerminal !==
+                                                      null &&
+                                                      item.details[0]
+                                                        .destinationTerminal !==
+                                                      "" ? (
+                                                      <>
+                                                        (Terminal-
+                                                        {
+                                                          item.details[0]
+                                                            .destinationTerminal
+                                                        }
+                                                        )
+                                                      </>
+                                                    ) : (
+                                                      <></>
+                                                    )}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.arrival).format(
+                                                    "DD-MMMM-yyyy"
                                                   )}
-                                                </span>
-                                              </td>
-                                              <td>
-                                                {moment(item.arrival).format(
-                                                  "DD-MMMM-yyyy"
-                                                )}
-                                                <br></br>
-                                                {moment(item.arrival).format(
-                                                  "hh:mm:ss A"
-                                                )}
-                                              </td>
-                                              <td>{item.fareBasisCode}</td>
-                                              <td>
-                                                {" "}
-                                                {item.serviceClass === "Y"
-                                                  ? "ECONOMY" +
+                                                  <br></br>
+                                                  {moment(item.arrival).format(
+                                                    "hh:mm:ss A"
+                                                  )}
+                                                </td>
+                                                <td>{item.fareBasisCode}</td>
+                                                <td>
+                                                  {" "}
+                                                  {item.serviceClass === "Y"
+                                                    ? "ECONOMY" +
                                                     " (" +
                                                     item.bookingClass +
                                                     ")"
-                                                  : item.serviceClass === "C"
-                                                  ? "BUSINESS CLASS" +
-                                                    " (" +
-                                                    item.bookingClass +
-                                                    ")"
-                                                  : item.serviceClass +
-                                                    " (" +
-                                                    item.bookingClass +
-                                                    ")"}
-                                              </td>
-                                            </tr>
-                                          );
-                                        }
-                                      )}
-                                    </>
-                                  ) : (
-                                    <></>
-                                  )}
+                                                    : item.serviceClass === "C"
+                                                      ? "BUSINESS CLASS" +
+                                                      " (" +
+                                                      item.bookingClass +
+                                                      ")"
+                                                      : item.serviceClass +
+                                                      " (" +
+                                                      item.bookingClass +
+                                                      ")"}
+                                                </td>
+                                              </tr>
+                                            );
+                                          }
+                                        )}
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
 
-                                  {ticketingList?.directions[3] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
-                                    <>
-                                      {ticketingList?.directions[3][0].segments.map(
-                                        (item, index) => {
-                                          return (
-                                            <tr key={index}>
-                                              <td>
-                                                {item.airline}
-                                                <br></br>
-                                                <span
-                                                  style={{ fontSize: "12px" }}
-                                                >
-                                                  {item.plane[0]}
-                                                </span>
-                                              </td>
-                                              <td>
-                                                {item.airlineCode}-
-                                                {item.flightNumber}
-                                              </td>
-                                              <td>
-                                                {item.from}
-                                                <br></br>
-                                                <span
-                                                  style={{ fontSize: "12px" }}
-                                                >
-                                                  {airports
-                                                    .filter(
-                                                      (f) =>
-                                                        f.iata === item.from
-                                                    )
-                                                    .map(
-                                                      (item) => item.city
-                                                    )}{" "}
-                                                  {item.details[0]
-                                                    .originTerminal !== null &&
-                                                  item.details[0]
-                                                    .originTerminal !== "" ? (
-                                                    <>
-                                                      (Terminal-
-                                                      {
-                                                        item.details[0]
-                                                          .originTerminal
-                                                      }
+                                    {ticketingList?.directions[3] !== undefined &&
+                                      ticketingList?.directions !== undefined ? (
+                                      <>
+                                        {ticketingList?.directions[3][0].segments.map(
+                                          (item, index) => {
+                                            return (
+                                              <tr key={index}>
+                                                <td>
+                                                  {item.airline}
+                                                  <br></br>
+                                                  <span
+                                                    style={{ fontSize: "12px" }}
+                                                  >
+                                                    {item.plane[0]}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {item.airlineCode}-
+                                                  {item.flightNumber}
+                                                </td>
+                                                <td>
+                                                  {item.from}
+                                                  <br></br>
+                                                  <span
+                                                    style={{ fontSize: "12px" }}
+                                                  >
+                                                    {airports
+                                                      .filter(
+                                                        (f) =>
+                                                          f.iata === item.from
                                                       )
-                                                    </>
-                                                  ) : (
-                                                    <></>
+                                                      .map(
+                                                        (item) => item.city
+                                                      )}{" "}
+                                                    {item.details[0]
+                                                      .originTerminal !== null &&
+                                                      item.details[0]
+                                                        .originTerminal !== "" ? (
+                                                      <>
+                                                        (Terminal-
+                                                        {
+                                                          item.details[0]
+                                                            .originTerminal
+                                                        }
+                                                        )
+                                                      </>
+                                                    ) : (
+                                                      <></>
+                                                    )}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.departure).format(
+                                                    "DD-MMMM-yyyy"
                                                   )}
-                                                </span>
-                                              </td>
-                                              <td>
-                                                {moment(item.departure).format(
-                                                  "DD-MMMM-yyyy"
-                                                )}
-                                                <br></br>
-                                                {moment(item.departure).format(
-                                                  "hh:mm:ss A"
-                                                )}
-                                              </td>
-                                              <td>
-                                                {item.to}
-                                                <br></br>
-                                                <span
-                                                  style={{ fontSize: "12px" }}
-                                                >
-                                                  {airports
-                                                    .filter(
-                                                      (f) => f.iata === item.to
-                                                    )
-                                                    .map(
-                                                      (item) => item.city
-                                                    )}{" "}
-                                                  {item.details[0]
-                                                    .destinationTerminal !==
-                                                    null &&
-                                                  item.details[0]
-                                                    .destinationTerminal !==
-                                                    "" ? (
-                                                    <>
-                                                      (Terminal-
-                                                      {
-                                                        item.details[0]
-                                                          .destinationTerminal
-                                                      }
+                                                  <br></br>
+                                                  {moment(item.departure).format(
+                                                    "hh:mm:ss A"
+                                                  )}
+                                                </td>
+                                                <td>
+                                                  {item.to}
+                                                  <br></br>
+                                                  <span
+                                                    style={{ fontSize: "12px" }}
+                                                  >
+                                                    {airports
+                                                      .filter(
+                                                        (f) => f.iata === item.to
                                                       )
-                                                    </>
-                                                  ) : (
-                                                    <></>
+                                                      .map(
+                                                        (item) => item.city
+                                                      )}{" "}
+                                                    {item.details[0]
+                                                      .destinationTerminal !==
+                                                      null &&
+                                                      item.details[0]
+                                                        .destinationTerminal !==
+                                                      "" ? (
+                                                      <>
+                                                        (Terminal-
+                                                        {
+                                                          item.details[0]
+                                                            .destinationTerminal
+                                                        }
+                                                        )
+                                                      </>
+                                                    ) : (
+                                                      <></>
+                                                    )}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.arrival).format(
+                                                    "DD-MMMM-yyyy"
                                                   )}
-                                                </span>
-                                              </td>
-                                              <td>
-                                                {moment(item.arrival).format(
-                                                  "DD-MMMM-yyyy"
-                                                )}
-                                                <br></br>
-                                                {moment(item.arrival).format(
-                                                  "hh:mm:ss A"
-                                                )}
-                                              </td>
-                                              <td>{item.fareBasisCode}</td>
-                                              <td>
-                                                {" "}
-                                                {item.serviceClass === "Y"
-                                                  ? "ECONOMY" +
+                                                  <br></br>
+                                                  {moment(item.arrival).format(
+                                                    "hh:mm:ss A"
+                                                  )}
+                                                </td>
+                                                <td>{item.fareBasisCode}</td>
+                                                <td>
+                                                  {" "}
+                                                  {item.serviceClass === "Y"
+                                                    ? "ECONOMY" +
                                                     " (" +
                                                     item.bookingClass +
                                                     ")"
-                                                  : item.serviceClass === "C"
-                                                  ? "BUSINESS CLASS" +
-                                                    " (" +
-                                                    item.bookingClass +
-                                                    ")"
-                                                  : item.serviceClass +
-                                                    " (" +
-                                                    item.bookingClass +
-                                                    ")"}
-                                              </td>
-                                            </tr>
-                                          );
-                                        }
-                                      )}
-                                    </>
-                                  ) : (
-                                    <></>
-                                  )}
+                                                    : item.serviceClass === "C"
+                                                      ? "BUSINESS CLASS" +
+                                                      " (" +
+                                                      item.bookingClass +
+                                                      ")"
+                                                      : item.serviceClass +
+                                                      " (" +
+                                                      item.bookingClass +
+                                                      ")"}
+                                                </td>
+                                              </tr>
+                                            );
+                                          }
+                                        )}
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
 
-                                  {ticketingList?.directions[4] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
-                                    <>
-                                      {ticketingList?.directions[4][0].segments.map(
-                                        (item, index) => {
-                                          return (
-                                            <tr key={index}>
-                                              <td>
-                                                {item.airline}
-                                                <br></br>
-                                                <span
-                                                  style={{ fontSize: "12px" }}
-                                                >
-                                                  {item.plane[0]}
-                                                </span>
-                                              </td>
-                                              <td>
-                                                {item.airlineCode}-
-                                                {item.flightNumber}
-                                              </td>
-                                              <td>
-                                                {item.from}
-                                                <br></br>
-                                                <span
-                                                  style={{ fontSize: "12px" }}
-                                                >
-                                                  {airports
-                                                    .filter(
-                                                      (f) =>
-                                                        f.iata === item.from
-                                                    )
-                                                    .map(
-                                                      (item) => item.city
-                                                    )}{" "}
-                                                  {item.details[0]
-                                                    .originTerminal !== null &&
-                                                  item.details[0]
-                                                    .originTerminal !== "" ? (
-                                                    <>
-                                                      (Terminal-
-                                                      {
-                                                        item.details[0]
-                                                          .originTerminal
-                                                      }
+                                    {ticketingList?.directions[4] !== undefined &&
+                                      ticketingList?.directions !== undefined ? (
+                                      <>
+                                        {ticketingList?.directions[4][0].segments.map(
+                                          (item, index) => {
+                                            return (
+                                              <tr key={index}>
+                                                <td>
+                                                  {item.airline}
+                                                  <br></br>
+                                                  <span
+                                                    style={{ fontSize: "12px" }}
+                                                  >
+                                                    {item.plane[0]}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {item.airlineCode}-
+                                                  {item.flightNumber}
+                                                </td>
+                                                <td>
+                                                  {item.from}
+                                                  <br></br>
+                                                  <span
+                                                    style={{ fontSize: "12px" }}
+                                                  >
+                                                    {airports
+                                                      .filter(
+                                                        (f) =>
+                                                          f.iata === item.from
                                                       )
-                                                    </>
-                                                  ) : (
-                                                    <></>
+                                                      .map(
+                                                        (item) => item.city
+                                                      )}{" "}
+                                                    {item.details[0]
+                                                      .originTerminal !== null &&
+                                                      item.details[0]
+                                                        .originTerminal !== "" ? (
+                                                      <>
+                                                        (Terminal-
+                                                        {
+                                                          item.details[0]
+                                                            .originTerminal
+                                                        }
+                                                        )
+                                                      </>
+                                                    ) : (
+                                                      <></>
+                                                    )}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.departure).format(
+                                                    "DD-MMMM-yyyy"
                                                   )}
-                                                </span>
-                                              </td>
-                                              <td>
-                                                {moment(item.departure).format(
-                                                  "DD-MMMM-yyyy"
-                                                )}
-                                                <br></br>
-                                                {moment(item.departure).format(
-                                                  "hh:mm:ss A"
-                                                )}
-                                              </td>
-                                              <td>
-                                                {item.to}
-                                                <br></br>
-                                                <span
-                                                  style={{ fontSize: "12px" }}
-                                                >
-                                                  {airports
-                                                    .filter(
-                                                      (f) => f.iata === item.to
-                                                    )
-                                                    .map(
-                                                      (item) => item.city
-                                                    )}{" "}
-                                                  {item.details[0]
-                                                    .destinationTerminal !==
-                                                    null &&
-                                                  item.details[0]
-                                                    .destinationTerminal !==
-                                                    "" ? (
-                                                    <>
-                                                      (Terminal-
-                                                      {
-                                                        item.details[0]
-                                                          .destinationTerminal
-                                                      }
+                                                  <br></br>
+                                                  {moment(item.departure).format(
+                                                    "hh:mm:ss A"
+                                                  )}
+                                                </td>
+                                                <td>
+                                                  {item.to}
+                                                  <br></br>
+                                                  <span
+                                                    style={{ fontSize: "12px" }}
+                                                  >
+                                                    {airports
+                                                      .filter(
+                                                        (f) => f.iata === item.to
                                                       )
-                                                    </>
-                                                  ) : (
-                                                    <></>
+                                                      .map(
+                                                        (item) => item.city
+                                                      )}{" "}
+                                                    {item.details[0]
+                                                      .destinationTerminal !==
+                                                      null &&
+                                                      item.details[0]
+                                                        .destinationTerminal !==
+                                                      "" ? (
+                                                      <>
+                                                        (Terminal-
+                                                        {
+                                                          item.details[0]
+                                                            .destinationTerminal
+                                                        }
+                                                        )
+                                                      </>
+                                                    ) : (
+                                                      <></>
+                                                    )}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.arrival).format(
+                                                    "DD-MMMM-yyyy"
                                                   )}
-                                                </span>
-                                              </td>
-                                              <td>
-                                                {moment(item.arrival).format(
-                                                  "DD-MMMM-yyyy"
-                                                )}
-                                                <br></br>
-                                                {moment(item.arrival).format(
-                                                  "hh:mm:ss A"
-                                                )}
-                                              </td>
-                                              <td>{item.fareBasisCode}</td>
-                                              <td>
-                                                {" "}
-                                                {item.serviceClass === "Y"
-                                                  ? "ECONOMY" +
+                                                  <br></br>
+                                                  {moment(item.arrival).format(
+                                                    "hh:mm:ss A"
+                                                  )}
+                                                </td>
+                                                <td>{item.fareBasisCode}</td>
+                                                <td>
+                                                  {" "}
+                                                  {item.serviceClass === "Y"
+                                                    ? "ECONOMY" +
                                                     " (" +
                                                     item.bookingClass +
                                                     ")"
-                                                  : item.serviceClass === "C"
-                                                  ? "BUSINESS CLASS" +
-                                                    " (" +
-                                                    item.bookingClass +
-                                                    ")"
-                                                  : item.serviceClass +
-                                                    " (" +
-                                                    item.bookingClass +
-                                                    ")"}
-                                              </td>
-                                            </tr>
-                                          );
-                                        }
-                                      )}
-                                    </>
-                                  ) : (
-                                    <></>
-                                  )}
+                                                    : item.serviceClass === "C"
+                                                      ? "BUSINESS CLASS" +
+                                                      " (" +
+                                                      item.bookingClass +
+                                                      ")"
+                                                      : item.serviceClass +
+                                                      " (" +
+                                                      item.bookingClass +
+                                                      ")"}
+                                                </td>
+                                              </tr>
+                                            );
+                                          }
+                                        )}
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
 
-                                  {ticketingList?.directions[5] !== undefined &&
-                                  ticketingList?.directions !== undefined ? (
-                                    <>
-                                      {ticketingList?.directions[5][0].segments.map(
-                                        (item, index) => {
-                                          return (
-                                            <tr key={index}>
-                                              <td>
-                                                {item.airline}
-                                                <br></br>
-                                                <span
-                                                  style={{ fontSize: "12px" }}
-                                                >
-                                                  {item.plane[0]}
-                                                </span>
-                                              </td>
-                                              <td>
-                                                {item.airlineCode}-
-                                                {item.flightNumber}
-                                              </td>
-                                              <td>
-                                                {item.from}
-                                                <br></br>
-                                                <span
-                                                  style={{ fontSize: "12px" }}
-                                                >
-                                                  {airports
-                                                    .filter(
-                                                      (f) =>
-                                                        f.iata === item.from
-                                                    )
-                                                    .map(
-                                                      (item) => item.city
-                                                    )}{" "}
-                                                  {item.details[0]
-                                                    .originTerminal !== null &&
-                                                  item.details[0]
-                                                    .originTerminal !== "" ? (
-                                                    <>
-                                                      (Terminal-
-                                                      {
-                                                        item.details[0]
-                                                          .originTerminal
-                                                      }
+                                    {ticketingList?.directions[5] !== undefined &&
+                                      ticketingList?.directions !== undefined ? (
+                                      <>
+                                        {ticketingList?.directions[5][0].segments.map(
+                                          (item, index) => {
+                                            return (
+                                              <tr key={index}>
+                                                <td>
+                                                  {item.airline}
+                                                  <br></br>
+                                                  <span
+                                                    style={{ fontSize: "12px" }}
+                                                  >
+                                                    {item.plane[0]}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {item.airlineCode}-
+                                                  {item.flightNumber}
+                                                </td>
+                                                <td>
+                                                  {item.from}
+                                                  <br></br>
+                                                  <span
+                                                    style={{ fontSize: "12px" }}
+                                                  >
+                                                    {airports
+                                                      .filter(
+                                                        (f) =>
+                                                          f.iata === item.from
                                                       )
-                                                    </>
-                                                  ) : (
-                                                    <></>
+                                                      .map(
+                                                        (item) => item.city
+                                                      )}{" "}
+                                                    {item.details[0]
+                                                      .originTerminal !== null &&
+                                                      item.details[0]
+                                                        .originTerminal !== "" ? (
+                                                      <>
+                                                        (Terminal-
+                                                        {
+                                                          item.details[0]
+                                                            .originTerminal
+                                                        }
+                                                        )
+                                                      </>
+                                                    ) : (
+                                                      <></>
+                                                    )}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.departure).format(
+                                                    "DD-MMMM-yyyy"
                                                   )}
-                                                </span>
-                                              </td>
-                                              <td>
-                                                {moment(item.departure).format(
-                                                  "DD-MMMM-yyyy"
-                                                )}
-                                                <br></br>
-                                                {moment(item.departure).format(
-                                                  "hh:mm:ss A"
-                                                )}
-                                              </td>
-                                              <td>
-                                                {item.to}
-                                                <br></br>
-                                                <span
-                                                  style={{ fontSize: "12px" }}
-                                                >
-                                                  {airports
-                                                    .filter(
-                                                      (f) => f.iata === item.to
-                                                    )
-                                                    .map(
-                                                      (item) => item.city
-                                                    )}{" "}
-                                                  {item.details[0]
-                                                    .destinationTerminal !==
-                                                    null &&
-                                                  item.details[0]
-                                                    .destinationTerminal !==
-                                                    "" ? (
-                                                    <>
-                                                      (Terminal-
-                                                      {
-                                                        item.details[0]
-                                                          .destinationTerminal
-                                                      }
+                                                  <br></br>
+                                                  {moment(item.departure).format(
+                                                    "hh:mm:ss A"
+                                                  )}
+                                                </td>
+                                                <td>
+                                                  {item.to}
+                                                  <br></br>
+                                                  <span
+                                                    style={{ fontSize: "12px" }}
+                                                  >
+                                                    {airports
+                                                      .filter(
+                                                        (f) => f.iata === item.to
                                                       )
-                                                    </>
-                                                  ) : (
-                                                    <></>
+                                                      .map(
+                                                        (item) => item.city
+                                                      )}{" "}
+                                                    {item.details[0]
+                                                      .destinationTerminal !==
+                                                      null &&
+                                                      item.details[0]
+                                                        .destinationTerminal !==
+                                                      "" ? (
+                                                      <>
+                                                        (Terminal-
+                                                        {
+                                                          item.details[0]
+                                                            .destinationTerminal
+                                                        }
+                                                        )
+                                                      </>
+                                                    ) : (
+                                                      <></>
+                                                    )}
+                                                  </span>
+                                                </td>
+                                                <td>
+                                                  {moment(item.arrival).format(
+                                                    "DD-MMMM-yyyy"
                                                   )}
-                                                </span>
-                                              </td>
-                                              <td>
-                                                {moment(item.arrival).format(
-                                                  "DD-MMMM-yyyy"
-                                                )}
-                                                <br></br>
-                                                {moment(item.arrival).format(
-                                                  "hh:mm:ss A"
-                                                )}
-                                              </td>
-                                              <td>{item.fareBasisCode}</td>
-                                              <td>
-                                                {" "}
-                                                {item.serviceClass === "Y"
-                                                  ? "ECONOMY" +
+                                                  <br></br>
+                                                  {moment(item.arrival).format(
+                                                    "hh:mm:ss A"
+                                                  )}
+                                                </td>
+                                                <td>{item.fareBasisCode}</td>
+                                                <td>
+                                                  {" "}
+                                                  {item.serviceClass === "Y"
+                                                    ? "ECONOMY" +
                                                     " (" +
                                                     item.bookingClass +
                                                     ")"
-                                                  : item.serviceClass === "C"
-                                                  ? "BUSINESS CLASS" +
-                                                    " (" +
-                                                    item.bookingClass +
-                                                    ")"
-                                                  : item.serviceClass +
-                                                    " (" +
-                                                    item.bookingClass +
-                                                    ")"}
-                                              </td>
-                                            </tr>
-                                          );
-                                        }
-                                      )}
-                                    </>
-                                  ) : (
-                                    <></>
-                                  )}
-                                </>
-                              )}
+                                                    : item.serviceClass === "C"
+                                                      ? "BUSINESS CLASS" +
+                                                      " (" +
+                                                      item.bookingClass +
+                                                      ")"
+                                                      : item.serviceClass +
+                                                      " (" +
+                                                      item.bookingClass +
+                                                      ")"}
+                                                </td>
+                                              </tr>
+                                            );
+                                          }
+                                        )}
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </>
+                                )}
                             </tbody>
                           </table>
                         </div>
@@ -2177,7 +2201,7 @@ const BookedView = () => {
                                       <td>{item.ait.toLocaleString("en-US")}</td>
                                       <td>{item.passengerCount}</td>
                                       <td>{item.currencyName} {(item.totalPrice *
-                                            item.passengerCount).toLocaleString("en-US")}</td>
+                                        item.passengerCount).toLocaleString("en-US")}</td>
                                     </tr>
                                   </>
                                 );
@@ -2188,7 +2212,7 @@ const BookedView = () => {
                                 <td>
                                   {ticketingList.passengerInfo !== undefined
                                     ? ticketingList.passengerInfo[0]
-                                        ?.currencyName
+                                      ?.currencyName
                                     : ""}{" "}
                                   {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
                                   {ticketingList.ticketInfo?.ticketingPrice.toLocaleString(
@@ -2267,14 +2291,14 @@ const BookedView = () => {
 
                       {ticketingList.ticketInfo?.status ===
                         "Booking Cancelled" ||
-                      ticketingList.ticketInfo?.status ===
+                        ticketingList.ticketInfo?.status ===
                         "Ticket Cancelled" || ticketingList.ticketInfo?.status ===
-                        "Ticket Ordered"? (
+                        "Ticket Ordered" ? (
                         <></>
                       ) : (
                         <>
                           {agentInfo.activeCredit + agentInfo.currentBalance <
-                          ticketingList.ticketInfo?.ticketingPrice ? (
+                            ticketingList.ticketInfo?.ticketingPrice ? (
                             <>
                               <div className="row mb-5 mt-2">
                                 <div className="col-lg-12 text-center text-danger">

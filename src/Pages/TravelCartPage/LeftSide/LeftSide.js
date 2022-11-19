@@ -2202,11 +2202,9 @@ const LeftSide = () => {
                                       ? Database?.returnDate
                                       : Database?.journeyDate
                                   ),
-                                  {
-                                    years: -12,
-                                  }
+                                  { years: -2 }
                                 )}
-                                maxDate={add(
+                                maxDate={
                                   new Date(
                                     Database?.tripTypeModify === "Round Trip" &&
                                     calculateFullAge(
@@ -2215,11 +2213,8 @@ const LeftSide = () => {
                                     )
                                       ? Database?.returnDate
                                       : Database?.journeyDate
-                                  ),
-                                  {
-                                    years: -2,
-                                  }
-                                )}
+                                  )
+                                }
                               />
                             </Box>
 

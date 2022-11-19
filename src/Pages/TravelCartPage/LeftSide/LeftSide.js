@@ -936,13 +936,13 @@ const LeftSide = () => {
   return (
     <form onSubmit={bookingData}>
       <div className="col-lg-12">
-        {
+        {/* {
           <>
             <Text color="red">{isDisableAdt ? "TRUE" : "FALSE"}</Text>
             <Text color="red">{isDisableCnn ? "TRUE" : "FALSE"}</Text>
             <Text color="red">{isDisableInf ? "TRUE" : "FALSE"}</Text>
           </>
-        }
+        } */}
         <div className="card box-shadow">
           <div className="card-body border">
             <div style={{ fontSize: "small" }}>

@@ -167,7 +167,7 @@ const SalesReport = () => {
                             <Box w="260px">
                               <Button size="xs" h="38px" colorScheme="whatsapp">
                                 <CSVLink
-                                  filename={"ledger.xls"}
+                                  filename={"sales_report.xls"}
                                   data={csvData}
                                   headers={csvHeaders}
                                 >

@@ -936,13 +936,13 @@ const LeftSide = () => {
   return (
     <form onSubmit={bookingData}>
       <div className="col-lg-12">
-        {/* {
+        {
           <>
-            <Text color="red">{isExDateEmptyAdt ? "TRUE" : "FALSE"}</Text>
-            <Text color="red">{isExDateEmptyCnn ? "TRUE" : "FALSE"}</Text>
-            <Text color="red">{isExDateEmptyInf ? "TRUE" : "FALSE"}</Text>
+            <Text color="red">{isDisableAdt ? "TRUE" : "FALSE"}</Text>
+            <Text color="red">{isDisableCnn ? "TRUE" : "FALSE"}</Text>
+            <Text color="red">{isDisableInf ? "TRUE" : "FALSE"}</Text>
           </>
-        } */}
+        }
         <div className="card box-shadow">
           <div className="card-body border">
             <div style={{ fontSize: "small" }}>
@@ -3991,7 +3991,10 @@ const LeftSide = () => {
                       disabled={
                         isDomestic
                           ? false
-                          : !isExDateValidAdt ||
+                          : isDisableAdt ||
+                            isDisableCnn ||
+                            isDisableInf ||
+                            !isExDateValidAdt ||
                             !isExDateValidCnn ||
                             !isExDateValidInf ||
                             isExDateEmptyAdt ||

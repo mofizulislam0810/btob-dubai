@@ -53,6 +53,7 @@ const LeftSide = () => {
   const [firstname, setFirstname] = useState("");
   const [message, setMessage] = useState("");
   let [passengerADTList, setPassengerADTList] = useState([]);
+
   let [passengerCNNList, setPassengerCNNList] = useState([]);
   let [passengerINFList, setPassengerINFList] = useState([]);
   const [click, setClick] = useState(false);
@@ -348,6 +349,10 @@ const LeftSide = () => {
 
   const [adult, setAdult] = useState(adultList);
 
+  useEffect(() => {
+    console.log(adult, "+++++");
+  }, [adult]);
+
   // if ((origin.match("Bangladesh") !== null ? origin.match("Bangladesh")[0] : "") && (destination.match("Bangladesh") !== null ? destination.match("Bangladesh")[0] : "") !== "Bangladesh") {
   //   adult.map((i) =>
   //     i.dateOfBirth <= ISODateFormatter(add(new Date(), {
@@ -391,6 +396,22 @@ const LeftSide = () => {
   const [isExDateValidAdt, setisExDateValidAdt] = useState(true);
   const [isExDateValidCnn, setisExDateValidCnn] = useState(true);
   const [isExDateValidInf, setisExDateValidInf] = useState(true);
+
+  // useEffect(
+  //   () =>
+  //     console.log(
+  //       passengerADTList.filter((obj) => {
+  //         if (
+  //           adult.filter((e) => e.passportNumber === obj.documentNumber)
+  //             .length > 0
+  //         )
+  //           return null;
+  //         else return obj;
+  //       }),
+  //       "+++++=="
+  //     ),
+  //   [passengerADTList, adult]
+  // );
 
   let infantList = [];
   for (var i = 0; i < infantNumber; i++) {
@@ -905,17 +926,29 @@ const LeftSide = () => {
                       <div className="col-lg-12 my-2">
                         {" "}
                         <Select
-                          options={passengerADTList.map((item) => ({
-                            label:
-                              item.title +
-                              " " +
-                              item.first +
-                              " " +
-                              item.middle +
-                              " " +
-                              item.last,
-                            value: item.id,
-                          }))}
+                          options={passengerADTList
+                            .filter((obj) => {
+                              if (
+                                adult.filter(
+                                  (e) =>
+                                    e.passportNumber === obj.documentNumber &&
+                                    e.first === obj.firstName
+                                ).length > 0
+                              )
+                                return null;
+                              else return obj;
+                            })
+                            .map((item) => ({
+                              label:
+                                item.title +
+                                " " +
+                                item.first +
+                                " " +
+                                item.middle +
+                                " " +
+                                item.last,
+                              value: item.id,
+                            }))}
                           onChange={(e) => {
                             const id = Number(e.value);
                             console.log(id);
@@ -1905,17 +1938,29 @@ const LeftSide = () => {
                       </h3>
                       <div className="col-lg-12 my-2">
                         <Select
-                          options={passengerCNNList.map((item) => ({
-                            label:
-                              item.title +
-                              " " +
-                              item.first +
-                              " " +
-                              item.middle +
-                              " " +
-                              item.last,
-                            value: item.id,
-                          }))}
+                          options={passengerCNNList
+                            .filter((obj) => {
+                              if (
+                                child.filter(
+                                  (e) =>
+                                    e.passportNumber === obj.documentNumber &&
+                                    e.first === obj.firstName
+                                ).length > 0
+                              )
+                                return null;
+                              else return obj;
+                            })
+                            .map((item) => ({
+                              label:
+                                item.title +
+                                " " +
+                                item.first +
+                                " " +
+                                item.middle +
+                                " " +
+                                item.last,
+                              value: item.id,
+                            }))}
                           onChange={(e) => {
                             const id = Number(e.value);
                             console.log(id);
@@ -2840,17 +2885,29 @@ const LeftSide = () => {
                       </h3>
                       <div className="col-lg-12  my-2">
                         <Select
-                          options={passengerINFList.map((item) => ({
-                            label:
-                              item.title +
-                              " " +
-                              item.first +
-                              " " +
-                              item.middle +
-                              " " +
-                              item.last,
-                            value: item.id,
-                          }))}
+                          options={passengerINFList
+                            .filter((obj) => {
+                              if (
+                                infant.filter(
+                                  (e) =>
+                                    e.passportNumber === obj.documentNumber &&
+                                    e.first === obj.firstName
+                                ).length > 0
+                              )
+                                return null;
+                              else return obj;
+                            })
+                            .map((item) => ({
+                              label:
+                                item.title +
+                                " " +
+                                item.first +
+                                " " +
+                                item.middle +
+                                " " +
+                                item.last,
+                              value: item.id,
+                            }))}
                           onChange={(e) => {
                             const id = Number(e.value);
                             // console.log(id);

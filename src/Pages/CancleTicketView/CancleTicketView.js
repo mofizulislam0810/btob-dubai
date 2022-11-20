@@ -462,8 +462,7 @@ const CancleTicketView = () => {
                               className="border p-1"
                               style={{ fontSize: "14px" }}
                             >
-                              {ticketingList?.ticketInfo?.bookingType !==
-                                "Online" ? (
+                              {ticketingList?.directions !== undefined ? (
                                 <>
                                   {ticketingList.segmentInfo?.map(
                                     (item, index) => {
@@ -622,7 +621,7 @@ const CancleTicketView = () => {
                                                   {item.bookingCode})
                                                 </td>
                                                 <td className="align-middle">
-                                                  {ticketingList.passengerInfo?.map(
+                                                  {/* {ticketingList.passengerInfo?.map(
                                                     (itm, idx) => {
                                                       return (
                                                         <>
@@ -643,7 +642,89 @@ const CancleTicketView = () => {
                                                         </>
                                                       );
                                                     }
-                                                  )}
+                                                  )} */}
+
+
+
+
+                                                     {ticketingList.fareBreakdown?.map(
+                                                        (itm, idx) => {
+                                                          return (
+                                                            <>
+                                                              {
+                                                                itm.passengerType === "ADT" ?
+                                                                  <>
+                                                                    {
+                                                                      <>
+                                                                        <span> Adult<span
+                                                                          style={{
+                                                                            fontSize:
+                                                                              "10px",
+                                                                          }}
+                                                                        >
+                                                                          <i class="fas fa-arrow-right"></i>
+                                                                        </span>{" "}
+                                                                          Check in :{" "}30Kg
+                                                                        </span>
+                                                                        <br></br>
+                                                                      </>
+                                                                    }
+                                                                  </> : <></>
+                                                              }
+                                                              {
+                                                                itm.passengerType === "CNN" ?
+                                                                  <>
+                                                                    {
+                                                                     <>
+                                                                        <span> Child<span
+                                                                          style={{
+                                                                            fontSize:
+                                                                              "10px",
+                                                                          }}
+                                                                        >
+                                                                          <i class="fas fa-arrow-right"></i>
+                                                                        </span>{" "}
+                                                                          Check in :{" "}30Kg
+                                                                          {/* {item.baggage[0]?.amount} */}
+                                                                          {/* {
+                                                                            item.baggage[0]
+                                                                              ?.units
+                                                                          } */}
+                                                                        </span> 
+                                                                        <br></br>
+                                                                </>
+                                                                    }
+                                                                  </> : <></>
+                                                              }
+                                                              {
+                                                                itm.passengerType === "INF" ?
+                                                                  <>
+                                                                    {
+                                                               <>
+                                                                        <span> Infant<span
+                                                                          style={{
+                                                                            fontSize:
+                                                                              "10px",
+                                                                          }}
+                                                                        >
+                                                                          <i class="fas fa-arrow-right"></i>
+                                                                        </span>{" "}
+                                                                          Check in :{" "} 10Kg
+                                                                          {/* {item.baggage[0]?.amount}
+                                                                          {
+                                                                            item.baggage[0]
+                                                                              ?.units
+                                                                          } */}
+                                                                        </span>
+                                                                        <br></br>
+                                                                      </> 
+                                                                    }
+                                                                  </> : <></>
+                                                              }
+                                                            </>
+                                                          );
+                                                        }
+                                                      )}
                                                 </td>
                                               </tr>
                                             </tbody>

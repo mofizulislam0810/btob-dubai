@@ -612,7 +612,6 @@ const QuickPassenger = () => {
                       ></button>
                     </div>
                     <div className="modal-body">
-
                       <div className="border p-2 my-3">
                         <div className="row">
                           <div className="col-md-6">

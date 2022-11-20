@@ -15,7 +15,7 @@ import airports from "../../JSON/airports.json";
 import Footer from "../SharePages/Footer/Footer";
 import { Button } from "@chakra-ui/react";
 import { toast, ToastContainer } from "react-toastify";
-import { getCountryCode, getPassengerType } from "../../common/functions";
+import { getCountryCode, getPassengerType, sumRating } from "../../common/functions";
 
 const BookedView = () => {
   const { setLoading, setTicketData, loading } = useAuth();
@@ -227,7 +227,7 @@ const BookedView = () => {
     getTimeReq();
   };
 
-  console.log(ticketingList);
+  console.log(ticketingList, "+++++");
 
   return (
     <div>
@@ -494,8 +494,7 @@ const BookedView = () => {
                               </tr>
                             </thead>
                             <tbody className="text-center">
-                              {ticketingList?.ticketInfo?.bookingType !==
-                                "Online" ? (
+                              {ticketingList?.directions === undefined ? (
                                 <>
                                   {ticketingList.segmentInfo?.map(
                                     (item, index) => {
@@ -506,7 +505,7 @@ const BookedView = () => {
                                               {ticketingList[0].airlineName}
                                             </td>
                                             <td>
-                                              {item.airlineCode}-
+                                              {item.operationCarrier}-
                                               {item.flightNumber}
                                             </td>
                                             <td>
@@ -838,7 +837,13 @@ const BookedView = () => {
                                       ?.currencyName
                                     : ""}{" "}
                                   {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
-                                  {ticketingList.ticketInfo?.ticketingPrice}
+                                  {/* {ticketingList.ticketInfo?.ticketingPrice} */}
+                                  {
+                                    sumRating(ticketingList.fareBreakdown).toLocaleString("en-US")
+                                    // ticketingList.fareBreakdown?.map((item,idx)=>{
+                                    // (total +=  item.totalPrice * item.passengerCount)
+                                    // return total;
+                                  }
                                 </td>
                               </tr>
                             </tbody>
@@ -919,13 +924,17 @@ const BookedView = () => {
                         <>
                           <div className="container mt-3 mb-5">
                             <div className="row">
+                              
                               <div className="col-lg-12 text-center">
-                                <button
+                                {
+                                  ticketingList.ticketInfo?.status === "Booked" && <button
                                   className="btn button-color text-white w-25 fw-bold btn-sm rounded"
                                   onClick={handleGenerateTicket}
                                 >
                                   Issue Ticket
                                 </button>
+                                }
+                                
                               </div>
                             </div>
                           </div>
@@ -1350,7 +1359,7 @@ const BookedView = () => {
                                                 {item.operationCarrierName}
                                               </td>
                                               <td>
-                                                {item.airlineCode}-
+                                                {item.operationCarrier}-
                                                 {item.flightNumber}
                                               </td>
                                               <td>
@@ -2215,9 +2224,16 @@ const BookedView = () => {
                                       ?.currencyName
                                     : ""}{" "}
                                   {/* {ticketingList.passengerInfo[0]?.currencyName}{" "} */}
-                                  {ticketingList.ticketInfo?.ticketingPrice.toLocaleString(
+                                  {/* {ticketingList.ticketInfo?.ticketingPrice.toLocaleString(
                                     "en-US"
-                                  )}
+                                  )} */}
+
+                                  {
+                                    sumRating(ticketingList.fareBreakdown).toLocaleString("en-US")
+                                    // ticketingList.fareBreakdown?.map((item,idx)=>{
+                                    // (total +=  item.totalPrice * item.passengerCount)
+                                    // return total;
+                                  }
                                 </td>
                               </tr>
                             </tbody>
@@ -2314,12 +2330,15 @@ const BookedView = () => {
                               <div className="container mt-3 mb-5">
                                 <div className="row">
                                   <div className="col-lg-12 text-center">
-                                    <button
+                                    {
+                                      ticketingList.ticketInfo?.status === "Booked" &&  <button
                                       className="btn button-color text-white w-25 fw-bold btn-sm rounded"
                                       onClick={handleGenerateTicket}
                                     >
                                       Issue Ticket
                                     </button>
+                                    }
+                                    
                                   </div>
                                 </div>
                               </div>

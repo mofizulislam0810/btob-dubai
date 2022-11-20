@@ -83,7 +83,7 @@ const BookingModal = () => {
                 data-bs-dismiss="modal"
                 onClick={handleCancle}
               >
-                Cancle
+                Cancel
               </button>
               <button
                 type="button"

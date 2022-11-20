@@ -165,7 +165,7 @@ const SalesReport = () => {
                         <div className="col-sm-12 text-left pb-2">
                           <div className="d-flex float-end">
                             <Box w="260px">
-                              <Button size="xs" h="38px" colorScheme="whatsapp">
+                              <Button size="xs" h="38px" className="bg-secondary">
                                 <CSVLink
                                   filename={"report.xls"}
                                   data={csvData}

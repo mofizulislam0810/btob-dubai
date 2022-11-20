@@ -2160,7 +2160,7 @@ const ShowAllFlightPage = () => {
                                       className="form-label"
                                     >
                                       Depart From{" "}
-                                      <span className="fw-bold">*</span>
+                                      <span className="fw-bold text-danger">*</span>
                                     </label>
                                     <span className="address">
                                       <input
@@ -2193,7 +2193,7 @@ const ShowAllFlightPage = () => {
                                       className="form-label"
                                     >
                                       Going To{" "}
-                                      <span className="fw-bold">*</span>
+                                      <span className="fw-bold text-danger">*</span>
                                     </label>
                                     <span className="address">
                                       <input
@@ -2218,7 +2218,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Departing{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                       </div>
                                       <div
@@ -2230,7 +2230,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Returning{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                       </div>
                                     </div>
@@ -2270,7 +2270,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2303,7 +2303,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2328,7 +2328,7 @@ const ShowAllFlightPage = () => {
                                               className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="fw-bold">*</span>
+                                              <span className="fw-bold text-danger">*</span>
                                             </label>
                                           </div>
                                         </div>
@@ -2356,7 +2356,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2388,7 +2388,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2412,7 +2412,7 @@ const ShowAllFlightPage = () => {
                                               className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="fw-bold">*</span>
+                                              <span className="fw-bold text-danger">*</span>
                                             </label>
                                           </div>
                                         </div>
@@ -2440,7 +2440,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2472,7 +2472,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2493,10 +2493,10 @@ const ShowAllFlightPage = () => {
                                           <div className="col-lg-12">
                                             <label
                                               htmlFor="formGroupExampleInput"
-                                              className="form-label text-white"
+                                              className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="text-white fw-bold">
+                                              <span className="text-danger fw-bold">
                                                 *
                                               </span>
                                             </label>
@@ -2526,7 +2526,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2558,7 +2558,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2582,7 +2582,7 @@ const ShowAllFlightPage = () => {
                                               className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="fw-bold">*</span>
+                                              <span className="fw-bold text-danger">*</span>
                                             </label>
                                           </div>
                                         </div>
@@ -2610,7 +2610,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2642,7 +2642,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2666,7 +2666,7 @@ const ShowAllFlightPage = () => {
                                               className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="fw-bold">*</span>
+                                              <span className="fw-bold text-danger">*</span>
                                             </label>
                                           </div>
                                         </div>

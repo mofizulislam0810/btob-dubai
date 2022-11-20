@@ -10,6 +10,7 @@ import { totalFlightDuration } from "../../../common/functions";
 import useAuth from "../../../hooks/useAuth";
 import airports from "../../../JSON/airports.json";
 import dayCount from "../../SharePages/Utility/dayCount";
+import { environment } from "../../SharePages/Utility/environment";
 import layOver from "../../SharePages/Utility/layOver";
 import ShowModal from "../ShowModal/ShowModal";
 import "./ShowFlight.css";
@@ -127,10 +128,10 @@ const ShowFlight = (props) => {
     });
   }, [directions, props.index]);
 
-  const ImageUrlD = `https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${directions[0][0].platingCarrierCode}.png`;
+  const ImageUrlD = environment.s3ArliensImage +`${directions[0][0].platingCarrierCode}.png`;
   const ImageUrlR =
     directions[1] !== undefined
-      ? `https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${directions[1][0].platingCarrierCode}.png`
+      ? environment.s3ArliensImage +`${directions[1][0].platingCarrierCode}.png`
       : ``;
   const selectDirectionOption0 = (id) => {
     setdirection0(directions[0][id]);

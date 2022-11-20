@@ -7,6 +7,8 @@ const baseURL = "http://54.169.108.46:81/";
 //const baseURL = 'https://api.firsttrip.com/';
 // https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/
 // https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/
+// https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/AirlineLogos/}
+// "https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/"
 
 const baseApiURL = baseURL + "api/";
 const tokenData = JSON.parse(localStorage.getItem("token"));
@@ -16,6 +18,7 @@ if (tokenData != null && new Date(tokenData.expireIn) >= new Date()) {
 }
 export const environment = {
   s3URL: "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/",
+  s3ArliensImage : "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/AirlineLogos/",
   baseApiURL: baseApiURL,
   headerToken: headerToken,
 

@@ -242,7 +242,7 @@ const SuccessTicketPanel = () => {
                                     </span>
                                     <span className="d-flex align-items-center fw-bold">
                                       <img
-                                        src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.airlineCode}.png`}
+                                        src={environment.s3ArliensImage +`${item.airlineCode}.png`}
                                         className="me-2"
                                         alt=""
                                         width="30px"
@@ -354,7 +354,7 @@ const SuccessTicketPanel = () => {
                                 </span>
                                 <span className="d-flex align-items-center fw-bold">
                                   <img
-                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.airlineCode}.png`}
+                                    src={environment.s3ArliensImage +`${item.airlineCode}.png`}
                                     className="me-2"
                                     alt=""
                                     width="30px"
@@ -456,7 +456,7 @@ const SuccessTicketPanel = () => {
                                 </span>
                                 <span className="d-flex align-items-center fw-bold">
                                   <img
-                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.airlineCode}.png`}
+                                    src={environment.s3ArliensImage +`${item.airlineCode}.png`}
                                     className="me-2"
                                     alt=""
                                     width="30px"
@@ -559,7 +559,7 @@ const SuccessTicketPanel = () => {
                                 </span>
                                 <span className="d-flex align-items-center fw-bold">
                                   <img
-                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.airlineCode}.png`}
+                                    src={environment.s3ArliensImage +`${item.airlineCode}.png`}
                                     className="me-2"
                                     alt=""
                                     width="30px"
@@ -661,7 +661,7 @@ const SuccessTicketPanel = () => {
                                 </span>
                                 <span className="d-flex align-items-center fw-bold">
                                   <img
-                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.airlineCode}.png`}
+                                    src={environment.s3ArliensImage +`${item.airlineCode}.png`}
                                     className="me-2"
                                     alt=""
                                     width="30px"
@@ -764,7 +764,7 @@ const SuccessTicketPanel = () => {
                                 </span>
                                 <span className="d-flex align-items-center fw-bold">
                                   <img
-                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.airlineCode}.png`}
+                                    src={environment.s3ArliensImage +`${item.airlineCode}.png`}
                                     className="me-2"
                                     alt=""
                                     width="30px"

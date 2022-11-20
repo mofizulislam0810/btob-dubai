@@ -185,9 +185,9 @@ const SuccessTicketPanel = () => {
                             return (
                               <tr className="text-center" style={{ lineHeight: "14px" }}>
                                 <td className="text-start">
-                                  {item.passengerInfo.nameElement.title}{" "}
-                                  {item.passengerInfo.nameElement.firstName}{" "}
-                                  {item.passengerInfo.nameElement.lastName}
+                                  {item.passengerInfo.nameElement.title.toUpperCase()}{" "}
+                                  {item.passengerInfo.nameElement.firstName.toUpperCase()}{" "}
+                                  {item.passengerInfo.nameElement.lastName.toUpperCase()}
                                 </td>
                                 <td>
                                   {getPassengerType(item.passengerInfo.passengerType)}

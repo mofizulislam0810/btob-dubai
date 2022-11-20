@@ -139,7 +139,7 @@ const Ledger = () => {
                         <div className="col-sm-12 text-left ">
                           <div className="d-flex float-end pb-2">
                             <Box w="260px">
-                              <Button size="xs" h="38px" colorScheme="whatsapp">
+                              <Button size="xs" h="38px" className="bg-secondary">
                                 <CSVLink
                                   filename={"ledger.xls"}
                                   data={csvData}

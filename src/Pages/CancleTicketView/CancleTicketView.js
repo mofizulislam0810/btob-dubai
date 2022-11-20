@@ -462,7 +462,7 @@ const CancleTicketView = () => {
                               className="border p-1"
                               style={{ fontSize: "14px" }}
                             >
-                              {ticketingList?.directions !== undefined ? (
+                              {ticketingList?.directions === undefined ? (
                                 <>
                                   {ticketingList.segmentInfo?.map(
                                     (item, index) => {

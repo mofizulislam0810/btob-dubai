@@ -847,6 +847,22 @@ const LeftSide = () => {
             )
           )
         ) ||
+        moment(p.dateOfBirth).isBefore(
+          ISODateFormatter(
+            add(
+              new Date(
+                Database?.tripTypeModify === "Round Trip" &&
+                calculateFullAge(Database?.journeyDate, Database?.returnDate)
+                  ? Database?.returnDate
+                  : Database?.journeyDate
+              ),
+              {
+                years: -2,
+                days: 2,
+              }
+            )
+          )
+        ) ||
         p.dateOfBirth === "" ||
         p.passportExDate === ""
       );
@@ -3188,6 +3204,31 @@ const LeftSide = () => {
                                 dropdownMode="select"
                               />
                             </Box>
+
+                            {/* INFANT SAVED PROFILE */}
+                            {moment(p.dateOfBirth).isBefore(
+                              ISODateFormatter(
+                                add(
+                                  new Date(
+                                    Database?.tripTypeModify === "Round Trip" &&
+                                    calculateFullAge(
+                                      Database?.journeyDate,
+                                      Database?.returnDate
+                                    )
+                                      ? Database?.returnDate
+                                      : Database?.journeyDate
+                                  ),
+                                  {
+                                    years: -2,
+                                    days: 2,
+                                  }
+                                )
+                              )
+                            ) && (
+                              <Text color="red" pl="4px">
+                                Date of birth not valid!{" "}
+                              </Text>
+                            )}
 
                             {validityError && p.dateOfBirth === "" && (
                               <Text pl="2px" color="red">

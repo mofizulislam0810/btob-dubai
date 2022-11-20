@@ -16,7 +16,7 @@ import airports from "../../JSON/airports.json";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import logo from "../../images/logo/logo-combined.png";
-import { getPassengerType, sumRating } from "../../common/functions";
+import { getPassengerType, preventNegativeValues, sumRating } from "../../common/functions";
 
 const Ticket = () => {
   // let total = 0;
@@ -3025,13 +3025,14 @@ const Ticket = () => {
                               <td>{getPassengerType(item.passengerType)}</td>
                               <td>
                                 <input
-                                  value={item.basePrice}
+                                  onKeyDown={preventNegativeValues}
+                                  defaultValue={Math.abs(item.basePrice)}
                                   type={"number"}
                                   onChange={(e) =>
                                     setPassengerListEdited((ob) =>
                                       produce(ob, (v) => {
-                                        v[index].basePrice = Number(
-                                          e.target.value
+                                        v[index].basePrice = Math.abs((
+                                          e.target.value)
                                         );
                                       })
                                     )
@@ -3041,12 +3042,15 @@ const Ticket = () => {
                               </td>
                               <td>
                                 <input
-                                  value={item.tax}
+                                  onKeyDown={preventNegativeValues}
+                                  defaultValue={Math.abs(item.tax)}
                                   type={"number"}
                                   onChange={(e) =>
                                     setPassengerListEdited((ob) =>
                                       produce(ob, (v) => {
-                                        v[index].tax = Number(e.target.value);
+                                        v[index].tax = Math.abs((
+                                          e.target.value)
+                                        );
                                       })
                                     )
                                   }
@@ -3062,11 +3066,12 @@ const Ticket = () => {
                                 </label> */}
 
                                 <input
-                                  value={Math.round((item.basePrice + item.tax) * .003)}
+                                  onKeyDown={preventNegativeValues}
+                                  value={Math.round((Math.abs(item.basePrice) + Math.abs(item.tax)) * .003)}
                                   type={"number"}
                                   ref={() => setPassengerListEdited((ob) =>
                                     produce(ob, (v) => {
-                                      v[index].ait = Math.round((item.basePrice + item.tax) * .003);
+                                      v[index].ait = Math.round((Math.abs(item.basePrice) + Math.abs(item.tax)) * .003);
                                     })
                                   )}
                                   className="form-control"
@@ -3075,19 +3080,23 @@ const Ticket = () => {
                               </td>
                               <td>
                                 <input
-                                  value={item.discount !== 0 && item.discount}
-                                  type={"number"}
+                                  defaultValue={Math.abs(item.discount)}
+                                  id="number"
+                                  type="number"
                                   // disabled
+                                  min={0}
+                                  onKeyDown={preventNegativeValues}
                                   onChange={(e) =>
                                     setPassengerListEdited((ob) =>
                                       produce(ob, (v) => {
-                                        v[index].discount = e.target.value;
+                                        v[index].discount = (
+                                          e.target.value)
+                                        ;
                                       })
                                     )
                                   }
                                   className="form-control"
                                   placeholder="0"
-                                  min={0}
                                 />
                               </td>
                               {/* <td>
@@ -3108,11 +3117,11 @@ const Ticket = () => {
                               </td> */}
                               <td className="text-end">
                                 {(
-                                  item.basePrice +
+                                  Math.abs(item.basePrice +
                                   item.tax +
-                                  item.ait -
-                                  item.discount
-                                ).toFixed(2)}
+                                  item.ait) -
+                                 Math.abs(item.discount)
+                                )}
                               </td>
                             </tr>
                           </>
@@ -3123,10 +3132,10 @@ const Ticket = () => {
                           Total:{" "}
                           {passengerListEdited.map((item, index) => {
                             (totalPriceEdited +=
-                              item.basePrice +
-                              item.tax +
-                              item.ait -
-                              item.discount).toFixed(2);
+                              Math.abs(item.basePrice) +
+                              Math.abs(item.tax) +
+                              Math.abs(item.ait) -
+                              Math.abs(item.discount)).toFixed(2);
                             return index === passengerListEdited.length - 1
                               ? totalPriceEdited.toFixed(2)
                               : "";

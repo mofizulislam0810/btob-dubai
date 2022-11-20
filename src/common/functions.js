@@ -105,7 +105,7 @@ export const getCountryFomAirport = (input) => {
   })?.country;
 };
 
-
+export const preventNegativeValues = (e) => ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
 
 export const sumRating = (agent) => {
   let total = 0;

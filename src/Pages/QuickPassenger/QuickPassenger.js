@@ -42,7 +42,7 @@ const QuickPassenger = () => {
   let [nationality, setNationality] = useState("BD");
   let [gender, setGender] = useState("Male");
   let [passportNo, setPassportNo] = useState("");
-  let [issuingCountry, setIssuingCountry] = useState("");
+  let [issuingCountry, setIssuingCountry] = useState("BD");
   // let [peDay, setPEDay] = useState("");
   // let [peMonth, setPEMonth] = useState("");
   // let [peYear, setPEYear] = useState("");
@@ -597,7 +597,7 @@ const QuickPassenger = () => {
             >
               <div className="modal-dialog">
                 <div className="modal-content">
-                  <form ref={formReset}>
+                  <form >
                     <div className="modal-header">
                       <h5 className="modal-title" id="accountModalLabel">
                         {currentItem === null ? "Add" : "Edit"} Passenger
@@ -893,7 +893,7 @@ const QuickPassenger = () => {
                             <div className="input-group mb-3">
                               <select
                                 className="form-select rounded"
-                                onChange={(e) => handleCountryChange(e)}
+                                onChange={(e) => setIssuingCountry(e.target.value)}
                                 value={issuingCountry}
                               // required
                               >

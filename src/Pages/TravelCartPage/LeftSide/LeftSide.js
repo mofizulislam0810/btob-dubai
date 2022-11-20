@@ -3157,10 +3157,31 @@ const LeftSide = () => {
                                   )
                                 }
                                 placeholderText="dd/mm/yyyy"
-                                minDate={add(new Date(Database?.journeyDate), {
-                                  years: -2,
-                                })}
-                                maxDate={new Date(Database?.journeyDate)}
+                                minDate={add(
+                                  new Date(
+                                    Database?.tripTypeModify === "Round Trip" &&
+                                    calculateFullAge(
+                                      Database?.journeyDate,
+                                      Database?.returnDate
+                                    )
+                                      ? Database?.returnDate
+                                      : Database?.journeyDate
+                                  ),
+                                  {
+                                    years: -2,
+                                  }
+                                )}
+                                maxDate={
+                                  new Date(
+                                    Database?.tripTypeModify === "Round Trip" &&
+                                    calculateFullAge(
+                                      Database?.journeyDate,
+                                      Database?.returnDate
+                                    )
+                                      ? Database?.returnDate
+                                      : Database?.journeyDate
+                                  )
+                                }
                                 showMonthDropdown
                                 showYearDropdown
                                 dropdownMode="select"

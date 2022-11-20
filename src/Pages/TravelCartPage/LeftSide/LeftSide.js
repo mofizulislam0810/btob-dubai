@@ -3169,6 +3169,7 @@ const LeftSide = () => {
                                   ),
                                   {
                                     years: -2,
+                                    days: 1,
                                   }
                                 )}
                                 maxDate={

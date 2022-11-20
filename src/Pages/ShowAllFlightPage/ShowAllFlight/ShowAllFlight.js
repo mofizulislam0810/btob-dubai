@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import Loading from "../../Loading/Loading";
 import NoDataFoundPage from "../../NoDataFoundPage/NoDataFoundPage/NoDataFoundPage";
+import { environment } from "../../SharePages/Utility/environment";
 import ShowFlight from "../ShowFlight/ShowFlight";
 import "./ShowAllFlight.css";
 
@@ -503,6 +504,7 @@ const ShowAllFlight = ({
                   </div>
                   <div className="form-check mt-2">
                     {flightName.map((item, index) => (
+                      
                       <div
                         key={index}
                         className="d-flex align-items-center justify-content-between"
@@ -516,7 +518,7 @@ const ShowAllFlight = ({
                           // defaultChecked={itemCkeck}
                         />
                         <img
-                          src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.code}.png`}
+                          src={environment.s3ArliensImage +`${item.code}.png`}
                           alt="airlineCode"
                           width="35px"
                           height="30px"

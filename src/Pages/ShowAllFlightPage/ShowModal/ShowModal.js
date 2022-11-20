@@ -35,10 +35,10 @@ const ShowModal = ({
   passengerFares,
   currency,
 }) => {
-  const ImageUrlD = `https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction0.platingCarrierCode}.png`;
+  const ImageUrlD = environment.s3ArliensImage +`${direction0.platingCarrierCode}.png`
   const ImageUrlR =
     Object.keys(direction1).length > 0
-      ? `https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction1.platingCarrierCode}.png`
+      ? environment.s3ArliensImage +`${direction1.platingCarrierCode}.png`
       : ``;
   console.log(direction1);
   useEffect(() => {
@@ -266,7 +266,7 @@ const ShowModal = ({
                                     <div className="row py-4 pb-2">
                                       <div className="col-lg-1">
                                         <img
-                                          src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction2.segments[0].airlineCode}.png`}
+                                          src={environment.s3ArliensImage +`${direction2.segments[0].airlineCode}.png`}
                                           alt=""
                                           width="40px"
                                           height="40px"
@@ -390,7 +390,7 @@ const ShowModal = ({
                                     <div className="row py-4 pb-2">
                                       <div className="col-lg-1">
                                         <img
-                                          src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction3.segments[0].airlineCode}.png`}
+                                          src={environment.s3ArliensImage +`${direction3.segments[0].airlineCode}.png`}
                                           alt=""
                                           width="40px"
                                           height="40px"
@@ -515,7 +515,7 @@ const ShowModal = ({
                                     <div className="row py-4 pb-2">
                                       <div className="col-lg-1">
                                         <img
-                                          src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction4.segments[0].airlineCode}.png`}
+                                          src={environment.s3ArliensImage +`${direction4.segments[0].airlineCode}.png`}
                                           alt=""
                                           width="40px"
                                           height="40px"
@@ -649,7 +649,7 @@ const ShowModal = ({
                                     <div className="row py-4 pb-2">
                                       <div className="col-lg-1">
                                         <img
-                                          src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${direction5.segments[0].airlineCode}.png`}
+                                          src={environment.s3ArliensImage +`${direction5.segments[0].airlineCode}.png`}
                                           alt=""
                                           width="40px"
                                           height="40px"
@@ -1092,7 +1092,7 @@ const ShowModal = ({
                                         <div className="row py-4 p-2 border mb-2">
                                           <div className="col-lg-1">
                                             <img
-                                              src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${seg.airlineCode}.png`}
+                                              src={environment.s3ArliensImage +`${seg.airlineCode}.png`}
                                               alt=""
                                               width="40px"
                                               height="40px"

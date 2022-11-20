@@ -172,6 +172,7 @@ const ShowAllFlight = ({
         document.getElementById("checkDefault" + index).checked = false;
       });
     }
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
   console.log(check);
   const handleChange = (e) => {

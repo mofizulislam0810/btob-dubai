@@ -124,3 +124,8 @@ export const moveToFirstPlace = (arr, text) => {
   });
   return arr;
 };
+
+export const sortPassangerType = (data) =>{
+  return data?.sort((a,b)=>a.passengerType.localeCompare(b.passengerType));
+  // return data?.sort((a,b)=>b.passengerType.localeCompare(a.passengerType));
+}

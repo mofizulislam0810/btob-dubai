@@ -10,7 +10,7 @@ import Loading from "../../../Loading/Loading";
 import airports from "../../../../JSON/airports.json";
 import ReactToPrint from "react-to-print";
 import { getDefaultNormalizer } from "@testing-library/react";
-import { getCountryCode, getCountryFomAirport, getPassengerType } from "../../../../common/functions";
+import { getCountryCode, getCountryFomAirport, getPassengerType, sortPassangerType } from "../../../../common/functions";
 import { useEffect } from "react";
 import { useState } from "react";
 
@@ -97,6 +97,10 @@ const SuccessBookingPanel = () => {
     }
     fetchOptions();
   };
+
+  sortPassangerType(bookData.data?.item1.passengerInfoes);
+  console.log(sortPassangerType(bookData.data?.item1.passengerInfoes));
+
   return (
     <div>
       <Loading loading={loading}></Loading>

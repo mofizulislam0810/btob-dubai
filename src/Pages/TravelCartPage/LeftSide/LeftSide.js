@@ -831,6 +831,18 @@ const LeftSide = () => {
               { months: 6 }
             )
           )
+        ) || moment(p.dateOfBirth).isBefore(
+          ISODateFormatter(
+            add(
+              new Date(
+                Database?.tripTypeModify === "Round Trip" &&
+                calculateFullAge(Database?.journeyDate, Database?.returnDate)
+                  ? Database?.returnDate
+                  : Database?.journeyDate
+              ),
+              { years: -12 }
+            )
+          )
         ) ||
         p.dateOfBirth === "" ||
         p.passportExDate === ""

@@ -494,7 +494,11 @@ const LeftSide = () => {
   //       : toast.error("Passport expiry date does not valid")
   //   );
   // }
-
+//   const [dublicateAdultPax,setDublicateAdultPax] = useState(false);
+//   const handleCheck = (val) => {
+//     console.log(adult?.every(item => val.firstName === item.firstName))
+//     setDublicateAdultPax(adult?.every(item => val.firstName === item.firstName));
+// }
   const bookingData = (e) => {
     e.preventDefault();
     // infant.map((item,index)=>{
@@ -505,7 +509,50 @@ const LeftSide = () => {
     //     return;
     //   }
     // })
-    setLoading(true);
+    // const handleCheck = (val) => {
+      
+    //   console.log(adult?.every(item => val.firstName === item.firstName))
+      
+    // }
+    // const uniqueFirstNameAdult = new Set(adult.map(v => v.firstName));
+    // const uniqueLastNameAdult = new Set(adult.map(v => v.lastName));
+    // if (uniqueFirstNameAdult.size < adult.length) {
+    //   toast.error(`First name should be different!`);
+    //   return;
+    // }
+    // if (uniqueLastNameAdult.size < adult.length) {
+    //   toast.error(`Last name should be different!`);
+    //   return;
+    // } 
+    
+    
+
+    // const uniqueFirstNameChild = new Set(child.map(v => v.firstName));
+    // const uniqueLastNameChild = new Set(child.map(v => v.lastName));
+
+    // if (uniqueFirstNameChild.size < child.length) {
+    //   toast.error(`First name should be different!`);
+    //   return;
+    // }
+    // if (uniqueLastNameChild.size < child.length) {
+    //   toast.error(`Last name should be different!`);
+    //   return;
+    // }
+
+    // const uniqueFirstNameInfant = new Set(infant.map(v => v.firstName));
+    // const uniqueLastNameInfant = new Set(infant.map(v => v.lastName));
+
+    // if (uniqueFirstNameInfant.size < infant.length) {
+    //   toast.error(`First name should be different!`);
+    //   return;
+    // }
+    // if (uniqueLastNameInfant.size < infant.length) {
+    //   toast.error(`Last name should be different!`);
+    //   return;
+    // }
+
+    
+
     let sendObj = {
       passengerInfoes: [],
       taxRedemptions: [],
@@ -513,6 +560,7 @@ const LeftSide = () => {
       itemCodeRef: "",
       PriceCodeRef: "",
     };
+
 
     adult.map((item) => {
       let idObj = passengerADTList.find(
@@ -691,6 +739,19 @@ const LeftSide = () => {
       );
     }
 
+    const uniqueFirstName = new Set(sendObj.passengerInfoes.map(v => v.nameElement.firstName));
+    const uniqueLastName = new Set(sendObj.passengerInfoes.map(v => v.nameElement.lastName));
+    if (uniqueFirstName.size < sendObj.passengerInfoes.length) {
+      toast.error(`First name should be different!`);
+      return;
+    }
+    if (uniqueLastName.size < sendObj.passengerInfoes.length) {
+      toast.error(`Last name should be different!`);
+      return;
+    } 
+
+
+    setLoading(true);
     // console.log(priceCheck);
     async function fetchOptions() {
       await axios
@@ -723,7 +784,7 @@ const LeftSide = () => {
           navigate("/failedbooking");
         });
     }
-    fetchOptions();
+    // fetchOptions();
     console.log(sendObj);
     async function booking(price, uniqueTransID, itemCodeRef) {
       sendObj.uniqueTransID = uniqueTransID;

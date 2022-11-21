@@ -71,7 +71,7 @@ const BookingModal = () => {
                   </div>
                   <div className="col-lg-3 my-auto">
                     <h5 className="text-end text-success">
-                      New Price is BDT {bookData.data.item1.totalPrice}
+                      New Price is AED {bookData.data.item1.totalPrice}
                     </h5>
                   </div>
                 </div>

@@ -1,28 +1,42 @@
-import { Box, Circle, Flex, HStack, Icon, Text } from "@chakra-ui/react";
-import React from "react";
-import { BsFillHouseFill } from "react-icons/bs";
 import {
+  Box,
+  Center,
+  Circle,
+  Flex,
+  HStack,
+  Icon,
+  Image,
+  VStack,
+  Text,
+  Divider,
+} from "@chakra-ui/react";
+import React from "react";
+import logo from "../../../images/logo/logo-combined.png";
+import paymentOptions from "../../../images/footer/payment.png";
+import {
+  FaTwitter,
+  FaYoutube,
   FaFacebookF,
   FaLinkedinIn,
   FaPhoneAlt,
-  FaInstagram
 } from "react-icons/fa";
 import { GrMail } from "react-icons/gr";
+import { BsFillHouseFill } from "react-icons/bs";
+import Contact from "../../Optional/Contact/Contact";
+import { map } from "jquery";
 import { Link } from "react-router-dom";
-import logo from "../../../images/logo/logo-combined.png";
+import { nanoid } from "nanoid";
 
 const socialData = [
+  { icon: FaTwitter },
+  { icon: FaYoutube },
   { icon: FaFacebookF },
-  { icon: FaInstagram },
   { icon: FaLinkedinIn },
 ];
 
-
 const quickLinksData = [
-  { text: "About Us", to: "aboutus" },
   { text: "Contact", to: "contact" },
   // { text: "Bank Details", to: "bankdetail" },
-  { text: "EMI Policy", to: "EmiPolicy" },
   { text: "Privacy Policy", to: "privacypolicy" },
   { text: "Terms And Conditions", to: "termandcondition" },
   { text: "Refund & Cancellation", to: "refundandcancellation" },
@@ -30,97 +44,89 @@ const quickLinksData = [
 
 const addressData = [
   {
-    text: `39 Sharif Plaza, Kemal Ataturk Avenue, Banani, Dhaka 1213`,
+
+    text: `Al Muhairi 113-127, Al Dhagaya, Deira, Dubai, United Arab Emirates`,
     icon: BsFillHouseFill,
   },
   {
-    text: "09613123123",
+    text: "+97143375728",
     icon: FaPhoneAlt,
   },
   {
-    text: "support@firsttrip.com",
+    text: "support@triplover.ae",
     icon: GrMail,
   },
 ];
 
 const Footer = () => {
   return (
-    <>
-      <Box className="container-fluid" bg="#591b7d">
-        <Box className="container">
-          <Flex
-            w="100%"
-            pt={"20px"}
-            pb="10px"
-            justifyContent="space-between"
-            color={"white"}
-          >
-            <Box className="d-flex align-items-center">
-              {/* <div  w="160px" h="103px" /> */}
-
-              {socialData.map((item, idx) => (
-                <Circle bg="#E0ECFB" size="45px" key={idx} className="mx-1">
-                  <Icon as={item.icon} h="22px" w="22px" color="black" />
-                </Circle>
-              ))}
-            </Box>
-
-            {/* <Box borderRight="1px" color="#ECECEC" my={2} /> */}
-
-            <Box>
-              <Text fontSize="18px" fontWeight={500} mb="24px">
-                Quick Links
-              </Text>
-              {quickLinksData.map((item, idx) => (
-                <Link to={`/${item.to}`} key={idx}>
-                  <Text fontSize="14px" fontWeight={400} mb="8px">
-                    {item.text}
-                  </Text>
-                </Link>
-              ))}
-            </Box>
-
-            {/* <Box borderRight="1px" color="#ECECEC" my={2} /> */}
-
-            <Box>
-              <Text fontSize="18px" fontWeight={500} mb="24px">
-                Address
-              </Text>
-              {addressData.map((item, idx) => (
-                <HStack gap="8px" mb="18px" key={idx}>
-                  <Icon
-                    as={item.icon}
-                    h="26px"
-                    w="24px"
-                    // color="rgba(28, 25, 55, 0.72)"
-                    color={"white"}
-                  />
-                  <Text fontSize="14px" fontWeight={400} maxW="240px">
-                    {item.text}
-                  </Text>
-                </HStack>
-              ))}
-            </Box>
-          </Flex>
+    <Box className="container">
+      <Flex w="100%" mt="80px" mb="30px" justifyContent="space-between">
+        <Box>
+          <Image src={logo} alt="Triplover" w="160px" mb="24px" />
+          <HStack gap="10px">
+            {socialData.map((item,idx) => (
+              <Circle bg="#E0ECFB" size="45px" key={idx}>
+                <Icon as={item.icon} h="22px" w="22px" color="inactiveText" />
+              </Circle>
+            ))}
+          </HStack>
         </Box>
-      </Box>
 
-      {/* <Box borderTop="1px solid #E2E2E2" mx={4} /> */}
-      <Box display={"flex"} justifyContent="center" alignItems="center">
-        <img src={logo} alt="" width="100px" height={"10px"} />
-        <Text
-          fontSize="14px"
-          fontWeight={400}
-          color="#908DAB"
-          textAlign="center"
-          pt="16px"
-          pl="5px"
-        >
-          {" "}
-          Copyright © 2022 First Trip Ltd. All rights reserved.
-        </Text>
-      </Box>
-    </>
+        <Box borderRight="1px" color="#ECECEC" my={2} />
+
+        <Box>
+          <Text fontSize="18px" fontWeight={500} mb="24px">
+            Quick Links
+          </Text>
+          {quickLinksData.map((item,idx) => (
+            <Link to={`/${item.to}`} key={idx}>
+              <Text fontSize="14px" fontWeight={400} mb="17px">
+                {item.text}
+              </Text>
+            </Link>
+          ))}
+        </Box>
+
+        <Box borderRight="1px" color="#ECECEC" my={2} />
+
+        <Box>
+          <Text fontSize="18px" fontWeight={500} mb="24px">
+            Address
+          </Text>
+          {addressData.map((item,idx) => (
+            <HStack gap="8px" mb="18px" key={idx}>
+              <Icon
+                as={item.icon}
+                h="26px"
+                w="24px"
+                color="rgba(28, 25, 55, 0.72)"
+              />
+              <Text fontSize="14px" fontWeight={400} maxW="240px">
+                {item.text}
+              </Text>
+            </HStack>
+          ))}
+        </Box>
+      </Flex>
+
+      {/* <Center className="text-center">
+        <Image src={paymentOptions} alt="payment options" w="650px" my="30px" />
+      </Center> */}
+
+      <Box borderTop="1px solid #E2E2E2" mx={4} />
+
+      <Text
+        fontSize="14px"
+        fontWeight={400}
+        color="#908DAB"
+        textAlign="center"
+        mt="25px"
+        mb="30px"
+      >
+        © Copyright Triplover Limited. All rights reserved.
+      </Text>
+    </Box>
   );
 };
 

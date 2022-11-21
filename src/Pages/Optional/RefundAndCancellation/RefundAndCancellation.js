@@ -1,139 +1,168 @@
-import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 import Footer from "../../SharePages/Footer/Footer";
 import FooterLR from "../FooterLR/FooterLR";
 import Navbar from "../Navbar/Navbar";
-import { nanoid } from "nanoid";
-const data = [
-  {
-    title: '➢	There will be a fee associated with airline refunds.'
-  },
-  {
-    title: '➢	There will be an associated service fee'
-  },
-  {
-    title: '➢	Travelers are recommended to confirm the first trip 72 hours before the scheduled departure date if they wish to cancel or reissue. In such a case, a no-show fee can be charged in accordance with the airline policy. '
-  },
-
-  {
-    title: '	➢	Refunds only apply to refundable travel services. For domestic flights and flights abroad, the refund amount may appear in your account 3 to 7 working days and 3-6 weeks after the date of application, respectively.'
-  },
-  {
-    title: '➢	The business will give you your money back in the exact same form that you paid with. When requesting refunds for any transactions made via Mobile Financial Services, the customer must pay a service/cash-out fee.'
-  },
-  {
-    title: '➢	The service fee for domestic flights is BDT 100 and BDT 300 for international flights.'
-  },
-  {
-    title: '➢	Flights on the same calendar date will not be subject to the payment void policy.'
-  },
-  {
-    title: '➢	On low-cost carrier flights such as those operated by Air Asia, Indigo, SpiceJet, Jazeera Airways, Fly Dubai, etc. payment void would not be applied.'
-  },
-]
-
-const Hotel = [
-  {
-    title: '➢	The info you see on our website comes from our providers and clients. The hotel management has the right to alter the rate at any moment.Even though we make every effort to check the information, we cannot be held liable for any errors that may be provided by vendors or hotel employees.'
-  },
-  {
-    title: '➢	Prior to making a reservation, it is the customer`&apos`s responsibility to check whether or not the hotel has a refund policy.'
-  },
-  {
-    title: '➢	Within 7 working days, the customer will receive the refund according to the specific hotel and bank policy. '
-  },
-
-  {
-    title: '	➢	No hotel reservation allows for date changes. You must rebook with the new date and cancel the prior reservation.'
-  },
-  {
-    title: '➢	The service provider charges a service fee, which is not refundable.'
-  },
-
-]
-
-const Tours = [
-  {
-    title: '➢	Before making a reservation, please review the policy listed under each tour.'
-  },
-  {
-    title: '➢	Within 7 working days, the customer will receive their reimbursement according to the hotel and bank policy.'
-  },
-  {
-    title: '➢ The service provider charges a service fee, which is not refundable. '
-  },
-
-
-
-]
 
 const RefundAndCancellation = () => {
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
   return (
     <>
-      <Navbar></Navbar>
-      <div className="hold-transition login-page search-panel-bg" style={{ height: "100%" }}>
-        <div className="container mt-3">
-          <div className="row">
-            <div className="col-md-12" >
-              <Text fontWeight={700} fontSize='20px' pb={'10px'}>Refund Policy</Text>
-            </div>
+    <Navbar></Navbar>
+    <div  className="hold-transition login-page search-panel-bg" style={{height:"100%"}}>
+      <div className="container mt-3">
+        <div className="row">
+          <div className="col-md-12">
+            <h3>Refund &amp; Cancellation</h3>
+          </div>
 
-            <Box>
-              <Text pb={'20px'}>
-                First Trip maintains the airline's reissue and cancellation policy. The service provider charges a service fee, which is not refundable. The service fee is what the customer must pay in exchange for the assistance, convenience, and service they receive from online platforms. The National Board of Revenue (NBR) has ordered that 5% VAT will be applied to the service fee.
-
-              </Text>
-              <Text fontWeight={700} fontSize='20px' pb={'5px'}>Flights:</Text>
-              <Box mt="20px" >
-                {
-                  data.map(item => {
-                    return (
-                      <Box key={nanoid()}>
-                        <Text fontWeight={500} fontSize="md" color={'text'} key={nanoid()} pt='1px'>{item.title}</Text>
-                      </Box>
-                    )
-                  })
-                }
-              </Box>
-
-              <Box>
-                <Text fontWeight={700} fontSize='20px' pb={'10px'} pt={'20px'}>Hotel:</Text>
-                <Text pb={'4px'}>Please email us at info@firsttrip.com with any questions regarding refunds, cancellations, or date modifications.</Text>
-                {
-                  Hotel.map(item => {
-                    return (
-                      <Box key={nanoid()}>
-                        <Text fontWeight={500} fontSize="md" color={'text'} key={nanoid()} pt='1px'>{item.title}</Text>
-                      </Box>
-                    )
-                  })
-                }
-
-              </Box>
-
-              <Box pt={'20px'} pb='30px'>
-                <Text fontWeight={700} fontSize='20px' pb={'10px'}>Tours:</Text>
-                {
-                  Tours.map(item => {
-                    return (
-                      <Box key={nanoid()}>
-                        <Text fontWeight={500} fontSize="md" color={'text'} key={nanoid()} pt='1px'>{item.title}</Text>
-                      </Box>
-                    )
-                  })
-                }
-              </Box>
-
-            </Box>
-
-
-
-
+          <div className="col-md-12">
+            <p>
+              Most of our airline tickets, hotels, pre-paid car rentals,
+              vacation packages and service fees are non-refundable after the
+              booking. All cancellations must be done through email used at the
+              time of booking and over the phone only.We can accept refund
+              requests only if the following conditions have been met:
+            </p>
+            <ul className=""
+              style={{
+                listStyleType: "disc",
+                listStylePosition: "inside",
+                marginLeft: "20px",
+              }}
+            >
+              <li>
+                You have applied for a cancellation and refund with us and if
+                the fare rules accepts for cancellation and refunds;
+              </li>
+              <li>
+                You are not a "no show" (most "no show" bookings are in-eligible
+                for any waiver from suppliers for refund processing); and
+              </li>
+              <li>
+                We are able to secure waivers from suppliers to process this
+                requested cancellation and refund.
+              </li>
+            </ul>
+            <h5 className="my-2">Our Fees And Exceptions</h5>
+            <p>
+              In addition to each Travel Supplier's cost and fees including
+              Bank/Payment Gateway Charges, Triplover will charge a service fee
+              as described below. All Triplover fees are charged on a per-person
+              or per-ticket basis and are non-refundable.
+            </p>
+            {/* <h5 className="text-center py-2">Cancellation &amp; Refunds</h5> */}
+            <h5 className="text-start my-2">Agent Assisted Cancellation/ Refund</h5>
+            {/* <h5 className="py-2">Airline Economy Class </h5> */}
+            <table className="table table-bordered text-dark">
+              <tbody>
+                <tr>
+                  <td style={{width:'50%'}}>Economy Class</td>
+                  <td>AED 20</td>
+                </tr>
+                <tr>
+                  <td>Business/First Class</td>
+                  <td>AED 20</td>
+                </tr>
+              </tbody>
+            </table>
+            {/* <h5 className="py-2">Airline Business/First Class</h5>
+            <table className="table table-bordered text-dark">
+              <tbody>
+                <tr>
+                  <td style={{width:'50%'}}>Domestic</td>
+                  <td>AED 18</td>
+                </tr>
+                <tr>
+                  <td>International</td>
+                  <td>AED 80</td>
+                </tr>
+              </tbody>
+            </table>
+            <h5 className="text-center py-2">
+              Changes To Existing Tickets (Exchange)
+            </h5>
+            <h5 className="text-center">Agent Assisted Re-issue</h5>
+            <h5 className="py-2">Airline Economy Class </h5>
+            <table className="table table-bordered text-dark">
+              <tbody>
+                <tr>
+                  <td style={{width:'50%'}}>Domestic</td>
+                  <td>AED 12</td>
+                </tr>
+                <tr>
+                  <td>International</td>
+                  <td>AED 18</td>
+                </tr>
+              </tbody>
+            </table>
+            <h5 className="py-2">Airline Business/First Class</h5>
+            <table className="table table-bordered text-dark">
+              <tbody>
+                <tr>
+                  <td style={{width:'50%'}}>Domestic</td>
+                  <td>AED 18</td>
+                </tr>
+                <tr>
+                  <td>International</td>
+                  <td>AED 80</td>
+                </tr>
+              </tbody>
+            </table> */}
+            <h5 className="py-2">Airlines schedule changes/flight cancellations</h5>
+            <p>
+              All Airlines have differing rules and policies regarding schedule
+              changes, which are beyond our control.Due to the operational needs
+              of each airline, changes are often made to the flights that they
+              are currently operating.Often these changes are a prediction of
+              travel needs for a future dates but can also reflect same day
+              changes. Types of changes could be: flight number changes, time
+              changes, routing, date changes and or cancellations. Cancellations
+              include when an airline has stopped or temporarily canceled
+              service to certain cities, or stopped service on certain daysof
+              the week.
+            </p>
+            <h5 className="py-2">Refund payment</h5>
+            <p>
+              Refund will only be reversed to the cardholder's account that has
+              been used for transaction. In case of cash refund, gateway charge
+              or processing will be deducted
+            </p>
+            <p>
+              Triplover will process refund requests to gateway providers or to
+              the card issuing bank only after receiving refund payment from
+              airlines.
+            </p>
+            <h5 className="py-2">
+              Reasons for cancellations or schedule changes may include
+            </h5>
+            <ul style={{
+                listStyleType: "disc",
+                listStylePosition: "inside",
+                marginLeft: "20px",
+              }}>
+              <li>Aircraft Technical Problem;</li>
+              <li>Low/High Travel Season;</li>
+              <li>Airport Terminal Or Gate Changes;</li>
+              <li>Natural Disasters</li>
+              <li>Civil Unrest;</li>
+              <li>Bankruptcy.</li>
+            </ul>
+            <p>
+              Triplover does not assume any liability whatsoever for cancelled
+              flights, flights that are missed, or flights not connecting due to
+              any scheduled changes made by the airlines.
+            </p>
+            <h5 className="py-2">Our policy on schedule changes</h5>
+            <p>
+              We make every attempt to notify the customer of any schedule
+              changes. It is always best to contact the airline to reconfirm you
+              flights within 72 hours of departure.
+            </p>
           </div>
         </div>
       </div>
-      <Footer></Footer>
+    </div>
+    <Footer></Footer>
     </>
   );
 };

@@ -93,7 +93,7 @@ const LoginPage = () => {
         w="100%"
         h="640px"
         mb="-40px"
-        backgroundImage={{ base: "", xl: `url(${bg})` }}
+        // backgroundImage={{ base: "", xl: `url(${bg})` }}
         backgroundSize="contain"
       >
         <Flex
@@ -269,18 +269,9 @@ const LoginPage = () => {
         </Flex>
       </Center>
 
-      {/* <div className="login-form">
-          <FooterLR></FooterLR>
-        </div> */}
-      <Box>
-        <svg class="arrows">
-          <path class="a1" d="M0 0 L30 32 L60 0"></path>
-          <path class="a2" d="M0 20 L30 52 L60 20"></path>
-          <path class="a3" d="M0 40 L30 72 L60 40"></path>
-        </svg>
-      </Box>
+      
 
-      {/* <Text fontSize="21px" fontWeight={500} pt="30px">
+      <Text fontSize="21px" fontWeight={500} pt="30px">
         Our Services
       </Text>
 
@@ -316,9 +307,7 @@ const LoginPage = () => {
             <Image src={item.img} alt="airlines1" w="150px" />
           </Center>
         ))}
-      </Flex> */}
-      <Partners />
-      <Service />
+      </Flex>
 
       <Footer />
     </VStack>

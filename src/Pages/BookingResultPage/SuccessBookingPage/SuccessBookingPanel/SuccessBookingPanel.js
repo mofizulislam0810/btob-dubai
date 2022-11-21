@@ -997,7 +997,7 @@ const SuccessBookingPanel = () => {
                                   }
                                 </td>
                                 <td className="right fw-bold">
-                                  BDT{" "}
+                                  AED{" "}
                                   {(
                                     bookData.data?.item1.flightInfo
                                       ?.passengerFares.adt.totalPrice *
@@ -1043,7 +1043,7 @@ const SuccessBookingPanel = () => {
                                   }
                                 </td>
                                 <td className="right fw-bold">
-                                  BDT{" "}
+                                  AED{" "}
                                   {(
                                     bookData.data?.item1.flightInfo
                                       ?.passengerFares.cnn.totalPrice *
@@ -1089,7 +1089,7 @@ const SuccessBookingPanel = () => {
                                   }
                                 </td>
                                 <td className="right fw-bold">
-                                  BDT{" "}
+                                  AED{" "}
                                   {(
                                     bookData.data?.item1.flightInfo
                                       ?.passengerFares.inf.totalPrice *
@@ -1106,7 +1106,7 @@ const SuccessBookingPanel = () => {
                             <td colSpan={5} className="border-none"></td>
                             <td>Grand Total</td>
                             <td>
-                              BDT{" "}
+                              AED{" "}
                               {(bookData.data?.item1.flightInfo?.bookingComponents[0].totalPrice).toLocaleString(
                                 "en-US"
                               )}

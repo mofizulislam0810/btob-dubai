@@ -88,9 +88,9 @@ const Ledger = () => {
     { label: "Ticket Number	", key: "ticketNumbers" },
     { label: "Description", key: "description" },
     { label: "Type", key: "transactionType" },
-    { label: "Debit (BDT)", key: "debitAmount" },
-    { label: "Credit (BDT)", key: "creditAmount" },
-    { label: "Running Balance (BDT)", key: "balanceAmount" },
+    { label: "Debit (AED)", key: "debitAmount" },
+    { label: "Credit (AED)", key: "creditAmount" },
+    { label: "Running Balance (AED)", key: "balanceAmount" },
     { label: "Created By", key: "createdByName" },
   ];
 

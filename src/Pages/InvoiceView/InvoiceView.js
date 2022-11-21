@@ -187,7 +187,7 @@ const InvoiceView = () => {
                                                 </tr>
                                                 <tr>
                                                     <td className="fw-bold" colSpan={2} style={{ textAlign: "right" }}>
-                                                        Total:  BDT {invoice?.amount.toLocaleString("en-US")}
+                                                        Total:  AED {invoice?.amount.toLocaleString("en-US")}
                                                     </td>
                                                 </tr>
                                             </tbody>

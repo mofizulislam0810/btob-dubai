@@ -501,58 +501,6 @@ const LeftSide = () => {
 // }
   const bookingData = (e) => {
     e.preventDefault();
-    // infant.map((item,index)=>{
-    //   const ageInYears = moment().diff(moment(item.date+'/'+item.month+'/'+item.year, "DD/MM/YYYY"), 'months');
-    //   console.log(ageInYears);
-    //   if (ageInYears > 24) {
-    //     toast.error(`Infant ${index+1} age is more than 2 years!`);
-    //     return;
-    //   }
-    // })
-    // const handleCheck = (val) => {
-      
-    //   console.log(adult?.every(item => val.firstName === item.firstName))
-      
-    // }
-    // const uniqueFirstNameAdult = new Set(adult.map(v => v.firstName));
-    // const uniqueLastNameAdult = new Set(adult.map(v => v.lastName));
-    // if (uniqueFirstNameAdult.size < adult.length) {
-    //   toast.error(`First name should be different!`);
-    //   return;
-    // }
-    // if (uniqueLastNameAdult.size < adult.length) {
-    //   toast.error(`Last name should be different!`);
-    //   return;
-    // } 
-    
-    
-
-    // const uniqueFirstNameChild = new Set(child.map(v => v.firstName));
-    // const uniqueLastNameChild = new Set(child.map(v => v.lastName));
-
-    // if (uniqueFirstNameChild.size < child.length) {
-    //   toast.error(`First name should be different!`);
-    //   return;
-    // }
-    // if (uniqueLastNameChild.size < child.length) {
-    //   toast.error(`Last name should be different!`);
-    //   return;
-    // }
-
-    // const uniqueFirstNameInfant = new Set(infant.map(v => v.firstName));
-    // const uniqueLastNameInfant = new Set(infant.map(v => v.lastName));
-
-    // if (uniqueFirstNameInfant.size < infant.length) {
-    //   toast.error(`First name should be different!`);
-    //   return;
-    // }
-    // if (uniqueLastNameInfant.size < infant.length) {
-    //   toast.error(`Last name should be different!`);
-    //   return;
-    // }
-
-    
-
     let sendObj = {
       passengerInfoes: [],
       taxRedemptions: [],
@@ -784,7 +732,7 @@ const LeftSide = () => {
           navigate("/failedbooking");
         });
     }
-    // fetchOptions();
+    fetchOptions();
     console.log(sendObj);
     async function booking(price, uniqueTransID, itemCodeRef) {
       sendObj.uniqueTransID = uniqueTransID;

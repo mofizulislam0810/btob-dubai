@@ -4091,7 +4091,7 @@ const LeftSide = () => {
                       }}
                       disabled={
                         isDomestic
-                          ? isExDateEmptyCnn || isExDateEmptyInf
+                          ? isExDateEmptyCnn || isExDateEmptyInf || !isExDateValidInf 
                           : !isExDateValidAdt ||
                             !isExDateValidCnn ||
                             !isExDateValidInf ||

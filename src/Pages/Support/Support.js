@@ -774,9 +774,9 @@ const Support = () => {
                                           textAlign="center"
                                           w="100%"
                                         >
-                                          Plase make sure to select Ticket Number{" "}
+                                          Please make sure to select Ticket Number{" "}
                                           <br />
-                                          (You can seach for your ticket number
+                                          (You can search for your ticket number
                                           with Booking ID or PNR)
                                         </Text>
                                       }

@@ -494,18 +494,13 @@ const LeftSide = () => {
   //       : toast.error("Passport expiry date does not valid")
   //   );
   // }
-
+//   const [dublicateAdultPax,setDublicateAdultPax] = useState(false);
+//   const handleCheck = (val) => {
+//     console.log(adult?.every(item => val.firstName === item.firstName))
+//     setDublicateAdultPax(adult?.every(item => val.firstName === item.firstName));
+// }
   const bookingData = (e) => {
     e.preventDefault();
-    // infant.map((item,index)=>{
-    //   const ageInYears = moment().diff(moment(item.date+'/'+item.month+'/'+item.year, "DD/MM/YYYY"), 'months');
-    //   console.log(ageInYears);
-    //   if (ageInYears > 24) {
-    //     toast.error(`Infant ${index+1} age is more than 2 years!`);
-    //     return;
-    //   }
-    // })
-    setLoading(true);
     let sendObj = {
       passengerInfoes: [],
       taxRedemptions: [],
@@ -513,6 +508,7 @@ const LeftSide = () => {
       itemCodeRef: "",
       PriceCodeRef: "",
     };
+
 
     adult.map((item) => {
       let idObj = passengerADTList.find(
@@ -691,11 +687,25 @@ const LeftSide = () => {
       );
     }
 
+    const uniqueFirstName = new Set(sendObj.passengerInfoes.map(v => v.nameElement.firstName));
+    const uniqueLastName = new Set(sendObj.passengerInfoes.map(v => v.nameElement.lastName));
+    if (uniqueFirstName.size < sendObj.passengerInfoes.length) {
+      toast.error(`First name should be different!`);
+      return;
+    }
+    if (uniqueLastName.size < sendObj.passengerInfoes.length) {
+      toast.error(`Last name should be different!`);
+      return;
+    } 
+
+
+    setLoading(true);
     // console.log(priceCheck);
     async function fetchOptions() {
       await axios
         .post(environment.priceCheck, priceCheck, environment.headerToken)
         .then((response) => {
+          console.log(response,'pricecheck===');
           if (response.data.item1 !== null) {
             if (
               response.data.item1?.isPriceChanged === false &&
@@ -733,6 +743,7 @@ const LeftSide = () => {
       await axios
         .post(environment.bookFlight, sendObj, environment.headerToken)
         .then((response) => {
+          console.log(response,'booking===');
           if (response.data.item1 !== null) {
             if (response.data.item2?.isSuccess === true) {
               console.log(response);
@@ -820,6 +831,18 @@ const LeftSide = () => {
                   : Database?.journeyDate
               ),
               { months: 6 }
+            )
+          )
+        ) || moment(p.dateOfBirth).isBefore(
+          ISODateFormatter(
+            add(
+              new Date(
+                Database?.tripTypeModify === "Round Trip" &&
+                calculateFullAge(Database?.journeyDate, Database?.returnDate)
+                  ? Database?.returnDate
+                  : Database?.journeyDate
+              ),
+              { years: -12 }
             )
           )
         ) ||
@@ -3188,17 +3211,18 @@ const LeftSide = () => {
                                     days: 2,
                                   }
                                 )}
-                                maxDate={
-                                  new Date(
-                                    Database?.tripTypeModify === "Round Trip" &&
-                                    calculateFullAge(
-                                      Database?.journeyDate,
-                                      Database?.returnDate
-                                    )
-                                      ? Database?.returnDate
-                                      : Database?.journeyDate
-                                  )
-                                }
+                                // maxDate={
+                                //   new Date(
+                                //     Database?.tripTypeModify === "Round Trip" &&
+                                //     calculateFullAge(
+                                //       Database?.journeyDate,
+                                //       Database?.returnDate
+                                //     )
+                                //       ? Database?.returnDate
+                                //       : Database?.journeyDate
+                                //   )
+                                // }
+                                maxDate= {new Date()}
                                 showMonthDropdown
                                 showYearDropdown
                                 dropdownMode="select"
@@ -4082,7 +4106,7 @@ const LeftSide = () => {
                       }}
                       disabled={
                         isDomestic
-                          ? isExDateEmptyCnn || isExDateEmptyInf
+                          ? isExDateEmptyCnn || isExDateEmptyInf || !isExDateValidInf 
                           : !isExDateValidAdt ||
                             !isExDateValidCnn ||
                             !isExDateValidInf ||

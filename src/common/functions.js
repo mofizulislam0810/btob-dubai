@@ -105,7 +105,7 @@ export const getCountryFomAirport = (input) => {
   })?.country;
 };
 
-
+export const preventNegativeValues = (e) => ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
 
 export const sumRating = (agent) => {
   let total = 0;
@@ -124,3 +124,15 @@ export const moveToFirstPlace = (arr, text) => {
   });
   return arr;
 };
+
+export const sortPassangerType = (data) =>{
+  return data?.sort((a,b)=>a.passengerType.localeCompare(b.passengerType));
+  // return data?.sort((a,b)=>b.passengerType.localeCompare(a.passengerType));
+}
+
+export const uniqueUser = (arr) => {
+  const uniqueValues = new Set(arr.map(v => v?.firstName));
+    if (uniqueValues.size < arr.length) {
+      return true
+    } else return false
+}

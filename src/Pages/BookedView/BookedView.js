@@ -15,7 +15,7 @@ import airports from "../../JSON/airports.json";
 import Footer from "../SharePages/Footer/Footer";
 import { Button } from "@chakra-ui/react";
 import { toast, ToastContainer } from "react-toastify";
-import { getCountryCode, getPassengerType, sumRating } from "../../common/functions";
+import { getCountryCode, getPassengerType, sortPassangerType, sumRating } from "../../common/functions";
 
 const BookedView = () => {
   const { setLoading, setTicketData, loading } = useAuth();
@@ -228,6 +228,8 @@ const BookedView = () => {
   };
 
   console.log(ticketingList, "+++++");
+  sortPassangerType(ticketingList.passengerInfo);
+  console.log(sortPassangerType(ticketingList.passengerInfo));
 
   return (
     <div>
@@ -363,7 +365,7 @@ const BookedView = () => {
                             </tr>
 
                             <tr>
-                              {ticketingList.ticketInfo?.status === "Ticket Ordered" ? "" : <>
+                              {ticketingList.ticketInfo?.status !== "Booked" ? "" : <>
                                 <th>Issue Before:</th>
                                 <td style={{ color: "red" }}>
                                   {lastTicketTime !== "" &&

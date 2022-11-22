@@ -1400,6 +1400,7 @@ const ShowAllFlightPage = () => {
           <div className="container box-shadow content-width">
             <div className="row border">
               <div className="col-lg-7 py-3 ps-5 my-auto border-right bg-white">
+                <div>
                 <span className="p-2 border">
                   <span className="fw-bold" style={{ fontSize: "10px" }}>
                     <span className="me-2">
@@ -1515,11 +1516,12 @@ const ShowAllFlightPage = () => {
                 ) : (
                   <></>
                 )}
-
+                </div>
+                <div className="mt-3">
                 {searchData.origin3 !== "" &&
                   searchData.origin3 !== undefined ? (
                   <>
-                    <span className="p-2 border ms-1">
+                    <span className="p-2 border">
                       <span className="fw-bold" style={{ fontSize: "10px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-departure"></i>
@@ -1534,7 +1536,7 @@ const ShowAllFlightPage = () => {
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
                       <span className="px-1">|</span>
-                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                      <span className="fw-bold" style={{ fontSize: "10px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-arrival"></i>
                         </span>
@@ -1573,7 +1575,7 @@ const ShowAllFlightPage = () => {
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
                       <span className="px-1">|</span>
-                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                      <span className="fw-bold" style={{ fontSize: "10px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-arrival"></i>
                         </span>
@@ -1596,7 +1598,7 @@ const ShowAllFlightPage = () => {
                 {searchData.origin5 !== "" &&
                   searchData.origin5 !== undefined ? (
                   <>
-                    <span className="p-2 border">
+                    <span className="p-2 border ms-1">
                       <span className="fw-bold" style={{ fontSize: "10px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-departure"></i>
@@ -1630,6 +1632,7 @@ const ShowAllFlightPage = () => {
                 ) : (
                   <></>
                 )}
+                </div>
               </div>
               <div className="col-lg-3 py-3 my-auto border-right bg-white">
                 <span

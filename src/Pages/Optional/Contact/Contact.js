@@ -29,14 +29,14 @@ const Contact = () => {
                   <i className="la la-phone la-lg"></i>
                 </span>{" "}
                 09613123123 */}
-                <span className="fw-bold">Hotline No - </span>  09613123123
+                <span className="fw-bold">Hotline No - </span>  01322819380
               </p>
               <p>
                 {/* <span className="">
                   <i className="la la-envelope la-lg"></i>
                 </span>{" "}
                 <a href="" className="text-dark fw-bold">support@firsttrip.com</a> */}
-                <span className="fw-bold">Email - </span>  support@firsttrip.com
+                <span className="fw-bold">Email - </span>  info@travelchamp.com
               </p>
             </div>
             {/* <div className="col-lg-12">

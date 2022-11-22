@@ -18,19 +18,19 @@ const AboutUs = () => {
 
                         <Box>
                             <Text pb={'20px'}>
-                                First Trip Limited is a sister concern of the US-Bangla Group which has set its sights on outclassing the online travel market in Bangladesh to bring the tours you desire.
+                                Travelchamp Limited is a sister concern of the US-Bangla Group which has set its sights on outclassing the online travel market in Bangladesh to bring the tours you desire.
                             </Text>
 
                             <Text pb={'20px'}>
-                                Since 2009 US-Bangla Group has been the fastest-growing company in Bangladesh. The group is engaged in creating a more fantastic future for the next generation with US-Bangla Airlines, USB Express, Vibrant, US-Bangla Medical College and Hospital, and many more. As a travel-tech organization, First Trip Limited looks forward to viable courses as it moves interactively into the years ahead. They are setting goals for advancing its network and expanding activities, intending to provide you with everything for a hassle-free tour. Incorporating deals with worldwide hotels and  airlines, First Trip Limited makes it convenient to prepare for your travels, minimize your expenses, and highlights valuable insights.
+                                Since 2009 US-Bangla Group has been the fastest-growing company in Bangladesh. The group is engaged in creating a more fantastic future for the next generation with US-Bangla Airlines, USB Express, Vibrant, US-Bangla Medical College and Hospital, and many more. As a travel-tech organization, Travelchamp Limited looks forward to viable courses as it moves interactively into the years ahead. They are setting goals for advancing its network and expanding activities, intending to provide you with everything for a hassle-free tour. Incorporating deals with worldwide hotels and  airlines, Travelchamp Limited makes it convenient to prepare for your travels, minimize your expenses, and highlights valuable insights.
                             </Text>
 
                             <Text pb={'20px'}>
-                                First Trip Limited will offer services for booking hotels, airplanes, and tour reservations. Through commitments to tailored and top-notch services, First Trip will make every attempt to develop innovative traveling arrangements. Holiday and corporate clients can learn about, connect with, and book a wide range of services specialized to their travel preferences by exploring  First Trip’s website. In all phases of the customers' journeys—before, throughout, and even after, it provides amicable  assistance.
+                                Travelchamp Limited will offer services for booking hotels, airplanes, and tour reservations. Through commitments to tailored and top-notch services, Travelchamp will make every attempt to develop innovative traveling arrangements. Holiday and corporate clients can learn about, connect with, and book a wide range of services specialized to their travel preferences by exploring  Travelchamp’s website. In all phases of the customers' journeys—before, throughout, and even after, it provides amicable  assistance.
                             </Text>
 
                             <Text pb={'20px'}>
-                                With the ambition of becoming recognized as a portrait of reliability, cutting-edge technology, and dedication to travel management, First Trip Limited approaches the travel industry.
+                                With the ambition of becoming recognized as a portrait of reliability, cutting-edge technology, and dedication to travel management, Travelchamp Limited approaches the travel industry.
                             </Text>
                         </Box>
                     </div>

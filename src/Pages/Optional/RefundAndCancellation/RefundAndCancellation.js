@@ -81,7 +81,7 @@ const RefundAndCancellation = () => {
 
             <Box>
               <Text pb={'20px'}>
-                First Trip maintains the airline's reissue and cancellation policy. The service provider charges a service fee, which is not refundable. The service fee is what the customer must pay in exchange for the assistance, convenience, and service they receive from online platforms. The National Board of Revenue (NBR) has ordered that 5% VAT will be applied to the service fee.
+                Travelchamp maintains the airline's reissue and cancellation policy. The service provider charges a service fee, which is not refundable. The service fee is what the customer must pay in exchange for the assistance, convenience, and service they receive from online platforms. The National Board of Revenue (NBR) has ordered that 5% VAT will be applied to the service fee.
 
               </Text>
               <Text fontWeight={700} fontSize='20px' pb={'5px'}>Flights:</Text>

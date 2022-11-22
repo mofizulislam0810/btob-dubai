@@ -18,11 +18,11 @@ const PrivacyPolicy = () => {
 
             <Box>
               <Text pb={'20px'}>
-                Your trust is important to First Trip, and we want you to realize how we gather, manage, and share information. This privacy statement explains how we recognize the data we receive from you when you visit our websites, use any mobile applications we make available ("Apps"), or purchase or engage in any of the services we make available through our various channels.
+                Your trust is important to Travelchamp, and we want you to realize how we gather, manage, and share information. This privacy statement explains how we recognize the data we receive from you when you visit our websites, use any mobile applications we make available ("Apps"), or purchase or engage in any of the services we make available through our various channels.
               </Text>
 
               <Text pb={'20px'}>
-                In order to make reservations and booking the services for the customer/traveler, the name, address, phone number, credit and debit card number and related information, passport number, social media ID links and age of the traveler are provided with the appropriate service providers, such as the airlines, hotels, buses etc. In addition, for service quality, website updates and other information, as well as marketing and promotional purposes, we will connect with you, either ourselves or using one of our associates. You can still explore the First Trip website without providing this information, but you might not be able to avail of all the options, promotions, and facilities. We might also disclose your personal information if it's necessary to follow the law or any legal request for information, or if it's necessary to defend our rights.
+                In order to make reservations and booking the services for the customer/traveler, the name, address, phone number, credit and debit card number and related information, passport number, social media ID links and age of the traveler are provided with the appropriate service providers, such as the airlines, hotels, buses etc. In addition, for service quality, website updates and other information, as well as marketing and promotional purposes, we will connect with you, either ourselves or using one of our associates. You can still explore the Travelchamp website without providing this information, but you might not be able to avail of all the options, promotions, and facilities. We might also disclose your personal information if it's necessary to follow the law or any legal request for information, or if it's necessary to defend our rights.
 
               </Text>
 

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { environment } from "../../../../src/Pages/SharePages/Utility/environment";
-import logo from "../../../images/logo/image_2022_07_28T11_49_00_957Z_2-removebg-preview.png";
+import logo from "../../../images/logo/logo-combined.png";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -154,7 +154,7 @@ const Navbar = () => {
             <i className="fas fa-bars"></i>
           </a>
         </li>
-        <li className="nav-item d-none d-sm-inline-block">
+        <li className="nav-item d-none d-sm-inline-block my-auto">
           <Link to="/search">
             <Image src={logo} alt="FirstTrip" w="100px" />
           </Link>

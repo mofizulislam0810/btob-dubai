@@ -34,11 +34,11 @@ const addressData = [
     icon: BsFillHouseFill,
   },
   {
-    text: "09613123123",
+    text: "01322819380",
     icon: FaPhoneAlt,
   },
   {
-    text: "support@firsttrip.com",
+    text: "info@travelchamp.com",
     icon: GrMail,
   },
 ];
@@ -106,14 +106,14 @@ const Footer = () => {
       </Box>
 
       {/* <Box borderTop="1px solid #E2E2E2" mx={4} /> */}
-      <Box display={"flex"} justifyContent="center" alignItems="center">
+      <Box display={"flex"} justifyContent="center" alignItems="center" className="py-3">
         <img src={logo} alt="" width="100px" height={"10px"} />
         <Text
           fontSize="14px"
           fontWeight={400}
           color="#908DAB"
           textAlign="center"
-          pt="16px"
+
           pl="5px"
         >
           {" "}

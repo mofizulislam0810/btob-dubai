@@ -74,7 +74,6 @@ const QuickPassenger = () => {
       passCopy.current.disabled = true
       visaCopy.current.disabled = true
     }
-
   }
 
   useEffect(() => {
@@ -481,7 +480,7 @@ const QuickPassenger = () => {
                                 ({item.passengerType})
                               </td>
                               <td>{item.email}</td>
-                              <td>  
+                              <td>
                                 {item.dateOfBirth === null
                                   ? "N/A"
                                   : moment(item.dateOfBirth).format(

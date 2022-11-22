@@ -494,11 +494,11 @@ const LeftSide = () => {
   //       : toast.error("Passport expiry date does not valid")
   //   );
   // }
-//   const [dublicateAdultPax,setDublicateAdultPax] = useState(false);
-//   const handleCheck = (val) => {
-//     console.log(adult?.every(item => val.firstName === item.firstName))
-//     setDublicateAdultPax(adult?.every(item => val.firstName === item.firstName));
-// }
+  //   const [dublicateAdultPax,setDublicateAdultPax] = useState(false);
+  //   const handleCheck = (val) => {
+  //     console.log(adult?.every(item => val.firstName === item.firstName))
+  //     setDublicateAdultPax(adult?.every(item => val.firstName === item.firstName));
+  // }
   const bookingData = (e) => {
     e.preventDefault();
     let sendObj = {
@@ -508,7 +508,6 @@ const LeftSide = () => {
       itemCodeRef: "",
       PriceCodeRef: "",
     };
-
 
     adult.map((item) => {
       let idObj = passengerADTList.find(
@@ -687,8 +686,12 @@ const LeftSide = () => {
       );
     }
 
-    const uniqueFirstName = new Set(sendObj.passengerInfoes.map(v => v.nameElement.firstName));
-    const uniqueLastName = new Set(sendObj.passengerInfoes.map(v => v.nameElement.lastName));
+    const uniqueFirstName = new Set(
+      sendObj.passengerInfoes.map((v) => v.nameElement.firstName)
+    );
+    const uniqueLastName = new Set(
+      sendObj.passengerInfoes.map((v) => v.nameElement.lastName)
+    );
     if (uniqueFirstName.size < sendObj.passengerInfoes.length) {
       toast.error(`First name should be different!`);
       return;
@@ -696,8 +699,7 @@ const LeftSide = () => {
     if (uniqueLastName.size < sendObj.passengerInfoes.length) {
       toast.error(`Last name should be different!`);
       return;
-    } 
-
+    }
 
     setLoading(true);
     // console.log(priceCheck);
@@ -705,7 +707,7 @@ const LeftSide = () => {
       await axios
         .post(environment.priceCheck, priceCheck, environment.headerToken)
         .then((response) => {
-          console.log(response,'pricecheck===');
+          console.log(response, "pricecheck===");
           if (response.data.item1 !== null) {
             if (
               response.data.item1?.isPriceChanged === false &&
@@ -743,7 +745,7 @@ const LeftSide = () => {
       await axios
         .post(environment.bookFlight, sendObj, environment.headerToken)
         .then((response) => {
-          console.log(response,'booking===');
+          console.log(response, "booking===");
           if (response.data.item1 !== null) {
             if (response.data.item2?.isSuccess === true) {
               console.log(response);
@@ -811,7 +813,7 @@ const LeftSide = () => {
           )
         ) ||
         p.dateOfBirth === "" ||
-        p.passportExDate === ""
+        (isDomestic ? false : p.passportExDate === "")
       );
     });
     setisExDateValidAdt(arr.every((element) => element === true));
@@ -833,7 +835,8 @@ const LeftSide = () => {
               { months: 6 }
             )
           )
-        ) || moment(p.dateOfBirth).isBefore(
+        ) ||
+        moment(p.dateOfBirth).isBefore(
           ISODateFormatter(
             add(
               new Date(
@@ -847,7 +850,7 @@ const LeftSide = () => {
           )
         ) ||
         p.dateOfBirth === "" ||
-        p.passportExDate === ""
+        (isDomestic ? false : p.passportExDate === "")
       );
     });
     setisExDateValidCnn(arr.every((element) => element === true));
@@ -887,37 +890,37 @@ const LeftSide = () => {
           )
         ) ||
         p.dateOfBirth === "" ||
-        p.passportExDate === ""
+        (isDomestic ? false : p.passportExDate === "")
       );
     });
     setisExDateValidInf(arr.every((element) => element === true));
   }, [infant]);
 
   // FOR BOOK NOW BUTTON DISABLE
-  const [isDisableAdt, setIsDisableAdt] = useState(false);
-  const [isDisableCnn, setIsDisableCnn] = useState(false);
-  const [isDisableInf, setIsDisableInf] = useState(false);
+  // const [isDisableAdt, setIsDisableAdt] = useState(false);
+  // const [isDisableCnn, setIsDisableCnn] = useState(false);
+  // const [isDisableInf, setIsDisableInf] = useState(false);
 
-  useEffect(() => {
-    let arr = adult.map((p) => {
-      return p.dateOfBirth === "" || p.passportExDate === "";
-    });
-    setIsDisableAdt(arr.includes(true) ? true : false);
-  }, [adult]);
+  // useEffect(() => {
+  //   let arr = adult.map((p) => {
+  //     return p.dateOfBirth === "" || p.passportExDate === "";
+  //   });
+  //   setIsDisableAdt(arr.includes(true) ? true : false);
+  // }, [adult]);
 
-  useEffect(() => {
-    let arr = child.map((p) => {
-      return p.dateOfBirth === "" || p.passportExDate === "";
-    });
-    setIsDisableCnn(arr.includes(true) ? true : false);
-  }, [child]);
+  // useEffect(() => {
+  //   let arr = child.map((p) => {
+  //     return p.dateOfBirth === "" || p.passportExDate === "";
+  //   });
+  //   setIsDisableCnn(arr.includes(true) ? true : false);
+  // }, [child]);
 
-  useEffect(() => {
-    let arr = infant.map((p) => {
-      return p.dateOfBirth === "" || p.passportExDate === "";
-    });
-    setIsDisableInf(arr.includes(true) ? true : false);
-  }, [infant]);
+  // useEffect(() => {
+  //   let arr = infant.map((p) => {
+  //     return p.dateOfBirth === "" || p.passportExDate === "";
+  //   });
+  //   setIsDisableInf(arr.includes(true) ? true : false);
+  // }, [infant]);
   // useEffect(() => console.log(isExDateValidAdt, "===="), [isExDateValidAdt]);
 
   const [isDomestic, setIsDomestic] = useState(false);
@@ -3222,7 +3225,7 @@ const LeftSide = () => {
                                 //       : Database?.journeyDate
                                 //   )
                                 // }
-                                maxDate= {new Date()}
+                                maxDate={new Date()}
                                 showMonthDropdown
                                 showYearDropdown
                                 dropdownMode="select"
@@ -4106,7 +4109,9 @@ const LeftSide = () => {
                       }}
                       disabled={
                         isDomestic
-                          ? isExDateEmptyCnn || isExDateEmptyInf || !isExDateValidInf 
+                          ? isExDateEmptyCnn ||
+                            isExDateEmptyInf ||
+                            !isExDateValidInf
                           : !isExDateValidAdt ||
                             !isExDateValidCnn ||
                             !isExDateValidInf ||

@@ -705,6 +705,7 @@ const LeftSide = () => {
       await axios
         .post(environment.priceCheck, priceCheck, environment.headerToken)
         .then((response) => {
+          console.log(response,'pricecheck===');
           if (response.data.item1 !== null) {
             if (
               response.data.item1?.isPriceChanged === false &&
@@ -742,6 +743,7 @@ const LeftSide = () => {
       await axios
         .post(environment.bookFlight, sendObj, environment.headerToken)
         .then((response) => {
+          console.log(response,'booking===');
           if (response.data.item1 !== null) {
             if (response.data.item2?.isSuccess === true) {
               console.log(response);
@@ -3209,17 +3211,18 @@ const LeftSide = () => {
                                     days: 2,
                                   }
                                 )}
-                                maxDate={
-                                  new Date(
-                                    Database?.tripTypeModify === "Round Trip" &&
-                                    calculateFullAge(
-                                      Database?.journeyDate,
-                                      Database?.returnDate
-                                    )
-                                      ? Database?.returnDate
-                                      : Database?.journeyDate
-                                  )
-                                }
+                                // maxDate={
+                                //   new Date(
+                                //     Database?.tripTypeModify === "Round Trip" &&
+                                //     calculateFullAge(
+                                //       Database?.journeyDate,
+                                //       Database?.returnDate
+                                //     )
+                                //       ? Database?.returnDate
+                                //       : Database?.journeyDate
+                                //   )
+                                // }
+                                maxDate= {new Date()}
                                 showMonthDropdown
                                 showYearDropdown
                                 dropdownMode="select"

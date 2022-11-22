@@ -390,9 +390,9 @@ const ShowFlight = (props) => {
                     </p>
                   </div>
                   <div className="col-lg-2 my-auto">
-                    <h6 className="fw-bold">
-                      <span className="fs-5">{item[0].from}</span>
-                      <span className="ms-1 fs-5">
+                    <h6 className="fw-bold" style={{fontSize:"19px"}}>
+                      <span className="">{item[0].from}</span>
+                      <span className="ms-1 ">
                         {item[0].segments[0].departure.substr(11, 5)}
                       </span>
                     </h6>
@@ -434,9 +434,9 @@ const ShowFlight = (props) => {
                     </div>
                   </div>
                   <div className="col-lg-2 my-auto">
-                    <h6 className="fw-bold">
-                      <span className="fs-5">{item[0].to}</span>
-                      <span className="ms-1 fs-5">
+                    <h6 className="fw-bold" style={{fontSize:"19px"}}>
+                      <span className="">{item[0].to}</span>
+                      <span className="ms-1 ">
                         {item[0].segments[
                           item[0].segments.length - 1
                         ].arrival.substr(11, 5)}
@@ -498,9 +498,9 @@ const ShowFlight = (props) => {
                   </p>
                 </div>
                 <div className="col-lg-2 my-auto">
-                  <h6 className="fw-bold">
-                    <span className="fs-5">{directions[0][0].from}</span>
-                    <span className="ms-1 fs-5">
+                  <h6 className="fw-bold" style={{fontSize:"19px"}}>
+                    <span className="">{directions[0][0].from}</span>
+                    <span className="ms-1 ">
                       {directions[0][0].segments[0].departure.substr(11, 5)}
                     </span>
                     {/* {directions[0][0].segments[0].departure.substr(11, 5)} */}
@@ -674,9 +674,9 @@ const ShowFlight = (props) => {
                   </div>
                 </div>
                 <div className="col-lg-2 my-auto">
-                  <h6 className="fw-bold">
-                    <span className="fs-5">{directions[0][0].to}</span>
-                    <span className="ms-1 fs-5">
+                  <h6 className="fw-bold" style={{fontSize:"19px"}}>
+                    <span className="">{directions[0][0].to}</span>
+                    <span className="ms-1 ">
                       {directions[0][0].segments[
                         directions[0][0].segments.length - 1
                       ].arrival.substr(11, 5)}
@@ -754,9 +754,9 @@ const ShowFlight = (props) => {
                   </p>
                 </div>
                 <div className="col-lg-2 my-auto">
-                  <h6 className="fw-bold">
-                    <span className="fs-5">{directions[1][0].from}</span>
-                    <span className="ms-1 fs-5">
+                  <h6 className="fw-bold" style={{fontSize:"19px"}}>
+                    <span className="">{directions[1][0].from}</span>
+                    <span className="ms-1 ">
                       {directions[1][0].segments[0].departure.substr(11, 5)}
                     </span>
                   </h6>
@@ -928,9 +928,9 @@ const ShowFlight = (props) => {
                   </div>
                 </div>
                 <div className="col-lg-2 my-auto">
-                  <h6 className="fw-bold">
-                    <span className="fs-5">{directions[1][0].to}</span>
-                    <span className="ms-1 fs-5">
+                  <h6 className="fw-bold" style={{fontSize:"19px"}}>
+                    <span className="">{directions[1][0].to}</span>
+                    <span className="ms-1 ">
                       {directions[1][0].segments[
                         directions[1][0].segments.length - 1
                       ].arrival.substr(11, 5)}
@@ -1817,8 +1817,8 @@ const ShowFlight = (props) => {
                         </div>
                         <div className="col-lg-2 my-auto">
                           <h6 className="fw-bold">
-                            <span className="fs-5">{item.from}</span>
-                            <span className="ms-1 fs-5">
+                            <span className="">{item.from}</span>
+                            <span className="ms-1 ">
                               {item.segments[0].departure.substr(11, 5)}
                             </span>
                           </h6>
@@ -1871,8 +1871,8 @@ const ShowFlight = (props) => {
                         </div>
                         <div className="col-lg-2 my-auto">
                           <h6 className="fw-bold">
-                            <span className="fs-5">{item.to}</span>
-                            <span className="ms-1 fs-5">
+                            <span className="">{item.to}</span>
+                            <span className="ms-1 ">
                               {item.segments[
                                 item.segments.length - 1
                               ].arrival.substr(11, 5)}
@@ -1975,8 +1975,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.from}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.from}</span>
+                                <span className="ms-1 ">
                                   {item.segments[0].departure.substr(11, 5)}
                                 </span>
                               </h6>
@@ -2029,8 +2029,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.to}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.to}</span>
+                                <span className="ms-1 ">
                                   {item.segments[
                                     item.segments.length - 1
                                   ].arrival.substr(11, 5)}
@@ -2139,8 +2139,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.from}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.from}</span>
+                                <span className="ms-1 ">
                                   {item.segments[0].departure.substr(11, 5)}
                                 </span>
                               </h6>
@@ -2193,8 +2193,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.to}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.to}</span>
+                                <span className="ms-1 ">
                                   {item.segments[
                                     item.segments.length - 1
                                   ].arrival.substr(11, 5)}
@@ -2304,8 +2304,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.from}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.from}</span>
+                                <span className="ms-1 ">
                                   {item.segments[0].departure.substr(11, 5)}
                                 </span>
                               </h6>
@@ -2358,8 +2358,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.to}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.to}</span>
+                                <span className="ms-1 ">
                                   {item.segments[
                                     item.segments.length - 1
                                   ].arrival.substr(11, 5)}
@@ -2468,8 +2468,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.from}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.from}</span>
+                                <span className="ms-1 ">
                                   {item.segments[0].departure.substr(11, 5)}
                                 </span>
                               </h6>
@@ -2522,8 +2522,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.to}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.to}</span>
+                                <span className="ms-1 ">
                                   {item.segments[
                                     item.segments.length - 1
                                   ].arrival.substr(11, 5)}
@@ -2633,8 +2633,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.from}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.from}</span>
+                                <span className="ms-1 ">
                                   {item.segments[0].departure.substr(11, 5)}
                                 </span>
                               </h6>
@@ -2687,8 +2687,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.to}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.to}</span>
+                                <span className="ms-1 ">
                                   {item.segments[
                                     item.segments.length - 1
                                   ].arrival.substr(11, 5)}
@@ -2793,8 +2793,8 @@ const ShowFlight = (props) => {
                       </span>
                       <p className="my-auto">{item.from}</p> */}
                         <h6 className="fw-bold">
-                          <span className="fs-5">{item.from}</span>
-                          <span className="ms-1 fs-5">
+                          <span className="">{item.from}</span>
+                          <span className="ms-1 ">
                             {item.segments[0].departure.substr(11, 5)}
                           </span>
                           {/* {directions[0][0].segments[0].departure.substr(11, 5)} */}
@@ -2848,8 +2848,8 @@ const ShowFlight = (props) => {
                       </div>
                       <div className="col-lg-2 my-auto">
                         <h6 className="fw-bold">
-                          <span className="fs-5">{item.to}</span>
-                          <span className="ms-1 fs-5">
+                          <span className="">{item.to}</span>
+                          <span className="ms-1 ">
                             {item.segments[
                               item.segments.length - 1
                             ].arrival.substr(11, 5)}
@@ -2960,8 +2960,8 @@ const ShowFlight = (props) => {
                           </div>
                           <div className="col-lg-2 my-auto">
                             <h6 className="fw-bold">
-                              <span className="fs-5">{item.from}</span>
-                              <span className="ms-1 fs-5">
+                              <span className="">{item.from}</span>
+                              <span className="ms-1 ">
                                 {item.segments[0].departure.substr(11, 5)}
                               </span>
                             </h6>
@@ -3014,8 +3014,8 @@ const ShowFlight = (props) => {
                           </div>
                           <div className="col-lg-2 my-auto">
                             <h6 className="fw-bold">
-                              <span className="fs-5">{item.to}</span>
-                              <span className="ms-1 fs-5">
+                              <span className="">{item.to}</span>
+                              <span className="ms-1 ">
                                 {item.segments[
                                   item.segments.length - 1
                                 ].arrival.substr(11, 5)}

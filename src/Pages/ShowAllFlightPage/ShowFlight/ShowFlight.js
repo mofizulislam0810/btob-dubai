@@ -128,10 +128,10 @@ const ShowFlight = (props) => {
     });
   }, [directions, props.index]);
 
-  const ImageUrlD = environment.s3ArliensImage +`${directions[0][0].platingCarrierCode}.png`;
+  const ImageUrlD = environment.s3ArliensImage + `${directions[0][0].platingCarrierCode}.png`;
   const ImageUrlR =
     directions[1] !== undefined
-      ? environment.s3ArliensImage +`${directions[1][0].platingCarrierCode}.png`
+      ? environment.s3ArliensImage + `${directions[1][0].platingCarrierCode}.png`
       : ``;
   const selectDirectionOption0 = (id) => {
     setdirection0(directions[0][id]);
@@ -314,7 +314,7 @@ const ShowFlight = (props) => {
   const refCheck = useRef()
 
   const handleCheckBox = (e) => {
- 
+
     const checked = e.target.checked;
     if (checked) {
       console.log({ refCheck }, { e })
@@ -390,7 +390,7 @@ const ShowFlight = (props) => {
                     </p>
                   </div>
                   <div className="col-lg-2 my-auto">
-                    <h6 className="fw-bold" style={{fontSize:"19px"}}>
+                    <h6 className="fw-bold" style={{ fontSize: "19px" }}>
                       <span className="">{item[0].from}</span>
                       <span className="ms-1 ">
                         {item[0].segments[0].departure.substr(11, 5)}
@@ -434,7 +434,7 @@ const ShowFlight = (props) => {
                     </div>
                   </div>
                   <div className="col-lg-2 my-auto">
-                    <h6 className="fw-bold" style={{fontSize:"19px"}}>
+                    <h6 className="fw-bold" style={{ fontSize: "19px" }}>
                       <span className="">{item[0].to}</span>
                       <span className="ms-1 ">
                         {item[0].segments[
@@ -498,7 +498,7 @@ const ShowFlight = (props) => {
                   </p>
                 </div>
                 <div className="col-lg-2 my-auto">
-                  <h6 className="fw-bold" style={{fontSize:"19px"}}>
+                  <h6 className="fw-bold" style={{ fontSize: "19px" }}>
                     <span className="">{directions[0][0].from}</span>
                     <span className="ms-1 ">
                       {directions[0][0].segments[0].departure.substr(11, 5)}
@@ -674,7 +674,7 @@ const ShowFlight = (props) => {
                   </div>
                 </div>
                 <div className="col-lg-2 my-auto">
-                  <h6 className="fw-bold" style={{fontSize:"19px"}}>
+                  <h6 className="fw-bold" style={{ fontSize: "19px" }}>
                     <span className="">{directions[0][0].to}</span>
                     <span className="ms-1 ">
                       {directions[0][0].segments[
@@ -754,7 +754,7 @@ const ShowFlight = (props) => {
                   </p>
                 </div>
                 <div className="col-lg-2 my-auto">
-                  <h6 className="fw-bold" style={{fontSize:"19px"}}>
+                  <h6 className="fw-bold" style={{ fontSize: "19px" }}>
                     <span className="">{directions[1][0].from}</span>
                     <span className="ms-1 ">
                       {directions[1][0].segments[0].departure.substr(11, 5)}
@@ -928,7 +928,7 @@ const ShowFlight = (props) => {
                   </div>
                 </div>
                 <div className="col-lg-2 my-auto">
-                  <h6 className="fw-bold" style={{fontSize:"19px"}}>
+                  <h6 className="fw-bold" style={{ fontSize: "19px" }}>
                     <span className="">{directions[1][0].to}</span>
                     <span className="ms-1 ">
                       {directions[1][0].segments[
@@ -2838,9 +2838,18 @@ const ShowFlight = (props) => {
                             <span className="text-color">
                               <i className="fas fa-briefcase fa-sm"></i>
                               <span className="ms-1 font-size">
-                                {item.segments[0].baggage[0]?.amount +
+                                {
+                                  item.segments[0].baggage[0] !== undefined ? <>
+                                    {item.segments[0].baggage[0]?.amount +
+                                      " " +
+                                      item.segments[0].baggage[0]?.units}
+                                  </> : <>
+                                    N/A
+                                  </>
+                                }
+                                {/* {item.segments[0].baggage[0]?.amount +
                                   " " +
-                                  item.segments[0].baggage[0]?.units}
+                                  item.segments[0].baggage[0]?.units} */}
                               </span>
                             </span>
                           </div>
@@ -3004,9 +3013,15 @@ const ShowFlight = (props) => {
                                 <span className="text-color">
                                   <i className="fas fa-briefcase fa-sm"></i>
                                   <span className="ms-1 font-size">
-                                    {item.segments[0].baggage[0]?.amount +
-                                      " " +
-                                      item.segments[0].baggage[0]?.units}
+                                    {
+                                      item.segments[0].baggage[0] !== undefined ? <>
+                                        {item.segments[0].baggage[0]?.amount +
+                                          " " +
+                                          item.segments[0].baggage[0]?.units}
+                                      </> : <>
+                                        N/A
+                                      </>
+                                    }
                                   </span>
                                 </span>
                               </div>

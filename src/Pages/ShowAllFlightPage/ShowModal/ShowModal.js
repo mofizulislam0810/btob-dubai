@@ -40,7 +40,7 @@ const ShowModal = ({
     Object.keys(direction1).length > 0
       ? environment.s3ArliensImage + `${direction1.platingCarrierCode}.png`
       : ``;
-  console.log(direction1);
+  // console.log(direction1);
   useEffect(() => {
     $(document).ready(function () {
       $("#flightId" + index).attr("style", "background:#390404c8");

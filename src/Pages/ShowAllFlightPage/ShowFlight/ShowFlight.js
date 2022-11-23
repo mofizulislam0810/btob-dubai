@@ -41,7 +41,6 @@ const ShowFlight = (props) => {
   const amountChange = props.amountChange;
   let currency = props.currency;
   let checkList = props.checkList;
-  console.log(checkList);
   const getFareRules = (uId, dir, itemCode) => {
     handleFareRules(uId, dir, itemCode);
   };

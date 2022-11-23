@@ -2280,6 +2280,23 @@ const LeftSide = () => {
                               />
                             </Box>
 
+                            {moment(p.dateOfBirth).isBefore(
+          ISODateFormatter(
+            add(
+              new Date(
+                Database?.tripTypeModify === "Round Trip" &&
+                calculateFullAge(Database?.journeyDate, Database?.returnDate)
+                  ? Database?.returnDate
+                  : Database?.journeyDate
+              ),
+              { years: -12 }
+            )
+          )) && (
+                              <Text color="red" pl="4px">
+                                Date of birth not valid!{" "}
+                              </Text>
+                            )}
+
                             {validityError && p.dateOfBirth === "" && (
                               <Text pl="2px" color="red">
                                 Date of birth is required

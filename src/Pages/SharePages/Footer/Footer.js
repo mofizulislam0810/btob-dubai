@@ -46,7 +46,7 @@ const addressData = [
 const Footer = () => {
   return (
     <>
-      <Box className="container-fluid" bg="#ed7f22">
+      <Box className="container-fluid" bg="#7b71c7">
         <Box className="container">
           <Flex
             w="100%"

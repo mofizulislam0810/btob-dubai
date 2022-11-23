@@ -19,7 +19,7 @@ const Service = () => {
   return (
     <Center py="100px">
       <Container maxW={"6xl"} bg="" mb={"30px"} key={nanoid()}>
-        <Box justifyContent={"center"} mb="20px" key={nanoid()}>
+        <Box justifyContent={"center"} mb="20px" key={nanoid()} >
           <HStack
             justifyContent={"center"}
             display="flex"
@@ -29,7 +29,7 @@ const Service = () => {
             <Text height={"18px"} fontWeight={700} fontSize="20px">
               Why
             </Text>
-            <img src={logo} alt="" width="100px" height={"10px"} />
+            <img src={logo} alt="" width="100px" height={"10px"}/>
           </HStack>
           <Text
             textAlign={"center"}
@@ -38,7 +38,7 @@ const Service = () => {
             mr="50px"
             key={nanoid()}
           >
-            First Trip is one of the leading online travel agencies in the country. First Trip is revolutionizing the way you book travel services to make travel easier for people of all ages.
+            Travelchamp is one of the leading online travel agencies in the country. Travelchamp is revolutionizing the way you book travel services to make travel easier for people of all ages.
           </Text>
         </Box>
 

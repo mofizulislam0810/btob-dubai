@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./Loading.css";
-import img from "../../images/icon/loading.gif";
+import img from "../../images/icon/Spinner-1s-200px.gif";
 // import airports from "../../JSON/airports.json";
 import $ from "jquery";
 

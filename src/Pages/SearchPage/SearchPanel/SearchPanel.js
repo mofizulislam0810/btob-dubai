@@ -112,7 +112,7 @@ const SearchPanel = () => {
               >
                 <div
                   className="col-lg-12 d-flex justify-content-center"
-                  style={{ backgroundColor: "#fc2c74" }}
+                  style={{ backgroundColor: "#598dbd8c" }}
                 >
                   <div className="py-2 px-3">
                     <span className="text-white">

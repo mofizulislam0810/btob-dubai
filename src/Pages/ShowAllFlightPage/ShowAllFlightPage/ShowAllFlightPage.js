@@ -2716,7 +2716,7 @@ const ShowAllFlightPage = () => {
                                     <div className="d-flex justify-content-center">
                                       <button
                                         className="btn text-white mt-3 text-center fw-bold rounded-3"
-                                        style={{ backgroundColor: "#7c04c0" }}
+                                        style={{ backgroundColor: "#068b9f" }}
                                       >
                                         Search Flight
                                       </button>

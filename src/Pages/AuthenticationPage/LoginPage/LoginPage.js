@@ -24,7 +24,8 @@ import {
   Heading,
   Circle,
 } from "@chakra-ui/react";
-import cardImage from "../../../images/landing/card.png";
+// import cardImage from "../../../images/landing/card.png";
+import cardImage from "../../../images/landing/travelchamp_card.jpg";
 import flightsImg from "../../../images/landing/flights.png";
 import hotlelsImg from "../../../images/landing/hotels.png";
 import holidaysImg from "../../../images/landing/holidays.png";
@@ -111,7 +112,7 @@ const LoginPage = () => {
                   src={logo}
                   alt="Firsttrip"
                   w="160px"
-                  h="84px"
+                  h="30px"
                   mt={10}
                   mb={2}
                 />

@@ -46,7 +46,7 @@ const addressData = [
 const Footer = () => {
   return (
     <>
-      <Box className="container-fluid" bg="#591b7d">
+      <Box className="container-fluid" bg="#ed7f22">
         <Box className="container">
           <Flex
             w="100%"
@@ -113,11 +113,10 @@ const Footer = () => {
           fontWeight={400}
           color="#908DAB"
           textAlign="center"
-
           pl="5px"
         >
           {" "}
-          Copyright © 2022 First Trip Ltd. All rights reserved.
+          Copyright © 2022 Travelchamp Ltd. All rights reserved.
         </Text>
       </Box>
     </>

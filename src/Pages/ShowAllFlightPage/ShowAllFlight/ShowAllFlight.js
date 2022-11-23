@@ -449,13 +449,13 @@ const ShowAllFlight = ({
                           type="radio"
                           name="name"
                           value={index}
-                          id="flexCheckDefault"
+                          id={"flexRadioDefault"+index}
                           onChange={radiohandleChange}
                           defaultChecked={index === 0}
                         />
                         <label
                           className="form-check-label"
-                          htmlFor="flexCheckDefault"
+                          htmlFor={"flexRadioDefault"+index}
                         >
                           {item.name}
                         </label>

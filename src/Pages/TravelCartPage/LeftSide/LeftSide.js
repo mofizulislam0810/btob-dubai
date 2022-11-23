@@ -232,12 +232,14 @@ const LeftSide = () => {
         sendObj,
         environment.headerToken
       );
+      console.log(response,"passengerList+++++++");
       setPassengerADTList(
         response.data.data.filter((f) => f.passengerType === "ADT")
       );
       setPassengerCNNList(
         response.data.data.filter((f) => f.passengerType === "CNN")
       );
+      console.log(passengerCNNList,"CNNLIST+++++++");
       setPassengerINFList(
         response.data.data.filter((f) => f.passengerType === "INF")
       );
@@ -1013,17 +1015,17 @@ const LeftSide = () => {
                         {" "}
                         <Select
                           options={passengerADTList
-                            .filter((obj) => {
-                              if (
-                                adult.filter(
-                                  (e) =>
-                                    e.passportNumber === obj.documentNumber &&
-                                    e.first === obj.firstName
-                                ).length > 0
-                              )
-                                return null;
-                              else return obj;
-                            })
+                            // .filter((obj) => {
+                            //   if (
+                            //     adult.filter(
+                            //       (e) =>
+                            //         e.passportNumber === obj.documentNumber &&
+                            //         e.first === obj.firstName
+                            //     ).length > 0
+                            //   )
+                            //     return null;
+                            //   else return obj;
+                            // })
                             .map((item) => ({
                               label:
                                 item.title +
@@ -2033,17 +2035,17 @@ const LeftSide = () => {
                       <div className="col-lg-12 my-2">
                         <Select
                           options={passengerCNNList
-                            .filter((obj) => {
-                              if (
-                                child.filter(
-                                  (e) =>
-                                    e.passportNumber === obj.documentNumber &&
-                                    e.first === obj.firstName
-                                ).length > 0
-                              )
-                                return null;
-                              else return obj;
-                            })
+                            // .filter((obj) => {
+                            //   if (
+                            //     child.filter(
+                            //       (e) =>
+                            //         e.passportNumber === obj.documentNumber &&
+                            //         e.first === obj.firstName
+                            //     ).length > 0
+                            //   )
+                            //     return null;
+                            //   else return obj;
+                            // })
                             .map((item) => ({
                               label:
                                 item.title +
@@ -2999,17 +3001,17 @@ const LeftSide = () => {
                       <div className="col-lg-12  my-2">
                         <Select
                           options={passengerINFList
-                            .filter((obj) => {
-                              if (
-                                infant.filter(
-                                  (e) =>
-                                    e.passportNumber === obj.documentNumber &&
-                                    e.first === obj.firstName
-                                ).length > 0
-                              )
-                                return null;
-                              else return obj;
-                            })
+                            // .filter((obj) => {
+                            //   if (
+                            //     infant.filter(
+                            //       (e) =>
+                            //         e.passportNumber === obj.documentNumber &&
+                            //         e.first === obj.firstName
+                            //     ).length > 0
+                            //   )
+                            //     return null;
+                            //   else return obj;
+                            // })
                             .map((item) => ({
                               label:
                                 item.title +

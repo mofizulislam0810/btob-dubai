@@ -8,9 +8,11 @@ const baseURL = "http://13.228.152.29:81/";
 // const baseURL = 'https://api.firsttrip.com/';
 // https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/
 // https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/
+// https://tcluploaddocument.s3.ap-southeast-1.amazonaws.com/
 // "https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/"
 // https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/AirlineLogos/
 // https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/AirlineLogos/
+// https://tcluploaddocument.s3.ap-southeast-1.amazonaws.com/AirlineLogos/BG.png
 
 const baseApiURL = baseURL + "api/";
 const tokenData = JSON.parse(localStorage.getItem("token"));
@@ -19,8 +21,8 @@ if (tokenData != null && new Date(tokenData.expireIn) >= new Date()) {
   headerToken = { headers: { Authorization: "Bearer " + tokenData?.token } };
 }
 export const environment = {
-  s3URL: "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/",
-  s3ArliensImage : "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/AirlineLogos/",
+  s3URL: "https://tcluploaddocument.s3.ap-southeast-1.amazonaws.com/",
+  s3ArliensImage : "https://tcluploaddocument.s3.ap-southeast-1.amazonaws.com/AirlineLogos",
   baseApiURL: baseApiURL,
   headerToken: headerToken,
 

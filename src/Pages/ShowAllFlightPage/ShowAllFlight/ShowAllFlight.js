@@ -90,7 +90,7 @@ const ShowAllFlight = ({
   ]);
   console.log(name);
 
-  if (parseInt(radioname) === 0 && name.length === 0) {
+  if (parseInt(radioname) === 0 && name.length === 0 && check === true) {
     dataPrice = jsonData?.filter(
       // (item) => parseInt(item.totalPrice) <= parseInt(price, 10)
       (item) =>
@@ -98,21 +98,21 @@ const ShowAllFlight = ({
         parseInt(item.totalPrice) <= filterPrice[1] &&
         name.some((category) => [item.platingCarrier].flat().includes(category))
     );
-  } else if (parseInt(radioname) === 1 && name.length === 0) {
+  } else if (parseInt(radioname) === 1 && name.length === 0 && check === true) {
     dataPrice = jsonData?.filter(
       (item) =>
         parseInt(item.totalPrice) >= filterPrice[0] &&
         parseInt(item.totalPrice) <= filterPrice[1] &&
         item.directions[0][0].stops === 0
     );
-  } else if (parseInt(radioname) === 2 && name.length === 0) {
+  } else if (parseInt(radioname) === 2 && name.length === 0 && check === true) {
     dataPrice = jsonData?.filter(
       (item) =>
         parseInt(item.totalPrice) >= filterPrice[0] &&
         parseInt(item.totalPrice) <= filterPrice[1] &&
         item.directions[0][0].stops === 1
     );
-  } else if (parseInt(radioname) === 3 && name.length === 0) {
+  } else if (parseInt(radioname) === 3 && name.length === 0 && check === true) {
     dataPrice = jsonData?.filter(
       (item) =>
         parseInt(item.totalPrice) >= filterPrice[0] &&
@@ -201,38 +201,39 @@ const ShowAllFlight = ({
   // for radio button filter
   const radioflightName = [
     { name: "All Flights" },
-    // { name: "Direct flight only" },
-    // { name: "1 stop" },
-    // { name: "2 stops or more" },
+    { name: "Direct" },
+    { name: "1 stop" },
+    { name: "2 stops or more" }
   ];
 
-  let i = 0;
-  mainJson?.stops?.map((item) => {
-    if (item === 0) {
-      const obj = {
-        name: "Direct",
-      };
-      radioflightName.push(obj);
-    }
-    if (item === 1) {
-      const obj = {
-        name: "1 Stop",
-      };
-      radioflightName.push(obj);
-    }
-    if (item > 1) {
-      if (i === 0) {
-        const obj = {
-          name: "2 or More Stops",
-        };
-        radioflightName.push(obj);
-      }
-      i++;
-    }
-  });
+  // let i = 0;
+  // mainJson?.stops?.map((item) => {
+  //   if (item === 0) {
+  //     const obj = {
+  //       name: "Direct",
+  //     };
+  //     radioflightName.push(obj);
+  //   }
+  //   if (item === 1) {
+  //     const obj = {
+  //       name: "1 Stop",
+  //     };
+  //     radioflightName.push(obj);
+  //   }
+  //   if (item > 1) {
+  //     if (i === 0) {
+  //       const obj = {
+  //         name: "2 or More Stops",
+  //       };
+  //       radioflightName.push(obj);
+  //     }
+  //     i++;
+  //   }
+  // });
 
   const radiohandleChange = (e) => {
     setRadioName(e.target.value);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   if (String(tripType) === String("One Way")) {
@@ -248,6 +249,7 @@ const ShowAllFlight = ({
   localStorage.setItem("currency", JSON.stringify(currency));
   useEffect(() => {
     // setName(flightName?.name);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     setCheck(true);
     flightName.map((item, index) => {
       document.getElementById("checkDefault" + index).checked = true;
@@ -283,7 +285,7 @@ const ShowAllFlight = ({
         $("#pricesection").toggle();
       });
     });
-  }, []);
+  }, [filterPrice]);
 
   const handleProposal = () => {
     navigate("/proposal");
@@ -402,14 +404,14 @@ const ShowAllFlight = ({
                       style={{ fontSize: "13px" }}
                     >
                       MIN {currency !== undefined ? currency : "BDT"}{" "}
-                      {filterPrice[0]}
+                      {filterPrice[0].toLocaleString("en-US")}
                     </span>
                     <span
                       className="float-end fw-bold"
                       style={{ fontSize: "13px" }}
                     >
                       MAX {currency !== undefined ? currency : "BDT"}{" "}
-                      {filterPrice[1]}
+                      {filterPrice[1].toLocaleString("en-US")}
                     </span>
                   </div>
                 </div>
@@ -536,7 +538,7 @@ const ShowAllFlight = ({
                           style={{ fontSize: "13px" }}
                         >
                           {currency !== undefined ? currency : "BDT"}{" "}
-                          {item.minPrice}
+                          {item.minPrice.toLocaleString("en-US")}
                         </span>
                         <br></br>
                       </div>

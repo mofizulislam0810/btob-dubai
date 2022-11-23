@@ -22,7 +22,7 @@ if (tokenData != null && new Date(tokenData.expireIn) >= new Date()) {
 }
 export const environment = {
   s3URL: "https://tcluploaddocument.s3.ap-southeast-1.amazonaws.com/",
-  s3ArliensImage : "https://tcluploaddocument.s3.ap-southeast-1.amazonaws.com/AirlineLogos",
+  s3ArliensImage : "https://tcluploaddocument.s3.ap-southeast-1.amazonaws.com/AirlineLogos/",
   baseApiURL: baseApiURL,
   headerToken: headerToken,
 

@@ -31,10 +31,12 @@ import flightsImg from "../../../images/landing/flights.png";
 import hotlelsImg from "../../../images/landing/hotels.png";
 import holidaysImg from "../../../images/landing/holidays.png";
 import visaProcessingImg from "../../../images/landing/visa-processing.png";
-import airlines1 from "../../../images/landing/airlines-5.png";
-import airlines2 from "../../../images/landing/airlines-6.png";
-import airlines3 from "../../../images/landing/airlines-7.png";
-import airlines4 from "../../../images/landing/airlines-8.png";
+import airlines1 from "../../../images/landing/airlines-1.png";
+import airlines2 from "../../../images/landing/airlines-2.png";
+import airlines3 from "../../../images/landing/airlines-3.png";
+import airlines4 from "../../../images/landing/airlines-4.png";
+import airlines5 from "../../../images/landing/airlines-5.png";
+import airlines6 from "../../../images/landing/airlines-6.png";
 import { nanoid } from "nanoid";
 import { Partners } from "../../SharePages/Footer/Partners";
 import Service from "../../SharePages/Footer/Service";
@@ -196,6 +198,8 @@ const Registration = () => {
     { img: airlines2 },
     { img: airlines3 },
     { img: airlines4 },
+    { img: airlines5 },
+    { img: airlines6 },
   ];
 
   return (
@@ -212,9 +216,9 @@ const Registration = () => {
               <div className="card-header text-center">
                 <div className="row">
                   <div className="col-lg-2">
-                  <Link to="/">
-                  <img src={logo} alt="Triplover" width="160px" />
-                </Link>
+                    <Link to="/">
+                      <img src={logo} alt="Triplover" width="160px" />
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -242,7 +246,7 @@ const Registration = () => {
                     <div className="row">
                       <div className="col-lg-6">
                         <div class="card">
-                          <Box className="card-header text-dark" bg="pink">
+                          <Box className="card-header text-dark" bg="#b4dce2">
                             Company Information
                           </Box>
                           <div class="card-body">
@@ -426,7 +430,7 @@ const Registration = () => {
                       {/* <div className="col-lg-1"></div> */}
                       <div className="col-lg-6">
                         <div class="card">
-                          <Box className="card-header text-dark" bg="pink">
+                          <Box className="card-header text-dark" bg="#b4dce2">
                             User Information
                           </Box>
                           <div class="card-body">
@@ -486,7 +490,12 @@ const Registration = () => {
                                   />
                                   <div className="input-group-append">
                                     <div className="input-group-text">
-                                      <span className="fas fa-lock" onClick={() => setPasswordShown(!passwordShown)}></span>
+                                      <span
+                                        className="fas fa-lock"
+                                        onClick={() =>
+                                          setPasswordShown(!passwordShown)
+                                        }
+                                      ></span>
                                     </div>
                                   </div>
                                 </div>
@@ -494,7 +503,9 @@ const Registration = () => {
                               <div className="col-lg-6">
                                 <div className="input-group mb-3">
                                   <input
-                                    type={passwordCanShown ? "text" : "password"}
+                                    type={
+                                      passwordCanShown ? "text" : "password"
+                                    }
                                     className="form-control rounded"
                                     placeholder="Confirm Password"
                                     onChange={(e) =>
@@ -504,7 +515,12 @@ const Registration = () => {
                                   />
                                   <div className="input-group-append">
                                     <div className="input-group-text">
-                                      <span className="fas fa-lock" onClick={() => setPasswordCanShown(!passwordCanShown)}></span>
+                                      <span
+                                        className="fas fa-lock"
+                                        onClick={() =>
+                                          setPasswordCanShown(!passwordCanShown)
+                                        }
+                                      ></span>
                                     </div>
                                   </div>
                                 </div>
@@ -617,8 +633,52 @@ const Registration = () => {
       </div> */}
         </div>
 
-        <Partners />
-        <Service />
+        <Text fontSize="21px" fontWeight={500} pt="60px">
+          Our Services
+        </Text>
+
+        <Flex gap="60px" py="50px">
+          {ourServiceData.map((item) => (
+            <VStack gap={"22px"} key={nanoid()}>
+              <Circle
+                bg="white"
+                boxShadow=" 0px 11px 20px rgba(224, 239, 255, 0.32)"
+              >
+                <Image
+                  src={item.img}
+                  alt="flights"
+                  w="60px"
+                  h="60px"
+                  m="45px"
+                />
+              </Circle>
+              <Text fontWeight={400} fontSize="16px" color="text">
+                {item.text}
+              </Text>
+            </VStack>
+          ))}
+        </Flex>
+
+        <Text fontSize="21px" fontWeight={500} pt="100px">
+          Top Airlines Are With Us
+        </Text>
+
+        <Center pb="60px">
+          <Flex py="50px" wrap="wrap" gap={8} w="850px">
+            {topAirlinesData.map((item) => (
+              <Center
+                key={nanoid()}
+                bg="rgba(255, 255, 255, 0.3)"
+                border="1px solid #E8E8E8"
+                borderRadius="5px"
+                h="150px"
+                w="250px"
+              >
+                <Image src={item.img} alt="airlines1" w="150px" />
+              </Center>
+            ))}
+          </Flex>
+        </Center>
 
         <Footer></Footer>
       </VStack>

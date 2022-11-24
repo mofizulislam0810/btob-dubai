@@ -74,8 +74,14 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={isLoggedIn ? <SearchPage /> : <LoginPage />} />
-            <Route path="/registration" element={isLoggedIn ? <SearchPage /> : <Registration />} />
+            <Route
+              path="/"
+              element={isLoggedIn ? <SearchPage /> : <LoginPage />}
+            />
+            <Route
+              path="/registration"
+              element={isLoggedIn ? <SearchPage /> : <Registration />}
+            />
             <Route path="/loading" element={<Loading />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/bankdetail" element={<BankDetails />} />
@@ -84,12 +90,7 @@ function App() {
             <Route path="/EmiPolicy" element={<EmiPolicy />} />
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="/regsuccess" element={<RegComplete />} />
-            <Route
-              path="/resetpassword"
-              element={
-                <ResetPassword />
-              }
-            />
+            <Route path="/resetpassword" element={<ResetPassword />} />
             <Route
               path="/refundandcancellation"
               element={<RefundAndCancellation />}

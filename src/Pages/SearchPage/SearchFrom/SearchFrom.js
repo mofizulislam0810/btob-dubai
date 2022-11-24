@@ -1184,7 +1184,7 @@ const SearchFrom = () => {
                             className="t-check-in t-picker-only"
                             id="departureDate1"
                             style={{
-                              minHeight: "100%",
+                              minHeight: "60px",
                               border: "1px solid #ced4da",
                               background: "#F7FBFC",
                             }}
@@ -1256,7 +1256,7 @@ const SearchFrom = () => {
                             className="t-check-in t-picker-only"
                             id="departureDate2"
                             style={{
-                              minHeight: "100%",
+                              minHeight: "60px",
                               border: "1px solid #ced4da",
                               background: "#F7FBFC",
                             }}
@@ -1329,7 +1329,7 @@ const SearchFrom = () => {
                             className="t-check-in t-picker-only"
                             id="departureDate3"
                             style={{
-                              minHeight: "100%",
+                              minHeight: "60px",
                               border: "1px solid #ced4da",
                               background: "#F7FBFC",
                             }}
@@ -1401,7 +1401,7 @@ const SearchFrom = () => {
                             className="t-check-in t-picker-only"
                             id="departureDate4"
                             style={{
-                              minHeight: "100%",
+                              minHeight: "60px",
                               border: "1px solid #ced4da",
                               background: "#F7FBFC",
                             }}
@@ -1473,7 +1473,7 @@ const SearchFrom = () => {
                             className="t-check-in t-picker-only"
                             id="departureDate5"
                             style={{
-                              minHeight: "100%",
+                              minHeight: "60px",
                               border: "1px solid #ced4da",
                               background: "#F7FBFC",
                             }}

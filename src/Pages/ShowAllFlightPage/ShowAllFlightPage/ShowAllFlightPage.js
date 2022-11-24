@@ -1,4 +1,4 @@
-import { Box, VStack, Text } from "@chakra-ui/react";
+import { Box, VStack, Text, Center } from "@chakra-ui/react";
 import axios from "axios";
 import Fuse from "fuse.js";
 import $ from "jquery";
@@ -1727,11 +1727,13 @@ const ShowAllFlightPage = () => {
                                 }}
                               >
                                 <div className="row">
-                                  <div
-                                    className="col-lg-4 pb-4 text-center"
-                                    style={{ paddingTop: "3%" }}
+                                  <Center
+                                   className="pb-4 text-center"
+                                   style={{ paddingTop: "3%" }}
+                                   h="50px"
+                                
                                   >
-                                    <div className="flex-container">
+                                    <Box className="flex-container" mb="38px" border="1px solid #ededed">
                                       <div className="left-border">
                                         <button
                                           className="form-select border-0 inputgroup rounded-start"
@@ -2109,8 +2111,8 @@ const ShowAllFlightPage = () => {
                                           </div>
                                         </div>
                                       </div>
-                                    </div>
-                                  </div>
+                                    </Box>
+                                  </Center>
                                   <div className="col-lg-6 d-flex">
                                     {childAge.map((val, index) => {
                                       return (
@@ -2165,7 +2167,7 @@ const ShowAllFlightPage = () => {
                                       );
                                     })}
                                   </div>
-                                  <div className="col-lg-2">
+                                  {/* <div className="col-lg-2">
                                     <label
                                       htmlFor="formGroupExampleInput"
                                       className="form-label"
@@ -2183,7 +2185,7 @@ const ShowAllFlightPage = () => {
                                       }}
                                       onChange={handleChange}
                                     />
-                                  </div>
+                                  </div> */}
                                 </div>
 
                                 <div className="row pt-1 position-relative">
@@ -2384,7 +2386,7 @@ const ShowAllFlightPage = () => {
                                             className="t-check-in t-picker-only"
                                             id="departureDate1"
                                             style={{
-                                              minHeight: "100%",
+                                              minHeight: "60px",
                                               border: "1px solid #ced4da",
                                               background: "#F7FBFC",
                                             }}
@@ -2474,7 +2476,7 @@ const ShowAllFlightPage = () => {
                                             className="t-check-in t-picker-only"
                                             id="departureDate2"
                                             style={{
-                                              minHeight: "100%",
+                                              minHeight: "60px",
                                               border: "1px solid #ced4da",
                                               background: "#F7FBFC",
                                             }}
@@ -2564,7 +2566,7 @@ const ShowAllFlightPage = () => {
                                             className="t-check-in t-picker-only"
                                             id="departureDate3"
                                             style={{
-                                              minHeight: "100%",
+                                              minHeight: "60px",
                                               border: "1px solid #ced4da",
                                               background: "#F7FBFC",
                                             }}
@@ -2654,7 +2656,7 @@ const ShowAllFlightPage = () => {
                                             className="t-check-in t-picker-only"
                                             id="departureDate4"
                                             style={{
-                                              minHeight: "100%",
+                                              minHeight: "60px",
                                               border: "1px solid #ced4da",
                                               background: "#F7FBFC",
                                             }}
@@ -2744,7 +2746,7 @@ const ShowAllFlightPage = () => {
                                             className="t-check-in t-picker-only"
                                             id="departureDate5"
                                             style={{
-                                              minHeight: "100%",
+                                              minHeight: "60px",
                                               border: "1px solid #ced4da",
                                               background: "#F7FBFC",
                                             }}

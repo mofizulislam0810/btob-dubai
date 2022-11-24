@@ -38,9 +38,7 @@ const Service = () => {
             mr="50px"
             key={nanoid()}
           >
-            FirstTrip is the country's one of the leading online travel
-            aggregator. We dream of making travel easier for people of all
-            ages. FirstTrip is revolutionising the way you book travel services.
+            First Trip is one of the leading online travel agencies in the country. First Trip is revolutionizing the way you book travel services to make travel easier for people of all ages.
           </Text>
         </Box>
 

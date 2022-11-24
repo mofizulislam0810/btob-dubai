@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from "react";
+import {
+  RangeSlider,
+  RangeSliderFilledTrack,
+  RangeSliderThumb,
+  RangeSliderTrack,
+} from "@chakra-ui/react";
 import $ from "jquery";
-import SearchFrom from "../../SearchPage/SearchFrom/SearchFrom";
-import gif from "../../../images/icon/Spinner-1s-200px.gif";
-import ShowFlight from "../ShowFlight/ShowFlight";
-import "./ShowAllFlight.css";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import NoDataFoundPage from "../../NoDataFoundPage/NoDataFoundPage/NoDataFoundPage";
+import { ToastContainer } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import Loading from "../../Loading/Loading";
-import { RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack } from "@chakra-ui/react";
+import NoDataFoundPage from "../../NoDataFoundPage/NoDataFoundPage/NoDataFoundPage";
+import { environment } from "../../SharePages/Utility/environment";
+import ShowFlight from "../ShowFlight/ShowFlight";
+import "./ShowAllFlight.css";
 
 const ShowAllFlight = ({
   fetchFlighData,
@@ -17,11 +22,12 @@ const ShowAllFlight = ({
   fecthMulti,
   loading,
   airlineFilters,
-  tripType
+  tripType,
+  checkList,
 }) => {
   const { count } = useAuth();
   // console.log(count);
-  const [amountChange, setAmountChange] = useState('Gross Amount');
+  const [amountChange, setAmountChange] = useState("Gross Amount");
   const { state } = useLocation();
   const navigate = useNavigate();
   const { tripTypeModify } = state;
@@ -69,7 +75,7 @@ const ShowAllFlight = ({
   // console.log(price);
   // setPrice(mainJson.minMaxPrice?.maxPrice);
   //price=mainJson.minMaxPrice?.maxPrice;
-  const [name, setName] = useState(flightName.map(item => item.code));
+  const [name, setName] = useState(flightName.map((item) => item.code));
   const [radioname, setRadioName] = useState(0);
   const [check, setCheck] = useState(true);
   const handleInput = (e) => {
@@ -78,35 +84,35 @@ const ShowAllFlight = ({
 
   let dataPrice = [];
 
-
   const [filterPrice, setFilterPrice] = useState([
     Math.floor(mainJson?.minMaxPrice?.minPrice),
     Math.ceil(mainJson?.minMaxPrice?.maxPrice),
   ]);
-  console.log(name)
+  console.log(name);
 
-  if (parseInt(radioname) === 0 && name.length === 0) {
+  if (parseInt(radioname) === 0 && name.length === 0 && check === true) {
     dataPrice = jsonData?.filter(
       // (item) => parseInt(item.totalPrice) <= parseInt(price, 10)
       (item) =>
         parseInt(item.totalPrice) >= filterPrice[0] &&
-        parseInt(item.totalPrice) <= filterPrice[1] && name.some((category) => [item.platingCarrier].flat().includes(category))
+        parseInt(item.totalPrice) <= filterPrice[1] &&
+        name.some((category) => [item.platingCarrier].flat().includes(category))
     );
-  } else if (parseInt(radioname) === 1 && name.length === 0) {
+  } else if (parseInt(radioname) === 1 && name.length === 0 && check === true) {
     dataPrice = jsonData?.filter(
       (item) =>
         parseInt(item.totalPrice) >= filterPrice[0] &&
         parseInt(item.totalPrice) <= filterPrice[1] &&
         item.directions[0][0].stops === 0
     );
-  } else if (parseInt(radioname) === 2 && name.length === 0) {
+  } else if (parseInt(radioname) === 2 && name.length === 0 && check === true) {
     dataPrice = jsonData?.filter(
       (item) =>
         parseInt(item.totalPrice) >= filterPrice[0] &&
         parseInt(item.totalPrice) <= filterPrice[1] &&
         item.directions[0][0].stops === 1
     );
-  } else if (parseInt(radioname) === 3 && name.length === 0) {
+  } else if (parseInt(radioname) === 3 && name.length === 0 && check === true) {
     dataPrice = jsonData?.filter(
       (item) =>
         parseInt(item.totalPrice) >= filterPrice[0] &&
@@ -152,12 +158,11 @@ const ShowAllFlight = ({
     );
   }
 
-
   const [itemCkeck, setItemCheck] = useState(true);
   const handleClick = (e) => {
     if (e.target.checked) {
       setCheck(true);
-      setName(flightName.map(item => item.code))
+      setName(flightName.map((item) => item.code));
       flightName.map((item, index) => {
         document.getElementById("checkDefault" + index).checked = true;
       });
@@ -168,7 +173,8 @@ const ShowAllFlight = ({
         document.getElementById("checkDefault" + index).checked = false;
       });
     }
-  }
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
   console.log(check);
   const handleChange = (e) => {
     //  alert(name.length+", "+flightName.length);
@@ -189,43 +195,45 @@ const ShowAllFlight = ({
       setCheck(false);
       setName(name.filter((id) => id !== e.target.value));
     }
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   // for radio button filter
   const radioflightName = [
     { name: "All Flights" },
-    // { name: "Direct flight only" },
-    // { name: "1 stop" },
-    // { name: "2 stops or more" },
+    { name: "Direct" },
+    { name: "1 stop" },
+    { name: "2 stops or more" }
   ];
 
-  let i = 0;
-  mainJson?.stops?.map((item) => {
-    if (item === 0) {
-      const obj = {
-        name: "Direct",
-      };
-      radioflightName.push(obj);
-    }
-    if (item === 1) {
-      const obj = {
-        name: "1 Stop",
-      };
-      radioflightName.push(obj);
-    }
-    if (item > 1) {
-      if (i === 0) {
-        const obj = {
-          name: "2 or More Stops",
-        };
-        radioflightName.push(obj);
-      }
-      i++;
-    }
-  });
+  // let i = 0;
+  // mainJson?.stops?.map((item) => {
+  //   if (item === 0) {
+  //     const obj = {
+  //       name: "Direct",
+  //     };
+  //     radioflightName.push(obj);
+  //   }
+  //   if (item === 1) {
+  //     const obj = {
+  //       name: "1 Stop",
+  //     };
+  //     radioflightName.push(obj);
+  //   }
+  //   if (item > 1) {
+  //     if (i === 0) {
+  //       const obj = {
+  //         name: "2 or More Stops",
+  //       };
+  //       radioflightName.push(obj);
+  //     }
+  //     i++;
+  //   }
+  // });
 
   const radiohandleChange = (e) => {
     setRadioName(e.target.value);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   if (String(tripType) === String("One Way")) {
@@ -241,6 +249,7 @@ const ShowAllFlight = ({
   localStorage.setItem("currency", JSON.stringify(currency));
   useEffect(() => {
     // setName(flightName?.name);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     setCheck(true);
     flightName.map((item, index) => {
       document.getElementById("checkDefault" + index).checked = true;
@@ -276,8 +285,7 @@ const ShowAllFlight = ({
         $("#pricesection").toggle();
       });
     });
-
-  }, []);
+  }, [filterPrice]);
 
   const handleProposal = () => {
     navigate("/proposal");
@@ -285,19 +293,45 @@ const ShowAllFlight = ({
 
   return (
     <div>
+      <ToastContainer position="bottom-right" autoClose={1500} />
       <div className="container box-shadow content-width">
         <div className="row border mt-3">
           <div className="col-lg-6 py-3 px-5 bg-white">
-            <h5 className="pt-1">We found {fetchFlighData?.totalFlights} flights, {fetchFlighData?.airlineFilters?.length} Unique Airlines </h5>
+            <h5 className="pt-1">
+              We found {fetchFlighData?.totalFlights} flights,{" "}
+              {fetchFlighData?.airlineFilters?.length} Unique Airlines{" "}
+            </h5>
           </div>
           <div className="col-lg-6 bg-white py-3 px-5 ">
             <div class="dropdown float-end">
-              <button class="fw-bold text-color dropdown-toggle" style={{ fontSize: "11px" }} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <span className="me-1"><i class="fas fa-money-bill-wave"></i></span>{amountChange}
+              <button
+                class="fw-bold text-color dropdown-toggle"
+                style={{ fontSize: "11px" }}
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <span className="me-1">
+                  <i class="fas fa-money-bill-wave"></i>
+                </span>
+                {amountChange}
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li class="dropdown-item" style={{ cursor: "pointer" }} onClick={() => setAmountChange("Gross Amount")}>Gross Amount</li>
-                <li class="dropdown-item" style={{ cursor: "pointer" }} onClick={() => setAmountChange("Invoice Amount")}>Invoice Amount</li>
+                <li
+                  class="dropdown-item"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setAmountChange("Gross Amount")}
+                >
+                  Gross Amount
+                </li>
+                <li
+                  class="dropdown-item"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setAmountChange("Invoice Amount")}
+                >
+                  Invoice Amount
+                </li>
               </ul>
             </div>
           </div>
@@ -309,8 +343,11 @@ const ShowAllFlight = ({
           <div
             className="col-lg-3 rounded box-shadow bg-white"
             style={{
-              height: "100%", position: "sticky", top: "9%", maxHeight: "100vh",
-              overflowY: "auto"
+              height: "100%",
+              position: "sticky",
+              top: "9%",
+              maxHeight: "100vh",
+              overflowY: "auto",
             }}
           >
             <div className="container">
@@ -362,11 +399,19 @@ const ShowAllFlight = ({
                     </RangeSlider>
                   </div>
                   <div>
-                    <span className="float-start fw-bold" style={{ fontSize: "13px" }}>
-                      MIN {currency !== undefined ? currency : "BDT"}   {filterPrice[0]}
+                    <span
+                      className="float-start fw-bold"
+                      style={{ fontSize: "13px" }}
+                    >
+                      MIN {currency !== undefined ? currency : "BDT"}{" "}
+                      {filterPrice[0].toLocaleString("en-US")}
                     </span>
-                    <span className="float-end fw-bold" style={{ fontSize: "13px" }}>
-                      MAX {currency !== undefined ? currency : "BDT"}   {filterPrice[1]}
+                    <span
+                      className="float-end fw-bold"
+                      style={{ fontSize: "13px" }}
+                    >
+                      MAX {currency !== undefined ? currency : "BDT"}{" "}
+                      {filterPrice[1].toLocaleString("en-US")}
                     </span>
                   </div>
                 </div>
@@ -394,19 +439,23 @@ const ShowAllFlight = ({
                 <div className="col-lg-12 mt-2" id="stopsection">
                   <div className="form-check mt-2">
                     {radioflightName.map((item, index) => (
-                      <div key={index} style={{ fontSize: "13px" }} className="fw-bold">
+                      <div
+                        key={index}
+                        style={{ fontSize: "13px" }}
+                        className="fw-bold"
+                      >
                         <input
                           className="form-check-input"
                           type="radio"
                           name="name"
                           value={index}
-                          id="flexCheckDefault"
+                          id={"flexRadioDefault"+index}
                           onChange={radiohandleChange}
                           defaultChecked={index === 0}
                         />
                         <label
                           className="form-check-label"
-                          htmlFor="flexCheckDefault"
+                          htmlFor={"flexRadioDefault"+index}
                         >
                           {item.name}
                         </label>
@@ -457,24 +506,40 @@ const ShowAllFlight = ({
                   </div>
                   <div className="form-check mt-2">
                     {flightName.map((item, index) => (
-                      <div key={index} className="d-flex align-items-center justify-content-between">
+                      
+                      <div
+                        key={index}
+                        className="d-flex align-items-center justify-content-between"
+                      >
                         <input
                           className="form-check-input"
                           type="checkbox"
                           value={item.code}
                           id={"checkDefault" + index}
                           onChange={handleChange}
-                        // defaultChecked={itemCkeck}
+                          // defaultChecked={itemCkeck}
                         />
-                        <img src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.code}.png`} alt="airlineCode" width="35px" height="30px" />
+                        <img
+                          src={environment.s3ArliensImage +`${item.code}.png`}
+                          alt="airlineCode"
+                          width="35px"
+                          height="30px"
+                        />
                         <label
                           className="form-check-label fw-bold px-2"
                           htmlFor="flexCheckDefault"
-                          title={item.name} style={{ fontSize: "13px" }}
+                          title={item.name}
+                          style={{ fontSize: "13px" }}
                         >
                           {item.code} ({item.totalFlights})
                         </label>{" "}
-                        <span className="fw-bold float-end" style={{ fontSize: "13px" }}>{currency !== undefined ? currency : "BDT"}   {item.minPrice}</span>
+                        <span
+                          className="fw-bold float-end"
+                          style={{ fontSize: "13px" }}
+                        >
+                          {currency !== undefined ? currency : "BDT"}{" "}
+                          {item.minPrice.toLocaleString("en-US")}
+                        </span>
                         <br></br>
                       </div>
                     ))}
@@ -486,8 +551,8 @@ const ShowAllFlight = ({
             {/* End of Airlines Section  */}
 
             {/* Baggage section  */}
-            <div className="container pb-5 mb-5">
-              <div className="row px-2">
+            <div className="container pb-3 mb-5">
+              {/* <div className="row px-2">
                 <div className="col-lg-6 mt-3">
                   <h6 className="float-start text-color fw-bold">Baggage</h6>
                 </div>
@@ -534,11 +599,13 @@ const ShowAllFlight = ({
                     </label>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="col-lg-9">
-            {flightsData?.length === 0 && flightsData !== null && flightsData !== undefined ? (
+            {flightsData?.length === 0 &&
+            flightsData !== null &&
+            flightsData !== undefined ? (
               <>
                 <NoDataFoundPage />
               </>
@@ -551,6 +618,7 @@ const ShowAllFlight = ({
                   data={data}
                   amountChange={amountChange}
                   currency={currency}
+                  checkList={checkList}
                 ></ShowFlight>
               ))
             )}

@@ -1,4 +1,8 @@
-import { intervalToDuration, parse } from "date-fns";
+import { format, intervalToDuration, parse } from "date-fns";
+import countries from "../JSON/countries.json";
+import airports from "../JSON/airports.json";
+
+
 export const isValidEmail = (input) => {
   return input
     ?.toLowerCase()
@@ -57,11 +61,11 @@ export const addDurations = (inputArr) => {
 
   return totalMinutes >= 1440
     ? `${Math.floor(totalMinutes / 1440)}d ${Math.floor(
-        (totalMinutes % 1440) / 60
-      )}h ${(totalMinutes % 1440) % 60}m`
+      (totalMinutes % 1440) / 60
+    )}h ${(totalMinutes % 1440) % 60}m`
     : totalMinutes >= 60
-    ? `${Math.floor(totalMinutes / 60)}h ${totalMinutes % 60}m`
-    : `${totalMinutes % 60}m`;
+      ? `${Math.floor(totalMinutes / 60)}h ${totalMinutes % 60}m`
+      : `${totalMinutes % 60}m`;
 };
 
 // INTERVAL BETWEEN SEGMENTS
@@ -73,3 +77,62 @@ export const timeDuration = (start, end) => {
 
   return `${result.hours}h ${result.minutes}m`;
 };
+
+export const ISODateFormatter = (input) => {
+  return format(new Date(input), "yyyy-MM-dd");
+};
+
+export const getCountryNameFomCountryCode = (input) => {
+  return countries.find((obj) => {
+    return obj.code === input;
+  })?.name;
+};
+
+export const getCountryCode = (input) => {
+  // return countries.find((obj) => {
+  //   return obj.code === input;
+  // })?.name;
+ console.log(input);
+ let list = airports.find((obj) => obj.iata === input);
+ console.log(list.country,"++++");
+ return list.country
+};
+
+
+export const getCountryFomAirport = (input) => {
+  return airports.find((obj) => {
+    return obj.iata === input;
+  })?.country;
+};
+
+export const preventNegativeValues = (e) => ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
+
+export const sumRating = (agent) => {
+  let total = 0;
+    agent?.forEach(a => {
+         total+= a.totalPrice * a.passengerCount;
+    });
+return total;
+}
+
+export const moveToFirstPlace = (arr, text) => {
+  arr.map((elem, index) => {
+    if (elem?.platingCarrier === text) {
+      arr.splice(index, 1);
+      arr.splice(0, 0, elem);
+    }
+  });
+  return arr;
+};
+
+export const sortPassangerType = (data) =>{
+  return data?.sort((a,b)=>a.passengerType.localeCompare(b.passengerType));
+  // return data?.sort((a,b)=>b.passengerType.localeCompare(a.passengerType));
+}
+
+export const uniqueUser = (arr) => {
+  const uniqueValues = new Set(arr.map(v => v?.firstName));
+    if (uniqueValues.size < arr.length) {
+      return true
+    } else return false
+}

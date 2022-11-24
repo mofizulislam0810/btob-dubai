@@ -16,25 +16,27 @@ const Contact = () => {
             </div>
             <div className="col-lg-12">
               <p>
-                <span className="">Corporate Address:</span>
+                <span className="fw-bold">Corporate Address - </span>  39 Sharif Plaza, Kemal Ataturk Avenue, Banani, Dhaka 1213
               </p>
-              <p className="mb-0">
+              {/* <p className="mb-0">
                 <span className="">
                   <i className="la la-home la-lg"></i>
                 </span>{" "}
-                39 Sharif Plaza, Kemal Ataturk Avenue, Banani, Dhaka 1213
-              </p>
+               
+              </p> */}
               <p>
-                <span className="">
+                {/* <span className="">
                   <i className="la la-phone la-lg"></i>
                 </span>{" "}
-                09613123123
+                09613123123 */}
+                <span className="fw-bold">Hotline No - </span>  09613123123
               </p>
               <p>
-                <span className="">
+                {/* <span className="">
                   <i className="la la-envelope la-lg"></i>
                 </span>{" "}
-                <a href="" className="text-dark fw-bold">support@firsttrip.com</a>
+                <a href="" className="text-dark fw-bold">support@firsttrip.com</a> */}
+                <span className="fw-bold">Email - </span>  support@firsttrip.com
               </p>
             </div>
             {/* <div className="col-lg-12">

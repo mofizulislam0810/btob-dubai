@@ -13,7 +13,7 @@ import "../../../plugins/t-datepicker/t-datepicker.min";
 import { environment } from "../../SharePages/Utility/environment";
 import "./SearchFrom.css";
 
-const childrenAges = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const childrenAges = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 const SearchFrom = () => {
   const formCount = 0;
@@ -113,61 +113,66 @@ const SearchFrom = () => {
 
       if (origin === destination && origin !== "" && destination !== "") {
         toast.error("Depart From and Going To must be difference No.1");
-        setSameMatchError(true)
-      }
-      else if (origin1 === destination1 && origin1 !== "" && destination1 !== "") {
+      } else if (
+        origin1 === destination1 &&
+        origin1 !== "" &&
+        destination1 !== ""
+      ) {
         toast.error("Depart From and Going To must be difference No.2");
-        setSameMatchError(true)
-      }
-      else if (origin2 === destination2 && origin2 !== "" && destination2 !== "") {
+      } else if (
+        origin2 === destination2 &&
+        origin2 !== "" &&
+        destination2 !== ""
+      ) {
         toast.error("Depart From and Going To must be difference No.3");
-        setSameMatchError(true)
-      }
-      else if (origin3 === destination3 && origin3 !== "" && destination3 !== "") {
+      } else if (
+        origin3 === destination3 &&
+        origin3 !== "" &&
+        destination3 !== ""
+      ) {
         toast.error("Depart From and Going To must be difference No.4");
-        setSameMatchError(true)
-      }
-      else if (origin4 === destination4 && origin4 !== "" && destination4 !== "") {
+      } else if (
+        origin4 === destination4 &&
+        origin4 !== "" &&
+        destination4 !== ""
+      ) {
         toast.error("Depart From and Going To must be difference No.5");
-        setSameMatchError(true)
-      }
-      else if (origin5 === destination5 && origin5 !== "" && destination5 !== "") {
+      } else if (
+        origin5 === destination5 &&
+        origin5 !== "" &&
+        destination5 !== ""
+      ) {
         toast.error("Depart From and Going To must be difference No.5");
-        setSameMatchError(true)
-      }
-      else setSameMatchError(false)
-
-      if (String(journeyDate) === String(null) && origin !== destination) {
-        toast.error("Please select all departing date no.1");
-        setJourneyDateError(true)
-      }
-
-      else if (String(inputDateMulti1) === String(null) && origin1 !== destination1) {
-        toast.error("Please select all departing date no.2");
-        setJourneyDateError(true)
-      }
-      else if (String(inputDateMulti2) === String(null) && origin2 !== destination2) {
-        toast.error("Please select all departing date no.3");
-        setJourneyDateError(true)
-      }
-
-      else if (String(inputDateMulti3) === String(null) && origin3 !== destination3) {
-        toast.error("Please select all departing date no.3");
-        setJourneyDateError(true)
-      }
-      else if (String(inputDateMulti4) === String(null) && origin4 !== destination4) {
-        toast.error("Please select all departing date no.4");
-        setJourneyDateError(true)
-      }
-      else if (String(inputDateMulti5) === String(null) && origin5 !== destination5) {
-        toast.error("Please select all departing date no.5");
-        setJourneyDateError(true)
-      }
-      else setJourneyDateError(false)
-
-      console.log("String(inputDateMulti3)", inputDateMulti1, String(null))
-      if (!sameMatchError) {
-        if (!journeyDateError) {
+      } else {
+        if (String(journeyDate) === String(null) && origin !== destination) {
+          toast.error("Please select all departing date no.1");
+        } else if (
+          String(inputDateMulti1) === String(null) &&
+          origin1 !== destination1
+        ) {
+          toast.error("Please select all departing date no.2");
+        } else if (
+          String(inputDateMulti2) === String(null) &&
+          origin2 !== destination2
+        ) {
+          toast.error("Please select all departing date no.3");
+        } else if (
+          String(inputDateMulti3) === String(null) &&
+          origin3 !== destination3
+        ) {
+          toast.error("Please select all departing date no.3");
+        } else if (
+          String(inputDateMulti4) === String(null) &&
+          origin4 !== destination4
+        ) {
+          toast.error("Please select all departing date no.4");
+        } else if (
+          String(inputDateMulti5) === String(null) &&
+          origin5 !== destination5
+        ) {
+          toast.error("Please select all departing date no.5");
+          setJourneyDateError(true);
+        } else {
           const qtyList = {
             Adult: adultCount,
             Children: childCount,
@@ -228,8 +233,6 @@ const SearchFrom = () => {
           });
         }
       }
-
-
     } else {
       const origin = originRef.current.value;
       const destination = destinationRef.current.value;
@@ -445,7 +448,7 @@ const SearchFrom = () => {
       var ac = $(this);
 
       ac.on("click", function (e) {
-        e.stopPropagation();
+        // e.stopPropagation();
       })
         .on("focus keyup", search)
         .on("keydown", onKeyDown);
@@ -854,7 +857,7 @@ const SearchFrom = () => {
                                       ></i>
                                       Children
                                     </div>
-                                    <div className="adult">Aged 2-12</div>
+                                    <div className="adult">Aged 2-11</div>
                                   </div>
                                   <div className="number-input text-center">
                                     <button
@@ -1030,7 +1033,7 @@ const SearchFrom = () => {
                 <div className="row pt-1 position-relative">
                   <div className="col-lg-4 forms">
                     <label htmlFor="formGroupExampleInput" className="">
-                      Depart From <span className="fw-bold">*</span>
+                      Depart From <span className="fw-bold text-danger">*</span>
                     </label>
                     <span className="address">
                       <input
@@ -1056,7 +1059,7 @@ const SearchFrom = () => {
                   </div>
                   <div className="col-lg-4 forms">
                     <label htmlFor="formGroupExampleInput" className=" ">
-                      Going To <span className="fw-bold">*</span>
+                      Going To <span className="fw-bold text-danger">*</span>
                     </label>
                     <span className="address">
                       <input
@@ -1077,12 +1080,12 @@ const SearchFrom = () => {
                     <div className="row">
                       <div className="col-lg-6">
                         <label htmlFor="formGroupExampleInput">
-                          Departing <span className="fw-bold">*</span>
+                          Departing <span className="fw-bold text-danger">*</span>
                         </label>
                       </div>
                       <div className="col-lg-6" id="returnLavel">
                         <label htmlFor="formGroupExampleInput">
-                          Returning <span className="fw-bold">*</span>
+                          Returning <span className="fw-bold text-danger">*</span>
                         </label>
                       </div>
                     </div>
@@ -1115,7 +1118,7 @@ const SearchFrom = () => {
                     <div className="row pt-1 position-relative" id="multiCity1">
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Depart From <span className="fw-bold">*</span>
+                          Depart From <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1141,7 +1144,7 @@ const SearchFrom = () => {
                       </div>
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Going To <span className="fw-bold">*</span>
+                          Going To <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1162,7 +1165,7 @@ const SearchFrom = () => {
                         <div className="row">
                           <div className="col-lg-12 ">
                             <label htmlFor="formGroupExampleInput" className="">
-                              Departing <span className="fw-bold">*</span>
+                              Departing <span className="fw-bold text-danger">*</span>
                             </label>
                           </div>
                         </div>
@@ -1186,7 +1189,7 @@ const SearchFrom = () => {
                     >
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Depart From <span className="fw-bold">*</span>
+                          Depart From <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1211,7 +1214,7 @@ const SearchFrom = () => {
                       </div>
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Going To <span className="fw-bold">*</span>
+                          Going To <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1231,7 +1234,7 @@ const SearchFrom = () => {
                         <div className="row">
                           <div className="col-lg-12">
                             <label htmlFor="formGroupExampleInput" className="">
-                              Departing <span className="fw-bold">*</span>
+                              Departing <span className="fw-bold text-danger">*</span>
                             </label>
                           </div>
                         </div>
@@ -1255,7 +1258,7 @@ const SearchFrom = () => {
                     >
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Depart From <span className="fw-bold">*</span>
+                          Depart From <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1280,7 +1283,7 @@ const SearchFrom = () => {
                       </div>
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Going To <span className="fw-bold">*</span>
+                          Going To <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1301,7 +1304,7 @@ const SearchFrom = () => {
                         <div className="row">
                           <div className="col-lg-12">
                             <label htmlFor="formGroupExampleInput" className="">
-                              Departing <span className="fw-bold">*</span>
+                              Departing <span className="fw-bold text-danger">*</span>
                             </label>
                           </div>
                         </div>
@@ -1325,7 +1328,7 @@ const SearchFrom = () => {
                     >
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Depart From <span className="fw-bold">*</span>
+                          Depart From <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1350,7 +1353,7 @@ const SearchFrom = () => {
                       </div>
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Going To <span className="fw-bold">*</span>
+                          Going To <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1370,7 +1373,7 @@ const SearchFrom = () => {
                         <div className="row">
                           <div className="col-lg-12">
                             <label htmlFor="formGroupExampleInput" className="">
-                              Departing <span className="fw-bold">*</span>
+                              Departing <span className="fw-bold text-danger">*</span>
                             </label>
                           </div>
                         </div>
@@ -1394,7 +1397,7 @@ const SearchFrom = () => {
                     >
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Depart From <span className="fw-bold">*</span>
+                          Depart From <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1419,7 +1422,7 @@ const SearchFrom = () => {
                       </div>
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Going To <span className="fw-bold">*</span>
+                          Going To <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1439,7 +1442,7 @@ const SearchFrom = () => {
                         <div className="row rounded-3">
                           <div className="col-lg-12">
                             <label htmlFor="formGroupExampleInput" className="">
-                              Departing <span className="fw-bold">*</span>
+                              Departing <span className="fw-bold text-danger">*</span>
                             </label>
                           </div>
                         </div>

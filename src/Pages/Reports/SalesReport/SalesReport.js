@@ -9,8 +9,9 @@ import useAuth from "../../../hooks/useAuth";
 import Loading from "../../Loading/Loading";
 import ReactPaginate from "react-paginate";
 import Footer from "../../SharePages/Footer/Footer";
-import { Center, Spinner } from "@chakra-ui/react";
+import { Box, Button, Center, Spinner, Text } from "@chakra-ui/react";
 import { getPassengerType } from "../../../common/functions";
+import { CSVLink } from "react-csv";
 const SalesReport = () => {
   const { setLoading, loading } = useAuth();
   const [reportData, setReportData] = useState([]);
@@ -96,6 +97,48 @@ const SalesReport = () => {
   }, [currentPageNumber]);
 
   console.log(reportData);
+
+  const csvHeaders = [
+    { label: "Date Time", key: "createdDate" },
+    { label: "Booking ID", key: "uniqueTransID" },
+    { label: "PNR", key: "pnr" },
+    { label: "Ticket Number", key: "ticketNumbers" },
+    { label: "Passenger Name", key: "paxNames" },
+    { label: "Passenger Type", key: "passengerType" },
+    { label: "Base Fare", key: "basePriceSelling" },
+    { label: "Tax", key: "taxesSelling" },
+    { label: "Total Price", key: "priceSelling" },
+  ];
+
+  const [csvData, setCsvData] = useState([]);
+  useEffect(() => {
+    const csvArr = reportData?.map((item) => ({
+      createdDate: moment(item.createdDate).format("DD-MMM-yyyy hh:mm"),
+      uniqueTransID: item.uniqueTransID,
+      pnr: item.pnr,
+      ticketNumbers: item.ticketNumbers,
+      paxNames: item.paxNames,
+      passengerType: getPassengerType(item.passengerType),
+      basePriceSelling: item.basePriceSelling.toLocaleString("en-US"),
+      taxesSelling: item.taxesSelling.toLocaleString("en-US"),
+      priceSelling: item.priceSelling.toLocaleString("en-US"),
+    }));
+
+    csvArr.push({
+      createdDate: "",
+      uniqueTransID: "",
+      pnr: "",
+      ticketNumbers: "",
+      paxNames: "",
+      passengerType: `Grand Total (${currencyName})`,
+      basePriceSelling: totalSellingBasePrice.toLocaleString("en-US"),
+      taxesSelling: totalSellingTax.toLocaleString("en-US"),
+      priceSelling: totalSellingPrice.toLocaleString("en-US"),
+    });
+
+    csvArr && setCsvData(csvArr);
+  }, [reportData]);
+
   return (
     <div>
       <Navbar></Navbar>
@@ -121,6 +164,18 @@ const SalesReport = () => {
                       >
                         <div className="col-sm-12 text-left pb-2">
                           <div className="d-flex float-end">
+                            <Box w="260px">
+                              <Button size="xs" h="38px" className="bg-secondary">
+                                <CSVLink
+                                  filename={"report.xls"}
+                                  data={csvData}
+                                  headers={csvHeaders}
+                                >
+                                  <Text color="white">Download Excel File</Text>
+                                </CSVLink>
+                              </Button>
+                            </Box>
+
                             <input
                               type="date"
                               pattern="\d{4}-\d{2}-\d{2}"

@@ -1,12 +1,21 @@
+import { Box, HStack, Icon, Text } from "@chakra-ui/react";
 import axios from "axios";
-import { add, format } from "date-fns";
+import { add } from "date-fns";
 import $ from "jquery";
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { BiEdit } from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { isValidEmail } from "../../common/functions";
+import {
+  getCountryNameFomCountryCode,
+  ISODateFormatter,
+  isValidEmail
+} from "../../common/functions";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 import courtries from "../../JSON/countries.json";
 import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
@@ -28,26 +37,55 @@ const QuickPassenger = () => {
   // let [dobDay, setDOBDay] = useState("");
   // let [dobMonth, setDOBMonth] = useState("");
   // let [dobYear, setDOBYear] = useState("");
-  let [dob, setDOB] = useState("2018-07-22");
+  let [dob, setDOB] = useState(new Date());
   let [dobMinMax, setDobMinMax] = useState({ min: "", max: "" });
   let [nationality, setNationality] = useState("BD");
   let [gender, setGender] = useState("Male");
   let [passportNo, setPassportNo] = useState("");
-  let [issuingCountry, setIssuingCountry] = useState("");
+  let [issuingCountry, setIssuingCountry] = useState("BD");
   // let [peDay, setPEDay] = useState("");
   // let [peMonth, setPEMonth] = useState("");
   // let [peYear, setPEYear] = useState("");
   let [phone, setPhone] = useState("");
   let [email, setEmail] = useState("");
   let [phoneCountryCode, setPhoneCountryCode] = useState("+88");
+  let [cityList, setCityList] = useState([]);
   let [cityName, setCityName] = useState("");
   let [passportFileName, setPassportFileName] = useState("");
   let [visaFileName, setVisaFileName] = useState("");
-  let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
+  // let s3URL = "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
   let [loading, setLoading] = useState(false);
+  console.log({ passengerList });
+  const passCopy = useRef()
+  const visaCopy = useRef()
+  const formReset = useRef()
+  // const outSideClick = useRef()
+  const [fileError, setFileError] = useState(false)
+  const handleClickOutside = () => {
+    formReset.current.reset()
+  };
+  const outSideClick = useOutsideClick(handleClickOutside);
 
+  const handleRestrict = () => {
+    if (passportNo === "" || passportNo === null || passportNo === undefined) {
+      setFileError(true)
+      toast.error("Please select passport number then try again.")
+      passCopy.current.disabled = true
+      visaCopy.current.disabled = true
+    }
+  }
+
+  useEffect(() => {
+    if (passportNo.length > 0) {
+      setFileError(false)
+      passCopy.current.disabled = false
+      visaCopy.current.disabled = false
+    }
+
+  }, [passportNo])
   const handlePassportFileUpload = (file) => {
+    console.log({ file });
     let fileExt = file.name.split(".").pop().toLowerCase();
     if (
       fileExt === "jpg" ||
@@ -114,7 +152,7 @@ const QuickPassenger = () => {
       };
       const response = await axios.post(
         environment.getAgentPassengers +
-          `?pageNumber=${currentPage}&pageSize=${pageSize}`,
+        `?pageNumber=${currentPage}&pageSize=${pageSize}`,
         sendObj,
         environment.headerToken
       );
@@ -159,11 +197,13 @@ const QuickPassenger = () => {
     setFirstName(item.first);
     setMiddleName(item.middle);
     setLastName(item.last);
-    setDOB(item.dateOfBirth);
+    setDOB(item.dateOfBirth === null ? null : ISODateFormatter(item.dateOfBirth));
     setNationality(item.nationality);
     setGender(item.gender);
     setPassportNo(item.documentNumber);
-    setpassportExDate(item.expireDate);
+    setpassportExDate(
+      item.expireDate === null ? null : ISODateFormatter(item.expireDate)
+    );
     setIssuingCountry(item.documentIssuingCountry);
     setPhone(item.phone);
     setEmail(item.email);
@@ -269,7 +309,7 @@ const QuickPassenger = () => {
           $("body").removeAttr("style");
           setLoading(false);
         } else {
-          toast.error("Please try again..");
+          toast.error(response.data.message);
           setLoading(false);
         }
       };
@@ -297,16 +337,16 @@ const QuickPassenger = () => {
           $("body").removeAttr("style");
           setLoading(false);
         } else {
-          toast.error("Please try again..");
+          toast.error(response.data.message);
           setLoading(false);
         }
       };
       postData();
     }
   };
-  const ISODateFormatter = (input) => {
-    return format(new Date(input), "yyyy-MM-dd");
-  };
+  const handleClear = () => {
+    console.log({ visaCopy }, { passCopy })
+  }
   const passengerTypeFuc = (passengerType) => {
     switch (passengerType) {
       case "ADT":
@@ -353,7 +393,28 @@ const QuickPassenger = () => {
     handleGetPassengers(currentPageNumber);
   }, [currentPageNumber, passengerType]);
 
-  console.log(passengerList);
+  const getCityData = async (countryName) => {
+    console.log({ countryName });
+
+    const response = await axios.get(
+      environment.getcityListbycountryName + "/" + countryName
+    );
+    if (response.data.length > 0) {
+      setCityList(response.data);
+      // console.log(cityList);
+    }
+  };
+  useEffect(() => {
+    getCityData("Bangladesh");
+  }, []);
+
+  const handleCountryChange = (e) => {
+    console.log({ e });
+    const country = getCountryNameFomCountryCode(e.target.value);
+    setNationality(e.target.value);
+    getCityData(country);
+  };
+  console.log({ courtries });
   return (
     <div>
       <Navbar></Navbar>
@@ -379,7 +440,7 @@ const QuickPassenger = () => {
                           style={{ fontSize: "12px" }}
                         >
                           <span className="me-1">
-                            <i class="fas fa-user-plus"></i>
+                            <i className="fas fa-user-plus"></i>
                           </span>{" "}
                           Add
                         </a>
@@ -394,13 +455,13 @@ const QuickPassenger = () => {
                           <th>SL</th>
                           <th>Name</th>
                           <th>Email</th>
-                          <th>Mobile</th>
                           <th>DOB</th>
                           <th>Gender</th>
                           <th>Passport Number</th>
-                          {/* <th>Passport Copy</th>
-                          <th>Visa Copy</th> */}
-                          {/* <th>Action</th> */}
+                          <th>Passport Expire Date</th>
+                          <th>Passport Copy</th>
+                          <th>Visa Copy</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody className="lh-1 tbody">
@@ -409,12 +470,6 @@ const QuickPassenger = () => {
                             <tr key={index}>
                               <td>{index + 1}</td>
                               <td>
-                                {/* <a
-                                  onClick={() => handleEditItem(item)}
-                                  href="#"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#accountModal"
-                                > */}
                                 {item.title +
                                   " " +
                                   item.first +
@@ -422,14 +477,15 @@ const QuickPassenger = () => {
                                   item.middle +
                                   " " +
                                   item.last}{" "}
-                                ({item.passengerType}){/* </a> */}
+                                ({item.passengerType})
                               </td>
                               <td>{item.email}</td>
-                              <td>{item.phone}</td>
                               <td>
-                                {moment(item.dateOfBirth).format(
-                                  "DD-MMMM-yyyy"
-                                )}
+                                {item.dateOfBirth === null
+                                  ? "N/A"
+                                  : moment(item.dateOfBirth).format(
+                                    "DD-MMMM-yyyy"
+                                  )}
                               </td>
                               <td>{item.gender}</td>
                               <td>
@@ -437,22 +493,29 @@ const QuickPassenger = () => {
                                   ? "N/A"
                                   : item.documentNumber}
                               </td>
+                              <td>
+                                {item.expireDate === null
+                                  ? "N/A"
+                                  : moment(item.expireDate).format(
+                                    "DD-MMMM-yyyy"
+                                  )}
+                              </td>
 
-                              {/* <td>
+                              <td>
                                 {item.passportCopy !== null &&
                                   item.passportCopy !== "" ? (
                                   <a
                                     href={
-                                      environment.baseApiURL +
-                                      `agentinfo/GetPassengerFile/${item.passportCopy}/1`
+                                      environment.s3URL + `${item.passportCopy}`
                                     }
                                     download
-                                    target="_blank" rel="noreferrer"
+                                    target="_blank"
+                                    rel="noreferrer"
                                   >
                                     Passport Copy
                                   </a>
                                 ) : (
-                                  <></>
+                                  <>N/A</>
                                 )}
                               </td>
                               <td>
@@ -460,21 +523,40 @@ const QuickPassenger = () => {
                                   item.visaCopy != "" ? (
                                   <a
                                     href={
-                                      environment.baseApiURL +
-                                      `agentinfo/GetPassengerFile/${item.visaCopy}/2`
+                                      environment.s3URL + `${item.visaCopy}`
                                     }
                                     download
-                                    target="_blank" rel="noreferrer"
+                                    target="_blank"
+                                    rel="noreferrer"
                                   >
                                     Visa Copy
                                   </a>
                                 ) : (
-                                  <></>
+                                  <>N/A</>
                                 )}
-                              </td> */}
+                              </td>
                               {/* <td>
                                 <span onClick={() => handleDeleteItem(item)} className="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></span>
                               </td> */}
+
+                              <td>
+                                <a
+                                  onClick={() => handleEditItem(item)}
+                                  href="#"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#accountModal"
+                                >
+                                  <HStack justifyContent="center">
+                                    <Icon
+                                      as={BiEdit}
+                                      h="18px"
+                                      w="18px"
+                                      color={"logoGreen"}
+                                    />
+                                    <Text>Edit</Text>
+                                  </HStack>
+                                </a>
+                              </td>
                             </tr>
                           );
                         })}
@@ -505,6 +587,7 @@ const QuickPassenger = () => {
             </div>
 
             <div
+              ref={outSideClick}
               className="modal fade"
               id="accountModal"
               tabIndex={-1}
@@ -513,170 +596,307 @@ const QuickPassenger = () => {
             >
               <div className="modal-dialog">
                 <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title" id="accountModalLabel">
-                      {currentItem === null ? "Add" : "Edit"} Passenger
-                    </h5>
-                    <button
-                      type="button"
-                      className="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                      id="modal-close"
-                    ></button>
-                  </div>
-                  <div className="modal-body">
-                    <div className="border p-2 my-3">
-                      <div className="row">
-                        <div className="col-md-6">
-                          <div className="form-group">
-                            <select
-                              id="name"
-                              placeholder="Passenger Type"
-                              className="form-select titel-width rounded"
-                              onChange={(e) => setPassengerType(e.target.value)}
-                              required
-                              value={passengerType}
-                            >
-                              <option value="ADT"> Adult</option>
-                              <option value="CNN"> Child</option>
-                              <option value="INF"> Infant</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
+                  <form >
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="accountModalLabel">
+                        {currentItem === null ? "Add" : "Edit"} Passenger
+                      </h5>
+                      <button
+                        onClick={() => formReset.current.reset()}
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        id="modal-close"
+                      ></button>
+                    </div>
+                    <div className="modal-body">
 
-                      <div className="row">
-                        <div className="col-md-4">
-                          <div className="form-group">
-                            <label className="form-label float-start fw-bold">
-                              First name <span className="text-danger">*</span>
-                            </label>
-                            <div className="input-group mb-3">
-                              <div className="input-group-prepend">
-                                <select
-                                  id="name"
-                                  placeholder="Title"
-                                  className="form-select titel-width rounded-start"
-                                  onChange={(e) => setTitle(e.target.value)}
-                                  value={title}
-                                  required
-                                >
-                                  <option value=""> Title</option>
-                                  {passengerType === "ADT" ? (
-                                    <>
-                                      <option value="Mr"> Mr</option>
-                                      <option value="Ms"> Ms</option>
-                                      <option value="Mrs"> Mrs</option>
-                                    </>
-                                  ) : (
-                                    <>
-                                      <option value="Mstr">Mstr</option>
-                                      <option value="Miss">Miss</option>
-                                    </>
-                                  )}
-                                </select>
-                                <input
-                                  name="firstName"
-                                  className="form-control rounded-end"
-                                  onChange={(e) => {
-                                    setFirstName(e.target.value);
-                                    const result = add(new Date(), {
-                                      years: -2,
-                                    });
-                                    console.log({ result });
-                                  }}
-                                  value={firstName}
-                                  required
-                                  autoComplete="off"
-                                  placeholder="First Name"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-md-4">
-                          <div className="form-group">
-                            <label
-                              className="form-label float-start fw-bold"
-                              type=""
-                            >
-                              Last name <span className="text-danger">*</span>
-                            </label>
-                            <input
-                              name="lastName"
-                              className="form-control rounded"
-                              onChange={(e) => setLastName(e.target.value)}
-                              value={lastName}
-                              required
-                              autoComplete="off"
-                              placeholder="Last Name"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-lg-4">
-                          <div className="form-group">
-                            <label
-                              className="form-label float-start fw-bold"
-                              type=""
-                            >
-                              Gender <span className="text-danger">*</span>
-                            </label>
-                            <div className="input-group mb-3">
+                      <div className="border p-2 my-3">
+                        <div className="row">
+                          <div className="col-md-6">
+                            <div className="form-group">
                               <select
-                                name="date"
-                                className="form-select rounded"
-                                onChange={(e) => setGender(e.target.value)}
-                                value={gender}
+                                id="name"
+                                placeholder="Passenger Type"
+                                className="form-select titel-width rounded"
+                                onChange={(e) => setPassengerType(e.target.value)}
                                 required
+                                value={passengerType}
                               >
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
+                                <option value="ADT"> Adult</option>
+                                <option value="CNN"> Child</option>
+                                <option value="INF"> Infant</option>
                               </select>
                             </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div className="row">
-                        <div className="col-md-4">
-                          <div className="form-group">
-                            <label className="float-start fw-bold" type="">
-                              Date of birth
-                              <span className="text-danger">*</span>
-                            </label>
-                            <div className="input-group mb-3 d-flex">
+                        <div className="row">
+                          <div className="col-md-4">
+                            <div className="form-group">
+                              <label className="form-label float-start fw-bold">
+                                First name <span className="text-danger">*</span>
+                              </label>
+                              <div className="input-group mb-3">
+                                <div className="input-group-prepend">
+                                  <select
+                                    id="name"
+                                    placeholder="Title"
+                                    className="form-select titel-width rounded-start"
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    value={title}
+                                    required
+                                  >
+                                    <option value=""> Title</option>
+                                    {passengerType === "ADT" ? (
+                                      <>
+                                        <option value="Mr"> Mr</option>
+                                        <option value="Ms"> Ms</option>
+                                        <option value="Mrs"> Mrs</option>
+                                      </>
+                                    ) : (
+                                      <>
+                                        <option value="Mstr">Mstr</option>
+                                        <option value="Miss">Miss</option>
+                                      </>
+                                    )}
+                                  </select>
+                                  <input
+                                    name="firstName"
+                                    className="form-control rounded-end"
+                                    onChange={(e) => {
+                                      setFirstName(e.target.value);
+                                      const result = add(new Date(), {
+                                        years: -2,
+                                      });
+                                      console.log({ result });
+                                    }}
+                                    value={firstName}
+                                    required
+                                    autoComplete="off"
+                                    placeholder="First Name"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-md-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                type=""
+                              >
+                                Last name <span className="text-danger">*</span>
+                              </label>
                               <input
+                                name="lastName"
+                                className="form-control rounded"
+                                onChange={(e) => setLastName(e.target.value)}
+                                value={lastName}
+                                required
+                                autoComplete="off"
+                                placeholder="Last Name"
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                type=""
+                              >
+                                Gender <span className="text-danger">*</span>
+                              </label>
+                              <div className="input-group mb-3">
+                                <select
+                                  name="date"
+                                  className="form-select rounded"
+                                  onChange={(e) => setGender(e.target.value)}
+                                  value={gender}
+                                  required
+                                >
+                                  <option value="Male">Male</option>
+                                  <option value="Female">Female</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="row">
+                          <div className="col-md-4">
+                            <div className="form-group">
+                              <label className="float-start fw-bold" type="">
+                                Date of birth
+                                <span className="text-danger">*</span>
+                              </label>
+                              <div className="input-group mb-3 d-flex">
+                                <Box
+                                  border="1px solid #ced4da"
+                                  borderRadius="4px"
+                                  w="100%"
+                                  h="40px"
+                                  pt="6px"
+                                  pl="8px"
+                                >
+                                  <DatePicker
+                                    dateFormat="dd/MM/yyyy"
+                                    selected={
+                                      dob?.length === 10 ? new Date(dob) : dob
+                                    }
+                                    onChange={(date) =>
+                                      date !== "" && setDOB(date)
+                                    }
+                                    placeholderText="dd/mm/yyyy"
+                                    minDate={new Date(dobMinMax?.min)}
+                                    maxDate={new Date(dobMinMax?.max)}
+                                    peekNextMonth
+                                    showMonthDropdown
+                                    showYearDropdown
+                                    dropdownMode="select"
+                                  />
+                                </Box>
+
+                                {/* <input
                                 type={"date"}
+                                data-date=""
+                                data-date-format="DD/MM/YYYY"
                                 pattern="\d{4}-\d{2}-\d{2}"
                                 name="dateOfBirth"
                                 className="form-control rounded"
                                 onChange={(e) => {
                                   setDOB(e.target.value);
                                 }}
-                                value={dob}
+                                value={
+                                  currentItem !== null
+                                    ? dob
+                                    : ISODateFormatter(dobMinMax?.max)
+                                }
                                 min={dobMinMax?.min}
                                 max={dobMinMax?.max}
                                 required
                                 autoComplete="off"
                                 placeholder="Date of Birth"
+                              /> */}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-lg-4">
+                            <div className="form-group">
+                              <label className="float-start fw-bold" type="">
+                                Nationality <span className="text-danger">*</span>
+                              </label>
+                              <div className="input-group mb-3">
+                                <select
+                                  name="nationality"
+                                  className="form-select rounded"
+                                  onChange={(e) => handleCountryChange(e)}
+                                  value={nationality}
+                                  required
+                                >
+                                  <option value="BD" selected>
+                                    Bangladesh
+                                  </option>
+                                  {courtries.map((item, index) => {
+                                    return (
+                                      <option key={index} value={item.code}>
+                                        {item.name}
+                                      </option>
+                                    );
+                                  })}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-lg-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                htmlFor=""
+                              >
+                                City
+                                {/* <span className="text-danger">*</span> */}
+                              </label>
+                            </div>
+                            <div className="input-group mb-3">
+                              <select
+                                class="form-select rounded"
+                                aria-label="City"
+                                onChange={(e) => setCityName(e.target.value)}
+                              >
+                                <option selected>Select City</option>
+                                {cityList.map((item, index) => {
+                                  return (
+                                    <option key={index} value={item.name}>
+                                      {item.name}
+                                    </option>
+                                  );
+                                })}
+                              </select>
+                            </div>
+                          </div>
+                          <div className="col-lg-4">
+                            <div className="form-group">
+                              <label className="float-start fw-bold" htmlFor="">
+                                Email
+                                <span className="text-danger">*</span>
+                              </label>
+                            </div>
+                            <div className=" mb-3">
+                              <input
+                                type="email"
+                                className="form-control rounded"
+                                name="email"
+                                onChange={(e) => setEmail(e.target.value)}
+                                value={email}
+                                required
+                                autoComplete="off"
+                                placeholder="Email"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                               />
                             </div>
                           </div>
-                        </div>
-                        <div className="col-lg-4">
-                          <div className="form-group">
-                            <label className="float-start fw-bold" type="">
-                              Nationality <span className="text-danger">*</span>
-                            </label>
+                          <div className="col-lg-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                htmlFor=""
+                              >
+                                Passport number{" "}
+                                {/* <span className="text-danger">*</span> */}
+                              </label>
+                            </div>
+                            <div className="input-group mb-3">
+                              <input
+                                type="text"
+                                className="form-control rounded"
+                                name="passport-number"
+                                onChange={(e) => setPassportNo(e.target.value)}
+                                value={passportNo}
+                                autoComplete="off"
+                                placeholder="Passport Number"
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                htmlFor=""
+                              >
+                                Issuing country{" "}
+                                {/* <span className="text-danger">*</span> */}
+                              </label>
+                            </div>
                             <div className="input-group mb-3">
                               <select
-                                name="nationality"
                                 className="form-select rounded"
-                                onChange={(e) => setNationality(e.target.value)}
-                                value={nationality}
-                                required
+                                onChange={(e) => setIssuingCountry(e.target.value)}
+                                value={issuingCountry}
+                              // required
                               >
+                                <option value="">Issuing Country</option>
                                 {courtries.map((item, index) => {
                                   return (
                                     <option key={index} value={item.code}>
@@ -687,271 +907,153 @@ const QuickPassenger = () => {
                               </select>
                             </div>
                           </div>
-                        </div>
-                        <div className="col-lg-4">
-                          <div className="form-group">
-                            <label className="float-start fw-bold" htmlFor="">
-                              Email
-                              <span className="text-danger">*</span>
-                            </label>
-                          </div>
-                          <div className=" mb-3">
-                            <input
-                              type="email"
-                              className="form-control rounded"
-                              name="email"
-                              onChange={(e) => setEmail(e.target.value)}
-                              value={email}
-                              required
-                              autoComplete="off"
-                              placeholder="Email"
-                              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                            />
-                          </div>
-                        </div>
-                      </div>
+                          <div className="col-lg-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                htmlFor=""
+                              >
+                                Passport Expiry Date{" "}
+                                {/* <span className="text-danger">*</span> */}
+                              </label>
+                            </div>
+                            <div className="input-group mb-3 d-flex">
+                              {/* {
+                              <Text color="red">{passportExDate === null ? "NAI" : "ASE"}</Text>
+                              
+                            } */}
+                              <Box
+                                border="1px solid #ced4da"
+                                borderRadius="4px"
+                                w="100%"
+                                h="40px"
+                                pt="6px"
+                                pl="8px"
+                              >
+                                <DatePicker
+                                  dateFormat="dd/MM/yyyy"
+                                  selected={
+                                    passportExDate !== null &&
+                                      passportExDate?.length === 10
+                                      ? new Date(passportExDate)
+                                      : passportExDate
+                                  }
+                                  onChange={(date) =>
+                                    date !== "" && setpassportExDate(date)
+                                  }
+                                  placeholderText="dd/mm/yyyy"
+                                  minDate={new Date()}
+                                  maxDate={new Date("2199-12-30")}
+                                  showMonthDropdown
+                                  showYearDropdown
+                                  dropdownMode="select"
+                                />
+                              </Box>
 
-                      <div className="row">
-                        <div className="col-lg-4">
-                          <div className="form-group">
-                            <label
-                              className="form-label float-start fw-bold"
-                              htmlFor=""
-                            >
-                              Passport number{" "}
-                              {/* <span className="text-danger">*</span> */}
-                            </label>
-                          </div>
-                          <div className="input-group mb-3">
-                            <input
-                              type="text"
-                              className="form-control rounded"
-                              name="passport-number"
-                              onChange={(e) => setPassportNo(e.target.value)}
-                              value={passportNo}
-                              autoComplete="off"
-                              placeholder="Passport Number"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-lg-4">
-                          <div className="form-group">
-                            <label
-                              className="form-label float-start fw-bold"
-                              htmlFor=""
-                            >
-                              Issuing country{" "}
-                              {/* <span className="text-danger">*</span> */}
-                            </label>
-                          </div>
-                          <div className="input-group mb-3">
-                            <select
-                              className="form-select rounded"
-                              onChange={(e) =>
-                                setIssuingCountry(e.target.value)
-                              }
-                              value={issuingCountry}
-                              // required
-                            >
-                              <option value="">Issuing Country</option>
-                              {courtries.map((item, index) => {
-                                return (
-                                  <option key={index} value={item.code}>
-                                    {item.name}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                          </div>
-                        </div>
-                        <div className="col-lg-4">
-                          <div className="form-group">
-                            <label
-                              className="form-label float-start fw-bold"
-                              htmlFor=""
-                            >
-                              Passport Expiry Date{" "}
-                              {/* <span className="text-danger">*</span> */}
-                            </label>
-                          </div>
-                          <div className="input-group mb-3 d-flex">
-                            <input
+                              {/* <input
                               type={"date"}
+                              data-date=""
+                              data-date-format="DD/MM/YYYY"
                               name="passportExDate"
                               className="form-control rounded"
                               onChange={(e) => {
                                 setpassportExDate(e.target.value);
                               }}
-                              value={passportExDate}
+                              value={
+                                currentItem !== null
+                                  ? passportExDate
+                                  : ISODateFormatter(new Date())
+                              }
                               min={ISODateFormatter(new Date())}
                               autoComplete="off"
+                              required
                               pattern="\d{4}-\d{2}-\d{2}"
                               max="9999-12-31"
                               placeholder="Passport Expaire Date"
-                            />
+                            /> */}
+                            </div>
                           </div>
                         </div>
-                      </div>
-
-                      <div className="row">
-                        {/* <div className="col-lg-4">
-                          <div className="form-group">
-                            <label
-                              className="form-label float-start fw-bold"
-                              htmlFor=""
-                            >
-                              City Name
-                            </label>
-                          </div>
-                          <div className="input-group mb-3">
-                            <input
-                              type="text"
-                              className="form-control rounded"
-                              name="cityName"
-                              onChange={(e) => setCityName(e.target.value)}
-                              value={cityName}
-                              required
-                              autoComplete="off"
-                              placeholder="City Name"
-                            />
-                          </div>
-                        </div> */}
-                        {/* <div className="col-lg-4">
-                          <div className="form-group">
-                            <label
-                              className="form-label float-start fw-bold"
-                              htmlFor=""
-                            >
-                              Phone Number
-                            </label>
-                          </div>
-                          <div className="input-group mb-3">
-                            <select
-                              id="name"
-                              placeholder="Title"
-                              className="form-select rounded-start"
-                              onChange={(e) =>
-                                setPhoneCountryCode(e.target.value)
-                              }
-                              value={phoneCountryCode}
-                              required
-                              style={{ maxWidth: "5rem" }}
-                            >
-                              <option value="+88">+88</option>
-                              {courtries.map((item, index) => {
-                                return (
-                                  <option key={index} value={item.dial_code}>
-                                    {item.dial_code}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                            <input
-                              type="number"
-                              className="form-control rounded-end"
-                              name="passport-number"
-                              onChange={(e) => setPhone(e.target.value)}
-                              value={phone}
-                              required
-                              autoComplete="off"
-                              placeholder="Phone"
-                            />
-                          </div>
-                        </div> */}
-                        {/* <div className="col-lg-4">
-                          <div className="form-group">
-                            <label
-                              className="form-label float-start fw-bold"
-                              htmlFor=""
-                            >
-                              Passport Copy
-
-                            </label>
-                          </div>
-                          <div className="input-group mb-3 d-flex">
-                            {passportNo !== "" ? (
+                        <div className="row">
+                          <div className="col-lg-6">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                htmlFor=""
+                              >
+                                Passport Copy
+                              </label>
+                            </div>
+                            <div className="mb-3">
                               <input
+                                ref={passCopy}
+                                onClick={() => handleRestrict()}
                                 type={"file"}
                                 accept=".jpg, .jpeg, .png, .pdf"
                                 className="form-control rounded"
                                 onChange={(e) =>
                                   handlePassportFileUpload(e.target.files[0])
                                 }
-                              ></input>
-                            ) : (
-                              <></>
-                            )}
-                            <input
-                              type={"file"}
-                              accept=".jpg, .jpeg, .png, .pdf"
-                              className="form-control rounded"
-                              onChange={(e) =>
-                                handlePassportFileUpload(e.target.files[0])
-                              }
-                            />
+                              />
+                              {fileError && (<p style={{ color: "red" }}>Please select passport number then try again.</p>)}
+                            </div>
                           </div>
-                        </div> */}
-                        {/* <div className="col-lg-4">
-                          <div className="form-group">
-                            <label
-                              className="form-label float-start fw-bold"
-                              htmlFor=""
-                            >
-                              Visa Copy
-
-                            </label>
-                          </div>
-                          <div className="input-group mb-3 d-flex">
-                            {passportNo !== "" ? (
+                          <div className="col-lg-6">
+                            <div className="form-group">
+                              <label
+                                className="form-label float-start fw-bold"
+                                htmlFor=""
+                              >
+                                Visa Copy
+                              </label>
+                            </div>
+                            <div className="mb-3 ">
                               <input
+                                ref={visaCopy}
                                 type={"file"}
                                 accept=".jpg, .jpeg, .png, .pdf"
                                 className="form-control rounded"
+                                onClick={() => handleRestrict()}
                                 onChange={(e) =>
                                   handleVisaFileUpload(e.target.files[0])
                                 }
-                              ></input>
-                            ) : (
-                              <></>
-                            )}
-                            <input
-                              type={"file"}
-                              accept=".jpg, .jpeg, .png, .pdf"
-                              className="form-control rounded"
-                              onChange={(e) =>
-                                handleVisaFileUpload(e.target.files[0])
-                              }
-                            />
+                              />
+                              {fileError && (<p style={{ color: "red" }}>Please select passport number then try again.</p>)}
+                            </div>
                           </div>
-                        </div> */}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="modal-footer">
-                    <button
-                      type="button"
-                      className="btn btn-secondary rounded btn-sm"
-                      data-bs-dismiss="modal"
-                    >
-                      Close
-                    </button>
-                    <button
-                      type="button"
-                      className="btn button-color text-white rounded btn-sm"
-                      onClick={() => handleSubmit()}
-                      disabled={loading ? true : false}
-                    >
-                      {loading ? (
-                        <span
-                          class="spinner-border spinner-border-sm"
-                          role="status"
-                          aria-hidden="true"
-                        ></span>
-                      ) : (
-                        <span>Submit</span>
-                      )}
-                    </button>
-                  </div>
+                    <div className="modal-footer">
+                      <button
+                        type="reset"
+                        className="btn btn-secondary rounded btn-sm"
+                        data-bs-dismiss="modal"
+                        onClick={() => handleClear()}
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="button"
+                        className="btn button-color text-white rounded btn-sm"
+                        onClick={() => handleSubmit()}
+                        disabled={loading ? true : false}
+                      >
+                        {loading ? (
+                          <span
+                            class="spinner-border spinner-border-sm"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                        ) : (
+                          <span>
+                            {" "}
+                            {currentItem === null ? "Submit" : "Update"}
+                          </span>
+                        )}
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>

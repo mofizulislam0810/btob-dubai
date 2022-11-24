@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { decode as base64_decode } from "base-64";
 import $ from "jquery";
-import { Link, useNavigate } from "react-router-dom";
-import "./ShowFlight.css";
-import ShowModal from "../ShowModal/ShowModal";
-import useAuth from "../../../hooks/useAuth";
-import seatIcon from "../../../images/icon/Plane_Seat.svg";
 import moment from "moment";
-import airports from "../../../JSON/airports.json";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import { toast } from "react-toastify";
 import ReactTooltip from "react-tooltip";
-import layOver from "../../SharePages/Utility/layOver";
+import { totalFlightDuration } from "../../../common/functions";
+import useAuth from "../../../hooks/useAuth";
+import airports from "../../../JSON/airports.json";
 import dayCount from "../../SharePages/Utility/dayCount";
 import { environment } from "../../SharePages/Utility/environment";
-import axios from "axios";
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import { decode as base64_decode, encode as base64_encode } from "base-64";
-import { totalFlightDuration } from "../../../common/functions";
+import layOver from "../../SharePages/Utility/layOver";
+import ShowModal from "../ShowModal/ShowModal";
+import "./ShowFlight.css";
 
-let checkList = [];
+
 const ShowFlight = (props) => {
   const [grandTotal, setGrandTotal] = useState();
   const { setCount, handleFareRules, loading, fareRules, setFareRules } =
@@ -41,7 +40,7 @@ const ShowFlight = (props) => {
   const flightType = props.flightType;
   const amountChange = props.amountChange;
   let currency = props.currency;
-
+  let checkList = props.checkList;
   const getFareRules = (uId, dir, itemCode) => {
     handleFareRules(uId, dir, itemCode);
   };
@@ -128,10 +127,10 @@ const ShowFlight = (props) => {
     });
   }, [directions, props.index]);
 
-  const ImageUrlD = `https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${directions[0][0].platingCarrierCode}.png`;
+  const ImageUrlD = environment.s3ArliensImage + `${directions[0][0].platingCarrierCode}.png`;
   const ImageUrlR =
     directions[1] !== undefined
-      ? `https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${directions[1][0].platingCarrierCode}.png`
+      ? environment.s3ArliensImage + `${directions[1][0].platingCarrierCode}.png`
       : ``;
   const selectDirectionOption0 = (id) => {
     setdirection0(directions[0][id]);
@@ -209,7 +208,7 @@ const ShowFlight = (props) => {
       localStorage.setItem("refundable", JSON.stringify(refundable));
     });
 
-    $("#select-flight-t-click" + props.index).click(function () {});
+    $("#select-flight-t-click" + props.index).click(function () { });
 
     $(document).ready(function () {
       $("#show-option" + props.index).show();
@@ -291,26 +290,58 @@ const ShowFlight = (props) => {
     });
   }, [props.index]);
 
+  // const handleCheckBox = (e) => {
+  //   const checked = e.target.checked;
+  //   console.log("e.target.checked", e.target.checked)
+  //   if (checked) {
+  //     checkList.push(props.data);
+  //     setCount(checkList.length);
+  //     sessionStorage.setItem("checkList", JSON.stringify(checkList));
+  //     console.log("1", { checkList })
+  //   } else {
+
+  //     checkList = checkList.filter(
+  //       (item) => item.itemCodeRef !== props.data.itemCodeRef
+  //     );
+  //     checkList.pop(props.data);
+
+  //     console.log(checkList,"======")
+  //     sessionStorage.setItem("checkList", JSON.stringify(checkList));
+  //     setCount(checkList.length);
+  //   }
+  // };
+  const refCheck = useRef()
+
   const handleCheckBox = (e) => {
+
     const checked = e.target.checked;
     if (checked) {
+      console.log({ refCheck }, { e })
+      if (checkList.length >= 3) {
+        toast.error("Sorry! You can't select more then three.");
+        refCheck.current.checked = false
+        return
+      }
       checkList.push(props.data);
-      sessionStorage.setItem("checkList", JSON.stringify(checkList));
       setCount(checkList.length);
+      sessionStorage.setItem("checkList", JSON.stringify(checkList));
     } else {
-      checkList = checkList.filter(
+      const checkListPOP = checkList.filter(
         (item) => item.itemCodeRef !== props.data.itemCodeRef
       );
+      checkList.splice(0, checkList.length, ...checkListPOP);
+      setCount(checkListPOP.length);
       sessionStorage.setItem("checkList", JSON.stringify(checkList));
-      setCount(checkList.length);
     }
   };
+
+
+
+
   // console.log(currency);
   const isTempInspector = sessionStorage.getItem("isTempInspector");
-
   //BAGGAGE RESPONSE
   //console.log(directions[0][0].segments[0].baggage, "====");
-
   return (
     <>
       <>
@@ -322,8 +353,11 @@ const ShowFlight = (props) => {
             {/* up flight section  */}
             <span className="text-start">
               <input
+                ref={refCheck}
                 type="checkbox"
                 className="show-flight-checkbox"
+                // checked={checkList.length <= 3 ? true : false}
+                // onChange={(e) => console.log(e.target.value)}
                 onClick={(e) => handleCheckBox(e)}
               />
             </span>
@@ -355,9 +389,9 @@ const ShowFlight = (props) => {
                     </p>
                   </div>
                   <div className="col-lg-2 my-auto">
-                    <h6 className="fw-bold">
-                      <span className="fs-5">{item[0].from}</span>
-                      <span className="ms-1 fs-5">
+                    <h6 className="fw-bold" style={{ fontSize: "19px" }}>
+                      <span className="">{item[0].from}</span>
+                      <span className="ms-1 ">
                         {item[0].segments[0].departure.substr(11, 5)}
                       </span>
                     </h6>
@@ -399,9 +433,9 @@ const ShowFlight = (props) => {
                     </div>
                   </div>
                   <div className="col-lg-2 my-auto">
-                    <h6 className="fw-bold">
-                      <span className="fs-5">{item[0].to}</span>
-                      <span className="ms-1 fs-5">
+                    <h6 className="fw-bold" style={{ fontSize: "19px" }}>
+                      <span className="">{item[0].to}</span>
+                      <span className="ms-1 ">
                         {item[0].segments[
                           item[0].segments.length - 1
                         ].arrival.substr(11, 5)}
@@ -463,9 +497,9 @@ const ShowFlight = (props) => {
                   </p>
                 </div>
                 <div className="col-lg-2 my-auto">
-                  <h6 className="fw-bold">
-                    <span className="fs-5">{directions[0][0].from}</span>
-                    <span className="ms-1 fs-5">
+                  <h6 className="fw-bold" style={{ fontSize: "19px" }}>
+                    <span className="">{directions[0][0].from}</span>
+                    <span className="ms-1 ">
                       {directions[0][0].segments[0].departure.substr(11, 5)}
                     </span>
                     {/* {directions[0][0].segments[0].departure.substr(11, 5)} */}
@@ -491,7 +525,7 @@ const ShowFlight = (props) => {
                         ) : (
                           <>
                             {directions[0][0].segments.length === 1 &&
-                            directions[0][0].segments[0].details.length ===
+                              directions[0][0].segments[0].details.length ===
                               1 ? (
                               "Direct"
                             ) : (
@@ -639,9 +673,9 @@ const ShowFlight = (props) => {
                   </div>
                 </div>
                 <div className="col-lg-2 my-auto">
-                  <h6 className="fw-bold">
-                    <span className="fs-5">{directions[0][0].to}</span>
-                    <span className="ms-1 fs-5">
+                  <h6 className="fw-bold" style={{ fontSize: "19px" }}>
+                    <span className="">{directions[0][0].to}</span>
+                    <span className="ms-1 ">
                       {directions[0][0].segments[
                         directions[0][0].segments.length - 1
                       ].arrival.substr(11, 5)}
@@ -719,9 +753,9 @@ const ShowFlight = (props) => {
                   </p>
                 </div>
                 <div className="col-lg-2 my-auto">
-                  <h6 className="fw-bold">
-                    <span className="fs-5">{directions[1][0].from}</span>
-                    <span className="ms-1 fs-5">
+                  <h6 className="fw-bold" style={{ fontSize: "19px" }}>
+                    <span className="">{directions[1][0].from}</span>
+                    <span className="ms-1 ">
                       {directions[1][0].segments[0].departure.substr(11, 5)}
                     </span>
                   </h6>
@@ -745,7 +779,7 @@ const ShowFlight = (props) => {
                         ) : (
                           <>
                             {directions[0][0].segments.length === 1 &&
-                            directions[0][0].segments[0].details.length ===
+                              directions[0][0].segments[0].details.length ===
                               1 ? (
                               "Direct"
                             ) : (
@@ -893,9 +927,9 @@ const ShowFlight = (props) => {
                   </div>
                 </div>
                 <div className="col-lg-2 my-auto">
-                  <h6 className="fw-bold">
-                    <span className="fs-5">{directions[1][0].to}</span>
-                    <span className="ms-1 fs-5">
+                  <h6 className="fw-bold" style={{ fontSize: "19px" }}>
+                    <span className="">{directions[1][0].to}</span>
+                    <span className="ms-1 ">
                       {directions[1][0].segments[
                         directions[1][0].segments.length - 1
                       ].arrival.substr(11, 5)}
@@ -1342,13 +1376,13 @@ const ShowFlight = (props) => {
                         {(
                           passengerFares.adt.basePrice +
                           bookingComponents[0].agentAdditionalPrice /
-                            (passengerCounts.adt +
-                              (passengerCounts.cnn !== null
-                                ? passengerCounts.cnn
-                                : 0) +
-                              (passengerCounts.inf !== null
-                                ? passengerCounts.inf
-                                : 0))
+                          (passengerCounts.adt +
+                            (passengerCounts.cnn !== null
+                              ? passengerCounts.cnn
+                              : 0) +
+                            (passengerCounts.inf !== null
+                              ? passengerCounts.inf
+                              : 0))
                         ).toLocaleString("en-US")}
                       </td>
                       <td className="center">
@@ -1370,48 +1404,48 @@ const ShowFlight = (props) => {
                             title={
                               bookingComponents[0]?.fareReference !== ""
                                 ? JSON.parse(
-                                    base64_decode(
-                                      bookingComponents[0]?.fareReference
-                                    )
-                                  ).map((item) => {
-                                    return (
-                                      item.Id +
-                                      "(" +
-                                      (item.IsDefault == true &&
+                                  base64_decode(
+                                    bookingComponents[0]?.fareReference
+                                  )
+                                ).map((item) => {
+                                  return (
+                                    item.Id +
+                                    "(" +
+                                    (item.IsDefault == true &&
                                       item.IsAgent == false
-                                        ? "Default"
-                                        : item.IsDefault == false &&
-                                          item.IsAgent == false
+                                      ? "Default"
+                                      : item.IsDefault == false &&
+                                        item.IsAgent == false
                                         ? "Dynamic"
                                         : item.IsDefault == false &&
                                           item.IsAgent == true
-                                        ? "Agent"
-                                        : "") +
-                                      ") " +
-                                      (item.DiscountType == 1
-                                        ? "Markup"
-                                        : "Discount") +
-                                      " " +
-                                      item.Value +
-                                      (item.Type == 1 ? "%" : "") +
-                                      "\n"
-                                    );
-                                  })
+                                          ? "Agent"
+                                          : "") +
+                                    ") " +
+                                    (item.DiscountType == 1
+                                      ? "Markup"
+                                      : "Discount") +
+                                    " " +
+                                    item.Value +
+                                    (item.Type == 1 ? "%" : "") +
+                                    "\n"
+                                  );
+                                })
                                 : ""
                             }
                           >
                             {currency !== undefined ? currency : "BDT"}{" "}
                             {(
                               passengerFares.adt.totalPrice *
-                                passengerCounts.adt +
+                              passengerCounts.adt +
                               bookingComponents[0].agentAdditionalPrice /
-                                (passengerCounts.adt +
-                                  (passengerCounts.cnn !== null
-                                    ? passengerCounts.cnn
-                                    : 0) +
-                                  (passengerCounts.inf !== null
-                                    ? passengerCounts.inf
-                                    : 0))
+                              (passengerCounts.adt +
+                                (passengerCounts.cnn !== null
+                                  ? passengerCounts.cnn
+                                  : 0) +
+                                (passengerCounts.inf !== null
+                                  ? passengerCounts.inf
+                                  : 0))
                             ).toLocaleString("en-US")}
                           </td>
                         </>
@@ -1421,15 +1455,15 @@ const ShowFlight = (props) => {
                             {currency !== undefined ? currency : "BDT"}{" "}
                             {(
                               passengerFares.adt.totalPrice *
-                                passengerCounts.adt +
+                              passengerCounts.adt +
                               bookingComponents[0].agentAdditionalPrice /
-                                (passengerCounts.adt +
-                                  (passengerCounts.cnn !== null
-                                    ? passengerCounts.cnn
-                                    : 0) +
-                                  (passengerCounts.inf !== null
-                                    ? passengerCounts.inf
-                                    : 0))
+                              (passengerCounts.adt +
+                                (passengerCounts.cnn !== null
+                                  ? passengerCounts.cnn
+                                  : 0) +
+                                (passengerCounts.inf !== null
+                                  ? passengerCounts.inf
+                                  : 0))
                             ).toLocaleString("en-US")}
                           </td>
                         </>
@@ -1448,13 +1482,13 @@ const ShowFlight = (props) => {
                         {(
                           passengerFares.cnn.basePrice +
                           bookingComponents[0].agentAdditionalPrice /
-                            (passengerCounts.adt +
-                              (passengerCounts.cnn !== null
-                                ? passengerCounts.cnn
-                                : 0) +
-                              (passengerCounts.inf !== null
-                                ? passengerCounts.inf
-                                : 0))
+                          (passengerCounts.adt +
+                            (passengerCounts.cnn !== null
+                              ? passengerCounts.cnn
+                              : 0) +
+                            (passengerCounts.inf !== null
+                              ? passengerCounts.inf
+                              : 0))
                         ).toLocaleString("en-US")}
                       </td>
                       <td className="center">
@@ -1477,48 +1511,48 @@ const ShowFlight = (props) => {
                             title={
                               bookingComponents[0]?.fareReference !== ""
                                 ? JSON.parse(
-                                    base64_decode(
-                                      bookingComponents[0]?.fareReference
-                                    )
-                                  ).map((item) => {
-                                    return (
-                                      item.Id +
-                                      "(" +
-                                      (item.IsDefault == true &&
+                                  base64_decode(
+                                    bookingComponents[0]?.fareReference
+                                  )
+                                ).map((item) => {
+                                  return (
+                                    item.Id +
+                                    "(" +
+                                    (item.IsDefault == true &&
                                       item.IsAgent == false
-                                        ? "Default"
-                                        : item.IsDefault == false &&
-                                          item.IsAgent == false
+                                      ? "Default"
+                                      : item.IsDefault == false &&
+                                        item.IsAgent == false
                                         ? "Dynamic"
                                         : item.IsDefault == false &&
                                           item.IsAgent == true
-                                        ? "Agent"
-                                        : "") +
-                                      ") " +
-                                      (item.DiscountType == 1
-                                        ? "Markup"
-                                        : "Discount") +
-                                      " " +
-                                      item.Value +
-                                      (item.Type == 1 ? "%" : "") +
-                                      "\n"
-                                    );
-                                  })
+                                          ? "Agent"
+                                          : "") +
+                                    ") " +
+                                    (item.DiscountType == 1
+                                      ? "Markup"
+                                      : "Discount") +
+                                    " " +
+                                    item.Value +
+                                    (item.Type == 1 ? "%" : "") +
+                                    "\n"
+                                  );
+                                })
                                 : ""
                             }
                           >
                             {currency !== undefined ? currency : "BDT"}{" "}
                             {(
                               passengerFares.cnn.totalPrice *
-                                passengerCounts.cnn +
+                              passengerCounts.cnn +
                               bookingComponents[0].agentAdditionalPrice /
-                                (passengerCounts.adt +
-                                  (passengerCounts.cnn !== null
-                                    ? passengerCounts.cnn
-                                    : 0) +
-                                  (passengerCounts.inf !== null
-                                    ? passengerCounts.inf
-                                    : 0))
+                              (passengerCounts.adt +
+                                (passengerCounts.cnn !== null
+                                  ? passengerCounts.cnn
+                                  : 0) +
+                                (passengerCounts.inf !== null
+                                  ? passengerCounts.inf
+                                  : 0))
                             ).toLocaleString("en-US")}
                           </td>
                         </>
@@ -1529,15 +1563,15 @@ const ShowFlight = (props) => {
                             {currency !== undefined ? currency : "BDT"}{" "}
                             {(
                               passengerFares.cnn.totalPrice *
-                                passengerCounts.cnn +
+                              passengerCounts.cnn +
                               bookingComponents[0].agentAdditionalPrice /
-                                (passengerCounts.adt +
-                                  (passengerCounts.cnn !== null
-                                    ? passengerCounts.cnn
-                                    : 0) +
-                                  (passengerCounts.inf !== null
-                                    ? passengerCounts.inf
-                                    : 0))
+                              (passengerCounts.adt +
+                                (passengerCounts.cnn !== null
+                                  ? passengerCounts.cnn
+                                  : 0) +
+                                (passengerCounts.inf !== null
+                                  ? passengerCounts.inf
+                                  : 0))
                             ).toLocaleString("en-US")}
                           </td>
                         </>
@@ -1556,13 +1590,13 @@ const ShowFlight = (props) => {
                         {(
                           passengerFares.inf.basePrice +
                           bookingComponents[0].agentAdditionalPrice /
-                            (passengerCounts.adt +
-                              (passengerCounts.cnn !== null
-                                ? passengerCounts.cnn
-                                : 0) +
-                              (passengerCounts.inf !== null
-                                ? passengerCounts.inf
-                                : 0))
+                          (passengerCounts.adt +
+                            (passengerCounts.cnn !== null
+                              ? passengerCounts.cnn
+                              : 0) +
+                            (passengerCounts.inf !== null
+                              ? passengerCounts.inf
+                              : 0))
                         ).toLocaleString("en-US")}
                       </td>
                       <td className="center">
@@ -1585,48 +1619,48 @@ const ShowFlight = (props) => {
                             title={
                               bookingComponents[0]?.fareReference !== ""
                                 ? JSON.parse(
-                                    base64_decode(
-                                      bookingComponents[0]?.fareReference
-                                    )
-                                  ).map((item) => {
-                                    return (
-                                      item.Id +
-                                      "(" +
-                                      (item.IsDefault == true &&
+                                  base64_decode(
+                                    bookingComponents[0]?.fareReference
+                                  )
+                                ).map((item) => {
+                                  return (
+                                    item.Id +
+                                    "(" +
+                                    (item.IsDefault == true &&
                                       item.IsAgent == false
-                                        ? "Default"
-                                        : item.IsDefault == false &&
-                                          item.IsAgent == false
+                                      ? "Default"
+                                      : item.IsDefault == false &&
+                                        item.IsAgent == false
                                         ? "Dynamic"
                                         : item.IsDefault == false &&
                                           item.IsAgent == true
-                                        ? "Agent"
-                                        : "") +
-                                      ") " +
-                                      (item.DiscountType == 1
-                                        ? "Markup"
-                                        : "Discount") +
-                                      " " +
-                                      item.Value +
-                                      (item.Type == 1 ? "%" : "") +
-                                      "\n"
-                                    );
-                                  })
+                                          ? "Agent"
+                                          : "") +
+                                    ") " +
+                                    (item.DiscountType == 1
+                                      ? "Markup"
+                                      : "Discount") +
+                                    " " +
+                                    item.Value +
+                                    (item.Type == 1 ? "%" : "") +
+                                    "\n"
+                                  );
+                                })
                                 : " "
                             }
                           >
                             {currency !== undefined ? currency : "BDT"}{" "}
                             {(
                               passengerFares.inf.totalPrice *
-                                passengerCounts.inf +
+                              passengerCounts.inf +
                               bookingComponents[0].agentAdditionalPrice /
-                                (passengerCounts.adt +
-                                  (passengerCounts.cnn !== null
-                                    ? passengerCounts.cnn
-                                    : 0) +
-                                  (passengerCounts.inf !== null
-                                    ? passengerCounts.inf
-                                    : 0))
+                              (passengerCounts.adt +
+                                (passengerCounts.cnn !== null
+                                  ? passengerCounts.cnn
+                                  : 0) +
+                                (passengerCounts.inf !== null
+                                  ? passengerCounts.inf
+                                  : 0))
                             ).toLocaleString("en-US")}
                           </td>
                         </>
@@ -1640,15 +1674,15 @@ const ShowFlight = (props) => {
                             {currency !== undefined ? currency : "BDT"}{" "}
                             {(
                               passengerFares.inf.totalPrice *
-                                passengerCounts.inf +
+                              passengerCounts.inf +
                               bookingComponents[0].agentAdditionalPrice /
-                                (passengerCounts.adt +
-                                  (passengerCounts.cnn !== null
-                                    ? passengerCounts.cnn
-                                    : 0) +
-                                  (passengerCounts.inf !== null
-                                    ? passengerCounts.inf
-                                    : 0))
+                              (passengerCounts.adt +
+                                (passengerCounts.cnn !== null
+                                  ? passengerCounts.cnn
+                                  : 0) +
+                                (passengerCounts.inf !== null
+                                  ? passengerCounts.inf
+                                  : 0))
                             ).toLocaleString("en-US")}
                           </td>
                         </>
@@ -1688,11 +1722,11 @@ const ShowFlight = (props) => {
         {/* show more section  */}
 
         {(directions[0] !== undefined && directions[0].length > 1) ||
-        (directions[1] !== undefined && directions[1].length > 1) ||
-        (directions[2] !== undefined && directions[2].length > 1) ||
-        (directions[3] !== undefined && directions[3].length > 1) ||
-        (directions[4] !== undefined && directions[4].length > 1) ||
-        (directions[5] !== undefined && directions[5].length > 1) ? (
+          (directions[1] !== undefined && directions[1].length > 1) ||
+          (directions[2] !== undefined && directions[2].length > 1) ||
+          (directions[3] !== undefined && directions[3].length > 1) ||
+          (directions[4] !== undefined && directions[4].length > 1) ||
+          (directions[5] !== undefined && directions[5].length > 1) ? (
           <>
             <div className="position-relative" id={"show-option" + props.index}>
               <div className="position-absolute top-100 start-50 translate-middle">
@@ -1782,8 +1816,8 @@ const ShowFlight = (props) => {
                         </div>
                         <div className="col-lg-2 my-auto">
                           <h6 className="fw-bold">
-                            <span className="fs-5">{item.from}</span>
-                            <span className="ms-1 fs-5">
+                            <span className="">{item.from}</span>
+                            <span className="ms-1 ">
                               {item.segments[0].departure.substr(11, 5)}
                             </span>
                           </h6>
@@ -1805,8 +1839,8 @@ const ShowFlight = (props) => {
                                 {directions[0][0].segments.length === 1
                                   ? "Direct"
                                   : directions[0][0].segments.length -
-                                    1 +
-                                    " Stop"}
+                                  1 +
+                                  " Stop"}
                               </span>
                             </div>
                             <div className="col-lg-12 text-center">
@@ -1836,8 +1870,8 @@ const ShowFlight = (props) => {
                         </div>
                         <div className="col-lg-2 my-auto">
                           <h6 className="fw-bold">
-                            <span className="fs-5">{item.to}</span>
-                            <span className="ms-1 fs-5">
+                            <span className="">{item.to}</span>
+                            <span className="ms-1 ">
                               {item.segments[
                                 item.segments.length - 1
                               ].arrival.substr(11, 5)}
@@ -1884,7 +1918,7 @@ const ShowFlight = (props) => {
                               name={"chooseoption0" + props.index}
                               onChange={() => selectDirectionOption0(index)}
                               defaultChecked={index === 0 ? true : false}
-                              // onChange={handleChange}
+                            // onChange={handleChange}
                             />
                             <label
                               className="form-check-label"
@@ -1940,8 +1974,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.from}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.from}</span>
+                                <span className="ms-1 ">
                                   {item.segments[0].departure.substr(11, 5)}
                                 </span>
                               </h6>
@@ -1963,8 +1997,8 @@ const ShowFlight = (props) => {
                                     {directions[0][0].segments.length === 1
                                       ? "Direct"
                                       : directions[0][0].segments.length -
-                                        1 +
-                                        " Stop"}
+                                      1 +
+                                      " Stop"}
                                   </span>
                                 </div>
                                 <div className="col-lg-12 text-center">
@@ -1994,8 +2028,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.to}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.to}</span>
+                                <span className="ms-1 ">
                                   {item.segments[
                                     item.segments.length - 1
                                   ].arrival.substr(11, 5)}
@@ -2044,7 +2078,7 @@ const ShowFlight = (props) => {
                                   name={"chooseoption1" + props.index}
                                   onChange={() => selectDirectionOption1(index)}
                                   defaultChecked={index === 0 ? true : false}
-                                  // onChange={handleChange}
+                                // onChange={handleChange}
                                 />
                                 <label
                                   className="form-check-label"
@@ -2104,8 +2138,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.from}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.from}</span>
+                                <span className="ms-1 ">
                                   {item.segments[0].departure.substr(11, 5)}
                                 </span>
                               </h6>
@@ -2127,8 +2161,8 @@ const ShowFlight = (props) => {
                                     {directions[0][0].segments.length === 1
                                       ? "Direct"
                                       : directions[0][0].segments.length -
-                                        1 +
-                                        " Stop"}
+                                      1 +
+                                      " Stop"}
                                   </span>
                                 </div>
                                 <div className="col-lg-12 text-center">
@@ -2158,8 +2192,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.to}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.to}</span>
+                                <span className="ms-1 ">
                                   {item.segments[
                                     item.segments.length - 1
                                   ].arrival.substr(11, 5)}
@@ -2208,7 +2242,7 @@ const ShowFlight = (props) => {
                                   name={"chooseoption2" + props.index}
                                   onChange={() => selectDirectionOption2(index)}
                                   defaultChecked={index === 0 ? true : false}
-                                  // onChange={handleChange}
+                                // onChange={handleChange}
                                 />
                                 <label
                                   className="form-check-label"
@@ -2269,8 +2303,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.from}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.from}</span>
+                                <span className="ms-1 ">
                                   {item.segments[0].departure.substr(11, 5)}
                                 </span>
                               </h6>
@@ -2292,8 +2326,8 @@ const ShowFlight = (props) => {
                                     {directions[0][0].segments.length === 1
                                       ? "Direct"
                                       : directions[0][0].segments.length -
-                                        1 +
-                                        " Stop"}
+                                      1 +
+                                      " Stop"}
                                   </span>
                                 </div>
                                 <div className="col-lg-12 text-center">
@@ -2323,8 +2357,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.to}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.to}</span>
+                                <span className="ms-1 ">
                                   {item.segments[
                                     item.segments.length - 1
                                   ].arrival.substr(11, 5)}
@@ -2373,7 +2407,7 @@ const ShowFlight = (props) => {
                                   name={"chooseoption3" + props.index}
                                   onChange={() => selectDirectionOption3(index)}
                                   defaultChecked={index === 0 ? true : false}
-                                  // onChange={handleChange}
+                                // onChange={handleChange}
                                 />
                                 <label
                                   className="form-check-label"
@@ -2433,8 +2467,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.from}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.from}</span>
+                                <span className="ms-1 ">
                                   {item.segments[0].departure.substr(11, 5)}
                                 </span>
                               </h6>
@@ -2456,8 +2490,8 @@ const ShowFlight = (props) => {
                                     {directions[0][0].segments.length === 1
                                       ? "Direct"
                                       : directions[0][0].segments.length -
-                                        1 +
-                                        " Stop"}
+                                      1 +
+                                      " Stop"}
                                   </span>
                                 </div>
                                 <div className="col-lg-12 text-center">
@@ -2487,8 +2521,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.to}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.to}</span>
+                                <span className="ms-1 ">
                                   {item.segments[
                                     item.segments.length - 1
                                   ].arrival.substr(11, 5)}
@@ -2537,7 +2571,7 @@ const ShowFlight = (props) => {
                                   name={"chooseoption4" + props.index}
                                   onChange={() => selectDirectionOption4(index)}
                                   defaultChecked={index === 0 ? true : false}
-                                  // onChange={handleChange}
+                                // onChange={handleChange}
                                 />
                                 <label
                                   className="form-check-label"
@@ -2598,8 +2632,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.from}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.from}</span>
+                                <span className="ms-1 ">
                                   {item.segments[0].departure.substr(11, 5)}
                                 </span>
                               </h6>
@@ -2621,8 +2655,8 @@ const ShowFlight = (props) => {
                                     {directions[0][0].segments.length === 1
                                       ? "Direct"
                                       : directions[0][0].segments.length -
-                                        1 +
-                                        " Stop"}
+                                      1 +
+                                      " Stop"}
                                   </span>
                                 </div>
                                 <div className="col-lg-12 text-center">
@@ -2652,8 +2686,8 @@ const ShowFlight = (props) => {
                             </div>
                             <div className="col-lg-2 my-auto">
                               <h6 className="fw-bold">
-                                <span className="fs-5">{item.to}</span>
-                                <span className="ms-1 fs-5">
+                                <span className="">{item.to}</span>
+                                <span className="ms-1 ">
                                   {item.segments[
                                     item.segments.length - 1
                                   ].arrival.substr(11, 5)}
@@ -2702,7 +2736,7 @@ const ShowFlight = (props) => {
                                   name={"chooseoption5" + props.index}
                                   onChange={() => selectDirectionOption5(index)}
                                   defaultChecked={index === 0 ? true : false}
-                                  // onChange={handleChange}
+                                // onChange={handleChange}
                                 />
                                 <label
                                   className="form-check-label"
@@ -2758,8 +2792,8 @@ const ShowFlight = (props) => {
                       </span>
                       <p className="my-auto">{item.from}</p> */}
                         <h6 className="fw-bold">
-                          <span className="fs-5">{item.from}</span>
-                          <span className="ms-1 fs-5">
+                          <span className="">{item.from}</span>
+                          <span className="ms-1 ">
                             {item.segments[0].departure.substr(11, 5)}
                           </span>
                           {/* {directions[0][0].segments[0].departure.substr(11, 5)} */}
@@ -2782,8 +2816,8 @@ const ShowFlight = (props) => {
                               {directions[0][0].segments.length === 1
                                 ? "Direct"
                                 : directions[0][0].segments.length -
-                                  1 +
-                                  " Stop"}
+                                1 +
+                                " Stop"}
                             </span>
                           </div>
                           <div className="col-lg-12 text-center">
@@ -2803,9 +2837,18 @@ const ShowFlight = (props) => {
                             <span className="text-color">
                               <i className="fas fa-briefcase fa-sm"></i>
                               <span className="ms-1 font-size">
-                                {item.segments[0].baggage[0]?.amount +
+                                {
+                                  item.segments[0].baggage[0] !== undefined ? <>
+                                    {item.segments[0].baggage[0]?.amount +
+                                      " " +
+                                      item.segments[0].baggage[0]?.units}
+                                  </> : <>
+                                    N/A
+                                  </>
+                                }
+                                {/* {item.segments[0].baggage[0]?.amount +
                                   " " +
-                                  item.segments[0].baggage[0]?.units}
+                                  item.segments[0].baggage[0]?.units} */}
                               </span>
                             </span>
                           </div>
@@ -2813,8 +2856,8 @@ const ShowFlight = (props) => {
                       </div>
                       <div className="col-lg-2 my-auto">
                         <h6 className="fw-bold">
-                          <span className="fs-5">{item.to}</span>
-                          <span className="ms-1 fs-5">
+                          <span className="">{item.to}</span>
+                          <span className="ms-1 ">
                             {item.segments[
                               item.segments.length - 1
                             ].arrival.substr(11, 5)}
@@ -2861,7 +2904,7 @@ const ShowFlight = (props) => {
                             name={"chooseDeparture" + props.index}
                             onChange={() => selectDirectionOption0(index)}
                             defaultChecked={index === 0 ? true : false}
-                            // onChange={handleChange}
+                          // onChange={handleChange}
                           />
                           <label
                             className="form-check-label"
@@ -2925,8 +2968,8 @@ const ShowFlight = (props) => {
                           </div>
                           <div className="col-lg-2 my-auto">
                             <h6 className="fw-bold">
-                              <span className="fs-5">{item.from}</span>
-                              <span className="ms-1 fs-5">
+                              <span className="">{item.from}</span>
+                              <span className="ms-1 ">
                                 {item.segments[0].departure.substr(11, 5)}
                               </span>
                             </h6>
@@ -2948,8 +2991,8 @@ const ShowFlight = (props) => {
                                   {directions[1][0].segments.length === 1
                                     ? "Direct"
                                     : directions[1][0].segments.length -
-                                      1 +
-                                      " Stop"}
+                                    1 +
+                                    " Stop"}
                                 </span>
                               </div>
                               <div className="col-lg-12 text-center">
@@ -2969,9 +3012,15 @@ const ShowFlight = (props) => {
                                 <span className="text-color">
                                   <i className="fas fa-briefcase fa-sm"></i>
                                   <span className="ms-1 font-size">
-                                    {item.segments[0].baggage[0]?.amount +
-                                      " " +
-                                      item.segments[0].baggage[0]?.units}
+                                    {
+                                      item.segments[0].baggage[0] !== undefined ? <>
+                                        {item.segments[0].baggage[0]?.amount +
+                                          " " +
+                                          item.segments[0].baggage[0]?.units}
+                                      </> : <>
+                                        N/A
+                                      </>
+                                    }
                                   </span>
                                 </span>
                               </div>
@@ -2979,8 +3028,8 @@ const ShowFlight = (props) => {
                           </div>
                           <div className="col-lg-2 my-auto">
                             <h6 className="fw-bold">
-                              <span className="fs-5">{item.to}</span>
-                              <span className="ms-1 fs-5">
+                              <span className="">{item.to}</span>
+                              <span className="ms-1 ">
                                 {item.segments[
                                   item.segments.length - 1
                                 ].arrival.substr(11, 5)}
@@ -3063,10 +3112,10 @@ const ShowFlight = (props) => {
                     {currency !== undefined ? currency : "BDT"}{" "}
                     {parseFloat(
                       totalPrice -
-                        bookingComponents[0].discountPrice +
-                        (bookingComponents[0].agentAdditionalPrice < 0
-                          ? 0
-                          : bookingComponents[0].agentAdditionalPrice)
+                      bookingComponents[0].discountPrice +
+                      (bookingComponents[0].agentAdditionalPrice < 0
+                        ? 0
+                        : bookingComponents[0].agentAdditionalPrice)
                     ).toLocaleString("en-US")}
                   </div>
                 </>
@@ -3075,10 +3124,10 @@ const ShowFlight = (props) => {
                   {currency !== undefined ? currency : "BDT"}{" "}
                   {parseFloat(
                     totalPrice -
-                      bookingComponents[0].discountPrice +
-                      (bookingComponents[0].agentAdditionalPrice < 0
-                        ? 0
-                        : bookingComponents[0].agentAdditionalPrice)
+                    bookingComponents[0].discountPrice +
+                    (bookingComponents[0].agentAdditionalPrice < 0
+                      ? 0
+                      : bookingComponents[0].agentAdditionalPrice)
                   ).toLocaleString("en-US")}
                 </div>
               )}
@@ -3143,9 +3192,9 @@ const ShowFlight = (props) => {
               ) : (
                 <>
                   {fareRules !== undefined &&
-                  fareRules.item2 != undefined &&
-                  fareRules !== "" &&
-                  fareRules.item1 != null ? (
+                    fareRules.item2 != undefined &&
+                    fareRules !== "" &&
+                    fareRules.item1 != null ? (
                     fareRules.item2.isSuccess == true ? (
                       <Tabs>
                         <TabList style={{ overflowY: "scroll" }}>

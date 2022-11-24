@@ -1,42 +1,28 @@
-import {
-  Box,
-  Center,
-  Circle,
-  Flex,
-  HStack,
-  Icon,
-  Image,
-  VStack,
-  Text,
-  Divider,
-} from "@chakra-ui/react";
+import { Box, Circle, Flex, HStack, Icon, Text } from "@chakra-ui/react";
 import React from "react";
-import logo from "../../../images/logo/logo-combined.png";
-import paymentOptions from "../../../images/footer/payment.png";
+import { BsFillHouseFill } from "react-icons/bs";
 import {
-  FaTwitter,
-  FaYoutube,
   FaFacebookF,
   FaLinkedinIn,
   FaPhoneAlt,
+  FaInstagram
 } from "react-icons/fa";
 import { GrMail } from "react-icons/gr";
-import { BsFillHouseFill } from "react-icons/bs";
-import Contact from "../../Optional/Contact/Contact";
-import { map } from "jquery";
 import { Link } from "react-router-dom";
-import { nanoid } from "nanoid";
+import logo from "../../../images/logo/logo-combined.png";
 
 const socialData = [
-  { icon: FaTwitter },
-  { icon: FaYoutube },
   { icon: FaFacebookF },
+  { icon: FaInstagram },
   { icon: FaLinkedinIn },
 ];
 
+
 const quickLinksData = [
+  { text: "About Us", to: "aboutus" },
   { text: "Contact", to: "contact" },
   // { text: "Bank Details", to: "bankdetail" },
+  { text: "EMI Policy", to: "EmiPolicy" },
   { text: "Privacy Policy", to: "privacypolicy" },
   { text: "Terms And Conditions", to: "termandcondition" },
   { text: "Refund & Cancellation", to: "refundandcancellation" },
@@ -60,19 +46,23 @@ const addressData = [
 const Footer = () => {
   return (
     <>
-
-      <Box className="container-fluid" bg="#591b7d" >
+      <Box className="container-fluid" bg="#591b7d">
         <Box className="container">
-          <Flex w="100%" pt={'20px'} pb='10px' justifyContent="space-between" color={'white'}>
+          <Flex
+            w="100%"
+            pt={"20px"}
+            pb="10px"
+            justifyContent="space-between"
+            color={"white"}
+          >
             <Box className="d-flex align-items-center">
               {/* <div  w="160px" h="103px" /> */}
 
               {socialData.map((item, idx) => (
                 <Circle bg="#E0ECFB" size="45px" key={idx} className="mx-1">
-                  <Icon as={item.icon} h="22px" w="22px" color='black' />
+                  <Icon as={item.icon} h="22px" w="22px" color="black" />
                 </Circle>
               ))}
-
             </Box>
 
             {/* <Box borderRight="1px" color="#ECECEC" my={2} /> */}
@@ -83,7 +73,7 @@ const Footer = () => {
               </Text>
               {quickLinksData.map((item, idx) => (
                 <Link to={`/${item.to}`} key={idx}>
-                  <Text fontSize="14px" fontWeight={400} mb="17px">
+                  <Text fontSize="14px" fontWeight={400} mb="8px">
                     {item.text}
                   </Text>
                 </Link>
@@ -103,7 +93,7 @@ const Footer = () => {
                     h="26px"
                     w="24px"
                     // color="rgba(28, 25, 55, 0.72)"
-                    color={'white'}
+                    color={"white"}
                   />
                   <Text fontSize="14px" fontWeight={400} maxW="240px">
                     {item.text}
@@ -115,26 +105,22 @@ const Footer = () => {
         </Box>
       </Box>
 
-
-
-
-
       {/* <Box borderTop="1px solid #E2E2E2" mx={4} /> */}
-      <Box display={'flex'} justifyContent='center' alignItems="center">
-      <img src={logo} alt="" width='100px' height={"10px"} />
-          <Text fontSize="14px"
-            fontWeight={400}
-            color="#908DAB"
-            textAlign="center"
-            pt="16px"
-            pl="5px"
-          > Copyright © 2022 First Trip Ltd. All rights reserved.</Text>
+      <Box display={"flex"} justifyContent="center" alignItems="center">
+        <img src={logo} alt="" width="100px" height={"10px"} />
+        <Text
+          fontSize="14px"
+          fontWeight={400}
+          color="#908DAB"
+          textAlign="center"
+          pt="16px"
+          pl="5px"
+        >
+          {" "}
+          Copyright © 2022 First Trip Ltd. All rights reserved.
+        </Text>
       </Box>
-
-
     </>
-
-
   );
 };
 

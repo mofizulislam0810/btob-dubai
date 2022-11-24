@@ -1,4 +1,4 @@
-// const baseURL='http://localhost:7236/';
+//  const baseURL='http://localhost:7236/';
 // const baseURL='http://52.221.202.198:83/';
 // const baseURL='http://13.212.45.180:81/';
 const baseURL = "http://54.169.108.46:81/";
@@ -7,6 +7,9 @@ const baseURL = "http://54.169.108.46:81/";
 // const baseURL = 'https://api.firsttrip.com/';
 // https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/
 // https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/
+// "https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/"
+// https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/AirlineLogos/
+// https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/AirlineLogos/
 
 const baseApiURL = baseURL + "api/";
 const tokenData = JSON.parse(localStorage.getItem("token"));
@@ -15,7 +18,8 @@ if (tokenData != null && new Date(tokenData.expireIn) >= new Date()) {
   headerToken = { headers: { Authorization: "Bearer " + tokenData?.token } };
 }
 export const environment = {
-  s3URL: "https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/",
+  s3URL: "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/",
+  s3ArliensImage : "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/AirlineLogos/",
   baseApiURL: baseApiURL,
   headerToken: headerToken,
 
@@ -25,6 +29,7 @@ export const environment = {
   logoFileUpload: baseApiURL + "user/uploadB2B",
 
   userList: baseApiURL + "user",
+  userProfileEdit: baseApiURL + "user/B2BProfileEdit",
   searchFlight: baseApiURL + "Search",
   bookFlight: baseApiURL + "Book",
   ticketingFlight: baseApiURL + "Ticket",
@@ -112,6 +117,7 @@ export const environment = {
   segmentList: baseApiURL + "B2BReport/SegmentsByTransactionId",
   creditNoteList: baseApiURL + "B2BReport/GetCreditNoteByAgentId",
   getTicketingDetails: baseApiURL + "B2BReport/AirTicketingDetails",
+  getTicketingDetailsCancel: baseApiURL + "B2BReport/AirTicketingDetailsCanceled",
   airTicketingSearch: baseApiURL + "B2BReport/AirTicketingSearch",
   searchLogs: baseApiURL + "B2BReport/SearchLogsByUser",
 

@@ -19,7 +19,10 @@ import SideNavBar from "../../SharePages/SideNavBar/SideNavBar";
 import { environment } from "../../SharePages/Utility/environment";
 import ShowAllFlight from "../ShowAllFlight/ShowAllFlight";
 let cIndex = 1;
+
 const ShowAllFlightPage = () => {
+  let checkList = [];
+  sessionStorage.removeItem("checkList");
   const searchData = JSON.parse(localStorage.getItem("Database"));
   window.scrollTo(0, 0);
   const { state } = useLocation();
@@ -111,7 +114,7 @@ const ShowAllFlightPage = () => {
   //     cIndex=1;
   // }
 
-  const childrenAges = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const childrenAges = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   if (originRefValue2 && document.getElementById("multiCity2")) {
     // alert(cIndex+"o2");
@@ -146,6 +149,17 @@ const ShowAllFlightPage = () => {
       cIndex = 5;
     }
   }
+
+  const [preAirlines, setPreAirlines] = useState();
+
+  const handleChange = (e) => {
+    const re = /^[a-zA-Z,]*$/;
+    let text = e.target.value;
+    if (re.test(text)) {
+      setPreAirlines(text);
+    } else {
+    }
+  };
 
   const handleFlightOptionP = () => {
     // alert(cIndex);
@@ -289,6 +303,8 @@ const ShowAllFlightPage = () => {
         f.city + " - " + f.country + ", " + f.name === searchData.destination2
     )
     .map((item) => item.iata);
+
+    console.log(destinationCode2[0]);
   const originCode3 = airports
     .filter(
       (f) => f.city + " - " + f.country + ", " + f.name === searchData.origin3
@@ -567,7 +583,7 @@ const ShowAllFlightPage = () => {
       var ac = $(this);
 
       ac.on("click", function (e) {
-        e.stopPropagation();
+        // e.stopPropagation();
       })
         .on("focus keyup", search)
         .on("keydown", onKeyDown);
@@ -606,10 +622,10 @@ const ShowAllFlightPage = () => {
       if (results.length >= index + 1) {
         autoinput.val(
           results[index].city +
-            " - " +
-            results[index].country +
-            ", " +
-            results[index].name
+          " - " +
+          results[index].country +
+          ", " +
+          results[index].name
         );
         clearResults();
       }
@@ -799,78 +815,230 @@ const ShowAllFlightPage = () => {
       const inputDateMulti5 = $("#departureDate5").children("input").val();
       if (origin === destination && origin !== "" && destination !== "") {
         toast.error("Depart From and Going To must be difference No.1");
-        setSameMatchError(true);
       } else if (
         origin1 === destination1 &&
         origin1 !== "" &&
         destination1 !== ""
       ) {
         toast.error("Depart From and Going To must be difference No.2");
-        setSameMatchError(true);
       } else if (
         origin2 === destination2 &&
         origin2 !== "" &&
         destination2 !== ""
       ) {
         toast.error("Depart From and Going To must be difference No.3");
-        setSameMatchError(true);
       } else if (
         origin3 === destination3 &&
         origin3 !== "" &&
         destination3 !== ""
       ) {
         toast.error("Depart From and Going To must be difference No.4");
-        setSameMatchError(true);
       } else if (
         origin4 === destination4 &&
         origin4 !== "" &&
         destination4 !== ""
       ) {
         toast.error("Depart From and Going To must be difference No.5");
-        setSameMatchError(true);
       } else if (
         origin5 === destination5 &&
         origin5 !== "" &&
         destination5 !== ""
       ) {
         toast.error("Depart From and Going To must be difference No.5");
-        setSameMatchError(true);
-      } else setSameMatchError(false);
+      } else {
+        if (String(journeyDate) === String(null) && origin !== destination) {
+          toast.error("Please select all departing date no.1");
+        } else if (
+          String(inputDateMulti1) === String(null) &&
+          origin1 !== destination1
+        ) {
+          toast.error("Please select all departing date no.2");
+        } else if (
+          String(inputDateMulti2) === String(null) &&
+          origin2 !== destination2
+        ) {
+          toast.error("Please select all departing date no.3");
+        } else if (
+          String(inputDateMulti3) === String(null) &&
+          origin3 !== destination3
+        ) {
+          toast.error("Please select all departing date no.3");
+        } else if (
+          String(inputDateMulti4) === String(null) &&
+          origin4 !== destination4
+        ) {
+          toast.error("Please select all departing date no.4");
+        } else if (
+          String(inputDateMulti5) === String(null) &&
+          origin5 !== destination5
+        ) {
+          toast.error("Please select all departing date no.5");
+        } else {
+            const qtyList = {
+              Adult: adultCount,
+              Children: childCount,
+              Infant: infantCount,
+            };
+            const originCode = airports
+              .filter(
+                (f) => f.city + " - " + f.country + ", " + f.name === origin
+              )
+              .map((item) => item.iata);
+            const destinationCode = airports
+              .filter(
+                (f) => f.city + " - " + f.country + ", " + f.name === destination
+              )
+              .map((item) => item.iata);
+            const originCode1 = airports
+              .filter(
+                (f) => f.city + " - " + f.country + ", " + f.name === origin1
+              )
+              .map((item) => item.iata);
+            const destinationCode1 = airports
+              .filter(
+                (f) => f.city + " - " + f.country + ", " + f.name === destination1
+              )
+              .map((item) => item.iata);
+            const originCode2 = airports
+              .filter(
+                (f) => f.city + " - " + f.country + ", " + f.name === origin2
+              )
+              .map((item) => item.iata);
+            const destinationCode2 = airports
+              .filter(
+                (f) => f.city + " - " + f.country + ", " + f.name === destination2
+              )
+              .map((item) => item.iata);
+            const originCode3 = airports
+              .filter(
+                (f) => f.city + " - " + f.country + ", " + f.name === origin3
+              )
+              .map((item) => item.iata);
+            const destinationCode3 = airports
+              .filter(
+                (f) => f.city + " - " + f.country + ", " + f.name === destination3
+              )
+              .map((item) => item.iata);
+            const originCode4 = airports
+              .filter(
+                (f) => f.city + " - " + f.country + ", " + f.name === origin4
+              )
+              .map((item) => item.iata);
+            const destinationCode4 = airports
+              .filter(
+                (f) => f.city + " - " + f.country + ", " + f.name === destination4
+              )
+              .map((item) => item.iata);
+            const originCode5 = airports
+              .filter(
+                (f) => f.city + " - " + f.country + ", " + f.name === origin5
+              )
+              .map((item) => item.iata);
+            const destinationCode5 = airports
+              .filter(
+                (f) => f.city + " - " + f.country + ", " + f.name === destination5
+              )
+              .map((item) => item.iata);
+            let searchParamMulti = {
+              routes: [
+                {
+                  origin: originCode[0],
+                  destination: destinationCode[0],
+                  departureDate: journeyDate,
+                },
+                {
+                  origin: originCode1[0],
+                  destination: destinationCode1[0],
+                  departureDate: inputDateMulti1,
+                },
+              ],
+              adults: qtyList.Adult,
+              childs: qtyList.Children,
+              infants: qtyList.Infant,
+              isOpenCombination: false,
+              cabinClass: getCabinClass(travelClassType),
+              preferredCarriers: preAirlines !== undefined ? preAirlines.split(",") : [],
+              prohibitedCarriers: [],
+              taxRedemptions: [],
+              childrenAges: [],
+            };
+            if (originCode2[0] !== undefined) {
+              let mc2 = {
+                origin: originCode2[0],
+                destination: destinationCode2[0],
+                departureDate: inputDateMulti2,
+              };
+              searchParamMulti.routes.push(mc2);
+            }
+            if (originCode3[0] !== undefined) {
+              let mc2 = {
+                origin: originCode3[0],
+                destination: destinationCode3[0],
+                departureDate: inputDateMulti3,
+              };
+              searchParamMulti.routes.push(mc2);
+            }
+            if (originCode4[0] !== undefined) {
+              let mc2 = {
+                origin: originCode4[0],
+                destination: destinationCode4[0],
+                departureDate: inputDateMulti4,
+              };
+              searchParamMulti.routes.push(mc2);
+            }
+            if (originCode5[0] !== undefined) {
+              let mc2 = {
+                origin: originCode5[0],
+                destination: destinationCode5[0],
+                departureDate: inputDateMulti5,
+              };
+              searchParamMulti.routes.push(mc2);
+            }
+            const searchData = {
+              origin: origin,
+              destination: destination,
+              origin1: origin1,
+              destination1: destination1,
+              origin2: origin2,
+              destination2: destination2,
+              origin3: origin3,
+              destination3: destination3,
+              origin4: origin4,
+              destination4: destination4,
+              origin5: origin5,
+              destination5: destination5,
+              journeyDate: journeyDate,
+              returnDate: returnDate,
+              inputDateMulti1: inputDateMulti1,
+              inputDateMulti2: inputDateMulti2,
+              inputDateMulti3: inputDateMulti3,
+              inputDateMulti4: inputDateMulti4,
+              inputDateMulti5: inputDateMulti5,
+              tripTypeModify: tripType,
+              qtyList: qtyList,
+              travelClass: travelClassType,
+            };
+            localStorage.setItem("Database", JSON.stringify(searchData));
+  
+            const getData = async () => {
+              setLoading(true);
+              const response = await axios.post(
+                environment.searchFlight,
+                searchParamMulti,
+                environment.headerToken
+              );
+              setFetchFlighData(await response.data.item1);
+              setLoading(false);
+              document.getElementById("search-again").click();
+            };
+            console.log(searchParamMulti);
+            console.log(origin, origin1, origin2, origin3, origin4, origin5);
+            getData();
+          
+        }
 
-      if (String(journeyDate) === String(null) && origin !== destination) {
-        toast.error("Please select all departing date no.1");
-        setJourneyDateError(true);
-      } else if (
-        String(inputDateMulti1) === String(null) &&
-        origin1 !== destination1
-      ) {
-        toast.error("Please select all departing date no.2");
-        setJourneyDateError(true);
-      } else if (
-        String(inputDateMulti2) === String(null) &&
-        origin2 !== destination2
-      ) {
-        toast.error("Please select all departing date no.3");
-        setJourneyDateError(true);
-      } else if (
-        String(inputDateMulti3) === String(null) &&
-        origin3 !== destination3
-      ) {
-        toast.error("Please select all departing date no.3");
-        setJourneyDateError(true);
-      } else if (
-        String(inputDateMulti4) === String(null) &&
-        origin4 !== destination4
-      ) {
-        toast.error("Please select all departing date no.4");
-        setJourneyDateError(true);
-      } else if (
-        String(inputDateMulti5) === String(null) &&
-        origin5 !== destination5
-      ) {
-        toast.error("Please select all departing date no.5");
-        setJourneyDateError(true);
-      } else setJourneyDateError(false);
+      }
+      
 
       console.log("String(inputDateMulti3)", inputDateMulti1, String(null));
       if (!sameMatchError) {
@@ -958,7 +1126,7 @@ const ShowAllFlightPage = () => {
             infants: qtyList.Infant,
             isOpenCombination: false,
             cabinClass: getCabinClass(travelClassType),
-            preferredCarriers: [],
+            preferredCarriers: preAirlines !== undefined ? preAirlines.split(",") : [],
             prohibitedCarriers: [],
             taxRedemptions: [],
             childrenAges: [],
@@ -1100,7 +1268,7 @@ const ShowAllFlightPage = () => {
           infants: qtyList.Infant,
           isOpenCombination: false,
           cabinClass: getCabinClass(travelClassType),
-          preferredCarriers: [],
+          preferredCarriers: preAirlines !== undefined ? preAirlines.split(",") : [],
           prohibitedCarriers: [],
           taxRedemptions: [],
           childrenAges: [],
@@ -1178,7 +1346,7 @@ const ShowAllFlightPage = () => {
           infants: qtyList.Infant,
           isOpenCombination: false,
           cabinClass: getCabinClass(travelClassType),
-          preferredCarriers: [],
+          preferredCarriers: preAirlines !== undefined ? preAirlines.split(",") : [],
           prohibitedCarriers: [],
           taxRedemptions: [],
           childrenAges: [],
@@ -1232,40 +1400,40 @@ const ShowAllFlightPage = () => {
           <div className="container box-shadow content-width">
             <div className="row border">
               <div className="col-lg-7 py-3 ps-5 my-auto border-right bg-white">
+                <div>
                 <span className="p-2 border">
-                  <span className="fw-bold" style={{ fontSize: "14px" }}>
+                  <span className="fw-bold" style={{ fontSize: "10px" }}>
                     <span className="me-2">
                       <i className="fas fa-plane-departure"></i>
                     </span>{" "}
-                    <span data-tip={searchData.origin.split(",")[1]}>
-                      {originCode[0]}(
+                    <span>
+                      {originCode[0]}{" "}(
                       {airports
                         .filter((f) => f.iata === originCode[0])
                         .map((item) => item.city)}
-                      : {searchData.journeyDate})
+                      )
                     </span>
                     <ReactTooltip effect="solid" html={true}></ReactTooltip>
                   </span>
                   <span className="px-1">|</span>
-                  <span className="fw-bold" style={{ fontSize: "14px" }}>
+                  <span className="fw-bold" style={{ fontSize: "10px" }}>
                     <span className="me-2">
                       <i className="fas fa-plane-arrival"></i>
                     </span>
                     {searchData.returnDate === "null" ? (
-                      <span data-tip={searchData.destination.split(",")[1]}>
-                        {destinationCode[0]}(
+                      <span>
+                        {destinationCode[0]}{" "}(
                         {airports
                           .filter((f) => f.iata === destinationCode[0])
                           .map((item) => item.city)}
                         )
                       </span>
                     ) : (
-                      <span data-tip={searchData.destination.split(",")[1]}>
-                        {destinationCode[0]}(
+                      <span>
+                        {destinationCode[0]}{" "}(
                         {airports
                           .filter((f) => f.iata === destinationCode[0])
-                          .map((item) => item.city)}
-                        : {searchData.returnDate})
+                          .map((item) => item.city)})
                       </span>
                     )}
 
@@ -1273,34 +1441,35 @@ const ShowAllFlightPage = () => {
                   </span>
                 </span>
                 {searchData.origin1 !== "" &&
-                searchData.origin1 !== undefined ? (
+                  searchData.origin1 !== undefined ? (
                   <>
                     <span className="p-2 border ms-1">
-                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                      <span className="fw-bold" style={{ fontSize: "10px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-departure"></i>
                         </span>{" "}
-                        <span
-                          data-tip={
-                            searchData.origin1.split(",")[1] +
-                            "<br>" +
-                            searchData.inputDateMulti1
-                          }
-                        >
-                          {originCode1[0]}
+                        <span>
+                          {originCode1[0]}{" "}(
+                          {airports
+                            .filter((f) => f.iata === originCode1[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
                       <span className="px-1">|</span>
-                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                      <span className="fw-bold" style={{ fontSize: "10px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-arrival"></i>
                         </span>
 
-                        <span data-tip={searchData.destination1.split(",")[1]}>
-                          {destinationCode1[0]}
+                        <span>
+                          {destinationCode1[0]}{" "}(
+                          {airports
+                            .filter((f) => f.iata === destinationCode1[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
-
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
                     </span>
@@ -1309,32 +1478,36 @@ const ShowAllFlightPage = () => {
                   <></>
                 )}
                 {searchData.origin2 !== "" &&
-                searchData.origin2 !== undefined ? (
+                  searchData.origin2 !== undefined ? (
                   <>
                     <span className="p-2 border ms-1">
-                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                      <span className="fw-bold" style={{ fontSize: "10px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-departure"></i>
                         </span>{" "}
                         <span
-                          data-tip={
-                            searchData.origin2.split(",")[1] +
-                            "<br>" +
-                            searchData.inputDateMulti2
-                          }
+
                         >
-                          {originCode2[0]}
+                          {originCode2[0]}{" "}(
+                          {airports
+                            .filter((f) => f.iata === originCode2[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
                       <span className="px-1">|</span>
-                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                      <span className="fw-bold" style={{ fontSize: "10px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-arrival"></i>
                         </span>
 
-                        <span data-tip={searchData.destination2.split(",")[1]}>
-                          {destinationCode2[0]}
+                        <span>
+                          {destinationCode2[0]}{" "}(
+                          {airports
+                            .filter((f) => f.iata === destinationCode2[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
@@ -1343,34 +1516,38 @@ const ShowAllFlightPage = () => {
                 ) : (
                   <></>
                 )}
-
+                </div>
+                <div className="mt-3">
                 {searchData.origin3 !== "" &&
-                searchData.origin3 !== undefined ? (
+                  searchData.origin3 !== undefined ? (
                   <>
-                    <span className="p-2 border ms-1">
-                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                    <span className="p-2 border">
+                      <span className="fw-bold" style={{ fontSize: "10px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-departure"></i>
                         </span>{" "}
-                        <span
-                          data-tip={
-                            searchData.origin3.split(",")[1] +
-                            "<br>" +
-                            searchData.inputDateMulti3
-                          }
-                        >
-                          {originCode3[0]}
+                        <span>
+                          {originCode3[0]}{" "}(
+                          {airports
+                            .filter((f) => f.iata === originCode3[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
                       <span className="px-1">|</span>
-                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                      <span className="fw-bold" style={{ fontSize: "10px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-arrival"></i>
                         </span>
 
-                        <span data-tip={searchData.destination3.split(",")[1]}>
-                          {destinationCode3[0]}
+                        <span>
+
+                          {destinationCode3[0]}{" "}(
+                          {airports
+                            .filter((f) => f.iata === destinationCode3[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
@@ -1381,32 +1558,34 @@ const ShowAllFlightPage = () => {
                 )}
 
                 {searchData.origin4 !== "" &&
-                searchData.origin4 !== undefined ? (
+                  searchData.origin4 !== undefined ? (
                   <>
                     <span className="p-2 border ms-1">
-                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                      <span className="fw-bold" style={{ fontSize: "10px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-departure"></i>
                         </span>{" "}
-                        <span
-                          data-tip={
-                            searchData.origin4.split(",")[1] +
-                            "<br>" +
-                            searchData.inputDateMulti4
-                          }
-                        >
-                          {originCode4[0]}
+                        <span>
+                          {originCode4[0]}{" "}(
+                          {airports
+                            .filter((f) => f.iata === originCode4[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
                       <span className="px-1">|</span>
-                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                      <span className="fw-bold" style={{ fontSize: "10px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-arrival"></i>
                         </span>
 
-                        <span data-tip={searchData.destination4.split(",")[1]}>
-                          {destinationCode4[0]}
+                        <span>
+                          {destinationCode4[0]}{" "}(
+                          {airports
+                            .filter((f) => f.iata === destinationCode4[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
@@ -1417,32 +1596,34 @@ const ShowAllFlightPage = () => {
                 )}
 
                 {searchData.origin5 !== "" &&
-                searchData.origin5 !== undefined ? (
+                  searchData.origin5 !== undefined ? (
                   <>
-                    <span className="p-2 border">
-                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                    <span className="p-2 border ms-1">
+                      <span className="fw-bold" style={{ fontSize: "10px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-departure"></i>
                         </span>{" "}
-                        <span
-                          data-tip={
-                            searchData.origin5.split(",")[1] +
-                            "<br>" +
-                            searchData.inputDateMulti5
-                          }
-                        >
-                          {originCode5[0]}
+                        <span>
+                          {originCode5[0]}{" "}(
+                          {airports
+                            .filter((f) => f.iata === originCode5[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
                       <span className="px-1">|</span>
-                      <span className="fw-bold" style={{ fontSize: "14px" }}>
+                      <span className="fw-bold" style={{ fontSize: "10px" }}>
                         <span className="me-2">
                           <i className="fas fa-plane-arrival"></i>
                         </span>
 
-                        <span data-tip={searchData.destination5.split(",")[1]}>
-                          {destinationCode5[0]}
+                        <span>
+                          {destinationCode5[0]}{" "}(
+                          {airports
+                            .filter((f) => f.iata === destinationCode5[0])
+                            .map((item) => item.city)}
+                          )
                         </span>
                         <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
@@ -1451,6 +1632,7 @@ const ShowAllFlightPage = () => {
                 ) : (
                   <></>
                 )}
+                </div>
               </div>
               <div className="col-lg-3 py-3 my-auto border-right bg-white">
                 <span
@@ -1679,20 +1861,20 @@ const ShowAllFlightPage = () => {
                                                       title="adultminus"
                                                       onClick={
                                                         infantCount > 0 &&
-                                                        adultCount ===
+                                                          adultCount ===
                                                           infantCount
                                                           ? () => {
-                                                              setAdultCount(
-                                                                adultCount - 1
-                                                              );
-                                                              setInfantCount(
-                                                                infantCount - 1
-                                                              );
-                                                            }
+                                                            setAdultCount(
+                                                              adultCount - 1
+                                                            );
+                                                            setInfantCount(
+                                                              infantCount - 1
+                                                            );
+                                                          }
                                                           : () =>
-                                                              setAdultCount(
-                                                                adultCount - 1
-                                                              )
+                                                            setAdultCount(
+                                                              adultCount - 1
+                                                            )
                                                       }
                                                       disabled={
                                                         adultCount === 1
@@ -1752,7 +1934,7 @@ const ShowAllFlightPage = () => {
                                                       Children
                                                     </div>
                                                     <div className="adult">
-                                                      Aged 2-12
+                                                      Aged 2-11
                                                     </div>
                                                   </div>
                                                   <div className="number-input text-center">
@@ -1866,10 +2048,10 @@ const ShowAllFlightPage = () => {
                                                       onClick={
                                                         infantCount < adultCount
                                                           ? () =>
-                                                              setInfantCount(
-                                                                infantCount + 1
-                                                              )
-                                                          : () => {}
+                                                            setInfantCount(
+                                                              infantCount + 1
+                                                            )
+                                                          : () => { }
                                                       }
                                                       disabled={
                                                         infantCount === 9
@@ -1956,7 +2138,7 @@ const ShowAllFlightPage = () => {
                                   <div className="col-lg-2">
                                     <label
                                       htmlFor="formGroupExampleInput"
-                                      className="form-label text-white"
+                                      className="form-label"
                                     >
                                       Preferred Airline
                                     </label>
@@ -1969,6 +2151,7 @@ const ShowAllFlightPage = () => {
                                       style={{
                                         background: "#f8f2fb",
                                       }}
+                                      onChange={handleChange}
                                     />
                                   </div>
                                 </div>
@@ -1980,7 +2163,7 @@ const ShowAllFlightPage = () => {
                                       className="form-label"
                                     >
                                       Depart From{" "}
-                                      <span className="fw-bold">*</span>
+                                      <span className="fw-bold text-danger">*</span>
                                     </label>
                                     <span className="address">
                                       <input
@@ -2013,7 +2196,7 @@ const ShowAllFlightPage = () => {
                                       className="form-label"
                                     >
                                       Going To{" "}
-                                      <span className="fw-bold">*</span>
+                                      <span className="fw-bold text-danger">*</span>
                                     </label>
                                     <span className="address">
                                       <input
@@ -2038,7 +2221,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Departing{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                       </div>
                                       <div
@@ -2050,7 +2233,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Returning{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                       </div>
                                     </div>
@@ -2090,7 +2273,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2123,7 +2306,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2148,7 +2331,7 @@ const ShowAllFlightPage = () => {
                                               className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="fw-bold">*</span>
+                                              <span className="fw-bold text-danger">*</span>
                                             </label>
                                           </div>
                                         </div>
@@ -2176,7 +2359,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2208,7 +2391,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2232,7 +2415,7 @@ const ShowAllFlightPage = () => {
                                               className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="fw-bold">*</span>
+                                              <span className="fw-bold text-danger">*</span>
                                             </label>
                                           </div>
                                         </div>
@@ -2260,7 +2443,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2292,7 +2475,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2313,10 +2496,10 @@ const ShowAllFlightPage = () => {
                                           <div className="col-lg-12">
                                             <label
                                               htmlFor="formGroupExampleInput"
-                                              className="form-label text-white"
+                                              className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="text-white fw-bold">
+                                              <span className="text-danger fw-bold">
                                                 *
                                               </span>
                                             </label>
@@ -2346,7 +2529,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2378,7 +2561,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2402,7 +2585,7 @@ const ShowAllFlightPage = () => {
                                               className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="fw-bold">*</span>
+                                              <span className="fw-bold text-danger">*</span>
                                             </label>
                                           </div>
                                         </div>
@@ -2430,7 +2613,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2462,7 +2645,7 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="fw-bold">*</span>
+                                          <span className="fw-bold text-danger">*</span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2486,7 +2669,7 @@ const ShowAllFlightPage = () => {
                                               className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="fw-bold">*</span>
+                                              <span className="fw-bold text-danger">*</span>
                                             </label>
                                           </div>
                                         </div>
@@ -2572,6 +2755,7 @@ const ShowAllFlightPage = () => {
                     loading={loading}
                     destinationCode={destinationCode}
                     tripType={tripType}
+                    checkList={checkList}
                   ></ShowAllFlight>
                 </>
               )

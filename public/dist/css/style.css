@@ -48,7 +48,7 @@ body{
 .input-field{
     height: 50px;
     padding: 10px;
-    border: 0;
+    /* border: 0; */
     background-color: #f8f2fb;
     /* box-shadow:0 0 15px 4px rgb(255, 255, 255); */
 }

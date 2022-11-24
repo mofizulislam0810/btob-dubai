@@ -10,25 +10,26 @@ const BookingModal = () => {
   const sendObj = JSON.parse(localStorage.getItem("passengerPack"));
   const navigate = useNavigate();
   const { bookData } = useAuth();
-  const handleCancle = () => {
-    document.getElementsByClassName("modal-backdrop")[0].remove();
-    navigate("/");
-  };
+  // const handleCancle = () => {
+  //   document.getElementsByClassName("modal-backdrop")[0].remove();
+  //   navigate("/");
+  // };
 
   const handleBooking = () => {
-    async function booking(price) {
-      sendObj.PriceCodeRef = price;
-      await axios.post(environment.bookFlight, sendObj).then((response) => {
-        if (response.data.item2.isSuccess === true) {
-          document.getElementsByClassName("modal-backdrop")[0].remove();
-          navigate("/successbooking");
-        } else {
-          document.getElementsByClassName("modal-backdrop")[0].remove();
-          navigate("/failedbooking");
-        }
-      });
-    }
-    booking(bookData.data.item1.priceCodeRef);
+    navigate("/");
+    // async function booking(price) {
+    //   sendObj.PriceCodeRef = price;
+    //   await axios.post(environment.bookFlight, sendObj).then((response) => {
+    //     if (response.data.item2.isSuccess === true) {
+    //       document.getElementsByClassName("modal-backdrop")[0].remove();
+    //       navigate("/successbooking");
+    //     } else {
+    //       document.getElementsByClassName("modal-backdrop")[0].remove();
+    //       navigate("/failedbooking");
+    //     }
+    //   });
+    // }
+    // booking(bookData.data.item1.priceCodeRef);
   };
   useEffect(() => {
     $("#modal").click();
@@ -77,20 +78,20 @@ const BookingModal = () => {
               </div>
             </div>
             <div class="modal-footer">
-              <button
+              {/* <button
                 type="button"
                 class="btn btn-secondary"
                 data-bs-dismiss="modal"
                 onClick={handleCancle}
               >
-                Cancle
-              </button>
+                Cancel
+              </button> */}
               <button
                 type="button"
                 class="btn btn-primary"
                 onClick={handleBooking}
               >
-                Continue Booking
+                Search Again
               </button>
             </div>
           </div>

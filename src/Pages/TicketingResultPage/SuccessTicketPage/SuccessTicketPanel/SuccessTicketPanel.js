@@ -185,9 +185,9 @@ const SuccessTicketPanel = () => {
                             return (
                               <tr className="text-center" style={{ lineHeight: "14px" }}>
                                 <td className="text-start">
-                                  {item.passengerInfo.nameElement.title}{" "}
-                                  {item.passengerInfo.nameElement.firstName}{" "}
-                                  {item.passengerInfo.nameElement.lastName}
+                                  {item.passengerInfo.nameElement.title.toUpperCase()}{" "}
+                                  {item.passengerInfo.nameElement.firstName.toUpperCase()}{" "}
+                                  {item.passengerInfo.nameElement.lastName.toUpperCase()}
                                 </td>
                                 <td>
                                   {getPassengerType(item.passengerInfo.passengerType)}
@@ -242,7 +242,7 @@ const SuccessTicketPanel = () => {
                                     </span>
                                     <span className="d-flex align-items-center fw-bold">
                                       <img
-                                        src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.airlineCode}.png`}
+                                        src={environment.s3ArliensImage +`${item.airlineCode}.png`}
                                         className="me-2"
                                         alt=""
                                         width="30px"
@@ -294,7 +294,7 @@ const SuccessTicketPanel = () => {
                                                 ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
                                                 : item.serviceClass + "(" + item.bookingClass + ")"}</td>
                                           <td className="align-middle">
-                                            {
+                                            {/* {
                                               ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                                 return (
                                                   <>
@@ -302,6 +302,26 @@ const SuccessTicketPanel = () => {
                                                   </>
                                                 )
                                               })
+                                            }
+
+{
+                                            ticketData.item1?.ticketInfoes.map((itm, idx) => {
+                                                return (
+                                                  <>
+                                                    <span>{itm.passengerInfo.passengerType === 'ADT' ? 'Adult' : itm.passengerInfo.passengerType === 'CNN' ? 'Child' : itm.passengerInfo.passengerType === 'INF'?'Infant' : 'Adult'} <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {itm.passengerInfo.passengerType === 'INF' ? "10" : item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br>
+                                                  </>
+                                                )
+                                              })
+                                            } */}
+
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.adt !== null ? <><span>Adult <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.cnn !== null ? <><span>Child <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.inf !== null ? <><span>Infant <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : 10Kg</span><br></br> </> : <></>
                                             }
                                           </td>
                                         </tr>
@@ -334,7 +354,7 @@ const SuccessTicketPanel = () => {
                                 </span>
                                 <span className="d-flex align-items-center fw-bold">
                                   <img
-                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.airlineCode}.png`}
+                                    src={environment.s3ArliensImage +`${item.airlineCode}.png`}
                                     className="me-2"
                                     alt=""
                                     width="30px"
@@ -386,7 +406,7 @@ const SuccessTicketPanel = () => {
                                             ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
                                             : item.serviceClass + "(" + item.bookingClass + ")"}</td>
                                       <td className="align-middle">
-                                        {
+                                        {/* {
                                           ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                             return (
                                               <>
@@ -394,7 +414,16 @@ const SuccessTicketPanel = () => {
                                               </>
                                             )
                                           })
-                                        }
+                                        } */}
+                                         {
+                                              ticketData.item1?.flightInfo.passengerFares.adt !== null ? <><span>Adult <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.cnn !== null ? <><span>Child <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.inf !== null ? <><span>Infant <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : 10Kg</span><br></br> </> : <></>
+                                            }
                                       </td>
                                     </tr>
                                   </tbody>
@@ -427,7 +456,7 @@ const SuccessTicketPanel = () => {
                                 </span>
                                 <span className="d-flex align-items-center fw-bold">
                                   <img
-                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.airlineCode}.png`}
+                                    src={environment.s3ArliensImage +`${item.airlineCode}.png`}
                                     className="me-2"
                                     alt=""
                                     width="30px"
@@ -479,7 +508,7 @@ const SuccessTicketPanel = () => {
                                             ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
                                             : item.serviceClass + "(" + item.bookingClass + ")"}</td>
                                       <td className="align-middle">
-                                        {
+                                        {/* {
                                           ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                             return (
                                               <>
@@ -487,7 +516,17 @@ const SuccessTicketPanel = () => {
                                               </>
                                             )
                                           })
-                                        }
+                                        } */}
+
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.adt !== null ? <><span>Adult <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.cnn !== null ? <><span>Child <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.inf !== null ? <><span>Infant <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : 10Kg</span><br></br> </> : <></>
+                                            }
                                       </td>
                                     </tr>
                                   </tbody>
@@ -520,7 +559,7 @@ const SuccessTicketPanel = () => {
                                 </span>
                                 <span className="d-flex align-items-center fw-bold">
                                   <img
-                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.airlineCode}.png`}
+                                    src={environment.s3ArliensImage +`${item.airlineCode}.png`}
                                     className="me-2"
                                     alt=""
                                     width="30px"
@@ -572,7 +611,7 @@ const SuccessTicketPanel = () => {
                                             ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
                                             : item.serviceClass + "(" + item.bookingClass + ")"}</td>
                                       <td className="align-middle">
-                                        {
+                                        {/* {
                                           ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                             return (
                                               <>
@@ -580,7 +619,16 @@ const SuccessTicketPanel = () => {
                                               </>
                                             )
                                           })
-                                        }
+                                        } */}
+                                           {
+                                              ticketData.item1?.flightInfo.passengerFares.adt !== null ? <><span>Adult <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.cnn !== null ? <><span>Child <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.inf !== null ? <><span>Infant <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : 10Kg</span><br></br> </> : <></>
+                                            }
                                       </td>
                                     </tr>
                                   </tbody>
@@ -613,7 +661,7 @@ const SuccessTicketPanel = () => {
                                 </span>
                                 <span className="d-flex align-items-center fw-bold">
                                   <img
-                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.airlineCode}.png`}
+                                    src={environment.s3ArliensImage +`${item.airlineCode}.png`}
                                     className="me-2"
                                     alt=""
                                     width="30px"
@@ -665,7 +713,7 @@ const SuccessTicketPanel = () => {
                                             ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
                                             : item.serviceClass + "(" + item.bookingClass + ")"}</td>
                                       <td className="align-middle">
-                                        {
+                                        {/* {
                                           ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                             return (
                                               <>
@@ -673,7 +721,17 @@ const SuccessTicketPanel = () => {
                                               </>
                                             )
                                           })
-                                        }
+                                        } */}
+
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.adt !== null ? <><span>Adult <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.cnn !== null ? <><span>Child <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.inf !== null ? <><span>Infant <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : 10Kg</span><br></br> </> : <></>
+                                            }
                                       </td>
                                     </tr>
                                   </tbody>
@@ -706,7 +764,7 @@ const SuccessTicketPanel = () => {
                                 </span>
                                 <span className="d-flex align-items-center fw-bold">
                                   <img
-                                    src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${item.airlineCode}.png`}
+                                    src={environment.s3ArliensImage +`${item.airlineCode}.png`}
                                     className="me-2"
                                     alt=""
                                     width="30px"
@@ -758,7 +816,7 @@ const SuccessTicketPanel = () => {
                                             ? "BUSINESS CLASS" + "(" + item.bookingClass + ")"
                                             : item.serviceClass + "(" + item.bookingClass + ")"}</td>
                                       <td className="align-middle">
-                                        {
+                                        {/* {
                                           ticketData.item1?.ticketInfoes.map((itm, idx) => {
                                             return (
                                               <>
@@ -766,7 +824,17 @@ const SuccessTicketPanel = () => {
                                               </>
                                             )
                                           })
-                                        }
+                                        } */}
+
+                                             {
+                                              ticketData.item1?.flightInfo.passengerFares.adt !== null ? <><span>Adult <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.cnn !== null ? <><span>Child <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : {item.baggage[0]?.amount}{item.baggage[0]?.units}</span><br></br> </> : <></>
+                                            }
+                                            {
+                                              ticketData.item1?.flightInfo.passengerFares.inf !== null ? <><span>Infant <span style={{ fontSize: "10px" }}><i class="fas fa-arrow-right"></i></span> Check in : 10Kg</span><br></br> </> : <></>
+                                            }
                                       </td>
                                     </tr>
                                   </tbody>
@@ -800,7 +868,7 @@ const SuccessTicketPanel = () => {
                             style={{ fontSize: "12px" }}
                           >
                             <thead>
-                              <tr>
+                              <tr className="text-end">
                                 <th className="text-start">Type</th>
                                 <th>Base Price</th>
                                 <th>Tax</th>
@@ -814,31 +882,31 @@ const SuccessTicketPanel = () => {
                               {ticketData.item1?.flightInfo.passengerFares
                                 .adt !== null ? (
                                 <>
-                                  <tr>
+                                  <tr className="text-end">
                                     <td className="text-start">Adult</td>
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.adt.basePrice
+                                          .passengerFares.adt.basePrice.toLocaleString("en-US")
                                       }
                                     </td>
 
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.adt.taxes
+                                          .passengerFares.adt.taxes.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.adt.ait
+                                          .passengerFares.adt.ait.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.adt.discountPrice
+                                          .passengerFares.adt.discountPrice.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
@@ -862,31 +930,31 @@ const SuccessTicketPanel = () => {
                               {ticketData.item1?.flightInfo.passengerFares
                                 .cnn !== null ? (
                                 <>
-                                  <tr>
+                                  <tr className="text-end">
                                     <td className="text-start">Child</td>
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.cnn.basePrice
+                                          .passengerFares.cnn.basePrice.toLocaleString("en-US")
                                       }
                                     </td>
 
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.cnn.taxes
+                                          .passengerFares.cnn.taxes.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.adt.ait
+                                          .passengerFares.cnn.ait.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.cnn.discountPrice
+                                          .passengerFares.cnn.discountPrice.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
@@ -911,31 +979,31 @@ const SuccessTicketPanel = () => {
                               {ticketData.item1?.flightInfo.passengerFares
                                 .inf !== null ? (
                                 <>
-                                  <tr>
+                                  <tr className="text-end">
                                     <td className="text-start">Infant</td>
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.inf.basePrice
+                                          .passengerFares.inf.basePrice.toLocaleString("en-US")
                                       }
                                     </td>
 
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.inf.taxes
+                                          .passengerFares.inf.taxes.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.adt.ait
+                                          .passengerFares.inf.ait.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>
                                       {
                                         ticketData.item1?.flightInfo
-                                          .passengerFares.inf.discountPrice
+                                          .passengerFares.inf.discountPrice.toLocaleString("en-US")
                                       }
                                     </td>
                                     <td>

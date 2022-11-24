@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { HStack, Text } from "@chakra-ui/react";
+import axios from "axios";
+import $ from "jquery";
+import moment from "moment";
+import React, { useEffect, useRef, useState } from "react";
+import ReactPaginate from "react-paginate";
+import { useLocation, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Footer from "../SharePages/Footer/Footer";
 import Navbar from "../SharePages/Navbar/Navbar";
 import SideNavBar from "../SharePages/SideNavBar/SideNavBar";
-import Footer from "../SharePages/Footer/Footer";
-import "./Support.css";
-import axios from "axios";
 import { environment } from "../SharePages/Utility/environment";
-import moment from "moment";
-import { useLocation } from "react-router-dom";
-import $ from "jquery";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import ReactPaginate from "react-paginate";
-import { Box, Center, HStack, Text } from "@chakra-ui/react";
+import "./Support.css";
 const Support = () => {
   const [filterSubjectId, setFilterSubjectId] = useState("0");
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("page ---------->", page);
@@ -51,7 +52,7 @@ const Support = () => {
   let ticketno = "";
   let s3URL = "https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/";
   let staticURL = "wwwroot/Uploads/Support/";
-
+  const buttonActive = useRef()
   //let page=1;
   let [page, setPage] = useState(1);
 
@@ -88,7 +89,10 @@ const Support = () => {
       pnrs = location.search.split("=")[4].split("&")[0];
       ticketno = location.search.split("=")[5].split("&")[0];
       setUniqueTransID(utid);
+      console.log(ticketno);
+      if(ticketno !== null && typeid === 2){
       handleGetPassengerList(utid);
+      }
       setI(i + 1);
     }
   }
@@ -123,14 +127,23 @@ const Support = () => {
   let [ticketNumbers, setTicketno] = useState(
     ticketno != "" ? "," + ticketno : ""
   );
+
+  useEffect(() => {
+    console.log(ticketNumbers, "+++")
+  }, [ticketNumbers])
   const handleSetTicketNo = (isChecked, tNo) => {
     if (isChecked) {
       //let ticketNew = ticketNumbers + "," + tNo;
       // ticketNew=ticketNew.substring(1,ticketNew.length())
+      if (ticketNumbers === tNo) {
+        return
+      }
       setTicketno((oldData) => oldData + "," + tNo);
+      // setTicketno(tNo);
     } else {
       //let ticketNew = ticketNumbers.replace("," + tNo, "");
-      setTicketno(ticketNumbers + "," + tNo);
+      //setTicketno(ticketNumbers + "," + tNo);
+      setTicketno("")
     }
   };
 
@@ -143,7 +156,9 @@ const Support = () => {
   let [supportHistoryList, setSupportHistoryList] = useState([]);
   let [fileCurrentName, setCurrentFileName] = useState("");
   let [pageSize, setPageSize] = useState(10);
-  let [pageCount, setPageCount] = useState(0);
+  let [pageCountOn, setPageCountOn] = useState(0);
+  let [pageCountOg, setPageCountOg] = useState(0);
+  let [pageCountCl, setPageCountCl] = useState(0);
   let [pageNumber, setPageNumber] = useState(1);
 
   let [pageSizeH, setPageSizeH] = useState(10);
@@ -161,13 +176,13 @@ const Support = () => {
     setCurrentItem(item);
     const response = await axios.get(
       environment.getSupportHistoriesByAgentList +
-        "/" +
-        (sessionStorage.getItem("agentId") ?? 0) +
-        "/" +
-        (item == null ? 0 : item.id) +
-        "/" +
-        true +
-        `?pageNumber=${pageNumberH}&pageSize=${pageSizeH}`,
+      "/" +
+      (sessionStorage.getItem("agentId") ?? 0) +
+      "/" +
+      (item == null ? 0 : item.id) +
+      "/" +
+      true +
+      `?pageNumber=${pageNumberH}&pageSize=${pageSizeH}`,
       environment.headerToken
     );
     setSupportHistoryList(response.data.data);
@@ -200,17 +215,17 @@ const Support = () => {
       setPageNumber(pageNumber);
       const response = await axios.get(
         environment.getSupportInfoesByStatustList +
-          "/" +
-          (sessionStorage.getItem("agentId") ?? 0) +
-          "/" +
-          1 +
-          "/" +
-          searchSubjectId +
-          `?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+        "/" +
+        (sessionStorage.getItem("agentId") ?? 0) +
+        "/" +
+        1 +
+        "/" +
+        searchSubjectId +
+        `?pageNumber=${pageNumber}&pageSize=${pageSize}`,
         environment.headerToken
       );
       setSupportOpenedList(response.data.data);
-      setPageCount(response.data.totalPages);
+      setPageCountOn(response.data.totalPages);
       console.log(response.data.data);
     };
     getSupport();
@@ -220,17 +235,17 @@ const Support = () => {
     const getSupport = async () => {
       const response = await axios.get(
         environment.getSupportInfoesByStatustList +
-          "/" +
-          (sessionStorage.getItem("agentId") ?? 0) +
-          "/" +
-          2 +
-          "/" +
-          searchSubjectId +
-          `?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+        "/" +
+        (sessionStorage.getItem("agentId") ?? 0) +
+        "/" +
+        2 +
+        "/" +
+        searchSubjectId +
+        `?pageNumber=${pageNumber}&pageSize=${pageSize}`,
         environment.headerToken
       );
       setSupportOngoingList(response.data.data);
-      setPageCount(response.data.totalPages);
+      setPageCountOg(response.data.totalPages);
     };
     getSupport();
     getSupportHistory(currentItem, 1);
@@ -240,17 +255,17 @@ const Support = () => {
     const getSupport = async () => {
       const response = await axios.get(
         environment.getSupportInfoesByStatustList +
-          "/" +
-          (sessionStorage.getItem("agentId") ?? 0) +
-          "/" +
-          3 +
-          "/" +
-          searchSubjectId +
-          `?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+        "/" +
+        (sessionStorage.getItem("agentId") ?? 0) +
+        "/" +
+        3 +
+        "/" +
+        searchSubjectId +
+        `?pageNumber=${pageNumber}&pageSize=${pageSize}`,
         environment.headerToken
       );
       setSupportClosedList(response.data.data);
-      setPageCount(response.data.totalPages);
+      setPageCountCl(response.data.totalPages);
     };
     getSupport();
   };
@@ -261,18 +276,7 @@ const Support = () => {
     handleGetOngoing(currentPage);
     handleGetClosed(currentPage);
   };
-  // const handleEditItem = (item) => {
-  //   setCurrentItem(item);
-  //   setSupportTypeId(item.supportTypeId);
-  //   setSubjectId(item.subjectId);
-  //   setMessage(item.message);
-  //   setFileName(item.fileName);
-  //   setStatus(item.status);
-  //   setRefundType(item.refundType);
-  //   setUniqueTransID(item.uniqueTransID);
-  //   setPNR(item.pnr);
-  //   setTicketno(item.ticketNumber);
-  // };
+
   const clearForm = (item) => {
     setCurrentItem(null);
     setSupportTypeId(0);
@@ -283,6 +287,7 @@ const Support = () => {
     setUniqueTransID("");
     setPNR("");
     setTicketno("");
+    navigate("/support");
   };
   const handleFileUpload = (file) => {
     var formData = new FormData();
@@ -353,89 +358,13 @@ const Support = () => {
     postData();
   };
 
-  // const handleSupportSubmit = () => {
-  //   let ticketNumbersN = ticketNumbers.substring(1, ticketNumbers.length);
-  //   // alert(uniqueTransID)
-  //   // alert(pnr)
-  //   let supportObj = {
-  //     id: currentItem == null ? 0 : currentItem.id,
-  //     agentId: sessionStorage.getItem("agentId") ?? 0,
-  //     supportTypeId: 2,
-  //     subjectId: subjectId,
-  //     message: message,
-  //     fileName: fileName,
-  //     status: 0,
-  //     uniqueTransID: uniqueTransID,
-  //     pnr: pnr,
-  //     ticketNumber: ticketNumbersN,
-  //   };
 
-  //   if (supportObj.fileNamesupportTypeId === 0) {
-  //     toast.error("Sorry! Support type not selected..");
-  //     return;
-  //   }
-  //   if (subjectId === 0) {
-  //     toast.error("Please select support type!");
-  //     return;
-  //   }
-  //   if (message === "") {
-  //     toast.error("Sorry! Message is empty..");
-  //     return;
-  //   }
-  //   if (
-  //     !isTicketNumRequired &&
-  //     location.search.split("ticketno=")[1] !== "null" &&
-  //     subjectId !== 10 &&
-  //     ticketNumbers === ""
-  //   ) {
-  //     toast.error("Sorry! Ticket number not selected..");
-  //     return;
-  //   }
-  //   console.log(supportObj);
-  //   if ((currentItem == null ? 0 : currentItem.id) > 0) {
-  //     const putData = async () => {
-  //       const response = await axios.put(
-  //         environment.supportInfo,
-  //         supportObj,
-  //         environment.headerToken
-  //       );
-  //       if (response.data > 0) {
-  //         // document.getElementById("submitCloseBtn").click();
-  //         //handleGetOpened(1);
-  //         // clearForm();
-
-  //         toast.success("Thanks! Support Info updated successfully..");
-  //       } else {
-  //         toast.error("Sorry! Support Info not updated..");
-  //       }
-  //     };
-  //     putData();
-  //   } else {
-  //     const postData = async () => {
-  //       //alert("ok");
-  //       const response = await axios.post(
-  //         environment.supportInfo,
-  //         supportObj,
-  //         environment.headerToken
-  //       );
-
-  //       if (response.data > 0) {
-  //         handleGetOpened(1);
-  //         clearForm();
-  //         toast.success("Thanks! Support Info created successfully..");
-  //         document.getElementById("submitCloseBtn").click();
-  //       } else {
-  //         toast.error("Sorry! Support Info not created..");
-  //       }
-  //     };
-  //     postData();
-  //   }
-  // };
-
-  const handleSupportSubmit = () => {
+  const handleSupportSubmit = (e) => {
+    e.preventDefault()
     let ticketNumbersN = ticketNumbers.substring(1, ticketNumbers.length);
     // alert(uniqueTransID)
     // alert(pnr)
+    console.log(ticketNumbersN,"++++++");
     let supportObj = {
       id: currentItem == null ? 0 : currentItem.id,
       agentId: sessionStorage.getItem("agentId") ?? 0,
@@ -446,8 +375,10 @@ const Support = () => {
       status: 0,
       uniqueTransID: uniqueTransID,
       pnr: pnr,
-      ticketNumber: ticketNumbersN,
+      ticketNumber: ticketNumbersN === null? '' : ticketNumbersN,
     };
+
+    console.log(supportObj)
 
     if (supportObj.fileNamesupportTypeId === 0) {
       toast.error("Sorry! Support type not selected..");
@@ -469,6 +400,8 @@ const Support = () => {
       toast.error("Sorry! Ticket number not selected..");
       return;
     }
+    e.target.disabled = true;
+    console.log({ e })
     console.log(supportObj);
     if ((currentItem == null ? 0 : currentItem.id) > 0) {
       const putData = async () => {
@@ -483,6 +416,7 @@ const Support = () => {
           // clearForm();
 
           toast.success("Thanks! Support Info updated successfully..");
+          navigate("/search");
         } else {
           toast.error("Sorry! Support Info not updated..");
         }
@@ -520,6 +454,8 @@ const Support = () => {
   }, [pageNumber]);
 
   const clearSupportForm = () => {
+    console.log({ buttonActive })
+    buttonActive.current.disabled = false
     if (location.search === "") {
       setUniqueTransID("");
       setPassengerList([]);
@@ -580,6 +516,7 @@ const Support = () => {
                         onClick={() => {
                           handleGetOpened(1);
                           setPage(1);
+
                         }}
                       >
                         Opened
@@ -630,8 +567,10 @@ const Support = () => {
                         className="modal fade"
                         id="supportModal"
                         tabIndex={-1}
-                        aria-labelledby="supportModalLabel"
                         aria-hidden="true"
+                        aria-labelledby="staticBackdropLabel"
+                        data-bs-keyboard="false"
+                        data-bs-backdrop="static"
                       >
                         <div className="modal-dialog">
                           <div className="modal-content">
@@ -658,33 +597,33 @@ const Support = () => {
                                 <div className="row my-3">
                                   {location.search.split("ticketno=")[1] !==
                                     "null" && (
-                                    <div className="col-sm-4">
-                                      <label class="form-label">
-                                        Support Type
-                                        <span style={{ color: "red" }}>*</span>
-                                      </label>
-                                      <select
-                                        className="form-select"
-                                        value={subjectId}
-                                        placeholder="Subject"
-                                        onChange={(e) =>
-                                          setSubjectId(Number(e.target.value))
-                                        }
-                                      >
-                                        <option key={0}>Select Type</option>
-                                        {subjectList.map((item, index) => {
-                                          return (
-                                            <option
-                                              key={index + 1}
-                                              value={item.id}
-                                            >
-                                              {item.name}
-                                            </option>
-                                          );
-                                        })}
-                                      </select>
-                                    </div>
-                                  )}
+                                      <div className="col-sm-4">
+                                        <label class="form-label">
+                                          Support Type
+                                          <span style={{ color: "red" }}>*</span>
+                                        </label>
+                                        <select
+                                          className="form-select"
+                                          value={subjectId}
+                                          placeholder="Subject"
+                                          onChange={(e) =>
+                                            setSubjectId(Number(e.target.value))
+                                          }
+                                        >
+                                          <option key={0}>Select Type</option>
+                                          {subjectList.map((item, index) => {
+                                            return (
+                                              <option
+                                                key={index + 1}
+                                                value={item.id}
+                                              >
+                                                {item.name}
+                                              </option>
+                                            );
+                                          })}
+                                        </select>
+                                      </div>
+                                    )}
 
                                   <HStack w="400px">
                                     <div className="col-sm-8">
@@ -730,138 +669,128 @@ const Support = () => {
                                   </HStack>
 
                                   {location.search.split("ticketno=")[1] !==
-                                  "null" ? (
-                                    <div className="col-sm-12">
-                                      <table
-                                        className="table table-boardered table-sm mt-3"
-                                        style={{
-                                          width: "100%",
-                                          fontSize: "13px",
-                                        }}
-                                      >
-                                        <thead className="text-center fw-bold bg-secondary">
-                                          <tr>
-                                            <th>Pax Name</th>
-                                            <th>Type</th>
-                                            <th>
-                                              Ticket Number{" "}
-                                              <span style={{ color: "red" }}>
-                                                *
-                                              </span>
-                                            </th>
-                                          </tr>
-                                        </thead>
+                                    "null" ? (
+                                    <>
+                                      {
+                                        passengerList.length > 0 ? <>
 
-                                        <tbody className="lh-1 tbody text-center">
-                                          {passengerList.length > 0
-                                            ? passengerList.map(
-                                                (item, index) => {
-                                                  // console.log(
-                                                  //   item.ticketNumbers === null
-                                                  //     ? "TRUE"
-                                                  //     : "FALSE",
-                                                  //   "++++"
-                                                  // );
-                                                  item.ticketNumbers === null &&
-                                                    setIsTicketNumRequired(
-                                                      false
-                                                    );
+                                          <div className="col-sm-12">
+                                            <table
+                                              className="table table-boardered table-sm mt-3"
+                                              style={{
+                                                width: "100%",
+                                                fontSize: "13px",
+                                              }}
+                                            >
+                                              <thead className="text-center fw-bold bg-secondary">
+                                                <tr>
+                                                  <th>Pax Name</th>
+                                                  <th>Type</th>
+                                                  <th>
+                                                    Ticket Number{" "}
+                                                    <span style={{ color: "red" }}>
+                                                      *
+                                                    </span>
+                                                  </th>
+                                                </tr>
+                                              </thead>
 
-                                                  return (
-                                                    <>
-                                                      {item.ticketNumbers &&
-                                                        item.ticketNumbers !==
-                                                          null && (
-                                                          <tr>
-                                                            <td>
-                                                              {item.title +
-                                                                " " +
-                                                                item.first +
-                                                                " " +
-                                                                item.middle +
-                                                                " " +
-                                                                item.last}
-                                                            </td>
-                                                            <td>
-                                                              {
-                                                                item.passengerType
-                                                              }
-                                                            </td>
-                                                            <td>
-                                                              {
-                                                                <>
-                                                                  <input
-                                                                    type={
-                                                                      "checkbox"
-                                                                    }
-                                                                    defaultChecked={
-                                                                      item.ticketNumbers ===
-                                                                      defaultTicketNumber
-                                                                        ? true
-                                                                        : false
-                                                                    }
-                                                                    onChange={(
-                                                                      e
-                                                                    ) =>
-                                                                      handleSetTicketNo(
-                                                                        e.target
-                                                                          .checked,
-                                                                        item.ticketNumbers
-                                                                      )
-                                                                    }
-                                                                  ></input>
-                                                                  &nbsp;{" "}
+                                              <tbody className="lh-1 tbody text-center">
+                                                {passengerList.length > 0
+                                                  ? passengerList.map(
+                                                    (item, index) => {
+                                                      // console.log(
+                                                      //   item.ticketNumbers === null
+                                                      //     ? "TRUE"
+                                                      //     : "FALSE",
+                                                      //   "++++"
+                                                      // );
+                                                      item.ticketNumbers === null &&
+                                                        setIsTicketNumRequired(
+                                                          false
+                                                        );
+
+                                                      return (
+                                                        <>
+                                                          {item.ticketNumbers &&
+                                                            item.ticketNumbers !==
+                                                            null && (
+                                                              <tr>
+                                                                <td>
+                                                                  {item.title +
+                                                                    " " +
+                                                                    item.first +
+                                                                    " " +
+                                                                    item.middle +
+                                                                    " " +
+                                                                    item.last}
+                                                                </td>
+                                                                <td>
                                                                   {
-                                                                    item.ticketNumbers
+                                                                    item.passengerType
                                                                   }
-                                                                </>
-                                                              }
-                                                            </td>
-                                                          </tr>
-                                                        )}
-                                                    </>
-                                                  );
-                                                }
-                                              )
-                                            : ""}
-                                        </tbody>
-                                      </table>
-                                      <Text
-                                        fontSize="xs"
-                                        textAlign="center"
-                                        w="100%"
-                                      >
-                                        Plase make sure to select Ticket Number{" "}
-                                        <br />
-                                        (You can seach for your ticket number
-                                        with Booking ID or PNR)
-                                      </Text>
-                                      <br />
-                                      {/* <label>{ticketNumbers}</label> */}
-                                      {/* <input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumber === "null" ? "" : ticketNumber} className="form-control" onChange={(e) => setTicketno()}></input> */}
-                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                  {
+                                                                    <>
+                                                                      <input
+                                                                        type={
+                                                                          "checkbox"
+                                                                        }
+                                                                        defaultChecked={
+                                                                          item.ticketNumbers ===
+                                                                            defaultTicketNumber
+                                                                            ? true
+                                                                            : false
+                                                                        }
+                                                                        onChange={(
+                                                                          e
+                                                                        ) =>
+                                                                          handleSetTicketNo(
+                                                                            e.target
+                                                                              .checked,
+                                                                            item.ticketNumbers
+                                                                          )
+                                                                        }
+                                                                      ></input>
+                                                                      &nbsp;{" "}
+                                                                      {
+                                                                        item.ticketNumbers
+                                                                      }
+                                                                    </>
+                                                                  }
+                                                                </td>
+                                                              </tr>
+                                                            )}
+                                                        </>
+                                                      );
+                                                    }
+                                                  )
+                                                  : ""}
+                                              </tbody>
+                                            </table>
+
+                                            <br />
+                                            {/* <label>{ticketNumbers}</label> */}
+                                            {/* <input class="form-control" type={'text'} placeholder={'Ticket Number'} value={ticketNumber === "null" ? "" : ticketNumber} className="form-control" onChange={(e) => setTicketno()}></input> */}
+                                          </div>
+                                        </> : subjectId !== 10 && <Text
+                                          pt="30px"
+                                          fontSize="sm"
+                                          textAlign="center"
+                                          w="100%"
+                                        >
+                                          Please make sure to select Ticket Number{" "}
+                                          <br />
+                                          (You can search for your ticket number
+                                          with Booking ID or PNR)
+                                        </Text>
+                                      }
+                                    </>
+
                                   ) : (
                                     ""
                                   )}
-
-                                  {/* {
-																		subjectId === 2 ? 
-																		<>		
-																			<div className='col-sm-5'>
-																				<label  class="form-label my-2">Refund Type</label><br></br>
-																				<input type="radio" value={refundType} name="refundType" checked={refundType == "Full"}
-																					onClick={() => { setRefundType("Full"); }} />&nbsp; Full &nbsp;&nbsp;
-
-																				<input type="radio" disabled value={refundType} name="refundType" checked={refundType == "Partial"}
-																					onClick={() => { setRefundType("Partial"); }} />&nbsp; Partial &nbsp;&nbsp;
-
-																				<input type="radio" disabled value={refundType} name="refundType" checked={refundType == "Split"}
-																					onClick={() => { setRefundType("Split"); }} /> &nbsp;Split
-
-																			</div>
-																		</> : <>
-																		</>
-																	} */}
                                 </div>
                                 <div className="row mb-3">
                                   <div className="col-sm-12">
@@ -906,10 +835,12 @@ const Support = () => {
                                 Close
                               </button>
                               <button
+                                ref={buttonActive}
                                 id="submitBtn"
                                 type="button"
                                 className="btn button-color fw-bold text-white rounded"
-                                onClick={() => handleSupportSubmit()}
+                                onClick={(e) => handleSupportSubmit(e)}
+
                               >
                                 Submit
                               </button>
@@ -967,10 +898,16 @@ const Support = () => {
                                     )}
                                   </td>
                                   <td>{item.uniqueTransID}</td>
-                                  <td>{item.pnr}</td>
+                                  <td>
+                                  {item.pnr === "" ||
+                                      item.pnr === null
+                                      ? "N/A"
+                                      : item.pnr}
+                                  
+                                  </td>
                                   <td>
                                     {item.ticketNumber === "null" ||
-                                    item.ticketNumber === null
+                                      item.ticketNumber === null || item.ticketNumber === ""
                                       ? "N/A"
                                       : item.ticketNumber}
                                   </td>
@@ -1005,7 +942,7 @@ const Support = () => {
                         previousLabel={"previous"}
                         nextLabel={"next"}
                         breakLabel={"..."}
-                        pageCount={pageCount}
+                        pageCount={pageCountOn}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={3}
                         onPageChange={handlePageClick}
@@ -1101,7 +1038,7 @@ const Support = () => {
                         previousLabel={"previous"}
                         nextLabel={"next"}
                         breakLabel={"..."}
-                        pageCount={pageCount}
+                        pageCount={pageCountOg}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={3}
                         onPageChange={handlePageClick}
@@ -1184,7 +1121,7 @@ const Support = () => {
                         previousLabel={"previous"}
                         nextLabel={"next"}
                         breakLabel={"..."}
-                        pageCount={pageCount}
+                        pageCount={pageCountCl}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={3}
                         onPageChange={handlePageClick}
@@ -1232,11 +1169,10 @@ const Support = () => {
                                       {supportHistoryList.map((item, index) => {
                                         return (
                                           <li
-                                            className={`text-${
-                                              item.isAgent === true
-                                                ? "right"
-                                                : "left"
-                                            } clearfix`}
+                                            className={`text-${item.isAgent === true
+                                              ? "right"
+                                              : "left"
+                                              } clearfix`}
                                           >
                                             <span className="chat-img">
                                               {/* <img src={require(`../../images/icon/${'user.png'}`)} alt=''/> */}
@@ -1248,11 +1184,10 @@ const Support = () => {
                                                 </strong>
                                                 <br />
                                                 <small
-                                                  className={`text-${
-                                                    item.isAgent === true
-                                                      ? "right"
-                                                      : "left"
-                                                  } text-muted`}
+                                                  className={`text-${item.isAgent === true
+                                                    ? "right"
+                                                    : "left"
+                                                    } text-muted`}
                                                 >
                                                   <i className="fa fa-clock-o"></i>{" "}
                                                   {moment(
@@ -1263,30 +1198,29 @@ const Support = () => {
                                                 </small>
                                               </div>
                                               <p
-                                                className={`text-${
-                                                  item.isAgent === true
-                                                    ? "right"
-                                                    : "left"
-                                                } text-muted`}
+                                                className={`text-${item.isAgent === true
+                                                  ? "right"
+                                                  : "left"
+                                                  } text-muted`}
                                               >
                                                 {item.message}
                                               </p>
                                               {/* <a href={require(`../../images/icon/${'user.png'}`)} download>download</a> */}
                                               {item.fileName != null &&
-                                              item.fileName != "" ? (
+                                                item.fileName != "" ? (
                                                 <a
                                                   href={
                                                     environment.s3URL +
                                                     `${item.fileName}`
                                                   }
                                                   download
-                                                  target="_blank"
+                                                  target="_blank" rel="noreferrer"
                                                 >
                                                   {item.fileName.length > 50
                                                     ? item.fileName.substr(
-                                                        0,
-                                                        50
-                                                      ) + "..."
+                                                      0,
+                                                      50
+                                                    ) + "..."
                                                     : item.fileName}
                                                 </a>
                                               ) : (
@@ -1297,7 +1231,7 @@ const Support = () => {
                                                   style={{ color: "green" }}
                                                 >
                                                   {item.isAgent === true &&
-                                                  item.isAdminRead === true
+                                                    item.isAdminRead === true
                                                     ? "Seen"
                                                     : ""}
                                                 </span>
@@ -1307,7 +1241,7 @@ const Support = () => {
                                         );
                                       })}
                                     </ul>
-                                    <ReactPaginate
+                                    {/* <ReactPaginate
                                       previousLabel={"previous"}
                                       nextLabel={"next"}
                                       breakLabel={"..."}
@@ -1327,7 +1261,7 @@ const Support = () => {
                                       breakClassName={"page-item"}
                                       breakLinkClassName={"page-link"}
                                       activeClassName={"active"}
-                                    />
+                                    /> */}
                                   </div>
                                   {/* <div className="chat-box bg-white">
 																				<div className='row'>{fileCurrentName}</div>
@@ -1381,11 +1315,10 @@ const Support = () => {
                                       {supportHistoryList.map((item, index) => {
                                         return (
                                           <li
-                                            className={`text-${
-                                              item.isAgent === true
-                                                ? "right"
-                                                : "left"
-                                            } clearfix`}
+                                            className={`text-${item.isAgent === true
+                                              ? "right"
+                                              : "left"
+                                              } clearfix`}
                                           >
                                             <span className="chat-img">
                                               {/* <img src={require(`../../images/icon/${'user.png'}`)} alt=''/> */}
@@ -1397,11 +1330,10 @@ const Support = () => {
                                                 </strong>
                                                 <br />
                                                 <small
-                                                  className={`text-${
-                                                    item.isAgent === true
-                                                      ? "right"
-                                                      : "left"
-                                                  } text-muted`}
+                                                  className={`text-${item.isAgent === true
+                                                    ? "right"
+                                                    : "left"
+                                                    } text-muted`}
                                                 >
                                                   <i className="fa fa-clock-o"></i>{" "}
                                                   {moment(
@@ -1412,30 +1344,29 @@ const Support = () => {
                                                 </small>
                                               </div>
                                               <p
-                                                className={`text-${
-                                                  item.isAgent === true
-                                                    ? "right"
-                                                    : "left"
-                                                } text-muted`}
+                                                className={`text-${item.isAgent === true
+                                                  ? "right"
+                                                  : "left"
+                                                  } text-muted`}
                                               >
                                                 {item.message}
                                               </p>
                                               {/* <a href={require(`../../images/icon/${'user.png'}`)} download>download</a> */}
                                               {item.fileName != null &&
-                                              item.fileName != "" ? (
+                                                item.fileName != "" ? (
                                                 <a
                                                   href={
                                                     environment.s3URL +
                                                     `${item.fileName}`
                                                   }
                                                   download
-                                                  target="_blank"
+                                                  target="_blank" rel="noreferrer"
                                                 >
                                                   {item.fileName.length > 50
                                                     ? item.fileName.substr(
-                                                        0,
-                                                        50
-                                                      ) + "..."
+                                                      0,
+                                                      50
+                                                    ) + "..."
                                                     : item.fileName}
                                                 </a>
                                               ) : (
@@ -1446,7 +1377,7 @@ const Support = () => {
                                                   style={{ color: "green" }}
                                                 >
                                                   {item.isAgent === true &&
-                                                  item.isAdminRead === true
+                                                    item.isAdminRead === true
                                                     ? "Seen"
                                                     : ""}
                                                 </span>
@@ -1456,7 +1387,7 @@ const Support = () => {
                                         );
                                       })}
                                     </ul>
-                                    <ReactPaginate
+                                    {/* <ReactPaginate
                                       previousLabel={"previous"}
                                       nextLabel={"next"}
                                       breakLabel={"..."}
@@ -1476,7 +1407,7 @@ const Support = () => {
                                       breakClassName={"page-item"}
                                       breakLinkClassName={"page-link"}
                                       activeClassName={"active"}
-                                    />
+                                    /> */}
                                   </div>
                                   <div className="chat-box bg-white">
                                     <div className="row">{fileCurrentName}</div>

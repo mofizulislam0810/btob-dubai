@@ -12,20 +12,23 @@ const FailedTicketPage = () => {
   const { loading, ticketData } = useAuth();
   const navigate = useNavigate();
     const handleOrder=()=>{
-        const orderTicket = async () => {
-            let transactionId=JSON.parse(localStorage.getItem("uniqueTransID"));
-			      const response = await axios.put(environment.changeTicketStatus+"/"+transactionId+"/Ordered",null,environment.headerToken);
-            console.log(response);
-            if(response.data>0){
-                navigate('/successorderticket');
-            }
-            else{
-                toast.error('Sorry! try again..');
-            }
-		};
-		orderTicket();
+    //     const orderTicket = async () => {
+    //         let transactionId=JSON.parse(localStorage.getItem("uniqueTransID"));
+		// 	      const response = await axios.put(environment.changeTicketStatus+"/"+transactionId+"/Ordered",null,environment.headerToken);
+    //         console.log(response);
+    //         if(response.data>0){
+    //             navigate('/successorderticket');
+    //         }
+    //         else{
+    //             toast.error('Sorry! try again..');
+    //         }
+		// };
+		// orderTicket();
+    navigate('/search');
+
     }
     console.log(ticketData);
+    console.log(ticketData.item2);
   return (
     <div>
       <Navbar></Navbar>
@@ -36,28 +39,47 @@ const FailedTicketPage = () => {
         <section className="content-header"></section>
         <section className="content content-panel">
           <div className="container bg-white w-25">
-            <div className="row">
+            <div className="row p-4">
               <div className="col-lg-12 text-center">
-                <h5 className="pt-4 fw-bold">Please try again</h5>
+                {/* <h5 className="pt-4 fw-bold">Please try again</h5> */}
                 {
-                  ticketData.item2 != undefined ? <><p className="text-danger">{ticketData.item2?.message}</p></> :<><p className="text-danger">{ticketData.message}</p></>
+                  ticketData.item2 != undefined ? 
+                    <>
+                      <p className="">
+                        {
+                        ticketData.item2?.isMessageShow ===true ? ticketData.item2?.message:
+                           <p>We are processing your ticket.<br></br>Please contact to the support.<br></br>
+                           Thank You</p>
+                        }
+                      </p>
+                    </> :
+                    
+                    <>
+                     {
+                        ticketData.isMessageShow ===true ? ticketData.message:
+                           <p>We are processing your ticket.<br></br>Please contact to the support.<br></br>
+                           Thank You</p>
+                        }
+                    </>
                 }
                 
-                <div className="my-3">
-                  <span className="text-danger fs-3">
+                <div className="my-3 p-4">
+                  {/* <span className="text-danger fs-3">
                     <i
                       class="fa fa-exclamation-triangle"
                       aria-hidden="true"
                     ></i>
-                  </span>
+                    
+                  </span> */}
+                  
                 </div>
-                <p>
-                  We couldn't issue ticket that flight <br></br>Please contact
-                  the support or order e-ticket<br></br>Thank You
-                </p>
+                {/* <p>
+                  We are processing your ticket.<br></br>Please contact to
+                  the support.<br></br>Thank You
+                </p> */}
                 <hr></hr>
                 <button className="btn button-color my-3 text-white fw-bold" onClick={()=>handleOrder()}>
-                  Order e-ticket
+                  Search more
                 </button>
               </div>
             </div>

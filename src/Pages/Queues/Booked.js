@@ -114,7 +114,7 @@ const Booked = () => {
           );
         } else {
           window.open(
-            "/support?typeid=1&subjectid=1&utid=" +
+            "/support?typeid=1&subjectid=10&utid=" +
               utid +
               "&pnr=" +
               pnr +
@@ -274,11 +274,12 @@ const Booked = () => {
                                     )}
                                   </td>
                                   <td>
-                                  {
+                                  {/* {
                                     item.origin === "null"? "": 
                                     item.journeyType=="Round Trip"?item.origin + (item.destination === "" ? "" : "⇔" + item.destination)
                                     :item.origin + (item.destination === "" ? "" : "→" + item.destination)
-                                  }
+                                  } */}
+                                  {item?.routes ?? ""}
                                   </td>
                                   
                                   <td>

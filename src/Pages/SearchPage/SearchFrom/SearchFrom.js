@@ -110,7 +110,6 @@ const SearchFrom = () => {
       const inputDateMulti4 = $("#departureDate4").children("input").val();
       const inputDateMulti5 = $("#departureDate5").children("input").val();
 
-
       if (origin === destination && origin !== "" && destination !== "") {
         toast.error("Depart From and Going To must be difference No.1");
       } else if (
@@ -240,10 +239,15 @@ const SearchFrom = () => {
       const journeyDate = $("#departureDate").children("input").val();
       const returnDate = $("#returnDate").children("input").val();
 
-      if (origin === destination && origin !== "" & destination !== "") {
+      if (origin === destination && (origin !== "") & (destination !== "")) {
         toast.error("Depart From and Going To must be difference");
       } else {
-        if ((String(tripType) === "One Way" && String(journeyDate) !== String(null)) || ((String(journeyDate) !== String(null) && String(returnDate) !== String(null)))) {
+        if (
+          (String(tripType) === "One Way" &&
+            String(journeyDate) !== String(null)) ||
+          (String(journeyDate) !== String(null) &&
+            String(returnDate) !== String(null))
+        ) {
           const qtyList = {
             Adult: adultCount,
             Children: childCount,
@@ -298,8 +302,8 @@ const SearchFrom = () => {
         ? searchList[idx].cabinClass === 1
           ? "Economy"
           : searchList[idx].cabinClass === 3
-            ? "Business"
-            : " "
+          ? "Business"
+          : " "
         : "Economy"
     );
     setAdultCount(searchList !== undefined ? searchList[idx].adults : 1);
@@ -320,10 +324,10 @@ const SearchFrom = () => {
     $("#txtTo").val(
       searchList !== undefined
         ? destination[0].city +
-        " - " +
-        destination[0].country +
-        ", " +
-        destination[0].name
+            " - " +
+            destination[0].country +
+            ", " +
+            destination[0].name
         : destinationRef.current.value
     );
 
@@ -341,8 +345,8 @@ const SearchFrom = () => {
           $(".class_0").tDatePicker("update", [
             searchList !== undefined
               ? moment(searchList[idx].routes[0].departureDate).format(
-                "yyyy-MM-DD"
-              )
+                  "yyyy-MM-DD"
+                )
               : new Date(),
           ]);
         });
@@ -351,13 +355,13 @@ const SearchFrom = () => {
           $(".class_0").tDatePicker("update", [
             searchList !== undefined
               ? moment(searchList[idx].routes[0].departureDate).format(
-                "yyyy-MM-DD"
-              )
+                  "yyyy-MM-DD"
+                )
               : new Date(),
             searchList !== undefined
               ? moment(searchList[idx].routes[1].departureDate).format(
-                "yyyy-MM-DD"
-              )
+                  "yyyy-MM-DD"
+                )
               : new Date(),
           ]);
         });
@@ -487,10 +491,10 @@ const SearchFrom = () => {
       if (results.length >= index + 1) {
         autoinput.val(
           results[index].city +
-          " - " +
-          results[index].country +
-          ", " +
-          results[index].name
+            " - " +
+            results[index].country +
+            ", " +
+            results[index].name
         );
         clearResults();
       }
@@ -674,7 +678,7 @@ const SearchFrom = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                           style={{
-                            backgroundColor: "#f8f2fb",
+                            backgroundColor: "#F7FBFC",
                           }}
                         >
                           <span id="valWay">{tripType}</span>
@@ -684,7 +688,7 @@ const SearchFrom = () => {
                           className="dropdown-menu"
                           aria-labelledby="dropdownMenuButton1"
                           style={{
-                            backgroundColor: "#f8f2fb",
+                            backgroundColor: "#F7FBFC",
                           }}
                         >
                           <li
@@ -718,7 +722,7 @@ const SearchFrom = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                           style={{
-                            backgroundColor: "#f8f2fb",
+                            backgroundColor: "#F7FBFC",
                           }}
                         >
                           <span id="valClass">{travelClassType}</span>
@@ -728,7 +732,7 @@ const SearchFrom = () => {
                           className="dropdown-menu"
                           aria-labelledby="dropdownMenuButton"
                           style={{
-                            backgroundColor: "#f8f2fb",
+                            backgroundColor: "#F7FBFC",
                           }}
                         >
                           <li
@@ -766,7 +770,7 @@ const SearchFrom = () => {
                               data-bs-auto-close="outside"
                               style={{
                                 height: "38px",
-                                backgroundColor: "#f8f2fb",
+                                backgroundColor: "#F7FBFC",
                               }}
                             >
                               <span className="d-flex">
@@ -789,7 +793,7 @@ const SearchFrom = () => {
                               className="dropdown-menu passenger-pack"
                               aria-labelledby="dropdownMenuButtonpassenger"
                               style={{
-                                backgroundColor: "#f8f2fb",
+                                backgroundColor: "#F7FBFC",
                               }}
                             >
                               <div>
@@ -808,11 +812,11 @@ const SearchFrom = () => {
                                       title="adultminus"
                                       onClick={
                                         infantCount > 0 &&
-                                          adultCount === infantCount
+                                        adultCount === infantCount
                                           ? () => {
-                                            setAdultCount(adultCount - 1);
-                                            setInfantCount(infantCount - 1);
-                                          }
+                                              setAdultCount(adultCount - 1);
+                                              setInfantCount(infantCount - 1);
+                                            }
                                           : () => setAdultCount(adultCount - 1)
                                       }
                                       disabled={adultCount === 1 ? true : false}
@@ -828,7 +832,7 @@ const SearchFrom = () => {
                                       style={{
                                         width: "30px",
                                         height: "30px",
-                                        backgroundColor: "#f8f2fb",
+                                        backgroundColor: "#F7FBFC",
                                       }}
                                     />
                                     <button
@@ -880,7 +884,7 @@ const SearchFrom = () => {
                                       style={{
                                         width: "30px",
                                         height: "30px",
-                                        backgroundColor: "#f8f2fb",
+                                        backgroundColor: "#F7FBFC",
                                       }}
                                     />
                                     <button
@@ -933,7 +937,7 @@ const SearchFrom = () => {
                                       style={{
                                         width: "30px",
                                         height: "30px",
-                                        backgroundColor: "#f8f2fb",
+                                        backgroundColor: "#F7FBFC",
                                       }}
                                     />
                                     <button
@@ -942,8 +946,8 @@ const SearchFrom = () => {
                                       onClick={
                                         infantCount < adultCount
                                           ? () =>
-                                            setInfantCount(infantCount + 1)
-                                          : () => { }
+                                              setInfantCount(infantCount + 1)
+                                          : () => {}
                                       }
                                       disabled={
                                         infantCount === 9 ? true : false
@@ -977,7 +981,7 @@ const SearchFrom = () => {
                               value={val.agenum}
                               style={{
                                 width: "60px",
-                                backgroundColor: "#f8f2fb",
+                                backgroundColor: "#F7FBFC",
                                 borderRadius: "2px",
                                 height: "36px",
                                 paddingLeft: "8px",
@@ -1025,7 +1029,7 @@ const SearchFrom = () => {
                       onChange={handleChange}
                       autoComplete="off"
                       style={{
-                        background: "#f8f2fb",
+                        background: "#F7FBFC",
                       }}
                     />
                   </div>
@@ -1045,7 +1049,7 @@ const SearchFrom = () => {
                         autoComplete="off"
                         id="txtFrom"
                         style={{
-                          background: "#f8f2fb",
+                          background: "#F7FBFC",
                         }}
                       />
                     </span>
@@ -1071,7 +1075,7 @@ const SearchFrom = () => {
                         id="txtTo"
                         autoComplete="off"
                         style={{
-                          background: "#f8f2fb",
+                          background: "#F7FBFC",
                         }}
                       />
                     </span>
@@ -1080,12 +1084,14 @@ const SearchFrom = () => {
                     <div className="row">
                       <div className="col-lg-6">
                         <label htmlFor="formGroupExampleInput">
-                          Departing <span className="fw-bold text-danger">*</span>
+                          Departing{" "}
+                          <span className="fw-bold text-danger">*</span>
                         </label>
                       </div>
                       <div className="col-lg-6" id="returnLavel">
                         <label htmlFor="formGroupExampleInput">
-                          Returning <span className="fw-bold text-danger">*</span>
+                          Returning{" "}
+                          <span className="fw-bold text-danger">*</span>
                         </label>
                       </div>
                     </div>
@@ -1096,7 +1102,7 @@ const SearchFrom = () => {
                         style={{
                           minHeight: "100%",
                           //borderRight: "1px solid gray",
-                          background: "#f8f2fb",
+                          background: "#F7FBFC",
                           border: "1px solid #ced4da",
                         }}
                       ></div>
@@ -1105,7 +1111,7 @@ const SearchFrom = () => {
                         style={{
                           minHeight: "100%",
                           //borderRight: "1px solid gray",
-                          background: "#f8f2fb",
+                          background: "#F7FBFC",
                           border: "1px solid #ced4da",
                         }}
                         id="returnDate"
@@ -1118,7 +1124,8 @@ const SearchFrom = () => {
                     <div className="row pt-1 position-relative" id="multiCity1">
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Depart From <span className="fw-bold text-danger">*</span>
+                          Depart From{" "}
+                          <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1130,7 +1137,7 @@ const SearchFrom = () => {
                             id="txtFrom1"
                             required
                             style={{
-                              background: "#f8f2fb",
+                              background: "#F7FBFC",
                             }}
                           />
                         </span>
@@ -1144,7 +1151,8 @@ const SearchFrom = () => {
                       </div>
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Going To <span className="fw-bold text-danger">*</span>
+                          Going To{" "}
+                          <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1156,7 +1164,7 @@ const SearchFrom = () => {
                             autoComplete="off"
                             required
                             style={{
-                              background: "#f8f2fb",
+                              background: "#F7FBFC",
                             }}
                           />
                         </span>
@@ -1165,7 +1173,8 @@ const SearchFrom = () => {
                         <div className="row">
                           <div className="col-lg-12 ">
                             <label htmlFor="formGroupExampleInput" className="">
-                              Departing <span className="fw-bold text-danger">*</span>
+                              Departing{" "}
+                              <span className="fw-bold text-danger">*</span>
                             </label>
                           </div>
                         </div>
@@ -1176,7 +1185,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               border: "1px solid #ced4da",
-                              background: "#f8f2fb",
+                              background: "#F7FBFC",
                             }}
                           ></div>
                         </div>
@@ -1189,7 +1198,8 @@ const SearchFrom = () => {
                     >
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Depart From <span className="fw-bold text-danger">*</span>
+                          Depart From{" "}
+                          <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1200,7 +1210,7 @@ const SearchFrom = () => {
                             autoComplete="off"
                             id="txtFrom2"
                             style={{
-                              background: "#f8f2fb",
+                              background: "#F7FBFC",
                             }}
                           />
                         </span>
@@ -1214,7 +1224,8 @@ const SearchFrom = () => {
                       </div>
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Going To <span className="fw-bold text-danger">*</span>
+                          Going To{" "}
+                          <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1225,7 +1236,7 @@ const SearchFrom = () => {
                             id="txtTo2"
                             autoComplete="off"
                             style={{
-                              background: "#f8f2fb",
+                              background: "#F7FBFC",
                             }}
                           />
                         </span>
@@ -1234,7 +1245,8 @@ const SearchFrom = () => {
                         <div className="row">
                           <div className="col-lg-12">
                             <label htmlFor="formGroupExampleInput" className="">
-                              Departing <span className="fw-bold text-danger">*</span>
+                              Departing{" "}
+                              <span className="fw-bold text-danger">*</span>
                             </label>
                           </div>
                         </div>
@@ -1245,7 +1257,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               border: "1px solid #ced4da",
-                              background: "#f8f2fb",
+                              background: "#F7FBFC",
                             }}
                           ></div>
                         </div>
@@ -1258,7 +1270,8 @@ const SearchFrom = () => {
                     >
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Depart From <span className="fw-bold text-danger">*</span>
+                          Depart From{" "}
+                          <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1269,7 +1282,7 @@ const SearchFrom = () => {
                             autoComplete="off"
                             id="txtFrom3"
                             style={{
-                              background: "#f8f2fb",
+                              background: "#F7FBFC",
                             }}
                           />
                         </span>
@@ -1283,7 +1296,8 @@ const SearchFrom = () => {
                       </div>
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Going To <span className="fw-bold text-danger">*</span>
+                          Going To{" "}
+                          <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1294,7 +1308,7 @@ const SearchFrom = () => {
                             id="txtTo3"
                             autoComplete="off"
                             style={{
-                              background: "#f8f2fb",
+                              background: "#F7FBFC",
                             }}
                           />
                         </span>
@@ -1304,7 +1318,8 @@ const SearchFrom = () => {
                         <div className="row">
                           <div className="col-lg-12">
                             <label htmlFor="formGroupExampleInput" className="">
-                              Departing <span className="fw-bold text-danger">*</span>
+                              Departing{" "}
+                              <span className="fw-bold text-danger">*</span>
                             </label>
                           </div>
                         </div>
@@ -1315,7 +1330,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               border: "1px solid #ced4da",
-                              background: "#f8f2fb",
+                              background: "#F7FBFC",
                             }}
                           ></div>
                         </div>
@@ -1328,7 +1343,8 @@ const SearchFrom = () => {
                     >
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Depart From <span className="fw-bold text-danger">*</span>
+                          Depart From{" "}
+                          <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1339,7 +1355,7 @@ const SearchFrom = () => {
                             autoComplete="off"
                             id="txtFrom4"
                             style={{
-                              background: "#f8f2fb",
+                              background: "#F7FBFC",
                             }}
                           />
                         </span>
@@ -1353,7 +1369,8 @@ const SearchFrom = () => {
                       </div>
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Going To <span className="fw-bold text-danger">*</span>
+                          Going To{" "}
+                          <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1364,7 +1381,7 @@ const SearchFrom = () => {
                             id="txtTo4"
                             autoComplete="off"
                             style={{
-                              background: "#f8f2fb",
+                              background: "#F7FBFC",
                             }}
                           />
                         </span>
@@ -1373,7 +1390,8 @@ const SearchFrom = () => {
                         <div className="row">
                           <div className="col-lg-12">
                             <label htmlFor="formGroupExampleInput" className="">
-                              Departing <span className="fw-bold text-danger">*</span>
+                              Departing{" "}
+                              <span className="fw-bold text-danger">*</span>
                             </label>
                           </div>
                         </div>
@@ -1384,7 +1402,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               border: "1px solid #ced4da",
-                              background: "#f8f2fb",
+                              background: "#F7FBFC",
                             }}
                           ></div>
                         </div>
@@ -1397,7 +1415,8 @@ const SearchFrom = () => {
                     >
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Depart From <span className="fw-bold text-danger">*</span>
+                          Depart From{" "}
+                          <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1408,7 +1427,7 @@ const SearchFrom = () => {
                             autoComplete="off"
                             id="txtFrom5"
                             style={{
-                              background: "#f8f2fb",
+                              background: "#F7FBFC",
                             }}
                           />
                         </span>
@@ -1422,7 +1441,8 @@ const SearchFrom = () => {
                       </div>
                       <div className="col-lg-4 forms">
                         <label htmlFor="formGroupExampleInput" className="">
-                          Going To <span className="fw-bold text-danger">*</span>
+                          Going To{" "}
+                          <span className="fw-bold text-danger">*</span>
                         </label>
                         <span className="address">
                           <input
@@ -1433,7 +1453,7 @@ const SearchFrom = () => {
                             id="txtTo5"
                             autoComplete="off"
                             style={{
-                              background: "#f8f2fb",
+                              background: "#F7FBFC",
                             }}
                           />
                         </span>
@@ -1442,7 +1462,8 @@ const SearchFrom = () => {
                         <div className="row rounded-3">
                           <div className="col-lg-12">
                             <label htmlFor="formGroupExampleInput" className="">
-                              Departing <span className="fw-bold text-danger">*</span>
+                              Departing{" "}
+                              <span className="fw-bold text-danger">*</span>
                             </label>
                           </div>
                         </div>
@@ -1453,7 +1474,7 @@ const SearchFrom = () => {
                             style={{
                               minHeight: "100%",
                               border: "1px solid #ced4da",
-                              background: "#f8f2fb",
+                              background: "#F7FBFC",
                             }}
                           ></div>
                         </div>

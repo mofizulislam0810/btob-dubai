@@ -58,7 +58,9 @@ const ShowAllFlightPage = () => {
   const [sameMatchError, setSameMatchError] = useState(true);
   const [journeyDateError, setJourneyDateError] = useState(true);
   const [tripType, setTripType] = useState(tripTypeModify); //"One Way"
-  const [travelClassType, setTravelClassType] = useState(searchData.travelClass); //:"Economy"
+  const [travelClassType, setTravelClassType] = useState(
+    searchData.travelClass
+  ); //:"Economy"
   console.log(travelClassType);
   const [adultCount, setAdultCount] = useState(qtyList.Adult); //1
   const [childCount, setChildCount] = useState(qtyList.Children); //0
@@ -269,7 +271,6 @@ const ShowAllFlightPage = () => {
     });
   }, []);
 
-
   const originCode = airports
     .filter(
       (f) => f.city + " - " + f.country + ", " + f.name === searchData.origin
@@ -304,7 +305,7 @@ const ShowAllFlightPage = () => {
     )
     .map((item) => item.iata);
 
-    console.log(destinationCode2[0]);
+  console.log(destinationCode2[0]);
   const originCode3 = airports
     .filter(
       (f) => f.city + " - " + f.country + ", " + f.name === searchData.origin3
@@ -491,7 +492,6 @@ const ShowAllFlightPage = () => {
         setFetchFlighData(await response.data.item1);
         // setFetchFlighData(flightoneway.item1);
         setLoading(false);
-
       };
       getData();
     } else {
@@ -622,10 +622,10 @@ const ShowAllFlightPage = () => {
       if (results.length >= index + 1) {
         autoinput.val(
           results[index].city +
-          " - " +
-          results[index].country +
-          ", " +
-          results[index].name
+            " - " +
+            results[index].country +
+            ", " +
+            results[index].name
         );
         clearResults();
       }
@@ -874,171 +874,169 @@ const ShowAllFlightPage = () => {
         ) {
           toast.error("Please select all departing date no.5");
         } else {
-            const qtyList = {
-              Adult: adultCount,
-              Children: childCount,
-              Infant: infantCount,
+          const qtyList = {
+            Adult: adultCount,
+            Children: childCount,
+            Infant: infantCount,
+          };
+          const originCode = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === origin
+            )
+            .map((item) => item.iata);
+          const destinationCode = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === destination
+            )
+            .map((item) => item.iata);
+          const originCode1 = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === origin1
+            )
+            .map((item) => item.iata);
+          const destinationCode1 = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === destination1
+            )
+            .map((item) => item.iata);
+          const originCode2 = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === origin2
+            )
+            .map((item) => item.iata);
+          const destinationCode2 = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === destination2
+            )
+            .map((item) => item.iata);
+          const originCode3 = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === origin3
+            )
+            .map((item) => item.iata);
+          const destinationCode3 = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === destination3
+            )
+            .map((item) => item.iata);
+          const originCode4 = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === origin4
+            )
+            .map((item) => item.iata);
+          const destinationCode4 = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === destination4
+            )
+            .map((item) => item.iata);
+          const originCode5 = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === origin5
+            )
+            .map((item) => item.iata);
+          const destinationCode5 = airports
+            .filter(
+              (f) => f.city + " - " + f.country + ", " + f.name === destination5
+            )
+            .map((item) => item.iata);
+          let searchParamMulti = {
+            routes: [
+              {
+                origin: originCode[0],
+                destination: destinationCode[0],
+                departureDate: journeyDate,
+              },
+              {
+                origin: originCode1[0],
+                destination: destinationCode1[0],
+                departureDate: inputDateMulti1,
+              },
+            ],
+            adults: qtyList.Adult,
+            childs: qtyList.Children,
+            infants: qtyList.Infant,
+            isOpenCombination: false,
+            cabinClass: getCabinClass(travelClassType),
+            preferredCarriers:
+              preAirlines !== undefined ? preAirlines.split(",") : [],
+            prohibitedCarriers: [],
+            taxRedemptions: [],
+            childrenAges: [],
+          };
+          if (originCode2[0] !== undefined) {
+            let mc2 = {
+              origin: originCode2[0],
+              destination: destinationCode2[0],
+              departureDate: inputDateMulti2,
             };
-            const originCode = airports
-              .filter(
-                (f) => f.city + " - " + f.country + ", " + f.name === origin
-              )
-              .map((item) => item.iata);
-            const destinationCode = airports
-              .filter(
-                (f) => f.city + " - " + f.country + ", " + f.name === destination
-              )
-              .map((item) => item.iata);
-            const originCode1 = airports
-              .filter(
-                (f) => f.city + " - " + f.country + ", " + f.name === origin1
-              )
-              .map((item) => item.iata);
-            const destinationCode1 = airports
-              .filter(
-                (f) => f.city + " - " + f.country + ", " + f.name === destination1
-              )
-              .map((item) => item.iata);
-            const originCode2 = airports
-              .filter(
-                (f) => f.city + " - " + f.country + ", " + f.name === origin2
-              )
-              .map((item) => item.iata);
-            const destinationCode2 = airports
-              .filter(
-                (f) => f.city + " - " + f.country + ", " + f.name === destination2
-              )
-              .map((item) => item.iata);
-            const originCode3 = airports
-              .filter(
-                (f) => f.city + " - " + f.country + ", " + f.name === origin3
-              )
-              .map((item) => item.iata);
-            const destinationCode3 = airports
-              .filter(
-                (f) => f.city + " - " + f.country + ", " + f.name === destination3
-              )
-              .map((item) => item.iata);
-            const originCode4 = airports
-              .filter(
-                (f) => f.city + " - " + f.country + ", " + f.name === origin4
-              )
-              .map((item) => item.iata);
-            const destinationCode4 = airports
-              .filter(
-                (f) => f.city + " - " + f.country + ", " + f.name === destination4
-              )
-              .map((item) => item.iata);
-            const originCode5 = airports
-              .filter(
-                (f) => f.city + " - " + f.country + ", " + f.name === origin5
-              )
-              .map((item) => item.iata);
-            const destinationCode5 = airports
-              .filter(
-                (f) => f.city + " - " + f.country + ", " + f.name === destination5
-              )
-              .map((item) => item.iata);
-            let searchParamMulti = {
-              routes: [
-                {
-                  origin: originCode[0],
-                  destination: destinationCode[0],
-                  departureDate: journeyDate,
-                },
-                {
-                  origin: originCode1[0],
-                  destination: destinationCode1[0],
-                  departureDate: inputDateMulti1,
-                },
-              ],
-              adults: qtyList.Adult,
-              childs: qtyList.Children,
-              infants: qtyList.Infant,
-              isOpenCombination: false,
-              cabinClass: getCabinClass(travelClassType),
-              preferredCarriers: preAirlines !== undefined ? preAirlines.split(",") : [],
-              prohibitedCarriers: [],
-              taxRedemptions: [],
-              childrenAges: [],
+            searchParamMulti.routes.push(mc2);
+          }
+          if (originCode3[0] !== undefined) {
+            let mc2 = {
+              origin: originCode3[0],
+              destination: destinationCode3[0],
+              departureDate: inputDateMulti3,
             };
-            if (originCode2[0] !== undefined) {
-              let mc2 = {
-                origin: originCode2[0],
-                destination: destinationCode2[0],
-                departureDate: inputDateMulti2,
-              };
-              searchParamMulti.routes.push(mc2);
-            }
-            if (originCode3[0] !== undefined) {
-              let mc2 = {
-                origin: originCode3[0],
-                destination: destinationCode3[0],
-                departureDate: inputDateMulti3,
-              };
-              searchParamMulti.routes.push(mc2);
-            }
-            if (originCode4[0] !== undefined) {
-              let mc2 = {
-                origin: originCode4[0],
-                destination: destinationCode4[0],
-                departureDate: inputDateMulti4,
-              };
-              searchParamMulti.routes.push(mc2);
-            }
-            if (originCode5[0] !== undefined) {
-              let mc2 = {
-                origin: originCode5[0],
-                destination: destinationCode5[0],
-                departureDate: inputDateMulti5,
-              };
-              searchParamMulti.routes.push(mc2);
-            }
-            const searchData = {
-              origin: origin,
-              destination: destination,
-              origin1: origin1,
-              destination1: destination1,
-              origin2: origin2,
-              destination2: destination2,
-              origin3: origin3,
-              destination3: destination3,
-              origin4: origin4,
-              destination4: destination4,
-              origin5: origin5,
-              destination5: destination5,
-              journeyDate: journeyDate,
-              returnDate: returnDate,
-              inputDateMulti1: inputDateMulti1,
-              inputDateMulti2: inputDateMulti2,
-              inputDateMulti3: inputDateMulti3,
-              inputDateMulti4: inputDateMulti4,
-              inputDateMulti5: inputDateMulti5,
-              tripTypeModify: tripType,
-              qtyList: qtyList,
-              travelClass: travelClassType,
+            searchParamMulti.routes.push(mc2);
+          }
+          if (originCode4[0] !== undefined) {
+            let mc2 = {
+              origin: originCode4[0],
+              destination: destinationCode4[0],
+              departureDate: inputDateMulti4,
             };
-            localStorage.setItem("Database", JSON.stringify(searchData));
-  
-            const getData = async () => {
-              setLoading(true);
-              const response = await axios.post(
-                environment.searchFlight,
-                searchParamMulti,
-                environment.headerToken
-              );
-              setFetchFlighData(await response.data.item1);
-              setLoading(false);
-              document.getElementById("search-again").click();
+            searchParamMulti.routes.push(mc2);
+          }
+          if (originCode5[0] !== undefined) {
+            let mc2 = {
+              origin: originCode5[0],
+              destination: destinationCode5[0],
+              departureDate: inputDateMulti5,
             };
-            console.log(searchParamMulti);
-            console.log(origin, origin1, origin2, origin3, origin4, origin5);
-            getData();
-          
-        }
+            searchParamMulti.routes.push(mc2);
+          }
+          const searchData = {
+            origin: origin,
+            destination: destination,
+            origin1: origin1,
+            destination1: destination1,
+            origin2: origin2,
+            destination2: destination2,
+            origin3: origin3,
+            destination3: destination3,
+            origin4: origin4,
+            destination4: destination4,
+            origin5: origin5,
+            destination5: destination5,
+            journeyDate: journeyDate,
+            returnDate: returnDate,
+            inputDateMulti1: inputDateMulti1,
+            inputDateMulti2: inputDateMulti2,
+            inputDateMulti3: inputDateMulti3,
+            inputDateMulti4: inputDateMulti4,
+            inputDateMulti5: inputDateMulti5,
+            tripTypeModify: tripType,
+            qtyList: qtyList,
+            travelClass: travelClassType,
+          };
+          localStorage.setItem("Database", JSON.stringify(searchData));
 
+          const getData = async () => {
+            setLoading(true);
+            const response = await axios.post(
+              environment.searchFlight,
+              searchParamMulti,
+              environment.headerToken
+            );
+            setFetchFlighData(await response.data.item1);
+            setLoading(false);
+            document.getElementById("search-again").click();
+          };
+          console.log(searchParamMulti);
+          console.log(origin, origin1, origin2, origin3, origin4, origin5);
+          getData();
+        }
       }
-      
 
       console.log("String(inputDateMulti3)", inputDateMulti1, String(null));
       if (!sameMatchError) {
@@ -1126,7 +1124,8 @@ const ShowAllFlightPage = () => {
             infants: qtyList.Infant,
             isOpenCombination: false,
             cabinClass: getCabinClass(travelClassType),
-            preferredCarriers: preAirlines !== undefined ? preAirlines.split(",") : [],
+            preferredCarriers:
+              preAirlines !== undefined ? preAirlines.split(",") : [],
             prohibitedCarriers: [],
             taxRedemptions: [],
             childrenAges: [],
@@ -1268,7 +1267,8 @@ const ShowAllFlightPage = () => {
           infants: qtyList.Infant,
           isOpenCombination: false,
           cabinClass: getCabinClass(travelClassType),
-          preferredCarriers: preAirlines !== undefined ? preAirlines.split(",") : [],
+          preferredCarriers:
+            preAirlines !== undefined ? preAirlines.split(",") : [],
           prohibitedCarriers: [],
           taxRedemptions: [],
           childrenAges: [],
@@ -1346,7 +1346,8 @@ const ShowAllFlightPage = () => {
           infants: qtyList.Infant,
           isOpenCombination: false,
           cabinClass: getCabinClass(travelClassType),
-          preferredCarriers: preAirlines !== undefined ? preAirlines.split(",") : [],
+          preferredCarriers:
+            preAirlines !== undefined ? preAirlines.split(",") : [],
           prohibitedCarriers: [],
           taxRedemptions: [],
           childrenAges: [],
@@ -1401,237 +1402,265 @@ const ShowAllFlightPage = () => {
             <div className="row border">
               <div className="col-lg-7 py-3 ps-5 my-auto border-right bg-white">
                 <div>
-                <span className="p-2 border">
-                  <span className="fw-bold" style={{ fontSize: "10px" }}>
-                    <span className="me-2">
-                      <i className="fas fa-plane-departure"></i>
-                    </span>{" "}
-                    <span>
-                      {originCode[0]}{" "}(
-                      {airports
-                        .filter((f) => f.iata === originCode[0])
-                        .map((item) => item.city)}
-                      )
-                    </span>
-                    <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                  </span>
-                  <span className="px-1">|</span>
-                  <span className="fw-bold" style={{ fontSize: "10px" }}>
-                    <span className="me-2">
-                      <i className="fas fa-plane-arrival"></i>
-                    </span>
-                    {searchData.returnDate === "null" ? (
+                  <span className="p-2 border">
+                    <span className="fw-bold" style={{ fontSize: "10px" }}>
+                      <span className="me-2">
+                        <i className="fas fa-plane-departure"></i>
+                      </span>{" "}
                       <span>
-                        {destinationCode[0]}{" "}(
+                        {originCode[0]} (
                         {airports
-                          .filter((f) => f.iata === destinationCode[0])
+                          .filter((f) => f.iata === originCode[0])
                           .map((item) => item.city)}
                         )
                       </span>
-                    ) : (
-                      <span>
-                        {destinationCode[0]}{" "}(
-                        {airports
-                          .filter((f) => f.iata === destinationCode[0])
-                          .map((item) => item.city)})
+                      <ReactTooltip effect="solid" html={true}></ReactTooltip>
+                    </span>
+                    <span className="px-1">|</span>
+                    <span className="fw-bold" style={{ fontSize: "10px" }}>
+                      <span className="me-2">
+                        <i className="fas fa-plane-arrival"></i>
                       </span>
-                    )}
+                      {searchData.returnDate === "null" ? (
+                        <span>
+                          {destinationCode[0]} (
+                          {airports
+                            .filter((f) => f.iata === destinationCode[0])
+                            .map((item) => item.city)}
+                          )
+                        </span>
+                      ) : (
+                        <span>
+                          {destinationCode[0]} (
+                          {airports
+                            .filter((f) => f.iata === destinationCode[0])
+                            .map((item) => item.city)}
+                          )
+                        </span>
+                      )}
 
-                    <ReactTooltip effect="solid" html={true}></ReactTooltip>
+                      <ReactTooltip effect="solid" html={true}></ReactTooltip>
+                    </span>
                   </span>
-                </span>
-                {searchData.origin1 !== "" &&
+                  {searchData.origin1 !== "" &&
                   searchData.origin1 !== undefined ? (
-                  <>
-                    <span className="p-2 border ms-1">
-                      <span className="fw-bold" style={{ fontSize: "10px" }}>
-                        <span className="me-2">
-                          <i className="fas fa-plane-departure"></i>
-                        </span>{" "}
-                        <span>
-                          {originCode1[0]}{" "}(
-                          {airports
-                            .filter((f) => f.iata === originCode1[0])
-                            .map((item) => item.city)}
-                          )
+                    <>
+                      <span className="p-2 border ms-1">
+                        <span className="fw-bold" style={{ fontSize: "10px" }}>
+                          <span className="me-2">
+                            <i className="fas fa-plane-departure"></i>
+                          </span>{" "}
+                          <span>
+                            {originCode1[0]} (
+                            {airports
+                              .filter((f) => f.iata === originCode1[0])
+                              .map((item) => item.city)}
+                            )
+                          </span>
+                          <ReactTooltip
+                            effect="solid"
+                            html={true}
+                          ></ReactTooltip>
                         </span>
-                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                      </span>
-                      <span className="px-1">|</span>
-                      <span className="fw-bold" style={{ fontSize: "10px" }}>
-                        <span className="me-2">
-                          <i className="fas fa-plane-arrival"></i>
-                        </span>
+                        <span className="px-1">|</span>
+                        <span className="fw-bold" style={{ fontSize: "10px" }}>
+                          <span className="me-2">
+                            <i className="fas fa-plane-arrival"></i>
+                          </span>
 
-                        <span>
-                          {destinationCode1[0]}{" "}(
-                          {airports
-                            .filter((f) => f.iata === destinationCode1[0])
-                            .map((item) => item.city)}
-                          )
+                          <span>
+                            {destinationCode1[0]} (
+                            {airports
+                              .filter((f) => f.iata === destinationCode1[0])
+                              .map((item) => item.city)}
+                            )
+                          </span>
+                          <ReactTooltip
+                            effect="solid"
+                            html={true}
+                          ></ReactTooltip>
                         </span>
-                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
-                    </span>
-                  </>
-                ) : (
-                  <></>
-                )}
-                {searchData.origin2 !== "" &&
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {searchData.origin2 !== "" &&
                   searchData.origin2 !== undefined ? (
-                  <>
-                    <span className="p-2 border ms-1">
-                      <span className="fw-bold" style={{ fontSize: "10px" }}>
-                        <span className="me-2">
-                          <i className="fas fa-plane-departure"></i>
-                        </span>{" "}
-                        <span
+                    <>
+                      <span className="p-2 border ms-1">
+                        <span className="fw-bold" style={{ fontSize: "10px" }}>
+                          <span className="me-2">
+                            <i className="fas fa-plane-departure"></i>
+                          </span>{" "}
+                          <span>
+                            {originCode2[0]} (
+                            {airports
+                              .filter((f) => f.iata === originCode2[0])
+                              .map((item) => item.city)}
+                            )
+                          </span>
+                          <ReactTooltip
+                            effect="solid"
+                            html={true}
+                          ></ReactTooltip>
+                        </span>
+                        <span className="px-1">|</span>
+                        <span className="fw-bold" style={{ fontSize: "10px" }}>
+                          <span className="me-2">
+                            <i className="fas fa-plane-arrival"></i>
+                          </span>
 
-                        >
-                          {originCode2[0]}{" "}(
-                          {airports
-                            .filter((f) => f.iata === originCode2[0])
-                            .map((item) => item.city)}
-                          )
+                          <span>
+                            {destinationCode2[0]} (
+                            {airports
+                              .filter((f) => f.iata === destinationCode2[0])
+                              .map((item) => item.city)}
+                            )
+                          </span>
+                          <ReactTooltip
+                            effect="solid"
+                            html={true}
+                          ></ReactTooltip>
                         </span>
-                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
-                      <span className="px-1">|</span>
-                      <span className="fw-bold" style={{ fontSize: "10px" }}>
-                        <span className="me-2">
-                          <i className="fas fa-plane-arrival"></i>
-                        </span>
-
-                        <span>
-                          {destinationCode2[0]}{" "}(
-                          {airports
-                            .filter((f) => f.iata === destinationCode2[0])
-                            .map((item) => item.city)}
-                          )
-                        </span>
-                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                      </span>
-                    </span>
-                  </>
-                ) : (
-                  <></>
-                )}
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </div>
                 <div className="mt-3">
-                {searchData.origin3 !== "" &&
+                  {searchData.origin3 !== "" &&
                   searchData.origin3 !== undefined ? (
-                  <>
-                    <span className="p-2 border">
-                      <span className="fw-bold" style={{ fontSize: "10px" }}>
-                        <span className="me-2">
-                          <i className="fas fa-plane-departure"></i>
-                        </span>{" "}
-                        <span>
-                          {originCode3[0]}{" "}(
-                          {airports
-                            .filter((f) => f.iata === originCode3[0])
-                            .map((item) => item.city)}
-                          )
+                    <>
+                      <span className="p-2 border">
+                        <span className="fw-bold" style={{ fontSize: "10px" }}>
+                          <span className="me-2">
+                            <i className="fas fa-plane-departure"></i>
+                          </span>{" "}
+                          <span>
+                            {originCode3[0]} (
+                            {airports
+                              .filter((f) => f.iata === originCode3[0])
+                              .map((item) => item.city)}
+                            )
+                          </span>
+                          <ReactTooltip
+                            effect="solid"
+                            html={true}
+                          ></ReactTooltip>
                         </span>
-                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
+                        <span className="px-1">|</span>
+                        <span className="fw-bold" style={{ fontSize: "10px" }}>
+                          <span className="me-2">
+                            <i className="fas fa-plane-arrival"></i>
+                          </span>
+
+                          <span>
+                            {destinationCode3[0]} (
+                            {airports
+                              .filter((f) => f.iata === destinationCode3[0])
+                              .map((item) => item.city)}
+                            )
+                          </span>
+                          <ReactTooltip
+                            effect="solid"
+                            html={true}
+                          ></ReactTooltip>
+                        </span>
                       </span>
-                      <span className="px-1">|</span>
-                      <span className="fw-bold" style={{ fontSize: "10px" }}>
-                        <span className="me-2">
-                          <i className="fas fa-plane-arrival"></i>
-                        </span>
+                    </>
+                  ) : (
+                    <></>
+                  )}
 
-                        <span>
-
-                          {destinationCode3[0]}{" "}(
-                          {airports
-                            .filter((f) => f.iata === destinationCode3[0])
-                            .map((item) => item.city)}
-                          )
-                        </span>
-                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                      </span>
-                    </span>
-                  </>
-                ) : (
-                  <></>
-                )}
-
-                {searchData.origin4 !== "" &&
+                  {searchData.origin4 !== "" &&
                   searchData.origin4 !== undefined ? (
-                  <>
-                    <span className="p-2 border ms-1">
-                      <span className="fw-bold" style={{ fontSize: "10px" }}>
-                        <span className="me-2">
-                          <i className="fas fa-plane-departure"></i>
-                        </span>{" "}
-                        <span>
-                          {originCode4[0]}{" "}(
-                          {airports
-                            .filter((f) => f.iata === originCode4[0])
-                            .map((item) => item.city)}
-                          )
+                    <>
+                      <span className="p-2 border ms-1">
+                        <span className="fw-bold" style={{ fontSize: "10px" }}>
+                          <span className="me-2">
+                            <i className="fas fa-plane-departure"></i>
+                          </span>{" "}
+                          <span>
+                            {originCode4[0]} (
+                            {airports
+                              .filter((f) => f.iata === originCode4[0])
+                              .map((item) => item.city)}
+                            )
+                          </span>
+                          <ReactTooltip
+                            effect="solid"
+                            html={true}
+                          ></ReactTooltip>
                         </span>
-                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                      </span>
-                      <span className="px-1">|</span>
-                      <span className="fw-bold" style={{ fontSize: "10px" }}>
-                        <span className="me-2">
-                          <i className="fas fa-plane-arrival"></i>
-                        </span>
+                        <span className="px-1">|</span>
+                        <span className="fw-bold" style={{ fontSize: "10px" }}>
+                          <span className="me-2">
+                            <i className="fas fa-plane-arrival"></i>
+                          </span>
 
-                        <span>
-                          {destinationCode4[0]}{" "}(
-                          {airports
-                            .filter((f) => f.iata === destinationCode4[0])
-                            .map((item) => item.city)}
-                          )
+                          <span>
+                            {destinationCode4[0]} (
+                            {airports
+                              .filter((f) => f.iata === destinationCode4[0])
+                              .map((item) => item.city)}
+                            )
+                          </span>
+                          <ReactTooltip
+                            effect="solid"
+                            html={true}
+                          ></ReactTooltip>
                         </span>
-                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
-                    </span>
-                  </>
-                ) : (
-                  <></>
-                )}
+                    </>
+                  ) : (
+                    <></>
+                  )}
 
-                {searchData.origin5 !== "" &&
+                  {searchData.origin5 !== "" &&
                   searchData.origin5 !== undefined ? (
-                  <>
-                    <span className="p-2 border ms-1">
-                      <span className="fw-bold" style={{ fontSize: "10px" }}>
-                        <span className="me-2">
-                          <i className="fas fa-plane-departure"></i>
-                        </span>{" "}
-                        <span>
-                          {originCode5[0]}{" "}(
-                          {airports
-                            .filter((f) => f.iata === originCode5[0])
-                            .map((item) => item.city)}
-                          )
+                    <>
+                      <span className="p-2 border ms-1">
+                        <span className="fw-bold" style={{ fontSize: "10px" }}>
+                          <span className="me-2">
+                            <i className="fas fa-plane-departure"></i>
+                          </span>{" "}
+                          <span>
+                            {originCode5[0]} (
+                            {airports
+                              .filter((f) => f.iata === originCode5[0])
+                              .map((item) => item.city)}
+                            )
+                          </span>
+                          <ReactTooltip
+                            effect="solid"
+                            html={true}
+                          ></ReactTooltip>
                         </span>
-                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
-                      </span>
-                      <span className="px-1">|</span>
-                      <span className="fw-bold" style={{ fontSize: "10px" }}>
-                        <span className="me-2">
-                          <i className="fas fa-plane-arrival"></i>
-                        </span>
+                        <span className="px-1">|</span>
+                        <span className="fw-bold" style={{ fontSize: "10px" }}>
+                          <span className="me-2">
+                            <i className="fas fa-plane-arrival"></i>
+                          </span>
 
-                        <span>
-                          {destinationCode5[0]}{" "}(
-                          {airports
-                            .filter((f) => f.iata === destinationCode5[0])
-                            .map((item) => item.city)}
-                          )
+                          <span>
+                            {destinationCode5[0]} (
+                            {airports
+                              .filter((f) => f.iata === destinationCode5[0])
+                              .map((item) => item.city)}
+                            )
+                          </span>
+                          <ReactTooltip
+                            effect="solid"
+                            html={true}
+                          ></ReactTooltip>
                         </span>
-                        <ReactTooltip effect="solid" html={true}></ReactTooltip>
                       </span>
-                    </span>
-                  </>
-                ) : (
-                  <></>
-                )}
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </div>
               <div className="col-lg-3 py-3 my-auto border-right bg-white">
@@ -1664,7 +1693,8 @@ const ShowAllFlightPage = () => {
               </div>
               <div className="col-lg-2 my-auto d-flex justify-content-center bg-white">
                 <button
-                  className="btn button-color btn-sm text-white float-start fw-bold search-again rounded-3 d-flex align-items-center" id="search-again"
+                  className="btn button-color btn-sm text-white float-start fw-bold search-again rounded-3 d-flex align-items-center"
+                  id="search-again"
                   onClick={() => setModifySearch(!modifySearch)}
                 >
                   Modify search{" "}
@@ -1710,7 +1740,7 @@ const ShowAllFlightPage = () => {
                                           data-bs-toggle="dropdown"
                                           aria-expanded="false"
                                           style={{
-                                            backgroundColor: "#f8f2fb",
+                                            backgroundColor: "#F7FBFC",
                                           }}
                                         >
                                           <span id="valWay">{tripType}</span>
@@ -1719,7 +1749,7 @@ const ShowAllFlightPage = () => {
                                           id="tripList"
                                           className="dropdown-menu"
                                           aria-labelledby="dropdownMenuButton1"
-                                          style={{ backgroundColor: "#f8f2fb" }}
+                                          style={{ backgroundColor: "#F7FBFC" }}
                                         >
                                           <li
                                             className="dropdown-item dropdown-item-selected"
@@ -1758,7 +1788,7 @@ const ShowAllFlightPage = () => {
                                           data-bs-toggle="dropdown"
                                           aria-expanded="false"
                                           style={{
-                                            backgroundColor: "#f8f2fb",
+                                            backgroundColor: "#F7FBFC",
                                           }}
                                         >
                                           <span id="valClass">
@@ -1769,7 +1799,7 @@ const ShowAllFlightPage = () => {
                                           id="classList"
                                           className="dropdown-menu"
                                           aria-labelledby="dropdownMenuButton"
-                                          style={{ backgroundColor: "#f8f2fb" }}
+                                          style={{ backgroundColor: "#F7FBFC" }}
                                         >
                                           <li
                                             className="dropdown-item dropdown-item-selected"
@@ -1812,7 +1842,7 @@ const ShowAllFlightPage = () => {
                                               data-bs-auto-close="outside"
                                               style={{
                                                 height: "36px",
-                                                backgroundColor: "#f8f2fb",
+                                                backgroundColor: "#F7FBFC",
                                               }}
                                             >
                                               <span className="d-flex">
@@ -1840,7 +1870,7 @@ const ShowAllFlightPage = () => {
                                               className="dropdown-menu passenger-pack"
                                               aria-labelledby="dropdownMenuButtonpassenger"
                                               style={{
-                                                backgroundColor: "#f8f2fb",
+                                                backgroundColor: "#F7FBFC",
                                               }}
                                             >
                                               <div>
@@ -1861,20 +1891,20 @@ const ShowAllFlightPage = () => {
                                                       title="adultminus"
                                                       onClick={
                                                         infantCount > 0 &&
-                                                          adultCount ===
+                                                        adultCount ===
                                                           infantCount
                                                           ? () => {
-                                                            setAdultCount(
-                                                              adultCount - 1
-                                                            );
-                                                            setInfantCount(
-                                                              infantCount - 1
-                                                            );
-                                                          }
+                                                              setAdultCount(
+                                                                adultCount - 1
+                                                              );
+                                                              setInfantCount(
+                                                                infantCount - 1
+                                                              );
+                                                            }
                                                           : () =>
-                                                            setAdultCount(
-                                                              adultCount - 1
-                                                            )
+                                                              setAdultCount(
+                                                                adultCount - 1
+                                                              )
                                                       }
                                                       disabled={
                                                         adultCount === 1
@@ -1894,7 +1924,7 @@ const ShowAllFlightPage = () => {
                                                         width: "30px",
                                                         height: "30px",
                                                         backgroundColor:
-                                                          "#f8f2fb",
+                                                          "#F7FBFC",
                                                       }}
                                                     />
                                                     <button
@@ -1968,7 +1998,7 @@ const ShowAllFlightPage = () => {
                                                         width: "30px",
                                                         height: "30px",
                                                         backgroundColor:
-                                                          "#f8f2fb",
+                                                          "#F7FBFC",
                                                       }}
                                                     />
                                                     <button
@@ -2039,7 +2069,7 @@ const ShowAllFlightPage = () => {
                                                         width: "30px",
                                                         height: "30px",
                                                         backgroundColor:
-                                                          "#f8f2fb",
+                                                          "#F7FBFC",
                                                       }}
                                                     />
                                                     <button
@@ -2048,10 +2078,10 @@ const ShowAllFlightPage = () => {
                                                       onClick={
                                                         infantCount < adultCount
                                                           ? () =>
-                                                            setInfantCount(
-                                                              infantCount + 1
-                                                            )
-                                                          : () => { }
+                                                              setInfantCount(
+                                                                infantCount + 1
+                                                              )
+                                                          : () => {}
                                                       }
                                                       disabled={
                                                         infantCount === 9
@@ -2104,7 +2134,7 @@ const ShowAllFlightPage = () => {
                                             <select
                                               style={{
                                                 width: "60px",
-                                                backgroundColor: "#f8f2fb",
+                                                backgroundColor: "#F7FBFC",
                                                 borderRadius: "2px",
                                                 height: "36px",
                                                 paddingLeft: "8px",
@@ -2149,7 +2179,7 @@ const ShowAllFlightPage = () => {
                                       // required
                                       autoComplete="off"
                                       style={{
-                                        background: "#f8f2fb",
+                                        background: "#F7FBFC",
                                       }}
                                       onChange={handleChange}
                                     />
@@ -2163,7 +2193,9 @@ const ShowAllFlightPage = () => {
                                       className="form-label"
                                     >
                                       Depart From{" "}
-                                      <span className="fw-bold text-danger">*</span>
+                                      <span className="fw-bold text-danger">
+                                        *
+                                      </span>
                                     </label>
                                     <span className="address">
                                       <input
@@ -2175,7 +2207,7 @@ const ShowAllFlightPage = () => {
                                         autoComplete="off"
                                         id="txtFrom"
                                         style={{
-                                          background: "#f8f2fb",
+                                          background: "#F7FBFC",
                                         }}
                                       />
                                     </span>
@@ -2196,7 +2228,9 @@ const ShowAllFlightPage = () => {
                                       className="form-label"
                                     >
                                       Going To{" "}
-                                      <span className="fw-bold text-danger">*</span>
+                                      <span className="fw-bold text-danger">
+                                        *
+                                      </span>
                                     </label>
                                     <span className="address">
                                       <input
@@ -2208,7 +2242,7 @@ const ShowAllFlightPage = () => {
                                         id="txtTo"
                                         autoComplete="off"
                                         style={{
-                                          background: "#f8f2fb",
+                                          background: "#F7FBFC",
                                         }}
                                       />
                                     </span>
@@ -2221,7 +2255,9 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Departing{" "}
-                                          <span className="fw-bold text-danger">*</span>
+                                          <span className="fw-bold text-danger">
+                                            *
+                                          </span>
                                         </label>
                                       </div>
                                       <div
@@ -2233,7 +2269,9 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Returning{" "}
-                                          <span className="fw-bold text-danger">*</span>
+                                          <span className="fw-bold text-danger">
+                                            *
+                                          </span>
                                         </label>
                                       </div>
                                     </div>
@@ -2244,7 +2282,7 @@ const ShowAllFlightPage = () => {
                                         style={{
                                           minHeight: "100%",
                                           //borderRight: "1px solid gray",
-                                          background: "#f8f2fb",
+                                          background: "#F7FBFC",
                                           border: "1px solid #ced4da",
                                         }}
                                       ></div>
@@ -2253,7 +2291,7 @@ const ShowAllFlightPage = () => {
                                         style={{
                                           minHeight: "100%",
                                           //borderRight: "1px solid gray",
-                                          background: "#f8f2fb",
+                                          background: "#F7FBFC",
                                           border: "1px solid #ced4da",
                                         }}
                                         id="returnDate"
@@ -2273,7 +2311,9 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="fw-bold text-danger">*</span>
+                                          <span className="fw-bold text-danger">
+                                            *
+                                          </span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2285,7 +2325,7 @@ const ShowAllFlightPage = () => {
                                             id="txtFrom1"
                                             required
                                             style={{
-                                              background: "#f8f2fb",
+                                              background: "#F7FBFC",
                                             }}
                                           />
                                         </span>
@@ -2306,7 +2346,9 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="fw-bold text-danger">*</span>
+                                          <span className="fw-bold text-danger">
+                                            *
+                                          </span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2318,7 +2360,7 @@ const ShowAllFlightPage = () => {
                                             autoComplete="off"
                                             required
                                             style={{
-                                              background: "#f8f2fb",
+                                              background: "#F7FBFC",
                                             }}
                                           />
                                         </span>
@@ -2331,7 +2373,9 @@ const ShowAllFlightPage = () => {
                                               className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="fw-bold text-danger">*</span>
+                                              <span className="fw-bold text-danger">
+                                                *
+                                              </span>
                                             </label>
                                           </div>
                                         </div>
@@ -2342,7 +2386,7 @@ const ShowAllFlightPage = () => {
                                             style={{
                                               minHeight: "100%",
                                               border: "1px solid #ced4da",
-                                              background: "#f8f2fb",
+                                              background: "#F7FBFC",
                                             }}
                                           ></div>
                                         </div>
@@ -2359,7 +2403,9 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="fw-bold text-danger">*</span>
+                                          <span className="fw-bold text-danger">
+                                            *
+                                          </span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2370,7 +2416,7 @@ const ShowAllFlightPage = () => {
                                             autoComplete="off"
                                             id="txtFrom2"
                                             style={{
-                                              background: "#f8f2fb",
+                                              background: "#F7FBFC",
                                             }}
                                           />
                                         </span>
@@ -2391,7 +2437,9 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="fw-bold text-danger">*</span>
+                                          <span className="fw-bold text-danger">
+                                            *
+                                          </span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2402,7 +2450,7 @@ const ShowAllFlightPage = () => {
                                             id="txtTo2"
                                             autoComplete="off"
                                             style={{
-                                              background: "#f8f2fb",
+                                              background: "#F7FBFC",
                                             }}
                                           />
                                         </span>
@@ -2415,7 +2463,9 @@ const ShowAllFlightPage = () => {
                                               className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="fw-bold text-danger">*</span>
+                                              <span className="fw-bold text-danger">
+                                                *
+                                              </span>
                                             </label>
                                           </div>
                                         </div>
@@ -2426,7 +2476,7 @@ const ShowAllFlightPage = () => {
                                             style={{
                                               minHeight: "100%",
                                               border: "1px solid #ced4da",
-                                              background: "#f8f2fb",
+                                              background: "#F7FBFC",
                                             }}
                                           ></div>
                                         </div>
@@ -2443,7 +2493,9 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="fw-bold text-danger">*</span>
+                                          <span className="fw-bold text-danger">
+                                            *
+                                          </span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2454,7 +2506,7 @@ const ShowAllFlightPage = () => {
                                             autoComplete="off"
                                             id="txtFrom3"
                                             style={{
-                                              background: "#f8f2fb",
+                                              background: "#F7FBFC",
                                             }}
                                           />
                                         </span>
@@ -2475,7 +2527,9 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="fw-bold text-danger">*</span>
+                                          <span className="fw-bold text-danger">
+                                            *
+                                          </span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2486,7 +2540,7 @@ const ShowAllFlightPage = () => {
                                             id="txtTo3"
                                             autoComplete="off"
                                             style={{
-                                              background: "#f8f2fb",
+                                              background: "#F7FBFC",
                                             }}
                                           />
                                         </span>
@@ -2512,7 +2566,7 @@ const ShowAllFlightPage = () => {
                                             style={{
                                               minHeight: "100%",
                                               border: "1px solid #ced4da",
-                                              background: "#f8f2fb",
+                                              background: "#F7FBFC",
                                             }}
                                           ></div>
                                         </div>
@@ -2529,7 +2583,9 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="fw-bold text-danger">*</span>
+                                          <span className="fw-bold text-danger">
+                                            *
+                                          </span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2540,7 +2596,7 @@ const ShowAllFlightPage = () => {
                                             autoComplete="off"
                                             id="txtFrom4"
                                             style={{
-                                              background: "#f8f2fb",
+                                              background: "#F7FBFC",
                                             }}
                                           />
                                         </span>
@@ -2561,7 +2617,9 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="fw-bold text-danger">*</span>
+                                          <span className="fw-bold text-danger">
+                                            *
+                                          </span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2572,7 +2630,7 @@ const ShowAllFlightPage = () => {
                                             id="txtTo4"
                                             autoComplete="off"
                                             style={{
-                                              background: "#f8f2fb",
+                                              background: "#F7FBFC",
                                             }}
                                           />
                                         </span>
@@ -2585,7 +2643,9 @@ const ShowAllFlightPage = () => {
                                               className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="fw-bold text-danger">*</span>
+                                              <span className="fw-bold text-danger">
+                                                *
+                                              </span>
                                             </label>
                                           </div>
                                         </div>
@@ -2596,7 +2656,7 @@ const ShowAllFlightPage = () => {
                                             style={{
                                               minHeight: "100%",
                                               border: "1px solid #ced4da",
-                                              background: "#f8f2fb",
+                                              background: "#F7FBFC",
                                             }}
                                           ></div>
                                         </div>
@@ -2613,7 +2673,9 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Depart From{" "}
-                                          <span className="fw-bold text-danger">*</span>
+                                          <span className="fw-bold text-danger">
+                                            *
+                                          </span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2624,7 +2686,7 @@ const ShowAllFlightPage = () => {
                                             autoComplete="off"
                                             id="txtFrom5"
                                             style={{
-                                              background: "#f8f2fb",
+                                              background: "#F7FBFC",
                                             }}
                                           />
                                         </span>
@@ -2645,7 +2707,9 @@ const ShowAllFlightPage = () => {
                                           className="form-label"
                                         >
                                           Going To{" "}
-                                          <span className="fw-bold text-danger">*</span>
+                                          <span className="fw-bold text-danger">
+                                            *
+                                          </span>
                                         </label>
                                         <span className="address">
                                           <input
@@ -2656,7 +2720,7 @@ const ShowAllFlightPage = () => {
                                             id="txtTo5"
                                             autoComplete="off"
                                             style={{
-                                              background: "#f8f2fb",
+                                              background: "#F7FBFC",
                                             }}
                                           />
                                         </span>
@@ -2669,7 +2733,9 @@ const ShowAllFlightPage = () => {
                                               className="form-label"
                                             >
                                               Departing{" "}
-                                              <span className="fw-bold text-danger">*</span>
+                                              <span className="fw-bold text-danger">
+                                                *
+                                              </span>
                                             </label>
                                           </div>
                                         </div>
@@ -2680,7 +2746,7 @@ const ShowAllFlightPage = () => {
                                             style={{
                                               minHeight: "100%",
                                               border: "1px solid #ced4da",
-                                              background: "#f8f2fb",
+                                              background: "#F7FBFC",
                                             }}
                                           ></div>
                                         </div>

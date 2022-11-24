@@ -119,7 +119,7 @@ const InvoiceView = () => {
                                                     <td className="text-end bg-white">
                                                         <address>
                                                             <span className="fw-bold fs-6">
-                                                            First Trip Ltd.
+                                                            Travelchamp Ltd.
                                                             </span>
                                                             <br />
                                                             <div
@@ -129,8 +129,8 @@ const InvoiceView = () => {
                                                                 39 Sharif Plaza, Kemal Ataturk
                                                                 <br />
                                                                 Avenue, Banani, Dhaka 1213<br></br>
-                                                                Phone: 09613123123<br></br>
-                                                                Email: support@firsttrip.com
+                                                                Phone: 01322819380<br></br>
+                                                                Email: info@travelchamp.com
                                                             </div>
                                                         </address>
                                                     </td>

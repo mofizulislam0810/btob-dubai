@@ -12,7 +12,7 @@ const data = [
     title: '➢	There will be an associated service fee'
   },
   {
-    title: '➢	Travelers are recommended to confirm the first trip 72 hours before the scheduled departure date if they wish to cancel or reissue. In such a case, a no-show fee can be charged in accordance with the airline policy. '
+    title: '➢	Travelers are recommended to confirm the travelchamp 72 hours before the scheduled departure date if they wish to cancel or reissue. In such a case, a no-show fee can be charged in accordance with the airline policy. '
   },
 
   {
@@ -96,7 +96,7 @@ const RefundAndCancellation = () => {
 
               <Box>
                 <Text fontWeight={700} fontSize='20px' pb={'10px'} pt={'20px'}>Hotel:</Text>
-                <Text pb={'4px'}>Please email us at info@firsttrip.com with any questions regarding refunds, cancellations, or date modifications.</Text>
+                <Text pb={'4px'}>Please email us at info@travelchamp.com with any questions regarding refunds, cancellations, or date modifications.</Text>
                 {
                   Hotel.map(item => {
                     return (

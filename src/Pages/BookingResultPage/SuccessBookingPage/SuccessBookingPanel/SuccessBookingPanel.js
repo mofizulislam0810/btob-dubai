@@ -153,7 +153,7 @@ const SuccessBookingPanel = () => {
                     <img
                       src={logo}
                       className="my-3"
-                      alt="FirstTrip logo"
+                      alt="travelchamp logo"
                       style={{ width: "160px" }}
                     />
                     <table

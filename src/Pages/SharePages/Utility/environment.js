@@ -2,11 +2,11 @@
 // const baseURL='http://52.221.202.198:83/';
 // const baseURL='http://13.212.45.180:81/';
 // const baseURL = "http://54.169.108.46:81/";
-// const baseURL = "http://13.228.152.29:81/";
+const baseURL = "http://13.228.152.29:81/";
 // const baseURL = 'http://18.142.212.139:81/';
 // const baseURL = 'https://api.triplover.ae/';
 // const baseURL = 'https://api.firsttrip.com/';
-const baseURL = 'https://api.travelchamp.com/';
+// const baseURL = 'https://api.travelchamp.com/';
 // https://tlluploaddocument.s3.ap-southeast-1.amazonaws.com/
 // https://fstuploaddocument.s3.ap-southeast-1.amazonaws.com/
 // https://tcluploaddocument.s3.ap-southeast-1.amazonaws.com/

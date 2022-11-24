@@ -5,7 +5,7 @@ import {
   FaFacebookF,
   FaLinkedinIn,
   FaPhoneAlt,
-  FaInstagram
+  FaInstagram,
 } from "react-icons/fa";
 import { GrMail } from "react-icons/gr";
 import { Link } from "react-router-dom";
@@ -16,7 +16,6 @@ const socialData = [
   { icon: FaInstagram },
   { icon: FaLinkedinIn },
 ];
-
 
 const quickLinksData = [
   { text: "About Us", to: "aboutus" },
@@ -46,7 +45,12 @@ const addressData = [
 const Footer = () => {
   return (
     <>
-      <Box className="container-fluid" bg="#7b71c7">
+      <Box
+        className="container-fluid"
+        borderY="1px solid #ededed"
+        boxShadow="0px -4px 3px rgba(50, 50, 50, 0.05)"
+        bg="white"
+      >
         <Box className="container">
           <Flex
             w="100%"
@@ -68,12 +72,18 @@ const Footer = () => {
             {/* <Box borderRight="1px" color="#ECECEC" my={2} /> */}
 
             <Box>
-              <Text fontSize="18px" fontWeight={500} mb="24px">
+              <Text fontSize="18px" fontWeight={500} mb="24px" color="primary">
                 Quick Links
               </Text>
               {quickLinksData.map((item, idx) => (
                 <Link to={`/${item.to}`} key={idx}>
-                  <Text fontSize="14px" fontWeight={400} mb="8px">
+                  <Text
+                    fontSize="14px"
+                    fontWeight={400}
+                    mb="8px"
+                    color="black"
+                    _hover={{ color: "primary" }}
+                  >
                     {item.text}
                   </Text>
                 </Link>
@@ -83,17 +93,24 @@ const Footer = () => {
             {/* <Box borderRight="1px" color="#ECECEC" my={2} /> */}
 
             <Box>
-              <Text fontSize="18px" fontWeight={500} mb="24px">
+              <Text fontSize="18px" fontWeight={500} mb="24px" color="primary">
                 Address
               </Text>
               {addressData.map((item, idx) => (
-                <HStack gap="8px" mb="18px" key={idx}>
+                <HStack
+                  gap="8px"
+                  mb="18px"
+                  key={idx}
+                  color="black"
+                  _hover={{ color: "primary" }}
+                  cursor="pointer"
+                >
                   <Icon
                     as={item.icon}
                     h="26px"
                     w="24px"
                     // color="rgba(28, 25, 55, 0.72)"
-                    color={"white"}
+                    color="black"
                   />
                   <Text fontSize="14px" fontWeight={400} maxW="240px">
                     {item.text}
@@ -106,7 +123,12 @@ const Footer = () => {
       </Box>
 
       {/* <Box borderTop="1px solid #E2E2E2" mx={4} /> */}
-      <Box display={"flex"} justifyContent="center" alignItems="center" className="py-3">
+      <Box
+        display={"flex"}
+        justifyContent="center"
+        alignItems="center"
+        className="py-3"
+      >
         <img src={logo} alt="" width="100px" height={"10px"} />
         <Text
           fontSize="14px"

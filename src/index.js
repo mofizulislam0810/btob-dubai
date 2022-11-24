@@ -8,9 +8,9 @@ import { extendTheme, ChakraProvider } from "@chakra-ui/react";
 import "@fontsource/inter";
 
 const colors = {
-  primary: "#7800be",
+  primary: "#068b9f",
   primaryLight: "#a34fd2",
-  secondary: "#ff2e74",
+  secondary: "#ed7f22",
   secondaryLight: "#fc6b9d",
   logoGreen: "#009f70",
   logoGreenLight: "#7fceb7",

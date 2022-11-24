@@ -2280,7 +2280,7 @@ const ShowAllFlightPage = () => {
                                         className="t-check-in"
                                         id="departureDate"
                                         style={{
-                                          minHeight: "100%",
+                                          minHeight: "60px",
                                           //borderRight: "1px solid gray",
                                           background: "#F7FBFC",
                                           border: "1px solid #ced4da",
@@ -2289,7 +2289,7 @@ const ShowAllFlightPage = () => {
                                       <div
                                         className="t-check-out"
                                         style={{
-                                          minHeight: "100%",
+                                          minHeight: "60px",
                                           //borderRight: "1px solid gray",
                                           background: "#F7FBFC",
                                           border: "1px solid #ced4da",
@@ -2758,6 +2758,7 @@ const ShowAllFlightPage = () => {
                                         className="btn button-color rounded-pill text-white"
                                         id="btnp-1"
                                         onClick={() => handleFlightOptionP()}
+                                        style={{ backgroundColor: "#ed7f22" }}
                                       >
                                         Add more
                                       </button>

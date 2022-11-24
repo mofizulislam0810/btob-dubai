@@ -1,4 +1,4 @@
-import { Box, Text, VStack } from "@chakra-ui/react";
+import { Box, Center, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import Fuse from "fuse.js";
 import $ from "jquery";
@@ -653,7 +653,7 @@ const SearchFrom = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-12 col-sm-12 col-md-12 banner-text shadow-for-search">
-              <Box
+              <div
                 id="form-bg"
                 boxShadow="lg"
                 borderRadius="8px"
@@ -665,11 +665,12 @@ const SearchFrom = () => {
                 }}
               >
                 <div className="row">
-                  <div
-                    className="col-lg-4 pb-4 text-center"
+                  <Center
+                    className="pb-4 text-center"
                     style={{ paddingTop: "3%" }}
+                    h="50px"
                   >
-                    <div className="flex-container">
+                    <Box className="flex-container" pb="38px">
                       <div className="left-border">
                         <button
                           className="form-select inputgroup rounded-left"
@@ -964,8 +965,8 @@ const SearchFrom = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    </Box>
+                  </Center>
                   <div className="col-lg-6 d-flex">
                     {childAge.map((val, index) => {
                       let agenum = `age-${index}`;
@@ -1018,7 +1019,7 @@ const SearchFrom = () => {
                       );
                     })}
                   </div>
-                  <div className="col-lg-2">
+                  {/* <div className="col-lg-2">
                     <label htmlFor="formGroupExampleInput" className="">
                       Preferred Airline
                     </label>
@@ -1032,7 +1033,7 @@ const SearchFrom = () => {
                         background: "#F7FBFC",
                       }}
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row pt-1 position-relative">
                   <div className="col-lg-4 forms">
@@ -1100,7 +1101,7 @@ const SearchFrom = () => {
                         className="t-check-in"
                         id="departureDate"
                         style={{
-                          minHeight: "100%",
+                          minHeight: "60px",
                           //borderRight: "1px solid gray",
                           background: "#F7FBFC",
                           border: "1px solid #ced4da",
@@ -1109,7 +1110,7 @@ const SearchFrom = () => {
                       <div
                         className="t-check-out"
                         style={{
-                          minHeight: "100%",
+                          minHeight: "60px",
                           //borderRight: "1px solid gray",
                           background: "#F7FBFC",
                           border: "1px solid #ced4da",
@@ -1482,9 +1483,10 @@ const SearchFrom = () => {
                     </div>
                     <div className="my-2 d-flex justify-content-center">
                       <div
-                        className="btn button-color rounded-pill text-white"
+                        className="btn rounded-pill text-white"
                         id="btnp-1"
                         onClick={() => handleFlightOptionP(1)}
+                        style={{ backgroundColor: "#ed7f22" }}
                       >
                         Add more
                       </div>
@@ -1517,7 +1519,7 @@ const SearchFrom = () => {
                     </div>
                   </div>
                 </div>
-              </Box>
+              </div>
             </div>
           </div>
         </div>

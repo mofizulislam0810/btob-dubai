@@ -203,7 +203,7 @@ const ShowAllFlight = ({
     { name: "All Flights" },
     { name: "Direct" },
     { name: "1 stop" },
-    { name: "2 stops or more" }
+    { name: "2 stops or more" },
   ];
 
   // let i = 0;
@@ -391,8 +391,8 @@ const ShowAllFlight = ({
                       minStepsBetweenThumbs={1}
                       onChangeEnd={(val) => setFilterPrice(val)}
                     >
-                      <RangeSliderTrack bg="#e5d4b1">
-                        <RangeSliderFilledTrack bg="#BF953F" />
+                      <RangeSliderTrack bg="primaryLight">
+                        <RangeSliderFilledTrack bg="primary" />
                       </RangeSliderTrack>
                       <RangeSliderThumb bg="black" boxSize={4} index={0} />
                       <RangeSliderThumb bg="black" boxSize={4} index={1} />
@@ -506,7 +506,6 @@ const ShowAllFlight = ({
                   </div>
                   <div className="form-check mt-2">
                     {flightName.map((item, index) => (
-                      
                       <div
                         key={index}
                         className="d-flex align-items-center justify-content-between"
@@ -520,7 +519,7 @@ const ShowAllFlight = ({
                           // defaultChecked={itemCkeck}
                         />
                         <img
-                          src={environment.s3ArliensImage +`${item.code}.png`}
+                          src={environment.s3ArliensImage + `${item.code}.png`}
                           alt="airlineCode"
                           width="35px"
                           height="30px"

@@ -14,7 +14,7 @@ const colors = {
   secondaryLight: "#F9D8BC",
   backgroundVariant: "#FAF9FF",
   text: "#1E1E1E",
-  inactiveText: "##6F6F6F",
+  inactiveText: "#6F6F6F",
   inactiveIcon: "#8796A1",
   white: "#FFFFFF",
   black: "#000000",

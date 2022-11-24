@@ -23,6 +23,7 @@ import {
   Input,
   Heading,
   Circle,
+  Spacer,
 } from "@chakra-ui/react";
 // import cardImage from "../../../images/landing/card.png";
 import cardImage from "../../../images/landing/travelchamp_card.jpg";
@@ -285,6 +286,10 @@ const LoginPage = () => {
         </svg>
       </Box> */}
 
+      <div class="arrow-container">
+        <div class="arrow-down"></div>
+      </div>
+
       <Text fontSize="21px" fontWeight={500} pt="60px">
         Our Services
       </Text>
@@ -293,8 +298,9 @@ const LoginPage = () => {
         {ourServiceData.map((item) => (
           <VStack gap={"22px"} key={nanoid()}>
             <Circle
-              bg="white"
+              bg="backgroundVariant"
               boxShadow=" 0px 11px 20px rgba(224, 239, 255, 0.32)"
+              border="1px solid #ededed"
             >
               <Image src={item.img} alt="flights" w="60px" h="60px" m="45px" />
             </Circle>
@@ -314,11 +320,12 @@ const LoginPage = () => {
           {topAirlinesData.map((item) => (
             <Center
               key={nanoid()}
-              bg="rgba(255, 255, 255, 0.3)"
+              //bg="rgba(255, 255, 255, 0.3)"
               border="1px solid #E8E8E8"
               borderRadius="5px"
               h="150px"
               w="250px"
+              bg="backgroundVariant"
             >
               <Image src={item.img} alt="airlines1" w="150px" />
             </Center>

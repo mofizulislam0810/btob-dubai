@@ -63,7 +63,7 @@ function App() {
   var isLoggedIn = localStorage.getItem("token") !== null ? true : false;
   console.log(isLoggedIn);
   return (
-    <Box>
+    <Box bg="white">
       <Box
         w="100%"
         h="100vh"

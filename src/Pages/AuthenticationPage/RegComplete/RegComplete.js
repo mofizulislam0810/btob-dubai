@@ -14,8 +14,8 @@ const RegComplete = () => {
                 <div className="card rounded" style={{ width: "35%" }}>
                     <div className="card-body">
                         {/* <h5 className="card-title">Special title treatment</h5> */}
-                        <p className="card-text text-success py-3">Thank you for registering with FirstTrip.
-                            We really appreciate you choosing FirstTrip for your travel plans.
+                        <p className="card-text text-success py-3">Thank you for registering with Travelchamp.
+                            We really appreciate you choosing Travelchamp for your travel plans.
                             Your account activation is waiting for approval. 
                             {/* After the process is completed, you will receive email with login credentials. */}
                         </p>

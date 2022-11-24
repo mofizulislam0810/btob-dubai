@@ -43,7 +43,7 @@ const ForgotPassword = () => {
         <div className="card">
           <div className="card-header text-center">
             <Link to="/">
-              <img src={logo} alt="FirstTrip" />
+              <img src={logo} alt="Travelchamp" />
             </Link>
           </div>
           <div className="card-body login-card-body">
@@ -52,7 +52,7 @@ const ForgotPassword = () => {
                 Please check your email.
               </p> :
                 <p className="login-box-msg">
-                  Provide your registered email with FirstTrip to reset your
+                  Provide your registered email with Travelchamp to reset your
                   password.
                 </p>
             }

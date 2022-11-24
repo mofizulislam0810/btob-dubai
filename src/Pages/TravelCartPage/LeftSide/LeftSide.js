@@ -395,6 +395,34 @@ const LeftSide = () => {
   const [isExDateValidCnn, setisExDateValidCnn] = useState(true);
   const [isExDateValidInf, setisExDateValidInf] = useState(true);
 
+  const [isChildValid, setChildValid] = useState(false)
+  useEffect(()=> {
+
+    let arr = child.map((p) => {
+      //console.log(p.dateOfBirth === "" ? "TRUE" : "FALSE", "=")
+      return !(
+        
+    moment(p.dateOfBirth).isBefore(
+      ISODateFormatter(
+        add(
+          new Date(
+            Database?.tripTypeModify === "Round Trip" &&
+            calculateFullAge(Database?.journeyDate, Database?.returnDate)
+              ? Database?.returnDate
+              : Database?.journeyDate
+          ),
+          { years: -12 }
+        )
+      ) ||
+        p.dateOfBirth === "" ||
+        (isDomestic ? false : p.passportExDate === "")
+      ));
+    });
+    setChildValid(arr.every((element) => element === true));
+
+
+  },[child])
+
   // useEffect(
   //   () =>
   //     console.log(
@@ -4130,7 +4158,7 @@ const LeftSide = () => {
                         isDomestic
                           ? isExDateEmptyCnn ||
                             isExDateEmptyInf ||
-                            !isExDateValidInf
+                            !isExDateValidInf || !isChildValid
                           : !isExDateValidAdt ||
                             !isExDateValidCnn ||
                             !isExDateValidInf ||

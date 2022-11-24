@@ -89,7 +89,10 @@ const Support = () => {
       pnrs = location.search.split("=")[4].split("&")[0];
       ticketno = location.search.split("=")[5].split("&")[0];
       setUniqueTransID(utid);
+      console.log(ticketno);
+      if(ticketno !== null && typeid === 2){
       handleGetPassengerList(utid);
+      }
       setI(i + 1);
     }
   }
@@ -361,6 +364,7 @@ const Support = () => {
     let ticketNumbersN = ticketNumbers.substring(1, ticketNumbers.length);
     // alert(uniqueTransID)
     // alert(pnr)
+    console.log(ticketNumbersN,"++++++");
     let supportObj = {
       id: currentItem == null ? 0 : currentItem.id,
       agentId: sessionStorage.getItem("agentId") ?? 0,
@@ -371,8 +375,10 @@ const Support = () => {
       status: 0,
       uniqueTransID: uniqueTransID,
       pnr: pnr,
-      ticketNumber: ticketNumbersN,
+      ticketNumber: ticketNumbersN === null? '' : ticketNumbersN,
     };
+
+    console.log(supportObj)
 
     if (supportObj.fileNamesupportTypeId === 0) {
       toast.error("Sorry! Support type not selected..");
@@ -900,8 +906,8 @@ const Support = () => {
                                   
                                   </td>
                                   <td>
-                                    {item.ticketNumber === "" ||
-                                      item.ticketNumber === null
+                                    {item.ticketNumber === "null" ||
+                                      item.ticketNumber === null || item.ticketNumber === ""
                                       ? "N/A"
                                       : item.ticketNumber}
                                   </td>

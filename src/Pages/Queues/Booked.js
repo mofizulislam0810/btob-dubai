@@ -114,7 +114,7 @@ const Booked = () => {
           );
         } else {
           window.open(
-            "/support?typeid=1&subjectid=1&utid=" +
+            "/support?typeid=1&subjectid=10&utid=" +
               utid +
               "&pnr=" +
               pnr +

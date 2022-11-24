@@ -7,7 +7,7 @@ const BankDetails = () => {
   return (
     <>
       <Navbar></Navbar>
-      <div className="hold-transition login-page search-panel-bg pt-3" style={{ height: "100%" }}>
+      <div className="hold-transition login-page search-panel-bg pt-3">
         <div className="container mb-3">
           <div className="row">
             <div className="col-md-12">

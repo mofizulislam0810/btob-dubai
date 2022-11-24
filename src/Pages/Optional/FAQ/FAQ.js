@@ -7,7 +7,7 @@ const FAQ = () => {
   return (
     <>
       <Navbar></Navbar>
-      <div className="hold-transition login-page search-panel-bg" style={{ height: "100%" }}>
+      <div className="hold-transition login-page search-panel-bg">
         <div className="container mt-3 text-white">
           <div className="row">
             <div className="col-md-12 margin-top margin-bottom">

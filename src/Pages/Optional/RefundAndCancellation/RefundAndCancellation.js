@@ -62,9 +62,6 @@ const Tours = [
   {
     title: '➢ The service provider charges a service fee, which is not refundable. '
   },
-
-
-
 ]
 
 const RefundAndCancellation = () => {
@@ -72,7 +69,7 @@ const RefundAndCancellation = () => {
   return (
     <>
       <Navbar></Navbar>
-      <div className="hold-transition login-page search-panel-bg" style={{ height: "100%" }}>
+      <div className="hold-transition login-page search-panel-bg pt-2" style={{ display: "block", height: "900px" }}>
         <div className="container mt-3">
           <div className="row">
             <div className="col-md-12" >

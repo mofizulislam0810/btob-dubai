@@ -9,7 +9,7 @@ const AboutUs = () => {
     return (
         <>
             <Navbar></Navbar>
-            <div className="hold-transition login-page search-panel-bg " style={{ height: "100%" }} >
+            <div className="hold-transition login-page search-panel-bg">
                 <div className="container mt-3">
                     <div className="row">
                         <div className="col-lg-12 " >

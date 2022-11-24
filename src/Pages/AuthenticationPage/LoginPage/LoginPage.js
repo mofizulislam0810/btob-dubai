@@ -30,10 +30,12 @@ import flightsImg from "../../../images/landing/flights.png";
 import hotlelsImg from "../../../images/landing/hotels.png";
 import holidaysImg from "../../../images/landing/holidays.png";
 import visaProcessingImg from "../../../images/landing/visa-processing.png";
-import airlines1 from "../../../images/landing/airlines-5.png";
-import airlines2 from "../../../images/landing/airlines-6.png";
-import airlines3 from "../../../images/landing/airlines-7.png";
-import airlines4 from "../../../images/landing/airlines-8.png";
+import airlines1 from "../../../images/landing/airlines-1.png";
+import airlines2 from "../../../images/landing/airlines-2.png";
+import airlines3 from "../../../images/landing/airlines-3.png";
+import airlines4 from "../../../images/landing/airlines-4.png";
+import airlines5 from "../../../images/landing/airlines-5.png";
+import airlines6 from "../../../images/landing/airlines-6.png";
 
 import bg from "../../../images/login_bg.png";
 
@@ -86,6 +88,8 @@ const LoginPage = () => {
     { img: airlines2 },
     { img: airlines3 },
     { img: airlines4 },
+    { img: airlines5 },
+    { img: airlines6 },
   ];
 
   return (
@@ -255,7 +259,7 @@ const LoginPage = () => {
               </div>
             </div>
           </div>
-          <Hide below="md">
+          {/* <Hide below="md">
             <Box bg="background">
               <Image
                 w="450px"
@@ -266,22 +270,22 @@ const LoginPage = () => {
                 h="490px"
               />
             </Box>
-          </Hide>
+          </Hide> */}
         </Flex>
       </Center>
 
       {/* <div className="login-form">
           <FooterLR></FooterLR>
         </div> */}
-      <Box>
+      {/* <Box>
         <svg class="arrows">
           <path class="a1" d="M0 0 L30 32 L60 0"></path>
           <path class="a2" d="M0 20 L30 52 L60 20"></path>
           <path class="a3" d="M0 40 L30 72 L60 40"></path>
         </svg>
-      </Box>
+      </Box> */}
 
-      {/* <Text fontSize="21px" fontWeight={500} pt="30px">
+      <Text fontSize="21px" fontWeight={500} pt="60px">
         Our Services
       </Text>
 
@@ -304,22 +308,23 @@ const LoginPage = () => {
       <Text fontSize="21px" fontWeight={500} pt="100px">
         Top Airlines Are With Us
       </Text>
-      <Flex gap="60px" py="50px">
-        {topAirlinesData.map((item) => (
-          <Center
-            key={nanoid()}
-            bg="rgba(255, 255, 255, 0.3)"
-            border="1px solid #E8E8E8"
-            borderRadius="5px"
-            px="45px"
-            py="57px"
-          >
-            <Image src={item.img} alt="airlines1" w="150px" />
-          </Center>
-        ))}
-      </Flex> */}
-      <Partners />
-      <Service />
+
+      <Center pb="60px">
+        <Flex py="50px" wrap="wrap" gap={8} w="850px">
+          {topAirlinesData.map((item) => (
+            <Center
+              key={nanoid()}
+              bg="rgba(255, 255, 255, 0.3)"
+              border="1px solid #E8E8E8"
+              borderRadius="5px"
+              h="150px"
+              w="250px"
+            >
+              <Image src={item.img} alt="airlines1" w="150px" />
+            </Center>
+          ))}
+        </Flex>
+      </Center>
 
       <Footer />
     </VStack>

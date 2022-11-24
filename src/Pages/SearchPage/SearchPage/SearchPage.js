@@ -9,7 +9,7 @@ import useAuth from "../../../hooks/useAuth";
 
 const SearchPage = () => {
   sessionStorage.removeItem("checkList");
-  const {loading,setCount} = useAuth();
+  const { loading, setCount } = useAuth();
   setCount(0);
   useEffect(() => {
     $(document).ready(function () {
@@ -22,6 +22,7 @@ const SearchPage = () => {
       <Navbar></Navbar>
       <SideNavBar></SideNavBar>
       <SearchPanel></SearchPanel>
+
       {/* <Footer></Footer> */}
     </div>
   );

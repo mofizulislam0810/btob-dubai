@@ -9,13 +9,9 @@ import "@fontsource/inter";
 
 const colors = {
   primary: "#068b9f",
-  primaryLight: "#a34fd2",
+  primaryLight: "#b4dce2",
   secondary: "#ed7f22",
-  secondaryLight: "#fc6b9d",
-  logoGreen: "#009f70",
-  logoGreenLight: "#7fceb7",
-  logoYellow: "#fbbc05",
-  background: "#F7FBFF",
+  secondaryLight: "##F9D8BC",
   backgroundVariant: "#FAF9FF",
   text: "#1E1E1E",
   inactiveText: "##6F6F6F",

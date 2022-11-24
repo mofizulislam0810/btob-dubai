@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { environment } from "../../SharePages/Utility/environment";
 import Footer from "../../SharePages/Footer/Footer";
+import { Box, Center, HStack, Icon, Text } from "@chakra-ui/react";
+import { MdFlight } from "react-icons/md";
 
 const SearchPanel = () => {
   const { setId } = useAuth();
@@ -104,25 +106,46 @@ const SearchPanel = () => {
         {/* Main content  */}
         <section className="content">
           {/* main section start  */}
-          <div className="container mt-1">
+          <div className="container mt-3">
             <div className="position-relative">
               <div
                 className="row position-absolute top-0 start-50 translate-middle"
                 id="travel-type-panel"
               >
-                <div
+                <Center
+                  mb="20px"
+                  h="40px"
+                  w="250px"
+                  bg="white"
+                  border="1px solid #d3d3d3"
+                  borderRadius="25px"
+                >
+                  <HStack>
+                    <Icon
+                      as={MdFlight}
+                      h="25px"
+                      w="25px"
+                      color="primary"
+                      transform="rotate(45deg)"
+                    />
+                    <Text color="gray" fontWeight={600}>
+                      Flights
+                    </Text>
+                  </HStack>
+                </Center>
+                {/* <Box
                   className="col-lg-12 d-flex justify-content-center"
                   style={{ backgroundColor: "#598dbd8c" }}
-                >
-                  <div className="py-2 px-3">
+                > */}
+                {/* <div className="py-2 px-3">
                     <span className="text-white">
                       <i className="fas fa-plane"></i>
                     </span>
                     <span className="ms-2 fs-6 text-white fw-bold">
                       Flights
                     </span>
-                  </div>
-                  {/* <div
+                  </div> */}
+                {/* <div
                     className="bottom-border me-4 p-2"
                     id="flight-panal"
                     style={{ cursor: "pointer" }}
@@ -132,7 +155,7 @@ const SearchPanel = () => {
                     </span>
                     <span className="ms-1 fs-4 text-white">Flights</span>
                   </div> */}
-                  {/* <div
+                {/* <div
                     className="me-4 p-2"
                     id="hotel-panal"
                     style={{ cursor: "pointer" }}
@@ -152,7 +175,7 @@ const SearchPanel = () => {
                     </span>
                     <span className="ms-1 fs-4 text-white">Cars</span>
                   </div> */}
-                </div>
+                {/* </Box> */}
               </div>
             </div>
           </div>

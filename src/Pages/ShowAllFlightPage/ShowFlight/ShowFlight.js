@@ -524,7 +524,7 @@ const ShowFlight = (props) => {
                           "Direct"
                         ) : (
                           <>
-                            {directions[0][0].segments.length === 1 &&
+                            {/* {directions[0][0].segments.length === 1 &&
                               directions[0][0].segments[0].details.length ===
                               1 ? (
                               "Direct"
@@ -644,8 +644,8 @@ const ShowFlight = (props) => {
                                   </>
                                 )}
                               </>
-                            )}
-
+                            )} */}
+                            {directions[0][0].stops + " Stop"}
                             <ReactTooltip
                               effect="solid"
                               html={true}
@@ -778,7 +778,7 @@ const ShowFlight = (props) => {
                           "Direct"
                         ) : (
                           <>
-                            {directions[0][0].segments.length === 1 &&
+                            {/* {directions[0][0].segments.length === 1 &&
                               directions[0][0].segments[0].details.length ===
                               1 ? (
                               "Direct"
@@ -898,7 +898,8 @@ const ShowFlight = (props) => {
                                   </>
                                 )}
                               </>
-                            )}
+                            )} */}
+                            {directions[1][0].stops + " Stop"}
 
                             <ReactTooltip
                               effect="solid"

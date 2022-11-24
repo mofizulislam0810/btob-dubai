@@ -295,93 +295,102 @@ const ShowModal = ({
                               <></>
                             )}
                             {seg.details.length > 1 ? (
-                              seg.details.map((item, index) => (
-                                <>
-                                  {index === seg.details.length - 1 ? (
-                                    <></>
-                                  ) : seg.details.length > 1 ? (
-                                    <div className="text-center fw-bold">
-                                      {" "}
-                                      Layover :&nbsp;{" "}
-                                      {layOver(
-                                        seg.details[index]?.departure,
-                                        direction0.segments[index]?.arrival
-                                      )}
-                                    </div>
-                                  ) : (
-                                    <></>
-                                  )}
-                                  {index === 0 ? (
-                                    <></>
-                                  ) : (
-                                    <div className="text-center fw-bold">
-                                      {" "}
-                                      Layover :&nbsp;
-                                      {layOver(
-                                        seg.details[index]?.departure,
-                                        seg.details[index - 1]?.arrival
-                                      )}
-                                    </div>
-                                  )}
-                                  <div className="row py-4 p-2 border">
-                                    <div className="col-lg-1">
-                                      <img
-                                        src={ImageUrlD}
-                                        alt=""
-                                        width="40px"
-                                        height="40px"
-                                      />
-                                    </div>
-                                    <div className="col-lg-3 d-block">
-                                      <p className="my-auto text-start">
-                                        {seg.airline}
-                                      </p>
-                                      <p className="my-auto text-start">
-                                        {item.equipment}
-                                      </p>
-                                      <p className="my-auto text-start">
-                                        Class {seg.bookingClass}
-                                      </p>
-                                    </div>
-                                    <div className="col-lg-4">
-                                      <span className="float-start fw-bold">
-                                        {item.origin}
-                                        <strong className="ms-1">
-                                          {item.departure.substr(11, 5)}
-                                        </strong>
-                                      </span>
-                                      <br></br>
-                                      <span className="float-start">
-                                        {moment(item.departure).format(
-                                          "DD MMMM,yyyy, dddd"
+                              seg.details.map((item, idx) => {
+                                return (
+                                  <>
+                                    {index === seg.details.length - 1 ? (
+                                      <></>
+                                    ) : seg.details.length > 1 ? (
+                                      <>
+                                        {
+                                          idx === 0 ? <>
+                                          </> : <>
+                                            <div className="text-center fw-bold">
+                                              {" "}
+                                              Layover : &nbsp;
+                                              {layOver(
+                                                seg.details[index + 1]?.arrival,
+                                                seg.details[index]?.departure
+                                              )}
+                                            </div>
+                                          </>
+                                        }
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {index === 0 ? (
+                                      <></>
+                                    ) : (
+                                      <div className="text-center fw-bold">
+                                        {" "}
+                                        Layover : &nbsp;
+                                        {layOver(
+                                          seg.details[index]?.departure,
+                                          seg.details[index - 1]?.arrival
                                         )}
-                                      </span>
-                                      <br></br>
-                                      <h6 className="text-start">
-                                        {item.originName}
-                                      </h6>
+                                      </div>
+                                    )}
+                                    <div className="row py-4 p-2 border mb-2">
+                                      <div className="col-lg-1">
+                                        <img
+                                          src={environment.s3ArliensImage + `${seg.airlineCode}.png`}
+                                          alt=""
+                                          width="40px"
+                                          height="40px"
+                                        />
+                                      </div>
+                                      <div className="col-lg-3 d-block">
+                                        <p className="my-auto text-start">
+                                          {seg.airline}
+                                        </p>
+                                        <p className="my-auto text-start">
+                                          {item.equipment}
+                                        </p>
+                                        <p className="my-auto text-start">
+                                          Class {seg.bookingClass}
+                                        </p>
+                                      </div>
+                                      <div className="col-lg-4">
+                                        <span className="float-start fw-bold">
+                                          {item.origin}
+                                          <strong className="ms-1">
+                                            {item.departure.substr(11, 5)}
+                                          </strong>
+                                        </span>
+                                        <br></br>
+                                        <span className="float-start">
+                                          {moment(item.departure).format(
+                                            "DD MMMM,yyyy, dddd"
+                                          )}
+                                        </span>
+                                        <br></br>
+                                        <h6 className="text-start">
+                                          {item.originName}
+                                        </h6>
+                                      </div>
+                                      <div className="col-lg-4">
+                                        <span className="float-start fw-bold">
+                                          {item.destination}
+                                          <strong className="ms-1">
+                                            {item.arrival.substr(11, 5)}
+                                          </strong>
+                                        </span>
+                                        <br />
+                                        <span className="float-start">
+                                          {moment(item.arrival).format(
+                                            "DD MMMM,yyyy, dddd"
+                                          )}
+                                        </span>
+                                        <br></br>
+                                        <h6 className="text-start">
+                                          {item.destinationName}
+                                        </h6>
+                                      </div>
                                     </div>
-                                    <div className="col-lg-4">
-                                      <span className="float-start fw-bold">
-                                        {item.destination}
-                                        <strong className="ms-1">
-                                          {item.arrival.substr(11, 5)}
-                                        </strong>
-                                      </span>
-                                      <br />
-                                      <span className="float-start">
-                                        {moment(item.arrival).format(
-                                          "DD MMMM,yyyy, dddd"
-                                        )}
-                                      </span>
-                                      <br></br>
-                                      <h6 className="text-start">
-                                        {item.destinationName}
-                                      </h6>
-                                    </div>
-                                  </div>
-                                </>
-                              ))
+                                  </>
+                                )
+                              })
                             ) : (
                               <>
                                 {/* <span>Segments</span> */}

@@ -1858,7 +1858,7 @@ const ShowAllFlightPage = () => {
                                                   <div className="number-input text-center">
                                                     <button
                                                       className="round-btn"
-                                                      title="adultminus"
+                                                      // title="adultminus"
                                                       onClick={
                                                         infantCount > 0 &&
                                                           adultCount ===
@@ -1899,7 +1899,7 @@ const ShowAllFlightPage = () => {
                                                     />
                                                     <button
                                                       className="round-btn"
-                                                      title="adultplus"
+                                                      // title="adultplus"
                                                       onClick={() =>
                                                         setAdultCount(
                                                           adultCount + 1
@@ -1940,7 +1940,7 @@ const ShowAllFlightPage = () => {
                                                   <div className="number-input text-center">
                                                     <button
                                                       className="round-btn"
-                                                      title="adultminus"
+                                                      // title="adultminus"
                                                       onClick={
                                                         () =>
                                                           clickOnDelete(
@@ -1973,7 +1973,7 @@ const ShowAllFlightPage = () => {
                                                     />
                                                     <button
                                                       className="round-btn"
-                                                      title="adultplus"
+                                                      // title="adultplus"
                                                       onClick={
                                                         () =>
                                                           addNewChild(
@@ -2015,7 +2015,7 @@ const ShowAllFlightPage = () => {
                                                   <div className="number-input text-center">
                                                     <button
                                                       className="round-btn"
-                                                      title="adultminus"
+                                                      // title="adultminus"
                                                       onClick={() =>
                                                         setInfantCount(
                                                           infantCount - 1
@@ -2044,7 +2044,7 @@ const ShowAllFlightPage = () => {
                                                     />
                                                     <button
                                                       className="round-btn"
-                                                      title="adultplus"
+                                                      // title="adultplus"
                                                       onClick={
                                                         infantCount < adultCount
                                                           ? () =>

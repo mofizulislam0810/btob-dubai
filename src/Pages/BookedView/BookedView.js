@@ -189,6 +189,7 @@ const BookedView = () => {
   const handleGetTime = (referenceLog) => {
     setIsLoading(true);
     // alert(referenceLog);
+    console.log(referenceLog,"+++++response for referenceLog");
     const getTimeReq = async () => {
       await axios
         .post(

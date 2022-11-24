@@ -805,7 +805,7 @@ const SearchFrom = () => {
                                   <div className="number-input text-center">
                                     <button
                                       className="round-btn"
-                                      title="adultminus"
+                                      // title="adultminus"
                                       onClick={
                                         infantCount > 0 &&
                                           adultCount === infantCount
@@ -833,7 +833,7 @@ const SearchFrom = () => {
                                     />
                                     <button
                                       className="round-btn"
-                                      title="adultplus"
+                                      // title="adultplus"
                                       onClick={() =>
                                         setAdultCount(adultCount + 1)
                                       }
@@ -862,7 +862,7 @@ const SearchFrom = () => {
                                   <div className="number-input text-center">
                                     <button
                                       className="round-btn"
-                                      title="adultminus"
+                                      // title="adultminus"
                                       onClick={
                                         () => clickOnDelete(childCount)
                                         // setChildCount(childCount - 1)
@@ -885,7 +885,7 @@ const SearchFrom = () => {
                                     />
                                     <button
                                       className="round-btn"
-                                      title="adultplus"
+                                      // title="adultplus"
                                       onClick={
                                         () => addNewChild(childCount)
                                         // setChildCount(childCount + 1)
@@ -914,7 +914,7 @@ const SearchFrom = () => {
                                   <div className="number-input text-center">
                                     <button
                                       className="round-btn"
-                                      title="adultminus"
+                                      // title="adultminus"
                                       onClick={() =>
                                         setInfantCount(infantCount - 1)
                                       }
@@ -938,7 +938,7 @@ const SearchFrom = () => {
                                     />
                                     <button
                                       className="round-btn"
-                                      title="adultplus"
+                                      // title="adultplus"
                                       onClick={
                                         infantCount < adultCount
                                           ? () =>
